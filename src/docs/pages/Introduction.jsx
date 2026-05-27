@@ -30,7 +30,7 @@ export default function Introduction() {
         </p>
       </header>
 
-      <div id="welcome-video" className="w-full aspect-video border-4 sm:border-8 border-(--lithos-border) shadow-[8px_8px_0px_0px_var(--lithos-shadow)] mt-12 mb-16 scroll-mt-32 bg-(--lithos-surface) relative overflow-hidden">
+      <div id="welcome-video" className="w-full aspect-video border-2 mt-12 mb-16 scroll-mt-32 relative overflow-hidden">
         <iframe className="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/9ORW8yjorJE?si=rO7sIYy9tUHkcZPa" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
       </div>
     </div>

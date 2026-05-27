@@ -45,16 +45,16 @@ function Footer({ isDarkMode, onToggleObsidian }) {
 
         {/* - Navigation stays vertical so the exit path reads as a stack, not a menu bar. */}
         <div className="mt-12 flex w-full flex-col lg:mt-0 lg:w-1/4">
-          <a href="#features" className="text-2xl font-black uppercase tracking-tighter leading-none transition-all duration-150 ease-out active:translate-y-0 active:shadow-[2px_2px_0px_0px_var(--lithos-shadow)] md:text-4xl cursor-pointer text-(--lithos-accent-text)">
+          <a href="#features" className="text-2xl font-black uppercase tracking-tighter leading-none md:text-4xl cursor-pointer text-(--lithos-accent-text)">
             Features
           </a>
-          <a href="#pricing" className="mt-4 text-2xl font-black uppercase tracking-tighter leading-none transition-all duration-150 ease-out active:translate-y-0 active:shadow-[2px_2px_0px_0px_var(--lithos-shadow)] md:text-4xl cursor-pointer text-(--lithos-accent-text)">
+          <a href="#pricing" className="mt-4 text-2xl font-black uppercase tracking-tighter leading-none md:text-4xl cursor-pointer text-(--lithos-accent-text)">
             Pricing
           </a>
-          <a href="#testimonials" className="mt-4 text-2xl font-black uppercase tracking-tighter leading-none transition-all duration-150 ease-out active:translate-y-0 active:shadow-[2px_2px_0px_0px_var(--lithos-shadow)] md:text-4xl cursor-pointer text-(--lithos-accent-text)">
+          <a href="#testimonials" className="mt-4 text-2xl font-black uppercase tracking-tighter leading-none md:text-4xl cursor-pointer text-(--lithos-accent-text)">
             Testimonials
           </a>
-          <a href="#faq" className="mt-4 text-2xl font-black uppercase tracking-tighter leading-none transition-all duration-150 ease-out active:translate-y-0 active:shadow-[2px_2px_0px_0px_var(--lithos-shadow)] md:text-4xl cursor-pointer text-(--lithos-accent-text)">
+          <a href="#faq" className="mt-4 text-2xl font-black uppercase tracking-tighter leading-none md:text-4xl cursor-pointer text-(--lithos-accent-text)">
             FAQ
           </a>
           <div className="mt-4 flex items-center">
@@ -68,7 +68,7 @@ function Footer({ isDarkMode, onToggleObsidian }) {
             href="https://incrediblestand.gumroad.com/l/lithos-ui" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="group flex items-center border-4 border-(--lithos-border) bg-(--lithos-surface) p-4 text-2xl font-black uppercase tracking-tighter leading-none text-(--lithos-text) shadow-[6px_6px_0px_0px_var(--lithos-shadow)] hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) hover:shadow-[10px_10px_0px_0px_var(--lithos-shadow)] lithos-click md:text-3xl"
+            className="group flex items-center border-4 border-(--lithos-border) bg-(--lithos-surface) p-4 text-2xl font-black uppercase tracking-tighter leading-none text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) lithos-click md:text-3xl"
           >
             <span>Show Love</span>
             <svg 
