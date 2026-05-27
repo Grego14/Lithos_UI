@@ -16,6 +16,7 @@ import NotFound from './components/layout/NotFound'
 import DocsLayout from './docs/DocsLayout'
 import Introduction from './docs/pages/Introduction'
 import Installation from './docs/pages/Installation'
+import ComingSoon from './components/layout/ComingSoon'
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -53,8 +54,20 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Showroom isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />} />
+          {/* Completed Documentation Shells */}
           <Route path="/docs" element={<DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} toc={introTOC}><Introduction /></DocsLayout>} />
           <Route path="/docs/installation" element={<DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} toc={installationTOC}><Installation /></DocsLayout>} />
+          
+          {/* Active Engineering Zones - Bypassing DocsLayout for full-screen rendering */}
+          <Route path="/docs/hero" element={<ComingSoon />} />
+          <Route path="/docs/feature-grid" element={<ComingSoon />} />
+          <Route path="/docs/pricing" element={<ComingSoon />} />
+          <Route path="/docs/testimonials" element={<ComingSoon />} />
+          <Route path="/docs/faq" element={<ComingSoon />} />
+          <Route path="/docs/toggle" element={<ComingSoon />} />
+          <Route path="/docs/code-viewer" element={<ComingSoon />} />
+          
+          {/* Structural Failure Catch-all */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
