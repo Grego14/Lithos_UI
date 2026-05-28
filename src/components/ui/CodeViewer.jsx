@@ -48,8 +48,8 @@ export default function CodeViewer({ code, language = 'jsx', showControls = fals
   }
 
   return (
-    <div className="border-4 border-(--lithos-border) bg-(--lithos-bg) mb-8 relative">
-      <div className="border-b-4 border-(--lithos-border) bg-(--lithos-surface) px-4 py-2 flex justify-between items-center">
+    <div className="border-2 border-(--lithos-border) bg-(--lithos-bg) mb-8 relative">
+      <div className="border-b-2 border-(--lithos-border) bg-(--lithos-surface) px-4 py-2 flex justify-between items-center">
         <div className="flex items-center">
           {showControls ? (
             <div className="flex items-center">
