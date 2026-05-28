@@ -27,10 +27,10 @@ const plans = [
 
 function Pricing() {
   return (
-    <section id="pricing" className="bg-(--lithos-bg) py-24">
+    <section id="pricing" className="border-b-2 border-(--lithos-border) bg-(--lithos-bg) py-24">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-4xl font-black uppercase tracking-tighter leading-none text-center text-(--lithos-text) md:text-5xl">
-          Zero Cost. Build Forever.
+          Zero Cost  • Build Forever
         </h2>
         <p className="mt-4 text-lg font-bold leading-none text-center text-(--lithos-text) md:text-xl">
           Lithos UI is completely free and open-source. Just raw, portable components engineered for production.
