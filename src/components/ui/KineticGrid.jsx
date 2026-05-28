@@ -16,7 +16,7 @@ export default function KineticGrid({ children, baseOpacity = "opacity-10", clas
     <div 
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className={`relative overflow-hidden ${className}`}
+      className={`relative overflow-hidden flex items-center justify-center ${className}`}
     >
       {/* Base Structural Grid (Static) */}
       <div className={`absolute inset-0 pointer-events-none ${baseOpacity}`}>
@@ -49,7 +49,7 @@ export default function KineticGrid({ children, baseOpacity = "opacity-10", clas
       </div>
 
       {/* Content Injection */}
-      <div className="relative z-10 w-full h-full flex flex-col items-center justify-center">
+      <div className="relative z-10 w-full flex flex-col items-center justify-center">
         {children}
       </div>
     </div>

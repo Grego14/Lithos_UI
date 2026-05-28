@@ -47,10 +47,10 @@ const features = [
 function FeatureGrid() {
   // - 24px shell keeps the block aligned with the page rhythm above and below.
   return (
-    <section id="features" className="bg-(--lithos-surface) py-12 md:py-24">
+    <section id="features" className="border-b-2 border-(--lithos-border) bg-(--lithos-surface) py-24">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-4xl font-black uppercase tracking-tighter leading-none text-center text-(--lithos-text) md:text-5xl">
-          No Fluff. Just Features
+          No Fluff • Just Features
         </h2>
 
         {/* - Negative outer margin cancels the card margin so the field stays centered. */}
@@ -78,7 +78,7 @@ function FeatureGrid() {
 
         {/* - Footer link is centered to keep the card field visually sealed. */}
         <div className="mt-12 flex justify-center">
-          <a href="#pricing" className="font-black uppercase tracking-tighter text-(--lithos-text) transition-colors hover:text-(--lithos-accent) cursor-pointer">
+          <a href="/docs" className="font-black uppercase tracking-tighter text-(--lithos-text) transition-colors hover:text-(--lithos-accent) cursor-pointer">
             Explore the full library →
           </a>
         </div>
