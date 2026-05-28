@@ -12,24 +12,12 @@
  */
 
 import { Link } from 'react-router-dom'
+import KineticGrid from '../ui/KineticGrid'
 
 export default function NotFound() {
   return (
-    <div className="relative min-h-screen bg-(--lithos-bg) text-(--lithos-text) flex flex-col items-center justify-center px-4 overflow-hidden">
-      {/* Structural failure grid background */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="1" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
-      </div>
-
-      {/* Main content container */}
-      <div className="relative z-10 text-center max-w-2xl">
+    <KineticGrid baseOpacity="opacity-5" className="min-h-screen bg-(--lithos-bg) text-(--lithos-text) px-4">
+      <div className="text-center max-w-2xl">
         {/* Error code - massive and brutalist */}
         <h1 className="text-8xl md:text-[12rem] font-black leading-none tracking-tighter mb-10 select-none text-(--lithos-accent)">
           404
@@ -56,6 +44,6 @@ export default function NotFound() {
           </Link>
         </div>
       </div>
-    </div>
+    </KineticGrid>
   )
 }
