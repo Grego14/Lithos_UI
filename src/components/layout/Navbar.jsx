@@ -61,14 +61,15 @@ function Navbar() {
         <div className="flex lg:hidden">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="h-10 w-10 bg-(--lithos-accent) lithos-click"
+            className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
-            <svg 
-              className="w-6 h-6 stroke-(--lithos-accent-text)" 
-              fill="none" 
-              strokeWidth="3" 
-              strokeLinecap="square" 
+            <svg
+              className="w-6 h-6"
+              stroke="currentColor"
+              fill="none"
+              strokeWidth="3"
+              strokeLinecap="square"
               viewBox="0 0 24 24"
             >
               {isMenuOpen ? (
@@ -99,7 +100,7 @@ function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsMenuOpen(false)}
-            className="mt-auto self-start border-4 border-(--lithos-border) bg-(--lithos-accent) text-left text-2xl text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] hover:shadow-[6px_6px_0px_0px_var(--lithos-shadow)] lithos-click"
+            className="mt-auto self-start bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
           >
             GitHub
           </a>
