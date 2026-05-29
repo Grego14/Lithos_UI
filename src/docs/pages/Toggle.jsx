@@ -10,7 +10,7 @@ export const ToggleDoc = () => {
     <div className="max-w-5xl mx-auto px-6">
       <header className="mt-0">
         <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-none text-(--lithos-text) mb-8">
-          Kinetic Toggle
+          Toggle
         </h1>
         <p className="mt-2 text-lg md:text-xl font-bold opacity-70 text-(--lithos-text) font-body">
           A high-contrast binary control with strict mathematical dimensions.
