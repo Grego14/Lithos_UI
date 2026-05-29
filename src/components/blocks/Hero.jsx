@@ -58,7 +58,7 @@ export default function App() {
           <div className="mt-10 flex flex-col items-center justify-center sm:flex-row flex-wrap">
             <Link
               to="/docs"
-              className="inline-block border-2 border-(--lithos-border) bg-(--lithos-accent) px-8 py-4 font-black uppercase tracking-tighter leading-none text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] lithos-click mb-4 sm:mb-0 sm:mr-6"
+              className="bg-(--lithos-accent) text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] lithos-click mb-4 sm:mb-0 sm:mr-6"
             >
               Documentation
             </Link>
@@ -67,7 +67,7 @@ export default function App() {
               href="https://github.com/IncredibleStand/Lithos_UI"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block border-2 border-(--lithos-border) bg-(--lithos-surface) px-8 py-4 font-black uppercase tracking-tighter leading-none text-(--lithos-text) lithos-click"
+              className="bg-(--lithos-surface) text-(--lithos-text) lithos-click"
             >
               View on GitHub
             </a>

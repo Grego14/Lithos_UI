@@ -37,7 +37,7 @@ function DocsNavbar() {
         <div className="flex items-center justify-start lg:w-1/3">
           <Link
             to="/"
-            className="border-2 border-(--lithos-border) bg-(--lithos-accent) px-5 py-3 font-black tracking-tighter leading-none text-(--lithos-accent-text) lithos-click cursor-pointer"
+            className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
           >
             Lithos UI
           </Link>
@@ -48,7 +48,7 @@ function DocsNavbar() {
           href="https://github.com/IncredibleStand/Lithos_UI"
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden lg:inline-block ml-auto border-2 border-(--lithos-border) bg-(--lithos-accent) px-5 py-2 text-lg font-black text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] hover:shadow-[6px_6px_0px_0px_var(--lithos-shadow)] lithos-click"
+          className="hidden lg:ml-auto bg-(--lithos-accent) text-lg text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] hover:shadow-[6px_6px_0px_0px_var(--lithos-shadow)] lithos-click"
         >
           GitHub
         </a>
@@ -57,14 +57,14 @@ function DocsNavbar() {
         <div className="flex lg:hidden items-center">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="flex items-center justify-center h-10 w-10 border-2 border-(--lithos-border) bg-(--lithos-accent) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] lithos-click cursor-pointer"
+            className="h-10 w-10 bg-(--lithos-accent) lithos-click"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
-            <svg 
-              className="w-6 h-6 stroke-(--lithos-accent-text)" 
-              fill="none" 
-              strokeWidth="3" 
-              strokeLinecap="square" 
+            <svg
+              className="w-6 h-6 stroke-(--lithos-accent-text)"
+              fill="none"
+              strokeWidth="3"
+              strokeLinecap="square"
               viewBox="0 0 24 24"
             >
               {isMenuOpen ? (
@@ -118,7 +118,7 @@ function DocsNavbar() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsMenuOpen(false)}
-            className="mt-8 self-start inline-block border-2 border-(--lithos-border) bg-(--lithos-accent) px-6 py-4 text-left text-2xl font-black uppercase text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] hover:shadow-[6px_6px_0px_0px_var(--lithos-shadow)] lithos-click"
+            className="mt-8 self-start bg-(--lithos-accent) text-left text-2xl text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] hover:shadow-[6px_6px_0px_0px_var(--lithos-shadow)] lithos-click"
           >
             GitHub
           </a>

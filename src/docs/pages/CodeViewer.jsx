@@ -6,9 +6,9 @@ export const CodeViewerDoc = () => {
   // Sample code to display inside the preview pane
   const sampleCode = `export default function BrutalistButton() {
   return (
-    <button className="border-2 border-(--lithos-border) bg-(--lithos-accent) px-5 py-3 font-black tracking-tighter leading-none text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] lithos-click">
+    
       Click Me
-    </button>
+    
   )
 }`
 
@@ -56,7 +56,7 @@ export const CodeViewerDoc = () => {
       {/* Enforcing structural zero-gap compliance using standard margins */}
       <div className="mt-8 mb-16">
         <PreviewBlock code={codeViewerRaw} githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/CodeViewer.jsx">
-          <CodeViewer code={sampleCode} language="jsx" showControls={true} />
+          <CodeViewer code={sampleCode} language="jsx" showControls={true} className="mb-0" />
         </PreviewBlock>
       </div>
     </div>

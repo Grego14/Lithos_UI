@@ -53,7 +53,7 @@ export const ToastDoc = () => {
         <button
           type="button"
           onClick={triggerToast}
-          className="px-4 py-2 font-black uppercase tracking-tighter leading-none lithos-click bg-(--lithos-accent) text-(--lithos-accent-text)"
+          className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
         >
           Trigger System Alert
         </button>

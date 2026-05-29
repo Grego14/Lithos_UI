@@ -80,7 +80,7 @@ const ToastItem = ({ toast, onRemove }) => {
         {/* - Close control keeps the same hard-edge language as the card. */}
         <button 
           onClick={onRemove}
-          className="ml-4 shrink-0 p-3 bg-transparent lithos-click"
+          className="ml-4 shrink-0 bg-transparent lithos-click"
           aria-label="Close notification"
           style={{ borderColor: textColor }}
         >

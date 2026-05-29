@@ -67,7 +67,7 @@ export default function CodeViewer({ code, language = 'jsx', showControls = fals
         <button
           type="button"
           onClick={handleCopy}
-          className="bg-(--lithos-surface) px-4 py-2 font-black uppercase tracking-tighter leading-none text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) lithos-click"
+          className="bg-(--lithos-surface) text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) lithos-click"
           aria-label="Copy code"
           title="Copy code"
         >

@@ -58,7 +58,7 @@ function FeatureGrid() {
           {features.map((feature) => (
             <article
               key={feature.title}
-              className="group relative overflow-hidden m-4 w-full sm:w-[calc(50%-2rem)] lg:w-[calc(33.333%-2rem)] border-4 border-(--lithos-border) bg-(--lithos-surface) p-6 lithos-click"
+              className="group relative overflow-hidden m-4 w-full sm:w-[calc(50%-2rem)] lg:w-[calc(33.333%-2rem)] border-4 border-(--lithos-border) bg-(--lithos-surface) p-6 cursor-pointer transition-all duration-75 shadow-[2px_2px_0px_0px_var(--lithos-shadow)] hover:shadow-[4px_4px_0px_0px_var(--lithos-shadow)] active:shadow-none active:translate-x-0.5 active:translate-y-0.5"
             >
               {/* - The scale wipe is a hard plane, not a fade; the card stays geometrically intact. */}
               <div className="absolute inset-0 z-0 origin-top-left scale-0 bg-(--lithos-accent) transition-transform duration-300 ease-out group-hover:scale-100" aria-hidden="true" />

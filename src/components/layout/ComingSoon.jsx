@@ -39,7 +39,7 @@ export default function ComingSoon() {
           {/* Return button */}
           <Link
             to="/docs"
-            className="inline-block border-2 border-(--lithos-border) bg-(--lithos-accent) px-6 py-4 font-black uppercase tracking-tighter leading-none text-(--lithos-accent-text) lithos-click mb-4 sm:mb-0 sm:mr-4"
+            className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click mb-4 sm:mb-0 sm:mr-4"
           >
             Back to Docs
           </Link>
@@ -49,7 +49,7 @@ export default function ComingSoon() {
             href="https://github.com/IncredibleStand/Lithos_UI/issues"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block border-2 border-(--lithos-border) bg-(--lithos-surface) px-6 py-4 font-black uppercase tracking-tighter leading-none text-(--lithos-text) lithos-click"
+            className="bg-(--lithos-surface) text-(--lithos-text) lithos-click"
           >
             Contribute Code
           </a>

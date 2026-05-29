@@ -50,7 +50,7 @@ function ThemeEngine() {
                 onClick={() => handleThemeChange(theme.hex)}
                 aria-label={`Activate ${theme.name} theme`}
                 title={theme.name}
-                className={`m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 border-2 border-(--lithos-border) flex items-center justify-center lithos-click ${isActive ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : ''}`}
+                className={`m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 lithos-click ${isActive ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : ''}`}
                 style={{
                   backgroundColor: theme.hex,
                 }}
@@ -62,7 +62,7 @@ function ThemeEngine() {
 
           {/* - Custom picker keeps the tile geometry fixed while the input floats invisibly on top. */}
           <div
-            className={`relative m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 border-2 border-(--lithos-border) flex items-center justify-center lithos-click ${!themes.some((t) => t.hex === accentColor) ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : ''}`}
+            className={`relative m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 bg-(--lithos-surface) lithos-click group ${!themes.some((t) => t.hex === accentColor) ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : ''}`}
             style={{
               backgroundColor: !themes.some((t) => t.hex === accentColor)
                 ? accentColor
@@ -99,7 +99,7 @@ function ThemeEngine() {
             <button
               type="button"
               onClick={handleReset}
-              className="border-4 border-(--lithos-border) bg-(--lithos-surface) px-4 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-black uppercase tracking-tighter leading-none text-(--lithos-text) lithos-click"
+              className="border-4 border-(--lithos-border) bg-(--lithos-surface) text-sm sm:text-base text-(--lithos-text) lithos-click"
             >
               Reset to Default Theme
             </button>
