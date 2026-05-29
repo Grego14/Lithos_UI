@@ -15,7 +15,7 @@ import { useTheme } from '../../core/useTheme'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
-export default function CodeViewer({ code, language = 'jsx', showControls = false }) {
+export default function CodeViewer({ code, language = 'jsx', showControls = false, embedded = false, className = '' }) {
   const toast = useToast()
   const { accentColor } = useTheme()
 
@@ -48,8 +48,8 @@ export default function CodeViewer({ code, language = 'jsx', showControls = fals
   }
 
   return (
-    <div className="border-4 border-(--lithos-border) bg-(--lithos-bg) mb-8 relative">
-      <div className="border-b-4 border-(--lithos-border) bg-(--lithos-surface) px-4 py-2 flex justify-between items-center">
+    <div className={`w-full ${embedded ? 'bg-transparent mb-0 relative' : 'border-4 border-(--lithos-border) bg-(--lithos-bg) mb-8 relative'} ${className}`}>
+      <div className="border-b-2 border-(--lithos-border) bg-(--lithos-surface) px-4 py-2 flex justify-between items-center">
         <div className="flex items-center">
           {showControls ? (
             <div className="flex items-center">

@@ -16,7 +16,11 @@ import NotFound from './components/layout/NotFound'
 import DocsLayout from './docs/DocsLayout'
 import Introduction from './docs/pages/Introduction'
 import Installation from './docs/pages/Installation'
-import ComingSoon from './components/layout/ComingSoon'
+import { CodeViewerDoc } from './docs/pages/CodeViewer'
+import { PreviewBlockDoc } from './docs/pages/PreviewBlock'
+import { ToastDoc } from './docs/pages/Toast'
+import { ToggleDoc } from './docs/pages/Toggle'
+
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -27,15 +31,6 @@ function ScrollToTop() {
 
   return null;
 }
-
-const introTOC = [
-  { id: '#welcome-video', label: 'Intro To Lithos UI' },
-]
-
-const installationTOC = [
-  { id: '#base-template', label: '1. The Base Template' },
-  { id: '#global-css', label: '2. Global CSS Configuration' },
-]
 
 /**
  * App Component - Orchestrates theme state, routing, and renders application UI.
@@ -55,18 +50,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Showroom isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />} />
           {/* Completed Documentation Shells */}
-          <Route path="/docs" element={<DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} toc={introTOC}><Introduction /></DocsLayout>} />
-          <Route path="/docs/installation" element={<DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} toc={installationTOC}><Installation /></DocsLayout>} />
+          <Route path="/docs" element={<DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}><Introduction /></DocsLayout>} />
+          <Route path="/docs/installation" element={<DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}><Installation /></DocsLayout>} />
+          <Route path="/docs/code-viewer" element={<DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}><CodeViewerDoc /></DocsLayout>} />
+          <Route path="/docs/preview-block" element={<DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}><PreviewBlockDoc /></DocsLayout>} />
+          <Route path="/docs/toast" element={<DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}><ToastDoc /></DocsLayout>} />
+          <Route path="/docs/toggle" element={<DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}><ToggleDoc /></DocsLayout>} />
           
-          {/* Active Engineering Zones - Bypassing DocsLayout for full-screen rendering */}
-          <Route path="/docs/hero" element={<ComingSoon />} />
-          <Route path="/docs/feature-grid" element={<ComingSoon />} />
-          <Route path="/docs/pricing" element={<ComingSoon />} />
-          <Route path="/docs/testimonials" element={<ComingSoon />} />
-          <Route path="/docs/faq" element={<ComingSoon />} />
-          <Route path="/docs/toggle" element={<ComingSoon />} />
-          <Route path="/docs/code-viewer" element={<ComingSoon />} />
-          
+          {/* Active Engineering Zones*/}
           {/* Structural Failure Catch-all */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -23,12 +23,10 @@ function DocsNavbar() {
     {
       category: 'Components',
       links: [
-        { label: 'Hero Block', href: '/docs/hero' },
-        { label: 'Feature Grid', href: '/docs/feature-grid' },
-        { label: 'Pricing Slab', href: '/docs/pricing' },
-        { label: 'Testimonials', href: '/docs/testimonials' },
-        { label: 'FAQ Accordion', href: '/docs/faq' },
-        { label: 'Kinetic Toggle', href: '/docs/toggle' }
+        { label: 'Code Viewer', href: '/docs/code-viewer' },
+        { label: 'Preview Block', href: '/docs/preview-block' },
+        { label: 'Toast', href: '/docs/toast' },
+        { label: 'Toggle', href: '/docs/toggle' }
       ]
     }
   ]
@@ -50,7 +48,7 @@ function DocsNavbar() {
           href="https://github.com/IncredibleStand/Lithos_UI"
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden lg:inline-block ml-auto border-4 border-(--lithos-border) bg-(--lithos-accent) px-5 py-2 text-lg font-black uppercase text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] hover:shadow-[6px_6px_0px_0px_var(--lithos-shadow)] lithos-click"
+          className="hidden lg:inline-block ml-auto border-4 border-(--lithos-border) bg-(--lithos-accent) px-5 py-2 text-lg font-black text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] hover:shadow-[6px_6px_0px_0px_var(--lithos-shadow)] lithos-click"
         >
           GitHub
         </a>

@@ -6,10 +6,46 @@
  * - No gap utilities; spacing via px and py utilities on grid items.
  */
 
+import { useLocation } from 'react-router-dom'
 import Navbar from './layout/Navbar'
 import Sidebar from './layout/Sidebar'
 import TableOfContents from './layout/TableOfContents'
 import Footer from '../components/layout/Footer'
+
+const tocRegistry = {
+  '/docs': [
+    { id: '#welcome-video', label: 'Intro To Lithos UI', level: 1 },
+  ],
+  '/docs/installation': [
+    { id: '#base-template', label: '1. The Base Template', level: 1 },
+    { id: '#global-css', label: '2. Global CSS Configuration', level: 1 },
+  ],
+  '/docs/hero': [
+    { id: '#architecture', label: 'Architecture', level: 1 },
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#default', label: 'Default', level: 2 },
+  ],
+  '/docs/code-viewer': [
+    { id: '#architecture', label: 'Architecture', level: 1 },
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#default', label: 'Default', level: 2 },
+  ],
+  '/docs/preview-block': [
+    { id: '#architecture', label: 'Architecture', level: 1 },
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#default', label: 'Default', level: 2 },
+  ],
+  '/docs/toast': [
+    { id: '#architecture', label: 'Architecture', level: 1 },
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#default', label: 'Default', level: 2 },
+  ],
+  '/docs/toggle': [
+    { id: '#architecture', label: 'Architecture', level: 1 },
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#default', label: 'Default', level: 2 },
+  ],
+}
 
 /**
  * DocsLayout component.
@@ -17,7 +53,10 @@ import Footer from '../components/layout/Footer'
  * @param {{ children: React.ReactNode, isDarkMode: boolean, toggleObsidian: Function }} props
  * @returns {React.ReactElement}
  */
-export default function DocsLayout({ children, isDarkMode, toggleObsidian, toc }) {
+export default function DocsLayout({ children, isDarkMode, toggleObsidian }) {
+  const location = useLocation()
+  const currentTOC = tocRegistry[location.pathname] || []
+
   return (
     <div className="min-h-screen flex flex-col bg-(--lithos-bg) text-(--lithos-text)">
       <Navbar isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />
@@ -35,7 +74,7 @@ export default function DocsLayout({ children, isDarkMode, toggleObsidian, toc }
 
         <div className="hidden xl:block xl:col-span-2 sticky top-32">
           <div className="max-h-[calc(100vh-10rem)] pb-6 overflow-y-auto sidebar-scroll">
-            <TableOfContents links={toc} />
+            <TableOfContents links={currentTOC} />
           </div>
         </div>
       </div>
