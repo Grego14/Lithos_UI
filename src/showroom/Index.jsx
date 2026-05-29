@@ -1,10 +1,10 @@
 import Navbar from '../components/layout/Navbar'
-import Hero from '../components/sections/Hero'
-import FeatureGrid from '../components/sections/FeatureGrid'
-import Pricing from '../components/sections/Pricing'
-import Testimonials from '../components/sections/Testimonials'
-import FAQ from '../components/sections/FAQ'
-import ThemeEngine from '../components/sections/ThemeEngine'
+import Hero from '../components/blocks/Hero'
+import FeatureGrid from '../components/blocks/FeatureGrid'
+import Pricing from '../components/blocks/Pricing'
+import Testimonials from '../components/blocks/Testimonials'
+import FAQ from '../components/blocks/FAQ'
+import ThemeEngine from '../components/blocks/ThemeEngine'
 import Footer from '../components/layout/Footer'
 
 /**

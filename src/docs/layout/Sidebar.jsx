@@ -33,51 +33,33 @@ export default function Sidebar() {
         </nav>
       </div>
 
-      {/* Components Category */}
+      {/* Atomic Components Category */}
       <div>
         <h3 className="text-xs font-black opacity-50 mb-3 px-4 uppercase">Components</h3>
         <nav className="flex flex-col pl-4 ">
           <Link
-            to="/docs/hero"
-            className={getLinkClass('/docs/hero')}
+            to="/docs/code-viewer"
+            className={getLinkClass('/docs/code-viewer')}
           >
-            Hero
+            Code Viewer
           </Link>
           <Link
-            to="/docs/feature-grid"
-            className={getLinkClass('/docs/feature-grid')}
+            to="/docs/preview-block"
+            className={getLinkClass('/docs/preview-block')}
           >
-            Feature Grid
+            Preview Block
           </Link>
           <Link
-            to="/docs/pricing"
-            className={getLinkClass('/docs/pricing')}
+            to="/docs/toast"
+            className={getLinkClass('/docs/toast')}
           >
-            Pricing
-          </Link>
-          <Link
-            to="/docs/testimonials"
-            className={getLinkClass('/docs/testimonials')}
-          >
-            Testimonials
-          </Link>
-          <Link
-            to="/docs/faq"
-            className={getLinkClass('/docs/faq')}
-          >
-            FAQ
+            Toast
           </Link>
           <Link
             to="/docs/toggle"
             className={getLinkClass('/docs/toggle')}
           >
             Toggle
-          </Link>
-          <Link
-            to="/docs/code-viewer"
-            className={getLinkClass('/docs/code-viewer')}
-          >
-            Code Viewer
           </Link>
         </nav>
       </div>

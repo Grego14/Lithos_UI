@@ -51,7 +51,7 @@ function Navbar() {
             href="https://github.com/IncredibleStand/Lithos_UI"
             target="_blank"
             rel="noopener noreferrer"
-            className="border-2 border-(--lithos-border) bg-(--lithos-accent) px-5 py-3 font-black tracking-tighter leading-none text-(--lithos-accent-text) lithos-click cursor-pointer"
+            className="border-2 border-(--lithos-border) bg-(--lithos-accent) px-5 py-3 font-black tracking-tighter leading-none text-(--lithos-accent-text) lithos-click"
           >
             GitHub
           </a>
@@ -61,7 +61,7 @@ function Navbar() {
         <div className="flex lg:hidden">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="flex items-center justify-center h-10 w-10 border-2 border-(--lithos-border) bg-(--lithos-accent) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] lithos-click cursor-pointer"
+            className="flex items-center justify-center h-10 w-10 border-2 border-(--lithos-border) bg-(--lithos-accent) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] lithos-click"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             <svg 
