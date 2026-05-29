@@ -1,15 +1,8 @@
-/**
- * Docs navbar — physical shell cloned from the main marketing navbar.
- * This file preserves the exact outer wrapper classes, inner max-width
- * container, and logo markup so the docs header lines up perfectly.
- */
-
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-function DocsNavbar() {
+export default function DocsNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-
   const [expandedCategory, setExpandedCategory] = useState('Getting Started')
 
   const groupedLinks = [
@@ -43,25 +36,28 @@ function DocsNavbar() {
           </Link>
         </div>
 
-        {/* - Desktop GitHub CTA */}
-        <a
-          href="https://github.com/IncredibleStand/Lithos_UI"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden lg:ml-auto bg-(--lithos-accent) text-lg text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] hover:shadow-[6px_6px_0px_0px_var(--lithos-shadow)] lithos-click"
-        >
-          GitHub
-        </a>
+        {/* - Desktop GitHub CTA (Hidden on mobile) */}
+        <div className="hidden lg:flex items-center justify-end lg:w-1/3">
+          <a
+            href="[https://github.com/IncredibleStand/Lithos_UI](https://github.com/IncredibleStand/Lithos_UI)"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
+          >
+            GitHub
+          </a>
+        </div>
 
         {/* - Mobile Action Toggle (Hamburger / X) */}
         <div className="flex lg:hidden items-center">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="h-10 w-10 bg-(--lithos-accent) lithos-click"
+            className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             <svg
-              className="w-6 h-6 stroke-(--lithos-accent-text)"
+              className="w-6 h-6"
+              stroke="currentColor"
               fill="none"
               strokeWidth="3"
               strokeLinecap="square"
@@ -112,13 +108,13 @@ function DocsNavbar() {
             ))}
           </div>
 
-          {/* GitHub CTA */}
+          {/* Mobile Menu GitHub CTA */}
           <a
-            href="https://github.com/IncredibleStand/Lithos_UI"
+            href="[https://github.com/IncredibleStand/Lithos_UI](https://github.com/IncredibleStand/Lithos_UI)"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsMenuOpen(false)}
-            className="mt-8 self-start bg-(--lithos-accent) text-left text-2xl text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] hover:shadow-[6px_6px_0px_0px_var(--lithos-shadow)] lithos-click"
+            className="mt-8 self-start bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
           >
             GitHub
           </a>
@@ -127,5 +123,3 @@ function DocsNavbar() {
     </header>
   )
 }
-
-export default DocsNavbar
