@@ -21,27 +21,22 @@ const tocRegistry = {
     { id: '#global-css', label: '2. Global CSS Configuration', level: 1 },
   ],
   '/docs/hero': [
-    { id: '#architecture', label: 'Architecture', level: 1 },
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
   ],
   '/docs/code-viewer': [
-    { id: '#architecture', label: 'Architecture', level: 1 },
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
   ],
   '/docs/preview-block': [
-    { id: '#architecture', label: 'Architecture', level: 1 },
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
   ],
   '/docs/toast': [
-    { id: '#architecture', label: 'Architecture', level: 1 },
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
   ],
   '/docs/toggle': [
-    { id: '#architecture', label: 'Architecture', level: 1 },
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
   ],

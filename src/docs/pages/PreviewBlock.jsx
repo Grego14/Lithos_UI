@@ -1,7 +1,37 @@
 import PreviewBlockUI from '../../components/ui/PreviewBlock'
-import previewBlockRaw from '../../components/ui/PreviewBlock.jsx?raw'
 
 export const PreviewBlockDoc = () => {
+  const innerCode = `export default function InnerExample() {
+  return (
+    <p className="text-base md:text-lg text-(--lithos-text) font-body">
+      This is the inner live preview surface rendered by the nested PreviewBlock.
+    </p>
+  )
+}`
+
+  const usageCode = `import PreviewBlock from '../../components/ui/PreviewBlock'
+
+export default function PreviewBlockExample() {
+  const innerCode = \`export default function InnerExample() {
+  return (
+    <p className="text-base md:text-lg text-(--lithos-text) font-body">
+      This is the inner live preview surface rendered by the nested PreviewBlock.
+    </p>
+  )
+}\`
+
+  return (
+    <PreviewBlock 
+      code={innerCode} 
+      githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/PreviewBlock.jsx"
+    >
+      <p className="text-base md:text-lg text-(--lithos-text) font-body">
+        This is the inner live preview surface rendered by the nested PreviewBlock.
+      </p>
+    </PreviewBlock>
+  )
+}`
+
   return (
     <div className="max-w-5xl mx-auto px-6">
       <header className="mt-0">
@@ -20,12 +50,11 @@ export const PreviewBlockDoc = () => {
         </p>
       </section>
 
-      <h2 id="architecture" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
-        Architecture
-      </h2>
-      <p className="mb-4 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
-        This is a meta-demonstration: you are looking at a PreviewBlock wrapped inside another PreviewBlock.
-      </p>
+      <div className="border-l-4 border-(--lithos-accent) pl-6 py-2 mb-8 bg-(--lithos-surface) p-4">
+        <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
+          This is a meta-demonstration: you are looking at a PreviewBlock wrapped inside another PreviewBlock.
+        </p>
+      </div>
 
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Examples
@@ -35,15 +64,13 @@ export const PreviewBlockDoc = () => {
         Default
       </h3>
 
-      <PreviewBlockUI code={previewBlockRaw} githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/PreviewBlock.jsx">
- 
-         <PreviewBlockUI
-          code={previewBlockRaw}
-          githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/PreviewBlock.jsx"
-        >
+      <PreviewBlockUI code={usageCode} githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/PreviewBlock.jsx">
+      
+        <PreviewBlockUI code={innerCode} githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/PreviewBlock.jsx">
           <p className="text-base md:text-lg text-(--lithos-text) font-body">
             This is the inner live preview surface rendered by the nested PreviewBlock.
           </p>
+
         </PreviewBlockUI>
       </PreviewBlockUI>
     </div>

@@ -20,6 +20,7 @@ import { CodeViewerDoc } from './docs/pages/CodeViewer'
 import { PreviewBlockDoc } from './docs/pages/PreviewBlock'
 import { ToastDoc } from './docs/pages/Toast'
 import { ToggleDoc } from './docs/pages/Toggle'
+import { ComingSoon } from './components/layout/ComingSoon'
 
 
 function ScrollToTop() {
@@ -56,8 +57,8 @@ function App() {
           <Route path="/docs/preview-block" element={<DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}><PreviewBlockDoc /></DocsLayout>} />
           <Route path="/docs/toast" element={<DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}><ToastDoc /></DocsLayout>} />
           <Route path="/docs/toggle" element={<DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}><ToggleDoc /></DocsLayout>} />
-          
-          {/* Active Engineering Zones*/}
+
+          <Route path="/coming-soon" element={<ComingSoon />} />
           {/* Structural Failure Catch-all */}
           <Route path="*" element={<NotFound />} />
         </Routes>
