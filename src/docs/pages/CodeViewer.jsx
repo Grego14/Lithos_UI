@@ -6,7 +6,7 @@ export const CodeViewerDoc = () => {
   // Sample code to display inside the preview pane
   const sampleCode = `export default function BrutalistButton() {
   return (
-    <button className="border-4 border-(--lithos-border) bg-(--lithos-accent) px-5 py-3 font-black tracking-tighter leading-none text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] lithos-click cursor-pointer">
+    <button className="border-2 border-(--lithos-border) bg-(--lithos-accent) px-5 py-3 font-black tracking-tighter leading-none text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] lithos-click">
       Click Me
     </button>
   )
