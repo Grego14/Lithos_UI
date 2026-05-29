@@ -1,10 +1,24 @@
 import { useState } from 'react'
 import Toggle from '../../components/ui/Toggle'
 import PreviewBlock from '../../components/ui/PreviewBlock'
-import toggleRaw from '../../components/ui/Toggle.jsx?raw'
 
 export const ToggleDoc = () => {
   const [checked, setChecked] = useState(false)
+
+  const usageCode = `import { useState } from 'react'
+import Toggle from '../../components/ui/Toggle'
+
+export default function ToggleExample() {
+  const [checked, setChecked] = useState(false)
+
+  return (
+    <Toggle 
+      checked={checked} 
+      onToggle={() => setChecked(!checked)} 
+      label="Documentation Toggle" 
+    />
+  )
+}`
 
   return (
     <div className="max-w-5xl mx-auto px-6">
@@ -24,12 +38,11 @@ export const ToggleDoc = () => {
         </p>
       </section>
 
-      <h2 id="architecture" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
-        Architecture
-      </h2>
-      <p className="mb-4 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
-        Interact with the live assembly below to observe the binary contrast flip.
-      </p>
+      <div className="border-l-4 border-(--lithos-accent) pl-6 py-2 mb-8 bg-(--lithos-surface) p-4">
+        <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
+          Interact with the live assembly below to observe the binary contrast flip.
+        </p>
+      </div>
 
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Examples
@@ -39,7 +52,7 @@ export const ToggleDoc = () => {
         Default
       </h3>
 
-      <PreviewBlock code={toggleRaw} githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/Toggle.jsx">
+      <PreviewBlock code={usageCode} githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/Toggle.jsx">
         <Toggle checked={checked} onToggle={() => setChecked(!checked)} label="Documentation Toggle" />
       </PreviewBlock>
     </div>

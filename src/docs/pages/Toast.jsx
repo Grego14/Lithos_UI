@@ -1,6 +1,5 @@
 import { useToast } from '../../core/hooks/useToast'
 import PreviewBlock from '../../components/ui/PreviewBlock'
-import toastRaw from '../../components/ui/Toast.jsx?raw'
 
 export const ToastDoc = () => {
   const toast = useToast()
@@ -15,6 +14,33 @@ export const ToastDoc = () => {
       })
     }
   }
+
+  const usageCode = `import { useToast } from '../../core/hooks/useToast'
+
+export default function ToastExample() {
+  const { addToast } = useToast()
+
+  const triggerToast = () => {
+    if (addToast) {
+      addToast({
+        title: 'SYSTEM ALERT',
+        message: 'Structural integrity verified.',
+        type: 'success',
+        color: '#00FF00',
+      })
+    }
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={triggerToast}
+      className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
+    >
+      Trigger System Alert
+    </button>
+  )
+}`
 
   return (
     <div className="max-w-5xl mx-auto px-6">
@@ -34,12 +60,11 @@ export const ToastDoc = () => {
         </p>
       </section>
 
-      <h2 id="architecture" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
-        Architecture
-      </h2>
-      <p className="mb-4 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
-        Click the button below to dispatch an alert to the fixed coordinate stack.
-      </p>
+      <div className="border-l-4 border-(--lithos-accent) pl-6 py-2 mb-8 bg-(--lithos-surface) p-4">
+        <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
+          Click the button below to dispatch an alert to the fixed coordinate stack.
+        </p>
+      </div>
 
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Examples
@@ -49,7 +74,7 @@ export const ToastDoc = () => {
         Default
       </h3>
 
-      <PreviewBlock code={toastRaw} githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/Toast.jsx">
+      <PreviewBlock code={usageCode} githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/Toast.jsx">
         <button
           type="button"
           onClick={triggerToast}

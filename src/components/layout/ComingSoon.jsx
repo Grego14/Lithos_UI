@@ -14,7 +14,7 @@
 import { Link } from 'react-router-dom'
 import KineticGrid from '../ui/KineticGrid'
 
-export default function ComingSoon() {
+export const ComingSoon = () => {
   return (
     <KineticGrid baseOpacity="opacity-10" className="min-h-screen bg-(--lithos-bg) text-(--lithos-text) px-4">
       <div className="text-center max-w-5xl mx-auto w-full">

@@ -6,6 +6,18 @@ export default function TableOfContents({ links = [] }) {
       <h3 className="text-xs font-black opacity-50 uppercase px-4">On This Page</h3>
 
       <nav className="pt-3">
+        {/* Overview - Scroll to top */}
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault()
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          className="block py-1.5 px-4 text-xs font-bold transition-colors duration-150 ease-out hover:text-(--lithos-accent) mb-2"
+        >
+          Overview
+        </a>
+
         {links.map((link) => (
           <a
             key={link.id}
