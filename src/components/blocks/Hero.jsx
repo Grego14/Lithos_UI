@@ -44,10 +44,8 @@ export default function App() {
     <section id="top" className="border-b-2 border-(--lithos-border) bg-(--lithos-bg)">
       {/* Deploying the tracking engine to the main landing viewport */}
       <KineticGrid baseOpacity="opacity-10" className="py-12 md:py-24 w-full">
-        
         {/* Centered lane: keeps the slab width inside the page’s vertical cadence */}
         <div className="mx-auto max-w-6xl px-6 text-center w-full">
-          
           <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tighter leading-none md:text-7xl lg:text-8xl text-(--lithos-text)">
             BUILD FRONTENDS THAT REFUSE TO BREAK
           </h1>
@@ -56,19 +54,6 @@ export default function App() {
             Lithos UI is a neo-brutalist React component library engineered with absolute
             structural integrity.
           </p>
-    <section id="top" className="bg-(--lithos-surface) py-12 md:py-24">
-      {/* - 96px shell: 24 * 4px = the opening rhythm unit. */}
-      {/* - Centered lane: keeps the slab width inside the page’s vertical cadence. */}
-      <div className="mx-auto max-w-6xl px-6 text-center">
-        <h1 className="text-balance text-5xl font-black uppercase tracking-tighter leading-none md:text-7xl lg:text-8xl">
-          BUILD FRONTENDS THAT REFUSE TO BREAK
-        </h1>
-
-        {/* - Copy stays inside the hero mass; 24px top margin preserves the outer shell. */}
-        <p className="mt-6 text-2xl leading-none text-(--lithos-text) md:text-3xl font-body">
-          Lithos UI is a neo-brutalist React component library engineered with absolute
-          structural integrity.
-        </p>
 
           <div className="mt-10 flex flex-col items-center justify-center sm:flex-row flex-wrap">
             <Link
@@ -82,17 +67,16 @@ export default function App() {
               href="https://github.com/IncredibleStand/Lithos_UI"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block border-4 border-(--lithos-border) bg-(--lithos-surface) px-8 py-4 font-black uppercase tracking-tighter leading-none text-(--lithos-text) lithos-click"
+              className="inline-block border-2 border-(--lithos-border) bg-(--lithos-surface) px-8 py-4 font-black uppercase tracking-tighter leading-none text-(--lithos-text) lithos-click"
             >
               View on GitHub
             </a>
           </div>
 
           {/* The CodeViewer itself now wrapped in a hard border */}
-            <div className="border-4 border-(--lithos-border) bg-(--lithos-bg) mt-16">
-              <CodeViewer code={appShowcaseCode} showControls={true} />
-            </div>
-          
+          <div className="bg-(--lithos-bg) mt-16">
+            <CodeViewer code={appShowcaseCode} showControls={true} />
+          </div>
         </div>
       </KineticGrid>
     </section>
