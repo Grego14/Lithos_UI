@@ -38,7 +38,7 @@ export default function NotFound() {
           {/* Return to Base button - hard brutalist styling */}
           <Link
             to="/"
-            className="inline-block border-2 border-(--lithos-border) bg-(--lithos-accent) px-5 py-3 font-black tracking-tighter leading-none text-(--lithos-accent-text) lithos-click"
+            className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
           >
             Return to Base
           </Link>

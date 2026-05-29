@@ -81,8 +81,8 @@ function Pricing() {
                     href="#top"
                     className={
                       highlighted
-                        ? 'inline-flex border-2 border-(--lithos-) bg-(--lithos-accent-text) px-4 py-3 sm:px-6 sm:py-4 font-black uppercase tracking-tighter leading-none text-(--lithos-accent) lithos-click'
-                        : 'inline-flex border-2 border-(--lithos-border) bg-(--lithos-surface) px-4 py-3 sm:px-6 sm:py-4 font-black uppercase tracking-tighter leading-none text-(--lithos-text) lithos-click'
+                        ? 'bg-(--lithos-accent-text) text-(--lithos-accent) lithos-click'
+                        : 'bg-(--lithos-surface) text-(--lithos-text) lithos-click'
                     }
                   >
                     {tier.cta}

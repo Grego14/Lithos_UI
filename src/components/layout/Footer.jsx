@@ -68,7 +68,7 @@ function Footer({ isDarkMode, onToggleObsidian }) {
             href="https://incrediblestand.gumroad.com/l/lithos-ui" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="group flex items-center border-4 border-(--lithos-border) bg-(--lithos-surface) p-4 text-2xl font-black uppercase tracking-tighter leading-none text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) lithos-click md:text-3xl"
+            className="group border-4 border-(--lithos-border) bg-(--lithos-surface) text-2xl text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) lithos-click md:text-3xl"
           >
             <span>Show Love</span>
             <svg 

@@ -26,7 +26,7 @@ function Navbar() {
         <div className="flex items-center justify-start lg:w-1/3">
           <a
             href="#top"
-            className="border-2 border-(--lithos-border) bg-(--lithos-accent) px-5 py-3 font-black tracking-tighter leading-none text-(--lithos-accent-text) lithos-click cursor-pointer"
+            className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
           >
             Lithos UI
           </a>
@@ -51,7 +51,7 @@ function Navbar() {
             href="https://github.com/IncredibleStand/Lithos_UI"
             target="_blank"
             rel="noopener noreferrer"
-            className="border-2 border-(--lithos-border) bg-(--lithos-accent) px-5 py-3 font-black tracking-tighter leading-none text-(--lithos-accent-text) lithos-click"
+            className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
           >
             GitHub
           </a>
@@ -61,7 +61,7 @@ function Navbar() {
         <div className="flex lg:hidden">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="flex items-center justify-center h-10 w-10 border-2 border-(--lithos-border) bg-(--lithos-accent) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] lithos-click"
+            className="h-10 w-10 bg-(--lithos-accent) lithos-click"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             <svg 
@@ -99,7 +99,7 @@ function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsMenuOpen(false)}
-            className="mt-auto self-start inline-block border-4 border-(--lithos-border) bg-(--lithos-accent) px-6 py-4 text-left text-2xl font-black uppercase text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] hover:shadow-[6px_6px_0px_0px_var(--lithos-shadow)] lithos-click cursor-pointer"
+            className="mt-auto self-start border-4 border-(--lithos-border) bg-(--lithos-accent) text-left text-2xl text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] hover:shadow-[6px_6px_0px_0px_var(--lithos-shadow)] lithos-click"
           >
             GitHub
           </a>
