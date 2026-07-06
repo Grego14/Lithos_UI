@@ -38,7 +38,7 @@ Click the green **"Use this template"** button at the top of the repository to i
 
 **Adding to an existing project?**
 
-1. Ensure your project is running **React** and **Tailwind CSS v3+**.
+1. Ensure your project is running **React** and **Tailwind CSS v4+**.
 2. Copy the `index.css` global tokens into your main stylesheet.
 3. Drop the components from the `/components` folder into your standard architecture.
 

@@ -1,0 +1,21 @@
+node_modules
+build
+dist
+coverage
+public
+
+# Local env files
+.env*
+
+# IDEs and editors
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Package manager locks
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
