@@ -1,4 +1,3 @@
-
 # Lithos UI
 
 ![Lithos UI logo](src/assets/lithos-logo.webp)
@@ -48,17 +47,17 @@ The entire visual weight of the library is controlled by these 7 variables. Modi
 
 ```css
 :root {
-  --lithos-bg: #ffffff;          /* The deep background */
-  --lithos-text: #000000;        /* Primary typography */
-  --lithos-border: #000000;      /* Structural lines */
-  --lithos-accent: #00FF00;      /* The loud brand color */
+  --lithos-bg: #ffffff; /* The deep background */
+  --lithos-text: #000000; /* Primary typography */
+  --lithos-border: #000000; /* Structural lines */
+  --lithos-accent: #00ff00; /* The loud brand color */
   --lithos-accent-text: #000000; /* Auto-calculated by YIQ */
-  --lithos-surface: #ffffff;     /* Card backgrounds */
-  --lithos-shadow: rgba(0,0,0,1);/* Brutalist shadow offset */
+  --lithos-surface: #ffffff; /* Card backgrounds */
+  --lithos-shadow: rgba(0, 0, 0, 1); /* Brutalist shadow offset */
 }
 ```
 
-*(Note: Interactive physics and structural weight are handled via the `@layer utilities` block in `index.css`, primarily through the `.lithos-click` token.)*
+_(Note: Interactive physics and structural weight are handled via the `@layer utilities` block in `index.css`, primarily through the `.lithos-click` token.)_
 
 ## Obsidian Mode (Dark Theme)
 

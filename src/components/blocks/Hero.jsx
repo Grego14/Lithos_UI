@@ -38,7 +38,7 @@ export default function App() {
       />
     </main>
   );
-}`;
+}`
 
   return (
     <section id="top" className="border-b-2 border-(--lithos-border) bg-(--lithos-bg)">
@@ -51,8 +51,7 @@ export default function App() {
           </h1>
 
           <p className="mt-6 text-xl sm:text-2xl font-normal leading-tight text-(--lithos-text) md:text-3xl font-body max-w-4xl mx-auto">
-            Lithos UI is a neo-brutalist React component library engineered with absolute
-            structural integrity.
+            Lithos UI is a neo-brutalist React component library engineered with absolute structural integrity.
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center sm:flex-row flex-wrap">

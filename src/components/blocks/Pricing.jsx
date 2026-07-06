@@ -30,7 +30,7 @@ function Pricing() {
     <section id="pricing" className="border-b-2 border-(--lithos-border) bg-(--lithos-bg) py-24">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-4xl font-black uppercase tracking-tighter leading-none text-center text-(--lithos-text) md:text-5xl">
-          Zero Cost  • Build Forever
+          Zero Cost • Build Forever
         </h2>
         <p className="mt-4 text-lg font-bold leading-none text-center text-(--lithos-text) md:text-xl">
           Lithos UI is completely free and open-source. Just raw, portable components engineered for production.
@@ -52,26 +52,37 @@ function Pricing() {
                 }
               >
                 {/* - Highlighted tier gets the bigger shadow offset so the primary offer carries more mass. */}
-                <h3 className={`text-3xl font-black uppercase tracking-tighter leading-none text-(--lithos-accent-text)`}>{tier.title}</h3>
-                <p className={`mt-4 text-4xl sm:text-5xl font-black uppercase tracking-tighter leading-none text-(--lithos-accent-text)`}>{tier.price}</p>
+                <h3
+                  className={`text-3xl font-black uppercase tracking-tighter leading-none text-(--lithos-accent-text)`}
+                >
+                  {tier.title}
+                </h3>
+                <p
+                  className={`mt-4 text-4xl sm:text-5xl font-black uppercase tracking-tighter leading-none text-(--lithos-accent-text)`}
+                >
+                  {tier.price}
+                </p>
                 <p className={`mt-4 text-base font-medium leading-snug text-(--lithos-accent-text)`}>{tier.goal}</p>
 
                 {/* - Feature list uses explicit bottom spacing to keep each line independently readable. */}
                 <div className="mt-8">
                   <ul>
-                    {tier.features && tier.features.map((feature, i) => (
-                      <li
-                        key={`${tier.key}-f-${i}`}
-                        className={
-                          'leading-snug font-black uppercase tracking-tighter' +
-                          (feature.included ? ' text-(--lithos-accent-text)' : ' line-through opacity-30 text-(--lithos-accent-text)') +
-                          (i < tier.features.length - 1 ? ' mb-3' : '')
-                        }
-                      >
-                        {feature.included ? '✓ ' : '✕ '}
-                        {feature.label}
-                      </li>
-                    ))}
+                    {tier.features &&
+                      tier.features.map((feature, i) => (
+                        <li
+                          key={`${tier.key}-f-${i}`}
+                          className={
+                            'leading-snug font-black uppercase tracking-tighter' +
+                            (feature.included
+                              ? ' text-(--lithos-accent-text)'
+                              : ' line-through opacity-30 text-(--lithos-accent-text)') +
+                            (i < tier.features.length - 1 ? ' mb-3' : '')
+                          }
+                        >
+                          {feature.included ? '✓ ' : '✕ '}
+                          {feature.label}
+                        </li>
+                      ))}
                   </ul>
                 </div>
 

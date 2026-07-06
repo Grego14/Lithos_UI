@@ -10,8 +10,8 @@ export default function DocsNavbar() {
       category: 'Getting Started',
       links: [
         { label: 'Introduction', href: '/docs' },
-        { label: 'Installation', href: '/docs/installation' }
-      ]
+        { label: 'Installation', href: '/docs/installation' },
+      ],
     },
     {
       category: 'Components',
@@ -19,19 +19,16 @@ export default function DocsNavbar() {
         { label: 'Code Viewer', href: '/docs/code-viewer' },
         { label: 'Preview Block', href: '/docs/preview-block' },
         { label: 'Toast', href: '/docs/toast' },
-        { label: 'Toggle', href: '/docs/toggle' }
-      ]
-    }
+        { label: 'Toggle', href: '/docs/toggle' },
+      ],
+    },
   ]
 
   return (
     <header className="fixed top-0 z-50 w-full border-b-2 border-(--lithos-border) bg-(--lithos-surface)">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         <div className="flex items-center justify-start lg:w-1/3">
-          <Link
-            to="/"
-            className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
-          >
+          <Link to="/" className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click">
             Lithos UI
           </Link>
         </div>
@@ -53,7 +50,7 @@ export default function DocsNavbar() {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           >
             <svg
               className="w-6 h-6"
@@ -63,11 +60,7 @@ export default function DocsNavbar() {
               strokeLinecap="square"
               viewBox="0 0 24 24"
             >
-              {isMenuOpen ? (
-                <path d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              )}
+              {isMenuOpen ? <path d="M6 18L18 6M6 6l12 12" /> : <path d="M4 6h16M4 12h16M4 18h16" />}
             </svg>
           </button>
         </div>
@@ -76,7 +69,6 @@ export default function DocsNavbar() {
       {/* - Full-Screen Scrollable Mobile Accordion Overlay */}
       {isMenuOpen && (
         <nav className="fixed inset-0 z-[-1] pt-32 pb-12 px-6 bg-(--lithos-surface) overflow-y-auto flex flex-col justify-start lg:hidden">
-          
           {/* Grouped Accordion Links */}
           <div className="flex-1">
             {groupedLinks.map((group) => (
@@ -86,9 +78,11 @@ export default function DocsNavbar() {
                   className="flex w-full items-center justify-between border-b-2 border-(--lithos-border) pb-2 mb-4 text-left text-3xl sm:text-4xl font-black uppercase tracking-tighter text-(--lithos-text) cursor-pointer"
                 >
                   {group.category}
-                  <span className="text-3xl text-(--lithos-accent)">{expandedCategory === group.category ? '-' : '+'}</span>
+                  <span className="text-3xl text-(--lithos-accent)">
+                    {expandedCategory === group.category ? '-' : '+'}
+                  </span>
                 </button>
-                
+
                 {/* Accordion Content */}
                 {expandedCategory === group.category && (
                   <div className="pl-2 flex flex-col mt-4">
