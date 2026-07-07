@@ -48,7 +48,9 @@ export default function CodeViewer({ code, language = 'jsx', showControls = fals
   }
 
   return (
-    <div className={`w-full ${embedded ? 'bg-transparent mb-0 relative' : 'border-2 border-(--lithos-border) bg-(--lithos-bg) mb-8 relative'} ${className}`}>
+    <div
+      className={`w-full ${embedded ? 'bg-transparent mb-0 relative' : 'border-2 border-(--lithos-border) bg-(--lithos-bg) mb-8 relative'} ${className}`}
+    >
       <div className="border-b-2 border-(--lithos-border) bg-(--lithos-surface) px-4 py-2 flex justify-between items-center">
         <div className="flex items-center">
           {showControls ? (
@@ -58,9 +60,7 @@ export default function CodeViewer({ code, language = 'jsx', showControls = fals
               <div className="h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent)" aria-hidden="true" />
             </div>
           ) : (
-            <p className="text-xs font-black uppercase tracking-widest text-(--lithos-text) font-code">
-              {language}
-            </p>
+            <p className="text-xs font-black uppercase tracking-widest text-(--lithos-text) font-code">{language}</p>
           )}
         </div>
 

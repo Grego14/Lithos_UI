@@ -13,9 +13,7 @@ import TableOfContents from './layout/TableOfContents'
 import Footer from '../components/layout/Footer'
 
 const tocRegistry = {
-  '/docs': [
-    { id: '#welcome-video', label: 'Intro To Lithos UI', level: 1 },
-  ],
+  '/docs': [{ id: '#welcome-video', label: 'Intro To Lithos UI', level: 1 }],
   '/docs/installation': [
     { id: '#base-template', label: '1. The Base Template', level: 1 },
     { id: '#global-css', label: '2. Global CSS Configuration', level: 1 },
@@ -63,9 +61,7 @@ export default function DocsLayout({ children, isDarkMode, toggleObsidian }) {
           </div>
         </div>
 
-        <main className="col-span-12 lg:col-span-10 xl:col-span-8 px-6 lg:px-12 py-12">
-          {children}
-        </main>
+        <main className="col-span-12 lg:col-span-10 xl:col-span-8 px-6 lg:px-12 py-12">{children}</main>
 
         <div className="hidden xl:block xl:col-span-2 sticky top-32">
           <div className="max-h-[calc(100vh-10rem)] pb-6 overflow-y-auto sidebar-scroll">

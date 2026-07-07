@@ -1,10 +1,10 @@
 /**
  * @fileoverview The Void Coordinate - 404 Page
- * 
+ *
  * Neo-Brutalist 404 page component themed as "Structural Failure".
  * Renders a viewport-locked layout with massive engineered typography,
  * broken architectural elements, and a hard-shadowed return button.
- * 
+ *
  * ARCHITECTURAL NOTES:
  * - NO gap utilities (ZERO-GAP LAW)
  * - Spacing via explicit margins (mt-*, mb-*)
@@ -24,9 +24,7 @@ export default function NotFound() {
         </h1>
 
         {/* Primary error title */}
-        <h2 className="text-2xl md:text-4xl font-black uppercase tracking-widest mb-4">
-          Structural Failure
-        </h2>
+        <h2 className="text-2xl md:text-4xl font-black uppercase tracking-widest mb-4">Structural Failure</h2>
 
         {/* Secondary description */}
         <p className="text-base md:text-lg font-medium opacity-70 mb-12 leading-relaxed">
@@ -36,10 +34,7 @@ export default function NotFound() {
         {/* Vertical spacer for button positioning */}
         <div className="mt-8">
           {/* Return to Base button - hard brutalist styling */}
-          <Link
-            to="/"
-            className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
-          >
+          <Link to="/" className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click">
             Return to Base
           </Link>
         </div>

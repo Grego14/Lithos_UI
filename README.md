@@ -1,4 +1,3 @@
-
 # Lithos UI
 
 ![Lithos UI logo](src/assets/lithos-logo.webp)
@@ -27,6 +26,40 @@ CSS specificity wars ruin dynamic themes. Lithos UI utilizes a Javascript-inject
 
 To prevent Tailwind class bloat ("DRY" architecture), Lithos UI packages its mechanical interactions into global CSS utility tokens. By applying the `.lithos-click` class to any button, the element instantly inherits the system's strict `2px` borders, brutalist `2px` shadows, and our signature zero-latency "Hard-Drop" click physics. No redundant transition or active states required.
 
+## Component Status
+
+### Primitives
+
+| Component             | Status | Docs                                       |
+| --------------------- | ------ | ------------------------------------------ |
+| CodeViewer            | Stable | [/docs/code-viewer](/docs/code-viewer)     |
+| PreviewBlock          | Stable | [/docs/preview-block](/docs/preview-block) |
+| Toast (ToastProvider) | Stable | [/docs/toast](/docs/toast)                 |
+| Toggle                | Stable | [/docs/toggle](/docs/toggle)               |
+| KineticGrid           | Beta   | —                                          |
+
+### Layout
+
+| Component  | Status | Docs |
+| ---------- | ------ | ---- |
+| Navbar     | Beta   | —    |
+| Footer     | Beta   | —    |
+| NotFound   | Beta   | —    |
+| ComingSoon | Beta   | —    |
+
+### Data Display and Landing Blocks
+
+| Component    | Status | Docs |
+| ------------ | ------ | ---- |
+| Hero         | Beta   | —    |
+| FeatureGrid  | Beta   | —    |
+| Pricing      | Beta   | —    |
+| Testimonials | Beta   | —    |
+| FAQ          | Beta   | —    |
+| ThemeEngine  | Beta   | —    |
+
+Planned components from in-repo TODO/roadmap metadata: none currently tracked.
+
 ---
 
 ## Installation
@@ -42,23 +75,34 @@ Click the green **"Use this template"** button at the top of the repository to i
 2. Copy the `index.css` global tokens into your main stylesheet.
 3. Drop the components from the `/components` folder into your standard architecture.
 
+## Versioning
+
+Lithos UI is currently pre-1.0 (`0.x.y`). During this phase:
+
+- `0.X.0` (minor) releases may include breaking changes.
+- `0.x.X` (patch) releases are intended to be safe, non-breaking updates.
+
+After `1.0.0`, Lithos UI will follow standard semantic versioning where breaking changes only ship in major versions.
+
+See [CHANGELOG.md](./CHANGELOG.md) for release history.
+
 ## Global Design Tokens
 
 The entire visual weight of the library is controlled by these 7 variables. Modify them in your `index.css` or manipulate them via Javascript for live-theming.
 
 ```css
 :root {
-  --lithos-bg: #ffffff;          /* The deep background */
-  --lithos-text: #000000;        /* Primary typography */
-  --lithos-border: #000000;      /* Structural lines */
-  --lithos-accent: #00FF00;      /* The loud brand color */
+  --lithos-bg: #ffffff; /* The deep background */
+  --lithos-text: #000000; /* Primary typography */
+  --lithos-border: #000000; /* Structural lines */
+  --lithos-accent: #00ff00; /* The loud brand color */
   --lithos-accent-text: #000000; /* Auto-calculated by YIQ */
-  --lithos-surface: #ffffff;     /* Card backgrounds */
-  --lithos-shadow: rgba(0,0,0,1);/* Brutalist shadow offset */
+  --lithos-surface: #ffffff; /* Card backgrounds */
+  --lithos-shadow: rgba(0, 0, 0, 1); /* Brutalist shadow offset */
 }
 ```
 
-*(Note: Interactive physics and structural weight are handled via the `@layer utilities` block in `index.css`, primarily through the `.lithos-click` token.)*
+_(Note: Interactive physics and structural weight are handled via the `@layer utilities` block in `index.css`, primarily through the `.lithos-click` token.)_
 
 ## Obsidian Mode (Dark Theme)
 

@@ -46,7 +46,9 @@ export default function PreviewBlockExample() {
 
       <section className="mb-12">
         <p className="mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          This structural shell manages state between a live interactive component and its raw Vite string import. It carries heavy brutalist borders to explicitly separate documentation logic from the component being demonstrated.
+          This structural shell manages state between a live interactive component and its raw Vite string import. It
+          carries heavy brutalist borders to explicitly separate documentation logic from the component being
+          demonstrated.
         </p>
       </section>
 
@@ -64,13 +66,17 @@ export default function PreviewBlockExample() {
         Default
       </h3>
 
-      <PreviewBlockUI code={usageCode} githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/PreviewBlock.jsx">
-      
-        <PreviewBlockUI code={innerCode} githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/PreviewBlock.jsx">
+      <PreviewBlockUI
+        code={usageCode}
+        githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/PreviewBlock.jsx"
+      >
+        <PreviewBlockUI
+          code={innerCode}
+          githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/PreviewBlock.jsx"
+        >
           <p className="text-base md:text-lg text-(--lithos-text) font-body">
             This is the inner live preview surface rendered by the nested PreviewBlock.
           </p>
-
         </PreviewBlockUI>
       </PreviewBlockUI>
     </div>

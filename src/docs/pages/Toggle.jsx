@@ -34,7 +34,9 @@ export default function ToggleExample() {
 
       <section className="mb-12">
         <p className="mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          Unlike native checkboxes, this toggle is engineered as a stationary shell. Only the internal thumb and external shadow translate, ensuring the surrounding layout never suffers from sub-pixel shifting during interaction.
+          Unlike native checkboxes, this toggle is engineered as a stationary shell. Only the internal thumb and
+          external shadow translate, ensuring the surrounding layout never suffers from sub-pixel shifting during
+          interaction.
         </p>
       </section>
 
@@ -52,7 +54,10 @@ export default function ToggleExample() {
         Default
       </h3>
 
-      <PreviewBlock code={usageCode} githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/Toggle.jsx">
+      <PreviewBlock
+        code={usageCode}
+        githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/Toggle.jsx"
+      >
         <Toggle checked={checked} onToggle={() => setChecked(!checked)} label="Documentation Toggle" />
       </PreviewBlock>
     </div>

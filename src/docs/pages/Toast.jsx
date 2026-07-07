@@ -45,9 +45,7 @@ export default function ToastExample() {
   return (
     <div className="max-w-5xl mx-auto px-6">
       <header className="mt-0">
-        <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-none text-(--lithos-text) mb-8">
-          Toast
-        </h1>
+        <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-none text-(--lithos-text) mb-8">Toast</h1>
         <p className="mt-2 text-lg md:text-xl font-bold opacity-70 text-(--lithos-text) font-body">
           A transient feedback stack operating strictly outside the page flow.
         </p>
@@ -56,7 +54,9 @@ export default function ToastExample() {
 
       <section className="mb-12">
         <p className="mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          The Toast primitive renders as a hard plaque rather than a soft notification card. It utilizes explicit margins and absolute positioning to guarantee it never shifts or breaks the underlying layout grid when mounting.
+          The Toast primitive renders as a hard plaque rather than a soft notification card. It utilizes explicit
+          margins and absolute positioning to guarantee it never shifts or breaks the underlying layout grid when
+          mounting.
         </p>
       </section>
 
@@ -74,7 +74,10 @@ export default function ToastExample() {
         Default
       </h3>
 
-      <PreviewBlock code={usageCode} githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/Toast.jsx">
+      <PreviewBlock
+        code={usageCode}
+        githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/Toast.jsx"
+      >
         <button
           type="button"
           onClick={triggerToast}

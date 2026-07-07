@@ -45,13 +45,15 @@ export default function CodeViewerExample() {
 
       <section className="mb-12">
         <p className="mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          The Code Viewer is an atomic primitive designed to display raw architectural blueprints. It strictly avoids soft styling, utilizing explicit borders and a high-contrast terminal aesthetic.
+          The Code Viewer is an atomic primitive designed to display raw architectural blueprints. It strictly avoids
+          soft styling, utilizing explicit borders and a high-contrast terminal aesthetic.
         </p>
       </section>
 
       <div className="border-l-4 border-(--lithos-accent) pl-6 py-2 mb-8 bg-(--lithos-surface) p-4">
         <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
-          Test the live clipboard interaction below. You can toggle the <code className="font-black">showControls</code> prop to switch between a language label and structural window squares.
+          Test the live clipboard interaction below. You can toggle the <code className="font-black">showControls</code>{' '}
+          prop to switch between a language label and structural window squares.
         </p>
       </div>
 
@@ -62,10 +64,13 @@ export default function CodeViewerExample() {
       <h3 id="default" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
         Default
       </h3>
-      
+
       {/* Enforcing structural zero-gap compliance using standard margins */}
       <div className="mt-8 mb-16">
-        <PreviewBlock code={usageCode} githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/CodeViewer.jsx">
+        <PreviewBlock
+          code={usageCode}
+          githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/CodeViewer.jsx"
+        >
           <CodeViewer code={sampleCode} language="jsx" showControls={true} className="mb-0" />
         </PreviewBlock>
       </div>

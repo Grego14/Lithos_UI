@@ -4,8 +4,10 @@ export default function PreviewBlock({ children, code, githubUrl }) {
   const [activeTab, setActiveTab] = useState('preview')
 
   // 1. Decoupled, floating tab classes relying purely on the primitive
-  const inactiveBtnClass = 'bg-(--lithos-surface) text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) lithos-click'
-  const activeBtnClass = 'bg-(--lithos-accent) text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] lithos-click'
+  const inactiveBtnClass =
+    'bg-(--lithos-surface) text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) lithos-click'
+  const activeBtnClass =
+    'bg-(--lithos-accent) text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] lithos-click'
 
   return (
     <div className="mb-8">
@@ -30,12 +32,7 @@ export default function PreviewBlock({ children, code, githubUrl }) {
         </div>
 
         {githubUrl ? (
-          <a
-            href={githubUrl}
-            target="_blank"
-            rel="noreferrer"
-            className={inactiveBtnClass}
-          >
+          <a href={githubUrl} target="_blank" rel="noreferrer" className={inactiveBtnClass}>
             Source ↗
           </a>
         ) : null}
@@ -44,9 +41,7 @@ export default function PreviewBlock({ children, code, githubUrl }) {
       {/* 3. Main Content Pane - Single rigid box */}
       <div className="border-2 border-(--lithos-border) bg-(--lithos-bg) overflow-hidden">
         {activeTab === 'preview' ? (
-          <div className="flex min-h-48 items-center justify-center p-4 md:p-6">
-            {children}
-          </div>
+          <div className="flex min-h-48 items-center justify-center p-4 md:p-6">{children}</div>
         ) : (
           <CodeViewer code={code} language="jsx" embedded />
         )}

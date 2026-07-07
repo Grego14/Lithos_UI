@@ -1,60 +1,73 @@
 # Contributing to Lithos UI
 
-First, thank you for considering contributing to Lithos UI! This project is built on a specific, opinionated architectural foundation. To ensure the library remains stable and mathematically consistent, please adhere to these guidelines.
+Thank you for helping improve Lithos UI.
 
----
+## Local Setup
 
-## 1. The Manifesto
+```bash
+git clone https://github.com/IncredibleStand/Lithos_UI.git
+cd Lithos_UI
+pnpm install
+pnpm dev
+```
 
-Lithos UI is a system of **absolute structural integrity**. We prioritize predictable math, high-contrast visibility, and physical mass over "modern" soft-UI trends. If your contribution breaks the core physics, it will not be merged.
+Useful project scripts from `package.json`:
 
-## 2. The Zero-Gap Mandate
+- `pnpm dev` - start local development server
+- `pnpm build` - production build
+- `pnpm lint` - run ESLint
+- `pnpm preview` - preview production build
+- `pnpm format` - run Prettier
 
-This is the most critical rule of the repository.
+## Core Architecture Rules
 
-- **NO `gap` PROPERTY:** The CSS `gap` property is strictly forbidden for layout structure.
-- **WHY:** `gap` is mathematically invisible and fails to account for the heavy box-shadow offsets required by Neo-Brutalism.
-- **THE ALTERNATIVE:** Use explicit margin/padding math (e.g., negative parent margins combined with direct child margins) to create stable, non-collapsing gutters.
+These are required for all contributions:
 
-## 3. Design Principles
+- Zero-Gap Rule: do not use CSS `gap` for layout structure. Use explicit margin/padding math instead.
+- Contrast integrity: when adding dynamic color behavior, route foreground contrast through the YIQ engine in `src/utils/yiq.js`.
+- Specificity override pattern: do not bypass theme token rebinding in `src/core/useTheme.js` (`#lithos-theme-overrides` style injection).
+- Physics token consistency: interactive controls should use the shared `.lithos-click` utility from `src/index.css` unless there is a documented exception.
+- No soft shadow blur: keep the brutalist hard-shadow style (`0px` blur) intact.
 
-- **Hard Edges:** No rounded corners (`rounded-none` is the default).
-- **High Contrast:** All color pairings must pass YIQ mathematical contrast checks.
-- **Standardized Mass:** Every component must read as a "slab". We enforce a strict `2px` border and `shadow-[2px_2px_0px_0px]` baseline for all interactive elements to maintain a cohesive, professional system weight.
-- **Interactive Physics:** You MUST use the global `.lithos-click` utility class for all buttons. Do not hardcode redundant hover, active, or transition states. This token guarantees our standardized "Hard-Drop" mechanical click.
-- **No Soft Shadows:** Blur values in `box-shadow` must remain at `0px`.
+## Code Style and Tooling
 
-## 4. Workflow
+This repository currently uses:
 
-We follow a standard **Fork and Pull** model:
+- ESLint via `eslint.config.js`
+- Prettier via `.prettierrc`
+- Vite for dev/build
 
-1. **Fork** the repository to your own account.
-2. **Create a branch** for your feature (e.g., `git checkout -b feat/new-card-style`).
-3. **Code** with strict adherence to the architecture comments in `App.jsx` and `index.css`.
-4. **Test** locally to ensure no layout drift occurs in either Light or Obsidian (Dark) mode.
-5. **Submit a Pull Request** (PR) against the `main` branch.
+Before opening a PR, run:
 
-## 5. Pull Request Requirements
+```bash
+pnpm lint
+pnpm build
+```
 
-Every PR must include:
+## Proposing a New Component
 
-- **A Clear Description:** What does this add? Why is it needed?
-- **Architectural Compliance:** A confirmation that the "Zero-Gap" rule was followed.
-- **Visual Check:** Screenshots or videos of the component in both Light and Obsidian modes.
+For a new component, include all of the following:
 
-## 6. Tooling & Linting
+1. Component implementation under the appropriate `src/components/*` folder.
+2. Any required shared logic/hooks under `src/core` or `src/utils`.
+3. Route usage or integration where relevant (showroom/docs).
+4. A docs page under `src/docs/pages` if it is a reusable public primitive.
+5. README updates in the `Component Status` table.
+6. Tests for behavior that affects architecture guarantees (contrast, specificity, interaction state, accessibility).
 
-To maintain Lithos UI's high structural standards, we use automated linting:
+## Pull Request Process
 
-- **ESLint:** We enforce React best practices and clean import structures. While we ignore minor stylistic noise, syntax errors and hook violations will block your PR.
-- **CI Pipeline:** Every Pull Request triggers a GitHub Action that runs `pnpm build`. If the build fails, the PR cannot be merged.
-- **Pre-submission Check:** Run `pnpm lint` locally before pushing to ensure your code passes the pipeline.
+1. Create a focused branch (recommended naming: `feat/...`, `fix/...`, `docs/...`, `test/...`, `chore/...`).
+2. Keep changes scoped and include rationale in the PR description.
+3. In the PR description, include:
+   what changed
+   why it changed
+   architectural impact (Zero-Gap/contrast/specificity/physics tokens)
+   screenshots or short clips for UI-impacting changes
+4. Ensure CI is green before merge. Current workflow: `.github/workflows/main.yml` (lint + build). When test CI is added/expanded, link the run in the PR.
 
-## 7. Prohibited Changes
+## Code of Conduct
 
-- **No Framework Assumptions:** Do not add dependencies or logic specific to Next.js, Remix, or Vite. Lithos UI must remain framework-agnostic.
-- **No External Motion Libraries:** Use the internal CSS keyframes defined in `index.css` for animations.
+Be respectful and constructive. Harassment, discrimination, and personal attacks are not tolerated.
 
----
-
-**Note:** By contributing to Lithos UI, you agree that your contributions will be licensed under the project's existing Open Source license.
+By contributing, you agree your contributions are provided under this repository's license.

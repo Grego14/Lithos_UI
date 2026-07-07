@@ -1,10 +1,10 @@
 /**
  * @fileoverview The Blueprint Coordinate - Coming Soon Page
- * 
+ *
  * Neo-Brutalist construction page component themed as "Active Engineering".
  * Renders a viewport-locked layout with massive engineered typography,
  * architectural grid elements, and a hard-shadowed return button.
- * 
+ *
  * ARCHITECTURAL NOTES:
  * - NO gap utilities (ZERO-GAP LAW)
  * - Spacing via explicit margins (mt-*, mb-*, mr-*)
@@ -24,13 +24,12 @@ export const ComingSoon = () => {
         </h1>
 
         {/* Primary construction title */}
-        <h2 className="text-2xl md:text-4xl font-black uppercase tracking-widest mb-6">
-          Active Engineering Zone
-        </h2>
+        <h2 className="text-2xl md:text-4xl font-black uppercase tracking-widest mb-6">Active Engineering Zone</h2>
 
         {/* Secondary description - Rewritten for open source contribution */}
         <p className="text-base md:text-lg font-bold opacity-80 mb-12 leading-relaxed max-w-2xl mx-auto">
-          Lithos UI is an open-source architecture, and developers are actively encouraged to contribute code to engineer this structural block.
+          Lithos UI is an open-source architecture, and developers are actively encouraged to contribute code to
+          engineer this structural block.
         </p>
 
         {/* Vertical spacer for button positioning */}

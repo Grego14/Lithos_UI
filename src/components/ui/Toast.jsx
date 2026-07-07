@@ -5,55 +5,58 @@
  * - Applies per-toast contrast and heavy borders so alerts read as hard objects.
  */
 
-import { useState, useCallback } from 'react';
-import { getContrastText } from '../../utils/yiq';
-import { ToastContext } from '../../core/hooks/useToast';
+import { useState, useCallback } from 'react'
+import { getContrastText } from '../../utils/yiq'
+import { ToastContext } from '../../core/hooks/useToast'
 
 export const ToastProvider = ({ children }) => {
-  const [toasts, setToasts] = useState([]);
+  const [toasts, setToasts] = useState([])
 
   const removeToast = useCallback((id) => {
-    setToasts(prev => prev.filter(toast => toast.id !== id));
-  }, []);
+    setToasts((prev) => prev.filter((toast) => toast.id !== id))
+  }, [])
 
-  const addToast = useCallback(({ message, type = 'default', color, title }) => {
-    const id = Math.random().toString(36).substring(2, 9);
-    setToasts(prev => [...prev, { id, message, type, color, title }]);
+  const addToast = useCallback(
+    ({ message, type = 'default', color, title }) => {
+      const id = Math.random().toString(36).substring(2, 9)
+      setToasts((prev) => [...prev, { id, message, type, color, title }])
 
-    // - Auto-clear keeps the stack transient; it never becomes a second inbox.
-    setTimeout(() => {
-      removeToast(id);
-    }, 5000);
+      // - Auto-clear keeps the stack transient; it never becomes a second inbox.
+      setTimeout(() => {
+        removeToast(id)
+      }, 5000)
 
-    return id;
-  }, [removeToast]);
+      return id
+    },
+    [removeToast]
+  )
 
   return (
     <ToastContext.Provider value={{ addToast, removeToast }}>
       {children}
       {/* - Fixed corner stack uses explicit padding and margins, not gap, so each toast remains independently dismissible. */}
       <div className="fixed bottom-0 right-0 z-50 p-4 sm:p-6 md:p-8 pointer-events-none flex flex-col items-end w-full max-w-md">
-        {toasts.map(toast => (
+        {toasts.map((toast) => (
           <ToastItem key={toast.id} toast={toast} onRemove={() => removeToast(toast.id)} />
         ))}
       </div>
     </ToastContext.Provider>
-  );
-};
+  )
+}
 
 const ToastItem = ({ toast, onRemove }) => {
-  const { id, message, type, color, title } = toast;
-  
+  const { id, message, type, color, title } = toast
+
   const typeColors = {
     success: '#00FF00', // Neon Green
-    error: '#FF0000',   // Red
+    error: '#FF0000', // Red
     warning: '#FFFF00', // Yellow
-    info: '#00FFFF',    // Cyan
-    default: '#FFFFFF'  // White
-  };
-  
-  const bgColor = color || typeColors[type] || typeColors.default;
-  const textColor = getContrastText(bgColor);
+    info: '#00FFFF', // Cyan
+    default: '#FFFFFF', // White
+  }
+
+  const bgColor = color || typeColors[type] || typeColors.default
+  const textColor = getContrastText(bgColor)
 
   return (
     <>
@@ -66,9 +69,9 @@ const ToastItem = ({ toast, onRemove }) => {
           --lithos-shadow: ${textColor} !important;
         }
       `}</style>
-      
+
       {/* - Stack spacing uses explicit margins so each toast keeps its own exit path. */}
-      <div 
+      <div
         role="alert"
         className={`toast-override-${id} pointer-events-auto border-2 p-4 sm:p-6 mb-6 w-full flex flex-row items-start animate-[slide-up_0.3s_ease-out_forwards]`}
       >
@@ -76,19 +79,27 @@ const ToastItem = ({ toast, onRemove }) => {
           {title && <h4 className="font-black text-xl uppercase tracking-tighter leading-none mb-3 m-0">{title}</h4>}
           <p className="font-bold text-base leading-tight m-0">{message}</p>
         </div>
-        
+
         {/* - Close control keeps the same hard-edge language as the card. */}
-        <button 
+        <button
           onClick={onRemove}
           className="ml-4 shrink-0 bg-transparent lithos-click"
           aria-label="Close notification"
           style={{ borderColor: textColor }}
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="4" className="block">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="4"
+            className="block"
+          >
             <path d="M2 2L14 14M14 2L2 14" />
           </svg>
         </button>
       </div>
     </>
-  );
-};
+  )
+}

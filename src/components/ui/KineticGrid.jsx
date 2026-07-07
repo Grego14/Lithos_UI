@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 
-export default function KineticGrid({ children, baseOpacity = "opacity-10", className = "" }) {
+export default function KineticGrid({ children, baseOpacity = 'opacity-10', className = '' }) {
   const containerRef = useRef(null)
 
   const handleMouseMove = (e) => {
@@ -13,7 +13,7 @@ export default function KineticGrid({ children, baseOpacity = "opacity-10", clas
   }
 
   return (
-    <div 
+    <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
       className={`relative overflow-hidden flex items-center justify-center ${className}`}
@@ -31,11 +31,13 @@ export default function KineticGrid({ children, baseOpacity = "opacity-10", clas
       </div>
 
       {/* Kinetic Accent Grid (Masked by Cursor) */}
-      <div 
+      <div
         className="absolute inset-0 pointer-events-none text-(--lithos-accent) opacity-80"
         style={{
-          maskImage: 'radial-gradient(circle 200px at var(--mouse-x, -1000px) var(--mouse-y, -1000px), black, transparent)',
-          WebkitMaskImage: 'radial-gradient(circle 200px at var(--mouse-x, -1000px) var(--mouse-y, -1000px), black, transparent)',
+          maskImage:
+            'radial-gradient(circle 200px at var(--mouse-x, -1000px) var(--mouse-y, -1000px), black, transparent)',
+          WebkitMaskImage:
+            'radial-gradient(circle 200px at var(--mouse-x, -1000px) var(--mouse-y, -1000px), black, transparent)',
         }}
       >
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -49,9 +51,7 @@ export default function KineticGrid({ children, baseOpacity = "opacity-10", clas
       </div>
 
       {/* Content Injection */}
-      <div className="relative z-10 w-full flex flex-col items-center justify-center">
-        {children}
-      </div>
+      <div className="relative z-10 w-full flex flex-col items-center justify-center">{children}</div>
     </div>
   )
 }

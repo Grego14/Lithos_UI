@@ -39,59 +39,55 @@ function ThemeEngine() {
 
         <div className="mt-12 w-full border-2 border-(--lithos-border) bg-(--lithos-bg) p-6 sm:p-10 shadow-[6px_6px_0px_0px_var(--lithos-shadow)] mb-12">
           <div className="flex flex-wrap justify-center -m-2 sm:-m-4">
-          {themes.map((theme) => {
-            const isActive = accentColor === theme.hex
+            {themes.map((theme) => {
+              const isActive = accentColor === theme.hex
 
-            return (
-              // - Each swatch is a 64/96px tile with a hard edge; active state only changes shadow depth.
-              <button
-                key={theme.hex}
-                type="button"
-                onClick={() => handleThemeChange(theme.hex)}
-                aria-label={`Activate ${theme.name} theme`}
-                title={theme.name}
-                className={`m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 lithos-click ${isActive ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : ''}`}
-                style={{
-                  backgroundColor: theme.hex,
-                }}
-              >
-                <span className="sr-only">{theme.name}</span>
-              </button>
-            )
-          })}
+              return (
+                // - Each swatch is a 64/96px tile with a hard edge; active state only changes shadow depth.
+                <button
+                  key={theme.hex}
+                  type="button"
+                  onClick={() => handleThemeChange(theme.hex)}
+                  aria-label={`Activate ${theme.name} theme`}
+                  title={theme.name}
+                  className={`m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 lithos-click ${isActive ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : ''}`}
+                  style={{
+                    backgroundColor: theme.hex,
+                  }}
+                >
+                  <span className="sr-only">{theme.name}</span>
+                </button>
+              )
+            })}
 
-          {/* - Custom picker keeps the tile geometry fixed while the input floats invisibly on top. */}
-          <div
-            className={`relative m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 bg-(--lithos-surface) lithos-click group ${!themes.some((t) => t.hex === accentColor) ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : ''}`}
-            style={{
-              backgroundColor: !themes.some((t) => t.hex === accentColor)
-                ? accentColor
-                : 'var(--lithos-surface)',
-            }}
-          >
-            <input
-              type="color"
-              value={accentColor}
-              onChange={(e) => handleThemeChange(e.target.value)}
-              className="absolute inset-0 h-full w-full opacity-0 cursor-pointer z-10"
-              aria-label="Choose custom theme color"
-            />
-            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-              <div
-                className="h-6 w-6 sm:h-8 sm:w-8 rounded-full border-[3px] sm:border-4 border-black"
-                style={{
-                  background:
-                    'conic-gradient(red, yellow, lime, aqua, blue, magenta, red)',
-                }}
+            {/* - Custom picker keeps the tile geometry fixed while the input floats invisibly on top. */}
+            <div
+              className={`relative m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 bg-(--lithos-surface) lithos-click group ${!themes.some((t) => t.hex === accentColor) ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : ''}`}
+              style={{
+                backgroundColor: !themes.some((t) => t.hex === accentColor) ? accentColor : 'var(--lithos-surface)',
+              }}
+            >
+              <input
+                type="color"
+                value={accentColor}
+                onChange={(e) => handleThemeChange(e.target.value)}
+                className="absolute inset-0 h-full w-full opacity-0 cursor-pointer z-10"
+                aria-label="Choose custom theme color"
               />
-              <span
-                className={`mt-2 text-xs font-black uppercase tracking-tighter ${!themes.some((t) => t.hex === accentColor) ? 'text-(--lithos-accent-text)' : 'text-(--lithos-text)'}`}
-              >
-                Custom
-              </span>
+              <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                <div
+                  className="h-6 w-6 sm:h-8 sm:w-8 rounded-full border-[3px] sm:border-4 border-black"
+                  style={{
+                    background: 'conic-gradient(red, yellow, lime, aqua, blue, magenta, red)',
+                  }}
+                />
+                <span
+                  className={`mt-2 text-xs font-black uppercase tracking-tighter ${!themes.some((t) => t.hex === accentColor) ? 'text-(--lithos-accent-text)' : 'text-(--lithos-text)'}`}
+                >
+                  Custom
+                </span>
+              </div>
             </div>
-          </div>
-
           </div>
 
           {/* - Reset sits below a hard divider so the board reads as one rooted module. */}
