@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react'
 import { getContrastText } from '../utils/yiq'
+import type { HexColor } from './types'
 
 /**
  * Custom hook for managing theme state with localStorage persistence.
  *
  * Manages dark/light mode state by reading from and writing to localStorage.
  * The theme preference is persisted under the key 'lithos-theme-mode'.
- *
- * @returns {Object} Theme state and control object
- * @returns {boolean} isDarkMode - Current theme mode (true for dark, false for light)
- * @returns {Function} toggleObsidian - Function to toggle between dark and light modes
  */
 export function useTheme() {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -18,7 +15,7 @@ export function useTheme() {
   })
 
   const [accentColor, setAccentColor] = useState(() => {
-    return localStorage.getItem('lithos-theme-color') || '#00FF00'
+    return (localStorage.getItem('lithos-theme-color') as HexColor | null) || ('#00FF00' as HexColor)
   })
 
   useEffect(() => {
@@ -50,10 +47,10 @@ export function useTheme() {
     })
   }
 
-  const updateAccentColor = (color) => {
+  const updateAccentColor = (color: HexColor) => {
     setAccentColor(color)
     localStorage.setItem('lithos-theme-color', color)
   }
 
-  return { isDarkMode, toggleObsidian, accentColor, updateAccentColor }
+  return { isDarkMode, toggleObsidian, accentColor, updateAccentColor } as const
 }
