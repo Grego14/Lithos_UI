@@ -1,13 +1,22 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import CodeViewer from './CodeViewer'
-export default function PreviewBlock({ children, code, githubUrl }) {
-  const [activeTab, setActiveTab] = useState('preview')
 
-  // 1. Decoupled, floating tab classes relying purely on the primitive
-  const inactiveBtnClass =
-    'bg-(--lithos-surface) text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) lithos-click'
-  const activeBtnClass =
-    'bg-(--lithos-accent) text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] lithos-click'
+type AvailableTabs = 'preview' | 'code'
+
+interface PreviewBlockProps {
+  children: ReactNode
+  code: string
+  githubUrl?: string
+}
+
+// 1. Decoupled, floating tab classes relying purely on the primitive
+const inactiveBtnClass =
+  'bg-(--lithos-surface) text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) lithos-click'
+const activeBtnClass =
+  'bg-(--lithos-accent) text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] lithos-click'
+
+export default function PreviewBlock({ children, code, githubUrl }: PreviewBlockProps) {
+  const [activeTab, setActiveTab] = useState<AvailableTabs>('preview')
 
   return (
     <div className="mb-8">
