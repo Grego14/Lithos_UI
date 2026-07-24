@@ -1,9 +1,15 @@
-import { useRef } from 'react'
+import { useRef, type ReactNode, type MouseEvent } from 'react'
 
-export default function KineticGrid({ children, baseOpacity = 'opacity-10', className = '' }) {
-  const containerRef = useRef(null)
+interface KineticGridProps {
+  children: ReactNode
+  baseOpacity?: string
+  className?: string
+}
 
-  const handleMouseMove = (e) => {
+export default function KineticGrid({ children, baseOpacity = 'opacity-10', className = '' }: KineticGridProps) {
+  const containerRef = useRef<HTMLDivElement | null>(null)
+
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return
     const rect = containerRef.current.getBoundingClientRect()
     const x = e.clientX - rect.left
