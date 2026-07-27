@@ -1,6 +1,7 @@
-export const getContrastText = (hexcolor) => {
-  if (!hexcolor) return '#000000'
-  if (hexcolor.startsWith('var(')) return '#000000' // Fallback for CSS vars
+import { isHexColor } from '../core/types'
+
+export const getContrastText = (hexcolor: string | undefined) => {
+  if (!hexcolor || !isHexColor(hexcolor)) return '#000000'
 
   let hex = hexcolor.replace('#', '')
   if (hex.length === 3) {
