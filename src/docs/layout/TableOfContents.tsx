@@ -1,4 +1,6 @@
-export default function TableOfContents({ links = [] }) {
+import type { TOCItem } from "../types"
+
+export default function TableOfContents({ links = [] }: { links: TOCItem[] }) {
   if (links.length === 0) return null
 
   return (

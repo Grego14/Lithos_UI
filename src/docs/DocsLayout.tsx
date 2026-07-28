@@ -11,8 +11,11 @@ import Navbar from './layout/Navbar'
 import Sidebar from './layout/Sidebar'
 import TableOfContents from './layout/TableOfContents'
 import Footer from '../components/layout/Footer'
+import type { ReactNode } from 'react'
+import { useTheme } from '../core/useTheme'
+import type { TOCItem } from './types.ts'
 
-const tocRegistry = {
+const tocRegistry: Record<string, TOCItem[]> = {
   '/docs': [{ id: '#welcome-video', label: 'Intro To Lithos UI', level: 1 }],
   '/docs/installation': [
     { id: '#base-template', label: '1. The Base Template', level: 1 },
@@ -40,19 +43,14 @@ const tocRegistry = {
   ],
 }
 
-/**
- * DocsLayout component.
- *
- * @param {{ children: React.ReactNode, isDarkMode: boolean, toggleObsidian: Function }} props
- * @returns {React.ReactElement}
- */
-export default function DocsLayout({ children, isDarkMode, toggleObsidian }) {
+export default function DocsLayout({ children }: { children: ReactNode}) {
   const location = useLocation()
-  const currentTOC = tocRegistry[location.pathname] || []
+  const { isDarkMode, toggleObsidian } = useTheme()
+  const currentTOC = tocRegistry[location.pathname] ?? []
 
   return (
     <div className="min-h-screen flex flex-col bg-(--lithos-bg) text-(--lithos-text)">
-      <Navbar isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />
+      <Navbar />
 
       <div className="flex-1 w-full max-w-screen-2xl mx-auto grid grid-cols-12 pt-24 items-start">
         <div className="hidden lg:block lg:col-span-2 sticky top-32">
