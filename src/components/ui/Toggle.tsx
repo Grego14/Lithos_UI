@@ -4,7 +4,13 @@
  * - Neo-brutalist physics: shadow steps move; the parent never translates.
  * - Binary contrast: thumb and track invert as one hard state change.
  */
-function Toggle({ checked, onToggle, label = 'Theme Changed' }) {
+interface ToggleProps {
+  checked: boolean
+  onToggle: () => void
+  label?: string
+}
+
+function Toggle({ checked, onToggle, label = 'Theme Changed' }: ToggleProps) {
   // - Stationary shell: only the shadow changes, so surrounding layout never shifts.
   return (
     <button

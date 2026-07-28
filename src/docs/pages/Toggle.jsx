@@ -56,7 +56,7 @@ export default function ToggleExample() {
 
       <PreviewBlock
         code={usageCode}
-        githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/Toggle.jsx"
+        githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/Toggle.tsx"
       >
         <Toggle checked={checked} onToggle={() => setChecked(!checked)} label="Documentation Toggle" />
       </PreviewBlock>
