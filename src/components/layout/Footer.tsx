@@ -8,7 +8,12 @@
 import { useToast } from '../../core/hooks/useToast'
 import Toggle from '../ui/Toggle'
 
-function Footer({ isDarkMode, onToggleObsidian }) {
+interface FooterProps {
+  isDarkMode: boolean
+  onToggleObsidian: () => void
+}
+
+function Footer({ isDarkMode, onToggleObsidian }: FooterProps) {
   const { addToast } = useToast()
 
   const handleToggleObsidian = () => {
