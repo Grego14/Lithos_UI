@@ -1,6 +1,12 @@
 import { createContext, useContext } from 'react'
+import type { ToastProps } from '../types'
 
-export const ToastContext = createContext(null)
+interface ToastContextType {
+  addToast: (props: ToastProps) => string
+  removeToast: (id: string) => void
+}
+
+export const ToastContext = createContext<ToastContextType | null>(null)
 
 export const useToast = () => {
   const context = useContext(ToastContext)
