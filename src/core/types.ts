@@ -6,3 +6,12 @@ export type HexColor = string & { readonly __brand: 'HexColor' }
 export function isHexColor(value: string): value is HexColor {
   return HEX_COLOR_PATTERN.test(value)
 }
+
+export type ToastType = 'success' | 'error' | 'warning' | 'info' | 'default'
+
+export interface ToastProps {
+  type?: ToastType | undefined
+  title: string
+  message: string
+  color?: HexColor | string | undefined
+}
