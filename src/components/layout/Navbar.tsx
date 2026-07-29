@@ -6,12 +6,14 @@
  */
 
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const links = [
-  { label: 'Features', href: '#features' },
-  { label: 'Pricing', href: '#pricing' },
-  { label: 'Testimonials', href: '#testimonials' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Components', to: '/components' },
+  { label: 'Blocks', to: '/blocks' },
+  { label: 'Templates', to: '/templates' },
+  { label: 'FAQ', to: '/faq' },
+  { label: 'Docs', to: '/docs' },
 ]
 
 function Navbar() {
@@ -24,28 +26,28 @@ function Navbar() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         {/* - Brand block takes the left third so the center lane stays visually neutral. */}
         <div className="flex items-center justify-start lg:w-1/3">
-          <a href="#top" className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click">
+          <Link to="/" className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click">
             Lithos UI
-          </a>
+          </Link>
         </div>
 
         {/* - Center lane is reserved for wayfinding; it only appears when width can support the symmetry. */}
         <nav className="hidden items-center justify-center lg:flex lg:w-1/3">
           {links.map((link) => (
-            <a
+            <Link
               key={link.label}
-              href={link.href}
+              to={link.to}
               className="mx-4 font-black uppercase tracking-tighter leading-none text-(--lithos-text) transition-all duration-150 ease-out hover:text-(--lithos-accent) cursor-pointer"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
         {/* - Action block balances the brand block and keeps the header geometry stable. */}
         <div className="hidden items-center justify-end lg:flex lg:w-1/3">
           <a
-            href="https://github.com/IncredibleStand/Lithos_UI"
+            href="https://github.com/lithosui/Lithos_UI"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
@@ -79,17 +81,17 @@ function Navbar() {
       {isMenuOpen && (
         <nav className="fixed inset-0 z-[-1] pt-32 pb-6 px-6 bg-(--lithos-surface) overflow-y-auto flex flex-col justify-start lg:hidden">
           {links.map((link) => (
-            <a
+            <Link
               key={link.label}
-              href={link.href}
+              to={link.to}
               onClick={() => setIsMenuOpen(false)}
               className="block w-full text-left text-4xl sm:text-5xl font-black uppercase tracking-tighter text-(--lithos-text) opacity-80 hover:opacity-100 hover:text-(--lithos-text) hover:translate-x-2 mb-8 cursor-pointer transition-all duration-150"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
           <a
-            href="https://github.com/IncredibleStand/Lithos_UI"
+            href="https://github.com/lithosui/Lithos_UI"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsMenuOpen(false)}

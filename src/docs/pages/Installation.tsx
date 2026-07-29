@@ -31,7 +31,7 @@ body.obsidian {
   color-scheme: dark;
 }`
 
-export default function Installation() {
+export const Installation = () => {
   return (
     <div className="max-w-5xl mx-auto px-6">
       <header className="mt-0">

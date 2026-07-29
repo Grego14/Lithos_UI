@@ -14,22 +14,41 @@
 import { Link } from 'react-router-dom'
 import KineticGrid from '../ui/KineticGrid'
 
-export const ComingSoon = () => {
+interface ComingSoonProps {
+  eyebrow?: string
+  title: string
+  description: string
+  primaryAction?: {
+    label: string
+    to: string
+  }
+  secondaryAction?: {
+    label: string
+    href: string
+  }
+}
+
+export const ComingSoon = ({
+  eyebrow = "ACTIVE ENGINEERING ZONE",
+  title,
+  description,
+  primaryAction = { label: "Go to Docs", to: "/docs" },
+  secondaryAction = { label: "Contribute Code", href: "https://github.com/lithosui/Lithos_UI/issues" }
+}: ComingSoonProps) => {
   return (
     <KineticGrid baseOpacity="opacity-10" className="min-h-screen bg-(--lithos-bg) text-(--lithos-text) px-4">
       <div className="text-center max-w-5xl mx-auto w-full">
         {/* WIP code - Recalibrated for responsive wrapping without horizontal overflow */}
         <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] font-black leading-none tracking-tighter mb-10 select-none text-(--lithos-accent) uppercase">
-          Work In Progress
+          {title}
         </h1>
 
         {/* Primary construction title */}
-        <h2 className="text-2xl md:text-4xl font-black uppercase tracking-widest mb-6">Active Engineering Zone</h2>
+        <h2 className="text-2xl md:text-4xl font-black uppercase tracking-widest mb-6">{eyebrow}</h2>
 
         {/* Secondary description - Rewritten for open source contribution */}
         <p className="text-base md:text-lg font-bold opacity-80 mb-12 leading-relaxed max-w-2xl mx-auto">
-          Lithos UI is an open-source architecture, and developers are actively encouraged to contribute code to
-          engineer this structural block.
+          {description}
         </p>
 
         {/* Vertical spacer for button positioning */}
@@ -37,20 +56,20 @@ export const ComingSoon = () => {
         <div className="mt-8 flex flex-col sm:flex-row justify-center items-center">
           {/* Return button */}
           <Link
-            to="/docs"
+            to={primaryAction.to}
             className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click mb-4 sm:mb-0 sm:mr-4"
           >
-            Back to Docs
+            {primaryAction.label}
           </Link>
 
           {/* Contribute button */}
           <a
-            href="https://github.com/IncredibleStand/Lithos_UI/issues"
+            href={secondaryAction.href}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-(--lithos-surface) text-(--lithos-text) lithos-click"
           >
-            Contribute Code
+            {secondaryAction.label}
           </a>
         </div>
       </div>

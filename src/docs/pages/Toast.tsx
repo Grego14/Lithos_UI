@@ -1,8 +1,10 @@
 import { useToast } from '../../core/hooks/useToast'
+import { useTheme } from '../../core/useTheme'
 import PreviewBlock from '../../components/ui/PreviewBlock'
 
 export const ToastDoc = () => {
   const toast = useToast()
+  const { accentColor } = useTheme()
 
   const triggerToast = () => {
     if (toast && toast.addToast) {
@@ -10,15 +12,17 @@ export const ToastDoc = () => {
         title: 'SYSTEM ALERT',
         message: 'Structural integrity verified.',
         type: 'success',
-        color: '#00FF00',
+        color: accentColor,
       })
     }
   }
 
   const usageCode = `import { useToast } from '../../core/hooks/useToast'
+import { useTheme } from '../../core/useTheme'
 
 export default function ToastExample() {
   const { addToast } = useToast()
+  const { accentColor } = useTheme()
 
   const triggerToast = () => {
     if (addToast) {
@@ -26,7 +30,7 @@ export default function ToastExample() {
         title: 'SYSTEM ALERT',
         message: 'Structural integrity verified.',
         type: 'success',
-        color: '#00FF00',
+        color: accentColor,
       })
     }
   }
