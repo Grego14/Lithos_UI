@@ -1,28 +1,28 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+const groupedLinks = [
+  {
+    category: 'Getting Started',
+    links: [
+      { label: 'Introduction', href: '/docs' },
+      { label: 'Installation', href: '/docs/installation' },
+    ],
+  },
+  {
+    category: 'Components',
+    links: [
+      { label: 'Code Viewer', href: '/docs/code-viewer' },
+      { label: 'Preview Block', href: '/docs/preview-block' },
+      { label: 'Toast', href: '/docs/toast' },
+      { label: 'Toggle', href: '/docs/toggle' },
+    ],
+  },
+]
+
 export default function DocsNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [expandedCategory, setExpandedCategory] = useState('Getting Started')
-
-  const groupedLinks = [
-    {
-      category: 'Getting Started',
-      links: [
-        { label: 'Introduction', href: '/docs' },
-        { label: 'Installation', href: '/docs/installation' },
-      ],
-    },
-    {
-      category: 'Components',
-      links: [
-        { label: 'Code Viewer', href: '/docs/code-viewer' },
-        { label: 'Preview Block', href: '/docs/preview-block' },
-        { label: 'Toast', href: '/docs/toast' },
-        { label: 'Toggle', href: '/docs/toggle' },
-      ],
-    },
-  ]
+  const [expandedCategory, setExpandedCategory] = useState<string | null>('Getting Started')
 
   return (
     <header className="fixed top-0 z-50 w-full border-b-2 border-(--lithos-border) bg-(--lithos-surface)">

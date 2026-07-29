@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 export default function Sidebar() {
   const location = useLocation()
 
-  const getLinkClass = (path) => {
+  const getLinkClass = (path: string) => {
     const isActive = location.pathname === path
     const baseClass = 'block px-3 py-1.5 text-xs font-bold transition-colors duration-150 ease-out'
 
