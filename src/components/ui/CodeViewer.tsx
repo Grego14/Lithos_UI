@@ -3,11 +3,6 @@
  * - Displays raw React code inside a hard-shelled container.
  * - Copies the current code block to the clipboard with toast feedback.
  * - Uses explicit spacing only; no gap utilities are allowed.
- *
- * @param {Object} props
- * @param {string} props.code - Raw code string to display
- * @param {string} [props.language='jsx'] - Language label for the header
- * @returns {React.ReactElement}
  */
 
 import { useToast } from '../../core/hooks/useToast'
@@ -15,20 +10,25 @@ import { useTheme } from '../../core/useTheme'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
-export default function CodeViewer({ code, language = 'jsx', showControls = false, embedded = false, className = '' }) {
+interface CodeViewerProps {
+  code: string
+  language?: string
+  showControls?: boolean
+  embedded?: boolean
+  className?: string
+}
+
+export default function CodeViewer({ code, language = 'jsx', showControls = false, embedded = false, className = '' }: CodeViewerProps) {
   const toast = useToast()
   const { accentColor } = useTheme()
 
   const handleCopy = async () => {
+    const addToastExists = typeof toast?.addToast === 'function'
+
     try {
       await navigator.clipboard.writeText(code)
 
-      if (typeof toast?.success === 'function') {
-        toast.success('Copied to clipboard')
-        return
-      }
-
-      if (typeof toast?.addToast === 'function') {
+      if (addToastExists) {
         toast.addToast({
           title: 'SUCCESS',
           message: 'Copied to clipboard',
@@ -37,7 +37,7 @@ export default function CodeViewer({ code, language = 'jsx', showControls = fals
         })
       }
     } catch {
-      if (typeof toast?.addToast === 'function') {
+      if (addToastExists) {
         toast.addToast({
           title: 'ERROR',
           message: 'Failed to copy code to clipboard',
@@ -77,7 +77,7 @@ export default function CodeViewer({ code, language = 'jsx', showControls = fals
 
       <div className="overflow-x-auto p-4 text-sm bg-[#0a0a0a]">
         <SyntaxHighlighter
-          language="jsx"
+          language={language}
           style={okaidia}
           customStyle={{
             background: 'transparent',
