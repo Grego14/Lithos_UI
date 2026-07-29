@@ -30,7 +30,7 @@ function Hero({ accentColor, updateAccentColor }) {
             <h2
               className="mt-4 text-3xl sm:text-4xl font-display md:text-5xl italic font-medium text-(--lithos-accent)"
             >
-              Free Forever.
+              Free Forever
             </h2>
 
             <p className="mt-6 text-xl sm:text-2xl font-normal leading-tight text-(--lithos-text) md:text-3xl font-body max-w-2xl mx-auto lg:mx-0">

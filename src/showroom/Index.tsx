@@ -36,7 +36,7 @@ export default function Showroom({ isDarkMode, toggleObsidian, accentColor, upda
         <Hero accentColor={accentColor} updateAccentColor={updateAccentColor} />
         {/* All sections: mt-24 = 96px margin for zero-gap layout */}
         <div className="mt-24">
-          <ThemeEngine />
+          <ThemeEngine accentColor={accentColor} updateAccentColor={updateAccentColor} />
         </div>
         <div className="mt-24">
           <FeatureGrid />

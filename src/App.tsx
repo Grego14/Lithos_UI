@@ -55,7 +55,7 @@ function App() {
           <Route
             path="/docs"
             element={
-              <DocsLayout>
+              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
                 <Introduction />
               </DocsLayout>
             }
@@ -63,7 +63,7 @@ function App() {
           <Route
             path="/docs/installation"
             element={
-              <DocsLayout>
+              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
                 <Installation />
               </DocsLayout>
             }
@@ -71,7 +71,7 @@ function App() {
           <Route
             path="/docs/code-viewer"
             element={
-              <DocsLayout>
+              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
                 <CodeViewerDoc />
               </DocsLayout>
             }
@@ -79,7 +79,7 @@ function App() {
           <Route
             path="/docs/preview-block"
             element={
-              <DocsLayout>
+              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
                 <PreviewBlockDoc />
               </DocsLayout>
             }
@@ -87,7 +87,7 @@ function App() {
           <Route
             path="/docs/toast"
             element={
-              <DocsLayout>
+              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
                 <ToastDoc />
               </DocsLayout>
             }
@@ -95,7 +95,7 @@ function App() {
           <Route
             path="/docs/toggle"
             element={
-              <DocsLayout>
+              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
                 <ToggleDoc />
               </DocsLayout>
             }
