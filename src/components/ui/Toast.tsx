@@ -60,7 +60,7 @@ const typeColors = {
   default: '#FFFFFF', // White
 }
 
-const ToastItem = ({ toast, onRemove }: ToastItemType) => {
+export const ToastItem = ({ toast, onRemove }: ToastItemType) => {
   const { id, message, type = 'default', color, title } = toast
 
   const bgColor = color || typeColors[type] || typeColors.default

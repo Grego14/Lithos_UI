@@ -14,13 +14,15 @@ import { useTheme } from './core/useTheme'
 import Showroom from './showroom/Index'
 import NotFound from './components/layout/NotFound'
 import DocsLayout from './docs/DocsLayout'
-import Introduction from './docs/pages/Introduction'
-import Installation from './docs/pages/Installation'
+import { Introduction } from './docs/pages/Introduction'
+import { Installation } from './docs/pages/Installation'
 import { CodeViewerDoc } from './docs/pages/CodeViewer'
 import { PreviewBlockDoc } from './docs/pages/PreviewBlock'
 import { ToastDoc } from './docs/pages/Toast'
 import { ToggleDoc } from './docs/pages/Toggle'
 import { ComingSoon } from './components/layout/ComingSoon'
+import ComponentsIndex from './pages/ComponentsIndex'
+import Faq from './pages/Faq'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -40,7 +42,7 @@ function ScrollToTop() {
  * - "*" → NotFound (catch-all for undefined routes)
  */
 function App() {
-  const { isDarkMode, toggleObsidian } = useTheme()
+  const { isDarkMode, toggleObsidian, accentColor, updateAccentColor } = useTheme()
 
   return (
     <div className={'min-h-screen bg-(--lithos-bg) text-(--lithos-text) ' + (isDarkMode ? 'dark obsidian' : '')}>
@@ -48,12 +50,12 @@ function App() {
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route path="/" element={<Showroom isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />} />
+          <Route path="/" element={<Showroom isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} accentColor={accentColor} updateAccentColor={updateAccentColor} />} />
           {/* Completed Documentation Shells */}
           <Route
             path="/docs"
             element={
-              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
+              <DocsLayout>
                 <Introduction />
               </DocsLayout>
             }
@@ -61,7 +63,7 @@ function App() {
           <Route
             path="/docs/installation"
             element={
-              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
+              <DocsLayout>
                 <Installation />
               </DocsLayout>
             }
@@ -69,7 +71,7 @@ function App() {
           <Route
             path="/docs/code-viewer"
             element={
-              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
+              <DocsLayout>
                 <CodeViewerDoc />
               </DocsLayout>
             }
@@ -77,7 +79,7 @@ function App() {
           <Route
             path="/docs/preview-block"
             element={
-              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
+              <DocsLayout>
                 <PreviewBlockDoc />
               </DocsLayout>
             }
@@ -85,7 +87,7 @@ function App() {
           <Route
             path="/docs/toast"
             element={
-              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
+              <DocsLayout>
                 <ToastDoc />
               </DocsLayout>
             }
@@ -93,13 +95,47 @@ function App() {
           <Route
             path="/docs/toggle"
             element={
-              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
+              <DocsLayout>
                 <ToggleDoc />
               </DocsLayout>
             }
           />
 
-          <Route path="/coming-soon" element={<ComingSoon />} />
+          <Route
+            path="/coming-soon"
+            element={
+              <ComingSoon
+                eyebrow="ACTIVE ENGINEERING ZONE"
+                title="Work In Progress"
+                description="Lithos UI is an open-source architecture, and developers are actively encouraged to contribute code to engineer this structural block."
+                primaryAction={{ label: 'Go to Docs', to: '/docs' }}
+                secondaryAction={{ label: 'Contribute Code', href: 'https://github.com/lithosui/Lithos_UI/issues' }}
+              />
+            }
+          />
+          <Route path="/components" element={<ComponentsIndex isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />} />
+          <Route
+            path="/blocks"
+            element={
+              <ComingSoon
+                eyebrow="Coming Soon"
+                title="BLOCKS"
+                description="Pre-composed, production-ready page sections — hero variants, pricing tables, testimonial grids, footers, nav bars, feature comparisons — assembled from Lithos primitives. Landing soon."
+              />
+            }
+          />
+          <Route
+            path="/templates"
+            element={
+              <ComingSoon
+                eyebrow="Coming Soon"
+                title="TEMPLATES"
+                description="Full page scaffolds built entirely from the Blocks library. Ships once Blocks is live."
+                primaryAction={{ label: 'Go to Docs', to: '/docs' }}
+              />
+            }
+          />
+          <Route path="/faq" element={<Faq isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />} />
           {/* Structural Failure Catch-all */}
           <Route path="*" element={<NotFound />} />
         </Routes>

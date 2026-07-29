@@ -1,6 +1,14 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+const mainLinks = [
+  { label: 'Components', to: '/components' },
+  { label: 'Blocks', to: '/blocks' },
+  { label: 'Templates', to: '/templates' },
+  { label: 'FAQ', to: '/faq' },
+  { label: 'Docs', to: '/docs' },
+]
+
 const groupedLinks = [
   {
     category: 'Getting Started',
@@ -32,6 +40,19 @@ export default function DocsNavbar() {
             Lithos UI
           </Link>
         </div>
+
+        {/* - Center lane for main wayfinding */}
+        <nav className="hidden items-center justify-center lg:flex lg:w-1/3">
+          {mainLinks.map((link) => (
+            <Link
+              key={link.label}
+              to={link.to}
+              className="mx-4 font-black uppercase tracking-tighter leading-none text-(--lithos-text) transition-all duration-150 ease-out hover:text-(--lithos-accent) cursor-pointer"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
 
         {/* - Desktop GitHub CTA (Hidden on mobile) */}
         <div className="hidden lg:flex items-center justify-end lg:w-1/3">
@@ -69,6 +90,20 @@ export default function DocsNavbar() {
       {/* - Full-Screen Scrollable Mobile Accordion Overlay */}
       {isMenuOpen && (
         <nav className="fixed inset-0 z-[-1] pt-32 pb-12 px-6 bg-(--lithos-surface) overflow-y-auto flex flex-col justify-start lg:hidden">
+          {/* Main Top-level Links */}
+          <div className="mb-8 border-b-2 border-(--lithos-border) pb-4">
+            {mainLinks.map((link) => (
+              <Link
+                key={link.label}
+                to={link.to}
+                onClick={() => setIsMenuOpen(false)}
+                className="block w-full text-left text-4xl sm:text-5xl font-black uppercase tracking-tighter text-(--lithos-text) opacity-80 hover:opacity-100 hover:text-(--lithos-text) hover:translate-x-2 mb-6 cursor-pointer transition-all duration-150"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
           {/* Grouped Accordion Links */}
           <div className="flex-1">
             {groupedLinks.map((group) => (

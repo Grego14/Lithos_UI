@@ -7,35 +7,25 @@
 
 const features = [
   {
-    title: 'Structural Cards',
-    icon: '✦',
-    description: 'Every card is built to stay legible, rigid, and visually loud under pressure.',
-  },
-  {
-    title: 'Brutal Buttons',
-    icon: '▲',
-    description: 'CTA styles that punch through the layout with hard borders and sharp shadow offsets.',
-  },
-  {
-    title: 'Native Obsidian Mode',
-    icon: '◐',
-    description: 'A complete dark-mode implementation with swappable CSS tokens for instant theme switching.',
-  },
-  {
-    title: 'Staggered Motion Pack',
-    icon: '⬣',
-    description: 'Pre-built keyframes and easing curves for brutalist animation without external motion libraries.',
-  },
-  {
-    title: 'Responsive Rhythm',
+    title: 'Zero-Gap Layout System',
     icon: '■',
-    description: 'Layouts snap cleanly from mobile stacks to desktop rows without losing structural integrity.',
+    description: 'Strict avoidance of CSS gap utilities. Perfect geometric stacking via explicit mathematically proportional margins.',
   },
   {
-    title: 'Reusable Blocks',
-    icon: '✱',
-    description: 'Eight modular sections designed to assemble landing pages with zero visual compromise.',
+    title: 'Automated YIQ Contrast Engine',
+    icon: '◐',
+    description: 'Real-time foreground color recalculation guarantees AA+ accessibility against any dynamic background token.',
   },
+  {
+    title: 'Universal Specificity Overrides',
+    icon: '▲',
+    description: 'Engineered with a flat selector hierarchy, eliminating !important wrestling and enabling instant global theming.',
+  },
+  {
+    title: 'Global Physics Tokens',
+    icon: '⬣',
+    description: 'Standardized hard-shadow offsets, staggered spring curves, and hover lifts baked natively into the core.',
+  }
 ]
 
 function FeatureGrid() {
@@ -44,7 +34,7 @@ function FeatureGrid() {
     <section id="features" className="border-b-2 border-(--lithos-border) bg-(--lithos-surface) py-24">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-4xl font-black uppercase tracking-tighter leading-none text-center text-(--lithos-text) md:text-5xl">
-          No Fluff • Just Features
+          Four Architectural Pillars
         </h2>
 
         {/* - Negative outer margin cancels the card margin so the field stays centered. */}
@@ -52,7 +42,7 @@ function FeatureGrid() {
           {features.map((feature) => (
             <article
               key={feature.title}
-              className="group relative overflow-hidden m-4 w-full sm:w-[calc(50%-2rem)] lg:w-[calc(33.333%-2rem)] border-4 border-(--lithos-border) bg-(--lithos-surface) p-6 cursor-pointer transition-all duration-75 shadow-[2px_2px_0px_0px_var(--lithos-shadow)] hover:shadow-[4px_4px_0px_0px_var(--lithos-shadow)] active:shadow-none active:translate-x-0.5 active:translate-y-0.5"
+              className="group relative overflow-hidden m-4 w-full sm:w-[calc(50%-2rem)] border-4 border-(--lithos-border) bg-(--lithos-surface) p-6 cursor-pointer transition-all duration-75 shadow-[2px_2px_0px_0px_var(--lithos-shadow)] hover:shadow-[4px_4px_0px_0px_var(--lithos-shadow)] active:shadow-none active:translate-x-0.5 active:translate-y-0.5"
             >
               {/* - The scale wipe is a hard plane, not a fade; the card stays geometrically intact. */}
               <div

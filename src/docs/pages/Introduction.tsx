@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-export default function Introduction() {
+export const Introduction = () => {
   return (
     <div className="max-w-5xl mx-auto px-6">
       <header className="mt-0">

@@ -5,6 +5,7 @@
  * - Couples the theme toggle with toast feedback so state changes are visible and immediate.
  */
 
+import { Link } from 'react-router-dom'
 import { useToast } from '../../core/hooks/useToast'
 import Toggle from '../ui/Toggle'
 
@@ -53,30 +54,36 @@ function Footer({ isDarkMode, onToggleObsidian }: FooterProps) {
 
         {/* - Navigation stays vertical so the exit path reads as a stack, not a menu bar. */}
         <div className="mt-12 flex w-full flex-col lg:mt-0 lg:w-1/4">
-          <a
-            href="#features"
+          <Link
+            to="/components"
             className="text-2xl font-black uppercase tracking-tighter leading-none md:text-4xl cursor-pointer text-(--lithos-accent-text)"
           >
-            Features
-          </a>
-          <a
-            href="#pricing"
+            Components
+          </Link>
+          <Link
+            to="/blocks"
             className="mt-4 text-2xl font-black uppercase tracking-tighter leading-none md:text-4xl cursor-pointer text-(--lithos-accent-text)"
           >
-            Pricing
-          </a>
-          <a
-            href="#testimonials"
+            Blocks
+          </Link>
+          <Link
+            to="/templates"
             className="mt-4 text-2xl font-black uppercase tracking-tighter leading-none md:text-4xl cursor-pointer text-(--lithos-accent-text)"
           >
-            Testimonials
-          </a>
-          <a
-            href="#faq"
+            Templates
+          </Link>
+          <Link
+            to="/faq"
             className="mt-4 text-2xl font-black uppercase tracking-tighter leading-none md:text-4xl cursor-pointer text-(--lithos-accent-text)"
           >
             FAQ
-          </a>
+          </Link>
+          <Link
+            to="/docs"
+            className="mt-4 text-2xl font-black uppercase tracking-tighter leading-none md:text-4xl cursor-pointer text-(--lithos-accent-text)"
+          >
+            Docs
+          </Link>
           <div className="mt-4 flex items-center">
             <Toggle checked={isDarkMode} onToggle={handleToggleObsidian} label="Toggle Obsidian Mode" />
           </div>
