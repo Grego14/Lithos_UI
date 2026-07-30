@@ -10,11 +10,13 @@ import Footer from '../components/layout/Footer'
  * Isolates the landing page structure (Navbar, sections, Footer) from root App logic.
  * Accepts theme state and toggle function as props for downstream consumption.
  */
+import type { HexColor } from '../core/types'
+
 interface ShowroomProps {
   isDarkMode: boolean;
   toggleObsidian: () => void;
-  accentColor: string;
-  updateAccentColor: (color: string) => void;
+  accentColor: HexColor;
+  updateAccentColor: (color: HexColor) => void;
 }
 
 export default function Showroom({ isDarkMode, toggleObsidian, accentColor, updateAccentColor }: ShowroomProps) {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getContrastText } from '../utils/yiq'
+import { getContrastText, getYiqValue } from '../utils/yiq'
 import type { HexColor } from './types'
 
 /**
@@ -25,10 +25,24 @@ export function useTheme() {
       styleTag.id = 'lithos-theme-overrides'
       document.head.appendChild(styleTag)
     }
-    const text = getContrastText(accentColor)
+
+    // YIQ Logic: Ensure the accent color remains visible against the background.
+    // Instead of a binary light/dark check which breaks bright colors like cyan or yellow in light mode,
+    // we only override colors that are EXTREMELY close to the background color.
+    const yiq = getYiqValue(accentColor)
+    let adaptiveAccent = accentColor
+
+    // YIQ of pure white is 255. YIQ of pure black is 0.
+    if (!isDarkMode && yiq > 240) {
+      adaptiveAccent = '#000000' as HexColor
+    } else if (isDarkMode && yiq < 15) {
+      adaptiveAccent = '#FFFFFF' as HexColor
+    }
+
+    const text = getContrastText(adaptiveAccent)
     styleTag.innerHTML = `
       *, :root, .obsidian, body.obsidian, .dark {
-        --lithos-accent: ${accentColor} !important;
+        --lithos-accent: ${adaptiveAccent} !important;
         --lithos-accent-text: ${text} !important;
       }
       ::selection {
@@ -36,7 +50,7 @@ export function useTheme() {
         color: var(--lithos-accent-text) !important;
       }
     `
-  }, [accentColor])
+  }, [accentColor, isDarkMode])
 
   const toggleObsidian = () => {
     setIsDarkMode((prevMode) => {
