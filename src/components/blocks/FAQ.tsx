@@ -7,7 +7,12 @@
 
 import { useState } from 'react'
 
-const faqs = [
+interface FAQItem {
+  question: string
+  answer: string
+}
+
+const faqs: FAQItem[] = [
   {
     question: 'Is Lithos UI production ready?',
     answer:
@@ -30,9 +35,9 @@ const faqs = [
 ]
 
 function FAQ() {
-  const [openIndex, setOpenIndex] = useState(null)
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
 
-  const toggleItem = (index) => {
+  const toggleItem = (index: number) => {
     setOpenIndex((current) => (current === index ? null : index))
   }
 

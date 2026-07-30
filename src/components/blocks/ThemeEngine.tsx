@@ -6,7 +6,12 @@
  */
 
 
-const themes = [
+interface ThemeColor {
+  name: string
+  hex: string
+}
+
+const themes: ThemeColor[] = [
   { name: 'Cyan', hex: '#00FFFF' },
   { name: 'Purple', hex: '#800080' },
   { name: 'Yellow', hex: '#FFFF00' },
@@ -14,9 +19,14 @@ const themes = [
   { name: 'Pink', hex: '#FFC0CB' },
 ]
 
-function ThemeEngine({ accentColor, updateAccentColor }) {
+interface ThemeEngineProps {
+  accentColor: string
+  updateAccentColor: (color: string) => void
+}
 
-  const handleThemeChange = (hex) => {
+function ThemeEngine({ accentColor, updateAccentColor }: ThemeEngineProps) {
+
+  const handleThemeChange = (hex: string) => {
     updateAccentColor(hex)
   }
 

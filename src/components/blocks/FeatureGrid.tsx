@@ -5,7 +5,13 @@
  * - Keeps the grid readable by controlling wrap math instead of relying on soft spacing.
  */
 
-const features = [
+interface FeatureItem {
+  title: string
+  icon: string
+  description: string
+}
+
+const features: FeatureItem[] = [
   {
     title: 'Zero-Gap Layout System',
     icon: '■',

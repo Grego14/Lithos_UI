@@ -8,7 +8,12 @@ import { Link } from 'react-router-dom'
 import KineticGrid from '../ui/KineticGrid'
 import { getContrastText } from '../../utils/yiq'
 
-function Hero({ accentColor, updateAccentColor }) {
+interface HeroProps {
+  accentColor: string
+  updateAccentColor: (color: string) => void
+}
+
+function Hero({ accentColor, updateAccentColor }: HeroProps) {
   const fgColor = getContrastText(accentColor)
 
   return (
