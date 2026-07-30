@@ -69,7 +69,7 @@ export default function CodeViewerExample() {
       <div className="mt-8 mb-16">
         <PreviewBlock
           code={usageCode}
-          githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/CodeViewer.jsx"
+          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/CodeViewer.tsx"
         >
           <CodeViewer code={sampleCode} language="jsx" showControls={true} className="mb-0" />
         </PreviewBlock>
