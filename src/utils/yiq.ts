@@ -1,7 +1,7 @@
 import { isHexColor } from '../core/types'
 
-export const getContrastText = (hexcolor: string | undefined) => {
-  if (!hexcolor || !isHexColor(hexcolor)) return '#000000'
+export const getYiqValue = (hexcolor: string | undefined): number => {
+  if (!hexcolor || !isHexColor(hexcolor)) return 0
 
   let hex = hexcolor.replace('#', '')
   if (hex.length === 3) {
@@ -14,7 +14,9 @@ export const getContrastText = (hexcolor: string | undefined) => {
   const g = parseInt(hex.substr(2, 2), 16) || 0
   const b = parseInt(hex.substr(4, 2), 16) || 0
 
-  // YIQ equation
-  const yiq = (r * 299 + g * 587 + b * 114) / 1000
-  return yiq >= 128 ? '#000000' : '#FFFFFF'
+  return (r * 299 + g * 587 + b * 114) / 1000
+}
+
+export const getContrastText = (hexcolor: string | undefined) => {
+  return getYiqValue(hexcolor) >= 128 ? '#000000' : '#FFFFFF'
 }
