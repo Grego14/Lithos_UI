@@ -20,6 +20,7 @@ import { CodeViewerDoc } from './docs/pages/CodeViewer'
 import { PreviewBlockDoc } from './docs/pages/PreviewBlock'
 import { ToastDoc } from './docs/pages/Toast'
 import { ToggleDoc } from './docs/pages/Toggle'
+import { ButtonDoc } from './docs/pages/Button'
 import { ComingSoon } from './components/layout/ComingSoon'
 import ComponentsIndex from './pages/ComponentsIndex'
 import Faq from './pages/Faq'
@@ -97,6 +98,14 @@ function App() {
             element={
               <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
                 <ToggleDoc />
+              </DocsLayout>
+            }
+          />
+          <Route
+            path="/docs/button"
+            element={
+              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
+                <ButtonDoc />
               </DocsLayout>
             }
           />
