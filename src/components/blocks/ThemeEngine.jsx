@@ -5,7 +5,6 @@
  * - Treats the palette as a physical control board with hard tiles and explicit offsets.
  */
 
-import { useTheme } from '../../core/useTheme'
 
 const themes = [
   { name: 'Cyan', hex: '#00FFFF' },
@@ -15,8 +14,7 @@ const themes = [
   { name: 'Pink', hex: '#FFC0CB' },
 ]
 
-function ThemeEngine() {
-  const { accentColor, updateAccentColor } = useTheme()
+function ThemeEngine({ accentColor, updateAccentColor }) {
 
   const handleThemeChange = (hex) => {
     updateAccentColor(hex)

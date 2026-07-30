@@ -12,7 +12,6 @@ import Sidebar from './layout/Sidebar'
 import TableOfContents from './layout/TableOfContents'
 import Footer from '../components/layout/Footer'
 import type { ReactNode } from 'react'
-import { useTheme } from '../core/useTheme'
 import type { TOCItem } from './types.ts'
 
 const tocRegistry: Record<string, TOCItem[]> = {
@@ -43,9 +42,14 @@ const tocRegistry: Record<string, TOCItem[]> = {
   ],
 }
 
-export default function DocsLayout({ children }: { children: ReactNode}) {
+interface DocsLayoutProps {
+  children: ReactNode
+  isDarkMode: boolean
+  toggleObsidian: () => void
+}
+
+export default function DocsLayout({ children, isDarkMode, toggleObsidian }: DocsLayoutProps) {
   const location = useLocation()
-  const { isDarkMode, toggleObsidian } = useTheme()
   const currentTOC = tocRegistry[location.pathname] ?? []
 
   return (
