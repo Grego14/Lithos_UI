@@ -5,8 +5,23 @@
  * - Preserves zero-gap spacing with a centered single-card composition.
  */
 
+interface PricingFeature {
+  label: string
+  included: boolean
+}
+
+interface PricingPlan {
+  key: string
+  title: string
+  price: string
+  highlighted: boolean
+  features: PricingFeature[]
+  goal: string
+  cta: string
+}
+
 // - Single-plan model keeps the kit FOSS-first and avoids fake tier fragmentation.
-const plans = [
+const plans: PricingPlan[] = [
   {
     key: 'complete-assembly',
     title: 'FULL ASSEMBLY',

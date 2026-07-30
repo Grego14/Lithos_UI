@@ -5,7 +5,13 @@
  * - Keeps the grid wide and stable to avoid visual drift in the proof section.
  */
 
-const testimonials = [
+interface Testimonial {
+  quote: string
+  name: string
+  title: string
+}
+
+const testimonials: Testimonial[] = [
   {
     quote: 'Lithos UI gave our launch page a spine. It looks aggressive and stays readable.',
     name: 'Maya Chen',
