@@ -42,7 +42,9 @@ const tocRegistry: Record<string, TOCItem[]> = {
   ],
   '/docs/button': [
     { id: '#examples', label: 'Examples', level: 1 },
-    { id: '#intents', label: 'Intents', level: 2 },
+    { id: '#default', label: 'Default', level: 2 },
+    { id: '#secondary', label: 'Secondary', level: 2 },
+    { id: '#text', label: 'Text', level: 2 },
   ],
 }
 

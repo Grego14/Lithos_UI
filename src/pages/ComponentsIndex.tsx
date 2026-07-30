@@ -6,6 +6,7 @@ import CodeViewer from '../components/ui/CodeViewer'
 import PreviewBlock from '../components/ui/PreviewBlock'
 import Toggle from '../components/ui/Toggle'
 import { ToastItem } from '../components/ui/Toast'
+import { Button } from '../components/ui/Button'
 import { useTheme } from '../core/useTheme'
 interface ComponentsIndexProps {
   isDarkMode: boolean
@@ -27,6 +28,11 @@ function ToastPreview() {
 }
 
 const componentsList = [
+  {
+    name: 'Button',
+    to: '/docs/button',
+    preview: <Button className="cursor-pointer">Button</Button>
+  },
   {
     name: 'Code Viewer',
     to: '/docs/code-viewer',
