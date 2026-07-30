@@ -7,7 +7,7 @@ export function isHexColor(value: string): value is HexColor {
   return HEX_COLOR_PATTERN.test(value)
 }
 
-export type ButtonIntent = 'primary' | 'surface' | 'ghost'
+export type ButtonIntent = 'primary' | 'secondary' | 'text'
 
 export type ToastType = 'success' | 'error' | 'warning' | 'info' | 'default'
 
