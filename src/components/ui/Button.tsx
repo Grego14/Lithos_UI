@@ -1,0 +1,46 @@
+/**
+ * @fileoverview Lithos UI button primitive.
+ * - Centralizes `.lithos-click` physics behind typed `intent` variants so call sites stop hand-rolling className strings.
+ * - Ghost intent adds its own hover/active/disabled background because `.lithos-click` alone gives it no resting fill.
+ * - Zero-gap: icon+label spacing inside children is the consumer's responsibility via margin utilities, never `gap`.
+ * - Native `type="button"` default prevents accidental form submission; opt into `type="submit"` explicitly.
+ */
+import { forwardRef } from 'react'
+import type { ComponentPropsWithoutRef, ReactNode } from 'react'
+import type { ButtonIntent } from '../../core/types'
+
+export interface ButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'type'> {
+  intent?: ButtonIntent | undefined
+  fullWidth?: boolean | undefined
+  type?: 'button' | 'submit' | 'reset' | undefined
+  children: ReactNode
+}
+
+const intentClass: Record<ButtonIntent, string> = {
+  primary: 'bg-(--lithos-accent) text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]',
+  surface: 'bg-(--lithos-surface) text-(--lithos-text)',
+  ghost:
+    'bg-transparent text-(--lithos-text) hover:bg-(--lithos-surface) active:bg-(--lithos-muted) disabled:bg-(--lithos-muted)',
+}
+
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ intent = 'primary', fullWidth = false, type = 'button', className, children, ...rest }, ref) => {
+    const classes = [
+      'lithos-click',
+      intentClass[intent],
+      fullWidth ? 'w-full' : '',
+      'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
+      className ?? '',
+    ]
+      .filter(Boolean)
+      .join(' ')
+
+    return (
+      <button ref={ref} type={type} className={classes} {...rest}>
+        {children}
+      </button>
+    )
+  }
+)
+
+Button.displayName = 'Button'

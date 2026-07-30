@@ -40,6 +40,10 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
   ],
+  '/docs/button': [
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#intents', label: 'Intents', level: 2 },
+  ],
 }
 
 interface DocsLayoutProps {

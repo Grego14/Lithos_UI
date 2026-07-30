@@ -32,6 +32,7 @@ To prevent Tailwind class bloat ("DRY" architecture), Lithos UI packages its mec
 
 | Component             | Status | Docs                                       |
 | --------------------- | ------ | ------------------------------------------ |
+| Button                | Beta   | [/docs/button](/docs/button)               |
 | CodeViewer            | Stable | [/docs/code-viewer](/docs/code-viewer)     |
 | PreviewBlock          | Stable | [/docs/preview-block](/docs/preview-block) |
 | Toast (ToastProvider) | Stable | [/docs/toast](/docs/toast)                 |
