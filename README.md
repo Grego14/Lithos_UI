@@ -15,7 +15,7 @@ Lithos UI strictly enforces a **Zero-Gap Architecture**. All structural spacing 
 
 ### 2. YIQ Biological Contrast Engine
 
-The dynamic theme engine does not rely on static "Light/Dark" toggle classes. Instead, it uses the **YIQ Luminance formula**—a mathematical calculation based on human optical sensitivity (heavily weighting the green spectrum).
+For accent colors, the dynamic theme engine does not rely on hardcoded contrast scales. Instead, it uses the **YIQ Luminance formula**—a mathematical calculation based on human optical sensitivity (heavily weighting the green spectrum).
 When you inject a custom HEX code, the engine calculates the perceived biological brightness and automatically forces all nested typography and active UI elements to absolute `#000000` or `#FFFFFF` to ensure maximum WCAG compliance.
 
 ### 3. Universal Specificity Overrides
@@ -59,16 +59,16 @@ To prevent Tailwind class bloat ("DRY" architecture), Lithos UI packages its mec
 | FAQ          | Beta   | —    |
 | ThemeEngine  | Beta   | —    |
 
-Planned components from in-repo TODO/roadmap metadata: none currently tracked.
-
 ---
 
 ## Installation
 
-Lithos UI is not an NPM black-box dependency. It is a **Code Ownership Kit**. You copy the raw blocks into your project so you retain absolute control over the markup.
+Lithos UI is currently a **Code Ownership Kit**. You copy the raw blocks into your project so you retain absolute control over the markup. It will eventually become a published **NPM package**, but it will always remain **100% free and open-source**.
+
+As we continue to grow, more ready-made components, layout blocks, and dynamic features will be added to the library.
 
 **Starting a new project?**
-Click the green **"Use this template"** button at the top of the repository to instantly generate a fresh React app with the global design tokens and Theme Engine pre-configured.
+Click the Fork button at the top of the repository to instantly generate a fresh React app with the global design tokens and Theme Engine pre-configured.
 
 **Adding to an existing project?**
 

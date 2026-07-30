@@ -80,7 +80,7 @@ export default function ToastExample() {
 
       <PreviewBlock
         code={usageCode}
-        githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/Toast.jsx"
+        githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Toast.tsx"
       >
         <button
           type="button"

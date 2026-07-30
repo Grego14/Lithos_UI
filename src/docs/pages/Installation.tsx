@@ -59,7 +59,7 @@ export const Installation = () => {
       </p>
       <CodeViewer
         code={
-          '# Scaffold using degit\nnpx degit IncredibleStand/Lithos_UI my-app\n\n# OR clone directly\ngit clone https://github.com/IncredibleStand/Lithos_UI my-app\n\ncd my-app\npnpm install\npnpm dev'
+          '# Scaffold using degit\nnpx degit lithosui/Lithos_UI my-app\n\n# OR clone directly\ngit clone https://github.com/lithosui/Lithos_UI my-app\n\ncd my-app\npnpm install\npnpm dev'
         }
         language="bash"
       />

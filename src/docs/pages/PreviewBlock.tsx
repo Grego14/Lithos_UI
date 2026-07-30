@@ -23,7 +23,7 @@ export default function PreviewBlockExample() {
   return (
     <PreviewBlock 
       code={innerCode} 
-      githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/PreviewBlock.jsx"
+      githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/PreviewBlock.tsx"
     >
       <p className="text-base md:text-lg text-(--lithos-text) font-body">
         This is the inner live preview surface rendered by the nested PreviewBlock.
@@ -68,11 +68,11 @@ export default function PreviewBlockExample() {
 
       <PreviewBlockUI
         code={usageCode}
-        githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/PreviewBlock.jsx"
+        githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/PreviewBlock.tsx"
       >
         <PreviewBlockUI
           code={innerCode}
-          githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/PreviewBlock.jsx"
+          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/PreviewBlock.tsx"
         >
           <p className="text-base md:text-lg text-(--lithos-text) font-body">
             This is the inner live preview surface rendered by the nested PreviewBlock.

@@ -5,7 +5,7 @@ Thank you for helping improve Lithos UI.
 ## Local Setup
 
 ```bash
-git clone https://github.com/IncredibleStand/Lithos_UI.git
+git clone https://github.com/lithosui/Lithos_UI.git
 cd Lithos_UI
 pnpm install
 pnpm dev
