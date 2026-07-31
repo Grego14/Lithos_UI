@@ -5,12 +5,13 @@
  * - Keeps the opening rhythm controlled by explicit spacing math and centered containment.
  */
 import { Link } from 'react-router-dom'
-import KineticGrid from '../ui/KineticGrid'
+import { KineticGrid } from '../ui/KineticGrid'
 import { getContrastText } from '../../utils/yiq'
+import type { HexColor } from '../../core/types'
 
 interface HeroProps {
   accentColor: string
-  updateAccentColor: (color: string) => void
+  updateAccentColor: (color: HexColor) => void
 }
 
 function Hero({ accentColor, updateAccentColor }: HeroProps) {
@@ -94,7 +95,7 @@ function Hero({ accentColor, updateAccentColor }: HeroProps) {
                   <input
                     type="color"
                     value={accentColor}
-                    onChange={(e) => updateAccentColor(e.target.value)}
+                    onChange={(e) => updateAccentColor(e.target.value as HexColor)}
                     className="absolute inset-0 h-full w-full opacity-0 cursor-pointer z-10"
                     aria-label="Choose custom theme color"
                   />
@@ -144,4 +145,4 @@ function Hero({ accentColor, updateAccentColor }: HeroProps) {
   )
 }
 
-export default Hero
+export { Hero }

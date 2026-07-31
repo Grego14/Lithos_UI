@@ -1,4 +1,4 @@
-import CodeViewer from '../../components/ui/CodeViewer'
+import { CodeViewer } from '../../components/ui/CodeViewer'
 
 const cssConfig = `:root {
   /* - Default Light Theme: High contrast, heavy white/black balance. */

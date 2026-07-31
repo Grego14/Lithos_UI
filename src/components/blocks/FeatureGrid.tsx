@@ -88,4 +88,4 @@ function FeatureGrid() {
   )
 }
 
-export default FeatureGrid
+export { FeatureGrid }

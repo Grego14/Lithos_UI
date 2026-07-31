@@ -1,8 +1,8 @@
-import Navbar from '../components/layout/Navbar'
-import Hero from '../components/blocks/Hero'
-import FeatureGrid from '../components/blocks/FeatureGrid'
-import ThemeEngine from '../components/blocks/ThemeEngine'
-import Footer from '../components/layout/Footer'
+import { Navbar } from '../components/layout/Navbar'
+import { Hero } from '../components/blocks/Hero'
+import { FeatureGrid } from '../components/blocks/FeatureGrid'
+import { ThemeEngine } from '../components/blocks/ThemeEngine'
+import { Footer } from '../components/layout/Footer'
 
 /**
  * Showroom Component - Landing Page UI Composition
@@ -19,7 +19,7 @@ interface ShowroomProps {
   updateAccentColor: (color: HexColor) => void;
 }
 
-export default function Showroom({ isDarkMode, toggleObsidian, accentColor, updateAccentColor }: ShowroomProps) {
+export function Showroom({ isDarkMode, toggleObsidian, accentColor, updateAccentColor }: ShowroomProps) {
   /**
    * ZERO-GAP SPACING MATH:
    * - pt-24 (main): padding-top: 6rem = 96px

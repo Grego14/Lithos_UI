@@ -7,7 +7,7 @@
 
 import { Link } from 'react-router-dom'
 import { useToast } from '../../core/hooks/useToast'
-import Toggle from '../ui/Toggle'
+import { Toggle } from '../ui/Toggle'
 
 interface FooterProps {
   isDarkMode: boolean
@@ -112,4 +112,4 @@ function Footer({ isDarkMode, onToggleObsidian }: FooterProps) {
   )
 }
 
-export default Footer
+export { Footer }

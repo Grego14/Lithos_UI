@@ -29,7 +29,7 @@ const groupedLinks = [
   },
 ]
 
-export default function DocsNavbar() {
+export function DocsNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [expandedCategory, setExpandedCategory] = useState<string | null>('Getting Started')
 

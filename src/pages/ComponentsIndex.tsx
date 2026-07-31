@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Navbar from '../components/layout/Navbar'
-import Footer from '../components/layout/Footer'
-import CodeViewer from '../components/ui/CodeViewer'
-import PreviewBlock from '../components/ui/PreviewBlock'
-import Toggle from '../components/ui/Toggle'
+import { Navbar } from '../components/layout/Navbar'
+import { Footer } from '../components/layout/Footer'
+import { CodeViewer } from '../components/ui/CodeViewer'
+import { PreviewBlock } from '../components/ui/PreviewBlock'
+import { Toggle } from '../components/ui/Toggle'
 import { ToastItem } from '../components/ui/Toast'
 import { Button } from '../components/ui/Button'
 import { useTheme } from '../core/useTheme'
@@ -65,7 +65,7 @@ const componentsList = [
   }
 ]
 
-export default function ComponentsIndex({ isDarkMode, toggleObsidian }: ComponentsIndexProps) {
+export function ComponentsIndex({ isDarkMode, toggleObsidian }: ComponentsIndexProps) {
   return (
     <>
       <Navbar />

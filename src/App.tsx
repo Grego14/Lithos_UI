@@ -11,9 +11,9 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useTheme } from './core/useTheme'
-import Showroom from './showroom/Index'
-import NotFound from './components/layout/NotFound'
-import DocsLayout from './docs/DocsLayout'
+import { Showroom } from './showroom/Index'
+import { NotFound } from './components/layout/NotFound'
+import { DocsLayout } from './docs/DocsLayout'
 import { Introduction } from './docs/pages/Introduction'
 import { Installation } from './docs/pages/Installation'
 import { CodeViewerDoc } from './docs/pages/CodeViewer'
@@ -22,8 +22,8 @@ import { ToastDoc } from './docs/pages/Toast'
 import { ToggleDoc } from './docs/pages/Toggle'
 import { ButtonDoc } from './docs/pages/Button'
 import { ComingSoon } from './components/layout/ComingSoon'
-import ComponentsIndex from './pages/ComponentsIndex'
-import Faq from './pages/Faq'
+import { ComponentsIndex } from './pages/ComponentsIndex'
+import { Faq } from './pages/Faq'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -153,4 +153,4 @@ function App() {
   )
 }
 
-export default App
+export { App }

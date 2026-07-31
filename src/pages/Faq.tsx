@@ -1,5 +1,5 @@
-import Navbar from '../components/layout/Navbar'
-import Footer from '../components/layout/Footer'
+import { Navbar } from '../components/layout/Navbar'
+import { Footer } from '../components/layout/Footer'
 
 interface FaqProps {
   isDarkMode: boolean
@@ -29,7 +29,7 @@ const faqs = [
   }
 ]
 
-export default function Faq({ isDarkMode, toggleObsidian }: FaqProps) {
+export function Faq({ isDarkMode, toggleObsidian }: FaqProps) {
   return (
     <>
       <Navbar />

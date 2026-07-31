@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react'
-import CodeViewer from './CodeViewer'
+import { CodeViewer } from './CodeViewer'
 
 type AvailableTabs = 'preview' | 'code'
 
@@ -15,7 +15,7 @@ const inactiveBtnClass =
 const activeBtnClass =
   'bg-(--lithos-accent) text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] lithos-click'
 
-export default function PreviewBlock({ children, code, githubUrl }: PreviewBlockProps) {
+export function PreviewBlock({ children, code, githubUrl }: PreviewBlockProps) {
   const [activeTab, setActiveTab] = useState<AvailableTabs>('preview')
 
   return (
