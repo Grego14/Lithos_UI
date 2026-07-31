@@ -15,7 +15,7 @@ const inactiveBtnClass =
 const activeBtnClass =
   'bg-(--lithos-accent) text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] lithos-click'
 
-export function PreviewBlock({ children, code, githubUrl }: PreviewBlockProps) {
+export const PreviewBlock = ({ children, code, githubUrl }: PreviewBlockProps) => {
   const [activeTab, setActiveTab] = useState<AvailableTabs>('preview')
 
   return (
@@ -57,4 +57,4 @@ export function PreviewBlock({ children, code, githubUrl }: PreviewBlockProps) {
       </div>
     </div>
   )
-}
+};

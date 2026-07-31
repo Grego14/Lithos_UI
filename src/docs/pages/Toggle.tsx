@@ -8,7 +8,7 @@ export const ToggleDoc = () => {
   const usageCode = `import { useState } from 'react'
 import { Toggle } from '../../components/ui/Toggle'
 
-export function ToggleExample() {
+export const ToggleExample = () => {
   const [checked, setChecked] = useState(false)
 
   return (

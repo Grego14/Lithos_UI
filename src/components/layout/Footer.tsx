@@ -14,7 +14,7 @@ interface FooterProps {
   onToggleObsidian: () => void
 }
 
-function Footer({ isDarkMode, onToggleObsidian }: FooterProps) {
+const Footer = ({ isDarkMode, onToggleObsidian }: FooterProps) => {
   const { addToast } = useToast()
 
   const handleToggleObsidian = () => {
@@ -110,6 +110,6 @@ function Footer({ isDarkMode, onToggleObsidian }: FooterProps) {
       </div>
     </footer>
   )
-}
+};
 
 export { Footer }

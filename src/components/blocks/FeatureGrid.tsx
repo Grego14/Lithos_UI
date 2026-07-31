@@ -34,7 +34,7 @@ const features: FeatureItem[] = [
   }
 ]
 
-function FeatureGrid() {
+const FeatureGrid = () => {
   // - 24px shell keeps the block aligned with the page rhythm above and below.
   return (
     <section id="features" className="border-b-2 border-(--lithos-border) bg-(--lithos-surface) py-24">
@@ -86,6 +86,6 @@ function FeatureGrid() {
       </div>
     </section>
   )
-}
+};
 
 export { FeatureGrid }

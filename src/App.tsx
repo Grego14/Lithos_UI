@@ -25,7 +25,7 @@ import { ComingSoon } from './components/layout/ComingSoon'
 import { ComponentsIndex } from './pages/ComponentsIndex'
 import { Faq } from './pages/Faq'
 
-function ScrollToTop() {
+const ScrollToTop = () => {
   const { pathname } = useLocation()
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function ScrollToTop() {
   }, [pathname])
 
   return null
-}
+};
 
 /**
  * App Component - Orchestrates theme state, routing, and renders application UI.
@@ -42,7 +42,7 @@ function ScrollToTop() {
  * - "/" → Showroom (main landing page)
  * - "*" → NotFound (catch-all for undefined routes)
  */
-function App() {
+const App = () => {
   const { isDarkMode, toggleObsidian, accentColor, updateAccentColor } = useTheme()
 
   return (
@@ -151,6 +151,6 @@ function App() {
       </BrowserRouter>
     </div>
   )
-}
+};
 
 export { App }

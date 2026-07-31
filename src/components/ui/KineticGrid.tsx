@@ -6,7 +6,7 @@ interface KineticGridProps {
   className?: string
 }
 
-export function KineticGrid({ children, baseOpacity = 'opacity-10', className = '' }: KineticGridProps) {
+export const KineticGrid = ({ children, baseOpacity = 'opacity-10', className = '' }: KineticGridProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
@@ -60,4 +60,4 @@ export function KineticGrid({ children, baseOpacity = 'opacity-10', className = 
       <div className="relative z-10 w-full flex flex-col items-center justify-center">{children}</div>
     </div>
   )
-}
+};

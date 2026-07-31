@@ -10,7 +10,7 @@ interface ToggleProps {
   label?: string
 }
 
-function Toggle({ checked, onToggle, label = 'Theme Changed' }: ToggleProps) {
+const Toggle = ({ checked, onToggle, label = 'Theme Changed' }: ToggleProps) => {
   // - Stationary shell: only the shadow changes, so surrounding layout never shifts.
   return (
     <button
@@ -38,6 +38,6 @@ function Toggle({ checked, onToggle, label = 'Theme Changed' }: ToggleProps) {
       <span className="sr-only">{label}</span>
     </button>
   )
-}
+};
 
 export { Toggle }

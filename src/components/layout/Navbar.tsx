@@ -16,7 +16,7 @@ const links = [
   { label: 'Docs', to: '/docs' },
 ]
 
-function Navbar() {
+const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
@@ -103,6 +103,6 @@ function Navbar() {
       )}
     </header>
   )
-}
+};
 
 export { Navbar }

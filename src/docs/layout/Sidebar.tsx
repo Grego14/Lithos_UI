@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 
-export function Sidebar() {
+export const Sidebar = () => {
   const location = useLocation()
 
   const getLinkClass = (path: string) => {
@@ -50,4 +50,4 @@ export function Sidebar() {
       </div>
     </aside>
   )
-}
+};

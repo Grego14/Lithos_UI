@@ -1,7 +1,7 @@
 import { PreviewBlock as PreviewBlockUI } from '../../components/ui/PreviewBlock'
 
 export const PreviewBlockDoc = () => {
-  const innerCode = `export function InnerExample() {
+  const innerCode = `export const InnerExample = () => {
   return (
     <p className="text-base md:text-lg text-(--lithos-text) font-body">
       This is the inner live preview surface rendered by the nested PreviewBlock.
@@ -9,10 +9,10 @@ export const PreviewBlockDoc = () => {
   )
 }`
 
-  const usageCode = `import PreviewBlock from '../../components/ui/PreviewBlock'
+  const usageCode = `import { PreviewBlock } from '../../components/ui/PreviewBlock'
 
-export function PreviewBlockExample() {
-  const innerCode = \`export function InnerExample() {
+export const PreviewBlockExample = () => {
+  const innerCode = \`export const InnerExample = () => {
   return (
     <p className="text-base md:text-lg text-(--lithos-text) font-body">
       This is the inner live preview surface rendered by the nested PreviewBlock.
