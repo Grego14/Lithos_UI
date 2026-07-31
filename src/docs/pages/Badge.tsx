@@ -1,4 +1,4 @@
-import PreviewBlock from '../../components/ui/PreviewBlock'
+import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { Badge } from '../../components/ui/Badge'
 
 export const BadgeDoc = () => {
