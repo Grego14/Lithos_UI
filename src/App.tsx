@@ -22,6 +22,7 @@ import { ToastDoc } from './docs/pages/Toast'
 import { ToggleDoc } from './docs/pages/Toggle'
 import { ButtonDoc } from './docs/pages/Button'
 import { CardDoc } from './docs/pages/Card'
+import { BadgeDoc } from './docs/pages/Badge'
 import { ComingSoon } from './components/layout/ComingSoon'
 import { ComponentsIndex } from './pages/ComponentsIndex'
 import { Faq } from './pages/Faq'
@@ -118,6 +119,14 @@ const App = () => {
               </DocsLayout>
             }
           />
+          <Route
+            path="/docs/badge"
+            element={
+              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
+                <BadgeDoc />
+              </DocsLayout>
+            }
+          />
 
           <Route
             path="/coming-soon"
@@ -131,6 +140,7 @@ const App = () => {
               />
             }
           />
+
           <Route path="/components" element={<ComponentsIndex isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />} />
           <Route
             path="/blocks"
