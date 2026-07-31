@@ -7,6 +7,7 @@ interface PreviewBlockProps {
   children: ReactNode
   code: string
   githubUrl?: string
+  language?: string
 }
 
 // 1. Decoupled, floating tab classes relying purely on the primitive
@@ -15,7 +16,7 @@ const inactiveBtnClass =
 const activeBtnClass =
   'bg-(--lithos-accent) text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] lithos-click'
 
-export const PreviewBlock = ({ children, code, githubUrl }: PreviewBlockProps) => {
+export const PreviewBlock = ({ children, code, githubUrl, language = 'tsx' }: PreviewBlockProps) => {
   const [activeTab, setActiveTab] = useState<AvailableTabs>('preview')
 
   return (
@@ -52,7 +53,7 @@ export const PreviewBlock = ({ children, code, githubUrl }: PreviewBlockProps) =
         {activeTab === 'preview' ? (
           <div className="flex min-h-48 items-center justify-center p-4 md:p-6">{children}</div>
         ) : (
-          <CodeViewer code={code} language="jsx" embedded />
+          <CodeViewer code={code} language={language} embedded />
         )}
       </div>
     </div>
