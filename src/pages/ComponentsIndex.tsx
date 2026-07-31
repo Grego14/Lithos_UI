@@ -9,6 +9,7 @@ import { ToastItem } from '../components/ui/Toast'
 import { Button } from '../components/ui/Button'
 import { Card, CardContent } from '../components/ui/Card'
 import { useTheme } from '../core/useTheme'
+import { Badge } from '../components/ui/Badge'
 interface ComponentsIndexProps {
   isDarkMode: boolean
   toggleObsidian: () => void
@@ -74,6 +75,11 @@ const componentsList = [
     name: 'Toggle',
     to: '/docs/toggle',
     preview: <TogglePreview />
+  },
+  {
+    name: 'Badge',
+    to: '/docs/badge',
+    preview: <Badge variant='info' size='medium'>Feature</Badge>
   }
 ]
 
