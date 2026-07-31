@@ -14,9 +14,7 @@
 import { Link } from 'react-router-dom'
 import { KineticGrid } from '../ui/KineticGrid'
 
-export function NotFound() {
-  return (
-    <KineticGrid baseOpacity="opacity-5" className="min-h-screen bg-(--lithos-bg) text-(--lithos-text) px-4">
+export const NotFound = () => <KineticGrid baseOpacity="opacity-5" className="min-h-screen bg-(--lithos-bg) text-(--lithos-text) px-4">
       <div className="text-center max-w-2xl">
         {/* Error code - massive and brutalist */}
         <h1 className="text-8xl md:text-[12rem] font-black leading-none tracking-tighter mb-10 select-none text-(--lithos-accent)">
@@ -39,6 +37,4 @@ export function NotFound() {
           </Link>
         </div>
       </div>
-    </KineticGrid>
-  )
-}
+    </KineticGrid>;

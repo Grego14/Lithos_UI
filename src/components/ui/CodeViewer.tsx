@@ -18,7 +18,7 @@ interface CodeViewerProps {
   className?: string
 }
 
-export function CodeViewer({ code, language = 'jsx', showControls = false, embedded = false, className = '' }: CodeViewerProps) {
+export const CodeViewer = ({ code, language = 'jsx', showControls = false, embedded = false, className = '' }: CodeViewerProps) => {
   const toast = useToast()
   const { accentColor } = useTheme()
 
@@ -94,4 +94,4 @@ export function CodeViewer({ code, language = 'jsx', showControls = false, embed
       </div>
     </div>
   )
-}
+};

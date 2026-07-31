@@ -34,7 +34,7 @@ const faqs: FAQItem[] = [
   },
 ]
 
-function FAQ() {
+const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const toggleItem = (index: number) => {
@@ -101,6 +101,6 @@ function FAQ() {
       </div>
     </section>
   )
-}
+};
 
 export { FAQ }

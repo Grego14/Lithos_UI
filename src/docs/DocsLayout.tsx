@@ -54,7 +54,7 @@ interface DocsLayoutProps {
   toggleObsidian: () => void
 }
 
-export function DocsLayout({ children, isDarkMode, toggleObsidian }: DocsLayoutProps) {
+export const DocsLayout = ({ children, isDarkMode, toggleObsidian }: DocsLayoutProps) => {
   const location = useLocation()
   const currentTOC = tocRegistry[location.pathname] ?? []
 
@@ -83,4 +83,4 @@ export function DocsLayout({ children, isDarkMode, toggleObsidian }: DocsLayoutP
       </div>
     </div>
   )
-}
+};

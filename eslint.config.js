@@ -4,6 +4,7 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 import importPlugin from 'eslint-plugin-import-x'
+import preferArrowFunctions from 'eslint-plugin-prefer-arrow-functions'
 
 export default tseslint.config(
   { ignores: ['dist', 'eslint.config.js', 'vite.config.js', 'src/global.d.ts'] },
@@ -18,6 +19,7 @@ export default tseslint.config(
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
       'import': importPlugin,
+      'prefer-arrow-functions': preferArrowFunctions,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -27,6 +29,15 @@ export default tseslint.config(
       ],
       'import/no-default-export': 'error',
       '@typescript-eslint/no-explicit-any': 'error',
+      'prefer-arrow-functions/prefer-arrow-functions': [
+        'error',
+        {
+          classPropertiesAllowed: false,
+          disallowPrototype: false,
+          returnStyle: 'unchanged',
+          singleReturnOnly: false,
+        },
+      ],
     },
   },
 )

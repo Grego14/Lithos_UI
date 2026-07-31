@@ -24,7 +24,7 @@ interface ThemeEngineProps {
   updateAccentColor: (color: HexColor) => void
 }
 
-function ThemeEngine({ accentColor, updateAccentColor }: ThemeEngineProps) {
+const ThemeEngine = ({ accentColor, updateAccentColor }: ThemeEngineProps) => {
 
   const handleThemeChange = (hex: string) => {
     updateAccentColor(hex as HexColor)
@@ -112,6 +112,6 @@ function ThemeEngine({ accentColor, updateAccentColor }: ThemeEngineProps) {
       </div>
     </section>
   )
-}
+};
 
 export { ThemeEngine }

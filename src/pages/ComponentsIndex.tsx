@@ -13,19 +13,19 @@ interface ComponentsIndexProps {
   toggleObsidian: () => void
 }
 
-function TogglePreview() {
+const TogglePreview = () => {
   const [on, setOn] = useState(true)
   return <Toggle checked={on} onToggle={() => setOn(!on)} />
-}
+};
 
-function ToastPreview() {
+const ToastPreview = () => {
   const { accentColor } = useTheme()
   return (
     <div className="w-[120%] scale-[0.7] origin-center pointer-events-none mt-6">
       <ToastItem toast={{ id: 'prev-toast', message: 'Yummy toast', type: 'success', color: accentColor, title: 'SUCCESS' }} onRemove={() => { }} />
     </div>
   )
-}
+};
 
 const componentsList = [
   {
@@ -65,9 +65,7 @@ const componentsList = [
   }
 ]
 
-export function ComponentsIndex({ isDarkMode, toggleObsidian }: ComponentsIndexProps) {
-  return (
-    <>
+export const ComponentsIndex = ({ isDarkMode, toggleObsidian }: ComponentsIndexProps) => <>
       <Navbar />
       <main className="pt-24 min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
         <section className="py-24">
@@ -106,6 +104,4 @@ export function ComponentsIndex({ isDarkMode, toggleObsidian }: ComponentsIndexP
       <div className="mt-24">
         <Footer isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
       </div>
-    </>
-  )
-}
+    </>;

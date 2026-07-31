@@ -14,7 +14,7 @@ interface HeroProps {
   updateAccentColor: (color: HexColor) => void
 }
 
-function Hero({ accentColor, updateAccentColor }: HeroProps) {
+const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
   const fgColor = getContrastText(accentColor)
 
   return (
@@ -143,6 +143,6 @@ function Hero({ accentColor, updateAccentColor }: HeroProps) {
       </KineticGrid>
     </section >
   )
-}
+};
 
 export { Hero }

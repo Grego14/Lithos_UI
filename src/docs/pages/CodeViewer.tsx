@@ -2,7 +2,7 @@ import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 
 export const CodeViewerDoc = () => {
-  const sampleCode = `export function BrutalistButton() {
+  const sampleCode = `export const BrutalistButton = () => {
   return (
     <button className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click">
       Click Me
@@ -10,10 +10,10 @@ export const CodeViewerDoc = () => {
   )
 }`
 
-  const usageCode = `import CodeViewer from '../../components/ui/CodeViewer'
+  const usageCode = `import { CodeViewer } from '../../components/ui/CodeViewer'
 
-export function CodeViewerExample() {
-  const sampleCode = \`export function BrutalistButton() {
+export const CodeViewerExample = () => {
+  const sampleCode = \`export const BrutalistButton = () => {
   return (
     <button className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click">
       Click Me

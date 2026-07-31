@@ -20,7 +20,7 @@ export const ToastDoc = () => {
   const usageCode = `import { useToast } from '../../core/hooks/useToast'
 import { useTheme } from '../../core/useTheme'
 
-export function ToastExample() {
+export const ToastExample = () => {
   const { addToast } = useToast()
   const { accentColor } = useTheme()
 

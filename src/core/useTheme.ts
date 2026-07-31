@@ -8,7 +8,7 @@ import type { HexColor } from './types'
  * Manages dark/light mode state by reading from and writing to localStorage.
  * The theme preference is persisted under the key 'lithos-theme-mode'.
  */
-export function useTheme() {
+export const useTheme = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     // Initialize from localStorage using direct string comparison
     return localStorage.getItem('lithos-theme-mode') === 'dark'
@@ -67,4 +67,4 @@ export function useTheme() {
   }
 
   return { isDarkMode, toggleObsidian, accentColor, updateAccentColor } as const
-}
+};

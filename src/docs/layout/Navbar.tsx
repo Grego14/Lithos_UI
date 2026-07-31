@@ -29,7 +29,7 @@ const groupedLinks = [
   },
 ]
 
-export function DocsNavbar() {
+export const DocsNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [expandedCategory, setExpandedCategory] = useState<string | null>('Getting Started')
 
@@ -152,4 +152,4 @@ export function DocsNavbar() {
       )}
     </header>
   )
-}
+};

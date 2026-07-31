@@ -19,7 +19,7 @@ interface ShowroomProps {
   updateAccentColor: (color: HexColor) => void;
 }
 
-export function Showroom({ isDarkMode, toggleObsidian, accentColor, updateAccentColor }: ShowroomProps) {
+export const Showroom = ({ isDarkMode, toggleObsidian, accentColor, updateAccentColor }: ShowroomProps) => {
   /**
    * ZERO-GAP SPACING MATH:
    * - pt-24 (main): padding-top: 6rem = 96px
@@ -56,4 +56,4 @@ export function Showroom({ isDarkMode, toggleObsidian, accentColor, updateAccent
       </div>
     </>
   )
-}
+};

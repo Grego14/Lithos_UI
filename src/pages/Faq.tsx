@@ -29,9 +29,7 @@ const faqs = [
   }
 ]
 
-export function Faq({ isDarkMode, toggleObsidian }: FaqProps) {
-  return (
-    <>
+export const Faq = ({ isDarkMode, toggleObsidian }: FaqProps) => <>
       <Navbar />
       <main className="pt-24 min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
         <section className="py-24">
@@ -69,6 +67,4 @@ export function Faq({ isDarkMode, toggleObsidian }: FaqProps) {
       <div className="mt-24">
         <Footer isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
       </div>
-    </>
-  )
-}
+    </>;
