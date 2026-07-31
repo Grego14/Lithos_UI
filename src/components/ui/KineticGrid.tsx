@@ -6,7 +6,7 @@ interface KineticGridProps {
   className?: string
 }
 
-export default function KineticGrid({ children, baseOpacity = 'opacity-10', className = '' }: KineticGridProps) {
+export function KineticGrid({ children, baseOpacity = 'opacity-10', className = '' }: KineticGridProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {

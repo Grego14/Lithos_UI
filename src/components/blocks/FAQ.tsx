@@ -103,4 +103,4 @@ function FAQ() {
   )
 }
 
-export default FAQ
+export { FAQ }

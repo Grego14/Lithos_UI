@@ -1,6 +1,6 @@
 import { useToast } from '../../core/hooks/useToast'
 import { useTheme } from '../../core/useTheme'
-import PreviewBlock from '../../components/ui/PreviewBlock'
+import { PreviewBlock } from '../../components/ui/PreviewBlock'
 
 export const ToastDoc = () => {
   const toast = useToast()
@@ -20,7 +20,7 @@ export const ToastDoc = () => {
   const usageCode = `import { useToast } from '../../core/hooks/useToast'
 import { useTheme } from '../../core/useTheme'
 
-export default function ToastExample() {
+export function ToastExample() {
   const { addToast } = useToast()
   const { accentColor } = useTheme()
 

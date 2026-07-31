@@ -12,9 +12,9 @@
  */
 
 import { Link } from 'react-router-dom'
-import KineticGrid from '../ui/KineticGrid'
+import { KineticGrid } from '../ui/KineticGrid'
 
-export default function NotFound() {
+export function NotFound() {
   return (
     <KineticGrid baseOpacity="opacity-5" className="min-h-screen bg-(--lithos-bg) text-(--lithos-text) px-4">
       <div className="text-center max-w-2xl">

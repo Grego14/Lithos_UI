@@ -1,14 +1,14 @@
 import { useState } from 'react'
-import Toggle from '../../components/ui/Toggle'
-import PreviewBlock from '../../components/ui/PreviewBlock'
+import { Toggle } from '../../components/ui/Toggle'
+import { PreviewBlock } from '../../components/ui/PreviewBlock'
 
 export const ToggleDoc = () => {
   const [checked, setChecked] = useState(false)
 
   const usageCode = `import { useState } from 'react'
-import Toggle from '../../components/ui/Toggle'
+import { Toggle } from '../../components/ui/Toggle'
 
-export default function ToggleExample() {
+export function ToggleExample() {
   const [checked, setChecked] = useState(false)
 
   return (

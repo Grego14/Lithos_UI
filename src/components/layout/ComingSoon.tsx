@@ -12,7 +12,7 @@
  */
 
 import { Link } from 'react-router-dom'
-import KineticGrid from '../ui/KineticGrid'
+import { KineticGrid } from '../ui/KineticGrid'
 
 interface ComingSoonProps {
   eyebrow?: string

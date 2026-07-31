@@ -40,4 +40,4 @@ function Toggle({ checked, onToggle, label = 'Theme Changed' }: ToggleProps) {
   )
 }
 
-export default Toggle
+export { Toggle }

@@ -7,10 +7,10 @@
  */
 
 import { useLocation } from 'react-router-dom'
-import Navbar from './layout/Navbar'
-import Sidebar from './layout/Sidebar'
-import TableOfContents from './layout/TableOfContents'
-import Footer from '../components/layout/Footer'
+import { DocsNavbar as Navbar } from './layout/Navbar'
+import { Sidebar } from './layout/Sidebar'
+import { TableOfContents } from './layout/TableOfContents'
+import { Footer } from '../components/layout/Footer'
 import type { ReactNode } from 'react'
 import type { TOCItem } from './types.ts'
 
@@ -54,7 +54,7 @@ interface DocsLayoutProps {
   toggleObsidian: () => void
 }
 
-export default function DocsLayout({ children, isDarkMode, toggleObsidian }: DocsLayoutProps) {
+export function DocsLayout({ children, isDarkMode, toggleObsidian }: DocsLayoutProps) {
   const location = useLocation()
   const currentTOC = tocRegistry[location.pathname] ?? []
 

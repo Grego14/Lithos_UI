@@ -1,16 +1,16 @@
 import { Button } from '../../components/ui/Button'
-import PreviewBlock from '../../components/ui/PreviewBlock'
+import { PreviewBlock } from '../../components/ui/PreviewBlock'
 
 export const ButtonDoc = () => {
   const defaultCode = `import { Button } from '../../components/ui/Button'
 
-export default function DefaultButton() {
+export function DefaultButton() {
   return <Button className="cursor-pointer">Default</Button>
 }`
 
   const secondaryCode = `import { Button } from '../../components/ui/Button'
 
-export default function SecondaryButton() {
+export function SecondaryButton() {
   return (
     <Button intent="secondary" className="cursor-pointer">
       Secondary
@@ -20,7 +20,7 @@ export default function SecondaryButton() {
 
   const textCode = `import { Button } from '../../components/ui/Button'
 
-export default function TextButton() {
+export function TextButton() {
   return (
     <Button intent="text" className="cursor-pointer">
       Text
