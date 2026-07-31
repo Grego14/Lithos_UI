@@ -13,12 +13,12 @@ import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism'
 interface CodeViewerProps {
   code: string
   language?: string
-  showControls?: boolean
+  showLanguage?: boolean
   embedded?: boolean
   className?: string
 }
 
-export const CodeViewer = ({ code, language = 'jsx', showControls = false, embedded = false, className = '' }: CodeViewerProps) => {
+export const CodeViewer = ({ code, language = 'tsx', showLanguage = false, embedded = false, className = '' }: CodeViewerProps) => {
   const toast = useToast()
   const { accentColor } = useTheme()
 
@@ -53,14 +53,14 @@ export const CodeViewer = ({ code, language = 'jsx', showControls = false, embed
     >
       <div className="border-b-2 border-(--lithos-border) bg-(--lithos-surface) px-4 py-2 flex justify-between items-center">
         <div className="flex items-center">
-          {showControls ? (
+          {showLanguage ? (
+            <p className="text-xs font-black uppercase tracking-widest text-(--lithos-text) font-code">{language}</p>
+          ) : (
             <div className="flex items-center">
               <div className="mr-2 h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent)" aria-hidden="true" />
               <div className="mr-2 h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent)" aria-hidden="true" />
               <div className="h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent)" aria-hidden="true" />
             </div>
-          ) : (
-            <p className="text-xs font-black uppercase tracking-widest text-(--lithos-text) font-code">{language}</p>
           )}
         </div>
 
