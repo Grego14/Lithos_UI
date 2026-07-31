@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { getContrastText } from "../../utils/yiq";
-import { colors } from "../../colors";
+import { colors } from "../../utils/colors";
 import { useTheme } from "../../core/useTheme";
 
 type BadgeSizes = 'small' | 'default' | 'medium' | 'large'
