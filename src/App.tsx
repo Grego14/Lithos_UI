@@ -21,6 +21,7 @@ import { PreviewBlockDoc } from './docs/pages/PreviewBlock'
 import { ToastDoc } from './docs/pages/Toast'
 import { ToggleDoc } from './docs/pages/Toggle'
 import { ButtonDoc } from './docs/pages/Button'
+import { CardDoc } from './docs/pages/Card'
 import { ComingSoon } from './components/layout/ComingSoon'
 import { ComponentsIndex } from './pages/ComponentsIndex'
 import { Faq } from './pages/Faq'
@@ -106,6 +107,14 @@ function App() {
             element={
               <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
                 <ButtonDoc />
+              </DocsLayout>
+            }
+          />
+          <Route
+            path="/docs/card"
+            element={
+              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
+                <CardDoc />
               </DocsLayout>
             }
           />

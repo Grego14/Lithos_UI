@@ -7,6 +7,7 @@ import { PreviewBlock } from '../components/ui/PreviewBlock'
 import { Toggle } from '../components/ui/Toggle'
 import { ToastItem } from '../components/ui/Toast'
 import { Button } from '../components/ui/Button'
+import { Card, CardContent } from '../components/ui/Card'
 import { useTheme } from '../core/useTheme'
 interface ComponentsIndexProps {
   isDarkMode: boolean
@@ -32,6 +33,17 @@ const componentsList = [
     name: 'Button',
     to: '/docs/button',
     preview: <Button className="cursor-pointer">Button</Button>
+  },
+  {
+    name: 'Card',
+    to: '/docs/card',
+    preview: (
+      <Card className="pointer-events-none w-32">
+        <CardContent className="p-3">
+          <p className="font-black uppercase text-xs tracking-tight">Card</p>
+        </CardContent>
+      </Card>
+    )
   },
   {
     name: 'Code Viewer',
