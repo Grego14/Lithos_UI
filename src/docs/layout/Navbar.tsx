@@ -59,7 +59,7 @@ export const DocsNavbar = () => {
         {/* - Desktop GitHub CTA (Hidden on mobile) */}
         <div className="hidden lg:flex items-center justify-end lg:w-1/3">
           <a
-            href="[https://github.com/lithosui/Lithos_UI](https://github.com/lithosui/Lithos_UI)"
+            href="https://github.com/lithosui/Lithos_UI"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
@@ -141,7 +141,7 @@ export const DocsNavbar = () => {
 
           {/* Mobile Menu GitHub CTA */}
           <a
-            href="[https://github.com/lithosui/Lithos_UI](https://github.com/lithosui/Lithos_UI)"
+            href="https://github.com/lithosui/Lithos_UI"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsMenuOpen(false)}
