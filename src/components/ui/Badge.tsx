@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import { getContrastText } from "../../utils/yiq";
 import { colors } from "../../utils/colors";
 import { useTheme } from "../../core/useTheme";
@@ -6,14 +6,11 @@ import { useTheme } from "../../core/useTheme";
 type BadgeSizes = 'small' | 'default' | 'medium' | 'large'
 type BadgeVariants = 'default' | 'accent' | 'success' | 'error' | 'warning' | 'info'
 
-interface BadgeProps {
-  children?: ReactNode
+export interface BadgeProps extends ComponentPropsWithoutRef<'div'> {
   variant?: BadgeVariants
   className?: string,
   size?: BadgeSizes
 }
-
-const baseStyles = 'uppercase font-(--font-sans) font-bold border-2 border-(--lithos-border) shadow-[1px_1px_0_0_var(--lithos-border)]'
 
 const sizeStyles = {
   small: 'text-[0.65rem] px-1.5',
@@ -22,15 +19,27 @@ const sizeStyles = {
   large: 'text-lg px-3'
 }
 
-export const Badge = ({ children, className = '', size = 'default', variant = 'default' }: BadgeProps) => {
-  const { accentColor } = useTheme()
+export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
+  ({ children, className = '', size = 'default', variant = 'default', ...props }, ref) => {
+    const { accentColor } = useTheme()
 
-  const bgColor = variant === 'accent' ? accentColor : colors[variant] 
-  const contrastedColor = getContrastText(bgColor)
+    const bgColor = variant === 'accent' ? accentColor : colors[variant]
+    const contrastedColor = getContrastText(bgColor)
 
-  return (
-    <div className={`${baseStyles} ${sizeStyles[size]} py-1 w-max ${className}`} style={{ backgroundColor: bgColor, color: contrastedColor }}>
-      {children}
-    </div>
-  )
-}
+    const classes = [
+      'uppercase font-(--font-sans) font-bold border-2 border-(--lithos-border) shadow-[1px_1px_0_0_var(--lithos-border)] py-1 w-max',
+      sizeStyles[size],
+      className ?? ''
+    ]
+      .filter(Boolean)
+      .join(' ')
+
+    return (
+      <div ref={ref} className={classes} style={{ backgroundColor: bgColor, color: contrastedColor }} {...props}>
+        {children}
+      </div>
+    )
+  }
+)
+
+Badge.displayName = 'Badge'
