@@ -46,6 +46,10 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#secondary', label: 'Secondary', level: 2 },
     { id: '#text', label: 'Text', level: 2 },
   ],
+  '/docs/card': [
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#default', label: 'Default', level: 2 },
+  ],
 }
 
 interface DocsLayoutProps {

@@ -21,6 +21,7 @@ const groupedLinks = [
     category: 'Components',
     links: [
       { label: 'Button', href: '/docs/button' },
+      { label: 'Card', href: '/docs/card' },
       { label: 'Code Viewer', href: '/docs/code-viewer' },
       { label: 'Preview Block', href: '/docs/preview-block' },
       { label: 'Toast', href: '/docs/toast' },
