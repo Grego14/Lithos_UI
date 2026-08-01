@@ -6,7 +6,7 @@ export const CardDoc = () => {
   const defaultCode = `import { Card, CardImage, CardContent, CardTitle, CardDescription, CardFooter, CardClose } from '../../components/ui/Card'
 import { Button } from '../../components/ui/Button'
 
-export function DefaultCard() {
+export const DefaultCard = () => {
   return (
     <Card interactive>
       <CardClose onClick={() => {}} />
@@ -22,8 +22,8 @@ export function DefaultCard() {
         <Button>Confirm</Button>
       </CardFooter>
     </Card>
-  )
-}`
+  );
+};`
 
   return (
     <div className="max-w-5xl mx-auto px-6">
@@ -65,7 +65,7 @@ export function DefaultCard() {
         githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Card.tsx"
       >
         <Card interactive className="max-w-sm">
-          <CardClose onClick={() => {}} />
+          <CardClose onClick={() => { }} />
           <CardImage src="https://picsum.photos/600/400" alt="Preview thumbnail" />
           <CardContent>
             <CardTitle>Card Title</CardTitle>
