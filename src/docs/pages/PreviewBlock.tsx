@@ -38,7 +38,7 @@ export const PreviewBlockExample = () => {
         <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-none text-(--lithos-text) mb-8">
           Preview Block
         </h1>
-        <p className="mt-2 text-lg md:text-xl font-bold opacity-70 text-(--lithos-text) font-body">
+        <p className="mt-2 text-lg md:text-xl font-display opacity-70 text-(--lithos-text)">
           The interactive documentation shell that encapsulates live components and raw source code.
         </p>
         <hr className="border-t-2 border-(--lithos-border) mt-8 mb-8" />
@@ -46,7 +46,7 @@ export const PreviewBlockExample = () => {
 
       <section className="mb-12">
         <p className="mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          This structural shell manages state between a live interactive component and its raw Vite string import. It
+          This structural shell manages state between a live interactive component and its raw string import. It
           carries heavy brutalist borders to explicitly separate documentation logic from the component being
           demonstrated.
         </p>

@@ -36,7 +36,7 @@ export const BadgeVariants = () => {
         <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-none text-(--lithos-text) mb-8">
           Badge
         </h1>
-        <p className="mt-2 text-lg md:text-xl font-bold opacity-70 text-(--lithos-text) font-body">
+        <p className="mt-2 text-lg md:text-xl font-display opacity-70 text-(--lithos-text)">
           A high-contrast metadata indicator that supports differents sizes and color variants.
         </p>
         <hr className="border-t-2 border-(--lithos-border) mt-8 mb-8" />

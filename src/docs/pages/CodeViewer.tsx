@@ -37,7 +37,7 @@ export const CodeViewerExample = () => {
         <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-none text-(--lithos-text) mb-8">
           Code Viewer
         </h1>
-        <p className="mt-2 text-lg md:text-xl font-bold opacity-70 text-(--lithos-text) font-body">
+        <p className="mt-2 text-lg md:text-xl font-display opacity-70 text-(--lithos-text)">
           A hard-shelled syntax highlighter with built-in clipboard interactions and toast feedback.
         </p>
         <hr className="border-t-2 border-(--lithos-border) mt-8 mb-8" />
