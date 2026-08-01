@@ -65,7 +65,7 @@ export default function BadgeVariants() {
       <div className="mt-8 mb-16">
         <PreviewBlock
           code={variantsCode}
-          githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/CodeViewer.jsx"
+          githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/Badge.tsx"
         >
           <div className='flex flex-col items-center text-center flex-wrap'>
             <Badge className='mb-4'>Default</Badge>
@@ -85,7 +85,7 @@ export default function BadgeVariants() {
       <div className="mt-8 mb-16">
         <PreviewBlock
           code={sizesCode}
-          githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/CodeViewer.jsx"
+          githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/Badge.tsx"
         >
           <div className='flex flex-col items-center text-center'>
             <Badge>Default</Badge>
