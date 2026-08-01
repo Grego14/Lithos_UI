@@ -4,7 +4,7 @@ import { Badge } from '../../components/ui/Badge'
 export const BadgeDoc = () => {
   const variantsCode = `import { Badge } from '../../components/ui/Badge'
 
-export default function BadgeVariants() {
+export const BadgeVariants = () => {
   return (
     <div className='flex flex-col items-center text-center flex-wrap'>
       <Badge className='mb-4'>Default</Badge>
@@ -19,7 +19,7 @@ export default function BadgeVariants() {
 
   const sizesCode = `import { Badge } from '../../components/ui/Badge'
 
-export default function BadgeVariants() {
+export const BadgeVariants = () => {
   return (
     <div className='flex flex-col items-center text-center'>
       <Badge>Default</Badge>
@@ -65,7 +65,7 @@ export default function BadgeVariants() {
       <div className="mt-8 mb-16">
         <PreviewBlock
           code={variantsCode}
-          githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/Badge.tsx"
+          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Badge.tsx"
         >
           <div className='flex flex-col items-center text-center flex-wrap'>
             <Badge className='mb-4'>Default</Badge>
@@ -85,7 +85,7 @@ export default function BadgeVariants() {
       <div className="mt-8 mb-16">
         <PreviewBlock
           code={sizesCode}
-          githubUrl="https://github.com/IncredibleStand/Lithos_UI/blob/main/src/components/ui/Badge.tsx"
+          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Badge.tsx"
         >
           <div className='flex flex-col items-center text-center'>
             <Badge>Default</Badge>

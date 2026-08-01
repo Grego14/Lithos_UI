@@ -79,7 +79,7 @@ const componentsList = [
   {
     name: 'Badge',
     to: '/docs/badge',
-    preview: <Badge variant='info' size='medium'>Feature</Badge>
+    preview: <Badge variant='accent' size='medium'>Feature</Badge>
   }
 ]
 

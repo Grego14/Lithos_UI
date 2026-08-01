@@ -55,8 +55,8 @@ const tocRegistry: Record<string, TOCItem[]> = {
   ],
   '/docs/badge': [
     { id: '#examples', label: 'Examples', level: 1 },
-    { id: '#variants', label: 'Default', level: 2 },
-    { id: '#sizes', label: 'Default', level: 2 },
+    { id: '#variants', label: 'Variants', level: 2 },
+    { id: '#sizes', label: 'Sizes', level: 2 },
   ],
 }
 
