@@ -9,56 +9,83 @@ import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
 export interface CardProps extends ComponentPropsWithoutRef<'div'> {
   interactive?: boolean | undefined
+  variant?: 'default' | 'accent' | 'image' | undefined
   children: ReactNode
 }
 
-export const Card = forwardRef<HTMLDivElement, CardProps>(({ interactive = false, className, children, ...rest }, ref) => {
-  const classes = [
-    'relative border-2 border-(--lithos-border) bg-(--lithos-surface) text-(--lithos-text) overflow-hidden',
-    'shadow-[4px_4px_0px_0px_var(--lithos-shadow)]',
-    interactive ? 'transition-transform hover:-translate-y-1' : '',
-    className ?? '',
-  ]
-    .filter(Boolean)
-    .join(' ')
+export const Card = forwardRef<HTMLDivElement, CardProps>(
+  ({ interactive = false, variant = 'default', className, children, ...rest }, ref) => {
+    const isImage = variant === 'image'
 
-  return (
-    <div ref={ref} className={classes} {...rest}>
-      {children}
-    </div>
-  )
-})
+    const classes = [
+      'relative border-2 border-(--lithos-border) overflow-hidden',
+      isImage ? 'bg-transparent text-white flex flex-col justify-end' : 'bg-(--lithos-surface) text-(--lithos-text)',
+      variant === 'accent' ? 'transition-colors hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)' : '',
+      'shadow-[4px_4px_0px_0px_var(--lithos-shadow)]',
+      interactive ? 'transition-transform hover:-translate-y-1' : '',
+      className ?? '',
+    ]
+      .filter(Boolean)
+      .join(' ')
+
+    return (
+      <div ref={ref} className={classes} {...rest}>
+        {isImage && (
+          <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
+        )}
+        {children}
+      </div>
+    )
+  }
+)
 
 Card.displayName = 'Card'
 
 export interface CardImageProps extends ComponentPropsWithoutRef<'img'> {
   src: string
   alt: string
+  isBackground?: boolean | undefined
 }
 
-export const CardImage = forwardRef<HTMLImageElement, CardImageProps>(({ className, ...rest }, ref) => {
-  const classes = ['w-full h-48 object-cover block border-b-2 border-(--lithos-border)', className ?? '']
-    .filter(Boolean)
-    .join(' ')
+export const CardImage = forwardRef<HTMLImageElement, CardImageProps>(
+  ({ isBackground = false, className, ...rest }, ref) => {
+    const classes = [
+      isBackground
+        ? 'absolute inset-0 w-full h-full object-cover z-0'
+        : 'w-full h-48 object-cover block border-b-2 border-(--lithos-border)',
+      className ?? '',
+    ]
+      .filter(Boolean)
+      .join(' ')
 
-  return <img ref={ref} className={classes} {...rest} />
-})
+    return <img ref={ref} className={classes} {...rest} />
+  }
+)
 
 CardImage.displayName = 'CardImage'
 
 export interface CardContentProps extends ComponentPropsWithoutRef<'div'> {
+  spacing?: 'sm' | 'md' | 'lg' | undefined
   children: ReactNode
 }
 
-export const CardContent = forwardRef<HTMLDivElement, CardContentProps>(({ className, children, ...rest }, ref) => {
-  const classes = ['p-6', className ?? ''].filter(Boolean).join(' ')
+export const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
+  ({ spacing = 'md', className, children, ...rest }, ref) => {
+    const spacingClass = {
+      sm: 'p-3',
+      md: 'p-6',
+      lg: 'p-9',
+    }[spacing]
 
-  return (
-    <div ref={ref} className={classes} {...rest}>
-      {children}
-    </div>
-  )
-})
+    const classes = ['relative z-20', spacingClass, className ?? ''].filter(Boolean).join(' ')
+
+    return (
+      <div ref={ref} className={classes} {...rest}>
+        {children}
+      </div>
+    )
+  }
+)
 
 CardContent.displayName = 'CardContent'
 
@@ -99,40 +126,29 @@ export const CardDescription = forwardRef<HTMLParagraphElement, CardDescriptionP
 CardDescription.displayName = 'CardDescription'
 
 export interface CardFooterProps extends ComponentPropsWithoutRef<'div'> {
+  spacing?: 'sm' | 'md' | 'lg' | undefined
   children: ReactNode
 }
 
-export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(({ className, children, ...rest }, ref) => {
-  const classes = ['flex items-center px-6 pt-4 pb-6 border-t-2 border-(--lithos-border)', className ?? '']
-    .filter(Boolean)
-    .join(' ')
+export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
+  ({ spacing = 'md', className, children, ...rest }, ref) => {
+    const spacingClass = {
+      sm: 'px-3 pt-2 pb-3',
+      md: 'px-6 pt-4 pb-6',
+      lg: 'px-9 pt-6 pb-9',
+    }[spacing]
 
-  return (
-    <div ref={ref} className={classes} {...rest}>
-      {children}
-    </div>
-  )
-})
+    const classes = ['relative z-20 flex items-center justify-end border-t-2 border-(--lithos-border)', spacingClass, className ?? '']
+      .filter(Boolean)
+      .join(' ')
+
+    return (
+      <div ref={ref} className={classes} {...rest}>
+        {children}
+      </div>
+    )
+  }
+)
 
 CardFooter.displayName = 'CardFooter'
 
-export type CardCloseProps = ComponentPropsWithoutRef<'button'>
-
-export const CardClose = forwardRef<HTMLButtonElement, CardCloseProps>(({ className, ...rest }, ref) => {
-  const classes = [
-    'absolute top-2 right-2 z-10 bg-(--lithos-surface) lithos-click',
-    className ?? '',
-  ]
-    .filter(Boolean)
-    .join(' ')
-
-  return (
-    <button ref={ref} type="button" aria-label="Close" className={classes} {...rest}>
-      <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="4" className="block">
-        <path d="M2 2L14 14M14 2L2 14" />
-      </svg>
-    </button>
-  )
-})
-
-CardClose.displayName = 'CardClose'

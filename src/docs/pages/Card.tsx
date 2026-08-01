@@ -1,16 +1,18 @@
-import { Card, CardImage, CardContent, CardTitle, CardDescription, CardFooter, CardClose } from '../../components/ui/Card'
+import { useState } from 'react'
+import { Card, CardImage, CardContent, CardTitle, CardDescription, CardFooter } from '../../components/ui/Card'
 import { Button } from '../../components/ui/Button'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 
 export const CardDoc = () => {
-  const defaultCode = `import { Card, CardImage, CardContent, CardTitle, CardDescription, CardFooter, CardClose } from '../../components/ui/Card'
+  const [spacing, setSpacing] = useState<'sm' | 'md' | 'lg'>('md')
+
+  const defaultCode = `import { Card, CardImage, CardContent, CardTitle, CardDescription, CardFooter } from '../../components/ui/Card'
 import { Button } from '../../components/ui/Button'
 
 export const DefaultCard = () => {
   return (
-    <Card interactive>
-      <CardClose onClick={() => {}} />
-      <CardImage src="/thumbnail.jpg" alt="Thumbnail" />
+    <Card interactive className="max-w-sm">
+      <CardImage src="https://picsum.photos/600/400" alt="Thumbnail" />
       <CardContent>
         <CardTitle>Card Title</CardTitle>
         <CardDescription>Short supporting copy goes here.</CardDescription>
@@ -24,6 +26,51 @@ export const DefaultCard = () => {
     </Card>
   );
 };`
+
+  const accentCode = `import { Card, CardImage, CardContent, CardTitle, CardDescription } from '../../components/ui/Card'
+
+export const AccentCard = () => {
+  return (
+    <Card variant="accent" interactive className="max-w-sm">
+      <CardImage src="https://picsum.photos/600/400?1" alt="Preview" />
+      <CardContent>
+        <CardTitle>Accent Card</CardTitle>
+        <CardDescription>Hover over this card to see the background fill with the active theme color.</CardDescription>
+      </CardContent>
+    </Card>
+  )
+}`
+
+  const spacingCode = `import { Card, CardContent, CardTitle, CardDescription, CardFooter } from '../../components/ui/Card'
+import { Button } from '../../components/ui/Button'
+
+export const SpacingCard = () => {
+  return (
+    <Card className="max-w-sm">
+      <CardContent spacing="${spacing}">
+        <CardTitle>Spacious Card</CardTitle>
+        <CardDescription>This card uses the ${spacing} spacing token for maximum internal breathing room.</CardDescription>
+      </CardContent>
+      <CardFooter spacing="${spacing}">
+        <Button>Action</Button>
+      </CardFooter>
+    </Card>
+  )
+}`
+
+  const imageCode = `import { Card, CardImage, CardContent, CardTitle, CardDescription } from '../../components/ui/Card'
+
+export const ImageBackgroundCard = () => {
+  return (
+    <Card variant="image" className="w-full max-w-sm min-h-[300px]">
+      <CardImage src="https://picsum.photos/600/600" alt="Full bleed background" isBackground />
+      <CardContent>
+        <CardTitle>Full Bleed Overlay</CardTitle>
+        <CardDescription className="opacity-90">Using isBackground on CardImage to compose a rich media card.</CardDescription>
+      </CardContent>
+    </Card>
+  )
+}`
 
   return (
     <div className="max-w-5xl mx-auto px-6">
@@ -41,8 +88,7 @@ export const DefaultCard = () => {
       <section className="mb-6">
         <p className="text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
           Card is a foundational container composed of <code>CardImage</code>, <code>CardContent</code> (with{' '}
-          <code>CardTitle</code> and <code>CardDescription</code>), <code>CardFooter</code>, and an optional{' '}
-          <code>CardClose</code>. Every part is optional — compose only what the content needs.
+          <code>CardTitle</code> and <code>CardDescription</code>) and <code>CardFooter</code>. Every part is optional — compose only what the content needs.
         </p>
       </section>
 
@@ -65,7 +111,6 @@ export const DefaultCard = () => {
         githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Card.tsx"
       >
         <Card interactive className="max-w-sm">
-          <CardClose onClick={() => { }} />
           <CardImage src="https://picsum.photos/600/400" alt="Preview thumbnail" />
           <CardContent>
             <CardTitle>Card Title</CardTitle>
@@ -79,6 +124,55 @@ export const DefaultCard = () => {
           </CardFooter>
         </Card>
       </PreviewBlock>
+
+      <h3 id="accent" className="mt-12 mb-3 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Accent
+      </h3>
+      <PreviewBlock code={accentCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Card.tsx">
+        <Card variant="accent" interactive className="max-w-sm">
+          <CardImage src="https://picsum.photos/600/400?1" alt="Preview" />
+          <CardContent>
+            <CardTitle>Accent Card</CardTitle>
+            <CardDescription>Hover over this card to see the background fill with the active theme color.</CardDescription>
+          </CardContent>
+        </Card>
+      </PreviewBlock>
+
+      <h3 id="spacing" className="mt-12 mb-3 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Spacing
+      </h3>
+      <PreviewBlock code={spacingCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Card.tsx">
+        <div className="flex flex-col">
+          <div className="flex mb-6">
+            <Button intent={spacing === 'sm' ? 'primary' : 'secondary'} onClick={() => setSpacing('sm')} className="mr-4">Small</Button>
+            <Button intent={spacing === 'md' ? 'primary' : 'secondary'} onClick={() => setSpacing('md')} className="mr-4">Medium</Button>
+            <Button intent={spacing === 'lg' ? 'primary' : 'secondary'} onClick={() => setSpacing('lg')}>Large</Button>
+          </div>
+          <Card className="max-w-sm">
+            <CardContent spacing={spacing}>
+              <CardTitle>Spacious Card</CardTitle>
+              <CardDescription>This card uses the {spacing} spacing token for maximum internal breathing room.</CardDescription>
+            </CardContent>
+            <CardFooter spacing={spacing}>
+              <Button>Action</Button>
+            </CardFooter>
+          </Card>
+        </div>
+      </PreviewBlock>
+
+      <h3 id="image" className="mt-12 mb-3 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Image
+      </h3>
+      <PreviewBlock code={imageCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Card.tsx">
+        <Card variant="image" className="w-full max-w-sm min-h-[300px]">
+          <CardImage src="https://picsum.photos/600/600" alt="Full bleed background" isBackground />
+          <CardContent>
+            <CardTitle>Full Bleed Overlay</CardTitle>
+            <CardDescription className="opacity-90">Using isBackground on CardImage to compose a rich media card.</CardDescription>
+          </CardContent>
+        </Card>
+      </PreviewBlock>
     </div>
   )
 }
+

@@ -49,6 +49,9 @@ const tocRegistry: Record<string, TOCItem[]> = {
   '/docs/card': [
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
+    { id: '#accent', label: 'Accent', level: 2 },
+    { id: '#spacing', label: 'Spacing', level: 2 },
+    { id: '#image', label: 'Image', level: 2 },
   ],
 }
 
