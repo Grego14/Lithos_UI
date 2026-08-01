@@ -9,6 +9,7 @@ import { useState, useCallback, type ReactNode } from 'react'
 import { getContrastText } from '../../utils/yiq'
 import { ToastContext } from '../../core/hooks/useToast'
 import type { ToastProps } from '../../core/types'
+import { colors } from '../../utils/colors'
 
 type IdentifiedToastProps = ToastProps & { id: string }
 
@@ -52,18 +53,10 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
   )
 }
 
-const typeColors = {
-  success: '#00FF00', // Neon Green
-  error: '#FF0000', // Red
-  warning: '#FFFF00', // Yellow
-  info: '#00FFFF', // Cyan
-  default: '#FFFFFF', // White
-}
-
 export const ToastItem = ({ toast, onRemove }: ToastItemType) => {
   const { id, message, type = 'default', color, title } = toast
 
-  const bgColor = color || typeColors[type] || typeColors.default
+  const bgColor = color || colors[type] || colors.default
   const textColor = getContrastText(bgColor)
 
   return (
