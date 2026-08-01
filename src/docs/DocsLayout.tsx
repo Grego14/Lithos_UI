@@ -53,6 +53,11 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#spacing', label: 'Spacing', level: 2 },
     { id: '#image', label: 'Image', level: 2 },
   ],
+  '/docs/badge': [
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#variants', label: 'Variants', level: 2 },
+    { id: '#sizes', label: 'Sizes', level: 2 },
+  ],
 }
 
 interface DocsLayoutProps {

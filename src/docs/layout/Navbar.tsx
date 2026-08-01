@@ -26,6 +26,7 @@ const groupedLinks = [
       { label: 'Preview Block', href: '/docs/preview-block' },
       { label: 'Toast', href: '/docs/toast' },
       { label: 'Toggle', href: '/docs/toggle' },
+      { label: 'Badge', href: '/docs/badge' },
     ],
   },
 ]
