@@ -86,7 +86,7 @@ const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
               </div>
 
               {/* Swatch → dimension line → mini browser mock, as one connected diagram */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center space-x-3">
                 {/* Custom color trigger */}
                 <div
                   className="relative h-20 w-20 shrink-0 border-4 border-(--lithos-border) shadow-[3px_3px_0px_0px_var(--lithos-shadow)] lithos-click"
@@ -113,7 +113,7 @@ const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
 
                 {/* Mini live browser mock */}
                 <div className="w-28 shrink-0 border-2 border-(--lithos-border) bg-(--lithos-bg)">
-                  <div className="flex items-center gap-1 px-2 py-1.5 border-b-2 border-(--lithos-border) bg-(--lithos-surface)">
+                  <div className="flex items-center space-x-1 px-2 py-1.5 border-b-2 border-(--lithos-border) bg-(--lithos-surface)">
                     <span className="w-1.5 h-1.5 bg-(--lithos-border)" />
                     <span className="w-1.5 h-1.5 bg-(--lithos-border)" />
                     <span className="w-1.5 h-1.5 bg-(--lithos-border)" />

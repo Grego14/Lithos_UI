@@ -7,7 +7,7 @@ import { PreviewBlock } from '../components/ui/PreviewBlock'
 import { Toggle } from '../components/ui/Toggle'
 import { ToastItem } from '../components/ui/Toast'
 import { Button } from '../components/ui/Button'
-import { Card, CardContent } from '../components/ui/Card'
+import { Card, CardImage, CardContent } from '../components/ui/Card'
 import { useTheme } from '../core/useTheme'
 import { Badge } from '../components/ui/Badge'
 interface ComponentsIndexProps {
@@ -39,9 +39,11 @@ const componentsList = [
     name: 'Card',
     to: '/docs/card',
     preview: (
-      <Card className="pointer-events-none w-32">
-        <CardContent className="p-3">
-          <p className="font-black uppercase text-xs tracking-tight">Card</p>
+      <Card variant="accent" className="pointer-events-none w-32 group-hover:bg-(--lithos-accent) group-hover:text-(--lithos-accent-text) transition-colors">
+        <CardImage src="https://picsum.photos/600/400?1" alt="Preview" className="!h-16" />
+        <CardContent className="p-2">
+          <p className="font-black uppercase text-[10px] tracking-tight leading-none mb-1">Accent Card</p>
+          <p className="font-body opacity-70 text-[8px] leading-tight">Hover to see fill.</p>
         </CardContent>
       </Card>
     )
@@ -84,42 +86,43 @@ const componentsList = [
 ]
 
 export const ComponentsIndex = ({ isDarkMode, toggleObsidian }: ComponentsIndexProps) => <>
-      <Navbar />
-      <main className="pt-24 min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
-        <section className="py-24">
-          <div className="mx-auto max-w-7xl px-6">
-            <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-12 text-(--lithos-text)">
-              Components
-            </h1>
-            <p className="text-xl md:text-2xl font-normal max-w-3xl mb-16 font-body">
-              The fundamental building blocks of Lithos UI. Every primitive is built with the Zero-Gap layout system and strict adherence to structural integrity.
-            </p>
+  <Navbar />
+  <main className="pt-24 min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
+    <section className="py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-12 text-(--lithos-text)">
+          Components
+        </h1>
+        <p className="text-xl md:text-2xl font-normal max-w-3xl mb-16 font-body">
+          The fundamental building blocks of Lithos UI. Every primitive is built with the Zero-Gap layout system and strict adherence to structural integrity.
+        </p>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-              {componentsList.map((comp) => (
-                <Link
-                  key={comp.name}
-                  to={comp.to}
-                  className="group block border-4 border-(--lithos-border) bg-(--lithos-surface) transition-transform hover:-translate-y-1 shadow-[4px_4px_0px_0px_var(--lithos-shadow)]"
-                >
-                  {/* Top Zone: Live Preview */}
-                  <div className="h-40 flex items-center justify-center bg-(--lithos-bg) p-4 overflow-hidden relative">
-                    {comp.preview}
-                  </div>
+        <div className="flex flex-wrap -m-3">
+          {componentsList.map((comp) => (
+            <div key={comp.name} className="w-[50%] sm:w-[33.333%] lg:w-[25%] p-3">
+              <Link
+                to={comp.to}
+                className="group block border-4 border-(--lithos-border) bg-(--lithos-surface) transition-transform hover:-translate-y-1 shadow-[4px_4px_0px_0px_var(--lithos-shadow)] h-full"
+              >
+                {/* Top Zone: Live Preview */}
+                <div className="h-40 flex items-center justify-center bg-(--lithos-bg) p-4 overflow-hidden relative">
+                  {comp.preview}
+                </div>
 
-                  {/* Bottom Zone: Thin Label Strip */}
-                  <div className="border-t-4 border-(--lithos-border) bg-(--lithos-surface) px-4 py-3 text-center">
-                    <h2 className="text-xl font-black uppercase tracking-tighter text-(--lithos-text) group-hover:text-(--lithos-accent) transition-colors">
-                      {comp.name}
-                    </h2>
-                  </div>
-                </Link>
-              ))}
+                {/* Bottom Zone: Thin Label Strip */}
+                <div className="border-t-4 border-(--lithos-border) bg-(--lithos-surface) px-4 py-3 text-center">
+                  <h2 className="text-xl font-black uppercase tracking-tighter text-(--lithos-text) group-hover:text-(--lithos-accent) transition-colors">
+                    {comp.name}
+                  </h2>
+                </div>
+              </Link>
             </div>
-          </div>
-        </section>
-      </main>
-      <div className="mt-24">
-        <Footer isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
+          ))}
+        </div>
       </div>
-    </>;
+    </section>
+  </main>
+  <div className="mt-24">
+    <Footer isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
+  </div>
+</>;
