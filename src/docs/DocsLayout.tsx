@@ -57,6 +57,7 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#variants', label: 'Variants', level: 2 },
     { id: '#sizes', label: 'Sizes', level: 2 },
+    { id: '#custom-color', label: 'Custom color', level: 2 },
   ],
 }
 
