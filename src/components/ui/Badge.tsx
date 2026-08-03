@@ -2,14 +2,16 @@ import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import { getContrastText } from "../../utils/yiq";
 import { colors } from "../../utils/colors";
 import { useTheme } from "../../core/useTheme";
+import type { HexColor } from "../../core/types";
 
 type BadgeSizes = 'small' | 'default' | 'medium' | 'large'
 type BadgeVariants = 'default' | 'accent' | 'success' | 'error' | 'warning' | 'info'
 
 export interface BadgeProps extends ComponentPropsWithoutRef<'div'> {
   variant?: BadgeVariants
-  className?: string,
+  className?: string
   size?: BadgeSizes
+  color?: HexColor | string
 }
 
 const sizeStyles = {
@@ -20,10 +22,10 @@ const sizeStyles = {
 }
 
 export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
-  ({ children, className = '', size = 'default', variant = 'default', ...props }, ref) => {
+  ({ children, className = '', size = 'default', variant = 'default', color, ...props }, ref) => {
     const { accentColor } = useTheme()
 
-    const bgColor = variant === 'accent' ? accentColor : colors[variant]
+    const bgColor = color || (variant === 'accent' ? accentColor : colors[variant])
     const contrastedColor = getContrastText(bgColor)
 
     const classes = [
