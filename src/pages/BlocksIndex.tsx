@@ -42,7 +42,7 @@ export const BlocksIndex = ({ isDarkMode, toggleObsidian }: BlocksIndexProps) =>
                 <h3 className="text-3xl font-black uppercase tracking-tighter mb-8 border-b-2 border-(--lithos-border) pb-4">
                   Testimonial Grids
                 </h3>
-                <PreviewBlock code={testimonialsCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/blocks/Testimonials.tsx">
+                <PreviewBlock code={testimonialsCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/blocks/Testimonials.tsx" slug="testimonials" height="600px">
                   <div className="w-full">
                     <Testimonials />
                   </div>
@@ -54,7 +54,7 @@ export const BlocksIndex = ({ isDarkMode, toggleObsidian }: BlocksIndexProps) =>
                 <h3 className="text-3xl font-black uppercase tracking-tighter mb-8 border-b-2 border-(--lithos-border) pb-4">
                   Nav Bars
                 </h3>
-                <PreviewBlock code={navbarCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/blocks/Navbar.tsx" height="400px" noPadding>
+                <PreviewBlock code={navbarCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/blocks/Navbar.tsx" height="400px" noPadding slug="navbar">
                   <div className="w-full relative h-[400px]">
                     <NavbarBlock />
                   </div>
@@ -66,7 +66,7 @@ export const BlocksIndex = ({ isDarkMode, toggleObsidian }: BlocksIndexProps) =>
                 <h3 className="text-3xl font-black uppercase tracking-tighter mb-8 border-b-2 border-(--lithos-border) pb-4">
                   Pricing Tables
                 </h3>
-                <PreviewBlock code={pricingTableCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/blocks/Pricing.tsx">
+                <PreviewBlock code={pricingTableCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/blocks/Pricing.tsx" slug="pricing" height="800px">
                   <div className="w-full">
                     <Pricing />
                   </div>

@@ -27,6 +27,7 @@ import { ComingSoon } from './components/layout/ComingSoon'
 import { ComponentsIndex } from './pages/ComponentsIndex'
 import { BlocksIndex } from './pages/BlocksIndex'
 import { Faq } from './pages/Faq'
+import { BlockPreviewPage } from './pages/BlockPreviewPage'
 
 const ScrollToTop = () => {
   const { pathname } = useLocation()
@@ -141,6 +142,7 @@ const App = () => {
               />
             }
           />
+          <Route path="/blocks/preview/:slug" element={<BlockPreviewPage />} />
 
           <Route path="/components" element={<ComponentsIndex isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />} />
           <Route
