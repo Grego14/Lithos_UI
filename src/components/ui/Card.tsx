@@ -9,7 +9,7 @@ import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
 export interface CardProps extends ComponentPropsWithoutRef<'div'> {
   interactive?: boolean | undefined
-  variant?: 'default' | 'accent' | 'image' | undefined
+  variant?: 'default' | 'accent' | 'image' | 'blueprint' | 'physics' | 'solid' | undefined
   children: ReactNode
 }
 
@@ -19,7 +19,9 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
 
     const classes = [
       'relative border-2 border-(--lithos-border) overflow-hidden',
-      isImage ? 'bg-transparent text-white flex flex-col justify-end' : 'bg-(--lithos-surface) text-(--lithos-text)',
+      isImage ? 'bg-transparent text-white flex flex-col justify-end' : 
+      variant === 'solid' ? 'bg-(--lithos-accent) text-(--lithos-accent-text)' : 
+      'bg-(--lithos-surface) text-(--lithos-text)',
       variant === 'accent' ? 'transition-colors hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)' : '',
       'shadow-[4px_4px_0px_0px_var(--lithos-shadow)]',
       interactive ? 'transition-transform hover:-translate-y-1' : '',

@@ -25,6 +25,7 @@ import { CardDoc } from './docs/pages/Card'
 import { BadgeDoc } from './docs/pages/Badge'
 import { ComingSoon } from './components/layout/ComingSoon'
 import { ComponentsIndex } from './pages/ComponentsIndex'
+import { BlocksIndex } from './pages/BlocksIndex'
 import { Faq } from './pages/Faq'
 
 const ScrollToTop = () => {
@@ -145,10 +146,9 @@ const App = () => {
           <Route
             path="/blocks"
             element={
-              <ComingSoon
-                eyebrow="Coming Soon"
-                title="BLOCKS"
-                description="Pre-composed, production-ready page sections — hero variants, pricing tables, testimonial grids, footers, nav bars, feature comparisons — assembled from Lithos primitives. Landing soon."
+              <BlocksIndex 
+                isDarkMode={isDarkMode} 
+                toggleObsidian={toggleObsidian} 
               />
             }
           />

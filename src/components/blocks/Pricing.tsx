@@ -1,9 +1,5 @@
-/**
- * @fileoverview Lithos UI pricing slab.
- * - Collapses the model into one free assembly block to keep the repository fully usable.
- * - Uses heavier borders and shadow offset on the highlighted tier to make the primary offer carry more physical weight.
- * - Preserves zero-gap spacing with a centered single-card composition.
- */
+import { Card } from '../ui/Card'
+import { Button } from '../ui/Button'
 
 interface PricingFeature {
   label: string
@@ -20,64 +16,99 @@ interface PricingPlan {
   cta: string
 }
 
-// - Single-plan model keeps the kit FOSS-first and avoids fake tier fragmentation.
 const plans: PricingPlan[] = [
   {
-    key: 'complete-assembly',
-    title: 'FULL ASSEMBLY',
-    price: '$0',
+    key: 'starter',
+    title: 'STARTER',
+    price: '$29',
+    highlighted: false,
+    features: [
+      { label: 'Up to 5 Users', included: true },
+      { label: 'Basic Analytics', included: true },
+      { label: '24/7 Support', included: false },
+      { label: 'Custom Domain', included: false },
+    ],
+    goal: 'Perfect for small teams getting started.',
+    cta: 'Start Free Trial',
+  },
+  {
+    key: 'pro',
+    title: 'PRO',
+    price: '$79',
     highlighted: true,
     features: [
-      { label: 'All 8 Premium Blocks', included: true },
-      { label: 'Complete App.jsx Layout', included: true },
-      { label: 'Obsidian (Dark) Mode', included: true },
-      { label: 'Native Motion Pack', included: true },
-      { label: 'Dynamic Theme Engine', included: true },
-      { label: 'Open Source License', included: true },
+      { label: 'Up to 20 Users', included: true },
+      { label: 'Advanced Analytics', included: true },
+      { label: '24/7 Support', included: true },
+      { label: 'Custom Domain', included: false },
     ],
-    goal: 'The complete engineered UI library. Free forever.',
-    cta: 'Get Started',
+    goal: 'For growing businesses that need more power.',
+    cta: 'Upgrade to Pro',
+  },
+  {
+    key: 'enterprise',
+    title: 'ENTERPRISE',
+    price: '$199',
+    highlighted: false,
+    features: [
+      { label: 'Unlimited Users', included: true },
+      { label: 'Custom Analytics', included: true },
+      { label: '24/7 Priority Support', included: true },
+      { label: 'Custom Domain', included: true },
+    ],
+    goal: 'Maximum performance and dedicated support.',
+    cta: 'Contact Sales',
   },
 ]
 
-const Pricing = () => <section id="pricing" className="border-b-2 border-(--lithos-border) bg-(--lithos-bg) py-24">
-      <div className="mx-auto max-w-6xl px-6">
+export const Pricing = () => {
+  return (
+    <section className="bg-(--lithos-bg) py-12 md:py-24">
+      <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-4xl font-black uppercase tracking-tighter leading-none text-center text-(--lithos-text) md:text-5xl">
-          Zero Cost • Build Forever
+          Simple, Transparent Pricing
         </h2>
-        <p className="mt-4 text-lg font-bold leading-none text-center text-(--lithos-text) md:text-xl">
-          Lithos UI is completely free and open-source. Just raw, portable components engineered for production.
+        <p className="mt-4 text-lg font-bold leading-none text-center text-(--lithos-text) opacity-70 md:text-xl">
+          Choose the plan that fits your needs.
         </p>
 
-        {/* - 24px shell above and below keeps the pricing slab on the same cadence as the rest of the page. */}
-        {/* - Negative outer margin cancels card gutters so the single tier stays centered. */}
-        <div className="mt-20 -m-4 flex justify-center">
+        <div className="mt-20 -m-4 flex flex-wrap justify-center items-stretch">
           {plans.map((tier) => {
             const highlighted = tier.highlighted === true
 
             return (
-              <article
+              <Card
                 key={tier.key}
+                variant={highlighted ? 'solid' : 'default'}
                 className={
                   highlighted
-                    ? 'm-4 flex w-[calc(100%-2rem)] max-w-2xl flex-col border-2 border-(--lithos-border) bg-(--lithos-accent) p-6 sm:p-10 shadow-[6px_6px_0px_0px_var(--lithos-shadow)] hover:shadow-[8px_8px_0px_0px_var(--lithos-shadow)] motion-safe:animate-[brutalist-pop_400ms_cubic-bezier(0.175,0.885,0.32,1.275)]'
-                    : 'm-4 flex w-[calc(100%-2rem)] max-w-2xl flex-col border-2 border-(--lithos-border) bg-(--lithos-surface) p-6 sm:p-10 shadow-[6px_6px_0px_0px_var(--lithos-shadow)] hover:shadow-[8px_8px_0px_0px_var(--lithos-shadow)] motion-safe:animate-[slide-up_400ms_cubic-bezier(0.175,0.885,0.32,1.275)]'
+                    ? 'm-4 flex w-full md:w-[calc(33.333%-2rem)] flex-col border-4 p-6 sm:p-8 shadow-[8px_8px_0px_0px_var(--lithos-shadow)] hover:shadow-[10px_10px_0px_0px_var(--lithos-shadow)] transition-shadow duration-200 scale-105 z-10'
+                    : 'm-4 flex w-full md:w-[calc(33.333%-2rem)] flex-col p-6 sm:p-8 hover:shadow-[6px_6px_0px_0px_var(--lithos-shadow)] transition-shadow duration-200'
                 }
               >
-                {/* - Highlighted tier gets the bigger shadow offset so the primary offer carries more mass. */}
                 <h3
-                  className={`text-3xl font-black uppercase tracking-tighter leading-none text-(--lithos-accent-text)`}
+                  className={`text-2xl font-black uppercase tracking-tighter leading-none ${
+                    highlighted ? 'text-(--lithos-accent-text)' : 'text-(--lithos-text)'
+                  }`}
                 >
                   {tier.title}
                 </h3>
                 <p
-                  className={`mt-4 text-4xl sm:text-5xl font-black uppercase tracking-tighter leading-none text-(--lithos-accent-text)`}
+                  className={`mt-4 text-4xl sm:text-5xl font-black uppercase tracking-tighter leading-none ${
+                    highlighted ? 'text-(--lithos-accent-text)' : 'text-(--lithos-text)'
+                  }`}
                 >
                   {tier.price}
+                  <span className="text-xl opacity-70">/mo</span>
                 </p>
-                <p className={`mt-4 text-base font-medium leading-snug text-(--lithos-accent-text)`}>{tier.goal}</p>
+                <p
+                  className={`mt-4 text-base font-medium leading-snug ${
+                    highlighted ? 'text-(--lithos-accent-text)' : 'text-(--lithos-text)'
+                  }`}
+                >
+                  {tier.goal}
+                </p>
 
-                {/* - Feature list uses explicit bottom spacing to keep each line independently readable. */}
                 <div className="mt-8">
                   <ul>
                     {tier.features &&
@@ -85,10 +116,14 @@ const Pricing = () => <section id="pricing" className="border-b-2 border-(--lith
                         <li
                           key={`${tier.key}-f-${i}`}
                           className={
-                            'leading-snug font-black uppercase tracking-tighter' +
+                            'leading-snug font-bold uppercase tracking-tighter' +
                             (feature.included
-                              ? ' text-(--lithos-accent-text)'
-                              : ' line-through opacity-30 text-(--lithos-accent-text)') +
+                              ? highlighted
+                                ? ' text-(--lithos-accent-text)'
+                                : ' text-(--lithos-text)'
+                              : highlighted
+                              ? ' line-through opacity-50 text-(--lithos-accent-text)'
+                              : ' line-through opacity-50 text-(--lithos-text)') +
                             (i < tier.features.length - 1 ? ' mb-3' : '')
                           }
                         >
@@ -99,24 +134,19 @@ const Pricing = () => <section id="pricing" className="border-b-2 border-(--lith
                   </ul>
                 </div>
 
-                {/* - CTA stays pinned to the bottom edge so the slab reads top-to-bottom as one unit. */}
                 <div className="mt-auto pt-8">
-                  <a
-                    href="#top"
-                    className={
-                      highlighted
-                        ? 'bg-(--lithos-accent-text) text-(--lithos-accent) lithos-click'
-                        : 'bg-(--lithos-surface) text-(--lithos-text) lithos-click'
-                    }
+                  <Button
+                    intent={highlighted ? 'secondary' : 'primary'}
+                    fullWidth
                   >
                     {tier.cta}
-                  </a>
+                  </Button>
                 </div>
-              </article>
+              </Card>
             )
           })}
         </div>
       </div>
-    </section>;
-
-export { Pricing }
+    </section>
+  )
+}
