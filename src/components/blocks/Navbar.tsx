@@ -14,8 +14,9 @@ export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b-2 border-(--lithos-border) bg-(--lithos-surface)">
-      {/* - Fixed rail: the 4px bottom border marks the top boundary of the app. */}
+    <>
+      <header className="sticky top-0 z-50 w-full border-b-2 border-(--lithos-border) bg-(--lithos-surface)">
+        {/* - Fixed rail: the 4px bottom border marks the top boundary of the app. */}
       {/* - 24px vertical padding gives the bar enough mass to read as a slab, not a strip. */}
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         {/* - Brand block flex-1 balances the center lane. */}
@@ -68,10 +69,10 @@ export const Navbar = () => {
           </button>
         </div>
       </div>
-
+    </header>
       {/* - Full-Screen Mobile Overlay */}
       {isMenuOpen && (
-        <nav className="absolute inset-0 z-[40] pt-32 pb-6 px-6 bg-(--lithos-surface) overflow-y-auto flex flex-col justify-start lg:hidden">
+        <nav className="fixed inset-0 z-[40] pt-32 pb-6 px-6 bg-(--lithos-surface) overflow-y-auto flex flex-col justify-start lg:hidden">
           {links.map((link) => (
             <Link
               key={link.label}
@@ -92,6 +93,6 @@ export const Navbar = () => {
           </div>
         </nav>
       )}
-    </header>
+    </>
   )
 }
