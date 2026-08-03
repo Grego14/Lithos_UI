@@ -4,6 +4,7 @@
  * - Uses scale-on-hover and shadow steps to imply physical lift without layout drift.
  * - Keeps the grid readable by controlling wrap math instead of relying on soft spacing.
  */
+import { Card } from '../ui/Card'
 
 interface FeatureItem {
   title: string
@@ -46,9 +47,9 @@ const FeatureGrid = () => {
         {/* - Negative outer margin cancels the card margin so the field stays centered. */}
         <div className="mt-20 -m-4 flex flex-wrap justify-center">
           {features.map((feature) => (
-            <article
+            <Card
               key={feature.title}
-              className="group relative overflow-hidden m-4 w-full sm:w-[calc(50%-2rem)] border-4 border-(--lithos-border) bg-(--lithos-surface) p-6 cursor-pointer transition-all duration-75 shadow-[2px_2px_0px_0px_var(--lithos-shadow)] hover:shadow-[4px_4px_0px_0px_var(--lithos-shadow)] active:shadow-none active:translate-x-0.5 active:translate-y-0.5"
+              className="group relative m-4 w-full sm:w-[calc(50%-2rem)] border-4 p-6 transition-all duration-75 shadow-[2px_2px_0px_0px_var(--lithos-shadow)] hover:shadow-[4px_4px_0px_0px_var(--lithos-shadow)] active:shadow-none active:translate-x-0.5 active:translate-y-0.5"
             >
               {/* - The scale wipe is a hard plane, not a fade; the card stays geometrically intact. */}
               <div
@@ -70,7 +71,7 @@ const FeatureGrid = () => {
                   {feature.description}
                 </p>
               </div>
-            </article>
+            </Card>
           ))}
         </div>
 

@@ -50,6 +50,7 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
     { id: '#accent', label: 'Accent', level: 2 },
+    { id: '#solid', label: 'Solid', level: 2 },
     { id: '#spacing', label: 'Spacing', level: 2 },
     { id: '#image', label: 'Image', level: 2 },
   ],

@@ -41,6 +41,21 @@ export const AccentCard = () => {
   )
 }`
 
+  const solidCode = `import { Card, CardImage, CardContent, CardTitle, CardDescription } from '../../components/ui/Card'
+
+export const SolidCard = () => {
+  return (
+    <Card variant="solid" interactive className="max-w-sm">
+      <CardImage src="https://picsum.photos/600/400?2" alt="Preview" />
+      <CardContent>
+        <CardTitle>Solid Card</CardTitle>
+        <CardDescription>A card that permanently stays in the accent color rather than waiting for a hover interaction.</CardDescription>
+      </CardContent>
+    </Card>
+  )
+}`
+
+
   const spacingCode = `import { Card, CardContent, CardTitle, CardDescription, CardFooter } from '../../components/ui/Card'
 import { Button } from '../../components/ui/Button'
 
@@ -134,6 +149,19 @@ export const ImageBackgroundCard = () => {
           <CardContent>
             <CardTitle>Accent Card</CardTitle>
             <CardDescription>Hover over this card to see the background fill with the active theme color.</CardDescription>
+          </CardContent>
+        </Card>
+      </PreviewBlock>
+
+      <h3 id="solid" className="mt-12 mb-3 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Solid
+      </h3>
+      <PreviewBlock code={solidCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Card.tsx">
+        <Card variant="solid" interactive className="max-w-sm">
+          <CardImage src="https://picsum.photos/600/400?2" alt="Preview" />
+          <CardContent>
+            <CardTitle>Solid Card</CardTitle>
+            <CardDescription>A card that permanently stays in the accent color rather than waiting for a hover interaction.</CardDescription>
           </CardContent>
         </Card>
       </PreviewBlock>

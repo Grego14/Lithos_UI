@@ -8,6 +8,7 @@ interface PreviewBlockProps {
   code: string
   githubUrl?: string
   language?: string
+  height?: string
 }
 
 // 1. Decoupled, floating tab classes relying purely on the primitive
@@ -16,7 +17,7 @@ const inactiveBtnClass =
 const activeBtnClass =
   'bg-(--lithos-accent) text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] lithos-click'
 
-export const PreviewBlock = ({ children, code, githubUrl, language = 'tsx' }: PreviewBlockProps) => {
+export const PreviewBlock = ({ children, code, githubUrl, language = 'tsx', height }: PreviewBlockProps) => {
   const [activeTab, setActiveTab] = useState<AvailableTabs>('preview')
 
   return (
@@ -49,9 +50,9 @@ export const PreviewBlock = ({ children, code, githubUrl, language = 'tsx' }: Pr
       </div>
 
       {/* 3. Main Content Pane - Single rigid box */}
-      <div className="border-2 border-(--lithos-border) bg-(--lithos-bg) overflow-hidden">
+      <div className="border-2 border-(--lithos-border) bg-(--lithos-bg) overflow-hidden" style={height ? { minHeight: height } : undefined}>
         {activeTab === 'preview' ? (
-          <div className="flex min-h-48 items-center justify-center p-4 md:p-6">{children}</div>
+          <div className="flex min-h-48 items-center justify-center p-4 md:p-6 w-full h-full">{children}</div>
         ) : (
           <CodeViewer code={code} language={language} embedded />
         )}
