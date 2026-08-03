@@ -10,6 +10,7 @@ import { Button } from '../components/ui/Button'
 import { Card, CardImage, CardContent } from '../components/ui/Card'
 import { useTheme } from '../core/useTheme'
 import { Badge } from '../components/ui/Badge'
+import { Avatar } from '../components/ui/Avatar'
 interface ComponentsIndexProps {
   isDarkMode: boolean
   toggleObsidian: () => void
@@ -82,6 +83,11 @@ const componentsList = [
     name: 'Badge',
     to: '/docs/badge',
     preview: <Badge variant='accent' size='medium'>Feature</Badge>
+  },
+  {
+    name: 'Avatar',
+    to: '/docs/avatar',
+    preview: <Avatar variant='solid' alt="Jane Doe" />
   }
 ]
 
