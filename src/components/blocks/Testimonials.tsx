@@ -46,10 +46,10 @@ const Testimonials = () => <section id="testimonials" className="bg-(--lithos-su
           className="m-4 flex w-[calc(100%-2rem)] sm:w-[calc(50%-2rem)] lg:w-[calc(33.333%-2rem)] flex-col p-6 shadow-[4px_4px_0px_0px_var(--lithos-shadow)] transition-all duration-150 ease-out hover:shadow-[6px_6px_0px_0px_var(--lithos-shadow)] active:shadow-[2px_2px_0px_var(--lithos-shadow)]"
         >
           {/* - 6px shadow offset gives the quote plaque a clear physical edge. */}
-          <p className="text-lg font-black uppercase tracking-tighter leading-none text-(--lithos-accent-text)">
+          <p className="text-lg font-black uppercase tracking-tighter leading-none">
             ★★★★★
           </p>
-          <p className="mt-4 text-2xl font-black uppercase tracking-tighter leading-none text-(--lithos-accent-text)">
+          <p className="mt-4 text-2xl font-black uppercase tracking-tighter leading-none">
             {testimonial.quote}
           </p>
 
@@ -60,10 +60,10 @@ const Testimonials = () => <section id="testimonials" className="bg-(--lithos-su
               aria-hidden="true"
             />
             <div className="ml-4">
-              <p className="font-black uppercase tracking-tighter leading-none text-(--lithos-accent-text)">
+              <p className="font-black uppercase tracking-tighter leading-none">
                 {testimonial.name}
               </p>
-              <p className="mt-2 font-bold uppercase tracking-tighter leading-none text-(--lithos-accent-text)">
+              <p className="mt-2 font-bold uppercase tracking-tighter leading-none">
                 {testimonial.title}
               </p>
             </div>
