@@ -82,8 +82,8 @@ export const Pricing = () => {
                 variant={highlighted ? 'solid' : 'default'}
                 className={
                   highlighted
-                    ? 'm-4 flex w-full md:w-[calc(33.333%-2rem)] flex-col border-4 p-6 sm:p-8 shadow-[8px_8px_0px_0px_var(--lithos-shadow)] hover:shadow-[10px_10px_0px_0px_var(--lithos-shadow)] transition-shadow duration-200 scale-105 z-10'
-                    : 'm-4 flex w-full md:w-[calc(33.333%-2rem)] flex-col p-6 sm:p-8 hover:shadow-[6px_6px_0px_0px_var(--lithos-shadow)] transition-shadow duration-200'
+                    ? 'm-4 flex w-[calc(100%-2rem)] md:w-[calc(33.333%-2rem)] flex-col border-4 p-6 sm:p-8 shadow-[8px_8px_0px_0px_var(--lithos-shadow)] hover:shadow-[10px_10px_0px_0px_var(--lithos-shadow)] transition-shadow duration-200 md:scale-105 md:z-10'
+                    : 'm-4 flex w-[calc(100%-2rem)] md:w-[calc(33.333%-2rem)] flex-col p-6 sm:p-8 hover:shadow-[6px_6px_0px_0px_var(--lithos-shadow)] transition-shadow duration-200'
                 }
               >
                 <h3

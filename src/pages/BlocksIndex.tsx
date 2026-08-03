@@ -38,7 +38,7 @@ export const BlocksIndex = ({ isDarkMode, toggleObsidian }: BlocksIndexProps) =>
             <div className="flex flex-col space-y-12">
 
               {/* Testimonial Grids */}
-              <Card variant="blueprint" className="p-6 md:p-12">
+              <div className="mb-16">
                 <h3 className="text-3xl font-black uppercase tracking-tighter mb-8 border-b-2 border-(--lithos-border) pb-4">
                   Testimonial Grids
                 </h3>
@@ -47,22 +47,22 @@ export const BlocksIndex = ({ isDarkMode, toggleObsidian }: BlocksIndexProps) =>
                     <Testimonials />
                   </div>
                 </PreviewBlock>
-              </Card>
+              </div>
 
               {/* Navbars */}
-              <Card variant="blueprint" className="p-6 md:p-12">
+              <div className="mb-16">
                 <h3 className="text-3xl font-black uppercase tracking-tighter mb-8 border-b-2 border-(--lithos-border) pb-4">
                   Nav Bars
                 </h3>
-                <PreviewBlock code={navbarCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/blocks/Navbar.tsx" height="400px">
+                <PreviewBlock code={navbarCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/blocks/Navbar.tsx" height="400px" noPadding>
                   <div className="w-full relative h-[400px]">
                     <NavbarBlock />
                   </div>
                 </PreviewBlock>
-              </Card>
+              </div>
 
               {/* Pricing Tables */}
-              <Card variant="blueprint" className="p-6 md:p-12">
+              <div className="mb-16">
                 <h3 className="text-3xl font-black uppercase tracking-tighter mb-8 border-b-2 border-(--lithos-border) pb-4">
                   Pricing Tables
                 </h3>
@@ -71,7 +71,7 @@ export const BlocksIndex = ({ isDarkMode, toggleObsidian }: BlocksIndexProps) =>
                     <Pricing />
                   </div>
                 </PreviewBlock>
-              </Card>
+              </div>
 
               {/* Coming Soon Categories */}
               <div className="grid grid-cols-1 md:grid-cols-3 sapce-x-6">

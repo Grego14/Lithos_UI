@@ -31,7 +31,7 @@ const testimonials: Testimonial[] = [
   },
 ]
 
-const Testimonials = () => <section id="testimonials" className="border-b-2 border-(--lithos-border) bg-(--lithos-surface) py-24">
+const Testimonials = () => <section id="testimonials" className="bg-(--lithos-surface) py-24">
   <div className="mx-auto max-w-6xl px-6">
     <h2 className="text-4xl font-black uppercase tracking-tighter leading-none text-center text-(--lithos-text) md:text-5xl">
       Proof From the Front Lines
@@ -43,7 +43,7 @@ const Testimonials = () => <section id="testimonials" className="border-b-2 bord
         <Card
           key={testimonial.name}
           variant="accent"
-          className="m-4 flex w-full sm:w-[calc(50%-2rem)] lg:w-[calc(33.333%-2rem)] flex-col p-6 shadow-[4px_4px_0px_0px_var(--lithos-shadow)] transition-all duration-150 ease-out hover:shadow-[6px_6px_0px_0px_var(--lithos-shadow)] active:shadow-[2px_2px_0px_0px_var(--lithos-shadow)]"
+          className="m-4 flex w-[calc(100%-2rem)] sm:w-[calc(50%-2rem)] lg:w-[calc(33.333%-2rem)] flex-col p-6 shadow-[4px_4px_0px_0px_var(--lithos-shadow)] transition-all duration-150 ease-out hover:shadow-[6px_6px_0px_0px_var(--lithos-shadow)] active:shadow-[2px_2px_0px_var(--lithos-shadow)]"
         >
           {/* - 6px shadow offset gives the quote plaque a clear physical edge. */}
           <p className="text-lg font-black uppercase tracking-tighter leading-none text-(--lithos-accent-text)">
