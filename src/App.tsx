@@ -23,6 +23,7 @@ import { ToggleDoc } from './docs/pages/Toggle'
 import { ButtonDoc } from './docs/pages/Button'
 import { CardDoc } from './docs/pages/Card'
 import { BadgeDoc } from './docs/pages/Badge'
+import { AvatarDoc } from './docs/pages/Avatar'
 import { ComingSoon } from './components/layout/ComingSoon'
 import { ComponentsIndex } from './pages/ComponentsIndex'
 import { BlocksIndex } from './pages/BlocksIndex'
@@ -126,6 +127,14 @@ const App = () => {
             element={
               <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
                 <BadgeDoc />
+              </DocsLayout>
+            }
+          />
+          <Route
+            path="/docs/avatar"
+            element={
+              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
+                <AvatarDoc />
               </DocsLayout>
             }
           />

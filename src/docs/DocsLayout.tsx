@@ -60,6 +60,12 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#sizes', label: 'Sizes', level: 2 },
     { id: '#custom-color', label: 'Custom color', level: 2 },
   ],
+  '/docs/avatar': [
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#variants', label: 'States', level: 2 },
+    { id: '#sizes', label: 'Sizes', level: 2 },
+    { id: '#group', label: 'Group', level: 2 },
+  ],
 }
 
 interface DocsLayoutProps {
