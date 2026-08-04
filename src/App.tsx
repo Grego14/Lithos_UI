@@ -8,6 +8,7 @@
  * - Component composition (Showroom, NotFound routes)
  */
 
+import { AvatarDoc } from './docs/pages/Avatar'
 import { BadgeDoc } from './docs/pages/Badge'
 import { BlockPreviewPage } from './pages/BlockPreviewPage'
 import { BlocksIndex } from './pages/BlocksIndex'
@@ -42,6 +43,7 @@ const ScrollToTop = () => {
 const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
   const docPages = [
     { path: '', component: Introduction },
+    { path: 'avatar', component: AvatarDoc },
     { path: 'badge', component: BadgeDoc },
     { path: 'button', component: ButtonDoc },
     { path: 'card', component: CardDoc },
@@ -82,7 +84,7 @@ const App = () => {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Showroom isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} accentColor={accentColor} updateAccentColor={updateAccentColor} />} />
-          
+
           <Route
             path="/blocks"
             element={
@@ -106,10 +108,10 @@ const App = () => {
             }
           />
           <Route path="/components" element={<ComponentsIndex isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />} />
-          
+
           {/* Completed Documentation Shells */}
           {renderDocRoutes(isDarkMode, toggleObsidian)}
-          
+
           <Route path="/faq" element={<Faq isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />} />
           <Route
             path="/templates"
