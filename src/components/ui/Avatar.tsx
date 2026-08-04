@@ -37,7 +37,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
     const contrastedColor = bgColor ? getContrastText(bgColor) : undefined
 
     const classes = [
-      'relative inline-flex items-center justify-center shrink-0 overflow-hidden rounded-full border-2 border-(--lithos-border) font-(--font-sans) font-bold uppercase',
+      'relative inline-flex items-center justify-center shrink-0 overflow-hidden rounded-full border-2 border-(--lithos-border) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] font-(--font-sans) font-bold uppercase',
       variant === 'default' ? 'bg-(--lithos-surface) text-(--lithos-text)' : '',
       sizeStyles[size],
       className,
