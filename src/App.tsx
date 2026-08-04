@@ -8,27 +8,26 @@
  * - Component composition (Showroom, NotFound routes)
  */
 
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
-import { useTheme } from './core/useTheme'
-import { Showroom } from './showroom/Index'
-import { NotFound } from './components/layout/NotFound'
-import { DocsLayout } from './docs/DocsLayout'
-import { Introduction } from './docs/pages/Introduction'
-import { Installation } from './docs/pages/Installation'
-import { CodeViewerDoc } from './docs/pages/CodeViewer'
-import { PreviewBlockDoc } from './docs/pages/PreviewBlock'
-import { ToastDoc } from './docs/pages/Toast'
-import { ToggleDoc } from './docs/pages/Toggle'
+import { BadgeDoc } from './docs/pages/Badge'
+import { BlockPreviewPage } from './pages/BlockPreviewPage'
+import { BlocksIndex } from './pages/BlocksIndex'
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { ButtonDoc } from './docs/pages/Button'
 import { CardDoc } from './docs/pages/Card'
-import { BadgeDoc } from './docs/pages/Badge'
-import { AvatarDoc } from './docs/pages/Avatar'
+import { CodeViewerDoc } from './docs/pages/CodeViewer'
 import { ComingSoon } from './components/layout/ComingSoon'
 import { ComponentsIndex } from './pages/ComponentsIndex'
-import { BlocksIndex } from './pages/BlocksIndex'
+import { DocsLayout } from './docs/DocsLayout'
 import { Faq } from './pages/Faq'
-import { BlockPreviewPage } from './pages/BlockPreviewPage'
+import { Installation } from './docs/pages/Installation'
+import { Introduction } from './docs/pages/Introduction'
+import { NotFound } from './components/layout/NotFound'
+import { PreviewBlockDoc } from './docs/pages/PreviewBlock'
+import { Showroom } from './showroom/Index'
+import { ToastDoc } from './docs/pages/Toast'
+import { ToggleDoc } from './docs/pages/Toggle'
+import { useEffect } from 'react'
+import { useTheme } from './core/useTheme'
 
 const ScrollToTop = () => {
   const { pathname } = useLocation()
@@ -38,7 +37,33 @@ const ScrollToTop = () => {
   }, [pathname])
 
   return null
-};
+}
+
+const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
+  const docPages = [
+    { path: '', component: Introduction },
+    { path: 'badge', component: BadgeDoc },
+    { path: 'button', component: ButtonDoc },
+    { path: 'card', component: CardDoc },
+    { path: 'code-viewer', component: CodeViewerDoc },
+    { path: 'installation', component: Installation },
+    { path: 'preview-block', component: PreviewBlockDoc },
+    { path: 'toast', component: ToastDoc },
+    { path: 'toggle', component: ToggleDoc },
+  ]
+
+  return docPages.map(({ path, component: Component }) => (
+    <Route
+      key={path || 'index'}
+      path={`/docs${path ? `/${path}` : ''}`}
+      element={
+        <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
+          <Component />
+        </DocsLayout>
+      }
+    />
+  ))
+}
 
 /**
  * App Component - Orchestrates theme state, routing, and renders application UI.
@@ -57,88 +82,17 @@ const App = () => {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Showroom isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} accentColor={accentColor} updateAccentColor={updateAccentColor} />} />
-          {/* Completed Documentation Shells */}
+          
           <Route
-            path="/docs"
+            path="/blocks"
             element={
-              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
-                <Introduction />
-              </DocsLayout>
+              <BlocksIndex
+                isDarkMode={isDarkMode}
+                toggleObsidian={toggleObsidian}
+              />
             }
           />
-          <Route
-            path="/docs/installation"
-            element={
-              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
-                <Installation />
-              </DocsLayout>
-            }
-          />
-          <Route
-            path="/docs/code-viewer"
-            element={
-              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
-                <CodeViewerDoc />
-              </DocsLayout>
-            }
-          />
-          <Route
-            path="/docs/preview-block"
-            element={
-              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
-                <PreviewBlockDoc />
-              </DocsLayout>
-            }
-          />
-          <Route
-            path="/docs/toast"
-            element={
-              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
-                <ToastDoc />
-              </DocsLayout>
-            }
-          />
-          <Route
-            path="/docs/toggle"
-            element={
-              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
-                <ToggleDoc />
-              </DocsLayout>
-            }
-          />
-          <Route
-            path="/docs/button"
-            element={
-              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
-                <ButtonDoc />
-              </DocsLayout>
-            }
-          />
-          <Route
-            path="/docs/card"
-            element={
-              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
-                <CardDoc />
-              </DocsLayout>
-            }
-          />
-          <Route
-            path="/docs/badge"
-            element={
-              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
-                <BadgeDoc />
-              </DocsLayout>
-            }
-          />
-          <Route
-            path="/docs/avatar"
-            element={
-              <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
-                <AvatarDoc />
-              </DocsLayout>
-            }
-          />
-
+          <Route path="/blocks/preview/:slug" element={<BlockPreviewPage />} />
           <Route
             path="/coming-soon"
             element={
@@ -151,18 +105,12 @@ const App = () => {
               />
             }
           />
-          <Route path="/blocks/preview/:slug" element={<BlockPreviewPage />} />
-
           <Route path="/components" element={<ComponentsIndex isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />} />
-          <Route
-            path="/blocks"
-            element={
-              <BlocksIndex 
-                isDarkMode={isDarkMode} 
-                toggleObsidian={toggleObsidian} 
-              />
-            }
-          />
+          
+          {/* Completed Documentation Shells */}
+          {renderDocRoutes(isDarkMode, toggleObsidian)}
+          
+          <Route path="/faq" element={<Faq isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />} />
           <Route
             path="/templates"
             element={
@@ -174,13 +122,13 @@ const App = () => {
               />
             }
           />
-          <Route path="/faq" element={<Faq isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />} />
+
           {/* Structural Failure Catch-all */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
   )
-};
+}
 
 export { App }
