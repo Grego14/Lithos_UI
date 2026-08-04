@@ -54,7 +54,7 @@ export const PreviewBlock = ({ children, code, githubUrl, language = 'tsx', heig
           </div>
 
           {slug && (
-            <div className="flex items-center space-x-2 border-(--lithos-border) pl-0 md:border-l-2 md:pl-4 mt-4 sm:mt-0">
+            <div className="hidden md:flex items-center space-x-2 border-l-2 border-(--lithos-border) pl-4">
               <button
                 type="button"
                 onClick={() => setBreakpoint('mobile')}
