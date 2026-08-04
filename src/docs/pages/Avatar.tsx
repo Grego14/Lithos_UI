@@ -1,12 +1,12 @@
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
-import { Avatar } from '../../components/ui/Avatar'
+import { Avatar, AvatarGroupCount } from '../../components/ui/Avatar'
 
 export const AvatarDoc = () => {
   const variantsCode = `import { Avatar } from '../../components/ui/Avatar'
 
 export const AvatarVariants = () => {
   return (
-    <div className='flex items-center gap-4'>
+    <div className='flex items-center space-x-4'>
       {/* default: image */}
       <Avatar src="https://picsum.photos/200" alt="Jane Doe" />
       {/* default: no src, two-word alt falls back to double-letter initials */}
@@ -23,7 +23,7 @@ export const AvatarVariants = () => {
 
 export const AvatarSizes = () => {
   return (
-    <div className='flex items-end gap-4'>
+    <div className='flex items-end space-x-4'>
       <Avatar size='sm' src="https://picsum.photos/200" alt="Jane Doe" />
       <Avatar size='md' src="https://picsum.photos/200" alt="Jane Doe" />
       <Avatar size='lg' src="https://picsum.photos/200" alt="Jane Doe" />
@@ -31,18 +31,15 @@ export const AvatarSizes = () => {
   )
 }`
 
-  const groupCode = `import { Avatar } from '../../components/ui/Avatar'
+  const groupCode = `import { Avatar, AvatarGroupCount } from '../../components/ui/Avatar'
 
 export const AvatarGroup = () => {
-  // Overflow count is a group-level indicator, not a per-person avatar — styled to match, rendered raw.
   return (
     <div className='flex -space-x-3'>
       <Avatar src="https://picsum.photos/200" alt="Jane Doe" />
       <Avatar src="https://picsum.photos/201" alt="John Smith" />
       <Avatar variant='solid' alt="Amy Lee" />
-      <div className='relative inline-flex items-center justify-center shrink-0 w-12 h-12 text-base rounded-full border-2 border-(--lithos-border) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] bg-(--lithos-surface) text-(--lithos-text) font-(--font-sans) font-bold'>
-        +3
-      </div>
+      <AvatarGroupCount count={3} />
     </div>
   )
 }`
@@ -84,7 +81,7 @@ export const AvatarGroup = () => {
           code={variantsCode}
           githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Avatar.tsx"
         >
-          <div className='flex items-center gap-4'>
+          <div className='flex items-center space-x-4'>
             <Avatar src="https://picsum.photos/200" alt="Jane Doe" />
             <Avatar alt="Jane Doe" />
             <Avatar alt="Amy" />
@@ -102,7 +99,7 @@ export const AvatarGroup = () => {
           code={sizesCode}
           githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Avatar.tsx"
         >
-          <div className='flex items-end gap-4'>
+          <div className='flex items-end space-x-4'>
             <Avatar size='sm' src="https://picsum.photos/200" alt="Jane Doe" />
             <Avatar size='md' src="https://picsum.photos/200" alt="Jane Doe" />
             <Avatar size='lg' src="https://picsum.photos/200" alt="Jane Doe" />
@@ -124,9 +121,7 @@ export const AvatarGroup = () => {
             <Avatar src="https://picsum.photos/201" alt="John Smith" />
             <Avatar variant='solid' alt="Amy Lee" />
             <Avatar variant='solid' alt="Sam" />
-            <div className='relative inline-flex items-center justify-center shrink-0 w-12 h-12 text-base rounded-full border-2 border-(--lithos-border) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] bg-(--lithos-surface) text-(--lithos-text) font-(--font-sans) font-bold'>
-              +3
-            </div>
+            <AvatarGroupCount count={3} />
           </div>
         </PreviewBlock>
       </div>

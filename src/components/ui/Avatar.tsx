@@ -68,3 +68,29 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
 )
 
 Avatar.displayName = 'Avatar'
+
+export interface AvatarGroupCountProps extends Omit<ComponentPropsWithoutRef<'div'>, 'children'> {
+  count: number
+  size?: AvatarSizes
+  className?: string
+}
+
+export const AvatarGroupCount = forwardRef<HTMLDivElement, AvatarGroupCountProps>(
+  ({ count, size = 'md', className = '', ...props }, ref) => {
+    const classes = [
+      'relative inline-flex items-center justify-center shrink-0 rounded-full border-2 border-(--lithos-border) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] bg-(--lithos-surface) text-(--lithos-text) font-(--font-sans) font-bold uppercase',
+      sizeStyles[size],
+      className,
+    ]
+      .filter(Boolean)
+      .join(' ')
+
+    return (
+      <div ref={ref} className={classes} {...props}>
+        +{count}
+      </div>
+    )
+  }
+)
+
+AvatarGroupCount.displayName = 'AvatarGroupCount'
