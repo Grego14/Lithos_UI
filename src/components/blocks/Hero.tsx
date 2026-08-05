@@ -52,7 +52,7 @@ const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
             <div className="mt-10 flex flex-col items-center lg:items-start sm:flex-row flex-wrap">
               <Link
                 to="/docs"
-                className="bg-(--lithos-accent) text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] lithos-click mb-4 sm:mb-0 sm:mr-6"
+                className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click mb-4 sm:mb-0 sm:mr-6"
               >
                 Documentation
               </Link>

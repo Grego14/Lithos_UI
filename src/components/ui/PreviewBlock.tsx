@@ -18,7 +18,7 @@ interface PreviewBlockProps {
 const inactiveBtnClass =
   'bg-(--lithos-surface) text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) lithos-click'
 const activeBtnClass =
-  'bg-(--lithos-accent) text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] lithos-click'
+  'bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click'
 
 export const PreviewBlock = ({ children, code, githubUrl, language = 'tsx', height, noPadding, slug }: PreviewBlockProps) => {
   const [activeTab, setActiveTab] = useState<AvailableTabs>('preview')

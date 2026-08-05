@@ -86,7 +86,7 @@ export const ComponentsIndex = ({ isDarkMode, toggleObsidian }: ComponentsIndexP
             <div key={comp.name} className="w-[50%] sm:w-[33.333%] lg:w-[25%] p-3">
               <Link
                 to={comp.to}
-                className="group block border-4 border-(--lithos-border) bg-(--lithos-surface) transition-transform hover:-translate-y-1 shadow-[4px_4px_0px_0px_var(--lithos-shadow)] h-full"
+                className="group block border-4 border-(--lithos-border) bg-(--lithos-surface) transition-transform lithos-click h-full"
               >
                 {/* Top Zone: Live Preview */}
                 <div className="h-40 flex items-center justify-center bg-(--lithos-bg) p-4 overflow-hidden relative">
@@ -95,7 +95,7 @@ export const ComponentsIndex = ({ isDarkMode, toggleObsidian }: ComponentsIndexP
 
                 {/* Bottom Zone: Thin Label Strip */}
                 <div className="border-t-4 border-(--lithos-border) bg-(--lithos-surface) px-4 py-3 text-center">
-                  <h2 className="text-xl font-black uppercase tracking-tighter text-(--lithos-text) group-hover:text-(--lithos-accent) transition-colors">
+                  <h2 className="text-xl font-black uppercase tracking-tighter text-(--lithos-text) transition-colors">
                     {comp.name}
                   </h2>
                 </div>
