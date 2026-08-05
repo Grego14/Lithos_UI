@@ -49,7 +49,7 @@ const FeatureGrid = () => {
           {features.map((feature) => (
             <Card
               key={feature.title}
-              className="group relative m-4 w-full sm:w-[calc(50%-2rem)] border-4 p-6 transition-all duration-75 shadow-[2px_2px_0px_0px_var(--lithos-shadow)] hover:shadow-[4px_4px_0px_0px_var(--lithos-shadow)] active:shadow-none active:translate-x-0.5 active:translate-y-0.5"
+              className="group relative m-4 w-full sm:w-[calc(50%-2rem)] border-4 p-6 transition-all duration-75 shadow-[2px_2px_0px_0px_var active:shadow-none active:translate-x-0.5 active:translate-y-0.5"
             >
               {/* - The scale wipe is a hard plane, not a fade; the card stays geometrically intact. */}
               <div
