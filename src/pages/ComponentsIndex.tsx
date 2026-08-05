@@ -32,6 +32,16 @@ const ToastPreview = () => {
 
 const componentsList = [
   {
+    name: 'Avatar',
+    to: '/docs/avatar',
+    preview: <Avatar variant='solid' alt="Jane Doe" />
+  },
+  {
+    name: 'Badge',
+    to: '/docs/badge',
+    preview: <Badge variant='accent' size='medium'>Feature</Badge>
+  },
+  {
     name: 'Button',
     to: '/docs/button',
     preview: <Button className="cursor-pointer">Button</Button>
@@ -78,16 +88,6 @@ const componentsList = [
     name: 'Toggle',
     to: '/docs/toggle',
     preview: <TogglePreview />
-  },
-  {
-    name: 'Badge',
-    to: '/docs/badge',
-    preview: <Badge variant='accent' size='medium'>Feature</Badge>
-  },
-  {
-    name: 'Avatar',
-    to: '/docs/avatar',
-    preview: <Avatar variant='solid' alt="Jane Doe" />
   }
 ]
 
