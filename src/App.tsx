@@ -15,7 +15,6 @@ import { BlocksIndex } from './pages/BlocksIndex'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { ButtonDoc } from './docs/pages/Button'
 import { CardDoc } from './docs/pages/Card'
-import { CodeViewerDoc } from './docs/pages/CodeViewer'
 import { ComingSoon } from './components/layout/ComingSoon'
 import { ComponentsIndex } from './pages/ComponentsIndex'
 import { DocsLayout } from './docs/DocsLayout'
@@ -23,7 +22,6 @@ import { Faq } from './pages/Faq'
 import { Installation } from './docs/pages/Installation'
 import { Introduction } from './docs/pages/Introduction'
 import { NotFound } from './components/layout/NotFound'
-import { PreviewBlockDoc } from './docs/pages/PreviewBlock'
 import { Showroom } from './showroom/Index'
 import { ToastDoc } from './docs/pages/Toast'
 import { ToggleDoc } from './docs/pages/Toggle'
@@ -47,9 +45,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
     { path: 'badge', component: BadgeDoc },
     { path: 'button', component: ButtonDoc },
     { path: 'card', component: CardDoc },
-    { path: 'code-viewer', component: CodeViewerDoc },
     { path: 'installation', component: Installation },
-    { path: 'preview-block', component: PreviewBlockDoc },
     { path: 'toast', component: ToastDoc },
     { path: 'toggle', component: ToggleDoc },
   ]

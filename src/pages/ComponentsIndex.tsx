@@ -2,8 +2,6 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Navbar } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
-import { CodeViewer } from '../components/ui/CodeViewer'
-import { PreviewBlock } from '../components/ui/PreviewBlock'
 import { Toggle } from '../components/ui/Toggle'
 import { ToastItem } from '../components/ui/Toast'
 import { Button } from '../components/ui/Button'
@@ -57,26 +55,6 @@ const componentsList = [
           <p className="font-body opacity-70 text-[8px] leading-tight">Hover to see fill.</p>
         </CardContent>
       </Card>
-    )
-  },
-  {
-    name: 'Code Viewer',
-    to: '/docs/code-viewer',
-    preview: (
-      <div className="w-[150%] scale-[0.65] origin-center">
-        <CodeViewer code={`<Button />`} embedded />
-      </div>
-    )
-  },
-  {
-    name: 'Preview Block',
-    to: '/docs/preview-block',
-    preview: (
-      <div className="w-[150%] scale-[0.5] origin-center pointer-events-none">
-        <PreviewBlock code="">
-          <div className="bg-(--lithos-accent) text-(--lithos-accent-text) p-2 font-bold uppercase tracking-widest text-xs border-2 border-(--lithos-border)">Button</div>
-        </PreviewBlock>
-      </div>
     )
   },
   {
