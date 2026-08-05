@@ -17,7 +17,7 @@ export interface ButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 't
 }
 
 const intentClass: Record<ButtonIntent, string> = {
-  primary: 'bg-(--lithos-accent) text-(--lithos-accent-text) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]',
+  primary: 'bg-(--lithos-accent) text-(--lithos-accent-text)',
   secondary: 'bg-(--lithos-surface) text-(--lithos-text)',
   text: 'bg-transparent text-(--lithos-text) cursor-pointer !border-transparent !shadow-none hover:!shadow-none',
 }
