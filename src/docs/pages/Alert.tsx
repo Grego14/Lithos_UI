@@ -8,19 +8,42 @@ import { Button } from '../../components/ui/Button'
 export const AlertDoc = () => {
   const [customColor, setCustomColor] = useState('#FF00FF')
   const [error, setError] = useState('')
+  const [closeDismissed, setCloseDismissed] = useState(false)
 
   const inputRef = useRef<null | HTMLInputElement>(null)
 
-  const variantsCode = `import { Alert } from '../../components/ui/Alert'
+  const typesCode = `import { Alert } from '../../components/ui/Alert'
 
-export const AlertVariants = () => {
+export const AlertTypes = () => {
   return (
     <div className='flex flex-col w-full'>
-      <Alert className='mb-4' title='Default'>Structural review pending.</Alert>
-      <Alert className='mb-4' variant='success' title='Success'>Deployment verified.</Alert>
-      <Alert className='mb-4' variant='warning' title='Warning'>Load tolerance nearing limit.</Alert>
-      <Alert className='mb-4' variant='error' title='Error'>Integrity check failed.</Alert>
-      <Alert variant='info' title='Info'>Maintenance window scheduled.</Alert>
+      <Alert className='mb-4' size='md' title='Default'>Structural review pending.</Alert>
+      <Alert className='mb-4' size='md' type='success' title='Success'>Deployment verified.</Alert>
+      <Alert className='mb-4' size='md' type='warning' title='Warning'>Load tolerance nearing limit.</Alert>
+      <Alert className='mb-4' size='md' type='error' title='Error'>Integrity check failed.</Alert>
+      <Alert size='md' type='info' title='Info'>Maintenance window scheduled.</Alert>
+    </div>
+  )
+}`
+
+  const filledCode = `import { Alert } from '../../components/ui/Alert'
+
+export const AlertFilled = () => {
+  return (
+    <div className='flex flex-col w-full'>
+      <Alert className='mb-4' size='md' type='success' variant='filled' title='Filled'>Deployment verified.</Alert>
+      <Alert size='md' type='accent' variant='filled' title='Accent'>Deployment verified.</Alert>
+    </div>
+  )
+}`
+
+  const outlineCode = `import { Alert } from '../../components/ui/Alert'
+
+export const AlertOutline = () => {
+  return (
+    <div className='flex flex-col w-full'>
+      <Alert className='mb-4' size='md' type='success' variant='outlined' title='Outline'>Deployment verified.</Alert>
+      <Alert size='md' type='accent' variant='outlined' title='Accent'>Deployment verified.</Alert>
     </div>
   )
 }`
@@ -30,9 +53,10 @@ export const AlertVariants = () => {
 export const AlertSizes = () => {
   return (
     <div className='flex flex-col w-full'>
-      <Alert className='mb-4' size='small' title='Small'>Structural review pending.</Alert>
-      <Alert className='mb-4' title='Default'>Structural review pending.</Alert>
-      <Alert size='medium' title='Medium'>Structural review pending.</Alert>
+      <Alert className='mb-4' size='xs' title='Xs'>Structural review pending.</Alert>
+      <Alert className='mb-4' size='sm' title='Sm'>Structural review pending.</Alert>
+      <Alert className='mb-4' size='md' title='Md'>Structural review pending.</Alert>
+      <Alert size='lg' title='Lg'>Structural review pending.</Alert>
     </div>
   )
 }`
@@ -42,8 +66,31 @@ export const AlertSizes = () => {
 export const AlertNoTitle = () => {
   return (
     <div className='flex flex-col w-full'>
-      <Alert variant='warning'>Load tolerance nearing limit.</Alert>
+      <Alert size='md' type='warning'>Load tolerance nearing limit.</Alert>
     </div>
+  )
+}`
+
+  const actionsCode = `import { useState } from 'react'
+import { Alert } from '../../components/ui/Alert'
+
+export const AlertWithClose = () => {
+  const [dismissed, setDismissed] = useState(false)
+
+  if (dismissed) return null
+
+  return (
+    <Alert size='md' type='error' title='Deployment failed' onClose={() => setDismissed(true)}>
+      Build #482 failed structural checks.
+    </Alert>
+  )
+}
+
+export const AlertWithUndo = () => {
+  return (
+    <Alert size='md' type='warning' title='Config changed' onUndo={() => alert('Reverting configuration change.')}>
+      Timeout threshold updated to 30s.
+    </Alert>
   )
 }`
 
@@ -51,7 +98,7 @@ export const AlertNoTitle = () => {
 
 export const CustomizedAlert = () => {
   return (
-    <Alert color='#FF0033' title='Custom'>Custom color alert.</Alert>
+    <Alert size='md' color='#FF0033' title='Custom'>Custom color alert.</Alert>
   )
 }`
 
@@ -90,7 +137,7 @@ export const CustomizedAlert = () => {
 
       <div className="border-l-4 border-(--lithos-accent) pl-6 py-2 mb-8 bg-(--lithos-surface) p-4">
         <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
-          Alerts have no close control. Mount and unmount them from your own layout state.
+          Alerts never dismiss themselves. The close and undo actions only appear when you pass <code>onClose</code>/<code>onUndo</code>, and it's on you to remove the Alert from your layout state.
         </p>
       </div>
 
@@ -98,21 +145,53 @@ export const CustomizedAlert = () => {
         Examples
       </h2>
 
-      <h3 id="variants" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
-        Variants
+      <h3 id="types" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Types
       </h3>
 
       <div className="mt-8 mb-16">
         <PreviewBlock
-          code={variantsCode}
+          code={typesCode}
           githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx"
         >
           <div className='flex flex-col w-full'>
-            <Alert className='mb-4' title='Default'>Structural review pending.</Alert>
-            <Alert className='mb-4' variant='success' title='Success'>Deployment verified.</Alert>
-            <Alert className='mb-4' variant='warning' title='Warning'>Load tolerance nearing limit.</Alert>
-            <Alert className='mb-4' variant='error' title='Error'>Integrity check failed.</Alert>
-            <Alert variant='info' title='Info'>Maintenance window scheduled.</Alert>
+            <Alert className='mb-4' size='md' title='Default'>Structural review pending.</Alert>
+            <Alert className='mb-4' size='md' type='success' title='Success'>Deployment verified.</Alert>
+            <Alert className='mb-4' size='md' type='warning' title='Warning'>Load tolerance nearing limit.</Alert>
+            <Alert className='mb-4' size='md' type='error' title='Error'>Integrity check failed.</Alert>
+            <Alert size='md' type='info' title='Info'>Maintenance window scheduled.</Alert>
+          </div>
+        </PreviewBlock>
+      </div>
+
+      <h3 id="filled" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Filled
+      </h3>
+
+      <div className="mt-8 mb-16">
+        <PreviewBlock
+          code={filledCode}
+          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx"
+        >
+          <div className='flex flex-col w-full'>
+            <Alert className='mb-4' size='md' type='success' variant='filled' title='Filled'>Deployment verified.</Alert>
+            <Alert size='md' type='accent' variant='filled' title='Accent'>Deployment verified.</Alert>
+          </div>
+        </PreviewBlock>
+      </div>
+
+      <h3 id="outline" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Outline
+      </h3>
+
+      <div className="mt-8 mb-16">
+        <PreviewBlock
+          code={outlineCode}
+          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx"
+        >
+          <div className='flex flex-col w-full'>
+            <Alert className='mb-4' size='md' type='success' variant='outlined' title='Outline'>Deployment verified.</Alert>
+            <Alert size='md' type='accent' variant='outlined' title='Accent'>Deployment verified.</Alert>
           </div>
         </PreviewBlock>
       </div>
@@ -127,9 +206,10 @@ export const CustomizedAlert = () => {
           githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx"
         >
           <div className='flex flex-col w-full'>
-            <Alert className='mb-4' size='small' title='Small'>Structural review pending.</Alert>
-            <Alert className='mb-4' title='Default'>Structural review pending.</Alert>
-            <Alert size='medium' title='Medium'>Structural review pending.</Alert>
+            <Alert className='mb-4' size='xs' title='Xs'>Structural review pending.</Alert>
+            <Alert className='mb-4' size='sm' title='Sm'>Structural review pending.</Alert>
+            <Alert className='mb-4' size='md' title='Md'>Structural review pending.</Alert>
+            <Alert size='lg' title='Lg'>Structural review pending.</Alert>
           </div>
         </PreviewBlock>
       </div>
@@ -144,7 +224,32 @@ export const CustomizedAlert = () => {
           githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx"
         >
           <div className='flex flex-col w-full'>
-            <Alert variant='warning'>Load tolerance nearing limit.</Alert>
+            <Alert size='md' type='warning'>Load tolerance nearing limit.</Alert>
+          </div>
+        </PreviewBlock>
+      </div>
+
+      <h3 id="actions" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Actions
+      </h3>
+
+      <div className="mt-8 mb-16">
+        <PreviewBlock
+          code={actionsCode}
+          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx"
+        >
+          <div className='flex flex-col w-full'>
+            {closeDismissed ? (
+              <Button intent='secondary' className='mb-4 text-sm' onClick={() => setCloseDismissed(false)}>Reset example</Button>
+            ) : (
+              <Alert className='mb-4' size='md' type='error' title='Deployment failed' onClose={() => setCloseDismissed(true)}>
+                Build #482 failed structural checks.
+              </Alert>
+            )}
+
+            <Alert size='md' type='warning' title='Config changed' onUndo={() => window.alert('Reverting configuration change.')}>
+              Timeout threshold updated to 30s.
+            </Alert>
           </div>
         </PreviewBlock>
       </div>
@@ -159,7 +264,7 @@ export const CustomizedAlert = () => {
           githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx"
         >
           <div className='flex flex-col w-full'>
-            <Alert color={customColor} title='Custom'>Custom color alert.</Alert>
+            <Alert size='md' color={customColor} title='Custom'>Custom color alert.</Alert>
 
             <div className='mt-4 text-center flex items-center justify-center'>
               <input ref={inputRef} type='text' onFocus={handleFocus} defaultValue={customColor} max={7} min={4} className='p-1.5 text-sm outline-none border-2 border-(--lithos-border) shadow-[2px_2px_0_0_var(--lithos-shadow)] focus:shadow-[4px_4px_0_0_var(--lithos-shadow)] hover:shadow-[4px_4px_0_0_var(--lithos-shadow)] max-w-[7.5rem]' />
