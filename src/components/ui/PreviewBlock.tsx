@@ -1,5 +1,12 @@
+/**
+ * @fileoverview Lithos UI PreviewBlock component.
+ * - Dual-tab container for component showcase with real-time toggle between visual preview and code viewer.
+ * - Responsive viewport testing via iframe scaling across mobile (375px), tablet (768px), and desktop breakpoints.
+ * - Unwrapped control bar layout with decoupled floating button primitives and single rigid border content panel.
+ */
 import { useState, type ReactNode } from 'react'
 import { CodeViewer } from './CodeViewer'
+import { Button } from './Button'
 
 type AvailableTabs = 'preview' | 'code'
 type Breakpoint = 'mobile' | 'tablet' | 'desktop'
@@ -16,9 +23,8 @@ interface PreviewBlockProps {
 
 // 1. Decoupled, floating tab classes relying purely on the primitive
 const inactiveBtnClass =
-  'bg-(--lithos-surface) text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) lithos-click'
-const activeBtnClass =
-  'bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click'
+  'lithos-click bg-(--lithos-surface) text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)'
+const activeBtnClass = 'lithos-click bg-(--lithos-accent) text-(--lithos-accent-text)'
 
 export const PreviewBlock = ({ children, code, githubUrl, language = 'tsx', height, noPadding, slug }: PreviewBlockProps) => {
   const [activeTab, setActiveTab] = useState<AvailableTabs>('preview')
@@ -36,46 +42,40 @@ export const PreviewBlock = ({ children, code, githubUrl, language = 'tsx', heig
       <div className="flex flex-wrap items-center justify-between">
         <div className="flex flex-wrap items-center mb-4">
           <div className="flex items-center mr-4">
-            <button
-              type="button"
+            <Button
               onClick={() => setActiveTab('preview')}
-              className={`${activeTab === 'preview' ? activeBtnClass : inactiveBtnClass} mr-4`}
+              className={`mr-4 ${activeTab !== 'preview' ? inactiveBtnClass : ''}`}
             >
               Preview
-            </button>
-
-            <button
-              type="button"
+            </Button>
+            <Button
               onClick={() => setActiveTab('code')}
-              className={`${activeTab === 'code' ? activeBtnClass : inactiveBtnClass}`}
+              className={activeTab !== 'code' ? inactiveBtnClass : ''}
             >
               Code
-            </button>
+            </Button>
           </div>
 
           {slug && (
             <div className="hidden md:flex items-center space-x-2 border-l-2 border-(--lithos-border) pl-4">
-              <button
-                type="button"
+              <Button
                 onClick={() => setBreakpoint('mobile')}
                 className={breakpoint === 'mobile' ? activeBtnClass : inactiveBtnClass}
               >
                 Mobile
-              </button>
-              <button
-                type="button"
+              </Button>
+              <Button
                 onClick={() => setBreakpoint('tablet')}
                 className={breakpoint === 'tablet' ? activeBtnClass : inactiveBtnClass}
               >
                 Tablet
-              </button>
-              <button
-                type="button"
+              </Button>
+              <Button
                 onClick={() => setBreakpoint('desktop')}
                 className={breakpoint === 'desktop' ? activeBtnClass : inactiveBtnClass}
               >
                 Desktop
-              </button>
+              </Button>
             </div>
           )}
         </div>

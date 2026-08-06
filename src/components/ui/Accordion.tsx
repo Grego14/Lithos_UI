@@ -3,7 +3,6 @@
  * - Dual-mode state architecture: works seamlessly as an uncontrolled/standalone item via local state, or co-op inside `AccordionGroup` via Context API.
  * - Dynamic shadow offset shifts from 2px to 4px on open state to retain hard geometry.
  */
-
 import { useId, createContext, useContext, useState, forwardRef, type ComponentPropsWithoutRef, type ReactNode } from "react";
 import { Button } from "./Button";
 import { cn } from "../../utils/cn";
