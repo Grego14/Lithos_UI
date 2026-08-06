@@ -9,6 +9,7 @@
  */
 
 import { AvatarDoc } from './docs/pages/Avatar'
+import { AccordionDoc } from './docs/pages/Accordion'
 import { BadgeDoc } from './docs/pages/Badge'
 import { BlockPreviewPage } from './pages/BlockPreviewPage'
 import { BlocksIndex } from './pages/BlocksIndex'
@@ -42,6 +43,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
   const docPages = [
     { path: '', component: Introduction },
     { path: 'avatar', component: AvatarDoc },
+    { path: 'accordion', component: AccordionDoc },
     { path: 'badge', component: BadgeDoc },
     { path: 'button', component: ButtonDoc },
     { path: 'card', component: CardDoc },

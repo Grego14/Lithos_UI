@@ -2,11 +2,11 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const mainLinks = [
-  { label: 'Blocks', to: '/blocks' },
   { label: 'Components', to: '/components' },
-  { label: 'Docs', to: '/docs' },
-  { label: 'FAQ', to: '/faq' },
+  { label: 'Blocks', to: '/blocks' },
   { label: 'Templates', to: '/templates' },
+  { label: 'FAQ', to: '/faq' },
+  { label: 'Docs', to: '/docs' },
 ]
 
 const groupedLinks = [
@@ -20,13 +20,15 @@ const groupedLinks = [
   {
     category: 'Components',
     links: [
-      { label: 'Badge', href: '/docs/badge' },
+      { label: 'Accordion', href: '/docs/accordion' },
+      { label: 'Avatar', href: '/docs/avatar' },
       { label: 'Button', href: '/docs/button' },
       { label: 'Card', href: '/docs/card' },
       { label: 'Code Viewer', href: '/docs/code-viewer' },
       { label: 'Preview Block', href: '/docs/preview-block' },
       { label: 'Toast', href: '/docs/toast' },
       { label: 'Toggle', href: '/docs/toggle' },
+      { label: 'Badge', href: '/docs/badge' },
     ],
   },
 ]

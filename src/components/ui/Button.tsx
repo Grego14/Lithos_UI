@@ -8,6 +8,7 @@
 import { forwardRef } from 'react'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 import type { ButtonIntent } from '../../core/types'
+import { cn } from '../../utils/cn'
 
 export interface ButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'type'> {
   intent?: ButtonIntent | undefined
@@ -27,15 +28,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const classes = [
       'lithos-click',
       intentClass[intent],
-      fullWidth ? 'w-full' : '',
+      fullWidth && 'w-full',
       'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
       className ?? '',
     ]
-      .filter(Boolean)
-      .join(' ')
 
     return (
-      <button ref={ref} type={type} className={classes} {...rest}>
+      <button ref={ref} type={type} className={cn(classes)} {...rest}>
         {children}
       </button>
     )

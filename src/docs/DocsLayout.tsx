@@ -66,6 +66,12 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#sizes', label: 'Sizes', level: 2 },
     { id: '#group', label: 'Group', level: 2 },
   ],
+  '/docs/accordion': [
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#default', label: 'Default', level: 2 },
+    { id: '#grouped-default', label: 'Grouped default', level: 2 },
+    { id: '#grouped-multiple', label: 'Grouped multiple', level: 2 },
+  ],
 }
 
 interface DocsLayoutProps {
