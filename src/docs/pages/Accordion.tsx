@@ -12,7 +12,7 @@ export const FAQItem = () => {
   )
 }`
 
-  const grouppedCode = `import { Accordion } from '../../components/ui/Accordion'
+  const groupedCode = `import { Accordion } from '../../components/ui/Accordion'
 
 export const FAQItem = () => {
   return (
@@ -30,7 +30,7 @@ export const FAQItem = () => {
   )
 }`
 
-  const grouppedMultipleCode = `import { Accordion, AccordionGroup } from '../../components/ui/Accordion'
+  const groupedMultipleCode = `import { Accordion, AccordionGroup } from '../../components/ui/Accordion'
 
 export const FAQItem = () => {
   return (
@@ -92,13 +92,13 @@ export const FAQItem = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="groupped-default" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
-        Groupped default
+      <h3 id="grouped-default" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Grouped default
       </h3>
 
       <div className="mt-8 mb-16">
         <PreviewBlock
-          code={grouppedCode}
+          code={groupedCode}
           githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Accordion.tsx"
         >
           <AccordionGroup defaultActive='faq-1'>
@@ -115,13 +115,13 @@ export const FAQItem = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="groupped-multiple" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
-        Groupped multiple
+      <h3 id="grouped-multiple" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Grouped multiple
       </h3>
 
       <div className="mt-8 mb-16">
         <PreviewBlock
-          code={grouppedMultipleCode}
+          code={groupedMultipleCode}
           githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Accordion.tsx"
         >
           <AccordionGroup defaultActive={['faq-1', 'faq-3']} allowMultiple>

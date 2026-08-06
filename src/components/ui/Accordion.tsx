@@ -93,7 +93,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
 
     // if is not controlled externally via the open prop, use the Context or the local state
     const isOpen = open !== undefined ? open : (context && value ? context.isItemOpen(value) : isOpenLocal)
-    const isGroupped = !!context
+    const isGrouped = !!context
 
     const handleToggle = () => {
       if (context && value) {
@@ -110,7 +110,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     const containerClass = cn(
       defaultClasses.container,
       isOpen && 'shadow-[4px_4px_0_0_var(--lithos-shadow)]',
-      isGroupped && 'mt-4',
+      isGrouped && 'mt-4',
       classes.container
     )
 

@@ -69,8 +69,8 @@ const tocRegistry: Record<string, TOCItem[]> = {
   '/docs/accordion': [
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
-    { id: '#groupped-default', label: 'Groupped default', level: 2 },
-    { id: '#groupped-multiple', label: 'Groupped multiple', level: 2 },
+    { id: '#grouped-default', label: 'Grouped default', level: 2 },
+    { id: '#grouped-multiple', label: 'Grouped multiple', level: 2 },
   ],
 }
 
