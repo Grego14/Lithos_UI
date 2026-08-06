@@ -27,6 +27,8 @@ const groupedLinks = [
       { label: 'Toast', href: '/docs/toast' },
       { label: 'Toggle', href: '/docs/toggle' },
       { label: 'Badge', href: '/docs/badge' },
+      { label: 'Avatar', href: '/docs/avatar' },
+      { label: 'Accordion', href: '/docs/accordion' },
     ],
   },
 ]
