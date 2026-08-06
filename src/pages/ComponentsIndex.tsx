@@ -9,6 +9,7 @@ import { Card, CardImage, CardContent } from '../components/ui/Card'
 import { useTheme } from '../core/useTheme'
 import { Badge } from '../components/ui/Badge'
 import { Avatar } from '../components/ui/Avatar'
+import { Alert } from '../components/ui/Alert'
 interface ComponentsIndexProps {
   isDarkMode: boolean
   toggleObsidian: () => void
@@ -28,7 +29,21 @@ const ToastPreview = () => {
   )
 };
 
+const AlertPreview = () => {
+  const { accentColor } = useTheme()
+  return (
+    <div className="w-[140%] scale-[0.55] origin-center pointer-events-none">
+      <Alert color={accentColor} title="Notice">Structural review pending.</Alert>
+    </div>
+  )
+};
+
 const componentsList = [
+  {
+    name: 'Alert',
+    to: '/docs/alert',
+    preview: <AlertPreview />
+  },
   {
     name: 'Avatar',
     to: '/docs/avatar',
