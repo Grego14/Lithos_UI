@@ -1,13 +1,18 @@
 import { useParams } from 'react-router-dom'
-import { Testimonials } from '../components/blocks/Testimonials/1'
-import { Navbar as NavbarBlock } from '../components/blocks/Navbar/1'
-import { Pricing } from '../components/blocks/Pricing/1'
+import { Testimonials1 } from '../components/blocks/Testimonials/1'
+import { Navbar1 as NavbarBlock } from '../components/blocks/Navbar/1'
+import { Pricing1 } from '../components/blocks/Pricing/1'
 import { ComingSoon } from '../showroom/sections/ComingSoon'
 
+import { FAQ1 } from '../components/blocks/FAQ/1'
+import { FeatureGrid1 } from '../components/blocks/FeatureGrid/1'
+
 const blockRegistry: Record<string, React.ComponentType> = {
-  testimonials: Testimonials,
+  testimonials: Testimonials1,
   navbar: NavbarBlock,
-  pricing: Pricing,
+  pricing: Pricing1,
+  faq: FAQ1,
+  'feature-grids': FeatureGrid1,
 }
 
 export const BlockPreviewPage = () => {

@@ -24,7 +24,7 @@ interface ThemeEngineProps {
   updateAccentColor: (color: HexColor) => void
 }
 
-const ThemeEngine = ({ accentColor, updateAccentColor }: ThemeEngineProps) => {
+const ThemeEngine1 = ({ accentColor, updateAccentColor }: ThemeEngineProps) => {
 
   const handleThemeChange = (hex: string) => {
     updateAccentColor(hex as HexColor)
@@ -114,4 +114,4 @@ const ThemeEngine = ({ accentColor, updateAccentColor }: ThemeEngineProps) => {
   )
 };
 
-export { ThemeEngine }
+export { ThemeEngine1 }

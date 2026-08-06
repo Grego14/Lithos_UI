@@ -61,7 +61,7 @@ const plans: PricingPlan[] = [
   },
 ]
 
-export const Pricing = () => {
+export const Pricing1 = () => {
   return (
     <section className="bg-(--lithos-bg) py-12 md:py-24">
       <div className="mx-auto max-w-7xl px-6">

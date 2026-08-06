@@ -74,7 +74,7 @@ export const ToastItem = ({ toast, onRemove }: ToastItemType) => {
       {/* - Stack spacing uses explicit margins so each toast keeps its own exit path. */}
       <div
         role="alert"
-        className={`toast-override-${id} pointer-events-auto border-2 p-4 sm:p-6 mb-6 w-full flex flex-row items-start animate-[slide-up_0.3s_ease-out_forwards]`}
+        className={`toast-override-${id} pointer-events-auto border-2 p-4 sm:p-6 mb-6 w-full flex flex-row items-start shadow-[4px_4px_0_0_var(--lithos-shadow)] animate-[slide-up_0.3s_ease-out_forwards]`}
       >
         <div className="flex-1 mr-4">
           {title && <h4 className="font-black text-xl uppercase tracking-tighter leading-none mb-3 m-0">{title}</h4>}
