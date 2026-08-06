@@ -4,7 +4,7 @@
  * - Uses explicit margins and shadow steps so the quotes read as physical plaques.
  * - Keeps the grid wide and stable to avoid visual drift in the proof section.
  */
-import { Card } from '../ui/Card'
+import { Card } from '../../ui/Card'
 
 interface Testimonial {
   quote: string

@@ -7,7 +7,7 @@
 
 import { Link } from 'react-router-dom'
 import { useToast } from '../../core/hooks/useToast'
-import { Toggle } from '../ui/Toggle'
+import { Toggle } from '../../components/ui/Toggle'
 
 interface FooterProps {
   isDarkMode: boolean

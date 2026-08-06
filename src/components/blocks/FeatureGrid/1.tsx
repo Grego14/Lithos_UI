@@ -4,7 +4,7 @@
  * - Uses scale-on-hover and shadow steps to imply physical lift without layout drift.
  * - Keeps the grid readable by controlling wrap math instead of relying on soft spacing.
  */
-import { Card, CardContent, CardTitle, CardDescription } from '../ui/Card'
+import { Card, CardContent, CardTitle, CardDescription } from '../../ui/Card'
 
 interface FeatureItem {
   title: string
@@ -14,24 +14,24 @@ interface FeatureItem {
 
 const features: FeatureItem[] = [
   {
-    title: 'Zero-Gap Layout System',
+    title: 'Real-time Analytics',
     icon: '■',
-    description: 'Strict avoidance of CSS gap utilities. Perfect geometric stacking via explicit mathematically proportional margins.',
+    description: 'Track your metrics in real-time with our beautiful, easy-to-use dashboard.',
   },
   {
-    title: 'Automated YIQ Contrast Engine',
+    title: 'Enterprise Security',
     icon: '◐',
-    description: 'Real-time foreground color recalculation guarantees AA+ accessibility against any dynamic background token.',
+    description: 'Bank-grade encryption ensures your data is safe, secure, and fully compliant.',
   },
   {
-    title: 'Universal Specificity Overrides',
+    title: 'Seamless Integrations',
     icon: '▲',
-    description: 'Engineered with a flat selector hierarchy, eliminating !important wrestling and enabling instant global theming.',
+    description: 'Connect to your favorite tools with one click. Zapier, Slack, and Salesforce ready.',
   },
   {
-    title: 'Global Physics Tokens',
+    title: '24/7 Support',
     icon: '⬣',
-    description: 'Standardized hard-shadow offsets, staggered spring curves, and hover lifts baked natively into the core.',
+    description: 'Our dedicated team is here around the clock to ensure you never face downtime.',
   }
 ]
 
@@ -41,7 +41,7 @@ const FeatureGrid = () => {
     <section id="features" className="border-b-2 border-(--lithos-border) bg-(--lithos-surface) py-24">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-4xl font-black uppercase tracking-tighter leading-none text-center text-(--lithos-text) md:text-5xl">
-          Four Architectural Pillars
+          Everything you need to grow
         </h2>
 
         {/* - Negative outer margin cancels the card margin so the field stays centered. */}

@@ -89,7 +89,7 @@ const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
               <div className="flex items-center space-x-3">
                 {/* Custom color trigger */}
                 <div
-                  className="relative h-20 w-20 shrink-0 border-4 border-(--lithos-border) shadow-[3px_3px_0px_0px_var(--lithos-shadow)] lithos-click"
+                  className="relative h-20 w-20 shrink-0 lithos-click"
                   style={{ backgroundColor: accentColor }}
                 >
                   <input

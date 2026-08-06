@@ -1,19 +1,19 @@
-import { Navbar } from '../components/layout/Navbar'
-import { Footer } from '../components/layout/Footer'
+import { Navbar } from '../showroom/sections/Navbar'
+import { Footer } from '../showroom/sections/Footer'
 import { Card, CardContent } from '../components/ui/Card'
 import { PreviewBlock } from '../components/ui/PreviewBlock'
-import { Testimonials } from '../components/blocks/Testimonials'
-import { Navbar as NavbarBlock } from '../components/blocks/Navbar'
-import { Pricing } from '../components/blocks/Pricing'
+import { Testimonials } from '../components/blocks/Testimonials/1'
+import { Navbar as NavbarBlock } from '../components/blocks/Navbar/1'
+import { Pricing } from '../components/blocks/Pricing/1'
 
 interface BlocksIndexProps {
   isDarkMode: boolean
   toggleObsidian: () => void
 }
 
-import testimonialsCode from '../components/blocks/Testimonials.tsx?raw'
-import navbarCode from '../components/blocks/Navbar.tsx?raw'
-import pricingTableCode from '../components/blocks/Pricing.tsx?raw'
+import testimonialsCode from '../components/blocks/Testimonials/1.tsx?raw'
+import navbarCode from '../components/blocks/Navbar/1.tsx?raw'
+import pricingTableCode from '../components/blocks/Pricing/1.tsx?raw'
 
 export const BlocksIndex = ({ isDarkMode, toggleObsidian }: BlocksIndexProps) => {
   return (
@@ -42,7 +42,7 @@ export const BlocksIndex = ({ isDarkMode, toggleObsidian }: BlocksIndexProps) =>
                 <h3 className="text-3xl font-black uppercase tracking-tighter mb-8 border-b-2 border-(--lithos-border) pb-4">
                   Testimonial Grids
                 </h3>
-                <PreviewBlock code={testimonialsCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/blocks/Testimonials.tsx" slug="testimonials" height="600px">
+                <PreviewBlock code={testimonialsCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/blocks/Testimonials/1.tsx" slug="testimonials" height="600px">
                   <div className="w-full">
                     <Testimonials />
                   </div>
@@ -54,7 +54,7 @@ export const BlocksIndex = ({ isDarkMode, toggleObsidian }: BlocksIndexProps) =>
                 <h3 className="text-3xl font-black uppercase tracking-tighter mb-8 border-b-2 border-(--lithos-border) pb-4">
                   Nav Bars
                 </h3>
-                <PreviewBlock code={navbarCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/blocks/Navbar.tsx" height="400px" noPadding slug="navbar">
+                <PreviewBlock code={navbarCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/blocks/Navbar/1.tsx" height="400px" noPadding slug="navbar">
                   <div className="w-full relative h-[400px]">
                     <NavbarBlock />
                   </div>
@@ -66,7 +66,7 @@ export const BlocksIndex = ({ isDarkMode, toggleObsidian }: BlocksIndexProps) =>
                 <h3 className="text-3xl font-black uppercase tracking-tighter mb-8 border-b-2 border-(--lithos-border) pb-4">
                   Pricing Tables
                 </h3>
-                <PreviewBlock code={pricingTableCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/blocks/Pricing.tsx" slug="pricing" height="800px">
+                <PreviewBlock code={pricingTableCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/blocks/Pricing/1.tsx" slug="pricing" height="800px">
                   <div className="w-full">
                     <Pricing />
                   </div>
