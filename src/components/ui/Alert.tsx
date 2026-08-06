@@ -14,7 +14,7 @@ import type { HexColor } from '../../core/types'
 
 export type AlertType = 'default' | 'success' | 'error' | 'warning' | 'info' | 'accent'
 export type AlertVariant = 'filled' | 'outlined'
-export type AlertSize = 'xs' | 'sm' | 'md' | 'lg'
+export type AlertSize = 'sm' | 'md' | 'lg'
 
 export interface AlertProps extends ComponentPropsWithoutRef<'div'> {
   type?: AlertType
@@ -28,10 +28,9 @@ export interface AlertProps extends ComponentPropsWithoutRef<'div'> {
 }
 
 const sizeStyles: Record<AlertSize, { container: string; title: string; headerGap: string; message: string }> = {
-  xs: { container: 'p-2 max-w-xs', title: 'text-xs', headerGap: 'mb-1', message: 'text-[11px]' },
-  sm: { container: 'p-4 sm:p-5 max-w-xl', title: 'text-base', headerGap: 'mb-2', message: 'text-sm' },
-  md: { container: 'p-6 sm:p-7 max-w-2xl', title: 'text-xl', headerGap: 'mb-3', message: 'text-base' },
-  lg: { container: 'p-8 sm:p-10', title: 'text-2xl', headerGap: 'mb-4', message: 'text-lg' },
+  sm: { container: 'p-3 max-w-xs', title: 'text-sm', headerGap: 'mb-2', message: 'text-xs' },
+  md: { container: 'p-6 max-w-md', title: 'text-lg', headerGap: 'mb-3', message: 'text-base' },
+  lg: { container: 'p-9', title: 'text-2xl', headerGap: 'mb-4', message: 'text-xl' },
 }
 
 export const Alert = forwardRef<HTMLDivElement, AlertProps>(
@@ -40,12 +39,14 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
     ref
   ) => {
     const isAccent = type === 'accent' && !color
+    const isDefault = type === 'default' && !color
     const accentColor = color || (type === 'accent' ? 'var(--lithos-accent)' : colors[type])
+    const outlineColor = isDefault ? 'var(--lithos-border)' : accentColor
     const isFilled = variant === 'filled'
     const textColor = isFilled ? (isAccent ? 'var(--lithos-accent-text)' : getContrastText(accentColor)) : 'var(--lithos-text)'
     const sizing = sizeStyles[size]
 
-    const actionColor = isFilled ? textColor : accentColor
+    const actionColor = isFilled ? textColor : outlineColor
 
     const classes = [
       'border-2 w-full',
@@ -61,8 +62,8 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
       : {
           backgroundColor: 'var(--lithos-bg)',
           color: textColor,
-          borderColor: accentColor,
-          boxShadow: `4px 4px 0px 0px ${accentColor}`,
+          borderColor: outlineColor,
+          boxShadow: `4px 4px 0px 0px ${outlineColor}`,
           ...style,
         }
 
@@ -73,7 +74,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
             {title && (
               <h4
                 className={`font-black uppercase tracking-tighter leading-none m-0 ${sizing.title}`}
-                style={!isFilled ? { color: accentColor } : undefined}
+                style={!isFilled ? { color: outlineColor } : undefined}
               >
                 {title}
               </h4>

@@ -17,11 +17,12 @@ export const AlertDoc = () => {
 export const AlertTypes = () => {
   return (
     <div className='flex flex-col w-full'>
-      <Alert className='mb-4' size='md' title='Default'>Structural review pending.</Alert>
-      <Alert className='mb-4' size='md' type='success' title='Success'>Deployment verified.</Alert>
-      <Alert className='mb-4' size='md' type='warning' title='Warning'>Load tolerance nearing limit.</Alert>
-      <Alert className='mb-4' size='md' type='error' title='Error'>Integrity check failed.</Alert>
-      <Alert size='md' type='info' title='Info'>Maintenance window scheduled.</Alert>
+      <Alert className='mb-4' size='lg' title='Default'>Structural review pending.</Alert>
+      <Alert className='mb-4' size='lg' type='success' title='Success'>Deployment verified.</Alert>
+      <Alert className='mb-4' size='lg' type='warning' title='Warning'>Load tolerance nearing limit.</Alert>
+      <Alert className='mb-4' size='lg' type='error' title='Error'>Integrity check failed.</Alert>
+      <Alert className='mb-4' size='lg' type='info' title='Info'>Maintenance window scheduled.</Alert>
+      <Alert size='lg' type='accent' title='Accent'>Theme accent applied.</Alert>
     </div>
   )
 }`
@@ -31,8 +32,12 @@ export const AlertTypes = () => {
 export const AlertFilled = () => {
   return (
     <div className='flex flex-col w-full'>
-      <Alert className='mb-4' size='md' type='success' variant='filled' title='Filled'>Deployment verified.</Alert>
-      <Alert size='md' type='accent' variant='filled' title='Accent'>Deployment verified.</Alert>
+      <Alert className='mb-4' size='lg' variant='filled' title='Default'>Structural review pending.</Alert>
+      <Alert className='mb-4' size='lg' type='success' variant='filled' title='Success'>Deployment verified.</Alert>
+      <Alert className='mb-4' size='lg' type='warning' variant='filled' title='Warning'>Load tolerance nearing limit.</Alert>
+      <Alert className='mb-4' size='lg' type='error' variant='filled' title='Error'>Integrity check failed.</Alert>
+      <Alert className='mb-4' size='lg' type='info' variant='filled' title='Info'>Maintenance window scheduled.</Alert>
+      <Alert size='lg' type='accent' variant='filled' title='Accent'>Theme accent applied.</Alert>
     </div>
   )
 }`
@@ -42,8 +47,12 @@ export const AlertFilled = () => {
 export const AlertOutline = () => {
   return (
     <div className='flex flex-col w-full'>
-      <Alert className='mb-4' size='md' type='success' variant='outlined' title='Outline'>Deployment verified.</Alert>
-      <Alert size='md' type='accent' variant='outlined' title='Accent'>Deployment verified.</Alert>
+      <Alert className='mb-4' size='lg' variant='outlined' title='Default'>Structural review pending.</Alert>
+      <Alert className='mb-4' size='lg' type='success' variant='outlined' title='Success'>Deployment verified.</Alert>
+      <Alert className='mb-4' size='lg' type='warning' variant='outlined' title='Warning'>Load tolerance nearing limit.</Alert>
+      <Alert className='mb-4' size='lg' type='error' variant='outlined' title='Error'>Integrity check failed.</Alert>
+      <Alert className='mb-4' size='lg' type='info' variant='outlined' title='Info'>Maintenance window scheduled.</Alert>
+      <Alert size='lg' type='accent' variant='outlined' title='Accent'>Theme accent applied.</Alert>
     </div>
   )
 }`
@@ -53,10 +62,9 @@ export const AlertOutline = () => {
 export const AlertSizes = () => {
   return (
     <div className='flex flex-col w-full'>
-      <Alert className='mb-4' size='xs' title='Xs'>Structural review pending.</Alert>
-      <Alert className='mb-4' size='sm' title='Sm'>Structural review pending.</Alert>
-      <Alert className='mb-4' size='md' title='Md'>Structural review pending.</Alert>
-      <Alert size='lg' title='Lg'>Structural review pending.</Alert>
+      <Alert className='mb-4' size='sm' title='Small'>Structural review pending.</Alert>
+      <Alert className='mb-4' size='md' title='Medium'>Structural review pending.</Alert>
+      <Alert size='lg' title='Large'>Structural review pending.</Alert>
     </div>
   )
 }`
@@ -155,11 +163,12 @@ export const CustomizedAlert = () => {
           githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx"
         >
           <div className='flex flex-col w-full'>
-            <Alert className='mb-4' size='md' title='Default'>Structural review pending.</Alert>
-            <Alert className='mb-4' size='md' type='success' title='Success'>Deployment verified.</Alert>
-            <Alert className='mb-4' size='md' type='warning' title='Warning'>Load tolerance nearing limit.</Alert>
-            <Alert className='mb-4' size='md' type='error' title='Error'>Integrity check failed.</Alert>
-            <Alert size='md' type='info' title='Info'>Maintenance window scheduled.</Alert>
+            <Alert className='mb-4' size='lg' title='Default'>Structural review pending.</Alert>
+            <Alert className='mb-4' size='lg' type='success' title='Success'>Deployment verified.</Alert>
+            <Alert className='mb-4' size='lg' type='warning' title='Warning'>Load tolerance nearing limit.</Alert>
+            <Alert className='mb-4' size='lg' type='error' title='Error'>Integrity check failed.</Alert>
+            <Alert className='mb-4' size='lg' type='info' title='Info'>Maintenance window scheduled.</Alert>
+            <Alert size='lg' type='accent' title='Accent'>Theme accent applied.</Alert>
           </div>
         </PreviewBlock>
       </div>
@@ -174,8 +183,12 @@ export const CustomizedAlert = () => {
           githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx"
         >
           <div className='flex flex-col w-full'>
-            <Alert className='mb-4' size='md' type='success' variant='filled' title='Filled'>Deployment verified.</Alert>
-            <Alert size='md' type='accent' variant='filled' title='Accent'>Deployment verified.</Alert>
+            <Alert className='mb-4' size='lg' variant='filled' title='Default'>Structural review pending.</Alert>
+            <Alert className='mb-4' size='lg' type='success' variant='filled' title='Success'>Deployment verified.</Alert>
+            <Alert className='mb-4' size='lg' type='warning' variant='filled' title='Warning'>Load tolerance nearing limit.</Alert>
+            <Alert className='mb-4' size='lg' type='error' variant='filled' title='Error'>Integrity check failed.</Alert>
+            <Alert className='mb-4' size='lg' type='info' variant='filled' title='Info'>Maintenance window scheduled.</Alert>
+            <Alert size='lg' type='accent' variant='filled' title='Accent'>Theme accent applied.</Alert>
           </div>
         </PreviewBlock>
       </div>
@@ -190,8 +203,12 @@ export const CustomizedAlert = () => {
           githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx"
         >
           <div className='flex flex-col w-full'>
-            <Alert className='mb-4' size='md' type='success' variant='outlined' title='Outline'>Deployment verified.</Alert>
-            <Alert size='md' type='accent' variant='outlined' title='Accent'>Deployment verified.</Alert>
+            <Alert className='mb-4' size='lg' variant='outlined' title='Default'>Structural review pending.</Alert>
+            <Alert className='mb-4' size='lg' type='success' variant='outlined' title='Success'>Deployment verified.</Alert>
+            <Alert className='mb-4' size='lg' type='warning' variant='outlined' title='Warning'>Load tolerance nearing limit.</Alert>
+            <Alert className='mb-4' size='lg' type='error' variant='outlined' title='Error'>Integrity check failed.</Alert>
+            <Alert className='mb-4' size='lg' type='info' variant='outlined' title='Info'>Maintenance window scheduled.</Alert>
+            <Alert size='lg' type='accent' variant='outlined' title='Accent'>Theme accent applied.</Alert>
           </div>
         </PreviewBlock>
       </div>
@@ -206,10 +223,9 @@ export const CustomizedAlert = () => {
           githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx"
         >
           <div className='flex flex-col w-full'>
-            <Alert className='mb-4' size='xs' title='Xs'>Structural review pending.</Alert>
-            <Alert className='mb-4' size='sm' title='Sm'>Structural review pending.</Alert>
-            <Alert className='mb-4' size='md' title='Md'>Structural review pending.</Alert>
-            <Alert size='lg' title='Lg'>Structural review pending.</Alert>
+            <Alert className='mb-4' size='sm' title='Small'>Structural review pending.</Alert>
+            <Alert className='mb-4' size='md' title='Medium'>Structural review pending.</Alert>
+            <Alert size='lg' title='Large'>Structural review pending.</Alert>
           </div>
         </PreviewBlock>
       </div>
