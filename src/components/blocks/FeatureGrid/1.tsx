@@ -4,7 +4,7 @@
  * - Uses scale-on-hover and shadow steps to imply physical lift without layout drift.
  * - Keeps the grid readable by controlling wrap math instead of relying on soft spacing.
  */
-import { Card, CardContent, CardTitle, CardDescription } from '../ui/Card'
+import { Card, CardContent, CardTitle, CardDescription } from '../../ui/Card'
 
 interface FeatureItem {
   title: string
