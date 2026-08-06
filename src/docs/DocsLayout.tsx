@@ -10,7 +10,7 @@ import { useLocation } from 'react-router-dom'
 import { DocsNavbar as Navbar } from './layout/Navbar'
 import { Sidebar } from './layout/Sidebar'
 import { TableOfContents } from './layout/TableOfContents'
-import { Footer } from '../components/layout/Footer'
+import { Footer } from '../showroom/sections/Footer'
 import type { ReactNode } from 'react'
 import type { TOCItem } from './types.ts'
 

@@ -4,7 +4,7 @@
  * - Uses scale-on-hover and shadow steps to imply physical lift without layout drift.
  * - Keeps the grid readable by controlling wrap math instead of relying on soft spacing.
  */
-import { Card } from '../ui/Card'
+import { Card, CardContent, CardTitle, CardDescription } from '../../components/ui/Card'
 
 interface FeatureItem {
   title: string
@@ -49,28 +49,25 @@ const FeatureGrid = () => {
           {features.map((feature) => (
             <Card
               key={feature.title}
-              className="group relative m-4 w-full sm:w-[calc(50%-2rem)] border-4 p-6 transition-all duration-75 shadow-[2px_2px_0px_0px_var active:shadow-none active:translate-x-0.5 active:translate-y-0.5"
+              variant="accent"
+              interactive
+              className="group m-4 w-full sm:w-[calc(50%-2rem)]"
             >
-              {/* - The scale wipe is a hard plane, not a fade; the card stays geometrically intact. */}
-              <div
-                className="absolute inset-0 z-0 origin-top-left scale-0 bg-(--lithos-accent) transition-transform duration-300 ease-out group-hover:scale-100"
-                aria-hidden="true"
-              />
-              <div className="relative z-10 flex flex-col">
+              <CardContent className="flex flex-col h-full">
                 {/* - 56px icon tile: enough mass to anchor the card without crowding copy. */}
                 <div
-                  className="flex h-14 w-14 items-center justify-center border-4 border-(--lithos-border) bg-(--lithos-accent) text-3xl text-(--lithos-accent-text) group-hover:bg-(--lithos-text) group-hover:text-(--lithos-surface) transition-colors duration-300 z-10"
+                  className="flex h-14 w-14 items-center justify-center border-2 border-(--lithos-border) bg-(--lithos-accent) text-3xl text-(--lithos-accent-text) group-hover:bg-(--lithos-text) group-hover:text-(--lithos-surface) transition-colors duration-300"
                   aria-hidden="true"
                 >
                   {feature.icon}
                 </div>
-                <h3 className="mt-6 text-2xl font-black uppercase tracking-tighter leading-none text-(--lithos-text) group-hover:text-(--lithos-accent-text) transition-colors duration-300">
+                <CardTitle className="mt-6 text-2xl mb-4">
                   {feature.title}
-                </h3>
-                <p className="mt-4 text-base font-medium leading-none text-(--lithos-text) group-hover:text-(--lithos-accent-text) transition-colors duration-300 font-body">
+                </CardTitle>
+                <CardDescription className="text-base font-medium">
                   {feature.description}
-                </p>
-              </div>
+                </CardDescription>
+              </CardContent>
             </Card>
           ))}
         </div>

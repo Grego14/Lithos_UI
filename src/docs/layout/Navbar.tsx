@@ -20,6 +20,8 @@ const groupedLinks = [
   {
     category: 'Components',
     links: [
+      { label: 'Accordion', href: '/docs/accordion' },
+      { label: 'Avatar', href: '/docs/avatar' },
       { label: 'Button', href: '/docs/button' },
       { label: 'Card', href: '/docs/card' },
       { label: 'Code Viewer', href: '/docs/code-viewer' },
@@ -27,8 +29,6 @@ const groupedLinks = [
       { label: 'Toast', href: '/docs/toast' },
       { label: 'Toggle', href: '/docs/toggle' },
       { label: 'Badge', href: '/docs/badge' },
-      { label: 'Avatar', href: '/docs/avatar' },
-      { label: 'Accordion', href: '/docs/accordion' },
     ],
   },
 ]

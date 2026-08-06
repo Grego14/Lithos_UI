@@ -4,7 +4,7 @@
  * - Uses explicit margins and shadow steps so the quotes read as physical plaques.
  * - Keeps the grid wide and stable to avoid visual drift in the proof section.
  */
-import { Card } from '../ui/Card'
+import { Card } from '../../ui/Card'
 
 interface Testimonial {
   quote: string
@@ -31,7 +31,7 @@ const testimonials: Testimonial[] = [
   },
 ]
 
-const Testimonials = () => <section id="testimonials" className="bg-(--lithos-surface) py-24">
+const Testimonials1 = () => <section id="testimonials" className="bg-(--lithos-surface) py-24">
   <div className="mx-auto max-w-6xl px-6">
     <h2 className="text-4xl font-black uppercase tracking-tighter leading-none text-center text-(--lithos-text) md:text-5xl">
       Proof From the Front Lines
@@ -74,4 +74,4 @@ const Testimonials = () => <section id="testimonials" className="bg-(--lithos-su
   </div>
 </section>;
 
-export { Testimonials }
+export { Testimonials1 }
