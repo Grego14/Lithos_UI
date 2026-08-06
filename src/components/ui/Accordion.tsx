@@ -66,9 +66,14 @@ export const AccordionGroup = forwardRef<HTMLDivElement, AccordionGroupProps>(
       return activedValues === value
     }
 
+    const containerClass = cn(
+      'flex flex-col items-center',
+      className
+    )
+
     return (
       <AccordionContext.Provider value={{ toggleItem, isItemOpen }}>
-        <div ref={ref} className={cn('flex flex-col items-center', className)}>
+        <div ref={ref} className={containerClass}>
           {children}
         </div>
       </AccordionContext.Provider>
@@ -79,8 +84,8 @@ export const AccordionGroup = forwardRef<HTMLDivElement, AccordionGroupProps>(
 AccordionGroup.displayName = 'AccordionGroup'
 
 const defaultClasses = {
-  container: 'w-110 min-w-[260px] border-2 border-(--lithos-border) duration-75 transition-shadow shadow-[2px_2px_0_0_var(--lithos-shadow)]',
-  content: 'p-4',
+  container: 'w-110 min-w-[260px] self-start border-2 border-(--lithos-border) duration-75 ease-out transition-shadow shadow-[2px_2px_0_0_var(--lithos-shadow)]',
+  content: 'p-4 min-h-0 overflow-hidden',
   header: 'justify-between text-lg text-start p-3'
 }
 
@@ -105,11 +110,11 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     }
 
     const label = isOpen ? 'Collapse' : 'Expand'
-    const iconRotation = isOpen ? 'rotate-180' : 'rotate-0'
+    const iconRotation = !isOpen ? 'rotate-180' : 'rotate-0'
 
     const containerClass = cn(
       defaultClasses.container,
-      isOpen && 'shadow-[4px_4px_0_0_var(--lithos-shadow)]',
+      isOpen && 'shadow-[4px_4px_0_0_var(--lithos-shadow)] h-auto',
       isGrouped && 'mt-4',
       classes.container
     )
@@ -121,7 +126,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
 
     return (
       <div className={containerClass} ref={ref}>
-        <h3 className='m-0 p-0'>
+        <h3 className='m-0 p-0 antialiased'>
           <Button className={cn(defaultClasses.header, classes.header)} id={buttonId} aria-expanded={isOpen} aria-controls={contentId} onClick={handleToggle} intent='text' fullWidth>
             <span>
               {title}
@@ -139,8 +144,12 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
           </Button>
         </h3>
 
-        <div className={cn(defaultClasses.content, !isOpen && 'hidden', classes.content)} aria-hidden={!isOpen} id={contentId} role='region' aria-labelledby={buttonId}>
-          {children}
+        <div className={cn('grid transition-[grid-template-rows] duration-75 ease-out', isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]')}>
+          <div className='min-h-0 overflow-hidden'>
+            <div className={cn(defaultClasses.content, classes.content)} aria-hidden={!isOpen} id={contentId} role='region' aria-labelledby={buttonId}>
+              {children}
+            </div>
+          </div>
         </div>
       </div>
     )
