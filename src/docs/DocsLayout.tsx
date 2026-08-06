@@ -68,7 +68,6 @@ const tocRegistry: Record<string, TOCItem[]> = {
   ],
   '/docs/alert': [
     { id: '#examples', label: 'Examples', level: 1 },
-    { id: '#types', label: 'Types', level: 2 },
     { id: '#filled', label: 'Filled', level: 2 },
     { id: '#outline', label: 'Outline', level: 2 },
     { id: '#sizes', label: 'Sizes', level: 2 },

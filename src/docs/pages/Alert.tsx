@@ -12,21 +12,6 @@ export const AlertDoc = () => {
 
   const inputRef = useRef<null | HTMLInputElement>(null)
 
-  const typesCode = `import { Alert } from '../../components/ui/Alert'
-
-export const AlertTypes = () => {
-  return (
-    <div className='flex flex-col w-full'>
-      <Alert className='mb-4' size='lg' title='Default'>Structural review pending.</Alert>
-      <Alert className='mb-4' size='lg' type='success' title='Success'>Deployment verified.</Alert>
-      <Alert className='mb-4' size='lg' type='warning' title='Warning'>Load tolerance nearing limit.</Alert>
-      <Alert className='mb-4' size='lg' type='error' title='Error'>Integrity check failed.</Alert>
-      <Alert className='mb-4' size='lg' type='info' title='Info'>Maintenance window scheduled.</Alert>
-      <Alert size='lg' type='accent' title='Accent'>Theme accent applied.</Alert>
-    </div>
-  )
-}`
-
   const filledCode = `import { Alert } from '../../components/ui/Alert'
 
 export const AlertFilled = () => {
@@ -152,26 +137,6 @@ export const CustomizedAlert = () => {
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Examples
       </h2>
-
-      <h3 id="types" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
-        Types
-      </h3>
-
-      <div className="mt-8 mb-16">
-        <PreviewBlock
-          code={typesCode}
-          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx"
-        >
-          <div className='flex flex-col w-full'>
-            <Alert className='mb-4' size='lg' title='Default'>Structural review pending.</Alert>
-            <Alert className='mb-4' size='lg' type='success' title='Success'>Deployment verified.</Alert>
-            <Alert className='mb-4' size='lg' type='warning' title='Warning'>Load tolerance nearing limit.</Alert>
-            <Alert className='mb-4' size='lg' type='error' title='Error'>Integrity check failed.</Alert>
-            <Alert className='mb-4' size='lg' type='info' title='Info'>Maintenance window scheduled.</Alert>
-            <Alert size='lg' type='accent' title='Accent'>Theme accent applied.</Alert>
-          </div>
-        </PreviewBlock>
-      </div>
 
       <h3 id="filled" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
         Filled
