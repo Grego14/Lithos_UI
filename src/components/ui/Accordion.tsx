@@ -85,7 +85,7 @@ AccordionGroup.displayName = 'AccordionGroup'
 
 const defaultClasses = {
   container: 'w-110 min-w-[260px] self-start border-2 border-(--lithos-border) duration-75 ease-out transition-shadow shadow-[2px_2px_0_0_var(--lithos-shadow)]',
-  content: 'p-4 min-h-0 overflow-hidden',
+  content: 'p-4 min-h-0 overflow-hidden font-body',
   header: 'justify-between text-lg text-start p-3'
 }
 
@@ -127,11 +127,11 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     return (
       <div className={containerClass} ref={ref}>
         <h3 className='m-0 p-0 antialiased'>
-          <Button className={cn(defaultClasses.header, classes.header)} id={buttonId} aria-expanded={isOpen} aria-controls={contentId} onClick={handleToggle} intent='text' fullWidth>
+          <Button className={cn(defaultClasses.header, classes.header, 'translate-x-0 translate-y-0 active:translate-x-0 active:translate-y-0')} id={buttonId} aria-expanded={isOpen} aria-controls={contentId} onClick={handleToggle} intent='text' fullWidth>
             <span>
               {title}
             </span>
-            <div className='ml-2 w-4 min-w-[16px]'>
+            <div className='ml-2 w-4 min-w-4'>
               <svg className={`max-w-full h-auto ${iconRotation}`} width="100" height="100" viewBox="0 -0.75 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000">
                 <g>
                   <title>{label}</title>
