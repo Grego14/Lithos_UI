@@ -34,7 +34,7 @@ const faqs: FAQItem[] = [
   },
 ]
 
-const FAQ = () => {
+const FAQ1 = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const toggleItem = (index: number) => {
@@ -103,4 +103,4 @@ const FAQ = () => {
   )
 };
 
-export { FAQ }
+export { FAQ1 }

@@ -10,7 +10,7 @@ const links = [
   { label: 'Company', to: '#' },
 ]
 
-export const Navbar = () => {
+export const Navbar1 = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (

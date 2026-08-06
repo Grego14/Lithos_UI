@@ -9,7 +9,7 @@ export const ToastDoc = () => {
   const triggerToast = () => {
     if (toast && toast.addToast) {
       toast.addToast({
-        title: 'SYSTEM ALERT',
+        title: 'SYSTEM TOAST',
         message: 'Structural integrity verified.',
         type: 'success',
         color: accentColor,
@@ -27,7 +27,7 @@ export const ToastExample = () => {
   const triggerToast = () => {
     if (addToast) {
       addToast({
-        title: 'SYSTEM ALERT',
+        title: 'SYSTEM TOAST',
         message: 'Structural integrity verified.',
         type: 'success',
         color: accentColor,
@@ -41,7 +41,7 @@ export const ToastExample = () => {
       onClick={triggerToast}
       className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
     >
-      Trigger System Alert
+      Trigger Toast
     </button>
   )
 }`
@@ -66,7 +66,7 @@ export const ToastExample = () => {
 
       <div className="border-l-4 border-(--lithos-accent) pl-6 py-2 mb-8 bg-(--lithos-surface) p-4">
         <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
-          Click the button below to dispatch an alert to the fixed coordinate stack.
+          Click the button below to dispatch a toast to the fixed coordinate stack.
         </p>
       </div>
 
@@ -87,7 +87,7 @@ export const ToastExample = () => {
           onClick={triggerToast}
           className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
         >
-          Trigger System Alert
+          Trigger Toast
         </button>
       </PreviewBlock>
     </div>

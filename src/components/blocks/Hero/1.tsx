@@ -5,16 +5,16 @@
  * - Keeps the opening rhythm controlled by explicit spacing math and centered containment.
  */
 import { Link } from 'react-router-dom'
-import { KineticGrid } from '../ui/KineticGrid'
-import { getContrastText } from '../../utils/yiq'
-import type { HexColor } from '../../core/types'
+import { KineticGrid } from '../../ui/KineticGrid'
+import { getContrastText } from '../../../utils/yiq'
+import type { HexColor } from '../../../core/types'
 
 interface HeroProps {
   accentColor: string
   updateAccentColor: (color: HexColor) => void
 }
 
-const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
+const Hero1 = ({ accentColor, updateAccentColor }: HeroProps) => {
   const fgColor = getContrastText(accentColor)
 
   return (
@@ -145,4 +145,4 @@ const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
   )
 };
 
-export { Hero }
+export { Hero1 }

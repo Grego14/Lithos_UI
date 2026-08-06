@@ -84,7 +84,7 @@ const ThemeEngine = ({ accentColor, updateAccentColor }: ThemeEngineProps) => {
               />
               <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                 <div
-                  className="h-6 w-6 sm:h-8 sm:w-8 rounded-full border-[3px] sm:border-4 border-black"
+                  className="h-6 w-6 sm:h-8 sm:w-8 rounded-full border-[3px] sm:border-2 border-black"
                   style={{
                     background: 'conic-gradient(red, yellow, lime, aqua, blue, magenta, red)',
                   }}
@@ -99,11 +99,11 @@ const ThemeEngine = ({ accentColor, updateAccentColor }: ThemeEngineProps) => {
           </div>
 
           {/* - Reset sits below a hard divider so the board reads as one rooted module. */}
-          <div className="mt-10 sm:mt-12 flex w-full justify-center border-t-4 border-(--lithos-border) pt-10 sm:pt-12">
+          <div className="mt-10 sm:mt-12 flex w-full justify-center border-t-2 border-(--lithos-border) pt-10 sm:pt-12">
             <button
               type="button"
               onClick={handleReset}
-              className="border-4 border-(--lithos-border) bg-(--lithos-surface) text-sm sm:text-base text-(--lithos-text) lithos-click"
+              className="border-2 border-(--lithos-border) bg-(--lithos-surface) text-sm sm:text-base text-(--lithos-text) lithos-click"
             >
               Reset to Default Theme
             </button>
