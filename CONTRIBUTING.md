@@ -24,8 +24,8 @@ Useful project scripts from `package.json`:
 These are required for all contributions:
 
 - Zero-Gap Rule: do not use CSS `gap` for layout structure. Use explicit margin/padding math instead.
-- Contrast integrity: when adding dynamic color behavior, route foreground contrast through the YIQ engine in `src/utils/yiq.js`.
-- Specificity override pattern: do not bypass theme token rebinding in `src/core/useTheme.js` (`#lithos-theme-overrides` style injection).
+- Contrast integrity: when adding dynamic color behavior, route foreground contrast through the YIQ engine in `src/utils/yiq.ts`.
+- Specificity override pattern: do not bypass theme token rebinding in `src/core/useTheme.ts` (`#lithos-theme-overrides` style injection).
 - Physics token consistency: interactive controls should use the shared `.lithos-click` utility from `src/index.css` unless there is a documented exception.
 - No soft shadow blur: keep the brutalist hard-shadow style (`0px` blur) intact.
 
@@ -36,6 +36,12 @@ This repository currently uses:
 - ESLint via `eslint.config.js`
 - Prettier via `.prettierrc`
 - Vite for dev/build
+- TypeScript (`.ts`/`.tsx` instead of `.js`)
+
+### Coding Conventions
+
+- **Exports & Functions**: Always use named exports and arrow functions. Only use default exports or standard `function` declarations if strictly required by a framework or library.
+- **File Types**: Always use `.tsx` and `.ts` rather than `.js`.
 
 Before opening a PR, run:
 
