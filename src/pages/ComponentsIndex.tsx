@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Navbar } from '../components/layout/Navbar'
-import { Footer } from '../components/layout/Footer'
+import { Navbar } from '../showroom/sections/Navbar'
+import { Footer } from '../showroom/sections/Footer'
 import { Toggle } from '../components/ui/Toggle'
 import { ToastItem } from '../components/ui/Toast'
 import { Button } from '../components/ui/Button'
@@ -10,6 +10,7 @@ import { useTheme } from '../core/useTheme'
 import { Badge } from '../components/ui/Badge'
 import { Avatar } from '../components/ui/Avatar'
 import { Alert } from '../components/ui/Alert'
+import { Accordion } from '../components/ui/Accordion'
 interface ComponentsIndexProps {
   isDarkMode: boolean
   toggleObsidian: () => void
@@ -48,6 +49,15 @@ const componentsList = [
     name: 'Avatar',
     to: '/docs/avatar',
     preview: <Avatar variant='solid' alt="Jane Doe" />
+  },
+  {
+    name: 'Accordion',
+    to: '/docs/accordion',
+    preview: (
+      <Accordion title='Is this product free?' classes={{ container: 'min-w-20', header: 'text-sm', content: 'text-xs' }}>
+        Yeah! This product is 100% free.
+      </Accordion>
+    )
   },
   {
     name: 'Badge',

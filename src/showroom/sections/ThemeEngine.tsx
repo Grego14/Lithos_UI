@@ -1,0 +1,117 @@
+/**
+ * @fileoverview Lithos UI token laboratory.
+ * - Rebinds accent and contrast tokens at the cascade root so the whole system moves together.
+ * - Uses YIQ contrast selection to keep the swatches legible across bright and dark colors.
+ * - Treats the palette as a physical control board with hard tiles and explicit offsets.
+ */
+import type { HexColor } from '../../core/types'
+
+interface ThemeColor {
+  name: string
+  hex: string
+}
+
+const themes: ThemeColor[] = [
+  { name: 'Cyan', hex: '#00FFFF' },
+  { name: 'Purple', hex: '#800080' },
+  { name: 'Yellow', hex: '#FFFF00' },
+  { name: 'Orange', hex: '#FF4500' },
+  { name: 'Pink', hex: '#FFC0CB' },
+]
+
+interface ThemeEngineProps {
+  accentColor: string
+  updateAccentColor: (color: HexColor) => void
+}
+
+const ThemeEngine = ({ accentColor, updateAccentColor }: ThemeEngineProps) => {
+
+  const handleThemeChange = (hex: string) => {
+    updateAccentColor(hex as HexColor)
+  }
+
+  const handleReset = () => {
+    updateAccentColor('#00FF00' as HexColor)
+  }
+
+  // - 8px border + 8px shadow keep the control board heavy and explicit.
+  return (
+    <section id="theme-engine" className="bg-(--lithos-surface) py-12 md:py-24">
+      <div className="mx-auto max-w-4xl px-6 text-center">
+        <h2 className="text-4xl font-black uppercase tracking-tighter leading-none text-(--lithos-text) md:text-5xl">
+          Dynamic Theme Engine
+        </h2>
+        <p className="mt-4 text-lg font-bold leading-none text-(--lithos-text)">
+          Test drive the global design tokens. One variable changes everything.
+        </p>
+
+        <div className="mt-12 w-full border-2 border-(--lithos-border) bg-(--lithos-bg) p-6 sm:p-10 shadow-[6px_6px_0px_0px_var(--lithos-shadow)] mb-12">
+          <div className="flex flex-wrap justify-center -m-2 sm:-m-4">
+            {themes.map((theme) => {
+              const isActive = accentColor === theme.hex
+
+              return (
+                // - Each swatch is a 64/96px tile with a hard edge; active state only changes shadow depth.
+                <button
+                  key={theme.hex}
+                  type="button"
+                  onClick={() => handleThemeChange(theme.hex)}
+                  aria-label={`Activate ${theme.name} theme`}
+                  title={theme.name}
+                  className={`m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 lithos-click ${isActive ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : ''}`}
+                  style={{
+                    backgroundColor: theme.hex,
+                  }}
+                >
+                  <span className="sr-only">{theme.name}</span>
+                </button>
+              )
+            })}
+
+            {/* - Custom picker keeps the tile geometry fixed while the input floats invisibly on top. */}
+            <div
+              className={`relative m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 bg-(--lithos-surface) lithos-click group ${!themes.some((t) => t.hex === accentColor) ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : ''}`}
+              style={{
+                backgroundColor: !themes.some((t) => t.hex === accentColor) ? accentColor : 'var(--lithos-surface)',
+              }}
+            >
+              <input
+                type="color"
+                value={accentColor}
+                onChange={(e) => handleThemeChange(e.target.value)}
+                className="absolute inset-0 h-full w-full opacity-0 cursor-pointer z-10"
+                aria-label="Choose custom theme color"
+              />
+              <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                <div
+                  className="h-6 w-6 sm:h-8 sm:w-8 rounded-full border-[3px] sm:border-2 border-black"
+                  style={{
+                    background: 'conic-gradient(red, yellow, lime, aqua, blue, magenta, red)',
+                  }}
+                />
+                <span
+                  className={`mt-2 text-xs font-black uppercase tracking-tighter ${!themes.some((t) => t.hex === accentColor) ? 'text-(--lithos-accent-text)' : 'text-(--lithos-text)'}`}
+                >
+                  Custom
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* - Reset sits below a hard divider so the board reads as one rooted module. */}
+          <div className="mt-10 sm:mt-12 flex w-full justify-center border-t-2 border-(--lithos-border) pt-10 sm:pt-12">
+            <button
+              type="button"
+              onClick={handleReset}
+              className="border-2 border-(--lithos-border) bg-(--lithos-surface) text-sm sm:text-base text-(--lithos-text) lithos-click"
+            >
+              Reset to Default Theme
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+};
+
+export { ThemeEngine }

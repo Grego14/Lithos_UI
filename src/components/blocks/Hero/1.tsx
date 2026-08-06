@@ -5,16 +5,16 @@
  * - Keeps the opening rhythm controlled by explicit spacing math and centered containment.
  */
 import { Link } from 'react-router-dom'
-import { KineticGrid } from '../ui/KineticGrid'
-import { getContrastText } from '../../utils/yiq'
-import type { HexColor } from '../../core/types'
+import { KineticGrid } from '../../ui/KineticGrid'
+import { getContrastText } from '../../../utils/yiq'
+import type { HexColor } from '../../../core/types'
 
 interface HeroProps {
   accentColor: string
   updateAccentColor: (color: HexColor) => void
 }
 
-const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
+const Hero1 = ({ accentColor, updateAccentColor }: HeroProps) => {
   const fgColor = getContrastText(accentColor)
 
   return (
@@ -89,7 +89,7 @@ const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
               <div className="flex items-center space-x-3">
                 {/* Custom color trigger */}
                 <div
-                  className="relative h-20 w-20 shrink-0 border-4 border-(--lithos-border) shadow-[3px_3px_0px_0px_var(--lithos-shadow)] lithos-click"
+                  className="relative h-20 w-20 shrink-0 lithos-click"
                   style={{ backgroundColor: accentColor }}
                 >
                   <input
@@ -145,4 +145,4 @@ const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
   )
 };
 
-export { Hero }
+export { Hero1 }

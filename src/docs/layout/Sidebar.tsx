@@ -37,6 +37,9 @@ export const Sidebar = () => {
           <Link to="/docs/avatar" className={getLinkClass('/docs/avatar')}>
             Avatar
           </Link>
+          <Link to="/docs/accordion" className={getLinkClass('/docs/accordion')}>
+            Accordion
+          </Link>
           <Link to="/docs/badge" className={getLinkClass('/docs/badge')}>
             Badge
           </Link>

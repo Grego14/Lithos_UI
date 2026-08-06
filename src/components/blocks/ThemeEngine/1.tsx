@@ -4,7 +4,7 @@
  * - Uses YIQ contrast selection to keep the swatches legible across bright and dark colors.
  * - Treats the palette as a physical control board with hard tiles and explicit offsets.
  */
-import type { HexColor } from '../../core/types'
+import type { HexColor } from '../../../core/types'
 
 interface ThemeColor {
   name: string
@@ -24,7 +24,7 @@ interface ThemeEngineProps {
   updateAccentColor: (color: HexColor) => void
 }
 
-const ThemeEngine = ({ accentColor, updateAccentColor }: ThemeEngineProps) => {
+const ThemeEngine1 = ({ accentColor, updateAccentColor }: ThemeEngineProps) => {
 
   const handleThemeChange = (hex: string) => {
     updateAccentColor(hex as HexColor)
@@ -114,4 +114,4 @@ const ThemeEngine = ({ accentColor, updateAccentColor }: ThemeEngineProps) => {
   )
 };
 
-export { ThemeEngine }
+export { ThemeEngine1 }

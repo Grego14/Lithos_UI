@@ -10,7 +10,7 @@ import { useLocation } from 'react-router-dom'
 import { DocsNavbar as Navbar } from './layout/Navbar'
 import { Sidebar } from './layout/Sidebar'
 import { TableOfContents } from './layout/TableOfContents'
-import { Footer } from '../components/layout/Footer'
+import { Footer } from '../showroom/sections/Footer'
 import type { ReactNode } from 'react'
 import type { TOCItem } from './types.ts'
 
@@ -75,6 +75,12 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#title', label: 'Without a title', level: 2 },
     { id: '#actions', label: 'Actions', level: 2 },
     { id: '#custom-color', label: 'Custom color', level: 2 },
+  ],
+  '/docs/accordion': [
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#default', label: 'Default', level: 2 },
+    { id: '#grouped-default', label: 'Grouped default', level: 2 },
+    { id: '#grouped-multiple', label: 'Grouped multiple', level: 2 },
   ],
 }
 

@@ -10,19 +10,20 @@
 
 import { AlertDoc } from './docs/pages/Alert'
 import { AvatarDoc } from './docs/pages/Avatar'
+import { AccordionDoc } from './docs/pages/Accordion'
 import { BadgeDoc } from './docs/pages/Badge'
 import { BlockPreviewPage } from './pages/BlockPreviewPage'
 import { BlocksIndex } from './pages/BlocksIndex'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { ButtonDoc } from './docs/pages/Button'
 import { CardDoc } from './docs/pages/Card'
-import { ComingSoon } from './components/layout/ComingSoon'
+import { ComingSoon } from './showroom/sections/ComingSoon'
 import { ComponentsIndex } from './pages/ComponentsIndex'
 import { DocsLayout } from './docs/DocsLayout'
 import { Faq } from './pages/Faq'
 import { Installation } from './docs/pages/Installation'
 import { Introduction } from './docs/pages/Introduction'
-import { NotFound } from './components/layout/NotFound'
+import { NotFound } from './showroom/sections/NotFound'
 import { Showroom } from './showroom/Index'
 import { ToastDoc } from './docs/pages/Toast'
 import { ToggleDoc } from './docs/pages/Toggle'
@@ -44,6 +45,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
     { path: '', component: Introduction },
     { path: 'alert', component: AlertDoc },
     { path: 'avatar', component: AvatarDoc },
+    { path: 'accordion', component: AccordionDoc },
     { path: 'badge', component: BadgeDoc },
     { path: 'button', component: ButtonDoc },
     { path: 'card', component: CardDoc },
