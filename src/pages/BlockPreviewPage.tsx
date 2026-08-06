@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom'
 import { Testimonials } from '../components/blocks/Testimonials'
 import { Navbar as NavbarBlock } from '../components/blocks/Navbar'
 import { Pricing } from '../components/blocks/Pricing'
-import { ComingSoon } from '../components/layout/ComingSoon'
+import { ComingSoon } from '../showroom/sections/ComingSoon'
 
 const blockRegistry: Record<string, React.ComponentType> = {
   testimonials: Testimonials,

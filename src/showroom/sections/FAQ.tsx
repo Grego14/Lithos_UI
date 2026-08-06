@@ -14,23 +14,23 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: 'Is this product scalable?',
+    question: 'Is Lithos UI production ready?',
     answer:
-      'Absolutely. We handle millions of requests a day without breaking a sweat.',
+      'Yes. The library is structured for reliable composition, predictable spacing, and resilient visual contrast.',
   },
   {
-    question: 'Can I cancel anytime?',
-    answer: 'Yes. No long-term contracts. You can cancel your subscription at any time with one click.',
+    question: 'Does it work with Tailwind?',
+    answer: 'Yes. Every component is written as a Tailwind-first React section with no dependency on custom config.',
   },
   {
-    question: 'Do you offer a free trial?',
+    question: 'Can I mix these sections with my own UI?',
     answer:
-      'Yes, we offer a 14-day free trial on all plans. No credit card required.',
+      'Absolutely. The system is intentionally modular so individual blocks can be dropped into existing products.',
   },
   {
-    question: 'What happens if I go over my plan limits?',
+    question: 'Why no soft shadows or rounded defaults?',
     answer:
-      'We will notify you before you hit your limits. We never cut off service unexpectedly.',
+      'Because Lithos UI is built around neo-brutalist clarity: hard edges, high contrast, and explicit structure.',
   },
 ]
 

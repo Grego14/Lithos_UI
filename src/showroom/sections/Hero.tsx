@@ -5,7 +5,7 @@
  * - Keeps the opening rhythm controlled by explicit spacing math and centered containment.
  */
 import { Link } from 'react-router-dom'
-import { KineticGrid } from '../ui/KineticGrid'
+import { KineticGrid } from '../../components/ui/KineticGrid'
 import { getContrastText } from '../../utils/yiq'
 import type { HexColor } from '../../core/types'
 

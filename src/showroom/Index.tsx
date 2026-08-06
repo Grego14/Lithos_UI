@@ -1,8 +1,8 @@
-import { Navbar } from '../components/layout/Navbar'
-import { Hero } from '../components/blocks/Hero'
-import { FeatureGrid } from '../components/blocks/FeatureGrid'
-import { ThemeEngine } from '../components/blocks/ThemeEngine'
-import { Footer } from '../components/layout/Footer'
+import { Navbar } from './sections/Navbar'
+import { Hero } from './sections/Hero'
+import { FeatureGrid } from './sections/FeatureGrid'
+import { ThemeEngine } from './sections/ThemeEngine'
+import { Footer } from './sections/Footer'
 
 /**
  * Showroom Component - Landing Page UI Composition

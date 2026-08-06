@@ -1,5 +1,5 @@
-import { Navbar } from '../components/layout/Navbar'
-import { Footer } from '../components/layout/Footer'
+import { Navbar } from '../showroom/sections/Navbar'
+import { Footer } from '../showroom/sections/Footer'
 import { Card, CardContent } from '../components/ui/Card'
 import { PreviewBlock } from '../components/ui/PreviewBlock'
 import { Testimonials } from '../components/blocks/Testimonials'
