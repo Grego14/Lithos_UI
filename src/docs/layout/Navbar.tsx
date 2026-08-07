@@ -97,9 +97,6 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
 
         {/* - Mobile Action Toggle (Hamburger / X) */}
         <div className="flex lg:hidden items-center">
-          <div className="mr-3 flex items-center">
-            <Toggle checked={isDarkMode} onToggle={handleToggleObsidian} label="Toggle Obsidian Mode" />
-          </div>
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
@@ -170,15 +167,20 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
           </div>
 
           {/* Mobile Menu GitHub CTA */}
-          <a
-            href="https://github.com/lithosui/Lithos_UI"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setIsMenuOpen(false)}
-            className="self-start bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
-          >
-            GitHub
-          </a>
+          <div className="mt-auto flex items-center justify-between">
+            <a
+              href="https://github.com/lithosui/Lithos_UI"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMenuOpen(false)}
+              className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
+            >
+              GitHub
+            </a>
+            <div className="flex items-center">
+              <Toggle checked={isDarkMode} onToggle={handleToggleObsidian} label="Toggle Obsidian Mode" />
+            </div>
+          </div>
         </nav>
       )}
     </header>
