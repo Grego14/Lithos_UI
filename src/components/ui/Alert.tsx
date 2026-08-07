@@ -60,12 +60,12 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
     const computedStyle: CSSProperties = isFilled
       ? { backgroundColor: accentColor, color: textColor, ...style }
       : {
-          backgroundColor: 'var(--lithos-bg)',
-          color: textColor,
-          borderColor: outlineColor,
-          boxShadow: `4px 4px 0px 0px ${outlineColor}`,
-          ...style,
-        }
+        backgroundColor: 'var(--lithos-bg)',
+        color: textColor,
+        borderColor: outlineColor,
+        boxShadow: `4px 4px 0px 0px ${outlineColor}`,
+        ...style,
+      }
 
     return (
       <div ref={ref} role="alert" className={classes} style={computedStyle} {...props}>
