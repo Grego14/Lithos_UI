@@ -11,6 +11,8 @@ import { forwardRef, type ComponentPropsWithoutRef, type CSSProperties, type Rea
 import { getContrastText } from '../../utils/yiq'
 import { colors } from '../../utils/colors'
 import type { HexColor } from '../../core/types'
+import { cn } from '../../utils/cn'
+import { Button } from './Button'
 
 export type AlertType = 'default' | 'success' | 'error' | 'warning' | 'info' | 'accent'
 export type AlertVariant = 'filled' | 'outlined'
@@ -48,24 +50,22 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
 
     const actionColor = isFilled ? textColor : outlineColor
 
-    const classes = [
+    const classes = cn(
       'border-2 w-full',
-      isFilled ? 'border-(--lithos-border) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]' : '',
+      isFilled && 'border-(--lithos-border) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]',
       sizing.container,
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ')
+      className
+    )
 
     const computedStyle: CSSProperties = isFilled
       ? { backgroundColor: accentColor, color: textColor, ...style }
       : {
-          backgroundColor: 'var(--lithos-bg)',
-          color: textColor,
-          borderColor: outlineColor,
-          boxShadow: `4px 4px 0px 0px ${outlineColor}`,
-          ...style,
-        }
+        backgroundColor: 'var(--lithos-bg)',
+        color: textColor,
+        borderColor: outlineColor,
+        boxShadow: `4px 4px 0px 0px ${outlineColor}`,
+        ...style,
+      }
 
     return (
       <div ref={ref} role="alert" className={classes} style={computedStyle} {...props}>
@@ -73,7 +73,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
           <div className={`flex items-center ${sizing.headerGap}`}>
             {title && (
               <h4
-                className={`font-black uppercase tracking-tighter leading-none m-0 ${sizing.title}`}
+                className={cn('font-black uppercase tracking-tighter leading-none m-0', sizing.title)}
                 style={!isFilled ? { color: outlineColor } : undefined}
               >
                 {title}
@@ -83,39 +83,37 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
             {(onClose || onUndo) && (
               <div className="flex items-center shrink-0 ml-auto">
                 {onUndo && (
-                  <button
-                    type="button"
+                  <Button
                     onClick={onUndo}
                     aria-label="Undo"
-                    className={`shrink-0 bg-transparent lithos-click ${onClose ? 'mr-3' : ''}`}
-                    style={{ borderColor: actionColor, color: actionColor, boxShadow: `2px 2px 0px 0px ${actionColor}` }}
+                    className={cn('shrink-0 bg-transparent', onClose && 'mr-3')}
+                    style={{ borderColor: actionColor, color: actionColor, '--lithos-shadow': actionColor } as React.CSSProperties}
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="square" strokeLinejoin="miter" className="block">
                       <polyline points="9 14 4 9 9 4" />
                       <path d="M20 20v-7a4 4 0 0 0-4-4H4" />
                     </svg>
-                  </button>
+                  </Button>
                 )}
 
                 {onClose && (
-                  <button
-                    type="button"
+                  <Button
                     onClick={onClose}
                     aria-label="Close alert"
-                    className="shrink-0 bg-transparent lithos-click"
-                    style={{ borderColor: actionColor, color: actionColor, boxShadow: `2px 2px 0px 0px ${actionColor}` }}
+                    className="shrink-0 bg-transparent"
+                    style={{ borderColor: actionColor, color: actionColor, '--lithos-shadow': actionColor } as React.CSSProperties}
                   >
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="4" className="block">
                       <path d="M2 2L14 14M14 2L2 14" />
                     </svg>
-                  </button>
+                  </Button>
                 )}
               </div>
             )}
           </div>
         )}
 
-        <p className={`font-bold leading-tight m-0 ${sizing.message}`}>{children}</p>
+        <p className={cn('leading-tight m-0 font-body', sizing.message)}>{children}</p>
       </div>
     )
   }

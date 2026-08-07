@@ -228,7 +228,7 @@ export const CustomizedAlert = () => {
               </Alert>
             )}
 
-            <Alert size='md' type='warning' title='Config changed' onUndo={() => window.alert('Reverting configuration change.')}>
+            <Alert size='md' type='warning' title='Config changed' onUndo={() => { }}>
               Timeout threshold updated to 30s.
             </Alert>
           </div>
@@ -248,7 +248,7 @@ export const CustomizedAlert = () => {
             <Alert size='md' color={customColor} title='Custom'>Custom color alert.</Alert>
 
             <div className='mt-4 text-center flex items-center justify-center'>
-              <input ref={inputRef} type='text' onFocus={handleFocus} defaultValue={customColor} max={7} min={4} className='p-1.5 text-sm outline-none border-2 border-(--lithos-border) shadow-[2px_2px_0_0_var(--lithos-shadow)] focus:shadow-[4px_4px_0_0_var(--lithos-shadow)] hover:shadow-[4px_4px_0_0_var(--lithos-shadow)] max-w-[7.5rem]' />
+              <input ref={inputRef} type='text' onFocus={handleFocus} defaultValue={customColor} max={7} min={4} className='p-1.5 text-sm outline-none border-2 border-(--lithos-border) shadow-[2px_2px_0_0_var(--lithos-shadow)] focus:shadow-[4px_4px_0_0_var(--lithos-shadow)] hover:shadow-[4px_4px_0_0_var(--lithos-shadow)] max-w-30' />
               <Button intent='primary' className='ml-6 text-sm' onClick={handleCustomColor}>Use color</Button>
             </div>
 

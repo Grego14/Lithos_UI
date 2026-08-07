@@ -30,7 +30,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     return (
       <div ref={ref} className={classes} {...rest}>
         {isImage && (
-          <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 z-10 bg-linear-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
         )}
         {children}
       </div>

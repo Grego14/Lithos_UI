@@ -159,7 +159,7 @@ const HeaderDropdown = ({ label, options, value, onChange, className }: HeaderDr
         onKeyDown={(event) => {
           if (event.key === 'Escape') setOpen(false)
         }}
-        className="justify-between text-sm min-w-[6.5rem]"
+        className="justify-between text-sm min-w-26"
       >
         <span>{current?.label}</span>
         <svg className={cn('h-3 w-3 shrink-0', open && 'rotate-180')} viewBox="0 0 12 8" fill="none">

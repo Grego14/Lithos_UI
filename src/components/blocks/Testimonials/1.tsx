@@ -5,6 +5,7 @@
  * - Keeps the grid wide and stable to avoid visual drift in the proof section.
  */
 import { Card } from '../../ui/Card'
+import { Avatar } from '../../ui/Avatar'
 
 interface Testimonial {
   quote: string
@@ -15,19 +16,19 @@ interface Testimonial {
 // NOTE: These are example names/quotes for template purposes, not real Lithos testimonials.
 const testimonials: Testimonial[] = [
   {
-    quote: 'Lithos UI gave our launch page a spine. It looks aggressive and stays readable.',
-    name: 'Maya Chen',
-    title: 'Design Lead',
+    quote: 'This product completely transformed how we operate. The workflow is incredibly smooth and efficient.',
+    name: 'Jane Doe',
+    title: 'Marketing Director',
   },
   {
-    quote: 'The components feel like they were engineered, not skinned. That matters.',
-    name: 'Jordan Lee',
-    title: 'Frontend Director',
+    quote: 'I\'ve tried every solution on the market, but nothing comes close to this level of polish and reliability.',
+    name: 'John Smith',
+    title: 'Lead Engineer',
   },
   {
-    quote: 'Fast to assemble, hard to break, and impossible to confuse with generic UI kits.',
-    name: 'Ari Patel',
-    title: 'Product Builder',
+    quote: 'The return on investment was immediate. Our team adopted it in hours and we\'ve never looked back.',
+    name: 'Sarah Jones',
+    title: 'Founder & CEO',
   },
 ]
 
@@ -55,10 +56,7 @@ const Testimonials1 = () => <section id="testimonials" className="bg-(--lithos-s
 
           {/* - Avatar + byline stay compact so the plaque weight remains on the quote. */}
           <div className="mt-8 flex items-center">
-            <div
-              className="h-12 w-12 rounded-full border-4 border-(--lithos-border) bg-(--lithos-surface)"
-              aria-hidden="true"
-            />
+            <Avatar alt={testimonial.name} />
             <div className="ml-4">
               <p className="font-black uppercase tracking-tighter leading-none">
                 {testimonial.name}
