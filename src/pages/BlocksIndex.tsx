@@ -1,6 +1,5 @@
 import { Navbar } from '../showroom/sections/Navbar'
 import { Footer } from '../showroom/sections/Footer'
-import { Card, CardContent } from '../components/ui/Card'
 import { PreviewBlock } from '../components/ui/PreviewBlock'
 import { KineticGrid } from '../components/ui/KineticGrid'
 import { Testimonials1 } from '../components/blocks/Testimonials/1'
