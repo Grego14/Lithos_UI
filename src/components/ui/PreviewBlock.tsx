@@ -83,7 +83,7 @@ export const PreviewBlock = ({ children, code, githubUrl, language = 'tsx', heig
         <div className="flex items-center space-x-4 mb-4">
           {slug && (
             <a href={`/blocks/preview/${slug}`} target="_blank" rel="noreferrer" className={inactiveBtnClass}>
-              Open in New Tab ↗
+              Open ↗
             </a>
           )}
           {githubUrl ? (
