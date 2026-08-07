@@ -228,7 +228,7 @@ export const CustomizedAlert = () => {
               </Alert>
             )}
 
-            <Alert size='md' type='warning' title='Config changed' onUndo={() => window.alert('Reverting configuration change.')}>
+            <Alert size='md' type='warning' title='Config changed' onUndo={() => { }}>
               Timeout threshold updated to 30s.
             </Alert>
           </div>
