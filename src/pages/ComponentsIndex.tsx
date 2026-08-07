@@ -10,6 +10,7 @@ import { useTheme } from '../core/useTheme'
 import { Badge } from '../components/ui/Badge'
 import { Avatar } from '../components/ui/Avatar'
 import { Accordion } from '../components/ui/Accordion'
+import { Calendar } from '../components/ui/Calendar'
 
 interface ComponentsIndexProps {
   isDarkMode: boolean
@@ -54,6 +55,11 @@ const componentsList = [
     name: 'Button',
     to: '/docs/button',
     preview: <Button className="cursor-pointer">Button</Button>
+  },
+  {
+    name: 'Calendar',
+    to: '/docs/calendar',
+    preview: <Calendar className="pointer-events-none scale-[0.32] origin-center" />
   },
   {
     name: 'Card',

@@ -72,6 +72,16 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#grouped-default', label: 'Grouped default', level: 2 },
     { id: '#grouped-multiple', label: 'Grouped multiple', level: 2 },
   ],
+  '/docs/calendar': [
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#single', label: 'Single', level: 2 },
+    { id: '#multiple', label: 'Multiple', level: 2 },
+    { id: '#multi-color', label: 'Multi-color selection', level: 2 },
+    { id: '#range', label: 'Range', level: 2 },
+    { id: '#disabled-dates', label: 'Disabled dates', level: 2 },
+    { id: '#bounded-years', label: 'Bounded years', level: 2 },
+    { id: '#controlled', label: 'Controlled', level: 2 },
+  ],
 }
 
 interface DocsLayoutProps {
