@@ -6,6 +6,7 @@
 import { forwardRef, useState, type ComponentPropsWithoutRef } from "react";
 import { getContrastText } from "../../utils/yiq";
 import { useTheme } from "../../core/useTheme";
+import { cn } from "../../utils/cn";
 
 type AvatarSizes = 'sm' | 'md' | 'lg'
 type AvatarVariants = 'default' | 'solid'
@@ -36,14 +37,12 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
     const bgColor = variant === 'solid' ? accentColor : undefined
     const contrastedColor = bgColor ? getContrastText(bgColor) : undefined
 
-    const classes = [
+    const classes = cn(
       'relative inline-flex items-center justify-center shrink-0 overflow-hidden rounded-full border-2 border-(--lithos-border) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] font-(--font-sans) font-bold uppercase',
-      variant === 'default' ? 'bg-(--lithos-surface) text-(--lithos-text)' : '',
+      variant === 'default' && 'bg-(--lithos-surface) text-(--lithos-text)',
       sizeStyles[size],
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ')
+      className
+    )
 
     return (
       <div
@@ -77,13 +76,11 @@ export interface AvatarGroupCountProps extends Omit<ComponentPropsWithoutRef<'di
 
 export const AvatarGroupCount = forwardRef<HTMLDivElement, AvatarGroupCountProps>(
   ({ count, size = 'md', className = '', ...props }, ref) => {
-    const classes = [
+    const classes = cn(
       'relative inline-flex items-center justify-center shrink-0 rounded-full border-2 border-(--lithos-border) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] bg-(--lithos-surface) text-(--lithos-text) font-(--font-sans) font-bold uppercase',
       sizeStyles[size],
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ')
+      className
+    )
 
     return (
       <div ref={ref} className={classes} {...props}>
