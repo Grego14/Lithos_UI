@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Navbar } from '../showroom/sections/Navbar'
 import { Footer } from '../showroom/sections/Footer'
 import { Toggle } from '../components/ui/Toggle'
+import { KineticGrid } from '../components/ui/KineticGrid'
 import { ToastItem } from '../components/ui/Toast'
 import { Button } from '../components/ui/Button'
 import { Card, CardImage, CardContent } from '../components/ui/Card'
@@ -119,30 +120,41 @@ const componentsList = [
 export const ComponentsIndex = ({ isDarkMode, toggleObsidian }: ComponentsIndexProps) => <>
   <Navbar isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
   <main className="pt-24 min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
+    <section className="border-b-2 border-(--lithos-border) bg-(--lithos-bg)">
+      <KineticGrid baseOpacity="opacity-10" className="py-12 md:py-24 w-full">
+        <div className="mx-auto max-w-7xl px-6 w-full flex flex-col lg:flex-row items-center lg:items-start lg:justify-between">
+          <div className="w-full text-center lg:text-left flex flex-col items-center lg:items-start">
+            <p className="mb-4 text-sm font-bold uppercase tracking-widest text-(--lithos-text) opacity-60">
+              EVERY PRIMITIVE. ONE SOURCE.
+            </p>
+            <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tighter leading-none md:text-7xl lg:text-8xl text-(--lithos-text)">
+              THE PARTS THAT <br /> DON'T BREAK
+            </h1>
+            <h2 className="mt-4 text-3xl sm:text-4xl font-display md:text-5xl italic text-(--lithos-accent) max-w-4xl mx-auto lg:mx-0">
+              Every primitive is built with strict adherence to structural integrity.
+            </h2>
+          </div>
+        </div>
+      </KineticGrid>
+    </section>
+
     <section className="py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-12 text-(--lithos-text)">
-          Components
-        </h1>
-        <p className="text-xl md:text-2xl font-normal max-w-3xl mb-16 font-body">
-          The fundamental building blocks of Lithos UI. Every primitive is built with the Zero-Gap layout system and strict adherence to structural integrity.
-        </p>
-
         <div className="flex flex-wrap -m-3">
           {componentsList.map((comp) => (
-            <div key={comp.name} className="w-[50%] sm:w-[33.333%] lg:w-[25%] p-3">
+            <div key={comp.name} className="w-full sm:w-[50%] md:w-[33.333%] lg:w-[25%] p-3">
               <Link
                 to={comp.to}
-                className="group block border-4 border-(--lithos-border) bg-(--lithos-surface) transition-transform lithos-click h-full"
+                className="block group lithos-click h-full"
               >
                 {/* Top Zone: Live Preview */}
-                <div className="h-40 flex items-center justify-center bg-(--lithos-bg) p-4 overflow-hidden relative">
+                <div className="aspect-[4/3] sm:aspect-[3/2] md:aspect-video flex items-center justify-center bg-(--lithos-surface) p-4 overflow-hidden relative border-2 border-(--lithos-border)">
                   {comp.preview}
                 </div>
 
                 {/* Bottom Zone: Thin Label Strip */}
-                <div className="border-t-4 border-(--lithos-border) bg-(--lithos-surface) px-4 py-3 text-center">
-                  <h2 className="text-xl font-black uppercase tracking-tighter text-(--lithos-text) transition-colors">
+                <div className="mt-3">
+                  <h2 className="text-xl font-black uppercase tracking-tighter text-(--lithos-text) group-hover:text-(--lithos-accent) transition-colors">
                     {comp.name}
                   </h2>
                 </div>
