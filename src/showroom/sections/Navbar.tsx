@@ -38,6 +38,7 @@ const Navbar = () => {
             <Link
               key={link.label}
               to={link.to}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="mx-4 font-black uppercase tracking-tighter leading-none text-(--lithos-text) transition-all duration-150 ease-out hover:text-(--lithos-accent) cursor-pointer"
             >
               {link.label}
@@ -86,7 +87,10 @@ const Navbar = () => {
             <Link
               key={link.label}
               to={link.to}
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() => {
+                setIsMenuOpen(false)
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+              }}
               className="block w-full text-left text-4xl sm:text-5xl font-black uppercase tracking-tighter text-(--lithos-text) opacity-80 hover:opacity-100 hover:text-(--lithos-text) hover:translate-x-2 mb-8 cursor-pointer transition-all duration-150"
             >
               {link.label}
