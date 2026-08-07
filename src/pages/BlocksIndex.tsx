@@ -44,7 +44,7 @@ export const BlocksIndex = ({ isDarkMode, toggleObsidian }: BlocksIndexProps) =>
         </section>
 
         {/* Category Catalog */}
-        <section className="py-12 border-b-2 border-(--lithos-border) bg-(--lithos-bg)">
+        <section className="py-12 border-b-2 border-(--lithos-border) bg-(--lithos-bg) mb-12">
           <div className="mx-auto max-w-7xl px-6">
             <div className="flex flex-wrap -m-3">
               <div className="w-full sm:w-[50%] lg:w-[33.333%] p-3">

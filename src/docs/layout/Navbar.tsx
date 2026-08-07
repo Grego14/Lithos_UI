@@ -28,14 +28,15 @@ const groupedLinks = [
     category: 'Components',
     links: [
       { label: 'Accordion', href: '/docs/accordion' },
+      { label: 'Alert', href: '/docs/alert' },
       { label: 'Avatar', href: '/docs/avatar' },
+      { label: 'Badge', href: '/docs/badge' },
+      { label: 'Breadcrumb', href: '/docs/breadcrumb' },
       { label: 'Button', href: '/docs/button' },
+      { label: 'Calendar', href: '/docs/calendar' },
       { label: 'Card', href: '/docs/card' },
-      { label: 'Code Viewer', href: '/docs/code-viewer' },
-      { label: 'Preview Block', href: '/docs/preview-block' },
       { label: 'Toast', href: '/docs/toast' },
       { label: 'Toggle', href: '/docs/toggle' },
-      { label: 'Badge', href: '/docs/badge' },
     ],
   },
 ]
