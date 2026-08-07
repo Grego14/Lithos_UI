@@ -11,6 +11,7 @@ import { Badge } from '../components/ui/Badge'
 import { Avatar } from '../components/ui/Avatar'
 import { Alert } from '../components/ui/Alert'
 import { Accordion } from '../components/ui/Accordion'
+import { Breadcrumb } from '../components/ui/Breadcrumb'
 import { Calendar } from '../components/ui/Calendar'
 
 interface ComponentsIndexProps {
@@ -65,6 +66,20 @@ const componentsList = [
     name: 'Badge',
     to: '/docs/badge',
     preview: <Badge variant='accent' size='medium'>Feature</Badge>
+  },
+  {
+    name: 'Breadcrumb',
+    to: '/docs/breadcrumb',
+    preview: (
+      <div className="scale-[0.75] origin-center">
+        <Breadcrumb
+          items={[
+            { label: 'Home', href: '#' },
+            { label: 'Docs', active: true },
+          ]}
+        />
+      </div>
+    )
   },
   {
     name: 'Button',

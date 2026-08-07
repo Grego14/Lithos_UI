@@ -12,6 +12,7 @@ import { AlertDoc } from './docs/pages/Alert'
 import { AvatarDoc } from './docs/pages/Avatar'
 import { AccordionDoc } from './docs/pages/Accordion'
 import { BadgeDoc } from './docs/pages/Badge'
+import { BreadcrumbDoc } from './docs/pages/Breadcrumb'
 import { BlockPreviewPage } from './pages/BlockPreviewPage'
 import { BlocksIndex } from './pages/BlocksIndex'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
@@ -48,6 +49,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
     { path: 'avatar', component: AvatarDoc },
     { path: 'accordion', component: AccordionDoc },
     { path: 'badge', component: BadgeDoc },
+    { path: 'breadcrumb', component: BreadcrumbDoc },
     { path: 'button', component: ButtonDoc },
     { path: 'calendar', component: CalendarDoc },
     { path: 'card', component: CardDoc },

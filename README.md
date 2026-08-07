@@ -30,18 +30,20 @@ To prevent Tailwind class bloat ("DRY" architecture), Lithos UI packages its mec
 
 ### Primitives
 
-| Component             | Status | Docs                                       |
-| --------------------- | ------ | ------------------------------------------ |
-| Accordion                | Stable | [Link](/src/docs/pages/Accordion.tsx)         |
-| Avatar                   | Stable | [Link](/src/docs/pages/Avatar.tsx)         |
-| Badge                 | Stable   | [Link](/src/docs/pages/Badge.tsx)          |
-| Button                | Stable | [Link](/src/docs/pages/Button.tsx)         |
-| Calendar              | Beta   | [Link](/src/docs/pages/Calendar.tsx)       |
-| Card                  | Stable | [Link](/src/docs/pages/Card.tsx)     |
-| CodeViewer            | Stable | [Link](/src/docs/pages/CodeViewer.tsx)     |
-| PreviewBlock          | Stable | [Link](/src/docs/pages/PreviewBlock.tsx)   |
-| Toast (ToastProvider) | Stable | [Link](/src/docs/pages/Toast.tsx)          |
-| Toggle                | Stable | [Link](/src/docs/pages/Toggle.tsx)         |
+
+| Component             | Status | Docs                                     |
+| --------------------- | ------ | ---------------------------------------- |
+| Accordion             | Stable | [Link](/src/docs/pages/Accordion.tsx)    |
+| Avatar                | Stable | [Link](/src/docs/pages/Avatar.tsx)       |
+| Badge                 | Stable | [Link](/src/docs/pages/Badge.tsx)        |
+| Button                | Stable | [Link](/src/docs/pages/Button.tsx)       |
+| Card                  | Stable | [Link](/src/docs/pages/Card.tsx)         |
+| Badge                 | Beta   | [Link](/src/docs/pages/Badge.tsx)        |
+| Breadcrumb            | Stable | [Link](/src/docs/pages/Breadcrumb.tsx)   |
+| CodeViewer            | Stable | [Link](/src/docs/pages/CodeViewer.tsx)   |
+| PreviewBlock          | Stable | [Link](/src/docs/pages/PreviewBlock.tsx) |
+| Toast (ToastProvider) | Stable | [Link](/src/docs/pages/Toast.tsx)        |
+| Toggle                | Stable | [Link](/src/docs/pages/Toggle.tsx)       |
 
 
 ### Layout
