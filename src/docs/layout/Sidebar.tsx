@@ -46,6 +46,9 @@ export const Sidebar = () => {
           <Link to="/docs/button" className={getLinkClass('/docs/button')}>
             Button
           </Link>
+          <Link to="/docs/calendar" className={getLinkClass('/docs/calendar')}>
+            Calendar
+          </Link>
           <Link to="/docs/card" className={getLinkClass('/docs/card')}>
             Card
           </Link>
