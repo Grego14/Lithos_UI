@@ -7,6 +7,13 @@
 
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useToast } from '../../core/hooks/useToast'
+import { Toggle } from '../../components/ui/Toggle'
+
+interface NavbarProps {
+  isDarkMode?: boolean
+  onToggleObsidian?: () => void
+}
 
 const links = [
   { label: 'Components', to: '/components' },
@@ -16,8 +23,22 @@ const links = [
   { label: 'Docs', to: '/docs' },
 ]
 
-const Navbar = () => {
+const Navbar = ({ isDarkMode = false, onToggleObsidian }: NavbarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { addToast } = useToast()
+
+  const handleToggleObsidian = () => {
+    const nextMode = !isDarkMode
+
+    onToggleObsidian?.()
+
+    addToast({
+      title: 'THEME CHANGED',
+      message: nextMode ? 'Obsidian Mode Activated.' : 'Light Mode Activated.',
+      type: 'default',
+      color: nextMode ? '#000000' : '#FFFFFF',
+    })
+  }
 
   return (
     <>
@@ -47,6 +68,9 @@ const Navbar = () => {
 
         {/* - Action block balances the brand block and keeps the header geometry stable. */}
         <div className="hidden items-center justify-end lg:flex lg:flex-1">
+          <div className="mr-4 flex items-center">
+            <Toggle checked={isDarkMode} onToggle={handleToggleObsidian} label="Toggle Obsidian Mode" />
+          </div>
           <a
             href="https://github.com/lithosui/Lithos_UI"
             target="_blank"
@@ -58,7 +82,10 @@ const Navbar = () => {
         </div>
 
         {/* - Mobile Action Toggle (Hamburger / X) */}
-        <div className="flex lg:hidden">
+        <div className="flex lg:hidden items-center">
+          <div className="mr-3 flex items-center">
+            <Toggle checked={isDarkMode} onToggle={handleToggleObsidian} label="Toggle Obsidian Mode" />
+          </div>
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"

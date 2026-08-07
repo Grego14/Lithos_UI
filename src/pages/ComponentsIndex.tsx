@@ -117,7 +117,7 @@ const componentsList = [
 ]
 
 export const ComponentsIndex = ({ isDarkMode, toggleObsidian }: ComponentsIndexProps) => <>
-  <Navbar />
+  <Navbar isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
   <main className="pt-24 min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
     <section className="py-24">
       <div className="mx-auto max-w-7xl px-6">
@@ -154,6 +154,6 @@ export const ComponentsIndex = ({ isDarkMode, toggleObsidian }: ComponentsIndexP
     </section>
   </main>
   <div className="mt-24">
-    <Footer isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
+    <Footer />
   </div>
 </>;

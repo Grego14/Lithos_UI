@@ -32,7 +32,7 @@ export const Showroom = ({ isDarkMode, toggleObsidian, accentColor, updateAccent
    */
   return (
     <>
-      <Navbar />
+      <Navbar isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
 
       <main className="pt-24">
         <Hero accentColor={accentColor} updateAccentColor={updateAccentColor} />
@@ -52,7 +52,7 @@ export const Showroom = ({ isDarkMode, toggleObsidian, accentColor, updateAccent
       </main>
 
       <div className="mt-24">
-        <Footer isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
+        <Footer />
       </div>
     </>
   )

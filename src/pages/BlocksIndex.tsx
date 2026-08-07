@@ -22,7 +22,7 @@ import featureGridCode from '../components/blocks/FeatureGrid/1.tsx?raw'
 export const BlocksIndex = ({ isDarkMode, toggleObsidian }: BlocksIndexProps) => {
   return (
     <>
-      <Navbar />
+      <Navbar isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
       <main className="pt-24 min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
         {/* Hero Section */}
         <section className="py-24">
@@ -122,7 +122,7 @@ export const BlocksIndex = ({ isDarkMode, toggleObsidian }: BlocksIndexProps) =>
           </div>
         </section>
       </main>
-      <Footer isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
+      <Footer />
     </>
   )
 }
