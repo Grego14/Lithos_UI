@@ -195,8 +195,8 @@ export const CustomizedAlert = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="title" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
-        Without a title
+      <h3 id="no-title" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+        No title
       </h3>
 
       <div className="mt-8 mb-16">

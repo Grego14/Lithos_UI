@@ -49,7 +49,7 @@ export const IconNameBreadcrumb = () => {
     { label: 'Lithos UI', href: '#' },
     { label: 'Components', href: '#', icon: <FolderIcon /> },
     { label: 'Breadcrumb', href: '#', icon: <SettingsIcon /> },
-    { label: 'Simple Icon + Name', active: true, icon: <DocumentIcon /> },
+    { label: 'Icon', active: true, icon: <DocumentIcon /> },
   ]
 
   return <Breadcrumb variant="icon" items={items} />
@@ -69,7 +69,7 @@ export const IconNameBreadcrumb = () => {
 
       <section className="mb-12">
         <p className="mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          Breadcrumbs show users where they are and help them navigate back to previous pages without getting lost. Lithos UI offers two simple styles: <strong>Collapsible</strong> to keep long paths tidy, and <strong>Icon + Name</strong> for a visual touch.
+          Breadcrumbs show users where they are and help them navigate back to previous pages without getting lost. Lithos UI offers two simple styles: <strong>Collapsible</strong> to keep long paths tidy, and <strong>Icon</strong> for a visual touch.
         </p>
       </section>
 
@@ -80,12 +80,12 @@ export const IconNameBreadcrumb = () => {
       </div>
 
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
-        Breadcrumb Types
+        Examples
       </h2>
 
       {/* Type 1: Collapsible */}
       <h3 id="collapsible" className="mb-2 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
-        1. Collapsible Breadcrumb
+        Collapsible
       </h3>
       <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
         Automatically truncates middle items when paths get too long. Click the <code>•••</code> ellipsis button to expand hidden items.
@@ -113,9 +113,9 @@ export const IconNameBreadcrumb = () => {
         </PreviewBlock>
       </div>
 
-      {/* Type 2: Simple Icon + Name */}
-      <h3 id="icon-name" className="mb-2 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
-        2. Simple Icon + Name Breadcrumb
+      {/* Type 2: Icon */}
+      <h3 id="icon" className="mb-2 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Icon
       </h3>
       <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
         Pairs descriptive icons alongside segment names for enhanced visual clarity and quick hierarchy scanning.
@@ -133,7 +133,7 @@ export const IconNameBreadcrumb = () => {
                 { label: 'Lithos UI', href: '#' },
                 { label: 'Components', href: '#', icon: <FolderIcon /> },
                 { label: 'Breadcrumb', href: '#', icon: <SettingsIcon /> },
-                { label: 'Simple Icon + Name', active: true, icon: <DocumentIcon /> },
+                { label: 'Icon', active: true, icon: <DocumentIcon /> },
               ]}
             />
           </div>
