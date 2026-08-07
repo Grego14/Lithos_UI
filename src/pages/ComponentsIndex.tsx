@@ -9,8 +9,12 @@ import { Card, CardImage, CardContent } from '../components/ui/Card'
 import { useTheme } from '../core/useTheme'
 import { Badge } from '../components/ui/Badge'
 import { Avatar } from '../components/ui/Avatar'
+<<<<<<< HEAD
 import { Accordion } from '../components/ui/Accordion'
 
+=======
+import { Breadcrumb } from '../components/ui/Breadcrumb'
+>>>>>>> 1ef22ee (feat: add breadcrumb component)
 interface ComponentsIndexProps {
   isDarkMode: boolean
   toggleObsidian: () => void
@@ -49,6 +53,20 @@ const componentsList = [
     name: 'Badge',
     to: '/docs/badge',
     preview: <Badge variant='accent' size='medium'>Feature</Badge>
+  },
+  {
+    name: 'Breadcrumb',
+    to: '/docs/breadcrumb',
+    preview: (
+      <div className="scale-[0.75] origin-center">
+        <Breadcrumb
+          items={[
+            { label: 'Home', href: '#' },
+            { label: 'Docs', active: true },
+          ]}
+        />
+      </div>
+    )
   },
   {
     name: 'Button',
