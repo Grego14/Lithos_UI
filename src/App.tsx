@@ -8,6 +8,7 @@
  * - Component composition (Showroom, NotFound routes)
  */
 
+import { AlertDoc } from './docs/pages/Alert'
 import { AvatarDoc } from './docs/pages/Avatar'
 import { AccordionDoc } from './docs/pages/Accordion'
 import { BadgeDoc } from './docs/pages/Badge'
@@ -43,6 +44,7 @@ const ScrollToTop = () => {
 const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
   const docPages = [
     { path: '', component: Introduction },
+    { path: 'alert', component: AlertDoc },
     { path: 'avatar', component: AvatarDoc },
     { path: 'accordion', component: AccordionDoc },
     { path: 'badge', component: BadgeDoc },
