@@ -61,9 +61,9 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#custom-color', label: 'Custom color', level: 2 },
   ],
   '/docs/breadcrumb': [
-    { id: '#examples', label: 'Examples', level: 1 },
-    { id: '#collapsible', label: 'Collapsible', level: 2 },
-    { id: '#icon', label: 'Icon', level: 2 },
+    { id: '#examples', label: 'Breadcrumb Types', level: 1 },
+    { id: '#collapsible', label: '1. Collapsible', level: 2 },
+    { id: '#icon-name', label: '2. Simple Icon + Name', level: 2 },
   ],
   '/docs/avatar': [
     { id: '#examples', label: 'Examples', level: 1 },
