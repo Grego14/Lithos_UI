@@ -6,30 +6,8 @@
  */
 
 import { Link } from 'react-router-dom'
-import { useToast } from '../../core/hooks/useToast'
-import { Toggle } from '../../components/ui/Toggle'
 
-interface FooterProps {
-  isDarkMode: boolean
-  onToggleObsidian: () => void
-}
-
-const Footer = ({ isDarkMode, onToggleObsidian }: FooterProps) => {
-  const { addToast } = useToast()
-
-  const handleToggleObsidian = () => {
-    // - Toggle and toast are paired so the theme flip has an explicit confirmation signal.
-    const nextMode = !isDarkMode
-
-    onToggleObsidian()
-
-    addToast({
-      title: 'THEME CHANGED',
-      message: nextMode ? 'Obsidian Mode Activated.' : 'Light Mode Activated.',
-      type: 'default',
-      color: nextMode ? '#000000' : '#FFFFFF',
-    })
-  }
+const Footer = () => {
 
   return (
     <footer className="relative overflow-hidden border-t-2 border-(--lithos-border) bg-(--lithos-accent) px-6 py-20 text-(--lithos-accent-text)">
@@ -84,9 +62,6 @@ const Footer = ({ isDarkMode, onToggleObsidian }: FooterProps) => {
           >
             Docs
           </Link>
-          <div className="mt-4 flex items-center">
-            <Toggle checked={isDarkMode} onToggle={handleToggleObsidian} label="Toggle Obsidian Mode" />
-          </div>
         </div>
 
         {/* - Sponsor CTA uses the same hard-surface language so the support action matches the system physics. */}

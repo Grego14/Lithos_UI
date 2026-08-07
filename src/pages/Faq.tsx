@@ -30,7 +30,7 @@ const faqs = [
 ]
 
 export const Faq = ({ isDarkMode, toggleObsidian }: FaqProps) => <>
-  <Navbar />
+  <Navbar isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
   <main className="pt-24 min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
     <section className="py-24">
       <div className="mx-auto max-w-4xl px-6">
@@ -65,6 +65,6 @@ export const Faq = ({ isDarkMode, toggleObsidian }: FaqProps) => <>
     </section>
   </main>
   <div className="mt-24">
-    <Footer isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
+    <Footer />
   </div>
 </>;
