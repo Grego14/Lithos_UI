@@ -1,8 +1,14 @@
+/**
+ * @fileoverview Lithos UI badge primitive.
+ * - Dynamic contrast text resolution based on YIQ color space calculated from custom HEX or preset variant backgrounds.
+ * - Integrates theme-aware accentColor fallback with hard-edged neo-brutalist border and shadow geometry.
+ */
 import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import { getContrastText } from "../../utils/yiq";
 import { colors } from "../../utils/colors";
 import { useTheme } from "../../core/useTheme";
 import type { HexColor } from "../../core/types";
+import { cn } from "../../utils/cn";
 
 type BadgeSizes = 'small' | 'default' | 'medium' | 'large'
 type BadgeVariants = 'default' | 'accent' | 'success' | 'error' | 'warning' | 'info'
@@ -28,13 +34,11 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
     const bgColor = color || (variant === 'accent' ? accentColor : colors[variant])
     const contrastedColor = getContrastText(bgColor)
 
-    const classes = [
+    const classes = cn(
       'uppercase font-(--font-sans) font-bold border-2 border-(--lithos-border) shadow-[1px_1px_0_0_var(--lithos-border)] py-1 w-max',
       sizeStyles[size],
-      className ?? ''
-    ]
-      .filter(Boolean)
-      .join(' ')
+      className
+    )
 
     return (
       <div ref={ref} className={classes} style={{ backgroundColor: bgColor, color: contrastedColor }} {...props}>

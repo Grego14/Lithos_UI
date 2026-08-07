@@ -4,11 +4,11 @@
  * - Copies the current code block to the clipboard with toast feedback.
  * - Uses explicit spacing only; no gap utilities are allowed.
  */
-
 import { useToast } from '../../core/hooks/useToast'
 import { useTheme } from '../../core/useTheme'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { cn } from '../../utils/cn'
 
 interface CodeViewerProps {
   code: string
@@ -47,10 +47,13 @@ export const CodeViewer = ({ code, language = 'tsx', showLanguage = false, embed
     }
   }
 
+  const classes = cn(
+    embedded ? 'bg-transparent mb-0 relative' : 'border-2 border-(--lithos-border) bg-(--lithos-bg) mb-8 relative',
+    className
+  )
+
   return (
-    <div
-      className={`w-full ${embedded ? 'bg-transparent mb-0 relative' : 'border-2 border-(--lithos-border) bg-(--lithos-bg) mb-8 relative'} ${className}`}
-    >
+    <div className={classes}>
       <div className="border-b-2 border-(--lithos-border) bg-(--lithos-surface) px-4 py-2 flex justify-between items-center">
         <div className="flex items-center">
           {showLanguage ? (

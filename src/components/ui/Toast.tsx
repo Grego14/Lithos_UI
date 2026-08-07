@@ -4,12 +4,12 @@
  * - Uses explicit margins and fixed positioning to keep the stack predictable.
  * - Applies per-toast contrast and heavy borders so alerts read as hard objects.
  */
-
 import { useState, useCallback, type ReactNode } from 'react'
 import { getContrastText } from '../../utils/yiq'
 import { ToastContext } from '../../core/hooks/useToast'
 import type { ToastProps } from '../../core/types'
 import { colors } from '../../utils/colors'
+import { Button } from './Button'
 
 type IdentifiedToastProps = ToastProps & { id: string }
 
@@ -59,6 +59,8 @@ export const ToastItem = ({ toast, onRemove }: ToastItemType) => {
   const bgColor = color || colors[type] || colors.default
   const textColor = getContrastText(bgColor)
 
+  const label = 'Close notification'
+
   return (
     <>
       <style>{`
@@ -82,10 +84,10 @@ export const ToastItem = ({ toast, onRemove }: ToastItemType) => {
         </div>
 
         {/* - Close control keeps the same hard-edge language as the card. */}
-        <button
+        <Button
           onClick={onRemove}
-          className="ml-4 shrink-0 bg-transparent lithos-click"
-          aria-label="Close notification"
+          className="ml-4 shrink-0 bg-transparent"
+          aria-label={label}
           style={{ borderColor: textColor }}
         >
           <svg
@@ -93,13 +95,14 @@ export const ToastItem = ({ toast, onRemove }: ToastItemType) => {
             height="16"
             viewBox="0 0 16 16"
             fill="none"
-            stroke="currentColor"
+            stroke={textColor}
             strokeWidth="4"
             className="block"
           >
+            <title>{label}</title>
             <path d="M2 2L14 14M14 2L2 14" />
           </svg>
-        </button>
+        </Button>
       </div>
     </>
   )

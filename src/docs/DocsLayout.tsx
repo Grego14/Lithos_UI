@@ -71,11 +71,30 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#sizes', label: 'Sizes', level: 2 },
     { id: '#group', label: 'Group', level: 2 },
   ],
+  '/docs/alert': [
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#filled', label: 'Filled', level: 2 },
+    { id: '#outline', label: 'Outline', level: 2 },
+    { id: '#sizes', label: 'Sizes', level: 2 },
+    { id: '#title', label: 'Without a title', level: 2 },
+    { id: '#actions', label: 'Actions', level: 2 },
+    { id: '#custom-color', label: 'Custom color', level: 2 },
+  ],
   '/docs/accordion': [
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
     { id: '#grouped-default', label: 'Grouped default', level: 2 },
     { id: '#grouped-multiple', label: 'Grouped multiple', level: 2 },
+  ],
+  '/docs/calendar': [
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#single', label: 'Single', level: 2 },
+    { id: '#multiple', label: 'Multiple', level: 2 },
+    { id: '#multi-color', label: 'Multi-color selection', level: 2 },
+    { id: '#range', label: 'Range', level: 2 },
+    { id: '#disabled-dates', label: 'Disabled dates', level: 2 },
+    { id: '#bounded-years', label: 'Bounded years', level: 2 },
+    { id: '#controlled', label: 'Controlled', level: 2 },
   ],
 }
 

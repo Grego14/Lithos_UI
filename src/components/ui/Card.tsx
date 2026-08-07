@@ -6,6 +6,7 @@
  */
 import { forwardRef } from 'react'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
+import { cn } from '../../utils/cn'
 
 export interface CardProps extends ComponentPropsWithoutRef<'div'> {
   interactive?: boolean | undefined
@@ -17,18 +18,14 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ interactive = false, variant = 'default', className, children, ...rest }, ref) => {
     const isImage = variant === 'image'
 
-    const classes = [
-      'relative border-2 border-(--lithos-border) overflow-hidden',
-      isImage ? 'bg-transparent text-white flex flex-col justify-end' : 
-      variant === 'solid' ? 'bg-(--lithos-accent) text-(--lithos-accent-text)' : 
-      'bg-(--lithos-surface) text-(--lithos-text)',
-      variant === 'accent' ? 'transition-colors hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)' : '',
-      'shadow-[4px_4px_0px_0px_var(--lithos-shadow)]',
-      interactive ? 'transition-transform hover:-translate-y-1' : '',
-      className ?? '',
-    ]
-      .filter(Boolean)
-      .join(' ')
+    const classes = cn(
+      'relative border-2 border-(--lithos-border) overflow-hidden shadow-[4px_4px_0px_0px_var(--lithos-shadow)]',
+      isImage ? 'bg-transparent text-white flex flex-col justify-end' : variant === 'solid'
+        ? 'bg-(--lithos-accent) text-(--lithos-accent-text)' : 'bg-(--lithos-surface) text-(--lithos-text)',
+      variant === 'accent' && 'transition-colors hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)',
+      interactive && 'transition-transform hover:-translate-y-1',
+      className
+    )
 
     return (
       <div ref={ref} className={classes} {...rest}>
@@ -51,14 +48,12 @@ export interface CardImageProps extends ComponentPropsWithoutRef<'img'> {
 
 export const CardImage = forwardRef<HTMLImageElement, CardImageProps>(
   ({ isBackground = false, className, ...rest }, ref) => {
-    const classes = [
+    const classes = cn(
       isBackground
         ? 'absolute inset-0 w-full h-full object-cover z-0'
         : 'w-full h-48 object-cover block border-b-2 border-(--lithos-border)',
-      className ?? '',
-    ]
-      .filter(Boolean)
-      .join(' ')
+      className,
+    )
 
     return <img ref={ref} className={classes} {...rest} />
   }
@@ -79,7 +74,7 @@ export const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
       lg: 'p-9',
     }[spacing]
 
-    const classes = ['relative z-20', spacingClass, className ?? ''].filter(Boolean).join(' ')
+    const classes = cn('relative z-20', spacingClass, className)
 
     return (
       <div ref={ref} className={classes} {...rest}>
@@ -96,9 +91,7 @@ export interface CardTitleProps extends ComponentPropsWithoutRef<'h3'> {
 }
 
 export const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(({ className, children, ...rest }, ref) => {
-  const classes = ['text-xl font-black uppercase tracking-tight leading-none mb-3', className ?? '']
-    .filter(Boolean)
-    .join(' ')
+  const classes = cn('text-xl font-black uppercase tracking-tight leading-none mb-3', className)
 
   return (
     <h3 ref={ref} className={classes} {...rest}>
@@ -115,7 +108,7 @@ export interface CardDescriptionProps extends ComponentPropsWithoutRef<'p'> {
 
 export const CardDescription = forwardRef<HTMLParagraphElement, CardDescriptionProps>(
   ({ className, children, ...rest }, ref) => {
-    const classes = ['font-body opacity-70 leading-snug', className ?? ''].filter(Boolean).join(' ')
+    const classes = cn('font-body opacity-70 leading-snug', className)
 
     return (
       <p ref={ref} className={classes} {...rest}>
@@ -140,9 +133,11 @@ export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
       lg: 'px-9 pt-6 pb-9',
     }[spacing]
 
-    const classes = ['relative z-20 flex items-center justify-end border-t-2 border-(--lithos-border)', spacingClass, className ?? '']
-      .filter(Boolean)
-      .join(' ')
+    const classes = cn(
+      'relative z-20 flex items-center justify-end border-t-2 border-(--lithos-border)',
+      spacingClass,
+      className
+    )
 
     return (
       <div ref={ref} className={classes} {...rest}>
@@ -153,4 +148,3 @@ export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
 )
 
 CardFooter.displayName = 'CardFooter'
-

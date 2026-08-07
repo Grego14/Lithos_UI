@@ -30,6 +30,7 @@ To prevent Tailwind class bloat ("DRY" architecture), Lithos UI packages its mec
 
 ### Primitives
 
+
 | Component             | Status | Docs                                     |
 | --------------------- | ------ | ---------------------------------------- |
 | Accordion             | Stable | [Link](/src/docs/pages/Accordion.tsx)    |
@@ -43,6 +44,7 @@ To prevent Tailwind class bloat ("DRY" architecture), Lithos UI packages its mec
 | PreviewBlock          | Stable | [Link](/src/docs/pages/PreviewBlock.tsx) |
 | Toast (ToastProvider) | Stable | [Link](/src/docs/pages/Toast.tsx)        |
 | Toggle                | Stable | [Link](/src/docs/pages/Toggle.tsx)       |
+
 
 ### Layout
 

@@ -31,6 +31,9 @@ export const Sidebar = () => {
       <div>
         <h3 className="text-xs font-black opacity-50 mb-3 px-4 uppercase">Components</h3>
         <nav className="flex flex-col pl-4 ">
+          <Link to="/docs/alert" className={getLinkClass('/docs/alert')}>
+            Alert
+          </Link>
           <Link to="/docs/avatar" className={getLinkClass('/docs/avatar')}>
             Avatar
           </Link>
@@ -45,6 +48,9 @@ export const Sidebar = () => {
           </Link>
           <Link to="/docs/button" className={getLinkClass('/docs/button')}>
             Button
+          </Link>
+          <Link to="/docs/calendar" className={getLinkClass('/docs/calendar')}>
+            Calendar
           </Link>
           <Link to="/docs/card" className={getLinkClass('/docs/card')}>
             Card

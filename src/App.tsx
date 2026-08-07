@@ -8,6 +8,7 @@
  * - Component composition (Showroom, NotFound routes)
  */
 
+import { AlertDoc } from './docs/pages/Alert'
 import { AvatarDoc } from './docs/pages/Avatar'
 import { AccordionDoc } from './docs/pages/Accordion'
 import { BadgeDoc } from './docs/pages/Badge'
@@ -16,6 +17,7 @@ import { BlockPreviewPage } from './pages/BlockPreviewPage'
 import { BlocksIndex } from './pages/BlocksIndex'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { ButtonDoc } from './docs/pages/Button'
+import { CalendarDoc } from './docs/pages/Calendar'
 import { CardDoc } from './docs/pages/Card'
 import { ComingSoon } from './showroom/sections/ComingSoon'
 import { ComponentsIndex } from './pages/ComponentsIndex'
@@ -43,11 +45,13 @@ const ScrollToTop = () => {
 const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
   const docPages = [
     { path: '', component: Introduction },
+    { path: 'alert', component: AlertDoc },
     { path: 'avatar', component: AvatarDoc },
     { path: 'accordion', component: AccordionDoc },
     { path: 'badge', component: BadgeDoc },
     { path: 'breadcrumb', component: BreadcrumbDoc },
     { path: 'button', component: ButtonDoc },
+    { path: 'calendar', component: CalendarDoc },
     { path: 'card', component: CardDoc },
     { path: 'installation', component: Installation },
     { path: 'toast', component: ToastDoc },
