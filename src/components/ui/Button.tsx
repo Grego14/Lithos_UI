@@ -9,12 +9,14 @@ import { forwardRef } from 'react'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 import type { ButtonIntent } from '../../core/types'
 import { cn } from '../../utils/cn'
+import type { ClassArray, ClassValue } from 'clsx'
 
-export interface ButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'type'> {
+export interface ButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'type' | 'className'> {
   intent?: ButtonIntent | undefined
   fullWidth?: boolean | undefined
   type?: 'button' | 'submit' | 'reset' | undefined
   children: ReactNode
+  className?: ClassValue | ClassArray
 }
 
 const intentClass: Record<ButtonIntent, string> = {
