@@ -326,7 +326,7 @@ export const AppCarousel = () => {
 
       <div className='mt-8 mb-16'>
         <PreviewBlock code={infinitePlayCode} githubUrl={githubUrl}>
-          <Carousel title='Carousel that plays infinitely!' playInfinite playDirection='left' playInterval={3000}>
+          <Carousel title='Carousel that plays infinitely!' playInfinite>
             <CarouselSlide className='h-[20rem] flex items-center justify-center'>Slide 1</CarouselSlide>
             <CarouselSlide className='h-[20rem] flex items-center justify-center'>Slide 2</CarouselSlide>
             <CarouselSlide className='h-[20rem] flex items-center justify-center'>Slide 3</CarouselSlide>
