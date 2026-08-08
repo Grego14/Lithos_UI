@@ -19,6 +19,7 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { ButtonDoc } from './docs/pages/Button'
 import { CalendarDoc } from './docs/pages/Calendar'
 import { CardDoc } from './docs/pages/Card'
+import { CarouselDoc } from './docs/pages/Carousel'
 import { ComingSoon } from './showroom/sections/ComingSoon'
 import { ComponentsIndex } from './pages/ComponentsIndex'
 import { DocsLayout } from './docs/DocsLayout'
@@ -53,6 +54,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
     { path: 'button', component: ButtonDoc },
     { path: 'calendar', component: CalendarDoc },
     { path: 'card', component: CardDoc },
+    { path: 'carousel', component: CarouselDoc },
     { path: 'installation', component: Installation },
     { path: 'toast', component: ToastDoc },
     { path: 'toggle', component: ToggleDoc },

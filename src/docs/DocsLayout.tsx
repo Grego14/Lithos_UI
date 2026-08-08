@@ -96,6 +96,15 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#bounded-years', label: 'Bounded years', level: 2 },
     { id: '#controlled', label: 'Controlled', level: 2 },
   ],
+  '/docs/carousel': [
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#default', label: 'Default', level: 2 },
+    { id: '#bottom-controls', label: 'Bottom controls', level: 2 },
+    { id: '#numbers-selector', label: 'Numbers Selector', level: 2 },
+    { id: '#no-current-slider', label: 'Without current slider', level: 2 },
+    { id: '#no-controls', label: 'Without controls', level: 2 },
+    { id: '#play-infinite', label: 'Play infinitely', level: 2 },
+  ],
 }
 
 interface DocsLayoutProps {

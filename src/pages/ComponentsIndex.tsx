@@ -14,6 +14,7 @@ import { Alert } from '../components/ui/Alert'
 import { Accordion } from '../components/ui/Accordion'
 import { Breadcrumb } from '../components/ui/Breadcrumb'
 import { Calendar } from '../components/ui/Calendar'
+import { Carousel, CarouselSlide } from '../components/ui/Carousel'
 
 interface ComponentsIndexProps {
   isDarkMode: boolean
@@ -42,6 +43,18 @@ const AlertPreview = () => {
     </div>
   )
 };
+
+const CarouselPreview = () => {
+  const slideClass = 'h-[4rem] flex items-center justify-center font-black text-lg'
+
+  return (
+    <Carousel title='LITHOS UI!' hideControls hideExtras playInfinite>
+      <CarouselSlide className={slideClass}>Slide 1</CarouselSlide>
+      <CarouselSlide className={slideClass}>Slide 2</CarouselSlide>
+      <CarouselSlide className={slideClass}>Slide 3</CarouselSlide>
+    </Carousel>
+  )
+}
 
 const componentsList = [
   {
@@ -104,6 +117,11 @@ const componentsList = [
         </CardContent>
       </Card>
     )
+  },
+  {
+    name: 'Carousel',
+    to: '/docs/carousel',
+    preview: <CarouselPreview />
   },
   {
     name: 'Toast',
