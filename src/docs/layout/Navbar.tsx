@@ -35,6 +35,7 @@ const groupedLinks = [
       { label: 'Button', href: '/docs/button' },
       { label: 'Calendar', href: '/docs/calendar' },
       { label: 'Card', href: '/docs/card' },
+      { label: 'Carousel', href: '/docs/carousel' },
       { label: 'Toast', href: '/docs/toast' },
       { label: 'Toggle', href: '/docs/toggle' },
     ],
