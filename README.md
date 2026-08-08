@@ -33,13 +33,14 @@ To prevent Tailwind class bloat ("DRY" architecture), Lithos UI packages its mec
 
 | Component             | Status | Docs                                     |
 | --------------------- | ------ | ---------------------------------------- |
-| Accordion             | Stable | [Link](/src/docs/pages/Accordion.tsx)    |
+| Alert                 | Stable | [Link](/src/docs/pages/Alert.tsx)       |
 | Avatar                | Stable | [Link](/src/docs/pages/Avatar.tsx)       |
+| Accordion             | Stable | [Link](/src/docs/pages/Accordion.tsx)    |
 | Badge                 | Stable | [Link](/src/docs/pages/Badge.tsx)        |
-| Button                | Stable | [Link](/src/docs/pages/Button.tsx)       |
-| Card                  | Stable | [Link](/src/docs/pages/Card.tsx)         |
-| Badge                 | Beta   | [Link](/src/docs/pages/Badge.tsx)        |
 | Breadcrumb            | Stable | [Link](/src/docs/pages/Breadcrumb.tsx)   |
+| Button                | Stable | [Link](/src/docs/pages/Button.tsx)       |
+| Calendar                  | Stable | [Link](/src/docs/pages/Calendar.tsx)     |
+| Card                  | Stable | [Link](/src/docs/pages/Card.tsx)         |
 | CodeViewer            | Stable | [Link](/src/docs/pages/CodeViewer.tsx)   |
 | PreviewBlock          | Stable | [Link](/src/docs/pages/PreviewBlock.tsx) |
 | Toast (ToastProvider) | Stable | [Link](/src/docs/pages/Toast.tsx)        |
