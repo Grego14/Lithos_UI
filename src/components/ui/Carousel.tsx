@@ -187,7 +187,7 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       const amount = carousel.clientWidth
       const isNext = direction === 'next'
 
-      let newIndex = 0
+      let newIndex
 
       // allow moving to a specific slide
       if (typeof direction === 'number') {
