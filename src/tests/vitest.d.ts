@@ -11,3 +11,9 @@ declare module 'vitest' {
     toHaveNoViolations(): void;
   }
 }
+
+declare module 'jest-axe' {
+  export const axe: any;
+  export const toHaveNoViolations: any;
+  export const configureAxe: any;
+}
