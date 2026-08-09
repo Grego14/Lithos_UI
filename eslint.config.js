@@ -7,7 +7,7 @@ import importPlugin from 'eslint-plugin-import-x'
 import preferArrowFunctions from 'eslint-plugin-prefer-arrow-functions'
 
 export default tseslint.config(
-  { ignores: ['dist', 'eslint.config.js', 'vite.config.js', 'src/global.d.ts'] },
+  { ignores: ['dist', 'eslint.config.js', 'vite.config.js'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx,js,jsx}'],
