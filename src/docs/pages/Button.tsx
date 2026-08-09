@@ -71,7 +71,7 @@ export const TextButton = () => {
         <h1 className="text-4xl md:text-5xl font-display tracking-tight leading-none text-(--lithos-text) mb-6">
           Button
         </h1>
-        <p className="mt-2 text-lg md:text-xl font-dsisplay opacity-70 text-(--lithos-text)">
+        <p className="mt-2 text-lg md:text-xl font-body opacity-70 text-(--lithos-text)">
           A hard-bordered, high-contrast clickable primitive with three levels of visual emphasis.
         </p>
         <hr className="border-t-2 border-(--lithos-border) mt-6 mb-6" />
