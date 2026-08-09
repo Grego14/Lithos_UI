@@ -1,5 +1,7 @@
 import { forwardRef, useState } from 'react'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
+import { IconHome } from './icons/IconHome'
+import { IconBreadcrumbSeparator } from './icons/IconBreadcrumbSeparator'
 
 export interface BreadcrumbItemData {
   label: string
@@ -30,7 +32,7 @@ export const BreadcrumbSeparator = forwardRef<HTMLLIElement, ComponentPropsWitho
 
     return (
       <li ref={ref} role="presentation" aria-hidden="true" className={classes} {...rest}>
-        {children ?? '/'}
+        {children ?? <IconBreadcrumbSeparator />}
       </li>
     )
   }
@@ -147,29 +149,13 @@ export const BreadcrumbList = forwardRef<HTMLOListElement, ComponentPropsWithout
 
 BreadcrumbList.displayName = 'BreadcrumbList'
 
-const HomeIcon = () => (
-  <svg
-    className="w-4 h-4 mr-1.5 inline-block"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2.5"
-    viewBox="0 0 24 24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-    />
-  </svg>
-)
 
 export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
   (
     {
       items,
       variant = 'default',
-      separator = '/',
+      separator = <IconBreadcrumbSeparator />,
       showHomeIcon = true,
       humanPrefix,
       maxItems = 4,
@@ -259,13 +245,13 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
                 <BreadcrumbItem>
                   {isActive ? (
                     <BreadcrumbPage>
-                      {showDefaultHome && <HomeIcon />}
+                      {showDefaultHome && <IconHome className="w-4 h-4 mr-1.5 inline-block" />}
                       {item.icon && <span className="mr-1.5 inline-flex items-center">{item.icon}</span>}
                       {item.label}
                     </BreadcrumbPage>
                   ) : (
                     <BreadcrumbLink href={item.href} onClick={item.onClick}>
-                      {showDefaultHome && <HomeIcon />}
+                      {showDefaultHome && <IconHome className="w-4 h-4 mr-1.5 inline-block" />}
                       {item.icon && <span className="mr-1.5 inline-flex items-center">{item.icon}</span>}
                       {item.label}
                     </BreadcrumbLink>
