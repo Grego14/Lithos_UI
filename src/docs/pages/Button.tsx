@@ -1,5 +1,42 @@
 import { Button } from '../../components/ui/Button'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
+import { type PropItem, PropsAccordion } from '../../components/ui/PropsTable'
+
+const buttonPropsData: PropItem[] = [
+  {
+    name: 'intent',
+    type: "'primary' | 'secondary' | 'text'",
+    defaultValue: "'primary'",
+    required: false,
+    description: 'Visual emphasis variant.',
+  },
+  {
+    name: 'fullWidth',
+    type: 'boolean',
+    defaultValue: 'false',
+    required: false,
+    description: 'Expands the button to fill its container width.',
+  },
+  {
+    name: 'type',
+    type: "'button' | 'submit' | 'reset'",
+    defaultValue: "'button'",
+    required: false,
+    description: 'Native HTML button type.',
+  },
+  {
+    name: 'children',
+    type: 'ReactNode',
+    required: true,
+    description: 'Content rendered inside the button.',
+  },
+  {
+    name: 'className',
+    type: 'string',
+    required: false,
+    description: 'Additional CSS classes.',
+  },
+]
 
 export const ButtonDoc = () => {
   const defaultCode = `import { Button } from '../../components/ui/Button'
@@ -34,7 +71,7 @@ export const TextButton = () => {
         <h1 className="text-4xl md:text-5xl font-display tracking-tight leading-none text-(--lithos-text) mb-6">
           Button
         </h1>
-        <p className="mt-2 text-lg md:text-xl font-dsisplay opacity-70 text-(--lithos-text)">
+        <p className="mt-2 text-lg md:text-xl font-body opacity-70 text-(--lithos-text)">
           A hard-bordered, high-contrast clickable primitive with three levels of visual emphasis.
         </p>
         <hr className="border-t-2 border-(--lithos-border) mt-6 mb-6" />
@@ -94,6 +131,32 @@ export const TextButton = () => {
           Text
         </Button>
       </PreviewBlock>
+
+      <h2 id="requires" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Requires
+      </h2>
+      <ul className="list-disc pl-6 mb-12 text-lg font-body text-(--lithos-text)">
+        <li><code>clsx</code> and <code>tailwind-merge</code> for class merging utility.</li>
+      </ul>
+
+      <section className="mb-12">
+        <h2 id="accessibility" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+          Accessibility
+        </h2>
+        <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
+          <li>Uses native <code>&lt;button&gt;</code> element for built-in keyboard navigation and screen reader support.</li>
+          <li>Supports standard focus outlines provided by the browser.</li>
+          <li>Maintains high contrast ratios for all intent variants.</li>
+          <li>Disabled state accurately maps to the native <code>disabled</code> attribute.</li>
+        </ul>
+      </section>
+
+      <section className="mb-12">
+        <h2 id="api" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+          API Reference
+        </h2>
+        <PropsAccordion title="Button Props" data={buttonPropsData} />
+      </section>
     </div>
   )
 }

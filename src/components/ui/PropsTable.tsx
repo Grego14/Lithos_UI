@@ -50,9 +50,9 @@ export const PropsTable = ({ data }: PropsTableProps) => {
   )
 }
 
-export const PropsAccordion = ({ title, data, className }: AccordionProps & { data: PropItem[] }) => {
+export const PropsAccordion = ({ title, data, className, defaultOpen = true, ...rest }: AccordionProps & { data: PropItem[] }) => {
   return (
-    <Accordion title={title} classes={{ container: 'my-4' }} className={className}>
+    <Accordion title={title} classes={{ container: 'my-4' }} className={className} defaultOpen={defaultOpen} {...rest}>
       <PropsTable data={data} />
     </Accordion>
   )
