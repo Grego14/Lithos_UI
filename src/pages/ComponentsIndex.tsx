@@ -48,7 +48,7 @@ const CarouselPreview = () => {
   const slideClass = 'h-[4rem] flex items-center justify-center font-black text-lg'
 
   return (
-    <Carousel title='LITHOS UI!' hideControls hideExtras playInfinite>
+    <Carousel title='LITHOS UI!' hideControls hidePagination playInfinite playInterval={3000}>
       <Carousel.Slide className={slideClass}>Slide 1</Carousel.Slide>
       <Carousel.Slide className={slideClass}>Slide 2</Carousel.Slide>
       <Carousel.Slide className={slideClass}>Slide 3</Carousel.Slide>
