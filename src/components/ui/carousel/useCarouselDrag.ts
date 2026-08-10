@@ -47,8 +47,6 @@ export const useCarouselDrag = ({ containerRef, scroll, vertical = false }: UseC
     const delta = e[vertical ? 'clientY' : 'clientX'] - start.current
     const threshold = 50
 
-    console.log('delta -> %d, threshold -> %d', delta, threshold, delta < -threshold)
-
     if (delta < -threshold) {
       scroll('forwards')
     } else if (delta > threshold) {

@@ -23,6 +23,7 @@ interface CarouselPaginationProps extends Omit<ComponentPropsWithoutRef<'div'>, 
   showCounter?: boolean
   label?: string
   className?: ClassValue | ClassArray
+  bottomControls?: boolean
   vertical?: boolean
 }
 
@@ -34,6 +35,7 @@ export const CarouselPagination = ({
   showCounter = true,
   className,
   label = 'Move to the slide $',
+  bottomControls = false,
   vertical = false,
   ...rest
 }: CarouselPaginationProps) => {
@@ -75,7 +77,7 @@ export const CarouselPagination = ({
   const selectorsContainerClass = cn('flex sm:ml-auto', !showCounter && 'mx-auto')
   const containerClass = cn(
     'flex items-center justify-center flex-col sm:flex-row overflow-x-hidden',
-    'my-3',
+    bottomControls ? 'mb-3' : 'mt-3',
     className
   )
 

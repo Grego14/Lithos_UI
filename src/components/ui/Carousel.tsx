@@ -213,6 +213,7 @@ export const Carousel = ({
       scroll={scroll}
       sliderSelector={slideSelector}
       showCounter={showCounter}
+      bottomControls={!isTop}
       vertical={vertical} // created outside the provider we need to pass the prop
     />
   )
