@@ -5,7 +5,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useMemo, type ReactNode } from 'react'
 
-export type CarouselDirection = 'prev' | 'next'
+export type CarouselDirection = 'forwards' | 'backwards'
 export type ScrollFuncProp = CarouselDirection | number
 export type ScrollFunc = (direction: ScrollFuncProp) => void
 export type SliderSelector = 'dots' | 'numbers'
@@ -14,6 +14,7 @@ export interface CarouselContextValue {
   scroll: ScrollFunc
   currentIndex: number
   totalSlides: number
+  vertical: boolean
 }
 
 export const CarouselContext = createContext<CarouselContextValue | null>(null)
@@ -23,21 +24,24 @@ export interface CarouselProviderProps {
   scroll: ScrollFunc
   currentIndex?: number
   totalSlides?: number
+  vertical?: boolean
 }
 
 export const CarouselProvider = ({
   children,
   scroll,
   currentIndex = 0,
-  totalSlides = 0
+  totalSlides = 0,
+  vertical = false
 }: CarouselProviderProps) => {
   const value = useMemo(
     () => ({
       scroll,
       currentIndex,
       totalSlides,
+      vertical
     }),
-    [scroll, currentIndex, totalSlides]
+    [scroll, currentIndex, totalSlides, vertical]
   )
 
   return (
