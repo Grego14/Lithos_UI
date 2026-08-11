@@ -118,11 +118,13 @@ const tocRegistry: Record<string, TOCItem[]> = {
   '/docs/carousel': [
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
+    { id: '#looping', label: 'Looping', level: 2 },
     { id: '#bottom-controls', label: 'Bottom controls', level: 2 },
     { id: '#numbers-selector', label: 'Numbers Selector', level: 2 },
     { id: '#no-current-slider', label: 'No current slider', level: 2 },
     { id: '#no-controls', label: 'No controls', level: 2 },
     { id: '#play-infinite', label: 'Play infinitely', level: 2 },
+    { id: '#vertical-scroll', label: 'Looping', level: 2 },
     { id: '#api', label: 'API Reference', level: 1 },
   ],
 }

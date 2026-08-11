@@ -62,8 +62,8 @@ const carouselPropsData: PropItem[] = [
   },
   {
     name: 'playDirection',
-    type: '"right" | "left"',
-    defaultValue: '"right"',
+    type: '"forwards" | "backwards"',
+    defaultValue: '"forwards"',
     required: false,
     description: 'Direction of infinite scroll movement.'
   },
@@ -73,6 +73,20 @@ const carouselPropsData: PropItem[] = [
     defaultValue: 'true',
     required: false,
     description: 'Pauses auto-rotation on mouse enter or keyboard focus.'
+  },
+  {
+    name: 'loop',
+    type: 'boolean',
+    defaultValue: 'false',
+    required: false,
+    description: 'Enables continuous looping, moving to the first item after reaching the end.'
+  },
+  {
+    name: 'vertical',
+    type: 'boolean',
+    defaultValue: 'false',
+    required: false,
+    description: 'Changes the layout and scroll direction from horizontal to vertical.'
   },
   {
     name: 'className',
@@ -90,6 +104,12 @@ const carouselSlidePropsData: PropItem[] = [
     description: 'Content rendered inside the individual slide.'
   },
   {
+    name: 'label',
+    type: 'string',
+    required: false,
+    description: 'Accessible label for the slide.'
+  },
+  {
     name: 'className',
     type: 'ClassValue | ClassArray',
     required: false,
@@ -103,7 +123,7 @@ const carouselPrevPropsData: PropItem[] = [
     type: 'string',
     defaultValue: '"Previous slide"',
     required: false,
-    description: 'Accessible label for the previous button. Useful for internationalization.'
+    description: 'Accessible label for the previous button.'
   },
   {
     name: 'className',
@@ -119,7 +139,7 @@ const carouselNextPropsData: PropItem[] = [
     type: 'string',
     defaultValue: '"Next slide"',
     required: false,
-    description: 'Accessible label for the next button. Useful for internationalization.'
+    description: 'Accessible label for the next button.'
   },
   {
     name: 'className',
@@ -226,6 +246,22 @@ export const AppCarousel = () => {
   )
 }`
 
+  const verticalCode = `import { Carousel } from '../../components/ui/Carousel'
+
+export const AppCarousel = () => {
+  return (
+    <Carousel title='Carousel with vertical sliding!' vertical>
+      <Carousel.Slide>Slide 1</Carousel.Slide>
+      <Carousel.Slide>Slide 2</Carousel.Slide>
+      <Carousel.Slide>Slide 3</Carousel.Slide>
+      <Carousel.Slide>Slide 4</Carousel.Slide>
+      <Carousel.Slide>Slide 5</Carousel.Slide>
+      <Carousel.Slide>Slide 6</Carousel.Slide>
+      <Carousel.Slide>Slide 7</Carousel.Slide>
+    </Carousel>
+  )
+}`
+
   return (
     <div className='max-w-5xl mx-auto px-6'>
       <header className='mt-0'>
@@ -233,14 +269,14 @@ export const AppCarousel = () => {
           Carousel
         </h1>
         <p className='mt-2 text-lg md:text-xl font-display opacity-70 text-(--lithos-text)'>
-          An accessible horizontal slide viewer supporting auto-play, custom controls, and live region announcements.
+          An accessible horizontal/vertical slide viewer supporting auto-play, custom controls, and live region announcements.
         </p>
         <hr className='border-t-2 border-(--lithos-border) mt-8 mb-8' />
       </header>
 
       <section className='mb-12'>
         <p className='mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body'>
-          The Carousel primitive organizes content into paginated horizontal steps. Includes built-in support for keyboard navigation (ArrowLeft / ArrowRight) and automated screen reader live region notifications.
+          The Carousel primitive organizes content into paginated horizontal/vertical steps. Includes built-in support for keyboard navigation (ArrowLeft / ArrowRight) and automated screen reader live region notifications.
         </p>
       </section>
 
@@ -258,6 +294,27 @@ export const AppCarousel = () => {
       <div className='mt-8 mb-16'>
         <PreviewBlock code={usageCode} githubUrl={githubUrl}>
           <Carousel title='Default carousel, everything included!'>
+            <Carousel.Slide>Slide 1</Carousel.Slide>
+            <Carousel.Slide>Slide 2</Carousel.Slide>
+            <Carousel.Slide>Slide 3</Carousel.Slide>
+            <Carousel.Slide>Slide 4</Carousel.Slide>
+            <Carousel.Slide>Slide 5</Carousel.Slide>
+            <Carousel.Slide>Slide 6</Carousel.Slide>
+            <Carousel.Slide>Slide 7</Carousel.Slide>
+          </Carousel>
+        </PreviewBlock>
+      </div>
+
+      <h3 id='looping' className='mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)'>
+        Infinite Looping
+      </h3>
+      <p className='mb-4 text-sm font-body opacity-70 text-(--lithos-text)'>
+        Enable continuous navigation so users can scroll seamlessly past the first and last slides.
+      </p>
+
+      <div className='mt-8 mb-16'>
+        <PreviewBlock code={usageCode} githubUrl={githubUrl}>
+          <Carousel title='Carousel with looping!' loop>
             <Carousel.Slide>Slide 1</Carousel.Slide>
             <Carousel.Slide>Slide 2</Carousel.Slide>
             <Carousel.Slide>Slide 3</Carousel.Slide>
@@ -374,14 +431,35 @@ export const AppCarousel = () => {
         </PreviewBlock>
       </div>
 
+      <h3 id='vertical-scroll' className='mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)'>
+        Vertical Scrolling
+      </h3>
+      <p className='mb-4 text-sm font-body opacity-70 text-(--lithos-text)'>
+        Navigate between slides vertically instead of the default horizontal direction.
+      </p>
+
+      <div className='mt-8 mb-16'>
+        <PreviewBlock code={verticalCode} githubUrl={githubUrl}>
+          <Carousel title='Carousel with vertical sliding!' vertical>
+            <Carousel.Slide>Slide 1</Carousel.Slide>
+            <Carousel.Slide>Slide 2</Carousel.Slide>
+            <Carousel.Slide>Slide 3</Carousel.Slide>
+            <Carousel.Slide>Slide 4</Carousel.Slide>
+            <Carousel.Slide>Slide 5</Carousel.Slide>
+            <Carousel.Slide>Slide 6</Carousel.Slide>
+            <Carousel.Slide>Slide 7</Carousel.Slide>
+          </Carousel>
+        </PreviewBlock>
+      </div>
+
       <section className='mb-12'>
         <h2 id='api' className='mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)'>
           API Reference
         </h2>
 
-        <PropsAccordion title='Carousel Props' data={carouselPropsData} className='mb-4' />
-        <PropsAccordion title='Carousel.Slide Props' data={carouselSlidePropsData} className='mb-4' />
-        <PropsAccordion title='Carousel.PrevButton Props' data={carouselPrevPropsData} className='mb-4' />
+        <PropsAccordion title='Carousel Props' data={carouselPropsData} className='mb-6' />
+        <PropsAccordion title='Carousel.Slide Props' data={carouselSlidePropsData} className='mb-6' />
+        <PropsAccordion title='Carousel.PrevButton Props' data={carouselPrevPropsData} className='mb-6' />
         <PropsAccordion title='Carousel.NextButton Props' data={carouselNextPropsData} />
       </section>
     </div>

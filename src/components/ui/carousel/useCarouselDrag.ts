@@ -9,9 +9,10 @@ import type { ScrollFunc } from './CarouselContext'
 interface UseCarouselDragOptions {
   containerRef: React.RefObject<HTMLDivElement | null>
   scroll: ScrollFunc
+  vertical?: boolean
 }
 
-export const useCarouselDrag = ({ containerRef, scroll }: UseCarouselDragOptions) => {
+export const useCarouselDrag = ({ containerRef, scroll, vertical = false }: UseCarouselDragOptions) => {
   const [isDragging, setIsDragging] = useState(false)
   const start = useRef(0)
   const scrollPosition = useRef(0)
@@ -22,8 +23,8 @@ export const useCarouselDrag = ({ containerRef, scroll }: UseCarouselDragOptions
     if (!carousel) return
 
     setIsDragging(true)
-    start.current = e.clientX
-    scrollPosition.current = carousel.scrollLeft
+    start.current = e[vertical ? 'clientY' : 'clientX']
+    scrollPosition.current = carousel[vertical ? 'scrollTop' : 'scrollLeft']
 
     e.currentTarget.setPointerCapture(e.pointerId)
   }
@@ -33,8 +34,8 @@ export const useCarouselDrag = ({ containerRef, scroll }: UseCarouselDragOptions
 
     if (!carousel || !isDragging) return
 
-    const delta = e.clientX - start.current
-    carousel.scrollLeft = scrollPosition.current - delta
+    const delta = e[vertical? 'clientY' : 'clientX'] - start.current
+    carousel[vertical ? 'scrollTop' : 'scrollLeft'] = scrollPosition.current - delta
   }
 
   const onPointerUp = (e: PointerEvent<HTMLDivElement>) => {
@@ -43,19 +44,19 @@ export const useCarouselDrag = ({ containerRef, scroll }: UseCarouselDragOptions
     setIsDragging(false)
     e.currentTarget.releasePointerCapture(e.pointerId)
 
-    const delta = e.clientX - start.current
+    const delta = e[vertical ? 'clientY' : 'clientX'] - start.current
     const threshold = 50
 
     if (delta < -threshold) {
-      scroll('next')
+      scroll('forwards')
     } else if (delta > threshold) {
-      scroll('prev')
+      scroll('backwards')
     } else {
       const carousel = containerRef.current
 
       if (!carousel) return
 
-      scrollTo({ element: carousel, amount: scrollPosition.current })
+      scrollTo({ element: carousel, amount: scrollPosition.current, vertical })
     }
   }
 

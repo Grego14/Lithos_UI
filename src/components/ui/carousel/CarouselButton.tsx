@@ -7,8 +7,10 @@ import { Button } from '../Button'
 import { type CarouselDirection } from './CarouselContext'
 import { useCarousel } from "./useCarousel"
 import type { ClassValue, ClassArray } from "clsx"
-import { IconArrowLeft } from "../icons/IconArrowLeft"
-import { IconArrowRight } from "../icons/IconArrowRight"
+import { IconArrowLeft } from '../icons/IconArrowLeft'
+import { IconArrowRight } from '../icons/IconArrowRight'
+import { IconArrowDown } from '../icons/IconArrowDown'
+import { IconArrowUp } from "../icons/IconArrowUp"
 
 export interface CarouselButtonProps extends Omit<ComponentPropsWithRef<'button'>, 'className'> {
   label?: string
@@ -17,20 +19,22 @@ export interface CarouselButtonProps extends Omit<ComponentPropsWithRef<'button'
 }
 
 export const CarouselButton = ({
-  direction = 'next',
+  direction = 'forwards',
   children,
   className,
   label,
   onClick,
   ...props }: CarouselButtonProps) => {
-  const { scroll } = useCarousel()
+  const { scroll, vertical } = useCarousel()
 
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
     scroll(direction)
     onClick?.(e)
   }
 
-  const ArrowIcon = direction === 'next' ? IconArrowRight : IconArrowLeft
+  const ArrowIcon = direction === 'forwards'
+    ? (vertical ? IconArrowDown : IconArrowRight)
+    : (vertical ? IconArrowUp : IconArrowLeft)
 
   return (
     <Button aria-label={label} onClick={handleClick} className={className} {...props}>
@@ -51,7 +55,7 @@ export const CarouselPrev = (props: ButtonVariantProp) => {
     <CarouselButton
       {...props}
       label={props.label || DEFAULT_PREV_LABEL}
-      direction='prev'
+      direction='backwards'
     />
   )
 }

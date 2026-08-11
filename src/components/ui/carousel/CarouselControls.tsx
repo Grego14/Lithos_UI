@@ -6,19 +6,24 @@ import type { ComponentPropsWithoutRef } from 'react'
 import { cn } from '../../../utils/cn'
 import { CarouselNext, CarouselPrev } from './CarouselButton'
 import type { ClassValue, ClassArray } from "clsx"
+import { useCarousel } from './useCarousel'
 
 interface CarouselControlsProps extends Omit<ComponentPropsWithoutRef<'div'>, 'className'> {
   title?: string | undefined
   bottomPositioned?: boolean
   className?: ClassValue | ClassArray
+  loop?: boolean
 }
 
 export const CarouselControls = ({
   title,
   bottomPositioned = false,
   className,
+  loop = false,
   ...rest
 }: CarouselControlsProps) => {
+  const { currentIndex, totalSlides } = useCarousel()
+
   return (
     <div
       className={cn(
@@ -35,8 +40,8 @@ export const CarouselControls = ({
       )}
 
       <div className='flex items-center flex-row'>
-        <CarouselPrev className='mr-4' />
-        <CarouselNext />
+        <CarouselPrev className='mr-4' disabled={!loop && currentIndex === 0} />
+        <CarouselNext disabled={!loop && currentIndex === totalSlides - 1} />
       </div>
     </div>
   )

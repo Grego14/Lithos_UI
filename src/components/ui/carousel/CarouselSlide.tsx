@@ -27,8 +27,10 @@ export const CarouselSlide = ({
   const isActive = currentIndex === slideIndex
   const slideLabel = label || `${slideIndex + 1} of ${totalSlides}`
 
+  // in case of height change, please also update the height of the children
+  // container on the ../Carousel.tsx file (trackClass variable)
   const classes = cn(
-    'snap-start shrink-0 w-full border-2 border-(--lithos-border) h-[20rem] flex items-center justify-center',
+    'snap-start shrink-0 w-full border-2 border-(--lithos-border) h-80 flex items-center justify-center',
     className
   )
 
