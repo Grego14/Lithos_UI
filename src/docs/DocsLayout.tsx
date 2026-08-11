@@ -106,6 +106,7 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#grouped-multiple', label: 'Grouped multiple', level: 2 },
   ],
   '/docs/calendar': [
+    { id: '#installation', label: 'Installation', level: 1 },
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#single', label: 'Single', level: 2 },
     { id: '#multiple', label: 'Multiple', level: 2 },
@@ -114,6 +115,9 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#disabled-dates', label: 'Disabled dates', level: 2 },
     { id: '#bounded-years', label: 'Bounded years', level: 2 },
     { id: '#controlled', label: 'Controlled', level: 2 },
+    { id: '#requires', label: 'Requires', level: 1 },
+    { id: '#accessibility', label: 'Accessibility', level: 1 },
+    { id: '#api', label: 'API Reference', level: 1 },
   ],
   '/docs/carousel': [
     { id: '#examples', label: 'Examples', level: 1 },
