@@ -89,8 +89,9 @@ export const CodeViewer = ({ code, language = 'tsx', showLanguage = false, embed
             fontFamily: 'var(--font-code)',
           }}
           codeTagProps={{
-            style: { fontFamily: 'inherit' },
+            style: { fontFamily: 'inherit' }
           }}
+          CodeTag={({ children }) => <code data-code-viewer>{children}</code>}
         >
           {code}
         </SyntaxHighlighter>
