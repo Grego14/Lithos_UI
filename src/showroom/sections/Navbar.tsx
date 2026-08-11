@@ -9,6 +9,8 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useToast } from '../../core/hooks/useToast'
 import { Toggle } from '../../components/ui/Toggle'
+import { IconMenu } from '../../components/ui/icons/IconMenu'
+import { IconClose } from '../../components/ui/icons/IconClose'
 
 interface NavbarProps {
   isDarkMode?: boolean
@@ -40,69 +42,62 @@ const Navbar = ({ isDarkMode = false, onToggleObsidian }: NavbarProps) => {
     })
   }
 
+  const ActionToggle = isMenuOpen ? IconClose : IconMenu
+
   return (
     <>
       <header className="fixed top-0 z-50 w-full border-b-2 border-(--lithos-border) bg-(--lithos-surface)">
         {/* - Fixed rail: the 4px bottom border marks the top boundary of the app. */}
-      {/* - 24px vertical padding gives the bar enough mass to read as a slab, not a strip. */}
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-        {/* - Brand block flex-1 balances the center lane. */}
-        <div className="flex items-center justify-start lg:flex-1">
-          <Link to="/" className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click">
-            Lithos UI
-          </Link>
-        </div>
-
-        {/* - Center lane is reserved for wayfinding and sized exactly to its content. */}
-        <nav className="hidden items-center justify-center lg:flex lg:flex-none">
-          {links.map((link) => (
-            <Link
-              key={link.label}
-              to={link.to}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="mx-4 font-black uppercase tracking-tighter leading-none text-(--lithos-text) transition-all duration-150 ease-out hover:text-(--lithos-accent) cursor-pointer"
-            >
-              {link.label}
+        {/* - 24px vertical padding gives the bar enough mass to read as a slab, not a strip. */}
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+          {/* - Brand block flex-1 balances the center lane. */}
+          <div className="flex items-center justify-start lg:flex-1">
+            <Link to="/" className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click">
+              Lithos UI
             </Link>
-          ))}
-        </nav>
-
-        {/* - Action block balances the brand block and keeps the header geometry stable. */}
-        <div className="hidden items-center justify-end lg:flex lg:flex-1">
-          <div className="mr-4 flex items-center">
-            <Toggle checked={isDarkMode} onToggle={handleToggleObsidian} label="Toggle Obsidian Mode" />
           </div>
-          <a
-            href="https://github.com/lithosui/Lithos_UI"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
-          >
-            GitHub
-          </a>
-        </div>
 
-        {/* - Mobile Action Toggle (Hamburger / X) */}
-        <div className="flex lg:hidden items-center">
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
-            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-          >
-            <svg
-              className="w-6 h-6"
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="3"
-              strokeLinecap="square"
-              viewBox="0 0 24 24"
+          {/* - Center lane is reserved for wayfinding and sized exactly to its content. */}
+          <nav className="hidden items-center justify-center lg:flex lg:flex-none">
+            {links.map((link) => (
+              <Link
+                key={link.label}
+                to={link.to}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="mx-4 font-black uppercase tracking-tighter leading-none text-(--lithos-text) transition-all duration-150 ease-out hover:text-(--lithos-accent) cursor-pointer"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* - Action block balances the brand block and keeps the header geometry stable. */}
+          <div className="hidden items-center justify-end lg:flex lg:flex-1">
+            <div className="mr-4 flex items-center">
+              <Toggle checked={isDarkMode} onToggle={handleToggleObsidian} label="Toggle Obsidian Mode" />
+            </div>
+            <a
+              href="https://github.com/lithosui/Lithos_UI"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
             >
-              {isMenuOpen ? <path d="M6 18L18 6M6 6l12 12" /> : <path d="M4 6h16M4 12h16M4 18h16" />}
-            </svg>
-          </button>
+              GitHub
+            </a>
+          </div>
+
+          {/* - Mobile Action Toggle (Hamburger / X) */}
+          <div className="flex lg:hidden items-center">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            >
+              <ActionToggle className='h-6 w-6' />
+            </button>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
 
       {/* - Full-Screen Mobile Overlay */}
       {isMenuOpen && (

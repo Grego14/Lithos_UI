@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '../../ui/Button'
+import { IconMenu } from '../../ui/icons/IconMenu'
+import { IconClose } from '../../ui/icons/IconClose'
 
 const links = [
   { label: 'Products', to: '#' },
@@ -12,6 +14,8 @@ const links = [
 
 export const Navbar1 = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const ActionToggle = isMenuOpen ? IconClose : IconMenu
 
   return (
     <>
@@ -56,16 +60,7 @@ export const Navbar1 = () => {
               className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
-              <svg
-                className="w-6 h-6"
-                stroke="currentColor"
-                fill="none"
-                strokeWidth="3"
-                strokeLinecap="square"
-                viewBox="0 0 24 24"
-              >
-                {isMenuOpen ? <path d="M6 18L18 6M6 6l12 12" /> : <path d="M4 6h16M4 12h16M4 18h16" />}
-              </svg>
+              <ActionToggle className='h-6 w-6' />
             </button>
           </div>
         </div>

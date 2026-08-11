@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useToast } from '../../core/hooks/useToast'
 import { Toggle } from '../../components/ui/Toggle'
+import { IconMenu } from '../../components/ui/icons/IconMenu'
+import { IconClose } from '../../components/ui/icons/IconClose'
 
 interface DocsNavbarProps {
   isDarkMode?: boolean
@@ -60,6 +62,8 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
     })
   }
 
+  const ActionToggle = isMenuOpen ? IconClose : IconMenu
+
   return (
     <header className="fixed top-0 z-50 w-full border-b-2 border-(--lithos-border) bg-(--lithos-surface)">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
@@ -104,16 +108,7 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
             className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           >
-            <svg
-              className="w-6 h-6"
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="3"
-              strokeLinecap="square"
-              viewBox="0 0 24 24"
-            >
-              {isMenuOpen ? <path d="M6 18L18 6M6 6l12 12" /> : <path d="M4 6h16M4 12h16M4 18h16" />}
-            </svg>
+            <ActionToggle className='w-6 h-6' />
           </button>
         </div>
       </div>
