@@ -77,11 +77,41 @@ describe('Carousel', () => {
     expect(screen.getByText('Slide 1 of 3')).toBeInTheDocument()
   })
 
-  it('wraps around to the last slide when clicking previous on the first slide', async () => {
+  it('should stay at the first slide when clicking previous on the first slide and not using loop', async () => {
     const user = userEvent.setup()
 
     render(
       <Carousel>
+        <Carousel.Slide>Slide 1</Carousel.Slide>
+        <Carousel.Slide>Slide 2</Carousel.Slide>
+        <Carousel.Slide>Slide 3</Carousel.Slide>
+      </Carousel>
+    )
+
+    const prevButton = screen.getByRole('button', { name: /previous/i })
+    await user.click(prevButton)
+
+    expect(screen.getByText('Slide 1 of 3')).toBeInTheDocument()
+  })
+
+  it('previous button should be disabled if we are at the first slide and not using loop', async () => {
+    render(
+      <Carousel>
+        <Carousel.Slide>Slide 1</Carousel.Slide>
+        <Carousel.Slide>Slide 2</Carousel.Slide>
+        <Carousel.Slide>Slide 3</Carousel.Slide>
+      </Carousel>
+    )
+
+    const prevButton = screen.getByRole('button', { name: /previous/i })
+    expect(prevButton).toHaveAttribute('disabled')
+  })
+
+  it('wraps around to the last slide when clicking previous on the first slide and using loop', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <Carousel loop>
         <Carousel.Slide>Slide 1</Carousel.Slide>
         <Carousel.Slide>Slide 2</Carousel.Slide>
         <Carousel.Slide>Slide 3</Carousel.Slide>

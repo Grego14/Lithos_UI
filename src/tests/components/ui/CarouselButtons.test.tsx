@@ -33,10 +33,10 @@ describe('CarouselButtons', () => {
     const nextButton = screen.getByRole('button', { name: 'Next slide' })
 
     await user.click(prevButton)
-    expect(scrollMock).toHaveBeenLastCalledWith('prev')
+    expect(scrollMock).toHaveBeenLastCalledWith('backwards')
 
     await user.click(nextButton)
-    expect(scrollMock).toHaveBeenLastCalledWith('next')
+    expect(scrollMock).toHaveBeenLastCalledWith('forwards')
     expect(scrollMock).toHaveBeenCalledTimes(2)
   })
 
@@ -56,7 +56,7 @@ describe('CarouselButtons', () => {
 
     await user.click(customBtn)
     expect(customOnClick).toHaveBeenCalledTimes(1)
-    expect(scrollMock).toHaveBeenCalledWith('prev')
+    expect(scrollMock).toHaveBeenCalledWith('backwards')
   })
 
   it('renders custom children instead of default arrow icons', () => {
