@@ -38,6 +38,8 @@ import {
 } from 'react'
 import { Button } from './Button'
 import { cn } from '../../utils/cn'
+import { IconChevronDown } from './icons/IconChevronDown'
+import { IconChevronLeft } from './icons/IconChevronLeft'
 import { getContrastText } from '../../utils/yiq'
 import type { HexColor } from '../../core/types'
 import {
@@ -162,9 +164,9 @@ const HeaderDropdown = ({ label, options, value, onChange, className }: HeaderDr
         className="justify-between text-sm min-w-26"
       >
         <span>{current?.label}</span>
-        <svg className={cn('h-3 w-3 shrink-0', open && 'rotate-180')} viewBox="0 0 12 8" fill="none">
-          <path d="M1 1L6 6L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter" />
-        </svg>
+        <div className="ml-2 w-3 min-w-3">
+          <IconChevronDown className={cn('max-w-full h-auto', open && 'rotate-180')} />
+        </div>
       </Button>
 
       {open && (
@@ -202,20 +204,9 @@ const HeaderDropdown = ({ label, options, value, onChange, className }: HeaderDr
 }
 
 const NavIcon = ({ direction }: { direction: 'prev' | 'next' }) => (
-  <svg
-    className={cn('h-4 w-4', direction === 'next' && 'rotate-180')}
-    viewBox="0 0 16 16"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M10.5 3L5.5 8L10.5 13"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="square"
-      strokeLinejoin="miter"
-    />
-  </svg>
+  <div className="w-4 min-w-4">
+    <IconChevronLeft className={cn('max-w-full h-auto', direction === 'next' && 'rotate-180')} />
+  </div>
 )
 
 export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
@@ -456,66 +447,71 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
           onKeyDown={handleGridKeyDown}
           className={cn('grid grid-cols-7 border-t-2 border-l-2 border-(--lithos-border)', classes.grid)}
         >
-          {weekdayLabels.map((label) => (
-            <div
-              key={label}
-              role="columnheader"
-              className={cn(
-                'border-r-2 border-b-2 border-(--lithos-border) h-8 flex items-center justify-center font-sans font-bold text-xs',
-                classes.weekdays
-              )}
-            >
-              {label}
+          <div role="row" className="contents">
+            {weekdayLabels.map((label) => (
+              <div
+                key={label}
+                role="columnheader"
+                className={cn(
+                  'border-r-2 border-b-2 border-(--lithos-border) h-8 flex items-center justify-center font-sans font-bold text-xs',
+                  classes.weekdays
+                )}
+              >
+                {label}
+              </div>
+            ))}
+          </div>
+
+          {Array.from({ length: gridDays.length / 7 }).map((_, rowIndex) => (
+            <div key={rowIndex} role="row" className="contents">
+              {gridDays.slice(rowIndex * 7, (rowIndex + 1) * 7).map(({ date, isCurrentMonth }) => {
+                const disabled = isDisabled(date)
+                const selected =
+                  mode === 'single'
+                    ? isSameDay(currentValue as Date | null, date)
+                    : mode === 'multiple'
+                      ? asArray(currentValue).some((d) => isSameDay(d, date))
+                      : isRangeMember(date)
+                const customColor = mode === 'multiple' && selected ? getDateColor?.(date) : undefined
+                const today = isToday(date)
+                const key = toDateKey(date)
+
+                return (
+                  <div key={key} role="gridcell" aria-selected={selected} className={cn('border-r-2 border-b-2 border-(--lithos-border)', classes.cell)}>
+                    <button
+                      ref={(el) => {
+                        if (el) dayButtonRefs.current.set(key, el)
+                        else dayButtonRefs.current.delete(key)
+                      }}
+                      type="button"
+                      tabIndex={isSameDay(date, focusedDate) ? 0 : -1}
+                      aria-disabled={disabled}
+                      aria-label={new Intl.DateTimeFormat(locale, { dateStyle: 'full' }).format(date)}
+                      disabled={disabled}
+                      onClick={() => {
+                        setFocusedDate(date)
+                        handleDayClick(date)
+                      }}
+                      onMouseEnter={() => setHoverDate(date)}
+                      style={customColor ? { backgroundColor: customColor, color: getContrastText(customColor) } : undefined}
+                      className={cn(
+                        'w-10 h-10 flex items-center justify-center font-sans text-sm cursor-pointer transition-colors duration-75',
+                        !isCurrentMonth && 'text-(--lithos-muted)',
+                        today && !selected && 'font-black underline',
+                        selected && !customColor && 'bg-(--lithos-accent) text-(--lithos-accent-text) font-black',
+                        selected && customColor && 'font-black',
+                        !selected && 'hover:bg-(--lithos-muted)',
+                        disabled && 'opacity-40 pointer-events-none cursor-not-allowed',
+                        classes.day
+                      )}
+                    >
+                      {date.getDate()}
+                    </button>
+                  </div>
+                )
+              })}
             </div>
           ))}
-
-          {gridDays.map(({ date, isCurrentMonth }) => {
-            const disabled = isDisabled(date)
-            const selected =
-              mode === 'single'
-                ? isSameDay(currentValue as Date | null, date)
-                : mode === 'multiple'
-                  ? asArray(currentValue).some((d) => isSameDay(d, date))
-                  : isRangeMember(date)
-            const customColor = mode === 'multiple' && selected ? getDateColor?.(date) : undefined
-            const today = isToday(date)
-            const key = toDateKey(date)
-
-            return (
-              <div key={key} role="gridcell" className={cn('border-r-2 border-b-2 border-(--lithos-border)', classes.cell)}>
-                <button
-                  ref={(el) => {
-                    if (el) dayButtonRefs.current.set(key, el)
-                    else dayButtonRefs.current.delete(key)
-                  }}
-                  type="button"
-                  tabIndex={isSameDay(date, focusedDate) ? 0 : -1}
-                  aria-selected={selected}
-                  aria-disabled={disabled}
-                  aria-label={new Intl.DateTimeFormat(locale, { dateStyle: 'full' }).format(date)}
-                  disabled={disabled}
-                  onClick={() => {
-                    setFocusedDate(date)
-                    handleDayClick(date)
-                  }}
-                  onMouseEnter={() => setHoverDate(date)}
-                  style={customColor ? { backgroundColor: customColor, color: getContrastText(customColor) } : undefined}
-                  className={cn(
-                    'w-10 h-10 flex items-center justify-center font-sans text-sm cursor-pointer transition-colors duration-75',
-                    !isCurrentMonth && 'text-(--lithos-muted)',
-                    today && !selected && 'font-black underline',
-                    selected && !customColor && 'bg-(--lithos-accent) text-(--lithos-accent-text) font-black',
-                    selected && customColor && 'font-black',
-                    !selected && 'hover:bg-(--lithos-muted)',
-                    disabled && 'opacity-40 pointer-events-none cursor-not-allowed',
-                    classes.day
-                  )}
-                >
-                  {date.getDate()}
-                </button>
-              </div>
-            )
-          })}
         </div>
       </div>
     )
