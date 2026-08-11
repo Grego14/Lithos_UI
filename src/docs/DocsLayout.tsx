@@ -39,6 +39,9 @@ const tocRegistry: Record<string, TOCItem[]> = {
   '/docs/toggle': [
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
+    { id: '#requires', label: 'Requires', level: 1 },
+    { id: '#accessibility', label: 'Accessibility', level: 1 },
+    { id: '#api', label: 'API Reference', level: 1 },
   ],
   '/docs/button': [
     { id: '#examples', label: 'Examples', level: 1 },
