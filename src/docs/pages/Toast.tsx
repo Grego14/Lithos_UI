@@ -1,47 +1,10 @@
 import { useToast } from '../../core/hooks/useToast'
 import { useTheme } from '../../core/useTheme'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
-import { type PropItem } from '../../components/ui/PropsTable'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 import { colors } from '../../utils/colors'
-
-export const toastProviderPropsData: PropItem[] = [
-  {
-    name: 'children',
-    type: 'ReactNode',
-    required: true,
-    description: 'The React node tree to be wrapped with the toast context.'
-  }
-]
-
-export const toastPropsData: PropItem[] = [
-  {
-    name: 'message',
-    type: 'string',
-    required: true,
-    description: 'The main body text displayed inside the toast notification.'
-  },
-  {
-    name: 'title',
-    type: 'string',
-    required: false,
-    description: 'Optional headline text rendered at the top of the toast.'
-  },
-  {
-    name: 'type',
-    type: '"default" | "success" | "error" | "warning" | "info"',
-    defaultValue: '"default"',
-    required: false,
-    description: 'Defines the structural intent and default styling variant.'
-  },
-  {
-    name: 'color',
-    type: 'string',
-    required: false,
-    description: 'Custom inline CSS background or accent color variable.'
-  }
-]
+import { toastPropsData, toastProviderPropsData } from '../propsData/toast'
 
 export const ToastDoc = () => {
   const toast = useToast()
@@ -87,14 +50,12 @@ export const ToastExample = () => {
   )
 }`
 
-
   const hookUsageCode = `import { useToast } from '../../core/hooks/useToast'
 
 const { addToast } = useToast()
 `
 
-  const hookReturnCode =
-    `type ToastContextType = {
+  const hookReturnCode = `type ToastContextType = {
   addToast: (props: ToastProps) => string
   removeToast: (id: string) => void
 }
