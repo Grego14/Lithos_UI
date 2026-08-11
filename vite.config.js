@@ -7,5 +7,11 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     setupFiles: './src/tests/setup.ts',
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html'],
+      include: ['src/components/**', 'src/core/**', 'src/utils/**'],
+      exclude: ['src/docs/**', 'src/pages/**', 'src/showroom/**', '**/*.test.{ts,tsx}'],
+    },
   },
 })
