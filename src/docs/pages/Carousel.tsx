@@ -431,8 +431,8 @@ export const AppCarousel = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id='vertical-scroll' className='mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)'>
-        Vertical Scrolling
+      <h3 id='vertical-orientation' className='mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)'>
+        Vertical Oreientation
       </h3>
       <p className='mb-4 text-sm font-body opacity-70 text-(--lithos-text)'>
         Navigate between slides vertically instead of the default horizontal direction.
