@@ -35,6 +35,9 @@ const tocRegistry: Record<string, TOCItem[]> = {
   '/docs/toast': [
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
+    { id: '#api', label: 'API Reference', level: 1 },
+    { id: '#hooks', label: 'Hooks', level: 1 },
+    { id: '#useToast', label: 'useToast', level: 2 },
   ],
   '/docs/toggle': [
     { id: '#examples', label: 'Examples', level: 1 },
