@@ -14,5 +14,3 @@ export const IconChevronLeft = ({
     />
   )
 }
-
-IconChevronLeft.displayName = 'IconChevronLeft'

@@ -10,5 +10,3 @@ export const IconDownload = ({ size = iconDefaults.size, strokeWidth = iconDefau
     />
   )
 }
-
-IconDownload.displayName = 'IconDownload'

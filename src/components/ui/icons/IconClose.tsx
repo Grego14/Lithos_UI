@@ -10,5 +10,3 @@ export const IconClose = ({ size = iconDefaults.size, strokeWidth = iconDefaults
     />
   )
 }
-
-IconClose.displayName = 'IconClose'

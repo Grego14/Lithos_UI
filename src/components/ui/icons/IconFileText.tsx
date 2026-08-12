@@ -10,5 +10,3 @@ export const IconFileText = ({ size = iconDefaults.size, strokeWidth = iconDefau
     />
   )
 }
-
-IconFileText.displayName = 'IconFileText'

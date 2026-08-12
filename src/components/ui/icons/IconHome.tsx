@@ -10,5 +10,3 @@ export const IconHome = ({ size = iconDefaults.size, strokeWidth = iconDefaults.
     />
   )
 }
-
-IconHome.displayName = 'IconHome'

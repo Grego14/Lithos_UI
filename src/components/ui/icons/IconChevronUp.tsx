@@ -14,5 +14,3 @@ export const IconChevronUp = ({
     />
   )
 }
-
-IconChevronUp.displayName = 'IconChevronUp'
