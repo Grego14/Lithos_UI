@@ -1,29 +1,9 @@
 import { useState } from 'react'
 import { Toggle } from '../../components/ui/Toggle'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
-import { type PropItem, PropsAccordion } from '../../components/ui/PropsTable'
-
-const toggleProps: PropItem[] = [
-  {
-    name: 'checked',
-    type: 'boolean',
-    required: true,
-    description: 'Controls the toggle state. True renders the thumb translated and inverted colors.'
-  },
-  {
-    name: 'onToggle',
-    type: '() => void',
-    required: true,
-    description: 'Callback fired when the toggle is clicked.'
-  },
-  {
-    name: 'label',
-    type: 'string',
-    defaultValue: '"Theme Changed"',
-    required: false,
-    description: 'Accessible label announced by screen readers and used as aria-label.'
-  }
-]
+import { PropsAccordion } from '../../components/ui/PropsTable'
+import { toggleProps } from '../propsData/toggle'
+import { SetupGuide } from '../layout/SetupGuide'
 
 export const ToggleDoc = () => {
   const [checked, setChecked] = useState(false)
@@ -69,6 +49,15 @@ export const ToggleExample = () => {
         </p>
       </div>
 
+      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Installation
+      </h2>
+
+      <SetupGuide
+        commandImport='import { Toggle } from "lithos-ui"'
+        manualImport='import { Toggle } from "../../components/ui/Toggle"'
+      />
+
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Examples
       </h2>
@@ -83,14 +72,6 @@ export const ToggleExample = () => {
       >
         <Toggle checked={checked} onToggle={() => setChecked(!checked)} label="Documentation Toggle" />
       </PreviewBlock>
-
-      <h2 id="requires" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
-        Requires
-      </h2>
-      <ul className="list-disc pl-6 mb-12 text-lg font-body text-(--lithos-text)">
-        <li>No external dependencies beyond React.</li>
-        <li>Tailwind CSS for styling classes.</li>
-      </ul>
 
       <section className="mb-12">
         <h2 id="accessibility" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">

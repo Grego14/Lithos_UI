@@ -90,8 +90,8 @@ const { addToast } = useToast()
 
       <SetupGuide
         commandImport='import { ToastProvider, useToast } from "lithos-ui"'
-        manualImport={`import { ToastProvider } from '../../components/ui/Toast.tsx'
-import { useToast } fromm '../../core/hooks/useToast.ts'`}
+        manualImport={`import { ToastProvider } from '../../components/ui/Toast'
+import { useToast } from '../../core/hooks/useToast.ts'`}
         requires={[
           'components/ui/icons/IconClose.tsx',
           'components/ui/Button.tsx',

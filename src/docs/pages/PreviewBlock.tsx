@@ -1,5 +1,7 @@
 import { PreviewBlock as PreviewBlockUI } from '../../components/ui/PreviewBlock'
 
+const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/PreviewBlock.tsx'
+
 export const PreviewBlockDoc = () => {
   const innerCode = `export const InnerExample = () => {
   return (
@@ -66,14 +68,8 @@ export const PreviewBlockExample = () => {
         Default
       </h3>
 
-      <PreviewBlockUI
-        code={usageCode}
-        githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/PreviewBlock.tsx"
-      >
-        <PreviewBlockUI
-          code={innerCode}
-          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/PreviewBlock.tsx"
-        >
+      <PreviewBlockUI code={usageCode} githubUrl={githubUrl}>
+        <PreviewBlockUI code={innerCode} githubUrl={githubUrl}>
           <p className="text-base md:text-lg text-(--lithos-text) font-body">
             This is the inner live preview surface rendered by the nested PreviewBlock.
           </p>

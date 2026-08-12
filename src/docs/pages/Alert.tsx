@@ -4,67 +4,11 @@ import { useRef, useState } from 'react'
 import { colors } from '../../utils/colors'
 import { isHexColor } from '../../core/types'
 import { Button } from '../../components/ui/Button'
-import { type PropItem, PropsAccordion } from '../../components/ui/PropsTable'
+import { PropsAccordion } from '../../components/ui/PropsTable'
+import { SetupGuide } from '../layout/SetupGuide'
+import { alertPropsData } from '../propsData/alert'
 
-const alertPropsData: PropItem[] = [
-  {
-    name: 'type',
-    type: "'default' | 'success' | 'error' | 'warning' | 'info' | 'accent'",
-    defaultValue: "'default'",
-    required: false,
-    description: 'Status color palette drawn from the shared color tokens.',
-  },
-  {
-    name: 'variant',
-    type: "'filled' | 'outlined'",
-    defaultValue: "'filled'",
-    required: false,
-    description: 'Solid fill vs. outline-only border/shadow on the accent color.',
-  },
-  {
-    name: 'size',
-    type: "'sm' | 'md' | 'lg'",
-    defaultValue: "'lg'",
-    required: false,
-    description: 'Scales padding and typography together.',
-  },
-  {
-    name: 'title',
-    type: 'string',
-    required: false,
-    description: 'Optional heading rendered above the message.',
-  },
-  {
-    name: 'color',
-    type: 'HexColor | string',
-    required: false,
-    description: "Overrides type's palette with a custom hex color; contrast text is computed via the YIQ engine.",
-  },
-  {
-    name: 'onClose',
-    type: '() => void',
-    required: false,
-    description: 'Renders a close button in the header when provided. Alert does not remove itself — call site owns the dismissed state.',
-  },
-  {
-    name: 'onUndo',
-    type: '() => void',
-    required: false,
-    description: 'Renders an undo button in the header when provided.',
-  },
-  {
-    name: 'children',
-    type: 'ReactNode',
-    required: true,
-    description: 'Message content rendered below the title.',
-  },
-  {
-    name: 'className',
-    type: 'string',
-    required: false,
-    description: 'Additional CSS classes.',
-  },
-]
+const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx'
 
 export const AlertDoc = () => {
   const [customColor, setCustomColor] = useState('#FF00FF')
@@ -195,6 +139,16 @@ export const CustomizedAlert = () => {
         </p>
       </div>
 
+      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Installation
+      </h2>
+
+      <SetupGuide
+        commandImport='import { Alert } from "lithos-ui"'
+        manualImport='import { Alert } from "../../components/ui/Alert"'
+        requires={['utils/cn.ts', 'utils/yiq.ts', 'components/ui/Button.tsx']}
+      />
+
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Examples
       </h2>
@@ -208,10 +162,7 @@ export const CustomizedAlert = () => {
       </p>
 
       <div className="mt-8 mb-16">
-        <PreviewBlock
-          code={filledCode}
-          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx"
-        >
+        <PreviewBlock code={filledCode} githubUrl={githubUrl}>
           <div className='flex flex-col w-full'>
             <Alert className='mb-4' size='lg' variant='filled' title='Default'>Structural review pending.</Alert>
             <Alert className='mb-4' size='lg' type='success' variant='filled' title='Success'>Deployment verified.</Alert>
@@ -232,10 +183,7 @@ export const CustomizedAlert = () => {
       </p>
 
       <div className="mt-8 mb-16">
-        <PreviewBlock
-          code={outlineCode}
-          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx"
-        >
+        <PreviewBlock code={outlineCode} githubUrl={githubUrl}>
           <div className='flex flex-col w-full'>
             <Alert className='mb-4' size='lg' variant='outlined' title='Default'>Structural review pending.</Alert>
             <Alert className='mb-4' size='lg' type='success' variant='outlined' title='Success'>Deployment verified.</Alert>
@@ -256,10 +204,7 @@ export const CustomizedAlert = () => {
       </p>
 
       <div className="mt-8 mb-16">
-        <PreviewBlock
-          code={sizesCode}
-          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx"
-        >
+        <PreviewBlock code={sizesCode} githubUrl={githubUrl}>
           <div className='flex flex-col w-full'>
             <Alert className='mb-4' size='sm' title='Small'>Structural review pending.</Alert>
             <Alert className='mb-4' size='md' title='Medium'>Structural review pending.</Alert>
@@ -277,10 +222,7 @@ export const CustomizedAlert = () => {
       </p>
 
       <div className="mt-8 mb-16">
-        <PreviewBlock
-          code={titlelessCode}
-          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx"
-        >
+        <PreviewBlock code={titlelessCode} githubUrl={githubUrl}>
           <div className='flex flex-col w-full'>
             <Alert size='md' type='warning'>Load tolerance nearing limit.</Alert>
           </div>
@@ -296,10 +238,7 @@ export const CustomizedAlert = () => {
       </p>
 
       <div className="mt-8 mb-16">
-        <PreviewBlock
-          code={actionsCode}
-          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx"
-        >
+        <PreviewBlock code={actionsCode} githubUrl={githubUrl}>
           <div className='flex flex-col w-full'>
             {closeDismissed ? (
               <Button intent='secondary' className='mb-4 text-sm' onClick={() => setCloseDismissed(false)}>Reset example</Button>
@@ -325,10 +264,7 @@ export const CustomizedAlert = () => {
       </p>
 
       <div className="mt-8 mb-16">
-        <PreviewBlock
-          code={customCode}
-          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx"
-        >
+        <PreviewBlock code={customCode} githubUrl={githubUrl}>
           <div className='flex flex-col w-full'>
             <Alert size='md' color={customColor} title='Custom'>Custom color alert.</Alert>
 
@@ -341,15 +277,6 @@ export const CustomizedAlert = () => {
           </div>
         </PreviewBlock>
       </div>
-
-      <h2 id="requires" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
-        Requires
-      </h2>
-      <ul className="list-disc pl-6 mb-12 text-lg font-body text-(--lithos-text)">
-        <li><code>clsx</code> and <code>tailwind-merge</code> for class merging utility.</li>
-        <li>The YIQ contrast engine in <code>src/utils/yiq.ts</code> for computed foreground text color.</li>
-        <li><code>Button</code> for the close/undo header actions.</li>
-      </ul>
 
       <section className="mb-12">
         <h2 id="accessibility" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">

@@ -3,6 +3,9 @@ import { Breadcrumb } from '../../components/ui/Breadcrumb'
 import { IconFolder } from '../../components/ui/icons/IconFolder'
 import { IconSettings } from '../../components/ui/icons/IconSettings'
 import { IconFileText } from '../../components/ui/icons/IconFileText'
+import { SetupGuide } from '../layout/SetupGuide'
+
+const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Breadcrumb.tsx'
 
 export const BreadcrumbDoc = () => {
   const collapsibleCode = `import { Breadcrumb } from '../../components/ui/Breadcrumb'
@@ -66,6 +69,20 @@ export const IconNameBreadcrumb = () => {
         </p>
       </div>
 
+      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Installation
+      </h2>
+
+      <SetupGuide
+        commandImport='import { Breadcrumb } from "lithos-ui"'
+        manualImport='import { Breadcrumb } from "../../components/ui/Breadcrumb"'
+        requires={[
+          'utils/cn.ts',
+          'components/ui/icons/IconHome.tsx',
+          'components/ui/icons/IconBreadcrumbSeparator'
+        ]}
+      />
+
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Examples
       </h2>
@@ -79,10 +96,7 @@ export const IconNameBreadcrumb = () => {
       </p>
 
       <div className="mt-4 mb-16">
-        <PreviewBlock
-          code={collapsibleCode}
-          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Breadcrumb.tsx"
-        >
+        <PreviewBlock code={collapsibleCode} githubUrl={githubUrl}>
           <div className="flex flex-col items-center justify-center p-4">
             <Breadcrumb
               variant="collapsible"
@@ -109,10 +123,7 @@ export const IconNameBreadcrumb = () => {
       </p>
 
       <div className="mt-4 mb-16">
-        <PreviewBlock
-          code={iconNameCode}
-          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Breadcrumb.tsx"
-        >
+        <PreviewBlock code={iconNameCode} githubUrl={githubUrl}>
           <div className="flex flex-col items-center justify-center p-4">
             <Breadcrumb
               variant="icon"

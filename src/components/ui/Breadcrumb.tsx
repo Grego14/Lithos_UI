@@ -2,6 +2,7 @@ import { forwardRef, useState } from 'react'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 import { IconHome } from './icons/IconHome'
 import { IconBreadcrumbSeparator } from './icons/IconBreadcrumbSeparator'
+import { cn } from '../../utils/cn'
 
 export interface BreadcrumbItemData {
   label: string
@@ -26,9 +27,11 @@ export interface BreadcrumbProps extends ComponentPropsWithoutRef<'nav'> {
 
 export const BreadcrumbSeparator = forwardRef<HTMLLIElement, ComponentPropsWithoutRef<'li'>>(
   ({ children, className, ...rest }, ref) => {
-    const classes = ['inline-flex items-center text-sm font-bold opacity-40 mx-2 select-none', className ?? '']
-      .filter(Boolean)
-      .join(' ')
+    const classes =
+      cn(
+        'inline-flex items-center text-sm font-bold opacity-40 mx-2 select-none',
+        className
+      )
 
     return (
       <li ref={ref} role="presentation" aria-hidden="true" className={classes} {...rest}>
@@ -42,7 +45,7 @@ BreadcrumbSeparator.displayName = 'BreadcrumbSeparator'
 
 export const BreadcrumbItem = forwardRef<HTMLLIElement, ComponentPropsWithoutRef<'li'>>(
   ({ className, children, ...rest }, ref) => {
-    const classes = ['inline-flex items-center text-sm font-bold', className ?? ''].filter(Boolean).join(' ')
+    const classes = cn('inline-flex items-center text-sm font-bold', className)
 
     return (
       <li ref={ref} className={classes} {...rest}>
@@ -62,12 +65,10 @@ export interface BreadcrumbLinkProps extends ComponentPropsWithoutRef<'a'> {
 
 export const BreadcrumbLink = forwardRef<HTMLAnchorElement, BreadcrumbLinkProps>(
   ({ href, onClick, className, children, ...rest }, ref) => {
-    const classes = [
+    const classes = cn(
       'inline-flex items-center px-2 py-1 border-2 border-transparent hover:border-(--lithos-border) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) transition-all duration-150 rounded-none lithos-click cursor-pointer font-bold',
-      className ?? '',
-    ]
-      .filter(Boolean)
-      .join(' ')
+      className
+    )
 
     return (
       <a ref={ref} href={href ?? '#'} onClick={onClick} className={classes} {...rest}>
@@ -85,12 +86,10 @@ export interface BreadcrumbPageProps extends ComponentPropsWithoutRef<'span'> {
 
 export const BreadcrumbPage = forwardRef<HTMLSpanElement, BreadcrumbPageProps>(
   ({ className, children, ...rest }, ref) => {
-    const classes = [
+    const classes = cn(
       'inline-flex items-center px-2.5 py-1 border-2 border-(--lithos-border) bg-(--lithos-accent) text-(--lithos-accent-text) font-black tracking-tight shadow-[2px_2px_0px_0px_var(--lithos-border)]',
-      className ?? '',
-    ]
-      .filter(Boolean)
-      .join(' ')
+      className,
+    )
 
     return (
       <span ref={ref} role="link" aria-disabled="true" aria-current="page" className={classes} {...rest}>
@@ -109,12 +108,10 @@ export interface BreadcrumbEllipsisProps extends ComponentPropsWithoutRef<'butto
 
 export const BreadcrumbEllipsis = forwardRef<HTMLButtonElement, BreadcrumbEllipsisProps>(
   ({ onClick, isExpanded, className, children, ...rest }, ref) => {
-    const classes = [
+    const classes = cn(
       'inline-flex items-center justify-center px-2 py-0.5 border-2 border-(--lithos-border) bg-(--lithos-surface) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) text-xs font-black transition-all cursor-pointer lithos-click select-none',
-      className ?? '',
-    ]
-      .filter(Boolean)
-      .join(' ')
+      className,
+    )
 
     return (
       <button
@@ -135,9 +132,7 @@ BreadcrumbEllipsis.displayName = 'BreadcrumbEllipsis'
 
 export const BreadcrumbList = forwardRef<HTMLOListElement, ComponentPropsWithoutRef<'ol'>>(
   ({ className, children, ...rest }, ref) => {
-    const classes = ['inline-flex flex-wrap items-center font-sans text-sm tracking-tight', className ?? '']
-      .filter(Boolean)
-      .join(' ')
+    const classes = cn('inline-flex flex-wrap items-center font-sans text-sm tracking-tight', className)
 
     return (
       <ol ref={ref} className={classes} {...rest}>
@@ -169,7 +164,7 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
   ) => {
     const [isExpanded, setIsExpanded] = useState(false)
 
-    const classes = ['relative inline-flex items-center flex-wrap', className ?? ''].filter(Boolean).join(' ')
+    const classes = cn('relative inline-flex items-center flex-wrap', className)
 
     if (!items || items.length === 0) {
       return (

@@ -3,84 +3,11 @@ import { IconDownload } from '../../components/ui/icons/IconDownload'
 import { IconHome } from '../../components/ui/icons/IconHome'
 import { IconSettings } from '../../components/ui/icons/IconSettings'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
-import { type PropItem, PropsAccordion } from '../../components/ui/PropsTable'
+import { PropsAccordion } from '../../components/ui/PropsTable'
+import { SetupGuide } from '../layout/SetupGuide'
+import { buttonPropsData, buttonGroupPropsData } from '../propsData/button'
 
-const buttonPropsData: PropItem[] = [
-  {
-    name: 'intent',
-    type: "'primary' | 'secondary' | 'accent' | 'text'",
-    defaultValue: "'primary'",
-    required: false,
-    description: 'Visual emphasis variant.',
-  },
-  {
-    name: 'fullWidth',
-    type: 'boolean',
-    defaultValue: 'false',
-    required: false,
-    description: 'Expands the button to fill its container width.',
-  },
-  {
-    name: 'type',
-    type: "'button' | 'submit' | 'reset'",
-    defaultValue: "'button'",
-    required: false,
-    description: 'Native HTML button type.',
-  },
-  {
-    name: 'iconLeft',
-    type: 'ReactNode',
-    required: false,
-    description: 'Icon rendered before the button label.',
-  },
-  {
-    name: 'iconRight',
-    type: 'ReactNode',
-    required: false,
-    description: 'Icon rendered after the button label.',
-  },
-  {
-    name: 'children',
-    type: 'ReactNode',
-    required: true,
-    description: 'Content rendered inside the button.',
-  },
-  {
-    name: 'className',
-    type: 'string',
-    required: false,
-    description: 'Additional CSS classes.',
-  },
-]
-
-const buttonGroupPropsData: PropItem[] = [
-  {
-    name: 'orientation',
-    type: "'horizontal' | 'vertical'",
-    defaultValue: "'horizontal'",
-    required: false,
-    description: 'Lays buttons out side by side or stacked.',
-  },
-  {
-    name: 'attached',
-    type: 'boolean',
-    defaultValue: 'false',
-    required: false,
-    description: 'Fuses adjacent buttons into a single hard-bordered strip instead of spacing them apart.',
-  },
-  {
-    name: 'children',
-    type: 'ReactNode',
-    required: true,
-    description: 'Button elements to lay out.',
-  },
-  {
-    name: 'className',
-    type: 'string',
-    required: false,
-    description: 'Additional CSS classes.',
-  },
-]
+const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Button.tsx'
 
 export const ButtonDoc = () => {
   const defaultCode = `import { Button } from '../../components/ui/Button'
@@ -210,6 +137,16 @@ export const AttachedButtonGroup = () => {
         </p>
       </div>
 
+      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Installation
+      </h2>
+
+      <SetupGuide
+        commandImport='import { Button } from "lithos-ui"'
+        manualImport='import { Button } from "../../components/ui/Button"'
+        requires={['utils/cn.ts']}
+      />
+
       <h2 id="examples" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Examples
       </h2>
@@ -225,10 +162,8 @@ export const AttachedButtonGroup = () => {
         The <code>primary</code> intent, used with no <code>intent</code> prop. Solid accent fill for the main
         call to action on a screen — use it once per view so it stays the obvious next step.
       </p>
-      <PreviewBlock
-        code={defaultCode}
-        githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Button.tsx"
-      >
+
+      <PreviewBlock code={defaultCode} githubUrl={githubUrl}>
         <Button className="cursor-pointer">Default</Button>
       </PreviewBlock>
 
@@ -239,10 +174,8 @@ export const AttachedButtonGroup = () => {
         Outlined, lower-emphasis variant for actions alongside a primary button — cancel, back, or any option
         that shouldn't compete visually with the main call to action.
       </p>
-      <PreviewBlock
-        code={secondaryCode}
-        githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Button.tsx"
-      >
+
+      <PreviewBlock code={secondaryCode} githubUrl={githubUrl}>
         <Button intent="secondary" className="cursor-pointer">
           Secondary
         </Button>
@@ -255,10 +188,8 @@ export const AttachedButtonGroup = () => {
         Secondary variant that fills solid with the accent color on hover. Use it for a
         call to action that needs to stand out without the full visual weight of the primary button.
       </p>
-      <PreviewBlock
-        code={accentCode}
-        githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Button.tsx"
-      >
+
+      <PreviewBlock code={accentCode} githubUrl={githubUrl}>
         <Button intent="accent" className="cursor-pointer">
           Accent
         </Button>
@@ -271,10 +202,8 @@ export const AttachedButtonGroup = () => {
         Flat, borderless variant with no background or shadow. Fits inline actions or tight spaces — toolbar
         items, table row actions — where a full bordered button would be too heavy.
       </p>
-      <PreviewBlock
-        code={textCode}
-        githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Button.tsx"
-      >
+
+      <PreviewBlock code={textCode} githubUrl={githubUrl}>
         <Button intent="text" className="cursor-pointer">
           Text
         </Button>
@@ -289,10 +218,8 @@ export const AttachedButtonGroup = () => {
         meaning before the reader reaches the text, or a trailing icon for actions that lead somewhere
         else, like opening a settings panel.
       </p>
-      <PreviewBlock
-        code={withIconCode}
-        githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Button.tsx"
-      >
+
+      <PreviewBlock code={withIconCode} githubUrl={githubUrl}>
         <div className="flex items-center">
           <Button iconLeft={<IconHome />} className="cursor-pointer">
             Home
@@ -311,10 +238,8 @@ export const AttachedButtonGroup = () => {
         <code>aria-label</code> so the action stays announced to assistive tech. The square{' '}
         <code>.lithos-click</code> padding keeps it visually balanced.
       </p>
-      <PreviewBlock
-        code={iconCode}
-        githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Button.tsx"
-      >
+
+      <PreviewBlock code={iconCode} githubUrl={githubUrl}>
         <Button aria-label="Download" className="cursor-pointer">
           <IconDownload />
         </Button>
@@ -335,10 +260,8 @@ export const AttachedButtonGroup = () => {
         Default orientation, buttons laid out side by side with margin-based spacing between them. The classic
         dialog footer pattern: a secondary <em>Cancel</em> next to the primary confirming action.
       </p>
-      <PreviewBlock
-        code={groupHorizontalCode}
-        githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Button.tsx"
-      >
+
+      <PreviewBlock code={groupHorizontalCode} githubUrl={githubUrl}>
         <ButtonGroup>
           <Button intent="secondary" className="cursor-pointer">Cancel</Button>
           <Button intent="primary" className="cursor-pointer">Save Changes</Button>
@@ -352,10 +275,8 @@ export const AttachedButtonGroup = () => {
         Set <code>orientation="vertical"</code> to stack buttons instead — useful in narrow sidebars, mobile
         sheets, or anywhere horizontal space is tight.
       </p>
-      <PreviewBlock
-        code={groupVerticalCode}
-        githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Button.tsx"
-      >
+
+      <PreviewBlock code={groupVerticalCode} githubUrl={githubUrl}>
         <ButtonGroup orientation="vertical">
           <Button intent="primary" className="cursor-pointer">Save Changes</Button>
           <Button intent="secondary" className="cursor-pointer">Cancel</Button>
@@ -370,22 +291,13 @@ export const AttachedButtonGroup = () => {
         pops the hovered/focused button's shadow above its neighbors via <code>z-10</code> — a segmented-control
         look without giving up individual <code>Button</code> semantics.
       </p>
-      <PreviewBlock
-        code={groupAttachedCode}
-        githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Button.tsx"
-      >
+
+      <PreviewBlock code={groupAttachedCode} githubUrl={githubUrl}>
         <ButtonGroup attached>
           <Button intent="secondary" className="cursor-pointer">Cancel</Button>
           <Button intent="primary" className="cursor-pointer">Save Changes</Button>
         </ButtonGroup>
       </PreviewBlock>
-
-      <h2 id="requires" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
-        Requires
-      </h2>
-      <ul className="list-disc pl-6 mb-12 text-lg font-body text-(--lithos-text)">
-        <li><code>clsx</code> and <code>tailwind-merge</code> for class merging utility.</li>
-      </ul>
 
       <section className="mb-12">
         <h2 id="accessibility" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">

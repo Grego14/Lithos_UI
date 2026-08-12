@@ -1,15 +1,6 @@
-import {
-  useState,
-  type KeyboardEventHandler,
-  type MouseEventHandler,
-  type FocusEventHandler,
-  type KeyboardEvent,
-  type MouseEvent,
-  type FocusEvent
-} from "react"
+import { useState } from "react"
 import { Button } from "../../components/ui/Button"
 import { CodeViewer } from "../../components/ui/CodeViewer"
-import { useToast } from "../../core/hooks/useToast"
 
 const commands = {
   pnpm: 'pnpm add lithos-ui',
@@ -26,88 +17,9 @@ interface SetupGuideProps {
   requires?: string[]
 }
 
-interface RequiredResourceProps {
-  resource: string
-  isLast: boolean
-  hoveredId: string | null
-  handlers: {
-    onMouseEnter: MouseEventHandler<HTMLSpanElement>
-    onMouseLeave: () => void
-    onFocus: FocusEventHandler<HTMLSpanElement>
-    onBlur: () => void
-    onClick: MouseEventHandler<HTMLSpanElement>
-    onKeyDown: KeyboardEventHandler<HTMLSpanElement>
-  }
-}
-
-const RequiredResource = ({ resource, isLast, hoveredId, handlers }: RequiredResourceProps) => {
-  const id = `id-${resource}`.replace('/', '-').replace(/\.\D+$/, '')
-
-  const classes = hoveredId === id
-    ? 'bg-(--lithos-accent)/25'
-    : 'bg-(--lithos-surface)'
-
-  return (
-    <>
-      <span {...handlers} tabIndex={0} data-resource-id={id}>
-        <code className={`${classes} cursor-pointer`}>{resource}</code>
-      </span>
-      {!isLast ? ',' : ''}
-    </>
-  )
-}
-
 export const SetupGuide = ({ commandImport, manualImport, requires }: SetupGuideProps) => {
   const [installTab, setInstallTab] = useState<'command' | 'manual'>('command')
   const [usedCommand, setUsedCommand] = useState<Commands>('pnpm')
-
-  const [hoveredId, setHoveredId] = useState<null | string>(null)
-  const toast = useToast()
-
-  const handleHover = (e: FocusEvent<HTMLSpanElement> | MouseEvent<HTMLSpanElement>) => {
-    const target = e.currentTarget
-    setHoveredId(target.getAttribute('data-resource-id'))
-  }
-
-  const handleBlur = () => setHoveredId(null)
-
-  const handleCopy =
-    async (e: KeyboardEvent<HTMLSpanElement> | MouseEvent<HTMLSpanElement>) => {
-      const addToastExists = typeof toast?.addToast === 'function'
-
-      if ('key' in e && e.key !== 'Enter') return
-
-      try {
-        const resource = (e.currentTarget as HTMLSpanElement).textContent
-        await navigator.clipboard.writeText(resource)
-
-        // TODO: make the toast duration shorter (that feature must be added)
-        if (addToastExists) {
-          toast.addToast({
-            title: 'SUCCESS',
-            message: 'Copied to clipboard',
-            type: 'success',
-          })
-        }
-      } catch {
-        if (addToastExists) {
-          toast.addToast({
-            title: 'ERROR',
-            message: 'Failed to copy code to clipboard',
-            type: 'error',
-          })
-        }
-      }
-    }
-
-  const handlers = {
-    onMouseEnter: handleHover,
-    onMouseLeave: handleBlur,
-    onFocus: handleHover,
-    onBlur: handleBlur,
-    onClick: handleCopy,
-    onKeyDown: handleCopy
-  }
 
   return (
     <div className="mb-8">
@@ -150,15 +62,9 @@ export const SetupGuide = ({ commandImport, manualImport, requires }: SetupGuide
             <p className="mb-4 text-sm font-bold opacity-80 text-(--lithos-text)">Copy the source components and import:</p>
             <CodeViewer code={manualImport} language="tsx" className="mb-6" />
             {Array.isArray(requires) && (
-              <p className="text-sm font-bold opacity-80 text-(--lithos-text)">Requires:
+              <p className="text-sm font-bold opacity-80 text-(--lithos-text)">Requires:{' '}
                 {requires.map((res, i) => (
-                  <RequiredResource
-                    hoveredId={hoveredId}
-                    handlers={handlers}
-                    resource={res}
-                    key={`required-item-${i}`}
-                    isLast={i === requires?.length - 1}
-                  />
+                  <span>{res}{i !== requires.length - 1 ? ',' : ''}</span>
                 ))}
               </p>
             )}
