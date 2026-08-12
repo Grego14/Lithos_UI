@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { Card, CardImage, CardContent, CardTitle, CardDescription, CardFooter } from '../../components/ui/Card'
 import { Button } from '../../components/ui/Button'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
+import { SetupGuide } from '../layout/SetupGuide'
+
+const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Card.tsx'
 
 export const CardDoc = () => {
   const [spacing, setSpacing] = useState<'sm' | 'md' | 'lg'>('md')
@@ -114,6 +117,16 @@ export const ImageBackgroundCard = () => {
         </p>
       </div>
 
+      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Installation
+      </h2>
+
+      <SetupGuide
+        commandImport='import { Card } from "lithos-ui"'
+        manualImport='import { Card } from "../../components/ui/Card"'
+        requires={['utils/cn.ts']}
+      />
+
       <h2 id="examples" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Examples
       </h2>
@@ -121,10 +134,7 @@ export const ImageBackgroundCard = () => {
       <h3 id="default" className="mb-3 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
         Default
       </h3>
-      <PreviewBlock
-        code={defaultCode}
-        githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Card.tsx"
-      >
+      <PreviewBlock code={defaultCode} githubUrl={githubUrl}>
         <Card interactive className="max-w-sm">
           <CardImage src="https://picsum.photos/600/400" alt="Preview thumbnail" />
           <CardContent>
@@ -143,7 +153,7 @@ export const ImageBackgroundCard = () => {
       <h3 id="accent" className="mt-12 mb-3 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
         Accent
       </h3>
-      <PreviewBlock code={accentCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Card.tsx">
+      <PreviewBlock code={accentCode} githubUrl={githubUrl}>
         <Card variant="accent" interactive className="max-w-sm">
           <CardImage src="https://picsum.photos/600/400?1" alt="Preview" />
           <CardContent>
@@ -156,7 +166,7 @@ export const ImageBackgroundCard = () => {
       <h3 id="solid" className="mt-12 mb-3 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
         Solid
       </h3>
-      <PreviewBlock code={solidCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Card.tsx">
+      <PreviewBlock code={solidCode} githubUrl={githubUrl}>
         <Card variant="solid" interactive className="max-w-sm">
           <CardImage src="https://picsum.photos/600/400?2" alt="Preview" />
           <CardContent>
@@ -169,7 +179,7 @@ export const ImageBackgroundCard = () => {
       <h3 id="spacing" className="mt-12 mb-3 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
         Spacing
       </h3>
-      <PreviewBlock code={spacingCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Card.tsx">
+      <PreviewBlock code={spacingCode} githubUrl={githubUrl}>
         <div className="flex flex-col">
           <div className="flex mb-6">
             <Button intent={spacing === 'sm' ? 'primary' : 'secondary'} onClick={() => setSpacing('sm')} className="mr-4">Small</Button>
@@ -191,7 +201,7 @@ export const ImageBackgroundCard = () => {
       <h3 id="image" className="mt-12 mb-3 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
         Image
       </h3>
-      <PreviewBlock code={imageCode} githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Card.tsx">
+      <PreviewBlock code={imageCode} githubUrl={githubUrl}>
         <Card variant="image" className="w-full max-w-sm min-h-[300px]">
           <CardImage src="https://picsum.photos/600/600" alt="Full bleed background" isBackground />
           <CardContent>

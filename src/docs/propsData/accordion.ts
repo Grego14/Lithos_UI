@@ -1,0 +1,47 @@
+import type { PropItem } from '../../components/ui/PropsTable'
+
+export const accordionPropsData: PropItem[] = [
+  {
+    name: 'title',
+    type: 'ReactNode',
+    required: true,
+    description: 'Header content rendered in the accordion trigger button.',
+  },
+  {
+    name: 'defaultOpen',
+    type: 'boolean',
+    defaultValue: 'false',
+    required: false,
+    description: 'Initial open state when used in uncontrolled mode.',
+  },
+  {
+    name: 'open',
+    type: 'boolean',
+    required: false,
+    description: 'Controlled open state of the accordion.',
+  },
+  {
+    name: 'value',
+    type: 'string',
+    required: false,
+    description: 'Unique identifier when used inside an AccordionGroup.',
+  },
+  {
+    name: 'classes',
+    type: '{ container?: string; header?: string; content?: string }',
+    required: false,
+    description: 'Custom class overrides for container, header, and content elements.',
+  },
+  {
+    name: 'children',
+    type: 'ReactNode',
+    required: false,
+    description: 'Content rendered inside the expandable section.',
+  },
+  {
+    name: 'className',
+    type: 'string',
+    required: false,
+    description: 'Additional CSS classes applied to the root container.',
+  },
+]

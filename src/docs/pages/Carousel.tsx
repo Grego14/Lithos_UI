@@ -1,153 +1,15 @@
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { Carousel } from '../../components/ui/Carousel'
-import { type PropItem, PropsAccordion } from '../../components/ui/PropsTable'
+import { PropsAccordion } from '../../components/ui/PropsTable'
+import { SetupGuide } from '../layout/SetupGuide'
+import {
+  carouselPropsData,
+  carouselSlidePropsData,
+  carouselPrevPropsData,
+  carouselNextPropsData
+} from '../propsData/carousel'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Carousel.tsx'
-
-const carouselPropsData: PropItem[] = [
-  {
-    name: 'title',
-    type: 'string',
-    required: false,
-    description: 'Header text for controls and screen reader accessibility label.'
-  },
-  {
-    name: 'controlsPosition',
-    type: '"top" | "bottom"',
-    defaultValue: '"top"',
-    required: false,
-    description: 'Positioning of the prev/next arrow buttons.'
-  },
-  {
-    name: 'hideControls',
-    type: 'boolean',
-    defaultValue: 'false',
-    required: false,
-    description: 'Hides the direction navigation buttons.'
-  },
-  {
-    name: 'hidePagination',
-    type: 'boolean',
-    defaultValue: 'false',
-    required: false,
-    description: 'Hides slide selectors and pagination count.'
-  },
-  {
-    name: 'slideSelector',
-    type: '"dots" | "numbers"',
-    defaultValue: '"dots"',
-    required: false,
-    description: 'The style of the sliders selectors.'
-  },
-  {
-    name: 'showCounter',
-    type: 'boolean',
-    defaultValue: 'true',
-    required: false,
-    description: 'Shows or hides the slider position counter.'
-  },
-  {
-    name: 'playInfinite',
-    type: 'boolean',
-    defaultValue: 'false',
-    required: false,
-    description: 'Enables automatic infinite slide rotation.'
-  },
-  {
-    name: 'playInterval',
-    type: 'number',
-    defaultValue: '5000',
-    required: false,
-    description: 'Interval timing in milliseconds for automatic rotation.'
-  },
-  {
-    name: 'playDirection',
-    type: '"forwards" | "backwards"',
-    defaultValue: '"forwards"',
-    required: false,
-    description: 'Direction of infinite scroll movement.'
-  },
-  {
-    name: 'stopOnHover',
-    type: 'boolean',
-    defaultValue: 'true',
-    required: false,
-    description: 'Pauses auto-rotation on mouse enter or keyboard focus.'
-  },
-  {
-    name: 'loop',
-    type: 'boolean',
-    defaultValue: 'false',
-    required: false,
-    description: 'Enables continuous looping, moving to the first item after reaching the end.'
-  },
-  {
-    name: 'vertical',
-    type: 'boolean',
-    defaultValue: 'false',
-    required: false,
-    description: 'Changes the layout and scroll direction from horizontal to vertical.'
-  },
-  {
-    name: 'className',
-    type: 'ClassValue | ClassArray',
-    required: false,
-    description: 'Custom CSS classes passed to the main carousel wrapper.'
-  },
-]
-
-const carouselSlidePropsData: PropItem[] = [
-  {
-    name: 'children',
-    type: 'ReactNode',
-    required: true,
-    description: 'Content rendered inside the individual slide.'
-  },
-  {
-    name: 'label',
-    type: 'string',
-    required: false,
-    description: 'Accessible label for the slide.'
-  },
-  {
-    name: 'className',
-    type: 'ClassValue | ClassArray',
-    required: false,
-    description: 'Custom CSS classes passed to the slide wrapper.'
-  }
-]
-
-const carouselPrevPropsData: PropItem[] = [
-  {
-    name: 'label',
-    type: 'string',
-    defaultValue: '"Previous slide"',
-    required: false,
-    description: 'Accessible label for the previous button.'
-  },
-  {
-    name: 'className',
-    type: 'ClassValue | ClassArray',
-    required: false,
-    description: 'Custom CSS classes passed to the previous button element.'
-  }
-]
-
-const carouselNextPropsData: PropItem[] = [
-  {
-    name: 'label',
-    type: 'string',
-    defaultValue: '"Next slide"',
-    required: false,
-    description: 'Accessible label for the next button.'
-  },
-  {
-    name: 'className',
-    type: 'ClassValue | ClassArray',
-    required: false,
-    description: 'Custom CSS classes passed to the next button element.'
-  }
-]
 
 export const CarouselDoc = () => {
   const usageCode = `import { Carousel } from '../../components/ui/Carousel'
@@ -279,6 +141,25 @@ export const AppCarousel = () => {
           The Carousel primitive organizes content into paginated horizontal/vertical steps. Includes built-in support for keyboard navigation (ArrowLeft / ArrowRight) and automated screen reader live region notifications.
         </p>
       </section>
+
+      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Installation
+      </h2>
+
+      <SetupGuide
+        commandImport='import { Carousel } from "lithos-ui"'
+        manualImport='import { Carousel } from "../../components/ui/Carousel"'
+        requires={[
+          'utils/cn.ts',
+          'utils/scrollTo.ts',
+          'components/ui/Button.tsx',
+          'components/ui/icons/IconArrowLeft.tsx',
+          'components/ui/icons/IconArrowRight.tsx',
+          'components/ui/icons/IconArrowDown.tsx',
+          'components/ui/icons/IconArrowUp.tsx',
+          'components/ui/icons/IconCircle.tsx'
+        ]}
+      />
 
       <h2 id='examples' className='mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)'>
         Examples

@@ -1,6 +1,8 @@
 import { useToast } from '../../core/hooks/useToast'
 import { useTheme } from '../../core/useTheme'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
+import { SetupGuide } from '../layout/SetupGuide'
+import { Button } from '../../components/ui/Button'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 import { colors } from '../../utils/colors'
@@ -23,6 +25,7 @@ export const ToastDoc = () => {
 
   const usageCode = `import { useToast } from '../../core/hooks/useToast'
 import { useTheme } from '../../core/useTheme'
+import { Button } from '../../components/ui/Button'
 
 export const ToastExample = () => {
   const { addToast } = useToast()
@@ -40,13 +43,9 @@ export const ToastExample = () => {
   }
 
   return (
-    <button
-      type="button"
-      onClick={triggerToast}
-      className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
-    >
+    <Button onClick={triggerToast}>
       Trigger Toast
-    </button>
+    </Button>
   )
 }`
 
@@ -85,6 +84,22 @@ const { addToast } = useToast()
         </p>
       </div>
 
+      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Installation
+      </h2>
+
+      <SetupGuide
+        commandImport='import { ToastProvider, useToast } from "lithos-ui"'
+        manualImport={`import { ToastProvider } from '../../components/ui/Toast'
+import { useToast } from '../../core/hooks/useToast.ts'`}
+        requires={[
+          'components/ui/icons/IconClose.tsx',
+          'components/ui/Button.tsx',
+          'core/hooks/useToast.ts',
+          'utils/colors.ts'
+        ]}
+      />
+
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Examples
       </h2>
@@ -97,13 +112,9 @@ const { addToast } = useToast()
         code={usageCode}
         githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Toast.tsx"
       >
-        <button
-          type="button"
-          onClick={triggerToast}
-          className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
-        >
+        <Button onClick={triggerToast}>
           Trigger Toast
-        </button>
+        </Button>
       </PreviewBlock>
 
       <section className="mb-12">

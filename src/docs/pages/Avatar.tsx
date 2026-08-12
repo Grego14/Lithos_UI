@@ -1,92 +1,22 @@
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { Avatar, AvatarGroup } from '../../components/ui/Avatar'
-import { type PropItem, PropsAccordion } from '../../components/ui/PropsTable'
+import { PropsAccordion } from '../../components/ui/PropsTable'
+import { SetupGuide } from '../layout/SetupGuide'
+import { avatarPropsData, avatarGroupPropsData, avatarGroupCountPropsData } from '../propsData/avatar'
 
-const avatarPropsData: PropItem[] = [
-  {
-    name: 'src',
-    type: 'string',
-    required: false,
-    description: 'Image URL. Falls back to initials when missing or when the image fails to load.',
-  },
-  {
-    name: 'alt',
-    type: 'string',
-    required: false,
-    description: "Accessible label and initials source — one word yields one letter, two or more yield the first two words' initials.",
-  },
-  {
-    name: 'variant',
-    type: "'default' | 'solid'",
-    defaultValue: "'default'",
-    required: false,
-    description: 'default uses the neutral surface color; solid fills with the theme accent color with computed contrast text.',
-  },
-  {
-    name: 'size',
-    type: "'sm' | 'md' | 'lg'",
-    defaultValue: "'md'",
-    required: false,
-    description: 'Scales the circle diameter and initials font size.',
-  },
-  {
-    name: 'className',
-    type: 'string',
-    required: false,
-    description: 'Additional CSS classes.',
-  },
+const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Avatar.tsx'
+
+const namedUsers = [
+  { src: 'https://picsum.photos/id/64/200', alt: 'Jane Doe' },
+  { src: 'https://picsum.photos/id/91/200', alt: 'John Smith' },
+  { src: 'https://picsum.photos/id/22/200', alt: 'Amy Lee' },
 ]
 
-const avatarGroupCountPropsData: PropItem[] = [
-  {
-    name: 'count',
-    type: 'number',
-    required: true,
-    description: 'Number rendered as "+N", typically the overflow count at the end of an avatar stack.',
-  },
-  {
-    name: 'size',
-    type: "'sm' | 'md' | 'lg'",
-    defaultValue: "'md'",
-    required: false,
-    description: 'Scales the circle diameter and font size to match adjacent Avatars.',
-  },
-  {
-    name: 'className',
-    type: 'string',
-    required: false,
-    description: 'Additional CSS classes.',
-  },
-]
+const restOfUsers = (from: number, to: number) =>
+  Array.from({ length: to - from + 1 }, (_, i) => ({ alt: `User ${from + i}` }))
 
-const avatarGroupPropsData: PropItem[] = [
-  {
-    name: 'items',
-    type: '{ src?: string; alt: string }[]',
-    required: true,
-    description: 'Full list to render. Items beyond max are collapsed into a single AvatarGroupCount.',
-  },
-  {
-    name: 'max',
-    type: 'number',
-    defaultValue: '4',
-    required: false,
-    description: 'Number of Avatars shown before the rest are collapsed into a "+N" count.',
-  },
-  {
-    name: 'size',
-    type: "'sm' | 'md' | 'lg'",
-    defaultValue: "'md'",
-    required: false,
-    description: 'Scales every Avatar and the AvatarGroupCount together.',
-  },
-  {
-    name: 'className',
-    type: 'string',
-    required: false,
-    description: 'Additional CSS classes.',
-  },
-]
+const tenUsers = [...namedUsers, ...restOfUsers(4, 10)]
+const fourteenUsers = [...namedUsers, ...restOfUsers(4, 14)]
 
 export const AvatarDoc = () => {
   const variantsCode = `import { Avatar } from '../../components/ui/Avatar'
@@ -117,17 +47,6 @@ export const AvatarSizes = () => {
     </div>
   )
 }`
-
-  const namedUsers = [
-    { src: 'https://picsum.photos/id/64/200', alt: 'Jane Doe' },
-    { src: 'https://picsum.photos/id/91/200', alt: 'John Smith' },
-    { src: 'https://picsum.photos/id/22/200', alt: 'Amy Lee' },
-  ]
-  const restOfUsers = (from: number, to: number) =>
-    Array.from({ length: to - from + 1 }, (_, i) => ({ alt: `User ${from + i}` }))
-
-  const tenUsers = [...namedUsers, ...restOfUsers(4, 10)]
-  const fourteenUsers = [...namedUsers, ...restOfUsers(4, 14)]
 
   const autoGroupTenCode = `import { AvatarGroup } from '../../components/ui/Avatar'
 
@@ -181,6 +100,16 @@ export const FourteenUserGroup = () => {
         </p>
       </div>
 
+      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Installation
+      </h2>
+
+      <SetupGuide
+        commandImport='import { Avatar } from "lithos-ui"'
+        manualImport='import { Avatar } from "../../components/ui/Avatar"'
+        requires={['utils/cn.ts', 'utils/yiq.ts', 'core/useTheme.ts']}
+      />
+
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Examples
       </h2>
@@ -194,10 +123,7 @@ export const FourteenUserGroup = () => {
       </p>
 
       <div className="mt-8 mb-16">
-        <PreviewBlock
-          code={variantsCode}
-          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Avatar.tsx"
-        >
+        <PreviewBlock code={variantsCode} githubUrl={githubUrl}>
           <div className='flex items-center space-x-4'>
             <Avatar src="https://picsum.photos/200" alt="Jane Doe" />
             <Avatar alt="Jane Doe" />
@@ -216,10 +142,7 @@ export const FourteenUserGroup = () => {
       </p>
 
       <div className="mt-8 mb-16">
-        <PreviewBlock
-          code={sizesCode}
-          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Avatar.tsx"
-        >
+        <PreviewBlock code={sizesCode} githubUrl={githubUrl}>
           <div className='flex items-end space-x-4'>
             <Avatar size='sm' src="https://picsum.photos/200" alt="Jane Doe" />
             <Avatar size='md' src="https://picsum.photos/200" alt="Jane Doe" />
@@ -238,31 +161,16 @@ export const FourteenUserGroup = () => {
       </p>
 
       <div className="mt-8 mb-8">
-        <PreviewBlock
-          code={autoGroupTenCode}
-          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Avatar.tsx"
-        >
+        <PreviewBlock code={autoGroupTenCode} githubUrl={githubUrl}>
           <AvatarGroup items={tenUsers} max={4} />
         </PreviewBlock>
       </div>
 
       <div className="mt-8 mb-16">
-        <PreviewBlock
-          code={autoGroupFourteenCode}
-          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Avatar.tsx"
-        >
+        <PreviewBlock code={autoGroupFourteenCode} githubUrl={githubUrl}>
           <AvatarGroup items={fourteenUsers} max={4} />
         </PreviewBlock>
       </div>
-
-      <h2 id="requires" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
-        Requires
-      </h2>
-      <ul className="list-disc pl-6 mb-12 text-lg font-body text-(--lithos-text)">
-        <li><code>clsx</code> and <code>tailwind-merge</code> for class merging utility.</li>
-        <li>The YIQ contrast engine in <code>src/utils/yiq.ts</code> for <code>solid</code> variant text color.</li>
-        <li><code>useTheme</code> from <code>src/core/useTheme.ts</code> for the current accent color.</li>
-      </ul>
 
       <section className="mb-12">
         <h2 id="accessibility" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
