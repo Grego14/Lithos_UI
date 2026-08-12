@@ -10,5 +10,3 @@ export const IconFolder = ({ size = iconDefaults.size, strokeWidth = iconDefault
     />
   )
 }
-
-IconFolder.displayName = 'IconFolder'

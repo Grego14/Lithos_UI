@@ -10,5 +10,3 @@ export const IconSettings = ({ size = iconDefaults.size, strokeWidth = iconDefau
     />
   )
 }
-
-IconSettings.displayName = 'IconSettings'

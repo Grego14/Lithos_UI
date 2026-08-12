@@ -10,5 +10,3 @@ export const IconUndo = ({ size = iconDefaults.size, strokeWidth = iconDefaults.
     />
   )
 }
-
-IconUndo.displayName = 'IconUndo'
