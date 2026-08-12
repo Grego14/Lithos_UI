@@ -1,6 +1,29 @@
 import { useState } from 'react'
 import { Toggle } from '../../components/ui/Toggle'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
+import { type PropItem, PropsAccordion } from '../../components/ui/PropsTable'
+
+const toggleProps: PropItem[] = [
+  {
+    name: 'checked',
+    type: 'boolean',
+    required: true,
+    description: 'Controls the toggle state. True renders the thumb translated and inverted colors.'
+  },
+  {
+    name: 'onToggle',
+    type: '() => void',
+    required: true,
+    description: 'Callback fired when the toggle is clicked.'
+  },
+  {
+    name: 'label',
+    type: 'string',
+    defaultValue: '"Theme Changed"',
+    required: false,
+    description: 'Accessible label announced by screen readers and used as aria-label.'
+  }
+]
 
 export const ToggleDoc = () => {
   const [checked, setChecked] = useState(false)
@@ -60,6 +83,34 @@ export const ToggleExample = () => {
       >
         <Toggle checked={checked} onToggle={() => setChecked(!checked)} label="Documentation Toggle" />
       </PreviewBlock>
+
+      <h2 id="requires" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Requires
+      </h2>
+      <ul className="list-disc pl-6 mb-12 text-lg font-body text-(--lithos-text)">
+        <li>No external dependencies beyond React.</li>
+        <li>Tailwind CSS for styling classes.</li>
+      </ul>
+
+      <section className="mb-12">
+        <h2 id="accessibility" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+          Accessibility
+        </h2>
+        <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
+          <li>Rendered as a native <code>&lt;button&gt;</code> with <code>type="button"</code>, ensuring keyboard accessibility and focus management.</li>
+          <li>Uses <code>aria-pressed</code> attribute to announce the toggle state (true/false) to assistive technology.</li>
+          <li>Accepts a custom <code>label</code> prop that powers both <code>aria-label</code> and a visually-hidden <code>.sr-only</code> span for screen readers.</li>
+          <li>High-contrast borders (2px black) and sharp state changes ensure visibility for users with low vision.</li>
+          <li>Stationary shell design prevents layout shifts, reducing cognitive load and motion-triggered issues.</li>
+        </ul>
+      </section>
+
+      <section className="mb-12">
+        <h2 id="api" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+          API Reference
+        </h2>
+        <PropsAccordion title="Toggle Props" data={toggleProps} />
+      </section>
     </div>
   )
 }
