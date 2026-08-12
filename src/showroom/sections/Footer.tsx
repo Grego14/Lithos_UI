@@ -6,9 +6,17 @@
  */
 
 import { Link } from 'react-router-dom'
+import { IconHeart } from '../../components/ui/icons/IconHeart';
 
-const Footer = () => {
+const links = [
+  { to: '/components', label: 'Components' },
+  { to: '/blocks', label: 'Blocks' },
+  { to: '/templates', label: 'Templates' },
+  { to: '/faq', label: 'FAQ' },
+  { to: '/docs', label: 'Docs' },
+]
 
+export const Footer = () => {
   return (
     <footer className="relative overflow-hidden border-t-2 border-(--lithos-border) bg-(--lithos-accent) px-6 py-20 text-(--lithos-accent-text)">
       {/* - 8px top border makes the footer read as a closing slab, not a soft appendix. */}
@@ -31,37 +39,15 @@ const Footer = () => {
         </div>
 
         {/* - Navigation stays vertical so the exit path reads as a stack, not a menu bar. */}
-        <div className="mt-12 flex w-full flex-col lg:mt-0 lg:w-1/4">
-          <Link
-            to="/components"
-            className="text-2xl font-black uppercase tracking-tighter leading-none md:text-4xl cursor-pointer text-(--lithos-accent-text)"
-          >
-            Components
-          </Link>
-          <Link
-            to="/blocks"
-            className="mt-4 text-2xl font-black uppercase tracking-tighter leading-none md:text-4xl cursor-pointer text-(--lithos-accent-text)"
-          >
-            Blocks
-          </Link>
-          <Link
-            to="/templates"
-            className="mt-4 text-2xl font-black uppercase tracking-tighter leading-none md:text-4xl cursor-pointer text-(--lithos-accent-text)"
-          >
-            Templates
-          </Link>
-          <Link
-            to="/faq"
-            className="mt-4 text-2xl font-black uppercase tracking-tighter leading-none md:text-4xl cursor-pointer text-(--lithos-accent-text)"
-          >
-            FAQ
-          </Link>
-          <Link
-            to="/docs"
-            className="mt-4 text-2xl font-black uppercase tracking-tighter leading-none md:text-4xl cursor-pointer text-(--lithos-accent-text)"
-          >
-            Docs
-          </Link>
+        <div className="mt-12 flex w-full flex-col lg:mt-0 lg:w-1/4 space-y-4">
+          {links.map(link => (
+            <Link
+              to={link.to}
+              className="text-2xl space-y-4 font-black uppercase tracking-tighter leading-none md:text-4xl cursor-pointer text-(--lithos-accent-text)"
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
 
         {/* - Sponsor CTA uses the same hard-surface language so the support action matches the system physics. */}
@@ -73,18 +59,13 @@ const Footer = () => {
             className="group border-2 border-(--lithos-border) bg-(--lithos-surface) text-2xl text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) lithos-click md:text-3xl"
           >
             <span>Show Love</span>
-            <svg
-              className="ml-3 h-8 w-8 transition-transform duration-300 group-hover:rotate-90 group-hover:scale-110"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
-            </svg>
+            <IconHeart
+              aria-hidden='true'
+              className='h-8 w-8 ml-3 transition-transform duration-300 group-hover:scale-110'
+            />
           </a>
         </div>
       </div>
     </footer>
   )
-};
-
-export { Footer }
+}
