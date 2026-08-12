@@ -204,7 +204,7 @@ export const AttachedButtonGroup = () => {
         <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
           <strong>Default</strong> is the primary call to action and requires no <code>intent</code> prop.{' '}
           <strong>Secondary</strong> is a secondary call-to-action with an outlined style.{' '}
-          <strong>Accent</strong> is an accent-colored outline that fills solid on hover.{' '}
+          <strong>Accent</strong> is a secondary button that fills solid with the accent color on hover.{' '}
           <strong>Text</strong> is a text-only button variant with no border or background, typically used for
           secondary or low-emphasis actions.
         </p>
@@ -252,7 +252,7 @@ export const AttachedButtonGroup = () => {
         Accent
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        Outlined variant colored with the accent border and text, filling solid on hover. Use it for a
+        Secondary variant that fills solid with the accent color on hover. Use it for a
         call to action that needs to stand out without the full visual weight of the primary button.
       </p>
       <PreviewBlock
