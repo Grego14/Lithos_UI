@@ -26,15 +26,12 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
     setToasts((prev) => prev.filter((toast) => toast.id !== id))
   }, [])
 
-  const addToast = useCallback(
-    ({ message, type = 'default', color, title }: ToastProps) => {
-      const id = Math.random().toString(36).substring(2, 9)
-      setToasts((prev) => [...prev, { id, message, type, color, title }])
+  const addToast = useCallback(({ message, type = 'default', color, title }: ToastProps) => {
+    const id = Math.random().toString(36).substring(2, 9)
+    setToasts((prev) => [...prev, { id, message, type, color, title }])
 
-      return id
-    },
-    []
-  )
+    return id
+  }, [])
 
   return (
     <ToastContext.Provider value={{ addToast, removeToast }}>
@@ -118,11 +115,11 @@ export const ToastItem = ({ toast, onRemove }: ToastItemType) => {
         {/* - Close control keeps the same hard-edge language as the card. */}
         <Button
           onClick={onRemove}
-          className="ml-3 shrink-0 bg-transparent"
+          className="ml-3 shrink-0 bg-transparent text-current"
           aria-label={label}
           style={{ borderColor: textColor }}
         >
-          <IconClose aria-hidden='true' />
+          <IconClose aria-hidden="true" />
         </Button>
       </div>
     </>
