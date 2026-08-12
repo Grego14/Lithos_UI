@@ -1,4 +1,5 @@
 import { Button, ButtonGroup } from '../../components/ui/Button'
+import { IconDownload } from '../../components/ui/icons/IconDownload'
 import { IconHome } from '../../components/ui/icons/IconHome'
 import { IconSettings } from '../../components/ui/icons/IconSettings'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
@@ -7,7 +8,7 @@ import { type PropItem, PropsAccordion } from '../../components/ui/PropsTable'
 const buttonPropsData: PropItem[] = [
   {
     name: 'intent',
-    type: "'primary' | 'secondary' | 'text'",
+    type: "'primary' | 'secondary' | 'accent' | 'text'",
     defaultValue: "'primary'",
     required: false,
     description: 'Visual emphasis variant.',
@@ -98,6 +99,16 @@ export const SecondaryButton = () => {
   )
 }`
 
+  const accentCode = `import { Button } from '../../components/ui/Button'
+
+export const AccentButton = () => {
+  return (
+    <Button intent="accent" className="cursor-pointer">
+      Accent
+    </Button>
+  )
+}`
+
   const textCode = `import { Button } from '../../components/ui/Button'
 
 export const TextButton = () => {
@@ -108,24 +119,30 @@ export const TextButton = () => {
   )
 }`
 
-  const iconLeftCode = `import { Button } from '../../components/ui/Button'
+  const withIconCode = `import { Button } from '../../components/ui/Button'
 import { IconHome } from '../../components/ui/icons/IconHome'
+import { IconSettings } from '../../components/ui/icons/IconSettings'
 
-export const IconLeftButton = () => {
+export const WithIconButtons = () => {
   return (
-    <Button iconLeft={<IconHome />} className="cursor-pointer">
-      Home
-    </Button>
+    <div className="flex items-center">
+      <Button iconLeft={<IconHome />} className="cursor-pointer">
+        Home
+      </Button>
+      <Button intent="secondary" iconRight={<IconSettings />} className="cursor-pointer ml-3">
+        Settings
+      </Button>
+    </div>
   )
 }`
 
-  const iconRightCode = `import { Button } from '../../components/ui/Button'
-import { IconSettings } from '../../components/ui/icons/IconSettings'
+  const iconCode = `import { Button } from '../../components/ui/Button'
+import { IconDownload } from '../../components/ui/icons/IconDownload'
 
-export const IconRightButton = () => {
+export const IconButton = () => {
   return (
-    <Button intent="secondary" iconRight={<IconSettings />} className="cursor-pointer">
-      Settings
+    <Button aria-label="Download" className="cursor-pointer">
+      <IconDownload />
     </Button>
   )
 }`
@@ -170,16 +187,16 @@ export const AttachedButtonGroup = () => {
           Button
         </h1>
         <p className="mt-2 text-lg md:text-xl font-body opacity-70 text-(--lithos-text)">
-          A hard-bordered, high-contrast clickable primitive with three levels of visual emphasis.
+          A hard-bordered, high-contrast clickable primitive with four levels of visual emphasis.
         </p>
         <hr className="border-t-2 border-(--lithos-border) mt-6 mb-6" />
       </header>
 
       <section className="mb-6">
         <p className="text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          Button is a strict native <code>&lt;button&gt;</code> primitive. It ships three <code>intent</code>{' '}
-          variants — Default, Secondary, Text — built on the shared hard-shadow, hard-border interaction physics of{' '}
-          <code>.lithos-click</code>.
+          Button is a strict native <code>&lt;button&gt;</code> primitive. It ships four <code>intent</code>{' '}
+          variants — Default, Secondary, Accent, Text — built on the shared hard-shadow, hard-border interaction
+          physics of <code>.lithos-click</code>.
         </p>
       </section>
 
@@ -187,6 +204,7 @@ export const AttachedButtonGroup = () => {
         <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
           <strong>Default</strong> is the primary call to action and requires no <code>intent</code> prop.{' '}
           <strong>Secondary</strong> is a secondary call-to-action with an outlined style.{' '}
+          <strong>Accent</strong> is a secondary button that fills solid with the accent color on hover.{' '}
           <strong>Text</strong> is a text-only button variant with no border or background, typically used for
           secondary or low-emphasis actions.
         </p>
@@ -230,6 +248,22 @@ export const AttachedButtonGroup = () => {
         </Button>
       </PreviewBlock>
 
+      <h4 id="accent" className="mb-3 text-lg font-black uppercase tracking-tight text-(--lithos-text)">
+        Accent
+      </h4>
+      <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
+        Secondary variant that fills solid with the accent color on hover. Use it for a
+        call to action that needs to stand out without the full visual weight of the primary button.
+      </p>
+      <PreviewBlock
+        code={accentCode}
+        githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Button.tsx"
+      >
+        <Button intent="accent" className="cursor-pointer">
+          Accent
+        </Button>
+      </PreviewBlock>
+
       <h4 id="text" className="mb-3 text-lg font-black uppercase tracking-tight text-(--lithos-text)">
         Text
       </h4>
@@ -246,36 +280,43 @@ export const AttachedButtonGroup = () => {
         </Button>
       </PreviewBlock>
 
-      <h4 id="icon-left" className="mb-3 text-lg font-black uppercase tracking-tight text-(--lithos-text)">
-        Icon Left
+      <h4 id="with-icon" className="mb-3 text-lg font-black uppercase tracking-tight text-(--lithos-text)">
+        With Icon
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        The <code>iconLeft</code> prop places an icon before the label with mandate-compliant margin spacing
-        (no CSS <code>gap</code>). Use it for actions where the icon reinforces meaning before the reader
-        reaches the text — navigation, filters, or a leading status glyph.
+        The <code>iconLeft</code> and <code>iconRight</code> props place an icon before or after the label
+        with mandate-compliant margin spacing (no CSS <code>gap</code>). Use a leading icon to reinforce
+        meaning before the reader reaches the text, or a trailing icon for actions that lead somewhere
+        else, like opening a settings panel.
       </p>
       <PreviewBlock
-        code={iconLeftCode}
+        code={withIconCode}
         githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Button.tsx"
       >
-        <Button iconLeft={<IconHome />} className="cursor-pointer">
-          Home
-        </Button>
+        <div className="flex items-center">
+          <Button iconLeft={<IconHome />} className="cursor-pointer">
+            Home
+          </Button>
+          <Button intent="secondary" iconRight={<IconSettings />} className="cursor-pointer ml-3">
+            Settings
+          </Button>
+        </div>
       </PreviewBlock>
 
-      <h4 id="icon-right" className="mb-3 text-lg font-black uppercase tracking-tight text-(--lithos-text)">
-        Icon Right
+      <h4 id="icon" className="mb-3 text-lg font-black uppercase tracking-tight text-(--lithos-text)">
+        Icon
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        The <code>iconRight</code> prop places an icon after the label — well suited to actions that lead
-        somewhere else, like opening a settings panel or a menu that expands to the right.
+        An icon-only button with no label — pass a single icon as <code>children</code> and set{' '}
+        <code>aria-label</code> so the action stays announced to assistive tech. The square{' '}
+        <code>.lithos-click</code> padding keeps it visually balanced.
       </p>
       <PreviewBlock
-        code={iconRightCode}
+        code={iconCode}
         githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Button.tsx"
       >
-        <Button intent="secondary" iconRight={<IconSettings />} className="cursor-pointer">
-          Settings
+        <Button aria-label="Download" className="cursor-pointer">
+          <IconDownload />
         </Button>
       </PreviewBlock>
 

@@ -20,7 +20,7 @@ describe('Button', () => {
     expect(screen.getByRole('button')).toHaveAttribute('type', 'submit')
   })
 
-  it.each(['primary', 'secondary', 'text'] as const)('renders the %s intent variant', (intent) => {
+  it.each(['primary', 'secondary', 'accent', 'text'] as const)('renders the %s intent variant', (intent) => {
     render(<Button intent={intent}>Click me</Button>)
     expect(screen.getByRole('button')).toBeInTheDocument()
   })
@@ -48,9 +48,21 @@ describe('Button', () => {
     expect(handleClick).not.toHaveBeenCalled()
   })
 
-  it.each(['primary', 'secondary', 'text'] as const)('has no accessibility violations — %s intent', async (intent) => {
+  it.each(['primary', 'secondary', 'accent', 'text'] as const)('has no accessibility violations — %s intent', async (intent) => {
     const { container } = render(<Button intent={intent}>Accessible</Button>)
     const results = await axe(container)
+    expect(results).toHaveNoViolations()
+  })
+
+  it('renders icon-only with an accessible name from aria-label', async () => {
+    render(
+      <Button aria-label="Download">
+        <span data-testid="icon">D</span>
+      </Button>
+    )
+    const button = screen.getByRole('button', { name: 'Download' })
+    expect(button).toContainElement(screen.getByTestId('icon'))
+    const results = await axe(button)
     expect(results).toHaveNoViolations()
   })
 

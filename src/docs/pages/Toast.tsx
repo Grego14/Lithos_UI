@@ -3,6 +3,10 @@ import { useTheme } from '../../core/useTheme'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { SetupGuide } from '../layout/SetupGuide'
 import { Button } from '../../components/ui/Button'
+import { PropsAccordion } from '../../components/ui/PropsTable'
+import { CodeViewer } from '../../components/ui/CodeViewer'
+import { colors } from '../../utils/colors'
+import { toastPropsData, toastProviderPropsData } from '../propsData/toast'
 
 export const ToastDoc = () => {
   const toast = useToast()
@@ -44,6 +48,17 @@ export const ToastExample = () => {
     </Button>
   )
 }`
+
+  const hookUsageCode = `import { useToast } from '../../core/hooks/useToast'
+
+const { addToast } = useToast()
+`
+
+  const hookReturnCode = `type ToastContextType = {
+  addToast: (props: ToastProps) => string
+  removeToast: (id: string) => void
+}
+`
 
   return (
     <div className="max-w-5xl mx-auto px-6">
@@ -101,6 +116,43 @@ import { useToast } fromm '../../core/hooks/useToast.ts'`}
           Trigger Toast
         </Button>
       </PreviewBlock>
+
+      <section className="mb-12">
+        <h2 id="api" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+          API Reference
+        </h2>
+        <PropsAccordion title="ToastProvider Props" data={toastProviderPropsData} />
+      </section>
+
+      <section className="mb-12">
+        <h2 id="hooks" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+          Hooks
+        </h2>
+
+        <h3 id="useToast" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+          useToast
+        </h3>
+        <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
+          Hook to access dispatch actions for trigger-based toasts.
+        </p>
+
+        <CodeViewer code={hookUsageCode} />
+
+        <div className="mt-6">
+          <PropsAccordion title="addToast Options (ToastProps)" data={toastPropsData} />
+        </div>
+
+        <CodeViewer code={hookReturnCode} />
+
+        <div
+          className="border-l-4 border-(--lithos-accent) pl-6 py-2 mb-8 bg-(--lithos-surface) p-4"
+          style={{ borderColor: colors.warning }}
+        >
+          <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
+            The removeToast dispatch action is not documented as it is automatically called when a ToastItem is created.
+          </p>
+        </div>
+      </section>
     </div>
   )
 }
