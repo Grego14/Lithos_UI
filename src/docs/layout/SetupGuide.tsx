@@ -149,17 +149,19 @@ export const SetupGuide = ({ commandImport, manualImport, requires }: SetupGuide
           <>
             <p className="mb-4 text-sm font-bold opacity-80 text-(--lithos-text)">Copy the source components and import:</p>
             <CodeViewer code={manualImport} language="tsx" className="mb-6" />
-            <p className="text-sm font-bold opacity-80 text-(--lithos-text)">Requires:
-              {requires?.map((res, i) => (
-                <RequiredResource
-                  hoveredId={hoveredId}
-                  handlers={handlers}
-                  resource={res}
-                  key={`required-item-${i}`}
-                  isLast={i === requires?.length - 1}
-                />
-              ))}
-            </p>
+            {Array.isArray(requires) && (
+              <p className="text-sm font-bold opacity-80 text-(--lithos-text)">Requires:
+                {requires.map((res, i) => (
+                  <RequiredResource
+                    hoveredId={hoveredId}
+                    handlers={handlers}
+                    resource={res}
+                    key={`required-item-${i}`}
+                    isLast={i === requires?.length - 1}
+                  />
+                ))}
+              </p>
+            )}
           </>
         )}
       </div>
