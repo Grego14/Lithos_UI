@@ -41,7 +41,7 @@ const Hero1 = ({ accentColor, updateAccentColor }: HeroProps) => {
 
             <p className="mt-6 text-xl sm:text-2xl font-normal leading-tight text-(--lithos-text) md:text-3xl font-body max-w-2xl mx-auto lg:mx-0">
               No layout shift. No unreadable text on a bad accent color. No CSS specificity fights. Four systems
-              <ht>built into every component</ht>, working automatically — so the UI you shipped is still standing next
+              <strong>built into every component</strong>, working automatically — so the UI you shipped is still standing next
               quarter.
             </p>
 
