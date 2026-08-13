@@ -3,7 +3,16 @@ import { Card, CardImage, CardContent, CardTitle, CardDescription, CardFooter } 
 import { Button } from '../../components/ui/Button'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { CodeViewer } from '../../components/ui/CodeViewer'
+import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
+import {
+  cardPropsData,
+  cardImagePropsData,
+  cardContentPropsData,
+  cardTitlePropsData,
+  cardDescriptionPropsData,
+  cardFooterPropsData,
+} from '../propsData/card'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Card.tsx'
 
@@ -113,7 +122,8 @@ export const ImageBackgroundCard = () => {
 
       <div className="border-l-4 border-(--lithos-accent) pl-6 py-2 mb-8 bg-(--lithos-surface) p-4">
         <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
-          <strong>Default</strong> is the only variant today, with more on the roadmap. Hover lift is opt-in via the{' '}
+          <strong>Default</strong>, <strong>accent</strong>, <strong>solid</strong>, and <strong>image</strong> are
+          the available variants, all shown below. Hover lift is opt-in via the{' '}
           <code>interactive</code> prop and off by default.
         </p>
       </div>
@@ -228,6 +238,31 @@ export const ImageBackgroundCard = () => {
           </CardContent>
         </Card>
       </PreviewBlock>
+
+      <section className="mt-12 mb-12">
+        <h2 id="accessibility" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+          Accessibility
+        </h2>
+        <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
+          <li>Card renders a plain <code>div</code> — it carries no implicit role or focus behavior of its own.</li>
+          <li><code>CardTitle</code> renders an <code>h3</code>, so cards compose into the surrounding document heading order rather than skipping levels.</li>
+          <li>Always pass descriptive <code>alt</code> text to <code>CardImage</code>; it is required, not optional, on the component's props.</li>
+          <li>When a Card wraps interactive controls (links, buttons), keyboard focus and activation come from those native elements, not from the Card itself.</li>
+          <li>If an entire Card is meant to be a single click target, wrap it in a native <code>a</code> or <code>button</code> rather than relying on an <code>onClick</code> on the <code>div</code>, so it stays keyboard operable.</li>
+        </ul>
+      </section>
+
+      <section className="mb-12">
+        <h2 id="api" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+          API Reference
+        </h2>
+        <PropsAccordion title="Card Props" data={cardPropsData} />
+        <PropsAccordion title="CardImage Props" data={cardImagePropsData} />
+        <PropsAccordion title="CardContent Props" data={cardContentPropsData} />
+        <PropsAccordion title="CardTitle Props" data={cardTitlePropsData} />
+        <PropsAccordion title="CardDescription Props" data={cardDescriptionPropsData} />
+        <PropsAccordion title="CardFooter Props" data={cardFooterPropsData} />
+      </section>
     </div>
   )
 }
