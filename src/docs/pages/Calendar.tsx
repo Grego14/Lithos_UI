@@ -117,8 +117,8 @@ export const ControlledExample = () => {
       </h2>
 
       <SetupGuide
-        commandImport='import { Calendar } from "lithos-ui"'
-        manualImport='import { Calendar } from "../../components/ui/Calendar"'
+        componentNames={['Calendar']}
+        manualPath="../../components/ui/Calendar"
         requires={[
           'utils/cn.ts',
           'utils/yiq.ts',

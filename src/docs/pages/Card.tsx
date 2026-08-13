@@ -122,8 +122,8 @@ export const ImageBackgroundCard = () => {
       </h2>
 
       <SetupGuide
-        commandImport='import { Card } from "lithos-ui"'
-        manualImport='import { Card } from "../../components/ui/Card"'
+        componentNames={['Card']}
+        manualPath="../../components/ui/Card"
         requires={['utils/cn.ts']}
       />
 

@@ -105,8 +105,8 @@ export const FourteenUserGroup = () => {
       </h2>
 
       <SetupGuide
-        commandImport='import { Avatar } from "lithos-ui"'
-        manualImport='import { Avatar } from "../../components/ui/Avatar"'
+        componentNames={['Avatar']}
+        manualPath="../../components/ui/Avatar"
         requires={['utils/cn.ts', 'utils/yiq.ts', 'core/useTheme.ts']}
       />
 

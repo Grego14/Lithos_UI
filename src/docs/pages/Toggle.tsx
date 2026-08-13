@@ -54,8 +54,8 @@ export const ToggleExample = () => {
       </h2>
 
       <SetupGuide
-        commandImport='import { Toggle } from "lithos-ui"'
-        manualImport='import { Toggle } from "../../components/ui/Toggle"'
+        componentNames={['Toggle']}
+        manualPath="../../components/ui/Toggle"
       />
 
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useInstallPreference, type PackageManager } from "../../core/useInstallPreference"
 import { Button } from "../../components/ui/Button"
 import { CodeViewer } from "../../components/ui/CodeViewer"
 
@@ -9,29 +9,48 @@ const commands = {
   bun: 'bun add lithos-ui'
 }
 
-type Commands = keyof typeof commands
-
 interface SetupGuideProps {
-  commandImport: string
-  manualImport: string,
+  componentNames: string[]
+  manualPath: string | Partial<Record<string, string>>
   requires?: string[]
 }
 
-export const SetupGuide = ({ commandImport, manualImport, requires }: SetupGuideProps) => {
-  const [installTab, setInstallTab] = useState<'command' | 'manual'>('command')
-  const [usedCommand, setUsedCommand] = useState<Commands>('pnpm')
+export const SetupGuide = ({ componentNames, manualPath, requires }: SetupGuideProps) => {
+  const { installTab, updateInstallTab, packageManager, updatePackageManager } = useInstallPreference()
+
+  const commandImport = `import { ${componentNames.join(', ')} } from 'lithos-ui'`
+
+  let manualImport: string
+  if (typeof manualPath === 'string') {
+    manualImport = `import { ${componentNames.join(', ')} } from '${manualPath}'`
+  } else {
+    // Group component names by their specific manual path
+    const pathsToNames: Record<string, string[]> = {}
+    componentNames.forEach(name => {
+      // Default to root if not mapped, though users should map all if using Record
+      const path = manualPath[name]
+      if (path) {
+        if (!pathsToNames[path]) pathsToNames[path] = []
+        pathsToNames[path].push(name)
+      }
+    })
+
+    manualImport = Object.entries(pathsToNames).map(([path, names]) => {
+      return `import { ${names.join(', ')} } from '${path}'`
+    }).join('\n')
+  }
 
   return (
     <div className="mb-8">
       <div className="flex space-x-4 mb-4">
         <Button
-          onClick={() => setInstallTab('command')}
+          onClick={() => updateInstallTab('command')}
           intent={installTab !== 'command' ? 'secondary' : 'primary'}
         >
           Command
         </Button>
         <Button
-          onClick={() => setInstallTab('manual')}
+          onClick={() => updateInstallTab('manual')}
           intent={installTab !== 'manual' ? 'secondary' : 'primary'}
         >
           Manual
@@ -42,29 +61,29 @@ export const SetupGuide = ({ commandImport, manualImport, requires }: SetupGuide
         {installTab === 'command' ? (
           <>
             <div className='mb-6 space-x-4'>
-              {(Object.keys(commands) as Commands[]).map((command) => (
+              {(Object.keys(commands) as PackageManager[]).map((command) => (
                 <Button
                   key={`commands-${command}`}
-                  intent={command === usedCommand ? 'primary' : 'text'}
-                  onClick={() => setUsedCommand(command)}>
+                  intent={command === packageManager ? 'primary' : 'text'}
+                  onClick={() => updatePackageManager(command)}>
                   {command}
                 </Button>
               ))}
             </div>
 
             <p className="mb-4 text-sm font-bold opacity-80 text-(--lithos-text)">Install package:</p>
-            <CodeViewer code={commands[usedCommand]} language="bash" className="mb-6" />
-            <p className="mb-4 text-sm font-bold opacity-80 text-(--lithos-text)">Import:</p>
+            <CodeViewer code={commands[packageManager]} language="bash" className="mb-6" />
+            <p className="mb-4 text-sm font-body opacity-80 text-(--lithos-text)">Import:</p>
             <CodeViewer code={commandImport} language="tsx" />
           </>
         ) : (
           <>
-            <p className="mb-4 text-sm font-bold opacity-80 text-(--lithos-text)">Copy the source components and import:</p>
+            <p className="mb-4 text-sm font-body opacity-80 text-(--lithos-text)">Copy the source components and import:</p>
             <CodeViewer code={manualImport} language="tsx" className="mb-6" />
             {Array.isArray(requires) && (
-              <p className="text-sm font-bold opacity-80 text-(--lithos-text)">Requires:{' '}
+              <p className="mt-6 text-sm font-body opacity-80 text-(--lithos-text) wrap-break-word"><strong>Requires:</strong>{' '}
                 {requires.map((res, i) => (
-                  <span>{res}{i !== requires.length - 1 ? ',' : ''}</span>
+                  <span key={res}>{res}{i !== requires.length - 1 ? ', ' : ''}</span>
                 ))}
               </p>
             )}

@@ -96,8 +96,8 @@ export const CustomizedBadge = () => {
       </h2>
 
       <SetupGuide
-        commandImport='import { Badge } from "lithos-ui"'
-        manualImport='import { Badge } from "../../components/ui/Badge"'
+        componentNames={['Badge']}
+        manualPath="../../components/ui/Badge"
         requires={['utils/cn.ts']}
       />
 
