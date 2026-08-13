@@ -7,7 +7,7 @@
  *   edge stays visible against the page regardless of fill color; `outlined` moves border/shadow
  *   onto the accent color itself since the fill no longer carries it.
  */
-import { forwardRef, type ComponentPropsWithoutRef, type CSSProperties, type ReactNode } from 'react'
+import type { ComponentPropsWithRef, CSSProperties, ReactNode } from 'react'
 import { getContrastText } from '../../utils/yiq'
 import { colors } from '../../utils/colors'
 import type { HexColor } from '../../core/types'
@@ -20,7 +20,7 @@ export type AlertType = 'default' | 'success' | 'error' | 'warning' | 'info' | '
 export type AlertVariant = 'filled' | 'outlined'
 export type AlertSize = 'sm' | 'md' | 'lg'
 
-export interface AlertProps extends ComponentPropsWithoutRef<'div'> {
+export interface AlertProps extends ComponentPropsWithRef<'div'> {
   type?: AlertType
   variant?: AlertVariant
   size?: AlertSize
@@ -37,11 +37,8 @@ const sizeStyles: Record<AlertSize, { container: string; title: string; headerGa
   lg: { container: 'p-9', title: 'text-2xl', headerGap: 'mb-4', message: 'text-xl' },
 }
 
-export const Alert = forwardRef<HTMLDivElement, AlertProps>(
-  (
-    { type = 'default', variant = 'filled', size = 'lg', title, color, onClose, onUndo, className = '', style, children, ...props },
-    ref
-  ) => {
+export const Alert = (
+  { type = 'default', variant = 'filled', size = 'lg', title, color, onClose, onUndo, className = '', style, children, ref, ...props }: AlertProps) => {
     const isAccent = type === 'accent' && !color
     const isDefault = type === 'default' && !color
     const accentColor = color || (type === 'accent' ? 'var(--lithos-accent)' : colors[type])
@@ -114,6 +111,3 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
       </div>
     )
   }
-)
-
-Alert.displayName = 'Alert'
