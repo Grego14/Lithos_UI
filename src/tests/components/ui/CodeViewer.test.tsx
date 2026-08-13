@@ -119,6 +119,38 @@ describe('CodeViewer Component', () => {
     expect(rootWrapper).toHaveClass('custom-test-class')
   })
 
+  it('has correct keyboard focus order and tabIndexes', () => {
+    render(
+      <ToastProvider>
+        <CodeViewer code={mockCode} />
+      </ToastProvider>
+    )
+
+    const copyBtn = screen.getByRole('button', { name: 'Copy code' })
+
+    // the <pre> element is the one with the scroll not the <code>
+    const codeContainer = screen.getByText((_, element) => element?.tagName === 'PRE')
+
+    expect(copyBtn).not.toHaveAttribute('tabIndex', '-1')
+    expect(codeContainer).not.toHaveAttribute('tabindex', '0')
+  })
+
+  it('allows focusing action button using keyboard navigation', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <ToastProvider>
+        <CodeViewer code={mockCode} />
+      </ToastProvider>
+    )
+
+    const copyBtn = screen.getByRole('button', { name: 'Copy code' })
+
+    // Navegamos con Tab hasta llegar al botón
+    await user.tab()
+    expect(document.activeElement).toBe(copyBtn)
+  })
+
   it('passes a11y audit without violations', async () => {
     const { container } = render(
       <ToastProvider>
