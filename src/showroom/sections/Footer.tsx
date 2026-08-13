@@ -42,6 +42,7 @@ export const Footer = () => {
         <div className="mt-12 flex w-full flex-col lg:mt-0 lg:w-1/4 space-y-4">
           {links.map(link => (
             <Link
+              key={link.to}
               to={link.to}
               className="text-2xl space-y-4 font-black uppercase tracking-tighter leading-none md:text-4xl cursor-pointer text-(--lithos-accent-text)"
             >

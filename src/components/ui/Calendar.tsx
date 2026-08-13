@@ -329,7 +329,10 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
       [minYear, maxYear]
     )
 
+    const isKeyboardNavigating = useRef(false)
     useEffect(() => {
+      if (!isKeyboardNavigating.current) return
+      isKeyboardNavigating.current = false
       const button = dayButtonRefs.current.get(toDateKey(focusedDate))
       button?.focus()
     }, [focusedDate])
@@ -344,34 +347,42 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
       switch (event.key) {
         case 'ArrowLeft':
           event.preventDefault()
+          isKeyboardNavigating.current = true
           moveFocus(addDays(focusedDate, -1))
           break
         case 'ArrowRight':
           event.preventDefault()
+          isKeyboardNavigating.current = true
           moveFocus(addDays(focusedDate, 1))
           break
         case 'ArrowUp':
           event.preventDefault()
+          isKeyboardNavigating.current = true
           moveFocus(addDays(focusedDate, -7))
           break
         case 'ArrowDown':
           event.preventDefault()
+          isKeyboardNavigating.current = true
           moveFocus(addDays(focusedDate, 7))
           break
         case 'Home':
           event.preventDefault()
+          isKeyboardNavigating.current = true
           moveFocus(addDays(focusedDate, -((focusedDate.getDay() - firstDayOfWeek + 7) % 7)))
           break
         case 'End':
           event.preventDefault()
+          isKeyboardNavigating.current = true
           moveFocus(addDays(focusedDate, 6 - ((focusedDate.getDay() - firstDayOfWeek + 7) % 7)))
           break
         case 'PageUp':
           event.preventDefault()
+          isKeyboardNavigating.current = true
           moveFocus(addMonths(focusedDate, -1))
           break
         case 'PageDown':
           event.preventDefault()
+          isKeyboardNavigating.current = true
           moveFocus(addMonths(focusedDate, 1))
           break
         case 'Enter':
