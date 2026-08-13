@@ -101,7 +101,7 @@ export const ToastProvider = ({
     <ToastContext.Provider value={{ addToast, removeToast }}>
       {children}
       {/* - Fixed corner stack uses explicit padding and margins, not gap, so each toast remains independently dismissible. */}
-      <div className={`fixed ${positionStyles[position]} p-6 sm:p-6 md:p-8 z-50 pointer-events-none flex flex-col items-end w-full max-w-xs`}>
+      <div className={`fixed ${positionStyles[position]} p-4 sm:p-6 md:p-8 z-50 pointer-events-none flex flex-col items-end w-full max-w-xs`}>
         {toasts.map((toast) => (
           <ToastItem
             key={toast.id}
