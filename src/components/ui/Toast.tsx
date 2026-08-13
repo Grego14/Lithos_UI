@@ -7,7 +7,7 @@
 import { useState, useCallback, useEffect, useRef, type ReactNode } from 'react'
 import { getContrastText } from '../../utils/yiq'
 import { ToastContext } from '../../core/hooks/useToast'
-import type { ToastProps } from '../../core/types'
+import type { ToastProps, ToastPosition } from '../../core/types'
 import { colors } from '../../utils/colors'
 import { Button } from './Button'
 import { IconClose } from './icons/IconClose'
@@ -19,27 +19,95 @@ interface ToastItemType {
   onRemove: () => void
 }
 
-export const ToastProvider = ({ children }: { children: ReactNode }) => {
+type DurationObjType = {
+  success?: number,
+  error?: number,
+  warning?: number
+  info?: number
+  default?: number
+}
+
+interface ToastProviderProps {
+  children: ReactNode
+  duration?: DurationObjType | number
+  position?: ToastPosition
+}
+
+const positionStyles = {
+  'top-left': 'top-0 left-0',
+  'top-right': 'top-0 right-0',
+  'bottom-left': 'bottom-0 left-0',
+  'bottom-right': 'bottom-0 right-0'
+}
+
+const DEFAULT_DURATION = 5000
+
+export const ToastProvider = ({
+  children,
+  duration,
+  position = 'bottom-right'
+}: ToastProviderProps) => {
   const [toasts, setToasts] = useState<IdentifiedToastProps[]>([])
+
+  const durationConfig = typeof duration == 'object' && Object.assign({
+    success: 5000,
+    error: 8000,
+    warning: 5000,
+    info: 5000,
+    default: 5000
+  }, duration) || null
 
   const removeToast = useCallback((id: string) => {
     setToasts((prev) => prev.filter((toast) => toast.id !== id))
   }, [])
 
-  const addToast = useCallback(({ message, type = 'default', color, title }: ToastProps) => {
-    const id = Math.random().toString(36).substring(2, 9)
-    setToasts((prev) => [...prev, { id, message, type, color, title }])
+  const addToast = useCallback(
+    ({
+      message,
+      type = 'default',
+      color,
+      title,
+      duration: customDuration,
+    }: ToastProps) => {
+      const id = Math.random().toString(36).substring(2, 9)
+      let toastDuration = customDuration
 
-    return id
-  }, [])
+      // use the duration config object
+      if (!customDuration && durationConfig) {
+        toastDuration = durationConfig[type]
+      }
+
+      // consumer passes a single duration for all the toast types
+      if (typeof duration === 'number') {
+        toastDuration = duration
+      }
+
+      // fallback duration
+      if (!toastDuration) { toastDuration = DEFAULT_DURATION }
+
+      setToasts((prev) => [...prev, {
+        id,
+        message,
+        type,
+        color,
+        title,
+        duration: toastDuration
+      }])
+
+      return id
+    }, [durationConfig, duration])
 
   return (
     <ToastContext.Provider value={{ addToast, removeToast }}>
       {children}
       {/* - Fixed corner stack uses explicit padding and margins, not gap, so each toast remains independently dismissible. */}
-      <div className="fixed bottom-0 right-0 z-50 p-4 sm:p-6 md:p-8 pointer-events-none flex flex-col items-end w-full max-w-xs">
+      <div className={`fixed ${positionStyles[position]} p-4 sm:p-6 md:p-8 z-50 pointer-events-none flex flex-col items-end w-full max-w-xs`}>
         {toasts.map((toast) => (
-          <ToastItem key={toast.id} toast={toast} onRemove={() => removeToast(toast.id)} />
+          <ToastItem
+            key={toast.id}
+            toast={toast}
+            onRemove={() => removeToast(toast.id)}
+          />
         ))}
       </div>
     </ToastContext.Provider>
@@ -47,7 +115,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
 }
 
 export const ToastItem = ({ toast, onRemove }: ToastItemType) => {
-  const { id, message, type = 'default', color, title } = toast
+  const { id, message, type = 'default', color, title, duration } = toast
   const [isHovered, setIsHovered] = useState(false)
   const toastRef = useRef<HTMLDivElement | null>(null)
 
@@ -73,9 +141,13 @@ export const ToastItem = ({ toast, onRemove }: ToastItemType) => {
   // Toast persists on hover; auto-dismiss timer pauses while hovered
   useEffect(() => {
     if (isHovered) return
-    const timer = setTimeout(onRemove, isError ? 8000 : 5000)
+
+    let timeout = duration
+    if (!timeout) { timeout = DEFAULT_DURATION }
+
+    const timer = setTimeout(onRemove, timeout)
     return () => clearTimeout(timer)
-  }, [isHovered, onRemove, isError])
+  }, [isHovered, onRemove, isError, duration])
 
   const bgColor = color || colors[type] || colors.default
   const textColor = getContrastText(bgColor)
