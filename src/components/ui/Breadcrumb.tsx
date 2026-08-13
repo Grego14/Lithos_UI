@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react'
+import { forwardRef, useState, Fragment } from 'react'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 import { IconHome } from './icons/IconHome'
 import { IconBreadcrumbSeparator } from './icons/IconBreadcrumbSeparator'
@@ -216,8 +216,8 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
 
             if (entry.type === 'ellipsis') {
               return (
-                <span key={`ellipsis-${index}`} className="inline-flex items-center">
-                  <BreadcrumbItem>
+                <Fragment key={`ellipsis-${index}`}>
+                  <BreadcrumbItem className="inline-flex items-center">
                     <BreadcrumbEllipsis
                       isExpanded={isExpanded}
                       onClick={() => setIsExpanded(!isExpanded)}
@@ -225,7 +225,7 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
                     />
                   </BreadcrumbItem>
                   {!isLastEntry && <BreadcrumbSeparator>{separator}</BreadcrumbSeparator>}
-                </span>
+                </Fragment>
               )
             }
 
@@ -236,8 +236,8 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
             const showDefaultHome = showHomeIcon && originalIndex === 0 && !item.icon
 
             return (
-              <span key={`${item.label}-${originalIndex}`} className="inline-flex items-center">
-                <BreadcrumbItem>
+              <Fragment key={`${item.label}-${originalIndex}`}>
+                <BreadcrumbItem className="inline-flex items-center">
                   {isActive ? (
                     <BreadcrumbPage>
                       {showDefaultHome && <IconHome className="w-4 h-4 mr-1.5 inline-block" />}
@@ -254,7 +254,7 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
                 </BreadcrumbItem>
 
                 {!isLastEntry && <BreadcrumbSeparator>{separator}</BreadcrumbSeparator>}
-              </span>
+              </Fragment>
             )
           })}
         </BreadcrumbList>
