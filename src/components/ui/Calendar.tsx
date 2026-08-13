@@ -28,12 +28,11 @@
  */
 
 import {
-  forwardRef,
   useEffect,
   useMemo,
   useRef,
   useState,
-  type ComponentPropsWithoutRef,
+  type ComponentPropsWithRef,
   type KeyboardEvent,
 } from 'react'
 import { Button } from './Button'
@@ -68,7 +67,7 @@ export interface DateRange {
 
 export type CalendarValue = Date | null | Date[] | DateRange
 
-export interface CalendarProps extends Omit<ComponentPropsWithoutRef<'div'>, 'defaultValue' | 'onChange'> {
+export interface CalendarProps extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'> {
   mode?: CalendarMode
   value?: CalendarValue
   defaultValue?: CalendarValue
@@ -209,7 +208,7 @@ const NavIcon = ({ direction }: { direction: 'prev' | 'next' }) => (
   </div>
 )
 
-export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
+export const Calendar = 
   (
     {
       mode = 'single',
@@ -229,10 +228,10 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
       yearRange,
       classes = {},
       className,
+      ref,
       ...rest
-    },
-    ref
-  ) => {
+  }: CalendarProps
+) => {
     const isValueControlled = value !== undefined
     const [localValue, setLocalValue] = useState<CalendarValue>(() => defaultValue ?? getEmptyValue(mode))
     const currentValue = isValueControlled ? value! : localValue
@@ -526,7 +525,4 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
         </div>
       </div>
     )
-  }
-)
-
-Calendar.displayName = 'Calendar'
+}

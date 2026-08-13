@@ -5,13 +5,12 @@
  * - Zero-Gap Rule: `iconLeft`/`iconRight` spacing and `ButtonGroup` layout use explicit margins, never CSS `gap`.
  * - Native `type="button"` default prevents accidental form submission; opt into `type="submit"` explicitly.
  */
-import { forwardRef } from 'react'
-import type { ComponentPropsWithoutRef, ReactNode } from 'react'
+import type { ComponentPropsWithRef, ReactNode } from 'react'
 import type { ButtonIntent } from '../../core/types'
 import { cn } from '../../utils/cn'
 import type { ClassArray, ClassValue } from 'clsx'
 
-export interface ButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'type' | 'className'> {
+export interface ButtonProps extends Omit<ComponentPropsWithRef<'button'>, 'type' | 'className'> {
   intent?: ButtonIntent | undefined
   fullWidth?: boolean | undefined
   type?: 'button' | 'submit' | 'reset' | undefined
@@ -28,10 +27,9 @@ const intentClass: Record<ButtonIntent, string> = {
   text: 'bg-transparent text-(--lithos-text) cursor-pointer !border-transparent !shadow-none hover:!shadow-none',
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+export const Button =
   (
-    { intent = 'primary', fullWidth = false, type = 'button', iconLeft, iconRight, className, children, ...rest },
-    ref
+    { intent = 'primary', fullWidth = false, type = 'button', iconLeft, iconRight, className, children, ref, ...rest }: ButtonProps
   ) => {
     const classes = [
       'lithos-click',
@@ -56,24 +54,22 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
       </button>
     )
-  }
-)
-
-Button.displayName = 'Button'
+}
 
 /**
  * ButtonGroup lays out `Button` primitives side by side (`horizontal`) or stacked (`vertical`).
  * `attached` fuses adjacent buttons into a single hard-bordered strip by collapsing the shared
  * border and popping the hovered/focused item's shadow above its neighbors via `z-10`.
  */
-export interface ButtonGroupProps extends Omit<ComponentPropsWithoutRef<'div'>, 'className'> {
+export interface ButtonGroupProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   orientation?: 'horizontal' | 'vertical' | undefined
   attached?: boolean | undefined
   className?: ClassValue | ClassArray
 }
 
-export const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
-  ({ orientation = 'horizontal', attached = false, className, children, ...rest }, ref) => {
+export const ButtonGroup = (
+  { orientation = 'horizontal', attached = false, className, children, ref, ...rest }: ButtonGroupProps
+) => {
     const isVertical = orientation === 'vertical'
 
     const classes = [
@@ -95,7 +91,4 @@ export const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
         {children}
       </div>
     )
-  }
-)
-
-ButtonGroup.displayName = 'ButtonGroup'
+}
