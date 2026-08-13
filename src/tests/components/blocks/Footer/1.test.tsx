@@ -2,28 +2,30 @@ import { render, screen } from '@testing-library/react'
 import { axe } from 'jest-axe'
 import { describe, it, expect } from 'vitest'
 import { MemoryRouter } from 'react-router-dom'
-import { Hero1 } from '../../../../components/blocks/Hero/1'
+import { Footer1 } from '../../../../components/blocks/Footer/1'
 
-describe('Hero1', () => {
+describe('Footer1', () => {
   it('renders correctly', () => {
     render(
       <MemoryRouter>
-        <Hero1 />
+        <Footer1 />
       </MemoryRouter>
     )
 
-    // Check main heading
-    expect(screen.getByText(/Build Something/i)).toBeInTheDocument()
+    expect(screen.getByText('BRAND MARK')).toBeInTheDocument()
+    
+    // Check navigation groups
+    expect(screen.getByText('Product')).toBeInTheDocument()
+    expect(screen.getByText('Resources')).toBeInTheDocument()
+    expect(screen.getByText('Company')).toBeInTheDocument()
 
-    // Check links/buttons
-    expect(screen.getByText('Start Free Trial')).toBeInTheDocument()
-    expect(screen.getByText('Read Documentation')).toBeInTheDocument()
+    expect(screen.getByText(/All rights reserved/i)).toBeInTheDocument()
   })
 
   it('has no accessibility violations', async () => {
     const { container } = render(
       <MemoryRouter>
-        <Hero1 />
+        <Footer1 />
       </MemoryRouter>
     )
     const results = await axe(container)
