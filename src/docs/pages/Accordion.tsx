@@ -1,4 +1,5 @@
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
+import { CodeViewer } from '../../components/ui/CodeViewer'
 import { Accordion, AccordionGroup } from '../../components/ui/Accordion'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
@@ -91,6 +92,20 @@ export const FAQItem = () => {
           'components/ui/icons/IconChevronUp.tsx'
         ]}
       />
+
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Anatomy
+      </h2>
+      <div className="mb-12">
+        <CodeViewer
+          language="tsx"
+          code={`<AccordionGroup>
+  <Accordion title="Heading">
+    Content
+  </Accordion>
+</AccordionGroup>`}
+        />
+      </div>
 
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Examples

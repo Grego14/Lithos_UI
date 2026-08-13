@@ -1,4 +1,5 @@
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
+import { CodeViewer } from '../../components/ui/CodeViewer'
 import { Carousel } from '../../components/ui/Carousel'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
@@ -160,6 +161,26 @@ export const AppCarousel = () => {
           'components/ui/icons/IconCircle.tsx'
         ]}
       />
+
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Anatomy
+      </h2>
+      <div className="mb-12">
+        <CodeViewer
+          language="tsx"
+          code={`<Carousel>
+  <Carousel.Controls>
+    <Carousel.PrevButton />
+    <Carousel.NextButton />
+  </Carousel.Controls>
+  
+  <Carousel.Slide>...</Carousel.Slide>
+  <Carousel.Slide>...</Carousel.Slide>
+  
+  <Carousel.Pagination />
+</Carousel>`}
+        />
+      </div>
 
       <h2 id='examples' className='mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)'>
         Examples
