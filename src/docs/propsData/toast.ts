@@ -5,8 +5,22 @@ export const toastProviderPropsData: PropItem[] = [
     name: 'children',
     type: 'ReactNode',
     required: true,
-    description: 'The React node tree to be wrapped with the toast context.',
+    description: 'The React node tree wrapped with the toast context.'
   },
+  {
+    name: 'duration',
+    type: 'number | DurationObjType',
+    defaultValue: '5000',
+    required: false,
+    description: 'Global duration in ms. Accepts a single number or an object with per-type values.'
+  },
+  {
+    name: 'position',
+    type: "'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'",
+    defaultValue: "'bottom-right'",
+    required: false,
+    description: 'Corner position on the viewport where toasts will stack.'
+  }
 ]
 
 export const toastPropsData: PropItem[] = [
@@ -35,4 +49,10 @@ export const toastPropsData: PropItem[] = [
     required: false,
     description: 'Custom inline CSS background or accent color variable.',
   },
+  {
+    name: 'duration',
+    type: 'number',
+    required: false,
+    description: 'Custom lifetime in milliseconds for this specific toast, overriding the provider setting.'
+  }
 ]
