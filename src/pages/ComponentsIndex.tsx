@@ -45,7 +45,7 @@ const AlertPreview = () => {
 };
 
 const CarouselPreview = () => {
-  const slideClass = 'h-[4rem] flex items-center justify-center font-black text-lg'
+  const slideClass = 'h-[4rem] flex items-center justify-center font-black text-sm'
 
   return (
     <Carousel title='LITHOS UI!' hideControls hidePagination playInfinite playInterval={3000}>
@@ -79,7 +79,7 @@ const componentsList = [
   {
     name: 'Badge',
     to: '/docs/badge',
-    preview: <Badge variant='accent' size='medium'>Feature</Badge>
+    preview: <Badge variant='accent' size='md'>Feature</Badge>
   },
   {
     name: 'Breadcrumb',
@@ -163,16 +163,16 @@ export const ComponentsIndex = ({ isDarkMode, toggleObsidian }: ComponentsIndexP
             <div key={comp.name} className="w-full sm:w-[50%] md:w-[33.333%] lg:w-[25%] p-3">
               <Link
                 to={comp.to}
-                className="block group lithos-click h-full"
+                className="block group lithos-click h-full p-0 flex flex-col items-stretch"
               >
                 {/* Top Zone: Live Preview */}
-                <div className="aspect-[4/3] sm:aspect-[3/2] md:aspect-video flex items-center justify-center bg-(--lithos-surface) p-4 overflow-hidden relative border-2 border-(--lithos-border)">
+                <div className="w-full aspect-[4/3] sm:aspect-[3/2] md:aspect-video flex items-center justify-center bg-(--lithos-surface) p-2 overflow-hidden relative border-b-2 border-(--lithos-border) font-normal tracking-normal leading-normal">
                   {comp.preview}
                 </div>
 
                 {/* Bottom Zone: Thin Label Strip */}
-                <div className="mt-3">
-                  <h2 className="text-xl font-black uppercase tracking-tighter text-(--lithos-text) group-hover:text-(--lithos-accent) transition-colors">
+                <div className="p-3 flex-grow w-full text-left">
+                  <h2 className="text-xl font-black uppercase tracking-tighter text-(--lithos-text)">
                     {comp.name}
                   </h2>
                 </div>

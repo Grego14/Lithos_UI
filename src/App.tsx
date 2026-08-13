@@ -14,6 +14,7 @@ import { AccordionDoc } from './docs/pages/Accordion'
 import { BadgeDoc } from './docs/pages/Badge'
 import { BreadcrumbDoc } from './docs/pages/Breadcrumb'
 import { BlockPreviewPage } from './pages/BlockPreviewPage'
+import { BlockCategoryPage } from './pages/BlockCategoryPage'
 import { BlocksIndex } from './pages/BlocksIndex'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { ButtonDoc } from './docs/pages/Button'
@@ -111,6 +112,15 @@ const App = () => {
             }
           />
           <Route path="/blocks/preview/:slug" element={<BlockPreviewPage />} />
+          <Route 
+            path="/blocks/:categorySlug" 
+            element={
+              <BlockCategoryPage 
+                isDarkMode={isDarkMode} 
+                toggleObsidian={toggleObsidian} 
+              />
+            } 
+          />
           <Route
             path="/coming-soon"
             element={

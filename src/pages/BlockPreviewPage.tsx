@@ -1,24 +1,15 @@
 import { useParams } from 'react-router-dom'
-import { Testimonials1 } from '../components/blocks/Testimonials/1'
-import { Navbar1 as NavbarBlock } from '../components/blocks/Navbar/1'
-import { Pricing1 } from '../components/blocks/Pricing/1'
 import { ComingSoon } from '../showroom/sections/ComingSoon'
-
-import { FAQ1 } from '../components/blocks/FAQ/1'
-import { FeatureGrid1 } from '../components/blocks/FeatureGrid/1'
-
-const blockRegistry: Record<string, React.ComponentType> = {
-  testimonials: Testimonials1,
-  navbar: NavbarBlock,
-  pricing: Pricing1,
-  faq: FAQ1,
-  'feature-grids': FeatureGrid1,
-}
+import { blockCategories } from '../components/blocks/registry'
 
 export const BlockPreviewPage = () => {
   const { slug } = useParams<{ slug: string }>()
 
-  if (!slug || !blockRegistry[slug]) {
+  // Flatten the registry to find the specific variant by slug
+  const allVariants = blockCategories.flatMap(c => c.variants)
+  const variant = allVariants.find(v => v.slug === slug)
+
+  if (!slug || !variant) {
     return (
       <ComingSoon
         eyebrow="404 NOT FOUND"
@@ -29,7 +20,7 @@ export const BlockPreviewPage = () => {
     )
   }
 
-  const Block = blockRegistry[slug]
+  const Block = variant.component
 
   return (
     <div className="min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
