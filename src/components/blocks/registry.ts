@@ -145,7 +145,7 @@ export const blockCategories: BlockCategory[] = [
     variants: [
       {
         slug: 'feature-grids-1',
-        name: 'Bento Grid',
+        name: 'Classic Grid',
         component: FeatureGrid1,
         code: featureGrid1Code,
         githubUrl: `${GITHUB_BASE}/FeatureGrid/1.tsx`

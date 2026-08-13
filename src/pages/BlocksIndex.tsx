@@ -46,22 +46,22 @@ export const BlocksIndex = ({ isDarkMode, toggleObsidian }: BlocksIndexProps) =>
                   <div key={category.slug} className="w-full sm:w-[50%] lg:w-[33.333%] p-3">
                     <Link
                       to={`/blocks/${category.slug}`}
-                      className="block group lithos-click h-full flex flex-col"
+                      className="block group lithos-click h-full flex flex-col p-0 items-stretch"
                     >
-                      <div className="w-full h-48 overflow-hidden bg-(--lithos-surface) relative border-2 border-(--lithos-border)">
+                      <div className="w-full h-48 overflow-hidden bg-(--lithos-surface) relative border-b-2 border-(--lithos-border) font-normal tracking-normal leading-normal">
                         <div className="absolute inset-0 pointer-events-none">
                           <div className="w-[200%] scale-[0.5] origin-top-left">
                             <FirstComponent />
                           </div>
                         </div>
                       </div>
-                      <div className="mt-3 flex-grow">
+                      <div className="p-3 flex-grow w-full text-left flex flex-col justify-between">
                         <h3 className="text-xl font-black uppercase tracking-tighter text-(--lithos-text)">
                           {category.title}
                         </h3>
-                      </div>
-                      <div className="mt-4 text-xs font-bold uppercase tracking-widest text-(--lithos-accent)">
-                        {category.variants.length} Variant{category.variants.length !== 1 ? 's' : ''}
+                        <div className="mt-4 text-xs font-bold uppercase tracking-widest text-(--lithos-accent)">
+                          {category.variants.length} Variant{category.variants.length !== 1 ? 's' : ''}
+                        </div>
                       </div>
                     </Link>
                   </div>
