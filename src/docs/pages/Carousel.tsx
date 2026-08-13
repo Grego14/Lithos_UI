@@ -147,8 +147,8 @@ export const AppCarousel = () => {
       </h2>
 
       <SetupGuide
-        commandImport='import { Carousel } from "lithos-ui"'
-        manualImport='import { Carousel } from "../../components/ui/Carousel"'
+        componentNames={['Carousel']}
+        manualPath="../../components/ui/Carousel"
         requires={[
           'utils/cn.ts',
           'utils/scrollTo.ts',

@@ -82,8 +82,9 @@ export const FAQItem = () => {
         Installation
       </h2>
 
-      <SetupGuide commandImport='import { Accordion, AccordionGroup } from "lithos-ui"'
-        manualImport="import { Accordion, AccordionGroup } from '../../components/ui/Accordion'"
+      <SetupGuide
+        componentNames={['Accordion', 'AccordionGroup']}
+        manualPath="../../components/ui/Accordion"
         requires={[
           'utils/cn.ts',
           'components/ui/Button.tsx',

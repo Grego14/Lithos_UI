@@ -142,8 +142,8 @@ export const AttachedButtonGroup = () => {
       </h2>
 
       <SetupGuide
-        commandImport='import { Button } from "lithos-ui"'
-        manualImport='import { Button } from "../../components/ui/Button"'
+        componentNames={['Button']}
+        manualPath="../../components/ui/Button"
         requires={['utils/cn.ts']}
       />
 

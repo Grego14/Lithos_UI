@@ -144,8 +144,8 @@ export const CustomizedAlert = () => {
       </h2>
 
       <SetupGuide
-        commandImport='import { Alert } from "lithos-ui"'
-        manualImport='import { Alert } from "../../components/ui/Alert"'
+        componentNames={['Alert']}
+        manualPath="../../components/ui/Alert"
         requires={['utils/cn.ts', 'utils/yiq.ts', 'components/ui/Button.tsx']}
       />
 

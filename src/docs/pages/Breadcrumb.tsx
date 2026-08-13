@@ -74,8 +74,8 @@ export const IconNameBreadcrumb = () => {
       </h2>
 
       <SetupGuide
-        commandImport='import { Breadcrumb } from "lithos-ui"'
-        manualImport='import { Breadcrumb } from "../../components/ui/Breadcrumb"'
+        componentNames={['Breadcrumb']}
+        manualPath="../../components/ui/Breadcrumb"
         requires={[
           'utils/cn.ts',
           'components/ui/icons/IconHome.tsx',
