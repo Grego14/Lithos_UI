@@ -75,6 +75,8 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#solid', label: 'Solid', level: 2 },
     { id: '#spacing', label: 'Spacing', level: 2 },
     { id: '#image', label: 'Image', level: 2 },
+    { id: '#accessibility', label: 'Accessibility', level: 1 },
+    { id: '#api', label: 'API Reference', level: 1 },
   ],
   '/docs/badge': [
     { id: '#installation', label: 'Installation', level: 1 },

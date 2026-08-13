@@ -4,18 +4,17 @@
  * - `CardContent`/`CardFooter` own their own padding; stack spacing between them is margin-based, never `gap`.
  * - Hard geometry: fixed-offset shadow always shows; `hover:translate` lift is opt-in via `interactive`, not forced on every Card.
  */
-import { forwardRef } from 'react'
-import type { ComponentPropsWithoutRef, ReactNode } from 'react'
+import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { cn } from '../../utils/cn'
 
-export interface CardProps extends ComponentPropsWithoutRef<'div'> {
+export interface CardProps extends ComponentPropsWithRef<'div'> {
   interactive?: boolean | undefined
   variant?: 'default' | 'accent' | 'image' | 'blueprint' | 'physics' | 'solid' | undefined
   children: ReactNode
 }
 
-export const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ interactive = false, variant = 'default', className, children, ...rest }, ref) => {
+export const Card = (
+  { interactive = false, variant = 'default', className, children, ref, ...rest }: CardProps) => {
     const isImage = variant === 'image'
 
     const classes = cn(
@@ -36,18 +35,15 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       </div>
     )
   }
-)
 
-Card.displayName = 'Card'
-
-export interface CardImageProps extends ComponentPropsWithoutRef<'img'> {
+export interface CardImageProps extends ComponentPropsWithRef<'img'> {
   src: string
   alt: string
   isBackground?: boolean | undefined
 }
 
-export const CardImage = forwardRef<HTMLImageElement, CardImageProps>(
-  ({ isBackground = false, className, ...rest }, ref) => {
+export const CardImage = (
+  { isBackground = false, className, ref, ...rest }: CardImageProps) => {
     const classes = cn(
       isBackground
         ? 'absolute inset-0 w-full h-full object-cover z-0'
@@ -57,17 +53,14 @@ export const CardImage = forwardRef<HTMLImageElement, CardImageProps>(
 
     return <img ref={ref} className={classes} {...rest} />
   }
-)
 
-CardImage.displayName = 'CardImage'
-
-export interface CardContentProps extends ComponentPropsWithoutRef<'div'> {
+export interface CardContentProps extends ComponentPropsWithRef<'div'> {
   spacing?: 'sm' | 'md' | 'lg' | undefined
   children: ReactNode
 }
 
-export const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
-  ({ spacing = 'md', className, children, ...rest }, ref) => {
+export const CardContent = (
+  { spacing = 'md', className, children, ref, ...rest }: CardContentProps) => {
     const spacingClass = {
       sm: 'p-3',
       md: 'p-6',
@@ -82,15 +75,12 @@ export const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
       </div>
     )
   }
-)
 
-CardContent.displayName = 'CardContent'
-
-export interface CardTitleProps extends ComponentPropsWithoutRef<'h3'> {
+export interface CardTitleProps extends ComponentPropsWithRef<'h3'> {
   children: ReactNode
 }
 
-export const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(({ className, children, ...rest }, ref) => {
+export const CardTitle = ({ className, children, ref, ...rest }: CardTitleProps) => {
   const classes = cn('text-xl font-black uppercase tracking-tight leading-none mb-3', className)
 
   return (
@@ -98,16 +88,14 @@ export const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(({ class
       {children}
     </h3>
   )
-})
+}
 
-CardTitle.displayName = 'CardTitle'
-
-export interface CardDescriptionProps extends ComponentPropsWithoutRef<'p'> {
+export interface CardDescriptionProps extends ComponentPropsWithRef<'p'> {
   children: ReactNode
 }
 
-export const CardDescription = forwardRef<HTMLParagraphElement, CardDescriptionProps>(
-  ({ className, children, ...rest }, ref) => {
+export const CardDescription = (
+  { className, children, ref, ...rest }: CardDescriptionProps) => {
     const classes = cn('font-body opacity-70 leading-snug', className)
 
     return (
@@ -116,17 +104,14 @@ export const CardDescription = forwardRef<HTMLParagraphElement, CardDescriptionP
       </p>
     )
   }
-)
 
-CardDescription.displayName = 'CardDescription'
-
-export interface CardFooterProps extends ComponentPropsWithoutRef<'div'> {
+export interface CardFooterProps extends ComponentPropsWithRef<'div'> {
   spacing?: 'sm' | 'md' | 'lg' | undefined
   children: ReactNode
 }
 
-export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
-  ({ spacing = 'md', className, children, ...rest }, ref) => {
+export const CardFooter = (
+  { spacing = 'md', className, children, ref, ...rest }: CardFooterProps) => {
     const spacingClass = {
       sm: 'px-3 pt-2 pb-3',
       md: 'px-6 pt-4 pb-6',
@@ -145,6 +130,3 @@ export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
       </div>
     )
   }
-)
-
-CardFooter.displayName = 'CardFooter'
