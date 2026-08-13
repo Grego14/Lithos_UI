@@ -1,4 +1,5 @@
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
+import { CodeViewer } from '../../components/ui/CodeViewer'
 import { Avatar, AvatarGroup } from '../../components/ui/Avatar'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
@@ -105,10 +106,26 @@ export const FourteenUserGroup = () => {
       </h2>
 
       <SetupGuide
-        componentNames={['Avatar']}
+        componentNames={['Avatar', 'AvatarGroup', 'AvatarGroupCount']}
         manualPath="../../components/ui/Avatar"
         requires={['utils/cn.ts', 'utils/yiq.ts', 'core/useTheme.ts']}
       />
+
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Anatomy
+      </h2>
+      <div className="mb-12">
+        <CodeViewer
+          language="tsx"
+          code={`<AvatarGroup>
+  <Avatar>
+    <AvatarImage />
+    <AvatarFallback />
+  </Avatar>
+  <AvatarGroupCount />
+</AvatarGroup>`}
+        />
+      </div>
 
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Examples

@@ -3,6 +3,7 @@ import { IconDownload } from '../../components/ui/icons/IconDownload'
 import { IconHome } from '../../components/ui/icons/IconHome'
 import { IconSettings } from '../../components/ui/icons/IconSettings'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
+import { CodeViewer } from '../../components/ui/CodeViewer'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
 import { buttonPropsData, buttonGroupPropsData } from '../propsData/button'
@@ -146,6 +147,19 @@ export const AttachedButtonGroup = () => {
         manualPath="../../components/ui/Button"
         requires={['utils/cn.ts']}
       />
+
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Anatomy
+      </h2>
+      <div className="mb-12">
+        <CodeViewer
+          language="tsx"
+          code={`<ButtonGroup>
+  <Button />
+  <Button />
+</ButtonGroup>`}
+        />
+      </div>
 
       <h2 id="examples" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Examples

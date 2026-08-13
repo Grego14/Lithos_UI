@@ -99,6 +99,26 @@ const { addToast } = useToast()
         ]}
       />
 
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Anatomy
+      </h2>
+      <div className="mb-12">
+        <p className="mb-4 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
+          Toasts require a global provider to wrap your application, enabling any nested component to dispatch notifications using the hook.
+        </p>
+        <CodeViewer
+          language="tsx"
+          code={`<ToastProvider>
+  {/* Wrap your application router or main layout here */}
+  <App />
+</ToastProvider>
+
+// Inside a child component:
+const { addToast } = useToast()
+`}
+        />
+      </div>
+
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Examples
       </h2>

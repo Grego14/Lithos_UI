@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Card, CardImage, CardContent, CardTitle, CardDescription, CardFooter } from '../../components/ui/Card'
 import { Button } from '../../components/ui/Button'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
+import { CodeViewer } from '../../components/ui/CodeViewer'
 import { SetupGuide } from '../layout/SetupGuide'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Card.tsx'
@@ -126,6 +127,23 @@ export const ImageBackgroundCard = () => {
         manualPath="../../components/ui/Card"
         requires={['utils/cn.ts']}
       />
+
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Anatomy
+      </h2>
+      <div className="mb-12">
+        <CodeViewer
+          language="tsx"
+          code={`<Card>
+  <CardImage />
+  <CardContent>
+    <CardTitle />
+    <CardDescription />
+  </CardContent>
+  <CardFooter />
+</Card>`}
+        />
+      </div>
 
       <h2 id="examples" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Examples

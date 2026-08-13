@@ -34,6 +34,7 @@ const tocRegistry: Record<string, TOCItem[]> = {
   ],
   '/docs/toast': [
     { id: '#installation', label: 'Installation', level: 1 },
+    { id: '#anatomy', label: 'Anatomy', level: 1 },
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
     { id: '#api', label: 'API Reference', level: 1 },
@@ -49,6 +50,7 @@ const tocRegistry: Record<string, TOCItem[]> = {
   ],
   '/docs/button': [
     { id: '#installation', label: 'Installation', level: 1 },
+    { id: '#anatomy', label: 'Anatomy', level: 1 },
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#button', label: 'Button', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
@@ -66,6 +68,7 @@ const tocRegistry: Record<string, TOCItem[]> = {
   ],
   '/docs/card': [
     { id: '#installation', label: 'Installation', level: 1 },
+    { id: '#anatomy', label: 'Anatomy', level: 1 },
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
     { id: '#accent', label: 'Accent', level: 2 },
@@ -84,12 +87,14 @@ const tocRegistry: Record<string, TOCItem[]> = {
   ],
   '/docs/breadcrumb': [
     { id: '#installation', label: 'Installation', level: 1 },
+    { id: '#anatomy', label: 'Anatomy', level: 1 },
     { id: '#examples', label: 'Breadcrumb Types', level: 1 },
     { id: '#collapsible', label: '1. Collapsible', level: 2 },
     { id: '#icon-name', label: '2. Simple Icon + Name', level: 2 },
   ],
   '/docs/avatar': [
     { id: '#installation', label: 'Installation', level: 1 },
+    { id: '#anatomy', label: 'Anatomy', level: 1 },
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#variants', label: 'States', level: 2 },
     { id: '#sizes', label: 'Sizes', level: 2 },
@@ -111,6 +116,7 @@ const tocRegistry: Record<string, TOCItem[]> = {
   ],
   '/docs/accordion': [
     { id: '#installation', label: 'Installation', level: 1 },
+    { id: '#anatomy', label: 'Anatomy', level: 1 },
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
     { id: '#grouped-default', label: 'Grouped default', level: 2 },
@@ -133,6 +139,7 @@ const tocRegistry: Record<string, TOCItem[]> = {
   ],
   '/docs/carousel': [
     { id: '#installation', label: 'Installation', level: 1 },
+    { id: '#anatomy', label: 'Anatomy', level: 1 },
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
     { id: '#looping', label: 'Looping', level: 2 },
