@@ -103,7 +103,7 @@ export const BreadcrumbList = ({ className, children, ref, ...rest }: ComponentP
 }
 
 export interface BreadcrumbItemData {
-  label: ReactNode
+  label: string
   active?: boolean | undefined
   icon?: ReactNode | undefined
   href?: string | undefined
@@ -112,13 +112,15 @@ export interface BreadcrumbItemData {
 
 export interface BreadcrumbProps extends ComponentPropsWithRef<'nav'> {
   items?: BreadcrumbItemData[] | undefined
-  variant?: 'default' | 'collapsible' | undefined
+  variant?: 'default' | 'collapsible' | 'icon' | undefined
   separator?: ReactNode | undefined
   showHomeIcon?: boolean | undefined
   humanPrefix?: ReactNode | undefined
   maxItems?: number | undefined
   itemsBeforeCollapse?: number | undefined
   itemsAfterCollapse?: number | undefined
+  className?: string | undefined
+  children?: ReactNode | undefined
 }
 
 export const Breadcrumb = ({
