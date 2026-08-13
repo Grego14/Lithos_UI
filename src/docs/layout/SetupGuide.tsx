@@ -71,7 +71,7 @@ export const SetupGuide = ({ componentNames, manualPath, requires }: SetupGuideP
               ))}
             </div>
 
-            <p className="mb-4 text-sm font-bold opacity-80 text-(--lithos-text)">Install package:</p>
+            <p className="mb-4 text-sm font-body opacity-80 text-(--lithos-text)">Install package:</p>
             <CodeViewer code={commands[packageManager]} language="bash" className="mb-6" />
             <p className="mb-4 text-sm font-body opacity-80 text-(--lithos-text)">Import:</p>
             <CodeViewer code={commandImport} language="tsx" />
