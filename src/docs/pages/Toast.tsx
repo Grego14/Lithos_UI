@@ -198,7 +198,7 @@ const { addToast } = useToast()
         </Button>
       </PreviewBlock>
 
-      <h3 id="top-left" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="custom-position" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
         Custom position
       </h3>
 
