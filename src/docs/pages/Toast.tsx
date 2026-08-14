@@ -7,20 +7,49 @@ import { PropsAccordion } from '../../components/ui/PropsTable'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 import { colors } from '../../utils/colors'
 import { toastPropsData, toastProviderPropsData } from '../propsData/toast'
+import { ToastProvider } from '../../components/ui/Toast'
+import type { ToastProps } from '../../core/types'
+
+const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Toast.tsx'
+
+const newToast: ToastProps = {
+  title: 'SYSTEM TOAST',
+  message: 'Structural integrity verified.',
+  type: 'success'
+}
+
+// inner component that consumes the nested context
+const ToastTriggerButton = () => {
+  const toast = useToast()
+  const { accentColor } = useTheme()
+
+  const triggerToast = () => {
+    if (toast && toast.addToast)
+      toast.addToast({ ...newToast, color: accentColor })
+  }
+
+  return (
+    <Button onClick={triggerToast}>
+      Trigger Toast
+    </Button>
+  )
+}
+
+const PositionedToast = () => {
+  return (
+    <ToastProvider position='top-left'>
+      <ToastTriggerButton />
+    </ToastProvider>
+  )
+}
 
 export const ToastDoc = () => {
   const toast = useToast()
   const { accentColor } = useTheme()
 
   const triggerToast = () => {
-    if (toast && toast.addToast) {
-      toast.addToast({
-        title: 'SYSTEM TOAST',
-        message: 'Structural integrity verified.',
-        type: 'success',
-        color: accentColor,
-      })
-    }
+    if (toast && toast.addToast)
+      toast.addToast({ ...newToast, color: accentColor })
   }
 
   const usageCode = `import { useToast } from '../../core/hooks/useToast'
@@ -57,6 +86,42 @@ const { addToast } = useToast()
   const hookReturnCode = `type ToastContextType = {
   addToast: (props: ToastProps) => string
   removeToast: (id: string) => void
+}
+`
+
+  const positionedCode = `import { ToastProvider } from '../../components/ui/Toast'
+import { useToast } from '../../core/hooks/useToast'
+import { useTheme } from '../../core/useTheme'
+import { Button } from '../../components/ui/Button'
+
+export const TriggerToastButton = () => {
+  const { addToast } = useToast()
+  const { accentColor } = useTheme()
+
+  const triggerToast = () => {
+    if (addToast) {
+      addToast({
+        title: 'SYSTEM TOAST',
+        message: 'Structural integrity verified.',
+        type: 'success',
+        color: accentColor,
+      })
+    }
+  }
+
+  return (
+    <Button onClick={triggerToast}>
+      Trigger Toast
+    </Button>
+  )
+}
+
+export const App = () => {
+  return (
+    <ToastProvider position='top-left'>
+      <TriggerToastButton />
+    </ToastProvider>
+  )
 }
 `
 
@@ -127,13 +192,18 @@ const { addToast } = useToast()
         Default
       </h3>
 
-      <PreviewBlock
-        code={usageCode}
-        githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Toast.tsx"
-      >
+      <PreviewBlock code={usageCode} githubUrl={githubUrl}>
         <Button onClick={triggerToast}>
           Trigger Toast
         </Button>
+      </PreviewBlock>
+
+      <h3 id="top-left" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Custom position
+      </h3>
+
+      <PreviewBlock code={positionedCode} githubUrl={githubUrl}>
+        <PositionedToast />
       </PreviewBlock>
 
       <section className="mb-12">
