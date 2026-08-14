@@ -1,8 +1,29 @@
-import { useState, Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { IconHome } from './icons/IconHome'
 import { IconBreadcrumbSeparator } from './icons/IconBreadcrumbSeparator'
 import { cn } from '../../utils/cn'
+
+export interface BreadcrumbItemData {
+  label: string
+  href?: string | undefined
+  icon?: ReactNode | undefined
+  active?: boolean | undefined
+  onClick?: (() => void) | undefined
+}
+
+export interface BreadcrumbProps extends ComponentPropsWithRef<'nav'> {
+  items?: BreadcrumbItemData[] | undefined
+  variant?: 'default' | 'collapsible' | 'icon' | undefined
+  separator?: ReactNode | undefined
+  showHomeIcon?: boolean | undefined
+  humanPrefix?: ReactNode | undefined
+  maxItems?: number | undefined
+  itemsBeforeCollapse?: number | undefined
+  itemsAfterCollapse?: number | undefined
+  className?: string | undefined
+  children?: ReactNode | undefined
+}
 
 export const BreadcrumbSeparator = ({ children, className, ref, ...rest }: ComponentPropsWithRef<'li'>) => {
   const classes = cn('inline-flex items-center text-sm font-bold opacity-40 mx-2 select-none', className)
@@ -37,7 +58,16 @@ export const BreadcrumbLink = ({ href, onClick, className, children, ref, ...res
   )
 
   return (
-    <a ref={ref} href={href ?? '#'} onClick={onClick} className={classes} {...rest}>
+    <a
+      ref={ref}
+      href={href ?? '#'}
+      onClick={(event) => {
+        event.preventDefault()
+        onClick?.()
+      }}
+      className={classes}
+      {...rest}
+    >
       {children}
     </a>
   )
@@ -102,27 +132,6 @@ export const BreadcrumbList = ({ className, children, ref, ...rest }: ComponentP
   )
 }
 
-export interface BreadcrumbItemData {
-  label: string
-  active?: boolean | undefined
-  icon?: ReactNode | undefined
-  href?: string | undefined
-  onClick?: (() => void) | undefined
-}
-
-export interface BreadcrumbProps extends ComponentPropsWithRef<'nav'> {
-  items?: BreadcrumbItemData[] | undefined
-  variant?: 'default' | 'collapsible' | 'icon' | undefined
-  separator?: ReactNode | undefined
-  showHomeIcon?: boolean | undefined
-  humanPrefix?: ReactNode | undefined
-  maxItems?: number | undefined
-  itemsBeforeCollapse?: number | undefined
-  itemsAfterCollapse?: number | undefined
-  className?: string | undefined
-  children?: ReactNode | undefined
-}
-
 export const Breadcrumb = ({
   items,
   variant = 'default',
@@ -151,19 +160,10 @@ export const Breadcrumb = ({
   }
 
   const isCollapsible = variant === 'collapsible' || items.length > maxItems
-
   const hasEnoughToCollapse = items.length > itemsBeforeCollapse + itemsAfterCollapse
 
   type RenderedEntry =
-    | {
-        type: 'item'
-        data: BreadcrumbItemData
-        originalIndex: number
-      }
-    | {
-        type: 'ellipsis'
-        count: number
-      }
+    { type: 'item'; data: BreadcrumbItemData; originalIndex: number } | { type: 'ellipsis'; count: number }
 
   let renderedEntries: RenderedEntry[] = []
 
@@ -174,15 +174,8 @@ export const Breadcrumb = ({
 
     if (!isExpanded) {
       renderedEntries = [
-        ...before.map((data, i) => ({
-          type: 'item' as const,
-          data,
-          originalIndex: i,
-        })),
-        {
-          type: 'ellipsis' as const,
-          count: middle.length,
-        },
+        ...before.map((data, i) => ({ type: 'item' as const, data, originalIndex: i })),
+        { type: 'ellipsis' as const, count: middle.length },
         ...after.map((data, i) => ({
           type: 'item' as const,
           data,
@@ -191,20 +184,9 @@ export const Breadcrumb = ({
       ]
     } else {
       renderedEntries = [
-        ...before.map((data, i) => ({
-          type: 'item' as const,
-          data,
-          originalIndex: i,
-        })),
-        {
-          type: 'ellipsis' as const,
-          count: middle.length,
-        },
-        ...middle.map((data, i) => ({
-          type: 'item' as const,
-          data,
-          originalIndex: itemsBeforeCollapse + i,
-        })),
+        ...before.map((data, i) => ({ type: 'item' as const, data, originalIndex: i })),
+        { type: 'ellipsis' as const, count: middle.length },
+        ...middle.map((data, i) => ({ type: 'item' as const, data, originalIndex: itemsBeforeCollapse + i })),
         ...after.map((data, i) => ({
           type: 'item' as const,
           data,
@@ -213,17 +195,12 @@ export const Breadcrumb = ({
       ]
     }
   } else {
-    renderedEntries = items.map((data, i) => ({
-      type: 'item' as const,
-      data,
-      originalIndex: i,
-    }))
+    renderedEntries = items.map((data, i) => ({ type: 'item' as const, data, originalIndex: i }))
   }
 
   return (
     <nav ref={ref} aria-label="Breadcrumb" className={classes} {...rest}>
       {humanPrefix}
-
       <BreadcrumbList>
         {renderedEntries.map((entry, index) => {
           const isLastEntry = index === renderedEntries.length - 1
@@ -238,7 +215,6 @@ export const Breadcrumb = ({
                     title={isExpanded ? 'Collapse breadcrumb steps' : `Show ${entry.count} hidden steps`}
                   />
                 </BreadcrumbItem>
-
                 {!isLastEntry && <BreadcrumbSeparator>{separator}</BreadcrumbSeparator>}
               </Fragment>
             )
@@ -256,17 +232,13 @@ export const Breadcrumb = ({
                 {isActive ? (
                   <BreadcrumbPage>
                     {showDefaultHome && <IconHome className="w-4 h-4 mr-1.5 inline-block" />}
-
                     {item.icon && <span className="mr-1.5 inline-flex items-center">{item.icon}</span>}
-
                     {item.label}
                   </BreadcrumbPage>
                 ) : (
                   <BreadcrumbLink href={item.href} onClick={item.onClick}>
                     {showDefaultHome && <IconHome className="w-4 h-4 mr-1.5 inline-block" />}
-
                     {item.icon && <span className="mr-1.5 inline-flex items-center">{item.icon}</span>}
-
                     {item.label}
                   </BreadcrumbLink>
                 )}
