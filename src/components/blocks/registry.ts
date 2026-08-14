@@ -25,6 +25,7 @@ import featureGrid1Code from './FeatureGrid/1.tsx?raw'
 export interface BlockVariant {
   slug: string
   name: string
+  exportName: string
   component: React.ComponentType
   code: string
   githubUrl: string
@@ -48,6 +49,7 @@ export const blockCategories: BlockCategory[] = [
       {
         slug: 'hero-1',
         name: 'Standard Hero',
+        exportName: 'Hero1',
         component: Hero1,
         code: hero1Code,
         githubUrl: `${GITHUB_BASE}/Hero/1.tsx`
@@ -55,6 +57,7 @@ export const blockCategories: BlockCategory[] = [
       {
         slug: 'hero-2',
         name: 'Split Layout Hero',
+        exportName: 'Hero2',
         component: Hero2,
         code: hero2Code,
         githubUrl: `${GITHUB_BASE}/Hero/2.tsx`
@@ -69,6 +72,7 @@ export const blockCategories: BlockCategory[] = [
       {
         slug: 'footer-1',
         name: 'Multi-column Footer',
+        exportName: 'Footer1',
         component: Footer1,
         code: footer1Code,
         githubUrl: `${GITHUB_BASE}/Footer/1.tsx`
@@ -76,6 +80,7 @@ export const blockCategories: BlockCategory[] = [
       {
         slug: 'footer-2',
         name: 'Minimal Footer',
+        exportName: 'Footer2',
         component: Footer2,
         code: footer2Code,
         githubUrl: `${GITHUB_BASE}/Footer/2.tsx`
@@ -90,6 +95,7 @@ export const blockCategories: BlockCategory[] = [
       {
         slug: 'testimonials-1',
         name: 'Standard Grid',
+        exportName: 'Testimonials1',
         component: Testimonials1,
         code: testimonials1Code,
         githubUrl: `${GITHUB_BASE}/Testimonials/1.tsx`
@@ -104,6 +110,7 @@ export const blockCategories: BlockCategory[] = [
       {
         slug: 'navbar-1',
         name: 'Standard Navbar',
+        exportName: 'Navbar1',
         component: Navbar1,
         code: navbar1Code,
         githubUrl: `${GITHUB_BASE}/Navbar/1.tsx`
@@ -118,6 +125,7 @@ export const blockCategories: BlockCategory[] = [
       {
         slug: 'pricing-1',
         name: '3-Tier Grid',
+        exportName: 'Pricing1',
         component: Pricing1,
         code: pricing1Code,
         githubUrl: `${GITHUB_BASE}/Pricing/1.tsx`
@@ -132,6 +140,7 @@ export const blockCategories: BlockCategory[] = [
       {
         slug: 'faq-1',
         name: 'Standard FAQ',
+        exportName: 'FAQ1',
         component: FAQ1,
         code: faq1Code,
         githubUrl: `${GITHUB_BASE}/FAQ/1.tsx`
@@ -146,6 +155,7 @@ export const blockCategories: BlockCategory[] = [
       {
         slug: 'feature-grids-1',
         name: 'Classic Grid',
+        exportName: 'FeatureGrid1',
         component: FeatureGrid1,
         code: featureGrid1Code,
         githubUrl: `${GITHUB_BASE}/FeatureGrid/1.tsx`

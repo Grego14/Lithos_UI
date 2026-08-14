@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom'
 import { blockCategories } from '../components/blocks/registry'
 import { ComingSoon } from '../showroom/sections/ComingSoon'
 import { PreviewBlock } from '../components/ui/PreviewBlock'
+import { SetupGuide } from '../docs/layout/SetupGuide'
 import { Navbar } from '../showroom/sections/Navbar'
 import { Footer } from '../showroom/sections/Footer'
 
@@ -12,9 +13,9 @@ interface BlockCategoryPageProps {
 
 export const BlockCategoryPage = ({ isDarkMode, toggleObsidian }: BlockCategoryPageProps) => {
   const { categorySlug } = useParams<{ categorySlug: string }>()
-  
+
   const category = blockCategories.find(c => c.slug === categorySlug)
-  
+
   if (!category) {
     return (
       <ComingSoon
@@ -55,12 +56,20 @@ export const BlockCategoryPage = ({ isDarkMode, toggleObsidian }: BlockCategoryP
                   <p className="font-body text-lg text-(--lithos-text) opacity-80 mb-8">
                     {variant.name}
                   </p>
-                  <PreviewBlock 
-                    code={variant.code} 
-                    githubUrl={variant.githubUrl} 
-                    slug={variant.slug} 
-                    height="600px" 
+                  <PreviewBlock
+                    code={variant.code}
+                    githubUrl={variant.githubUrl}
+                    slug={variant.slug}
+                    height="600px"
                     noPadding={category.slug === 'navbars'}
+                    installGuide={
+                      <SetupGuide
+                        bordered={false}
+                        manualOnly
+                        componentNames={[variant.exportName]}
+                        manualPath={`../../components/blocks/${variant.githubUrl.split('src/components/blocks/')[1]?.replace('.tsx', '')}`}
+                      />
+                    }
                   >
                     <div className={category.slug === 'navbars' ? "w-full relative h-100" : "w-full"}>
                       <variant.component />

@@ -9,8 +9,8 @@ import { Card } from '../../ui/Card'
 
 const Hero2 = () => (
   <section id="hero-block" className="bg-(--lithos-surface) overflow-hidden">
-    <div className="mx-auto max-w-7xl px-6 py-16 md:py-24 lg:flex lg:items-center lg:gap-12">
-      <div className="lg:w-1/2 flex flex-col items-start text-left mb-16 lg:mb-0">
+    <div className="mx-auto max-w-7xl px-6 py-16 md:py-24 lg:flex lg:items-center">
+      <div className="lg:w-1/2 flex flex-col items-start text-left mb-16 lg:mb-0 lg:pr-6">
         <div className="mb-6">
           <Badge variant="default" size="sm">
             Deployment Engine
@@ -36,7 +36,7 @@ const Hero2 = () => (
         </div>
       </div>
       
-      <div className="lg:w-1/2 w-full">
+      <div className="lg:w-1/2 w-full lg:pl-6">
         <Card variant="default" className="w-full h-full min-h-64 sm:min-h-96 flex items-center justify-center bg-(--lithos-bg)">
           <p className="font-black uppercase tracking-widest text-(--lithos-text) opacity-50 text-center p-8">
             [ Application Interface ]

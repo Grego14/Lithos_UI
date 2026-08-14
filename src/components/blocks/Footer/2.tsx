@@ -14,17 +14,17 @@ const Footer2 = () => (
         </p>
       </div>
       
-      <nav className="mb-12 flex flex-wrap justify-center gap-x-8 gap-y-4">
-        <a href="#" className="font-bold text-sm uppercase tracking-widest hover:text-(--lithos-accent) transition-colors text-(--lithos-text)">
+      <nav className="mb-12 flex flex-wrap justify-center">
+        <a href="#" className="mx-4 my-2 font-bold text-sm uppercase tracking-widest hover:text-(--lithos-accent) transition-colors text-(--lithos-text)">
           Features
         </a>
-        <a href="#" className="font-bold text-sm uppercase tracking-widest hover:text-(--lithos-accent) transition-colors text-(--lithos-text)">
+        <a href="#" className="mx-4 my-2 font-bold text-sm uppercase tracking-widest hover:text-(--lithos-accent) transition-colors text-(--lithos-text)">
           Pricing
         </a>
-        <a href="#" className="font-bold text-sm uppercase tracking-widest hover:text-(--lithos-accent) transition-colors text-(--lithos-text)">
+        <a href="#" className="mx-4 my-2 font-bold text-sm uppercase tracking-widest hover:text-(--lithos-accent) transition-colors text-(--lithos-text)">
           Blog
         </a>
-        <a href="#" className="font-bold text-sm uppercase tracking-widest hover:text-(--lithos-accent) transition-colors text-(--lithos-text)">
+        <a href="#" className="mx-4 my-2 font-bold text-sm uppercase tracking-widest hover:text-(--lithos-accent) transition-colors text-(--lithos-text)">
           Contact
         </a>
       </nav>

@@ -13,9 +13,11 @@ interface SetupGuideProps {
   componentNames: string[]
   manualPath: string | Partial<Record<string, string>>
   requires?: string[]
+  manualOnly?: boolean
+  bordered?: boolean
 }
 
-export const SetupGuide = ({ componentNames, manualPath, requires }: SetupGuideProps) => {
+export const SetupGuide = ({ componentNames, manualPath, requires, manualOnly = false, bordered = true }: SetupGuideProps) => {
   const { installTab, updateInstallTab, packageManager, updatePackageManager } = useInstallPreference()
 
   const commandImport = `import { ${componentNames.join(', ')} } from 'lithos-ui'`
@@ -40,25 +42,35 @@ export const SetupGuide = ({ componentNames, manualPath, requires }: SetupGuideP
     }).join('\n')
   }
 
-  return (
-    <div className="mb-8">
-      <div className="flex space-x-4 mb-4">
-        <Button
-          onClick={() => updateInstallTab('command')}
-          intent={installTab !== 'command' ? 'secondary' : 'primary'}
-        >
-          Command
-        </Button>
-        <Button
-          onClick={() => updateInstallTab('manual')}
-          intent={installTab !== 'manual' ? 'secondary' : 'primary'}
-        >
-          Manual
-        </Button>
-      </div>
+  // If manualOnly is true, we force it to act like the manual tab is selected.
+  const isManual = manualOnly || installTab === 'manual'
 
-      <div className="border-2 border-(--lithos-border) bg-(--lithos-bg) p-4 md:p-6">
-        {installTab === 'command' ? (
+  // Outer container classes based on bordered prop
+  const containerClasses = bordered 
+    ? "border-2 border-(--lithos-border) bg-(--lithos-bg) p-4 md:p-6 overflow-hidden transform-[translateZ(0)]"
+    : "bg-(--lithos-bg) p-4 md:p-6"
+
+  return (
+    <div className={bordered ? "mb-8" : ""}>
+      {!manualOnly && (
+        <div className="flex space-x-4 mb-4">
+          <Button
+            onClick={() => updateInstallTab('command')}
+            intent={installTab !== 'command' ? 'secondary' : 'primary'}
+          >
+            Command
+          </Button>
+          <Button
+            onClick={() => updateInstallTab('manual')}
+            intent={installTab !== 'manual' ? 'secondary' : 'primary'}
+          >
+            Manual
+          </Button>
+        </div>
+      )}
+
+      <div className={containerClasses}>
+        {!isManual ? (
           <>
             <div className='mb-6 space-x-4'>
               {(Object.keys(commands) as PackageManager[]).map((command) => (
