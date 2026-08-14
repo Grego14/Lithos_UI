@@ -95,7 +95,7 @@ export const PreviewBlock = ({ children, code, githubUrl, language = 'tsx', heig
       </div>
 
       {/* 3. Main Content Pane - Single rigid box */}
-      <div className="border-2 border-(--lithos-border) bg-(--lithos-bg) overflow-hidden transform-[translateZ(0)]" style={height ? { height: height } : undefined}>
+      <div className="border-2 border-(--lithos-border) bg-(--lithos-bg) overflow-hidden" style={height ? { height: height } : undefined}>
         {activeTab === 'preview' ? (
           slug ? (
             <div className={`flex items-center justify-center w-full h-full ${noPadding ? '' : 'p-4 md:p-6'}`}>
