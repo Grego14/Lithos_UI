@@ -187,7 +187,7 @@ export const Carousel = ({
   }
 
   const classes = cn(
-    'w-full border-2 border-(--lithos-border) bg-(--lithos-surface) p-2 sm:p-4 shadow-[4px_4px_0_0_var(--lithos-shadow)]',
+    'w-full border-2 border-(--lithos-border) bg-(--lithos-surface) p-2 sm:p-4 shadow-[4px_4px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)',
     className
   )
 

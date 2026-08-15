@@ -163,7 +163,7 @@ export const ComponentsIndex = ({ isDarkMode, toggleObsidian }: ComponentsIndexP
             <div key={comp.name} className="w-full sm:w-[50%] md:w-[33.333%] lg:w-[25%] p-3">
               <Link
                 to={comp.to}
-                className="block group lithos-click h-full p-0 flex flex-col items-stretch"
+                className="block group lithos-click h-full p-0 flex flex-col items-stretch rounded-(--lithos-radius) overflow-hidden"
               >
                 {/* Top Zone: Live Preview */}
                 <div className="w-full aspect-[4/3] sm:aspect-[3/2] md:aspect-video flex items-center justify-center bg-(--lithos-surface) p-2 overflow-hidden relative border-b-2 border-(--lithos-border) font-normal tracking-normal leading-normal">

@@ -177,7 +177,7 @@ export const ToastItem = ({ toast, onRemove }: ToastItemType) => {
         tabIndex={isError ? -1 : undefined}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className={`toast-override-${id} pointer-events-auto border-2 p-3 sm:p-4 mb-4 w-full flex flex-row items-start shadow-[4px_4px_0_0_var(--lithos-shadow)] animate-[slide-up_0.3s_ease-out_forwards]`}
+        className={`toast-override-${id} pointer-events-auto border-2 p-3 sm:p-4 mb-4 w-full flex flex-row items-start shadow-[4px_4px_0_0_var(--lithos-shadow)] animate-[slide-up_0.3s_ease-out_forwards] rounded-(--lithos-radius)`}
       >
         <div className="flex-1 mr-4">
           {title && <h4 className="font-black text-lg uppercase tracking-tighter leading-none mb-2 m-0">{title}</h4>}

@@ -9,6 +9,7 @@ import { useTheme } from '../../core/useTheme'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { cn } from '../../utils/cn'
+import { Button } from './Button'
 
 interface CodeViewerProps {
   code: string
@@ -48,7 +49,7 @@ export const CodeViewer = ({ code, language = 'tsx', showLanguage = false, embed
   }
 
   const classes = cn(
-    embedded ? 'bg-transparent mb-0 relative' : 'border-2 border-(--lithos-border) bg-(--lithos-bg) mb-8 relative',
+    embedded ? 'bg-transparent mb-0 relative overflow-hidden' : 'border-2 border-(--lithos-border) bg-(--lithos-bg) mb-8 relative rounded-(--lithos-radius) overflow-hidden',
     className
   )
 
@@ -67,15 +68,15 @@ export const CodeViewer = ({ code, language = 'tsx', showLanguage = false, embed
           )}
         </div>
 
-        <button
-          type="button"
+        <Button
           onClick={handleCopy}
-          className="bg-(--lithos-surface) text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) lithos-click"
+          intent="secondary"
+          className="hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)"
           aria-label="Copy code"
           title="Copy code"
         >
           Copy
-        </button>
+        </Button>
       </div>
 
       <div className="overflow-x-auto p-4 text-sm bg-[#0a0a0a]">

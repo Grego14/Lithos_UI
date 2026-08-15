@@ -53,7 +53,7 @@ export interface BreadcrumbLinkProps extends ComponentPropsWithRef<'a'> {
 
 export const BreadcrumbLink = ({ href, onClick, className, children, ref, ...rest }: BreadcrumbLinkProps) => {
   const classes = cn(
-    'inline-flex items-center px-2 py-1 border-2 border-transparent hover:border-(--lithos-border) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) transition-all duration-150 rounded-none lithos-click cursor-pointer font-bold',
+    'inline-flex items-center px-2 py-1 border-2 border-transparent hover:border-(--lithos-border) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) transition-all duration-150 rounded-(--lithos-radius) lithos-click cursor-pointer font-bold',
     className
   )
 
@@ -81,7 +81,7 @@ export interface BreadcrumbPageProps extends ComponentPropsWithRef<'span'> {
 
 export const BreadcrumbPage = ({ className, children, ref, ...rest }: BreadcrumbPageProps) => {
   const classes = cn(
-    'inline-flex items-center px-2.5 py-1 border-2 border-(--lithos-border) bg-(--lithos-accent) text-(--lithos-accent-text) font-black tracking-tight shadow-[2px_2px_0px_0px_var(--lithos-border)]',
+    'inline-flex items-center px-2.5 py-1 border-2 border-(--lithos-border) bg-(--lithos-accent) text-(--lithos-accent-text) font-black tracking-tight shadow-[2px_2px_0px_0px_var(--lithos-border)] rounded-(--lithos-radius)',
     className
   )
 
@@ -106,7 +106,7 @@ export const BreadcrumbEllipsis = ({
   ...rest
 }: BreadcrumbEllipsisProps) => {
   const classes = cn(
-    'inline-flex items-center justify-center px-2 py-0.5 border-2 border-(--lithos-border) bg-(--lithos-surface) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) text-xs font-black transition-all cursor-pointer lithos-click select-none',
+    'inline-flex items-center justify-center px-2 py-0.5 border-2 border-(--lithos-border) bg-(--lithos-surface) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) text-xs font-black transition-all cursor-pointer lithos-click select-none rounded-(--lithos-radius)',
     className
   )
 

@@ -29,6 +29,7 @@
   --lithos-surface: #ffffff;
   --lithos-muted: rgba(0, 0, 0, 0.3);
   --lithos-shadow: rgba(0, 0, 0, 1);
+  --lithos-radius: 0px;
 
   background-color: var(--lithos-bg);
   color: var(--lithos-text);

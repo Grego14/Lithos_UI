@@ -27,7 +27,7 @@ export const KineticGrid = ({ children, baseOpacity = 'opacity-10', className = 
   }
 
   const classes = cn(
-    'relative overflow-hidden flex items-center justify-center',
+    'relative overflow-hidden flex items-center justify-center rounded-(--lithos-radius)',
     className
   )
 

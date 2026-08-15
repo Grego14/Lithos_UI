@@ -92,7 +92,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
  * - "*" → NotFound (catch-all for undefined routes)
  */
 const App = () => {
-  const { isDarkMode, toggleObsidian, accentColor, updateAccentColor } = useTheme()
+  const { isDarkMode, toggleObsidian, accentColor, updateAccentColor, radius, updateRadius } = useTheme()
 
   return (
     <div className={'min-h-screen bg-(--lithos-bg) text-(--lithos-text) ' + (isDarkMode ? 'dark obsidian' : '')}>
@@ -100,7 +100,7 @@ const App = () => {
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route path="/" element={<Showroom isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} accentColor={accentColor} updateAccentColor={updateAccentColor} />} />
+          <Route path="/" element={<Showroom isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} accentColor={accentColor} updateAccentColor={updateAccentColor} radius={radius} updateRadius={updateRadius} />} />
 
           <Route
             path="/blocks"

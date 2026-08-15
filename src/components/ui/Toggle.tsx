@@ -18,17 +18,17 @@ const Toggle = ({ checked, onToggle, label = 'Theme Changed' }: ToggleProps) => 
       onClick={onToggle}
       aria-pressed={checked}
       aria-label={label}
-      className="inline-flex cursor-pointer items-center border-2 border-black bg-white px-1 py-1 text-black transition-shadow duration-200"
+      className="inline-flex cursor-pointer items-center border-2 border-black bg-white px-1 py-1 text-black transition-shadow duration-200 rounded-(--lithos-radius)"
     >
       {/* Track math (reduced ~1/3): previously 80x40; now approx 24x13 with border/padding scaled down. */}
       <span
-        className={`flex h-3 w-6 items-center border-2 border-black p-0.5 transition-colors duration-150 ease-out ${
+        className={`flex h-3 w-6 items-center border-2 border-black p-0.5 transition-colors duration-150 ease-out rounded-(--lithos-radius) ${
           checked ? 'bg-black' : 'bg-white'
         }`}
       >
         {/* Thumb math (reduced ~1/3): previously 24px -> now ~8px (h-2 w-2) */}
         <span
-          className={`block h-2 w-2 border-2 transition-transform duration-150 ease-out ${
+          className={`block h-2 w-2 border-2 transition-transform duration-150 ease-out rounded-(--lithos-radius) ${
             checked ? 'translate-x-2 border-white bg-white' : 'translate-x-0 border-black bg-black'
           }`}
         />

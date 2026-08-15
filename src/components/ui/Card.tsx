@@ -18,7 +18,7 @@ export const Card = (
     const isImage = variant === 'image'
 
     const classes = cn(
-      'relative border-2 border-(--lithos-border) overflow-hidden shadow-[4px_4px_0px_0px_var(--lithos-shadow)]',
+      'relative border-2 border-(--lithos-border) overflow-hidden shadow-[4px_4px_0px_0px_var(--lithos-shadow)] rounded-(--lithos-radius)',
       isImage ? 'bg-transparent text-white flex flex-col justify-end' : variant === 'solid'
         ? 'bg-(--lithos-accent) text-(--lithos-accent-text)' : 'bg-(--lithos-surface) text-(--lithos-text)',
       variant === 'accent' && 'transition-colors hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)',

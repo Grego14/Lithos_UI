@@ -173,7 +173,7 @@ const HeaderDropdown = ({ label, options, value, onChange, className }: HeaderDr
           ref={panelRef}
           role="listbox"
           aria-label={label}
-          className="absolute left-0 top-full z-10 mt-1 max-h-52 w-max min-w-full overflow-y-auto border-2 border-(--lithos-border) bg-(--lithos-bg) shadow-[2px_2px_0_0_var(--lithos-shadow)]"
+          className="absolute left-0 top-full z-10 mt-1 max-h-52 w-max min-w-full overflow-y-auto border-2 border-(--lithos-border) bg-(--lithos-bg) shadow-[2px_2px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)"
         >
           {options.map((option) => (
             <button
@@ -399,7 +399,7 @@ export const Calendar =
       <div
         ref={ref}
         className={cn(
-          'inline-block border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[2px_2px_0_0_var(--lithos-shadow)] p-3',
+          'inline-block border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[2px_2px_0_0_var(--lithos-shadow)] p-3 rounded-(--lithos-radius)',
           classes.container,
           className
         )}

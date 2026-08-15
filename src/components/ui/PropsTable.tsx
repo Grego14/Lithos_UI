@@ -14,7 +14,7 @@ export interface PropsTableProps {
 
 export const PropsTable = ({ data }: PropsTableProps) => {
   return (
-    <div className='overflow-x-auto my-2'>
+    <div className='overflow-x-auto my-2 rounded-(--lithos-radius)'>
       <table className='w-full text-left border-collapse font-body text-sm'>
         <thead>
           <tr className='border-b-2 border-(--lithos-border) bg-(--lithos-surface)'>

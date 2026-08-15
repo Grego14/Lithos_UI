@@ -33,7 +33,7 @@ export const BlockCategoryPage = ({ isDarkMode, toggleObsidian }: BlockCategoryP
       <main className="pt-24 min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
         <section className="border-b-2 border-(--lithos-border) bg-(--lithos-bg)">
           <div className="mx-auto max-w-7xl px-6 py-12 md:py-24">
-            <Link to="/blocks" className="inline-flex items-center text-sm font-bold uppercase tracking-widest text-(--lithos-accent) mb-8">
+            <Link to="/blocks" className="inline-flex items-center text-sm font-bold uppercase tracking-widest text-(--lithos-accent) mb-8 hover:opacity-80">
               ← Back to Catalog
             </Link>
             <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tighter leading-none md:text-7xl lg:text-8xl text-(--lithos-text)">

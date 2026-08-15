@@ -18,6 +18,10 @@ export const useTheme = () => {
     return (localStorage.getItem('lithos-theme-color') as HexColor | null) || ('#00FF00' as HexColor)
   })
 
+  const [radius, setRadius] = useState(() => {
+    return parseInt(localStorage.getItem('lithos-theme-radius') || '0', 10)
+  })
+
   useEffect(() => {
     let styleTag = document.getElementById('lithos-theme-overrides')
     if (!styleTag) {
@@ -44,13 +48,14 @@ export const useTheme = () => {
       *, :root, .obsidian, body.obsidian, .dark {
         --lithos-accent: ${adaptiveAccent} !important;
         --lithos-accent-text: ${text} !important;
+        --lithos-radius: ${radius}px !important;
       }
       ::selection {
         background-color: var(--lithos-accent) !important;
         color: var(--lithos-accent-text) !important;
       }
     `
-  }, [accentColor, isDarkMode])
+  }, [accentColor, isDarkMode, radius])
 
   const toggleObsidian = () => {
     setIsDarkMode((prevMode) => {
@@ -66,5 +71,10 @@ export const useTheme = () => {
     localStorage.setItem('lithos-theme-color', color)
   }
 
-  return { isDarkMode, toggleObsidian, accentColor, updateAccentColor } as const
+  const updateRadius = (newRadius: number) => {
+    setRadius(newRadius)
+    localStorage.setItem('lithos-theme-radius', newRadius.toString())
+  }
+
+  return { isDarkMode, toggleObsidian, accentColor, updateAccentColor, radius, updateRadius } as const
 };

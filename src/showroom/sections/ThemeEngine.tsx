@@ -5,6 +5,7 @@
  * - Treats the palette as a physical control board with hard tiles and explicit offsets.
  */
 import type { HexColor } from '../../core/types'
+import { Button } from '../../components/ui/Button'
 
 interface ThemeColor {
   name: string
@@ -22,9 +23,18 @@ const themes: ThemeColor[] = [
 interface ThemeEngineProps {
   accentColor: string
   updateAccentColor: (color: HexColor) => void
+  radius: number
+  updateRadius: (radius: number) => void
 }
 
-const ThemeEngine = ({ accentColor, updateAccentColor }: ThemeEngineProps) => {
+const radii = [
+  { label: 'Brutalist', value: 0 },
+  { label: 'Sharp', value: 4 },
+  { label: 'Soft', value: 8 },
+  { label: 'Round', value: 16 },
+]
+
+const ThemeEngine = ({ accentColor, updateAccentColor, radius, updateRadius }: ThemeEngineProps) => {
 
   const handleThemeChange = (hex: string) => {
     updateAccentColor(hex as HexColor)
@@ -32,6 +42,7 @@ const ThemeEngine = ({ accentColor, updateAccentColor }: ThemeEngineProps) => {
 
   const handleReset = () => {
     updateAccentColor('#00FF00' as HexColor)
+    updateRadius(0)
   }
 
   // - 8px border + 8px shadow keep the control board heavy and explicit.
@@ -45,32 +56,32 @@ const ThemeEngine = ({ accentColor, updateAccentColor }: ThemeEngineProps) => {
           Test drive the global design tokens. One variable changes everything.
         </p>
 
-        <div className="mt-12 w-full border-2 border-(--lithos-border) bg-(--lithos-bg) p-6 sm:p-10 shadow-[6px_6px_0px_0px_var(--lithos-shadow)] mb-12">
+        <div className="mt-12 w-full border-2 border-(--lithos-border) bg-(--lithos-bg) p-6 sm:p-10 shadow-[6px_6px_0px_0px_var(--lithos-shadow)] mb-12 rounded-(--lithos-radius)">
           <div className="flex flex-wrap justify-center -m-2 sm:-m-4">
             {themes.map((theme) => {
               const isActive = accentColor === theme.hex
 
               return (
                 // - Each swatch is a 64/96px tile with a hard edge; active state only changes shadow depth.
-                <button
+                <Button
                   key={theme.hex}
-                  type="button"
                   onClick={() => handleThemeChange(theme.hex)}
                   aria-label={`Activate ${theme.name} theme`}
                   title={theme.name}
-                  className={`m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 lithos-click ${isActive ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : ''}`}
+                  className={`m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 ${isActive ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : ''}`}
                   style={{
                     backgroundColor: theme.hex,
+                    color: 'transparent'
                   }}
                 >
                   <span className="sr-only">{theme.name}</span>
-                </button>
+                </Button>
               )
             })}
 
             {/* - Custom picker keeps the tile geometry fixed while the input floats invisibly on top. */}
             <div
-              className={`relative m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 bg-(--lithos-surface) lithos-click group ${!themes.some((t) => t.hex === accentColor) ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : ''}`}
+              className={`relative m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 bg-(--lithos-surface) lithos-click group rounded-(--lithos-radius) overflow-hidden ${!themes.some((t) => t.hex === accentColor) ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : ''}`}
               style={{
                 backgroundColor: !themes.some((t) => t.hex === accentColor) ? accentColor : 'var(--lithos-surface)',
               }}
@@ -98,15 +109,38 @@ const ThemeEngine = ({ accentColor, updateAccentColor }: ThemeEngineProps) => {
             </div>
           </div>
 
+          {/* Border Radius Section */}
+          <div className="mt-10 sm:mt-12 flex w-full flex-col items-center border-t-2 border-(--lithos-border) pt-10 sm:pt-12">
+            <h3 className="mb-6 text-2xl font-black uppercase tracking-tighter text-(--lithos-text)">Border Radius</h3>
+            <div className="flex flex-wrap justify-center -m-2 sm:-m-4">
+              {radii.map((r) => {
+                const isActive = radius === r.value
+
+                return (
+                  <Button
+                    key={r.label}
+                    onClick={() => updateRadius(r.value)}
+                    aria-label={`Set border radius to ${r.label}`}
+                    title={r.label}
+                    intent={isActive ? 'primary' : 'secondary'}
+                    className={`m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 font-black tracking-tighter uppercase text-xs sm:text-sm ${isActive ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : 'hover:bg-(--lithos-muted)'}`}
+                  >
+                    {r.label}
+                  </Button>
+                )
+              })}
+            </div>
+          </div>
+
           {/* - Reset sits below a hard divider so the board reads as one rooted module. */}
           <div className="mt-10 sm:mt-12 flex w-full justify-center border-t-2 border-(--lithos-border) pt-10 sm:pt-12">
-            <button
-              type="button"
+            <Button
               onClick={handleReset}
-              className="border-2 border-(--lithos-border) bg-(--lithos-surface) text-sm sm:text-base text-(--lithos-text) lithos-click"
+              intent="secondary"
+              className="text-sm sm:text-base"
             >
               Reset to Default Theme
-            </button>
+            </Button>
           </div>
         </div>
       </div>

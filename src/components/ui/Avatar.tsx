@@ -5,7 +5,7 @@
  */
 import { useState, type ComponentPropsWithRef } from "react";
 import { getContrastText } from "../../utils/yiq";
-import { useTheme } from "../../core/useTheme";
+import { useAccentColor } from "../../core/useAccentColor";
 import { cn } from "../../utils/cn";
 
 type AvatarSizes = 'sm' | 'md' | 'lg'
@@ -31,7 +31,7 @@ const getInitials = (value: string) =>
 export const Avatar = (
   { src, alt = '', variant = 'default', size = 'md', className = '', ref, ...props }: AvatarProps) => {
     const [imgFailed, setImgFailed] = useState(false)
-    const { accentColor } = useTheme()
+    const { accentColor } = useAccentColor()
 
     const showImage = !!src && !imgFailed
     const bgColor = variant === 'solid' ? accentColor : undefined

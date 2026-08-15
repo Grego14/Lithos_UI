@@ -6,7 +6,7 @@
 import type { ComponentPropsWithRef } from "react";
 import { getContrastText } from "../../utils/yiq";
 import { colors } from "../../utils/colors";
-import { useTheme } from "../../core/useTheme";
+import { useAccentColor } from "../../core/useAccentColor";
 import type { HexColor } from "../../core/types";
 import { cn } from "../../utils/cn";
 
@@ -36,13 +36,13 @@ export const Badge = ({
   ref,
   ...props
 }: BadgeProps) => {
-  const { accentColor } = useTheme()
+  const { accentColor } = useAccentColor()
 
   const bgColor = color || (variant === 'accent' ? accentColor : colors[variant])
   const contrastedColor = getContrastText(bgColor)
 
   const classes = cn(
-    'uppercase font-(--font-sans) font-bold border-2 border-(--lithos-border) shadow-[1px_1px_0_0_var(--lithos-border)] py-1 w-max',
+    'uppercase font-(--font-sans) font-bold border-2 border-(--lithos-border) shadow-[1px_1px_0_0_var(--lithos-border)] py-1 w-max rounded-(--lithos-radius)',
     sizeStyles[size],
     className
   )
