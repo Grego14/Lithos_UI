@@ -61,9 +61,9 @@ export const CodeViewer = ({ code, language = 'tsx', showLanguage = false, embed
             <p className="text-xs font-black uppercase tracking-widest text-(--lithos-text) font-code">{language}</p>
           ) : (
             <div className="flex items-center">
-              <div className="mr-2 h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent)" aria-hidden="true" />
-              <div className="mr-2 h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent)" aria-hidden="true" />
-              <div className="h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent)" aria-hidden="true" />
+              <div className="mr-2 h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent) rounded-(--lithos-radius)" aria-hidden="true" />
+              <div className="mr-2 h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent) rounded-(--lithos-radius)" aria-hidden="true" />
+              <div className="h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent) rounded-(--lithos-radius)" aria-hidden="true" />
             </div>
           )}
         </div>

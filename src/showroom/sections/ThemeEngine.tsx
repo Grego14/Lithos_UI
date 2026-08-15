@@ -135,7 +135,7 @@ const ThemeEngine = ({ accentColor, updateAccentColor, radius, updateRadius }: T
                         size={28}
                         strokeWidth={isActive ? 3 : 2}
                         className={`transition-colors ${isActive ? 'text-(--lithos-text)' : 'text-(--lithos-text) opacity-30 hover:opacity-60'}`}
-                        fill={isActive ? 'var(--lithos-border)' : 'transparent'}
+                        fill={isActive ? 'var(--lithos-accent)' : 'transparent'}
                       />
                     </button>
                   )
