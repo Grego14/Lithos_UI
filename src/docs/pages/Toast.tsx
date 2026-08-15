@@ -207,6 +207,18 @@ const { addToast } = useToast()
       </PreviewBlock>
 
       <section className="mb-12">
+        <h2 id="accessibility" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+          Accessibility
+        </h2>
+        <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
+          <li>Uses <code>role="alert"</code> and <code>aria-live="assertive"</code> for error toasts so critical feedback is announced immediately to screen readers.</li>
+          <li>Uses <code>role="status"</code> and <code>aria-live="polite"</code> for non-critical notifications (success, info, warning) to avoid interrupting ongoing screen reader speech.</li>
+          <li>Automatically shifts focus to error notifications when mounted and restores focus to the previously active element upon dismissal.</li>
+          <li>Pauses the auto-dismiss timer on hover, allowing users extra time to read or interact with the content.</li>
+        </ul>
+      </section>
+
+      <section className="mb-12">
         <h2 id="api" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
           API Reference
         </h2>

@@ -38,6 +38,7 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
     { id: '#custom-position', label: 'Custom position', level: 2 },
+    { id: '#accessibility', label: 'Accessibility', level: 1 },
     { id: '#api', label: 'API Reference', level: 1 },
     { id: '#hooks', label: 'Hooks', level: 1 },
     { id: '#useToast', label: 'useToast', level: 2 },
@@ -152,6 +153,7 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#no-controls', label: 'No controls', level: 2 },
     { id: '#play-infinite', label: 'Play infinitely', level: 2 },
     { id: '#vertical-orientation', label: 'Vertical Orientation', level: 2 },
+    { id: '#accessibility', label: 'Accessibility', level: 1 },
     { id: '#api', label: 'API Reference', level: 1 },
   ],
 }

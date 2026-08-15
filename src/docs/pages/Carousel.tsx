@@ -354,6 +354,19 @@ export const AppCarousel = () => {
         </PreviewBlock>
       </div>
 
+      <section className="mb-12">
+        <h2 id="accessibility" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+          Accessibility
+        </h2>
+        <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
+          <li>Uses <code>role="region"</code> and <code>aria-roledescription="carousel"</code> to identify the component structure to screen readers.</li>
+          <li>Provides an <code>aria-label</code> (falling back to "Carousel") to convey the component context.</li>
+          <li>Features a visually hidden live region (<code>aria-live</code>) that announces active slide changes dynamically, automatically setting politeness to <code>off</code> during auto-play to avoid screen reader spam.</li>
+          <li>Supports full keyboard navigation using directional arrow keys (<code>ArrowLeft</code>/<code>ArrowRight</code> or <code>ArrowUp</code>/<code>ArrowDown</code> based on orientation).</li>
+          <li>Automatically pauses auto-rotation on hover and focus to ensure users have enough time to interact with the content.</li>
+        </ul>
+      </section>
+
       <section className='mb-12'>
         <h2 id='api' className='mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)'>
           API Reference
