@@ -4,8 +4,9 @@
  * - Utilizes the KineticGrid to create an interactive tracking environment.
  * - Keeps the opening rhythm controlled by explicit spacing math and centered containment.
  */
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { KineticGrid } from '../../components/ui/KineticGrid'
+import { Button } from '../../components/ui/Button'
 import { getContrastText } from '../../utils/yiq'
 import type { HexColor } from '../../core/types'
 
@@ -16,6 +17,7 @@ interface HeroProps {
 
 const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
   const fgColor = getContrastText(accentColor)
+  const navigate = useNavigate()
 
   return (
     <section id="top" className="border-b-2 border-(--lithos-border) bg-(--lithos-bg)">
@@ -50,26 +52,26 @@ const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
             </p>
 
             <div className="mt-10 flex flex-col items-center lg:items-start sm:flex-row flex-wrap">
-              <Link
-                to="/docs"
-                className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click mb-4 sm:mb-0 sm:mr-6"
+              <Button
+                intent="primary"
+                onClick={() => navigate('/docs')}
+                className="mb-4 sm:mb-0 sm:mr-6 px-4 py-2"
               >
                 Documentation
-              </Link>
-              <a
-                href="https://github.com/lithosui/Lithos_UI"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-(--lithos-surface) text-(--lithos-text) lithos-click mb-4 sm:mb-0"
+              </Button>
+              <Button
+                intent="secondary"
+                onClick={() => window.open('https://github.com/lithosui/Lithos_UI', '_blank')}
+                className="mb-4 sm:mb-0 px-4 py-2"
               >
                 GitHub
-              </a>
+              </Button>
             </div>
           </div>
 
           {/* Right Column: Live Theme Panel */}
           <div className="w-full lg:w-[40%] mt-16 lg:mt-48 flex justify-center lg:justify-end">
-            <div className="relative border-4 border-(--lithos-border) bg-(--lithos-surface) p-6 w-full max-w-sm shadow-[6px_6px_0px_0px_var(--lithos-shadow)]">
+            <div className="relative border-4 border-(--lithos-border) bg-(--lithos-surface) p-6 w-full max-w-sm shadow-[6px_6px_0px_0px_var(--lithos-shadow)] rounded-(--lithos-radius)">
               {/* Architectural tick-marks */}
               <div className="absolute -top-1 -left-1 w-2 h-2 border-t-2 border-l-2 border-(--lithos-accent)" />
               <div className="absolute -top-1 -right-1 w-2 h-2 border-t-2 border-r-2 border-(--lithos-accent)" />
@@ -89,7 +91,7 @@ const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
               <div className="flex items-center space-x-3">
                 {/* Custom color trigger */}
                 <div
-                  className="relative h-20 w-20 shrink-0 lithos-click"
+                  className="relative h-20 w-20 shrink-0 lithos-click rounded-(--lithos-radius) overflow-hidden"
                   style={{ backgroundColor: accentColor }}
                 >
                   <input
@@ -112,7 +114,7 @@ const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
                 </div>
 
                 {/* Mini live browser mock */}
-                <div className="w-28 shrink-0 border-2 border-(--lithos-border) bg-(--lithos-bg)">
+                <div className="w-28 shrink-0 border-2 border-(--lithos-border) bg-(--lithos-bg) rounded-(--lithos-radius) overflow-hidden">
                   <div className="flex items-center space-x-1 px-2 py-1.5 border-b-2 border-(--lithos-border) bg-(--lithos-surface)">
                     <span className="w-1.5 h-1.5 bg-(--lithos-border)" />
                     <span className="w-1.5 h-1.5 bg-(--lithos-border)" />
@@ -125,7 +127,7 @@ const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
                     <div className="w-3/4 h-1.5 bg-(--lithos-text) opacity-20 mb-1" />
                     <div className="w-1/2 h-1.5 bg-(--lithos-text) opacity-20 mb-3" />
                     <div
-                      className="px-2 py-1 text-[9px] font-black uppercase tracking-tight border-2 border-(--lithos-border)"
+                      className="px-2 py-1 text-[9px] font-black uppercase tracking-tight border-2 border-(--lithos-border) rounded-(--lithos-radius)"
                       style={{ backgroundColor: accentColor, color: fgColor }}
                     >
                       Action

@@ -17,9 +17,11 @@ interface ShowroomProps {
   toggleObsidian: () => void;
   accentColor: HexColor;
   updateAccentColor: (color: HexColor) => void;
+  radius: number;
+  updateRadius: (radius: number) => void;
 }
 
-export const Showroom = ({ isDarkMode, toggleObsidian, accentColor, updateAccentColor }: ShowroomProps) => {
+export const Showroom = ({ isDarkMode, toggleObsidian, accentColor, updateAccentColor, radius, updateRadius }: ShowroomProps) => {
   /**
    * ZERO-GAP SPACING MATH:
    * - pt-24 (main): padding-top: 6rem = 96px
@@ -38,7 +40,7 @@ export const Showroom = ({ isDarkMode, toggleObsidian, accentColor, updateAccent
         <Hero accentColor={accentColor} updateAccentColor={updateAccentColor} />
         {/* All sections: mt-24 = 96px margin for zero-gap layout */}
         <div className="mt-24">
-          <ThemeEngine accentColor={accentColor} updateAccentColor={updateAccentColor} />
+          <ThemeEngine accentColor={accentColor} updateAccentColor={updateAccentColor} radius={radius} updateRadius={updateRadius} />
         </div>
         <div className="mt-24">
           <FeatureGrid />

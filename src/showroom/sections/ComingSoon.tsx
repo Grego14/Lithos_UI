@@ -11,8 +11,9 @@
  * - Button shadow fixed (no translate on interaction)
  */
 
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { KineticGrid } from '../../components/ui/KineticGrid'
+import { Button } from '../../components/ui/Button'
 
 interface ComingSoonProps {
   eyebrow?: string
@@ -35,6 +36,7 @@ export const ComingSoon = ({
   primaryAction = { label: "Go to Docs", to: "/docs" },
   secondaryAction = { label: "Contribute Code", href: "https://github.com/lithosui/Lithos_UI/issues" }
 }: ComingSoonProps) => {
+  const navigate = useNavigate()
   return (
     <KineticGrid baseOpacity="opacity-10" className="min-h-screen bg-(--lithos-bg) text-(--lithos-text) px-4">
       <div className="text-center max-w-5xl mx-auto w-full">
@@ -53,24 +55,22 @@ export const ComingSoon = ({
 
         {/* Vertical spacer for button positioning */}
         {/* Zero-Gap enforcement: stacking behavior controlled by explicit margins */}
-        <div className="mt-8 flex flex-col sm:flex-row justify-center items-center">
+        <div className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
           {/* Return button */}
-          <Link
-            to={primaryAction.to}
-            className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click mb-4 sm:mb-0 sm:mr-4"
+          <Button
+            intent="primary"
+            onClick={() => navigate(primaryAction.to)}
           >
             {primaryAction.label}
-          </Link>
+          </Button>
 
           {/* Contribute button */}
-          <a
-            href={secondaryAction.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-(--lithos-surface) text-(--lithos-text) lithos-click"
+          <Button
+            intent="secondary"
+            onClick={() => window.open(secondaryAction.href, '_blank')}
           >
             {secondaryAction.label}
-          </a>
+          </Button>
         </div>
       </div>
     </KineticGrid>

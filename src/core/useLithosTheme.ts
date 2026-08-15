@@ -8,7 +8,7 @@ import type { HexColor } from './types'
  * Manages dark/light mode state by reading from and writing to localStorage.
  * The theme preference is persisted under the key 'lithos-theme-mode'.
  */
-export const useTheme = () => {
+export const useLithosTheme = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     // Initialize from localStorage using direct string comparison
     return localStorage.getItem('lithos-theme-mode') === 'dark'
@@ -16,6 +16,10 @@ export const useTheme = () => {
 
   const [accentColor, setAccentColor] = useState(() => {
     return (localStorage.getItem('lithos-theme-color') as HexColor | null) || ('#00FF00' as HexColor)
+  })
+
+  const [radius, setRadius] = useState(() => {
+    return parseInt(localStorage.getItem('lithos-theme-radius') || '0', 10)
   })
 
   useEffect(() => {
@@ -44,13 +48,14 @@ export const useTheme = () => {
       *, :root, .obsidian, body.obsidian, .dark {
         --lithos-accent: ${adaptiveAccent} !important;
         --lithos-accent-text: ${text} !important;
+        --lithos-radius: ${radius}px !important;
       }
       ::selection {
         background-color: var(--lithos-accent) !important;
         color: var(--lithos-accent-text) !important;
       }
     `
-  }, [accentColor, isDarkMode])
+  }, [accentColor, isDarkMode, radius])
 
   const toggleObsidian = () => {
     setIsDarkMode((prevMode) => {
@@ -66,5 +71,10 @@ export const useTheme = () => {
     localStorage.setItem('lithos-theme-color', color)
   }
 
-  return { isDarkMode, toggleObsidian, accentColor, updateAccentColor } as const
+  const updateRadius = (newRadius: number) => {
+    setRadius(newRadius)
+    localStorage.setItem('lithos-theme-radius', newRadius.toString())
+  }
+
+  return { isDarkMode, toggleObsidian, accentColor, updateAccentColor, radius, updateRadius } as const
 };

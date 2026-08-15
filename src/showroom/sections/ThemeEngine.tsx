@@ -5,6 +5,11 @@
  * - Treats the palette as a physical control board with hard tiles and explicit offsets.
  */
 import type { HexColor } from '../../core/types'
+import { Button } from '../../components/ui/Button'
+import { IconRadiusNone } from '../../components/ui/icons/IconRadiusNone'
+import { IconRadiusSm } from '../../components/ui/icons/IconRadiusSm'
+import { IconRadiusMd } from '../../components/ui/icons/IconRadiusMd'
+import { IconRadiusLg } from '../../components/ui/icons/IconRadiusLg'
 
 interface ThemeColor {
   name: string
@@ -22,9 +27,18 @@ const themes: ThemeColor[] = [
 interface ThemeEngineProps {
   accentColor: string
   updateAccentColor: (color: HexColor) => void
+  radius: number
+  updateRadius: (radius: number) => void
 }
 
-const ThemeEngine = ({ accentColor, updateAccentColor }: ThemeEngineProps) => {
+const radii = [
+  { label: 'None', value: 0, Icon: IconRadiusNone },
+  { label: 'Sm', value: 4, Icon: IconRadiusSm },
+  { label: 'Md', value: 8, Icon: IconRadiusMd },
+  { label: 'Lg', value: 16, Icon: IconRadiusLg },
+]
+
+const ThemeEngine = ({ accentColor, updateAccentColor, radius, updateRadius }: ThemeEngineProps) => {
 
   const handleThemeChange = (hex: string) => {
     updateAccentColor(hex as HexColor)
@@ -32,6 +46,7 @@ const ThemeEngine = ({ accentColor, updateAccentColor }: ThemeEngineProps) => {
 
   const handleReset = () => {
     updateAccentColor('#00FF00' as HexColor)
+    updateRadius(0)
   }
 
   // - 8px border + 8px shadow keep the control board heavy and explicit.
@@ -45,32 +60,32 @@ const ThemeEngine = ({ accentColor, updateAccentColor }: ThemeEngineProps) => {
           Test drive the global design tokens. One variable changes everything.
         </p>
 
-        <div className="mt-12 w-full border-2 border-(--lithos-border) bg-(--lithos-bg) p-6 sm:p-10 shadow-[6px_6px_0px_0px_var(--lithos-shadow)] mb-12">
+        <div className="mt-12 w-full border-2 border-(--lithos-border) bg-(--lithos-bg) p-6 sm:p-10 shadow-[6px_6px_0px_0px_var(--lithos-shadow)] mb-12 rounded-(--lithos-radius)">
           <div className="flex flex-wrap justify-center -m-2 sm:-m-4">
             {themes.map((theme) => {
               const isActive = accentColor === theme.hex
 
               return (
                 // - Each swatch is a 64/96px tile with a hard edge; active state only changes shadow depth.
-                <button
+                <Button
                   key={theme.hex}
-                  type="button"
                   onClick={() => handleThemeChange(theme.hex)}
                   aria-label={`Activate ${theme.name} theme`}
                   title={theme.name}
-                  className={`m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 lithos-click ${isActive ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : ''}`}
+                  className={`m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 ${isActive ? '!border-4 !border-(--lithos-text)' : ''}`}
                   style={{
                     backgroundColor: theme.hex,
+                    color: 'transparent'
                   }}
                 >
                   <span className="sr-only">{theme.name}</span>
-                </button>
+                </Button>
               )
             })}
 
             {/* - Custom picker keeps the tile geometry fixed while the input floats invisibly on top. */}
             <div
-              className={`relative m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 bg-(--lithos-surface) lithos-click group ${!themes.some((t) => t.hex === accentColor) ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : ''}`}
+              className={`relative m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 bg-(--lithos-surface) lithos-click group rounded-(--lithos-radius) overflow-hidden ${!themes.some((t) => t.hex === accentColor) ? '!border-4 !border-(--lithos-text)' : ''}`}
               style={{
                 backgroundColor: !themes.some((t) => t.hex === accentColor) ? accentColor : 'var(--lithos-surface)',
               }}
@@ -98,15 +113,45 @@ const ThemeEngine = ({ accentColor, updateAccentColor }: ThemeEngineProps) => {
             </div>
           </div>
 
+            {/* - Radius Control Row */}
+            <div className="mb-8 mt-12 flex items-center justify-between border-t-2 border-(--lithos-border) pt-12">
+              <span className="text-sm font-black uppercase tracking-widest text-(--lithos-text) opacity-60">
+                Radius
+              </span>
+              <div className="flex items-center space-x-4 sm:space-x-6">
+                {radii.map((r) => {
+                  const isActive = radius === r.value
+                  const Icon = r.Icon
+                  return (
+                    <button
+                      key={r.label}
+                      type="button"
+                      onClick={() => updateRadius(r.value)}
+                      aria-label={`Set border radius to ${r.label}`}
+                      title={r.label}
+                      className="focus:outline-none transition-transform active:scale-95 cursor-pointer"
+                    >
+                      <Icon
+                        size={28}
+                        strokeWidth={isActive ? 3 : 2}
+                        className={`transition-colors ${isActive ? 'text-(--lithos-text)' : 'text-(--lithos-text) opacity-30 hover:opacity-60'}`}
+                        fill={isActive ? 'var(--lithos-accent)' : 'transparent'}
+                      />
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+
           {/* - Reset sits below a hard divider so the board reads as one rooted module. */}
           <div className="mt-10 sm:mt-12 flex w-full justify-center border-t-2 border-(--lithos-border) pt-10 sm:pt-12">
-            <button
-              type="button"
+            <Button
               onClick={handleReset}
-              className="border-2 border-(--lithos-border) bg-(--lithos-surface) text-sm sm:text-base text-(--lithos-text) lithos-click"
+              intent="secondary"
+              className="text-sm sm:text-base"
             >
               Reset to Default Theme
-            </button>
+            </Button>
           </div>
         </div>
       </div>

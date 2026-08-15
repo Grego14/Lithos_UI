@@ -85,6 +85,13 @@ describe('Button', () => {
     expect(button).toContainElement(icon)
     expect(button.textContent).toBe('Click meR')
   })
+
+  it('allows consumer to override border-radius via tailwind-merge (rounded-full)', () => {
+    render(<Button className="rounded-full">Click me</Button>)
+    const button = screen.getByRole('button')
+    expect(button.className).toContain('rounded-full')
+    expect(button.className).not.toContain('rounded-(--lithos-radius)')
+  })
 })
 
 describe('ButtonGroup', () => {

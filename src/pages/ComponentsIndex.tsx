@@ -7,7 +7,7 @@ import { KineticGrid } from '../components/ui/KineticGrid'
 import { ToastItem } from '../components/ui/Toast'
 import { Button } from '../components/ui/Button'
 import { Card, CardImage, CardContent } from '../components/ui/Card'
-import { useTheme } from '../core/useTheme'
+import { useLithosTheme } from '../core/useLithosTheme'
 import { Badge } from '../components/ui/Badge'
 import { Avatar } from '../components/ui/Avatar'
 import { Alert } from '../components/ui/Alert'
@@ -27,7 +27,7 @@ const TogglePreview = () => {
 };
 
 const ToastPreview = () => {
-  const { accentColor } = useTheme()
+  const { accentColor } = useLithosTheme()
   return (
     <div className="w-[120%] scale-[0.7] origin-center pointer-events-none mt-6">
       <ToastItem toast={{ id: 'prev-toast', message: 'Yummy toast', type: 'success', color: accentColor, title: 'SUCCESS' }} onRemove={() => { }} />
@@ -36,7 +36,7 @@ const ToastPreview = () => {
 };
 
 const AlertPreview = () => {
-  const { accentColor } = useTheme()
+  const { accentColor } = useLithosTheme()
   return (
     <div className="w-[140%] scale-[0.55] origin-center pointer-events-none">
       <Alert color={accentColor} title="Notice">Structural review pending.</Alert>
@@ -163,7 +163,7 @@ export const ComponentsIndex = ({ isDarkMode, toggleObsidian }: ComponentsIndexP
             <div key={comp.name} className="w-full sm:w-[50%] md:w-[33.333%] lg:w-[25%] p-3">
               <Link
                 to={comp.to}
-                className="block group lithos-click h-full p-0 flex flex-col items-stretch"
+                className="block group lithos-click h-full p-0 flex flex-col items-stretch rounded-(--lithos-radius) overflow-hidden"
               >
                 {/* Top Zone: Live Preview */}
                 <div className="w-full aspect-[4/3] sm:aspect-[3/2] md:aspect-video flex items-center justify-center bg-(--lithos-surface) p-2 overflow-hidden relative border-b-2 border-(--lithos-border) font-normal tracking-normal leading-normal">

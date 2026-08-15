@@ -33,6 +33,7 @@ export const Button =
   ) => {
     const classes = [
       'lithos-click',
+      'rounded-(--lithos-radius)',
       intentClass[intent],
       fullWidth && 'w-full',
       'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',

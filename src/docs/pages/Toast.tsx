@@ -1,5 +1,5 @@
 import { useToast } from '../../core/hooks/useToast'
-import { useTheme } from '../../core/useTheme'
+import { useLithosTheme } from '../../core/useLithosTheme'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { SetupGuide } from '../layout/SetupGuide'
 import { Button } from '../../components/ui/Button'
@@ -21,7 +21,7 @@ const newToast: ToastProps = {
 // inner component that consumes the nested context
 const ToastTriggerButton = () => {
   const toast = useToast()
-  const { accentColor } = useTheme()
+  const { accentColor } = useLithosTheme()
 
   const triggerToast = () => {
     if (toast && toast.addToast)
@@ -45,7 +45,7 @@ const PositionedToast = () => {
 
 export const ToastDoc = () => {
   const toast = useToast()
-  const { accentColor } = useTheme()
+  const { accentColor } = useLithosTheme()
 
   const triggerToast = () => {
     if (toast && toast.addToast)
@@ -53,12 +53,12 @@ export const ToastDoc = () => {
   }
 
   const usageCode = `import { useToast } from '../../core/hooks/useToast'
-import { useTheme } from '../../core/useTheme'
+import { useLithosTheme } from '../../core/useLithosTheme'
 import { Button } from '../../components/ui/Button'
 
 export const ToastExample = () => {
   const { addToast } = useToast()
-  const { accentColor } = useTheme()
+  const { accentColor } = useLithosTheme()
 
   const triggerToast = () => {
     if (addToast) {
@@ -91,12 +91,12 @@ const { addToast } = useToast()
 
   const positionedCode = `import { ToastProvider } from '../../components/ui/Toast'
 import { useToast } from '../../core/hooks/useToast'
-import { useTheme } from '../../core/useTheme'
+import { useLithosTheme } from '../../core/useLithosTheme'
 import { Button } from '../../components/ui/Button'
 
 export const TriggerToastButton = () => {
   const { addToast } = useToast()
-  const { accentColor } = useTheme()
+  const { accentColor } = useLithosTheme()
 
   const triggerToast = () => {
     if (addToast) {
@@ -222,6 +222,9 @@ const { addToast } = useToast()
         <h2 id="api" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
           API Reference
         </h2>
+        <div className="mb-6 p-4 border-l-4 border-(--lithos-accent) bg-(--lithos-surface) text-sm font-body text-(--lithos-text)">
+          <strong>Note:</strong> Border radius is configurable globally via the <code>--lithos-radius</code> CSS token, or per-instance via <code>className</code> (e.g. <code>rounded-full</code>). No custom prop is required.
+        </div>
         <PropsAccordion title="ToastProvider Props" data={toastProviderPropsData} />
       </section>
 

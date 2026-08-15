@@ -39,7 +39,7 @@ export const PreviewBlock = ({ children, code, githubUrl, language = 'tsx', heig
   }
 
   return (
-    <div className="mb-8 border-2 border-(--lithos-border) bg-(--lithos-bg) overflow-hidden transform-[translateZ(0)]">
+    <div className="mb-8 border-2 border-(--lithos-border) bg-(--lithos-bg) overflow-hidden transform-[translateZ(0)] rounded-(--lithos-radius)">
       {/* 2. Control Bar inside container */}
       <div className="flex flex-wrap items-center justify-between p-4 border-b-2 border-(--lithos-border) bg-(--lithos-surface)">
         <div className="flex flex-wrap items-center">
@@ -96,14 +96,14 @@ export const PreviewBlock = ({ children, code, githubUrl, language = 'tsx', heig
             </Button>
           )}
           {slug && (
-            <a href={`/blocks/preview/${slug}`} target="_blank" rel="noreferrer" aria-label="Open" className={`inline-flex items-center justify-center ${inactiveBtnClass}`}>
+            <Button intent="secondary" onClick={() => window.open(`/blocks/preview/${slug}`, '_blank')} aria-label="Open" className="inline-flex items-center justify-center hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)">
               <IconExternalLink />
-            </a>
+            </Button>
           )}
           {githubUrl ? (
-            <a href={githubUrl} target="_blank" rel="noreferrer" aria-label="Source" className={`inline-flex items-center justify-center ${inactiveBtnClass}`}>
+            <Button intent="secondary" onClick={() => window.open(githubUrl, '_blank')} aria-label="Source" className="inline-flex items-center justify-center hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)">
               <IconCode />
-            </a>
+            </Button>
           ) : null}
         </div>
       </div>

@@ -46,7 +46,7 @@ export const BlocksIndex = ({ isDarkMode, toggleObsidian }: BlocksIndexProps) =>
                   <div key={category.slug} className="w-full sm:w-[50%] lg:w-[33.333%] p-3">
                     <Link
                       to={`/blocks/${category.slug}`}
-                      className="block group lithos-click h-full flex flex-col p-0 items-stretch"
+                      className="block group lithos-click h-full flex flex-col p-0 items-stretch rounded-(--lithos-radius) overflow-hidden"
                     >
                       <div className="w-full h-48 overflow-hidden bg-(--lithos-surface) relative border-b-2 border-(--lithos-border) font-normal tracking-normal leading-normal">
                         <div className="absolute inset-0 pointer-events-none">

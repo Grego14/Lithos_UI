@@ -50,7 +50,7 @@ export const Alert = (
     const actionColor = isFilled ? textColor : outlineColor
 
     const classes = cn(
-      'border-2 w-full',
+      'border-2 w-full rounded-(--lithos-radius)',
       isFilled && 'border-(--lithos-border) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]',
       sizing.container,
       className

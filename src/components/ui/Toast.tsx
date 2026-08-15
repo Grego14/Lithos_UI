@@ -101,7 +101,7 @@ export const ToastProvider = ({
     <ToastContext.Provider value={{ addToast, removeToast }}>
       {children}
       {/* - Fixed corner stack uses explicit padding and margins, not gap, so each toast remains independently dismissible. */}
-      <div className={`fixed ${positionStyles[position]} p-4 sm:p-6 md:p-8 z-50 pointer-events-none flex flex-col items-end w-full max-w-xs`}>
+      <div className={`fixed ${positionStyles[position]} p-4 sm:p-6 md:p-8 z-50 pointer-events-none flex flex-col ${position.includes('left') ? 'items-start' : 'items-end'} w-full max-w-xs`}>
         {toasts.map((toast) => (
           <ToastItem
             key={toast.id}
@@ -177,7 +177,7 @@ export const ToastItem = ({ toast, onRemove }: ToastItemType) => {
         tabIndex={isError ? -1 : undefined}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className={`toast-override-${id} pointer-events-auto border-2 p-3 sm:p-4 mb-4 w-full flex flex-row items-start shadow-[4px_4px_0_0_var(--lithos-shadow)] animate-[slide-up_0.3s_ease-out_forwards]`}
+        className={`toast-override-${id} pointer-events-auto border-2 p-3 sm:p-4 mb-4 w-full flex flex-row items-start shadow-[4px_4px_0_0_var(--lithos-shadow)] animate-[slide-up_0.3s_ease-out_forwards] rounded-(--lithos-radius)`}
       >
         <div className="flex-1 mr-4">
           {title && <h4 className="font-black text-lg uppercase tracking-tighter leading-none mb-2 m-0">{title}</h4>}

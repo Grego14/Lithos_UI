@@ -45,9 +45,8 @@ export const SetupGuide = ({ componentNames, manualPath, requires, manualOnly = 
   // If manualOnly is true, we force it to act like the manual tab is selected.
   const isManual = manualOnly || installTab === 'manual'
 
-  // Outer container classes based on bordered prop
   const containerClasses = bordered 
-    ? "border-2 border-(--lithos-border) bg-(--lithos-bg) p-4 md:p-6 overflow-hidden transform-[translateZ(0)]"
+    ? "border-2 border-(--lithos-border) bg-(--lithos-bg) p-4 md:p-6 overflow-hidden transform-[translateZ(0)] rounded-(--lithos-radius)"
     : "bg-(--lithos-bg) p-4 md:p-6"
 
   return (

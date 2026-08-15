@@ -20,36 +20,7 @@
   --font-display: 'Sora', serif;
 }
 
-:root {
-  /* - Default Light Theme: High contrast, heavy white/black balance. */
-  --lithos-bg: #ffffff;
-  --lithos-text: #000000;
-  --lithos-border: #000000;
-  --lithos-accent: #00ff00;
-  --lithos-surface: #ffffff;
-  --lithos-muted: rgba(0, 0, 0, 0.3);
-  --lithos-shadow: rgba(0, 0, 0, 1);
-
-  background-color: var(--lithos-bg);
-  color: var(--lithos-text);
-  color-scheme: light;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* - Obsidian Mode: Inverts the environmental tokens without touching the structural CSS. */
-/* - Shadows use maximum opacity (rgba 1) to remain solid blocks against the dark background. */
-.obsidian,
-body.obsidian {
-  --lithos-bg: #000000;
-  --lithos-text: #ffffff;
-  --lithos-border: #ffffff;
-  --lithos-surface: #000000;
-  --lithos-muted: rgba(255, 255, 255, 0.3);
-  --lithos-shadow: rgba(255, 255, 255, 1);
-  color-scheme: dark;
-}
+@import './tokens.css';
 
 html {
   /* - Spacing Math: 96px offset accounts for the fixed Navbar height during anchor link scrolling. */

@@ -19,6 +19,7 @@ const tocRegistry: Record<string, TOCItem[]> = {
   '/docs/installation': [
     { id: '#base-template', label: '1. The Base Template', level: 1 },
     { id: '#global-css', label: '2. Global CSS Configuration', level: 1 },
+    { id: '#theming-configuration', label: '3. Theming & Configuration', level: 1 },
   ],
   '/docs/hero': [
     { id: '#examples', label: 'Examples', level: 1 },

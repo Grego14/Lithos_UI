@@ -6,7 +6,8 @@
  */
 
 import { Link } from 'react-router-dom'
-import { IconHeart } from '../../components/ui/icons/IconHeart';
+import { IconHeart } from '../../components/ui/icons/IconHeart'
+import { Button } from '../../components/ui/Button'
 
 const links = [
   { to: '/components', label: 'Components' },
@@ -53,18 +54,17 @@ export const Footer = () => {
 
         {/* - Sponsor CTA uses the same hard-surface language so the support action matches the system physics. */}
         <div className="mt-12 flex w-full flex-col lg:mt-0 lg:w-1/4 lg:items-end">
-          <a
-            href="https://incrediblestand.gumroad.com/l/lithos-ui"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group border-2 border-(--lithos-border) bg-(--lithos-surface) text-2xl text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) lithos-click md:text-3xl"
+          <Button
+            intent="secondary"
+            onClick={() => window.open('https://incrediblestand.gumroad.com/l/lithos-ui', '_blank')}
+            className="group text-2xl hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) md:text-3xl py-4 px-6"
           >
             <span>Show Love</span>
             <IconHeart
               aria-hidden='true'
               className='h-8 w-8 ml-3 transition-transform duration-300 group-hover:scale-110'
             />
-          </a>
+          </Button>
         </div>
       </div>
     </footer>

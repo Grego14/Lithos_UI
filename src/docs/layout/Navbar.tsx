@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useToast } from '../../core/hooks/useToast'
+import { Button } from '../../components/ui/Button'
 import { Toggle } from '../../components/ui/Toggle'
 import { IconMenu } from '../../components/ui/icons/IconMenu'
 import { IconClose } from '../../components/ui/icons/IconClose'
@@ -48,6 +49,7 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [expandedCategory, setExpandedCategory] = useState<string | null>('Getting Started')
   const { addToast } = useToast()
+  const navigate = useNavigate()
 
   const handleToggleObsidian = () => {
     const nextMode = !isDarkMode
@@ -68,9 +70,9 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
     <header className="fixed top-0 z-50 w-full border-b-2 border-(--lithos-border) bg-(--lithos-surface)">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         <div className="flex items-center justify-start lg:w-1/3">
-          <Link to="/" className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click">
+          <Button intent="primary" onClick={() => navigate('/')}>
             Lithos UI
-          </Link>
+          </Button>
         </div>
 
         {/* - Center lane for main wayfinding */}
@@ -91,25 +93,23 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
           <div className="mr-4 flex items-center">
             <Toggle checked={isDarkMode} onToggle={handleToggleObsidian} label="Toggle Obsidian Mode" />
           </div>
-          <a
-            href="https://github.com/lithosui/Lithos_UI"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
+          <Button
+            intent="primary"
+            onClick={() => window.open('https://github.com/lithosui/Lithos_UI', '_blank')}
           >
             GitHub
-          </a>
+          </Button>
         </div>
 
         {/* - Mobile Action Toggle (Hamburger / X) */}
         <div className="flex lg:hidden items-center">
-          <button
+          <Button
+            intent="primary"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           >
             <ActionToggle className='w-6 h-6' />
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -165,15 +165,15 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
 
           {/* Mobile Menu GitHub CTA */}
           <div className="mt-auto flex items-center justify-between">
-            <a
-              href="https://github.com/lithosui/Lithos_UI"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setIsMenuOpen(false)}
-              className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
+            <Button
+              intent="primary"
+              onClick={() => {
+                setIsMenuOpen(false)
+                window.open('https://github.com/lithosui/Lithos_UI', '_blank')
+              }}
             >
               GitHub
-            </a>
+            </Button>
             <div className="flex items-center">
               <Toggle checked={isDarkMode} onToggle={handleToggleObsidian} label="Toggle Obsidian Mode" />
             </div>
