@@ -12,12 +12,12 @@ export const BreadcrumbDoc = () => {
   const collapsibleCode = `import { Breadcrumb } from '../../components/ui/Breadcrumb'
 
 export const CollapsibleBreadcrumb = () => {
-  const items = [
-    { label: 'Lithos UI', href: '#' },
-    { label: 'Components', href: '#' },
-    { label: 'Breadcrumb', href: '#' },
+  items={[
+    { label: 'Lithos UI', href: '#', onClick: (e) => e.preventDefault() },
+    { label: 'Components', href: '#', onClick: (e) => e.preventDefault() },
+    { label: 'Breadcrumb', href: '#', onClick: (e) => e.preventDefault() },
     { label: 'Collapsible Breadcrumb', active: true },
-  ]
+  ]}
 
   return (
     <Breadcrumb
@@ -36,12 +36,12 @@ import { IconSettings } from '../../components/ui/icons/IconSettings'
 import { IconFileText } from '../../components/ui/icons/IconFileText'
 
 export const IconNameBreadcrumb = () => {
-  const items = [
-    { label: 'Lithos UI', href: '#' },
-    { label: 'Components', href: '#', icon: <IconFolder /> },
-    { label: 'Breadcrumb', href: '#', icon: <IconSettings /> },
+  items={[
+    { label: 'Lithos UI', href: '#', onClick: (e) => e.preventDefault() },
+    { label: 'Components', href: '#', icon: <IconFolder />, onClick: (e) => e.preventDefault() },
+    { label: 'Breadcrumb', href: '#', icon: <IconSettings />, onClick: (e) => e.preventDefault() },
     { label: 'Icon', active: true, icon: <IconFileText /> },
-  ]
+  ]}
 
   return <Breadcrumb variant="icon" items={items} />
 }`
@@ -60,13 +60,17 @@ export const IconNameBreadcrumb = () => {
 
       <section className="mb-12">
         <p className="mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          Breadcrumbs show users where they are and help them navigate back to previous pages without getting lost. Lithos UI offers two simple styles: <strong>Collapsible</strong> to keep long paths tidy, and <strong>Icon</strong> for a visual touch.
+          Breadcrumbs show users where they are and help them navigate back to previous pages without getting lost.
+          Lithos UI offers two simple styles: <strong>Collapsible</strong> to keep long paths tidy, and{' '}
+          <strong>Icon</strong> for a visual touch.
         </p>
       </section>
 
       <div className="border-l-4 border-(--lithos-accent) pl-6 py-2 mb-8 bg-(--lithos-surface) p-4">
         <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
-          Screen readers automatically recognize the breadcrumb landmark (<code>&lt;nav aria-label="Breadcrumb"&gt;</code>) and identify the active page (<code>aria-current="page"</code>) for easy keyboard navigation.
+          Screen readers automatically recognize the breadcrumb landmark (
+          <code>&lt;nav aria-label="Breadcrumb"&gt;</code>) and identify the active page (
+          <code>aria-current="page"</code>) for easy keyboard navigation.
         </p>
       </div>
 
@@ -77,11 +81,7 @@ export const IconNameBreadcrumb = () => {
       <SetupGuide
         componentNames={['Breadcrumb']}
         manualPath="../../components/ui/Breadcrumb"
-        requires={[
-          'utils/cn.ts',
-          'components/ui/icons/IconHome.tsx',
-          'components/ui/icons/IconBreadcrumbSeparator'
-        ]}
+        requires={['utils/cn.ts', 'components/ui/icons/IconHome.tsx', 'components/ui/icons/IconBreadcrumbSeparator']}
       />
 
       <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
@@ -117,7 +117,8 @@ export const IconNameBreadcrumb = () => {
         Collapsible
       </h3>
       <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
-        Automatically truncates middle items when paths get too long. Click the <code>•••</code> ellipsis button to expand hidden items.
+        Automatically truncates middle items when paths get too long. Click the <code>•••</code> ellipsis button to
+        expand hidden items.
       </p>
 
       <div className="mt-4 mb-16">
@@ -129,9 +130,9 @@ export const IconNameBreadcrumb = () => {
               itemsBeforeCollapse={1}
               itemsAfterCollapse={1}
               items={[
-                { label: 'Lithos UI', href: '#' },
-                { label: 'Components', href: '#' },
-                { label: 'Breadcrumb', href: '#' },
+                { label: 'Lithos UI', href: '#', onClick: (e) => e.preventDefault() },
+                { label: 'Components', href: '#', onClick: (e) => e.preventDefault() },
+                { label: 'Breadcrumb', href: '#', onClick: (e) => e.preventDefault() },
                 { label: 'Collapsible Breadcrumb', active: true },
               ]}
             />
@@ -153,9 +154,9 @@ export const IconNameBreadcrumb = () => {
             <Breadcrumb
               variant="icon"
               items={[
-                { label: 'Lithos UI', href: '#' },
-                { label: 'Components', href: '#', icon: <IconFolder /> },
-                { label: 'Breadcrumb', href: '#', icon: <IconSettings /> },
+                { label: 'Lithos UI', href: '#', onClick: (e) => e.preventDefault() },
+                { label: 'Components', href: '#', icon: <IconFolder />, onClick: (e) => e.preventDefault() },
+                { label: 'Breadcrumb', href: '#', icon: <IconSettings />, onClick: (e) => e.preventDefault() },
                 { label: 'Icon', active: true, icon: <IconFileText /> },
               ]}
             />
@@ -165,4 +166,3 @@ export const IconNameBreadcrumb = () => {
     </div>
   )
 }
-

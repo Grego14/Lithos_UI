@@ -48,6 +48,7 @@ describe('Breadcrumb', () => {
     render(<Breadcrumb showHomeIcon={false} items={[{ label: 'Home', href: '/' }, { label: 'Current' }]} />)
 
     expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument()
+    expect(screen.queryByTestId('home-icon')).not.toBeInTheDocument()
   })
 
   it('renders a custom separator', () => {
