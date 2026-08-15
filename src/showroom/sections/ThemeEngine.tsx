@@ -6,10 +6,10 @@
  */
 import type { HexColor } from '../../core/types'
 import { Button } from '../../components/ui/Button'
-import { IconRadiusBrutalist } from '../../components/ui/icons/IconRadiusBrutalist'
-import { IconRadiusSharp } from '../../components/ui/icons/IconRadiusSharp'
-import { IconRadiusSoft } from '../../components/ui/icons/IconRadiusSoft'
-import { IconRadiusRound } from '../../components/ui/icons/IconRadiusRound'
+import { IconRadiusNone } from '../../components/ui/icons/IconRadiusNone'
+import { IconRadiusSm } from '../../components/ui/icons/IconRadiusSm'
+import { IconRadiusMd } from '../../components/ui/icons/IconRadiusMd'
+import { IconRadiusLg } from '../../components/ui/icons/IconRadiusLg'
 
 interface ThemeColor {
   name: string
@@ -32,10 +32,10 @@ interface ThemeEngineProps {
 }
 
 const radii = [
-  { label: 'Brutalist', value: 0, Icon: IconRadiusBrutalist },
-  { label: 'Sharp', value: 4, Icon: IconRadiusSharp },
-  { label: 'Soft', value: 8, Icon: IconRadiusSoft },
-  { label: 'Round', value: 16, Icon: IconRadiusRound },
+  { label: 'None', value: 0, Icon: IconRadiusNone },
+  { label: 'Sm', value: 4, Icon: IconRadiusSm },
+  { label: 'Md', value: 8, Icon: IconRadiusMd },
+  { label: 'Lg', value: 16, Icon: IconRadiusLg },
 ]
 
 const ThemeEngine = ({ accentColor, updateAccentColor, radius, updateRadius }: ThemeEngineProps) => {
