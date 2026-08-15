@@ -96,12 +96,12 @@ export const PreviewBlock = ({ children, code, githubUrl, language = 'tsx', heig
             </Button>
           )}
           {slug && (
-            <Button intent="secondary" onClick={() => window.open(`/blocks/preview/${slug}`, '_blank')} aria-label="Open" className="inline-flex items-center justify-center px-3 hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)">
+            <Button intent="secondary" onClick={() => window.open(`/blocks/preview/${slug}`, '_blank')} aria-label="Open" className="inline-flex items-center justify-center hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)">
               <IconExternalLink />
             </Button>
           )}
           {githubUrl ? (
-            <Button intent="secondary" onClick={() => window.open(githubUrl, '_blank')} aria-label="Source" className="inline-flex items-center justify-center px-3 hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)">
+            <Button intent="secondary" onClick={() => window.open(githubUrl, '_blank')} aria-label="Source" className="inline-flex items-center justify-center hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)">
               <IconCode />
             </Button>
           ) : null}

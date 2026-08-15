@@ -50,13 +50,13 @@ export const Installation = () => {
       </p>
       <CodeViewer code={cssConfig} language="css" />
 
-      <h2 id="theming" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="theming-configuration" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         3. Theming & Configuration
       </h2>
       <p className="mb-4 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
         Lithos UI relies entirely on native CSS custom properties for theming. You have two paths to configure your aesthetic:
       </p>
-      
+
       <h3 className="text-xl font-bold uppercase tracking-tighter text-(--lithos-text) mb-2">Static Override (Recommended)</h3>
       <p className="mb-6 text-sm md:text-base text-(--lithos-text) max-w-3xl font-body">
         The primary and most performant way to theme your application is to simply override the root tokens in your global CSS after importing <code>tokens.css</code>. For instance, updating <code>--lithos-accent</code> and <code>--lithos-radius</code> globally. No JavaScript is required.

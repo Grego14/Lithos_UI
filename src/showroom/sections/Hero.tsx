@@ -55,14 +55,14 @@ const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
               <Button
                 intent="primary"
                 onClick={() => navigate('/docs')}
-                className="mb-4 sm:mb-0 sm:mr-6"
+                className="mb-4 sm:mb-0 sm:mr-6 px-4 py-2"
               >
                 Documentation
               </Button>
               <Button
                 intent="secondary"
                 onClick={() => window.open('https://github.com/lithosui/Lithos_UI', '_blank')}
-                className="mb-4 sm:mb-0"
+                className="mb-4 sm:mb-0 px-4 py-2"
               >
                 GitHub
               </Button>

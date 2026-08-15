@@ -15,11 +15,6 @@ export interface PropsTableProps {
 export const PropsTable = ({ data }: PropsTableProps) => {
   return (
     <div className='overflow-x-auto my-2 rounded-(--lithos-radius)'>
-      <div className="mb-4 p-4 border-2 border-(--lithos-border) bg-(--lithos-surface)">
-        <p className="text-sm font-body text-(--lithos-text) m-0">
-          <strong>Note:</strong> Border radius is configurable globally via the <code>--lithos-radius</code> CSS token, or per-instance via <code>className</code> (e.g. <code>rounded-full</code>). No custom prop is required.
-        </p>
-      </div>
       <table className='w-full text-left border-collapse font-body text-sm'>
         <thead>
           <tr className='border-b-2 border-(--lithos-border) bg-(--lithos-surface)'>
@@ -44,9 +39,9 @@ export const PropsTable = ({ data }: PropsTableProps) => {
                   </span>
                 )}
               </td>
-              <td className='p-3 font-mono text-xs opacity-80 break-words max-w-[220px]'>{prop.type}</td>
+              <td className='p-3 font-mono text-xs opacity-80 wrap-break-word max-w-55'>{prop.type}</td>
               <td className='p-3 font-mono text-xs opacity-70 whitespace-nowrap'>{prop.defaultValue || '—'}</td>
-              <td className='p-3 opacity-90 min-w-[200px]'>{prop.description}</td>
+              <td className='p-3 opacity-90 min-w-50'>{prop.description}</td>
             </tr>
           ))}
         </tbody>
