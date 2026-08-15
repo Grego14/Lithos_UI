@@ -6,6 +6,10 @@
  */
 import type { HexColor } from '../../core/types'
 import { Button } from '../../components/ui/Button'
+import { IconRadiusBrutalist } from '../../components/ui/icons/IconRadiusBrutalist'
+import { IconRadiusSharp } from '../../components/ui/icons/IconRadiusSharp'
+import { IconRadiusSoft } from '../../components/ui/icons/IconRadiusSoft'
+import { IconRadiusRound } from '../../components/ui/icons/IconRadiusRound'
 
 interface ThemeColor {
   name: string
@@ -28,10 +32,10 @@ interface ThemeEngineProps {
 }
 
 const radii = [
-  { label: 'Brutalist', value: 0 },
-  { label: 'Sharp', value: 4 },
-  { label: 'Soft', value: 8 },
-  { label: 'Round', value: 16 },
+  { label: 'Brutalist', value: 0, Icon: IconRadiusBrutalist },
+  { label: 'Sharp', value: 4, Icon: IconRadiusSharp },
+  { label: 'Soft', value: 8, Icon: IconRadiusSoft },
+  { label: 'Round', value: 16, Icon: IconRadiusRound },
 ]
 
 const ThemeEngine = ({ accentColor, updateAccentColor, radius, updateRadius }: ThemeEngineProps) => {
@@ -68,7 +72,7 @@ const ThemeEngine = ({ accentColor, updateAccentColor, radius, updateRadius }: T
                   onClick={() => handleThemeChange(theme.hex)}
                   aria-label={`Activate ${theme.name} theme`}
                   title={theme.name}
-                  className={`m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 ${isActive ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : ''}`}
+                  className={`m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 ${isActive ? '!border-4 !border-(--lithos-text)' : ''}`}
                   style={{
                     backgroundColor: theme.hex,
                     color: 'transparent'
@@ -81,7 +85,7 @@ const ThemeEngine = ({ accentColor, updateAccentColor, radius, updateRadius }: T
 
             {/* - Custom picker keeps the tile geometry fixed while the input floats invisibly on top. */}
             <div
-              className={`relative m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 bg-(--lithos-surface) lithos-click group rounded-(--lithos-radius) overflow-hidden ${!themes.some((t) => t.hex === accentColor) ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : ''}`}
+              className={`relative m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 bg-(--lithos-surface) lithos-click group rounded-(--lithos-radius) overflow-hidden ${!themes.some((t) => t.hex === accentColor) ? '!border-4 !border-(--lithos-text)' : ''}`}
               style={{
                 backgroundColor: !themes.some((t) => t.hex === accentColor) ? accentColor : 'var(--lithos-surface)',
               }}
@@ -109,28 +113,35 @@ const ThemeEngine = ({ accentColor, updateAccentColor, radius, updateRadius }: T
             </div>
           </div>
 
-          {/* Border Radius Section */}
-          <div className="mt-10 sm:mt-12 flex w-full flex-col items-center border-t-2 border-(--lithos-border) pt-10 sm:pt-12">
-            <h3 className="mb-6 text-2xl font-black uppercase tracking-tighter text-(--lithos-text)">Border Radius</h3>
-            <div className="flex flex-wrap justify-center -m-2 sm:-m-4">
-              {radii.map((r) => {
-                const isActive = radius === r.value
-
-                return (
-                  <Button
-                    key={r.label}
-                    onClick={() => updateRadius(r.value)}
-                    aria-label={`Set border radius to ${r.label}`}
-                    title={r.label}
-                    intent={isActive ? 'primary' : 'secondary'}
-                    className={`m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 font-black tracking-tighter uppercase text-xs sm:text-sm ${isActive ? 'ring-4 ring-(--lithos-text) ring-offset-2 ring-offset-(--lithos-bg)' : 'hover:bg-(--lithos-muted)'}`}
-                  >
-                    {r.label}
-                  </Button>
-                )
-              })}
+            {/* - Radius Control Row */}
+            <div className="mb-8 mt-12 flex items-center justify-between border-t-2 border-(--lithos-border) pt-12">
+              <span className="text-sm font-black uppercase tracking-widest text-(--lithos-text) opacity-60">
+                Radius
+              </span>
+              <div className="flex items-center space-x-4 sm:space-x-6">
+                {radii.map((r) => {
+                  const isActive = radius === r.value
+                  const Icon = r.Icon
+                  return (
+                    <button
+                      key={r.label}
+                      type="button"
+                      onClick={() => updateRadius(r.value)}
+                      aria-label={`Set border radius to ${r.label}`}
+                      title={r.label}
+                      className="focus:outline-none transition-transform active:scale-95 cursor-pointer"
+                    >
+                      <Icon
+                        size={28}
+                        strokeWidth={isActive ? 3 : 2}
+                        className={`transition-colors ${isActive ? 'text-(--lithos-text)' : 'text-(--lithos-text) opacity-30 hover:opacity-60'}`}
+                        fill={isActive ? 'var(--lithos-border)' : 'transparent'}
+                      />
+                    </button>
+                  )
+                })}
+              </div>
             </div>
-          </div>
 
           {/* - Reset sits below a hard divider so the board reads as one rooted module. */}
           <div className="mt-10 sm:mt-12 flex w-full justify-center border-t-2 border-(--lithos-border) pt-10 sm:pt-12">
