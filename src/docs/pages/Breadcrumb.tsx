@@ -5,6 +5,8 @@ import { IconFolder } from '../../components/ui/icons/IconFolder'
 import { IconSettings } from '../../components/ui/icons/IconSettings'
 import { IconFileText } from '../../components/ui/icons/IconFileText'
 import { SetupGuide } from '../layout/SetupGuide'
+import { PropsAccordion } from '../../components/ui/PropsTable'
+import { breadcrumbPropsData, breadcrumbItemDataPropsData } from '../propsData/breadcrumb'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Breadcrumb.tsx'
 
@@ -163,6 +165,26 @@ export const IconNameBreadcrumb = () => {
           </div>
         </PreviewBlock>
       </div>
+
+      <section className="mb-12">
+        <h2 id="accessibility" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+          Accessibility
+        </h2>
+        <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
+          <li>Breadcrumbs are wrapped in a <code>&lt;nav aria-label="Breadcrumb"&gt;</code> element to define a navigation landmark.</li>
+          <li>The currently active page is indicated to assistive technologies using <code>aria-current="page"</code>.</li>
+          <li>Separators between items are hidden from screen readers using <code>aria-hidden="true"</code>.</li>
+          <li>The collapsible ellipsis button provides a descriptive <code>aria-label</code> that updates dynamically when expanded.</li>
+        </ul>
+      </section>
+
+      <section className="mb-12">
+        <h2 id="api" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+          API Reference
+        </h2>
+        <PropsAccordion title="Breadcrumb Props" data={breadcrumbPropsData} />
+        <PropsAccordion title="BreadcrumbItemData" data={breadcrumbItemDataPropsData} />
+      </section>
     </div>
   )
 }

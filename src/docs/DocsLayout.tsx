@@ -95,6 +95,8 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#examples', label: 'Breadcrumb Types', level: 1 },
     { id: '#collapsible', label: '1. Collapsible', level: 2 },
     { id: '#icon-name', label: '2. Simple Icon + Name', level: 2 },
+    { id: '#accessibility', label: 'Accessibility', level: 1 },
+    { id: '#api', label: 'API Reference', level: 1 },
   ],
   '/docs/avatar': [
     { id: '#installation', label: 'Installation', level: 1 },
@@ -193,4 +195,4 @@ export const DocsLayout = ({ children, isDarkMode, toggleObsidian }: DocsLayoutP
       </div>
     </div>
   )
-};
+}
