@@ -5,7 +5,7 @@
  * - Uses explicit spacing only; no gap utilities are allowed.
  */
 import { useToast } from '../../core/hooks/useToast'
-import { useTheme } from '../../core/useTheme'
+import { useLithosTheme } from '../../core/useLithosTheme'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { cn } from '../../utils/cn'
@@ -21,7 +21,7 @@ interface CodeViewerProps {
 
 export const CodeViewer = ({ code, language = 'tsx', showLanguage = false, embedded = false, className = '' }: CodeViewerProps) => {
   const toast = useToast()
-  const { accentColor } = useTheme()
+  const { accentColor } = useLithosTheme()
 
   const handleCopy = async () => {
     const addToastExists = typeof toast?.addToast === 'function'

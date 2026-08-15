@@ -108,7 +108,7 @@ export const FourteenUserGroup = () => {
       <SetupGuide
         componentNames={['Avatar', 'AvatarGroup', 'AvatarGroupCount']}
         manualPath="../../components/ui/Avatar"
-        requires={['utils/cn.ts', 'utils/yiq.ts', 'core/useTheme.ts']}
+        requires={['utils/cn.ts', 'utils/yiq.ts', 'core/useAccentColor.ts']}
       />
 
       <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
@@ -205,6 +205,11 @@ export const FourteenUserGroup = () => {
         <h2 id="api" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
           API Reference
         </h2>
+        <div className="mb-6 p-4 border-2 border-(--lithos-border) bg-(--lithos-surface)">
+          <p className="text-sm font-body text-(--lithos-text)">
+            <strong>Note:</strong> Avatars intentionally ignore the global <code>--lithos-radius</code> token to remain perfectly circular by design. You can still override this behavior manually via <code>className</code> if necessary.
+          </p>
+        </div>
         <PropsAccordion title="Avatar Props" data={avatarPropsData} />
         <PropsAccordion title="AvatarGroupCount Props" data={avatarGroupCountPropsData} />
         <PropsAccordion title="AvatarGroup Props" data={avatarGroupPropsData} />

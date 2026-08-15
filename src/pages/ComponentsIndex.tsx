@@ -7,7 +7,7 @@ import { KineticGrid } from '../components/ui/KineticGrid'
 import { ToastItem } from '../components/ui/Toast'
 import { Button } from '../components/ui/Button'
 import { Card, CardImage, CardContent } from '../components/ui/Card'
-import { useTheme } from '../core/useTheme'
+import { useLithosTheme } from '../core/useLithosTheme'
 import { Badge } from '../components/ui/Badge'
 import { Avatar } from '../components/ui/Avatar'
 import { Alert } from '../components/ui/Alert'
@@ -27,7 +27,7 @@ const TogglePreview = () => {
 };
 
 const ToastPreview = () => {
-  const { accentColor } = useTheme()
+  const { accentColor } = useLithosTheme()
   return (
     <div className="w-[120%] scale-[0.7] origin-center pointer-events-none mt-6">
       <ToastItem toast={{ id: 'prev-toast', message: 'Yummy toast', type: 'success', color: accentColor, title: 'SUCCESS' }} onRemove={() => { }} />
@@ -36,7 +36,7 @@ const ToastPreview = () => {
 };
 
 const AlertPreview = () => {
-  const { accentColor } = useTheme()
+  const { accentColor } = useLithosTheme()
   return (
     <div className="w-[140%] scale-[0.55] origin-center pointer-events-none">
       <Alert color={accentColor} title="Notice">Structural review pending.</Alert>

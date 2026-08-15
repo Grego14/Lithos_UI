@@ -2,7 +2,7 @@
  * @fileoverview Lithos UI - Root Application Shell
  *
  * Minimal architectural shell responsible for:
- * - Theme state management via useTheme hook
+ * - Theme state management via useLithosTheme hook
  * - Dynamic theming class application
  * - Routing configuration via React Router
  * - Component composition (Showroom, NotFound routes)
@@ -32,7 +32,7 @@ import { Showroom } from './showroom/Index'
 import { ToastDoc } from './docs/pages/Toast'
 import { ToggleDoc } from './docs/pages/Toggle'
 import { useEffect } from 'react'
-import { useTheme } from './core/useTheme'
+import { useLithosTheme } from './core/useLithosTheme'
 
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation()
@@ -92,7 +92,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
  * - "*" → NotFound (catch-all for undefined routes)
  */
 const App = () => {
-  const { isDarkMode, toggleObsidian, accentColor, updateAccentColor, radius, updateRadius } = useTheme()
+  const { isDarkMode, toggleObsidian, accentColor, updateAccentColor, radius, updateRadius } = useLithosTheme()
 
   return (
     <div className={'min-h-screen bg-(--lithos-bg) text-(--lithos-text) ' + (isDarkMode ? 'dark obsidian' : '')}>

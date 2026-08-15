@@ -1,34 +1,11 @@
 import { CodeViewer } from '../../components/ui/CodeViewer'
 
-const cssConfig = `:root {
-  /* - Default Light Theme: High contrast, heavy white/black balance. */
-  --lithos-bg: #ffffff;
-  --lithos-text: #000000;
-  --lithos-border: #000000;
-  --lithos-accent: #00FF00;
-  --lithos-surface: #ffffff;
-  --lithos-muted: rgba(0, 0, 0, 0.3);
-  --lithos-shadow: rgba(0, 0, 0, 1);
+const cssConfig = `@import './tokens.css';
 
-  background-color: var(--lithos-bg);
-  color: var(--lithos-text);
-  color-scheme: light;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* - Obsidian Mode: Inverts the environmental tokens without touching the structural CSS. */
-/* - Shadows use maximum opacity (rgba 1) to remain solid blocks against the dark background. */
-.obsidian,
-body.obsidian {
-  --lithos-bg: #000000;
-  --lithos-text: #ffffff;
-  --lithos-border: #ffffff;
-  --lithos-surface: #000000;
-  --lithos-muted: rgba(255, 255, 255, 0.3);
-  --lithos-shadow: rgba(255, 255, 255, 1);
-  color-scheme: dark;
+/* If you need static global overrides, declare them here: */
+:root {
+  /* --lithos-accent: #FF00FF; */
+  /* --lithos-radius: 8px; */
 }`
 
 export const Installation = () => {
@@ -72,6 +49,28 @@ export const Installation = () => {
         your global CSS file. This powers the zero-render theme switching.
       </p>
       <CodeViewer code={cssConfig} language="css" />
+
+      <h2 id="theming" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        3. Theming & Configuration
+      </h2>
+      <p className="mb-4 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
+        Lithos UI relies entirely on native CSS custom properties for theming. You have two paths to configure your aesthetic:
+      </p>
+      
+      <h3 className="text-xl font-bold uppercase tracking-tighter text-(--lithos-text) mb-2">Static Override (Recommended)</h3>
+      <p className="mb-6 text-sm md:text-base text-(--lithos-text) max-w-3xl font-body">
+        The primary and most performant way to theme your application is to simply override the root tokens in your global CSS after importing <code>tokens.css</code>. For instance, updating <code>--lithos-accent</code> and <code>--lithos-radius</code> globally. No JavaScript is required.
+      </p>
+
+      <h3 className="text-xl font-bold uppercase tracking-tighter text-(--lithos-text) mb-2">Live In-App Theming</h3>
+      <p className="mb-6 text-sm md:text-base text-(--lithos-text) max-w-3xl font-body">
+        If you want your users to change themes dynamically at runtime, you can opt-in to using the <code>useLithosTheme</code> hook. This hook automatically injects live overrides into the DOM without forcing React to re-render the entire component tree.
+      </p>
+
+      <h3 className="text-xl font-bold uppercase tracking-tighter text-(--lithos-text) mb-2">Obsidian Mode</h3>
+      <p className="mb-6 text-sm md:text-base text-(--lithos-text) max-w-3xl font-body">
+        Dark mode is handled entirely by a single class. Simply toggle the <code>.obsidian</code> or <code>.dark</code> class on your <code>&lt;html&gt;</code> element to instantly invert the environmental tokens across your app.
+      </p>
     </div>
   )
 }

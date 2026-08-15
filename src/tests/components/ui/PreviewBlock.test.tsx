@@ -79,11 +79,17 @@ describe('PreviewBlock', () => {
     expect(iframe.parentElement).toHaveStyle({ width: '768px' })
   })
 
-  it('renders github link if githubUrl is provided', () => {
+  it('renders github button if githubUrl is provided', async () => {
+    const user = userEvent.setup()
+    const openSpy = vi.spyOn(window, 'open').mockImplementation(() => null)
+    
     render(<PreviewBlock {...defaultProps} githubUrl="https://github.com/test">Hello</PreviewBlock>)
-    const link = screen.getByRole('link', { name: /source/i })
-    expect(link).toBeInTheDocument()
-    expect(link).toHaveAttribute('href', 'https://github.com/test')
+    const button = screen.getByRole('button', { name: /source/i })
+    expect(button).toBeInTheDocument()
+    
+    await user.click(button)
+    expect(openSpy).toHaveBeenCalledWith('https://github.com/test', '_blank')
+    openSpy.mockRestore()
   })
 
   it('has zero accessibility violations', async () => {

@@ -294,6 +294,11 @@ export const CustomizedAlert = () => {
         <h2 id="api" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
           API Reference
         </h2>
+        <div className="mb-6 p-4 border-2 border-(--lithos-border) bg-(--lithos-surface)">
+          <p className="text-sm font-body text-(--lithos-text)">
+            <strong>Note:</strong> Border radius is configurable globally via the <code>--lithos-radius</code> CSS token, or per-instance via <code>className</code> (e.g. <code>rounded-full</code>). No custom prop is required.
+          </p>
+        </div>
         <PropsAccordion title="Alert Props" data={alertPropsData} />
       </section>
     </div>

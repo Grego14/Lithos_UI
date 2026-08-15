@@ -6,10 +6,8 @@ import { Badge } from '../../../components/ui/Badge'
 import { colors } from '../../../utils/colors'
 
 // Mock de las utilidades y hooks dependientes
-vi.mock('../../../core/useTheme.ts', () => ({
-  useTheme: () => ({
-    accentColor: '#ff5722'
-  })
+vi.mock('../../../core/useAccentColor', () => ({
+  useAccentColor: () => ({ accentColor: '#ff5722' })
 }))
 
 describe('Badge Component', () => {
@@ -41,7 +39,7 @@ describe('Badge Component', () => {
     expect(screen.getByText('Large')).toHaveClass('text-lg', 'px-3')
   })
 
-  it('resolves color for accent variant using useTheme accentColor', () => {
+  it('resolves color for accent variant using useAccentColor', () => {
     render(<Badge variant="accent">Accent</Badge>)
 
     const badge = screen.getByText('Accent')
