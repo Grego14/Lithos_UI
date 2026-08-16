@@ -41,7 +41,7 @@ export const Footer = () => {
 
         {/* - Navigation stays vertical so the exit path reads as a stack, not a menu bar. */}
         <div className="mt-12 flex w-full flex-col lg:mt-0 lg:w-1/4 space-y-4">
-          {links.map(link => (
+          {links.map((link) => (
             <Link
               key={link.to}
               to={link.to}
@@ -61,8 +61,8 @@ export const Footer = () => {
           >
             <span>Show Love</span>
             <IconHeart
-              aria-hidden='true'
-              className='h-8 w-8 ml-3 transition-transform duration-300 group-hover:scale-110'
+              aria-hidden="true"
+              className="h-8 w-8 ml-3 transition-transform duration-300 group-hover:scale-110"
             />
           </Button>
         </div>

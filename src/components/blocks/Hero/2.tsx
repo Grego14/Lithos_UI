@@ -16,28 +16,29 @@ const Hero2 = () => (
             Deployment Engine
           </Badge>
         </div>
-        
+
         <h1 className="text-5xl sm:text-6xl font-black uppercase tracking-tighter leading-none md:text-7xl text-(--lithos-text)">
           Ship Without <br className="hidden lg:block" /> Compromise
         </h1>
-        
+
         <p className="mt-8 text-xl font-normal leading-relaxed text-(--lithos-text) font-body">
-          Stop rebuilding the same components. Use a system that guarantees 
-          structural integrity across every viewport and device context.
+          Stop rebuilding the same components. Use a system that guarantees structural integrity across every viewport
+          and device context.
         </p>
-        
+
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-start w-full sm:w-auto">
-          <Button className="w-full sm:w-auto text-lg px-8 py-4 sm:mr-4 mb-4 sm:mb-0">
-            Start Free Trial
-          </Button>
+          <Button className="w-full sm:w-auto text-lg px-8 py-4 sm:mr-4 mb-4 sm:mb-0">Start Free Trial</Button>
           <Button intent="secondary" className="w-full sm:w-auto text-lg px-8 py-4">
             View Pricing
           </Button>
         </div>
       </div>
-      
+
       <div className="lg:w-1/2 w-full lg:pl-6">
-        <Card variant="default" className="w-full h-full min-h-64 sm:min-h-96 flex items-center justify-center bg-(--lithos-bg)">
+        <Card
+          variant="default"
+          className="w-full h-full min-h-64 sm:min-h-96 flex items-center justify-center bg-(--lithos-bg)"
+        >
           <p className="font-black uppercase tracking-widest text-(--lithos-text) opacity-50 text-center p-8">
             [ Application Interface ]
           </p>

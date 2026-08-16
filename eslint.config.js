@@ -18,15 +18,12 @@ export default tseslint.config(
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
-      'import': importPlugin,
+      import: importPlugin,
       'prefer-arrow-functions': preferArrowFunctions,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'import/no-default-export': 'error',
       '@typescript-eslint/no-explicit-any': 'error',
       'prefer-arrow-functions/prefer-arrow-functions': [
@@ -39,5 +36,5 @@ export default tseslint.config(
         },
       ],
     },
-  },
+  }
 )

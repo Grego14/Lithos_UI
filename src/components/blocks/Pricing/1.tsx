@@ -87,21 +87,24 @@ export const Pricing1 = () => {
                 }
               >
                 <h3
-                  className={`text-2xl font-black uppercase tracking-tighter leading-none ${highlighted ? 'text-(--lithos-accent-text)' : 'text-(--lithos-text)'
-                    }`}
+                  className={`text-2xl font-black uppercase tracking-tighter leading-none ${
+                    highlighted ? 'text-(--lithos-accent-text)' : 'text-(--lithos-text)'
+                  }`}
                 >
                   {tier.title}
                 </h3>
                 <p
-                  className={`mt-4 text-4xl sm:text-5xl font-black uppercase tracking-tighter leading-none ${highlighted ? 'text-(--lithos-accent-text)' : 'text-(--lithos-text)'
-                    }`}
+                  className={`mt-4 text-4xl sm:text-5xl font-black uppercase tracking-tighter leading-none ${
+                    highlighted ? 'text-(--lithos-accent-text)' : 'text-(--lithos-text)'
+                  }`}
                 >
                   {tier.price}
                   <span className="text-xl opacity-70">/mo</span>
                 </p>
                 <p
-                  className={`mt-4 text-base font-medium leading-snug ${highlighted ? 'text-(--lithos-accent-text)' : 'text-(--lithos-text)'
-                    }`}
+                  className={`mt-4 text-base font-medium leading-snug ${
+                    highlighted ? 'text-(--lithos-accent-text)' : 'text-(--lithos-text)'
+                  }`}
                 >
                   {tier.goal}
                 </p>
@@ -132,10 +135,7 @@ export const Pricing1 = () => {
                 </div>
 
                 <div className="mt-auto pt-8">
-                  <Button
-                    intent={highlighted ? 'secondary' : 'primary'}
-                    fullWidth
-                  >
+                  <Button intent={highlighted ? 'secondary' : 'primary'} fullWidth>
                     {tier.cta}
                   </Button>
                 </div>

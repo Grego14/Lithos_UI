@@ -3,10 +3,10 @@
  * - Dual-mode state architecture: works seamlessly as an uncontrolled/standalone item via local state, or co-op inside `AccordionGroup` via Context API.
  * - Dynamic shadow offset shifts from 2px to 4px on open state to retain hard geometry.
  */
-import { useId, createContext, useContext, useState, type ComponentPropsWithRef, type ReactNode } from "react";
-import { Button } from "./Button";
-import { cn } from "../../utils/cn";
-import { IconChevronUp } from "./icons/IconChevronUp";
+import { useId, createContext, useContext, useState, type ComponentPropsWithRef, type ReactNode } from 'react'
+import { Button } from './Button'
+import { cn } from '../../utils/cn'
+import { IconChevronUp } from './icons/IconChevronUp'
 
 interface AccordionContextType {
   toggleItem: (item: string) => void
@@ -37,7 +37,7 @@ export const AccordionGroup = ({
   children,
   defaultActive,
   className,
-  ref
+  ref,
 }: AccordionGroupProps) => {
   const [activedValues, setActivedValues] = useState<string | string[]>(() => {
     if (allowMultiple) {
@@ -50,13 +50,11 @@ export const AccordionGroup = ({
   })
 
   const toggleItem = (value: string) => {
-    setActivedValues(current => {
+    setActivedValues((current) => {
       if (allowMultiple) {
         const list = Array.isArray(current) ? current : []
 
-        return list.includes(value)
-          ? list.filter(item => item !== value)
-          : [...list, value]
+        return list.includes(value) ? list.filter((item) => item !== value) : [...list, value]
       }
 
       return current === value ? '' : value
@@ -71,10 +69,7 @@ export const AccordionGroup = ({
     return activedValues === value
   }
 
-  const containerClass = cn(
-    'flex flex-col items-center',
-    className
-  )
+  const containerClass = cn('flex flex-col items-center', className)
 
   return (
     <AccordionContext.Provider value={{ toggleItem, isItemOpen }}>
@@ -86,27 +81,20 @@ export const AccordionGroup = ({
 }
 
 const defaultClasses = {
-  container: 'w-full self-start border-2 border-(--lithos-border) duration-75 ease-out transition-shadow shadow-[2px_2px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)',
+  container:
+    'w-full self-start border-2 border-(--lithos-border) duration-75 ease-out transition-shadow shadow-[2px_2px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)',
   content: 'p-4 min-h-0 overflow-hidden font-body',
-  header: 'justify-between text-lg text-start p-3'
+  header: 'justify-between text-lg text-start p-3',
 }
 
-export const Accordion = ({
-  defaultOpen = false,
-  open,
-  children,
-  title,
-  value,
-  classes = {},
-  ref
-}: AccordionProps) => {
+export const Accordion = ({ defaultOpen = false, open, children, title, value, classes = {}, ref }: AccordionProps) => {
   const context = useContext(AccordionContext)
 
   // local state fallback if Accordion is used standalone without group
   const [isOpenLocal, setIsOpenLocal] = useState(defaultOpen)
 
   // if is not controlled externally via the open prop, use the Context or the local state
-  const isOpen = open !== undefined ? open : (context && value ? context.isItemOpen(value) : isOpenLocal)
+  const isOpen = open !== undefined ? open : context && value ? context.isItemOpen(value) : isOpenLocal
   const isGrouped = !!context
 
   const handleToggle = () => {
@@ -135,20 +123,41 @@ export const Accordion = ({
 
   return (
     <div className={containerClass} ref={ref}>
-      <h3 className='m-0 p-0 antialiased'>
-        <Button className={cn(defaultClasses.header, classes.header, 'translate-x-0 translate-y-0 active:translate-x-0 active:translate-y-0')} id={buttonId} aria-expanded={isOpen} aria-controls={contentId} onClick={handleToggle} intent='text' fullWidth>
-          <span>
-            {title}
-          </span>
-          <div className='ml-2 w-4 min-w-4'>
+      <h3 className="m-0 p-0 antialiased">
+        <Button
+          className={cn(
+            defaultClasses.header,
+            classes.header,
+            'translate-x-0 translate-y-0 active:translate-x-0 active:translate-y-0'
+          )}
+          id={buttonId}
+          aria-expanded={isOpen}
+          aria-controls={contentId}
+          onClick={handleToggle}
+          intent="text"
+          fullWidth
+        >
+          <span>{title}</span>
+          <div className="ml-2 w-4 min-w-4">
             <IconChevronUp className={`max-w-full h-auto ${iconRotation}`} title={label} />
           </div>
         </Button>
       </h3>
 
-      <div className={cn('grid transition-[grid-template-rows] duration-75 ease-out', isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]')}>
-        <div className='min-h-0 overflow-hidden'>
-          <div className={cn(defaultClasses.content, classes.content)} aria-hidden={!isOpen} id={contentId} role='region' aria-labelledby={buttonId}>
+      <div
+        className={cn(
+          'grid transition-[grid-template-rows] duration-75 ease-out',
+          isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+        )}
+      >
+        <div className="min-h-0 overflow-hidden">
+          <div
+            className={cn(defaultClasses.content, classes.content)}
+            aria-hidden={!isOpen}
+            id={contentId}
+            role="region"
+            aria-labelledby={buttonId}
+          >
             {children}
           </div>
         </div>

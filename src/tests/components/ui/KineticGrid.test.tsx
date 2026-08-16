@@ -11,14 +11,14 @@ describe('KineticGrid', () => {
 
   it('updates CSS variables on mouse move', () => {
     render(<KineticGrid>Test</KineticGrid>)
-    
+
     // The container is the wrapper, we can find it by its child text
     const wrapper = screen.getByText('Test').parentElement as HTMLElement
-    
+
     // Trigger mouse move
     fireEvent.mouseMove(wrapper, { clientX: 100, clientY: 100 })
-    
-    // Expect --mouse-x and --mouse-y to be set. Since getBoundingClientRect returns 0 in JSDOM, 
+
+    // Expect --mouse-x and --mouse-y to be set. Since getBoundingClientRect returns 0 in JSDOM,
     // clientX - left = 100, clientY - top = 100
     expect(wrapper.style.getPropertyValue('--mouse-x')).toBe('100px')
     expect(wrapper.style.getPropertyValue('--mouse-y')).toBe('100px')

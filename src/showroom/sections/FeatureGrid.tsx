@@ -16,23 +16,27 @@ const features: FeatureItem[] = [
   {
     title: 'Zero-Gap Layout System',
     icon: '■',
-    description: 'Strict avoidance of CSS gap utilities. Perfect geometric stacking via explicit mathematically proportional margins.',
+    description:
+      'Strict avoidance of CSS gap utilities. Perfect geometric stacking via explicit mathematically proportional margins.',
   },
   {
     title: 'Automated YIQ Contrast Engine',
     icon: '◐',
-    description: 'Real-time foreground color recalculation guarantees AA+ accessibility against any dynamic background token.',
+    description:
+      'Real-time foreground color recalculation guarantees AA+ accessibility against any dynamic background token.',
   },
   {
     title: 'Universal Specificity Overrides',
     icon: '▲',
-    description: 'Engineered with a flat selector hierarchy, eliminating !important wrestling and enabling instant global theming.',
+    description:
+      'Engineered with a flat selector hierarchy, eliminating !important wrestling and enabling instant global theming.',
   },
   {
     title: 'Global Physics Tokens',
     icon: '⬣',
-    description: 'Standardized hard-shadow offsets, staggered spring curves, and hover lifts baked natively into the core.',
-  }
+    description:
+      'Standardized hard-shadow offsets, staggered spring curves, and hover lifts baked natively into the core.',
+  },
 ]
 
 const FeatureGrid = () => {
@@ -47,12 +51,7 @@ const FeatureGrid = () => {
         {/* - Negative outer margin cancels the card margin so the field stays centered. */}
         <div className="mt-20 -m-4 flex flex-wrap justify-center">
           {features.map((feature) => (
-            <Card
-              key={feature.title}
-              variant="accent"
-              interactive
-              className="group m-4 w-full sm:w-[calc(50%-2rem)]"
-            >
+            <Card key={feature.title} variant="accent" interactive className="group m-4 w-full sm:w-[calc(50%-2rem)]">
               <CardContent className="flex flex-col h-full">
                 {/* - 56px icon tile: enough mass to anchor the card without crowding copy. */}
                 <div
@@ -61,12 +60,8 @@ const FeatureGrid = () => {
                 >
                   {feature.icon}
                 </div>
-                <CardTitle className="mt-6 text-2xl mb-4">
-                  {feature.title}
-                </CardTitle>
-                <CardDescription className="text-base font-medium">
-                  {feature.description}
-                </CardDescription>
+                <CardTitle className="mt-6 text-2xl mb-4">{feature.title}</CardTitle>
+                <CardDescription className="text-base font-medium">{feature.description}</CardDescription>
               </CardContent>
             </Card>
           ))}
@@ -84,6 +79,6 @@ const FeatureGrid = () => {
       </div>
     </section>
   )
-};
+}
 
 export { FeatureGrid }

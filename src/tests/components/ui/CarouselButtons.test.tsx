@@ -8,7 +8,7 @@ import { CarouselPrev, CarouselNext } from '../../../components/ui/carousel/Caro
 describe('CarouselButtons', () => {
   it('renders CarouselPrev and CarouselNext with default accessibility labels', () => {
     render(
-      <CarouselProvider scroll={() => { }}>
+      <CarouselProvider scroll={() => {}}>
         <CarouselPrev />
         <CarouselNext />
       </CarouselProvider>
@@ -61,7 +61,7 @@ describe('CarouselButtons', () => {
 
   it('renders custom children instead of default arrow icons', () => {
     render(
-      <CarouselProvider scroll={() => { }}>
+      <CarouselProvider scroll={() => {}}>
         <CarouselPrev>Custom Prev</CarouselPrev>
       </CarouselProvider>
     )
@@ -71,7 +71,7 @@ describe('CarouselButtons', () => {
 
   it('should have no accessibility violations', async () => {
     const { container } = render(
-      <CarouselProvider scroll={() => { }}>
+      <CarouselProvider scroll={() => {}}>
         <CarouselPrev />
         <CarouselNext />
       </CarouselProvider>

@@ -13,7 +13,7 @@ describe('Footer1', () => {
     )
 
     expect(screen.getByText('BRAND MARK')).toBeInTheDocument()
-    
+
     // Check navigation groups
     expect(screen.getByText('Product')).toBeInTheDocument()
     expect(screen.getByText('Resources')).toBeInTheDocument()

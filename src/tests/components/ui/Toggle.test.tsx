@@ -123,9 +123,7 @@ describe('Toggle Component', () => {
 
   it('should have no accessibility violations with custom label', async () => {
     const handleToggle = vi.fn()
-    const { container } = render(
-      <Toggle checked={false} onToggle={handleToggle} label="Accessibility Toggle" />
-    )
+    const { container } = render(<Toggle checked={false} onToggle={handleToggle} label="Accessibility Toggle" />)
 
     const results = await axe(container)
     expect(results).toHaveNoViolations()

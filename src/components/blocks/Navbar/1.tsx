@@ -48,9 +48,7 @@ export const Navbar1 = () => {
             <Button intent="secondary" className="mr-3">
               Log In
             </Button>
-            <Button intent="primary">
-              Sign Up
-            </Button>
+            <Button intent="primary">Sign Up</Button>
           </div>
 
           {/* - Mobile Action Toggle (Hamburger / X) */}
@@ -60,7 +58,7 @@ export const Navbar1 = () => {
               className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click"
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
-              <ActionToggle className='h-6 w-6' />
+              <ActionToggle className="h-6 w-6" />
             </button>
           </div>
         </div>

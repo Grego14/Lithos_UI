@@ -14,7 +14,7 @@ interface BlockCategoryPageProps {
 export const BlockCategoryPage = ({ isDarkMode, toggleObsidian }: BlockCategoryPageProps) => {
   const { categorySlug } = useParams<{ categorySlug: string }>()
 
-  const category = blockCategories.find(c => c.slug === categorySlug)
+  const category = blockCategories.find((c) => c.slug === categorySlug)
 
   if (!category) {
     return (
@@ -33,7 +33,10 @@ export const BlockCategoryPage = ({ isDarkMode, toggleObsidian }: BlockCategoryP
       <main className="pt-24 min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
         <section className="border-b-2 border-(--lithos-border) bg-(--lithos-bg)">
           <div className="mx-auto max-w-7xl px-6 py-12 md:py-24">
-            <Link to="/blocks" className="inline-flex items-center text-sm font-bold uppercase tracking-widest text-(--lithos-accent) mb-8 hover:opacity-80">
+            <Link
+              to="/blocks"
+              className="inline-flex items-center text-sm font-bold uppercase tracking-widest text-(--lithos-accent) mb-8 hover:opacity-80"
+            >
               ← Back to Catalog
             </Link>
             <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tighter leading-none md:text-7xl lg:text-8xl text-(--lithos-text)">
@@ -53,9 +56,7 @@ export const BlockCategoryPage = ({ isDarkMode, toggleObsidian }: BlockCategoryP
                   <h3 className="text-3xl font-black tracking-tighter mb-2 border-b-2 border-(--lithos-border) pb-4 text-(--lithos-text)">
                     {index + 1}
                   </h3>
-                  <p className="font-body text-lg text-(--lithos-text) opacity-80 mb-8">
-                    {variant.name}
-                  </p>
+                  <p className="font-body text-lg text-(--lithos-text) opacity-80 mb-8">{variant.name}</p>
                   <PreviewBlock
                     code={variant.code}
                     githubUrl={variant.githubUrl}
@@ -71,7 +72,7 @@ export const BlockCategoryPage = ({ isDarkMode, toggleObsidian }: BlockCategoryP
                       />
                     }
                   >
-                    <div className={category.slug === 'navbars' ? "w-full relative h-100" : "w-full"}>
+                    <div className={category.slug === 'navbars' ? 'w-full relative h-100' : 'w-full'}>
                       <variant.component />
                     </div>
                   </PreviewBlock>

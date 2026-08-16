@@ -5,19 +5,19 @@ export const toggleProps: PropItem[] = [
     name: 'checked',
     type: 'boolean',
     required: true,
-    description: 'Controls the toggle state. True renders the thumb translated and inverted colors.'
+    description: 'Controls the toggle state. True renders the thumb translated and inverted colors.',
   },
   {
     name: 'onToggle',
     type: '() => void',
     required: true,
-    description: 'Callback fired when the toggle is clicked.'
+    description: 'Callback fired when the toggle is clicked.',
   },
   {
     name: 'label',
     type: 'string',
     defaultValue: '"Theme Changed"',
     required: false,
-    description: 'Accessible label announced by screen readers and used as aria-label.'
-  }
+    description: 'Accessible label announced by screen readers and used as aria-label.',
+  },
 ]

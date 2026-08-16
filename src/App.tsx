@@ -100,26 +100,25 @@ const App = () => {
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route path="/" element={<Showroom isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} accentColor={accentColor} updateAccentColor={updateAccentColor} radius={radius} updateRadius={updateRadius} />} />
-
           <Route
-            path="/blocks"
+            path="/"
             element={
-              <BlocksIndex
+              <Showroom
                 isDarkMode={isDarkMode}
                 toggleObsidian={toggleObsidian}
+                accentColor={accentColor}
+                updateAccentColor={updateAccentColor}
+                radius={radius}
+                updateRadius={updateRadius}
               />
             }
           />
+
+          <Route path="/blocks" element={<BlocksIndex isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />} />
           <Route path="/blocks/preview/:slug" element={<BlockPreviewPage />} />
-          <Route 
-            path="/blocks/:categorySlug" 
-            element={
-              <BlockCategoryPage 
-                isDarkMode={isDarkMode} 
-                toggleObsidian={toggleObsidian} 
-              />
-            } 
+          <Route
+            path="/blocks/:categorySlug"
+            element={<BlockCategoryPage isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />}
           />
           <Route
             path="/coming-soon"
@@ -133,7 +132,10 @@ const App = () => {
               />
             }
           />
-          <Route path="/components" element={<ComponentsIndex isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />} />
+          <Route
+            path="/components"
+            element={<ComponentsIndex isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />}
+          />
 
           {/* Completed Documentation Shells */}
           {renderDocRoutes(isDarkMode, toggleObsidian)}

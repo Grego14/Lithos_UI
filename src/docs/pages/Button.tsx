@@ -122,19 +122,18 @@ export const AttachedButtonGroup = () => {
 
       <section className="mb-6">
         <p className="text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          Button is a strict native <code>&lt;button&gt;</code> primitive. It ships four <code>intent</code>{' '}
-          variants — Default, Secondary, Accent, Text — built on the shared hard-shadow, hard-border interaction
-          physics of <code>.lithos-click</code>.
+          Button is a strict native <code>&lt;button&gt;</code> primitive. It ships four <code>intent</code> variants —
+          Default, Secondary, Accent, Text — built on the shared hard-shadow, hard-border interaction physics of{' '}
+          <code>.lithos-click</code>.
         </p>
       </section>
 
       <div className="border-l-4 border-(--lithos-accent) pl-6 py-2 mb-8 bg-(--lithos-surface) p-4">
         <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
           <strong>Default</strong> is the primary call to action and requires no <code>intent</code> prop.{' '}
-          <strong>Secondary</strong> is a secondary call-to-action with an outlined style.{' '}
-          <strong>Accent</strong> is a secondary button that fills solid with the accent color on hover.{' '}
-          <strong>Text</strong> is a text-only button variant with no border or background, typically used for
-          secondary or low-emphasis actions.
+          <strong>Secondary</strong> is a secondary call-to-action with an outlined style. <strong>Accent</strong> is a
+          secondary button that fills solid with the accent color on hover. <strong>Text</strong> is a text-only button
+          variant with no border or background, typically used for secondary or low-emphasis actions.
         </p>
       </div>
 
@@ -142,11 +141,7 @@ export const AttachedButtonGroup = () => {
         Installation
       </h2>
 
-      <SetupGuide
-        componentNames={['Button']}
-        manualPath="../../components/ui/Button"
-        requires={['utils/cn.ts']}
-      />
+      <SetupGuide componentNames={['Button']} manualPath="../../components/ui/Button" requires={['utils/cn.ts']} />
 
       <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Anatomy
@@ -173,8 +168,8 @@ export const AttachedButtonGroup = () => {
         Default
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        The <code>primary</code> intent, used with no <code>intent</code> prop. Solid accent fill for the main
-        call to action on a screen — use it once per view so it stays the obvious next step.
+        The <code>primary</code> intent, used with no <code>intent</code> prop. Solid accent fill for the main call to
+        action on a screen — use it once per view so it stays the obvious next step.
       </p>
 
       <PreviewBlock code={defaultCode} githubUrl={githubUrl}>
@@ -185,8 +180,8 @@ export const AttachedButtonGroup = () => {
         Secondary
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        Outlined, lower-emphasis variant for actions alongside a primary button — cancel, back, or any option
-        that shouldn't compete visually with the main call to action.
+        Outlined, lower-emphasis variant for actions alongside a primary button — cancel, back, or any option that
+        shouldn't compete visually with the main call to action.
       </p>
 
       <PreviewBlock code={secondaryCode} githubUrl={githubUrl}>
@@ -199,8 +194,8 @@ export const AttachedButtonGroup = () => {
         Accent
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        Secondary variant that fills solid with the accent color on hover. Use it for a
-        call to action that needs to stand out without the full visual weight of the primary button.
+        Secondary variant that fills solid with the accent color on hover. Use it for a call to action that needs to
+        stand out without the full visual weight of the primary button.
       </p>
 
       <PreviewBlock code={accentCode} githubUrl={githubUrl}>
@@ -213,8 +208,8 @@ export const AttachedButtonGroup = () => {
         Text
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        Flat, borderless variant with no background or shadow. Fits inline actions or tight spaces — toolbar
-        items, table row actions — where a full bordered button would be too heavy.
+        Flat, borderless variant with no background or shadow. Fits inline actions or tight spaces — toolbar items,
+        table row actions — where a full bordered button would be too heavy.
       </p>
 
       <PreviewBlock code={textCode} githubUrl={githubUrl}>
@@ -227,10 +222,9 @@ export const AttachedButtonGroup = () => {
         With Icon
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        The <code>iconLeft</code> and <code>iconRight</code> props place an icon before or after the label
-        with mandate-compliant margin spacing (no CSS <code>gap</code>). Use a leading icon to reinforce
-        meaning before the reader reaches the text, or a trailing icon for actions that lead somewhere
-        else, like opening a settings panel.
+        The <code>iconLeft</code> and <code>iconRight</code> props place an icon before or after the label with
+        mandate-compliant margin spacing (no CSS <code>gap</code>). Use a leading icon to reinforce meaning before the
+        reader reaches the text, or a trailing icon for actions that lead somewhere else, like opening a settings panel.
       </p>
 
       <PreviewBlock code={withIconCode} githubUrl={githubUrl}>
@@ -248,9 +242,9 @@ export const AttachedButtonGroup = () => {
         Icon
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        An icon-only button with no label — pass a single icon as <code>children</code> and set{' '}
-        <code>aria-label</code> so the action stays announced to assistive tech. The square{' '}
-        <code>.lithos-click</code> padding keeps it visually balanced.
+        An icon-only button with no label — pass a single icon as <code>children</code> and set <code>aria-label</code>{' '}
+        so the action stays announced to assistive tech. The square <code>.lithos-click</code> padding keeps it visually
+        balanced.
       </p>
 
       <PreviewBlock code={iconCode} githubUrl={githubUrl}>
@@ -271,14 +265,18 @@ export const AttachedButtonGroup = () => {
         Default
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        Default orientation, buttons laid out side by side with margin-based spacing between them. The classic
-        dialog footer pattern: a secondary <em>Cancel</em> next to the primary confirming action.
+        Default orientation, buttons laid out side by side with margin-based spacing between them. The classic dialog
+        footer pattern: a secondary <em>Cancel</em> next to the primary confirming action.
       </p>
 
       <PreviewBlock code={groupHorizontalCode} githubUrl={githubUrl}>
         <ButtonGroup>
-          <Button intent="secondary" className="cursor-pointer">Cancel</Button>
-          <Button intent="primary" className="cursor-pointer">Save Changes</Button>
+          <Button intent="secondary" className="cursor-pointer">
+            Cancel
+          </Button>
+          <Button intent="primary" className="cursor-pointer">
+            Save Changes
+          </Button>
         </ButtonGroup>
       </PreviewBlock>
 
@@ -286,14 +284,18 @@ export const AttachedButtonGroup = () => {
         Vertical
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        Set <code>orientation="vertical"</code> to stack buttons instead — useful in narrow sidebars, mobile
-        sheets, or anywhere horizontal space is tight.
+        Set <code>orientation="vertical"</code> to stack buttons instead — useful in narrow sidebars, mobile sheets, or
+        anywhere horizontal space is tight.
       </p>
 
       <PreviewBlock code={groupVerticalCode} githubUrl={githubUrl}>
         <ButtonGroup orientation="vertical">
-          <Button intent="primary" className="cursor-pointer">Save Changes</Button>
-          <Button intent="secondary" className="cursor-pointer">Cancel</Button>
+          <Button intent="primary" className="cursor-pointer">
+            Save Changes
+          </Button>
+          <Button intent="secondary" className="cursor-pointer">
+            Cancel
+          </Button>
         </ButtonGroup>
       </PreviewBlock>
 
@@ -301,15 +303,19 @@ export const AttachedButtonGroup = () => {
         Attached
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        The <code>attached</code> flag collapses the shared border between buttons into a single fused strip and
-        pops the hovered/focused button's shadow above its neighbors via <code>z-10</code> — a segmented-control
-        look without giving up individual <code>Button</code> semantics.
+        The <code>attached</code> flag collapses the shared border between buttons into a single fused strip and pops
+        the hovered/focused button's shadow above its neighbors via <code>z-10</code> — a segmented-control look without
+        giving up individual <code>Button</code> semantics.
       </p>
 
       <PreviewBlock code={groupAttachedCode} githubUrl={githubUrl}>
         <ButtonGroup attached>
-          <Button intent="secondary" className="cursor-pointer">Cancel</Button>
-          <Button intent="primary" className="cursor-pointer">Save Changes</Button>
+          <Button intent="secondary" className="cursor-pointer">
+            Cancel
+          </Button>
+          <Button intent="primary" className="cursor-pointer">
+            Save Changes
+          </Button>
         </ButtonGroup>
       </PreviewBlock>
 
@@ -318,10 +324,14 @@ export const AttachedButtonGroup = () => {
           Accessibility
         </h2>
         <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
-          <li>Uses native <code>&lt;button&gt;</code> element for built-in keyboard navigation and screen reader support.</li>
+          <li>
+            Uses native <code>&lt;button&gt;</code> element for built-in keyboard navigation and screen reader support.
+          </li>
           <li>Supports standard focus outlines provided by the browser.</li>
           <li>Maintains high contrast ratios for all intent variants.</li>
-          <li>Disabled state accurately maps to the native <code>disabled</code> attribute.</li>
+          <li>
+            Disabled state accurately maps to the native <code>disabled</code> attribute.
+          </li>
         </ul>
       </section>
 
@@ -330,7 +340,8 @@ export const AttachedButtonGroup = () => {
           API Reference
         </h2>
         <div className="mb-6 p-4 border-l-4 border-(--lithos-accent) bg-(--lithos-surface) text-sm font-body text-(--lithos-text)">
-          <strong>Note:</strong> Border radius is configurable globally via the <code>--lithos-radius</code> CSS token, or per-instance via <code>className</code> (e.g. <code>rounded-full</code>). No custom prop is required.
+          <strong>Note:</strong> Border radius is configurable globally via the <code>--lithos-radius</code> CSS token,
+          or per-instance via <code>className</code> (e.g. <code>rounded-full</code>). No custom prop is required.
         </div>
         <PropsAccordion title="Button Props" data={buttonPropsData} />
         <PropsAccordion title="ButtonGroup Props" data={buttonGroupPropsData} />

@@ -32,21 +32,17 @@ export const CarouselProvider = ({
   scroll,
   currentIndex = 0,
   totalSlides = 0,
-  vertical = false
+  vertical = false,
 }: CarouselProviderProps) => {
   const value = useMemo(
     () => ({
       scroll,
       currentIndex,
       totalSlides,
-      vertical
+      vertical,
     }),
     [scroll, currentIndex, totalSlides, vertical]
   )
 
-  return (
-    <CarouselContext.Provider value={value}>
-      {children}
-    </CarouselContext.Provider>
-  )
+  return <CarouselContext.Provider value={value}>{children}</CarouselContext.Provider>
 }

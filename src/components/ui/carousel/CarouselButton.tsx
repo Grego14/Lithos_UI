@@ -2,15 +2,15 @@
  * CarouselButton.tsx
  * Renders the Previous and Next arrow buttons used to navigate slides.
  */
-import { type ComponentPropsWithRef, type MouseEvent } from "react"
+import { type ComponentPropsWithRef, type MouseEvent } from 'react'
 import { Button } from '../Button'
 import { type CarouselDirection } from './CarouselContext'
-import { useCarousel } from "./useCarousel"
-import type { ClassValue, ClassArray } from "clsx"
+import { useCarousel } from './useCarousel'
+import type { ClassValue, ClassArray } from 'clsx'
 import { IconArrowLeft } from '../icons/IconArrowLeft'
 import { IconArrowRight } from '../icons/IconArrowRight'
 import { IconArrowDown } from '../icons/IconArrowDown'
-import { IconArrowUp } from "../icons/IconArrowUp"
+import { IconArrowUp } from '../icons/IconArrowUp'
 
 export interface CarouselButtonProps extends Omit<ComponentPropsWithRef<'button'>, 'className'> {
   label?: string
@@ -24,7 +24,8 @@ export const CarouselButton = ({
   className,
   label,
   onClick,
-  ...props }: CarouselButtonProps) => {
+  ...props
+}: CarouselButtonProps) => {
   const { scroll, vertical } = useCarousel()
 
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
@@ -32,13 +33,12 @@ export const CarouselButton = ({
     onClick?.(e)
   }
 
-  const ArrowIcon = direction === 'forwards'
-    ? (vertical ? IconArrowDown : IconArrowRight)
-    : (vertical ? IconArrowUp : IconArrowLeft)
+  const ArrowIcon =
+    direction === 'forwards' ? (vertical ? IconArrowDown : IconArrowRight) : vertical ? IconArrowUp : IconArrowLeft
 
   return (
     <Button aria-label={label} onClick={handleClick} className={className} {...props}>
-      {children || <ArrowIcon aria-hidden='true' />}
+      {children || <ArrowIcon aria-hidden="true" />}
     </Button>
   )
 }
@@ -51,20 +51,9 @@ const DEFAULT_PREV_LABEL = 'Previous slide'
 const DEFAULT_NEXT_LABEL = 'Next slide'
 
 export const CarouselPrev = (props: ButtonVariantProp) => {
-  return (
-    <CarouselButton
-      {...props}
-      label={props.label || DEFAULT_PREV_LABEL}
-      direction='backwards'
-    />
-  )
+  return <CarouselButton {...props} label={props.label || DEFAULT_PREV_LABEL} direction="backwards" />
 }
 
 export const CarouselNext = (props: ButtonVariantProp) => {
-  return (
-    <CarouselButton
-      {...props}
-      label={props.label || DEFAULT_NEXT_LABEL}
-    />
-  )
+  return <CarouselButton {...props} label={props.label || DEFAULT_NEXT_LABEL} />
 }

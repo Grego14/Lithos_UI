@@ -15,7 +15,7 @@ describe('CodeViewer Component', () => {
       Object.defineProperty(navigator, 'clipboard', {
         value: { writeText: () => Promise.resolve() },
         configurable: true,
-        writable: true
+        writable: true,
       })
     }
 

@@ -27,34 +27,41 @@ const intentClass: Record<ButtonIntent, string> = {
   text: 'bg-transparent text-(--lithos-text) cursor-pointer !border-transparent !shadow-none hover:!shadow-none',
 }
 
-export const Button =
-  (
-    { intent = 'primary', fullWidth = false, type = 'button', iconLeft, iconRight, className, children, ref, ...rest }: ButtonProps
-  ) => {
-    const classes = [
-      'lithos-click',
-      'rounded-(--lithos-radius)',
-      intentClass[intent],
-      fullWidth && 'w-full',
-      'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
-      className,
-    ]
+export const Button = ({
+  intent = 'primary',
+  fullWidth = false,
+  type = 'button',
+  iconLeft,
+  iconRight,
+  className,
+  children,
+  ref,
+  ...rest
+}: ButtonProps) => {
+  const classes = [
+    'lithos-click',
+    'rounded-(--lithos-radius)',
+    intentClass[intent],
+    fullWidth && 'w-full',
+    'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
+    className,
+  ]
 
-    return (
-      <button ref={ref} type={type} className={cn(classes)} {...rest}>
-        {iconLeft && (
-          <span className="inline-flex shrink-0 mr-2" aria-hidden="true">
-            {iconLeft}
-          </span>
-        )}
-        {children}
-        {iconRight && (
-          <span className="inline-flex shrink-0 ml-2" aria-hidden="true">
-            {iconRight}
-          </span>
-        )}
-      </button>
-    )
+  return (
+    <button ref={ref} type={type} className={cn(classes)} {...rest}>
+      {iconLeft && (
+        <span className="inline-flex shrink-0 mr-2" aria-hidden="true">
+          {iconLeft}
+        </span>
+      )}
+      {children}
+      {iconRight && (
+        <span className="inline-flex shrink-0 ml-2" aria-hidden="true">
+          {iconRight}
+        </span>
+      )}
+    </button>
+  )
 }
 
 /**
@@ -68,28 +75,33 @@ export interface ButtonGroupProps extends Omit<ComponentPropsWithRef<'div'>, 'cl
   className?: ClassValue | ClassArray
 }
 
-export const ButtonGroup = (
-  { orientation = 'horizontal', attached = false, className, children, ref, ...rest }: ButtonGroupProps
-) => {
-    const isVertical = orientation === 'vertical'
+export const ButtonGroup = ({
+  orientation = 'horizontal',
+  attached = false,
+  className,
+  children,
+  ref,
+  ...rest
+}: ButtonGroupProps) => {
+  const isVertical = orientation === 'vertical'
 
-    const classes = [
-      'inline-flex',
-      isVertical ? 'flex-col' : 'flex-row',
-      attached
-        ? [
-            '[&>*]:relative [&>*:hover]:z-10 [&>*:focus-visible]:z-10',
-            isVertical ? '[&>*:not(:first-child)]:-mt-0.5' : '[&>*:not(:first-child)]:-ml-0.5',
-          ]
-        : isVertical
-          ? '[&>*:not(:first-child)]:mt-2'
-          : '[&>*:not(:first-child)]:ml-2',
-      className,
-    ]
+  const classes = [
+    'inline-flex',
+    isVertical ? 'flex-col' : 'flex-row',
+    attached
+      ? [
+          '[&>*]:relative [&>*:hover]:z-10 [&>*:focus-visible]:z-10',
+          isVertical ? '[&>*:not(:first-child)]:-mt-0.5' : '[&>*:not(:first-child)]:-ml-0.5',
+        ]
+      : isVertical
+        ? '[&>*:not(:first-child)]:mt-2'
+        : '[&>*:not(:first-child)]:ml-2',
+    className,
+  ]
 
-    return (
-      <div ref={ref} role="group" className={cn(classes)} {...rest}>
-        {children}
-      </div>
-    )
+  return (
+    <div ref={ref} role="group" className={cn(classes)} {...rest}>
+      {children}
+    </div>
+  )
 }

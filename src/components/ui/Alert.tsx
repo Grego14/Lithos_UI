@@ -37,28 +37,44 @@ const sizeStyles: Record<AlertSize, { container: string; title: string; headerGa
   lg: { container: 'p-9', title: 'text-2xl', headerGap: 'mb-4', message: 'text-xl' },
 }
 
-export const Alert = (
-  { type = 'default', variant = 'filled', size = 'lg', title, color, onClose, onUndo, className = '', style, children, ref, ...props }: AlertProps) => {
-    const isAccent = type === 'accent' && !color
-    const isDefault = type === 'default' && !color
-    const accentColor = color || (type === 'accent' ? 'var(--lithos-accent)' : colors[type])
-    const outlineColor = isDefault ? 'var(--lithos-border)' : accentColor
-    const isFilled = variant === 'filled'
-    const textColor = isFilled ? (isAccent ? 'var(--lithos-accent-text)' : getContrastText(accentColor)) : 'var(--lithos-text)'
-    const sizing = sizeStyles[size]
+export const Alert = ({
+  type = 'default',
+  variant = 'filled',
+  size = 'lg',
+  title,
+  color,
+  onClose,
+  onUndo,
+  className = '',
+  style,
+  children,
+  ref,
+  ...props
+}: AlertProps) => {
+  const isAccent = type === 'accent' && !color
+  const isDefault = type === 'default' && !color
+  const accentColor = color || (type === 'accent' ? 'var(--lithos-accent)' : colors[type])
+  const outlineColor = isDefault ? 'var(--lithos-border)' : accentColor
+  const isFilled = variant === 'filled'
+  const textColor = isFilled
+    ? isAccent
+      ? 'var(--lithos-accent-text)'
+      : getContrastText(accentColor)
+    : 'var(--lithos-text)'
+  const sizing = sizeStyles[size]
 
-    const actionColor = isFilled ? textColor : outlineColor
+  const actionColor = isFilled ? textColor : outlineColor
 
-    const classes = cn(
-      'border-2 w-full rounded-(--lithos-radius)',
-      isFilled && 'border-(--lithos-border) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]',
-      sizing.container,
-      className
-    )
+  const classes = cn(
+    'border-2 w-full rounded-(--lithos-radius)',
+    isFilled && 'border-(--lithos-border) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]',
+    sizing.container,
+    className
+  )
 
-    const computedStyle: CSSProperties = isFilled
-      ? { backgroundColor: accentColor, color: textColor, ...style }
-      : {
+  const computedStyle: CSSProperties = isFilled
+    ? { backgroundColor: accentColor, color: textColor, ...style }
+    : {
         backgroundColor: 'var(--lithos-bg)',
         color: textColor,
         borderColor: outlineColor,
@@ -66,48 +82,60 @@ export const Alert = (
         ...style,
       }
 
-    return (
-      <div ref={ref} role="alert" className={classes} style={computedStyle} {...props}>
-        {(title || onClose || onUndo) && (
-          <div className={`flex items-center ${sizing.headerGap}`}>
-            {title && (
-              <h4
-                className={cn('font-black uppercase tracking-tighter leading-none m-0', sizing.title)}
-                style={!isFilled ? { color: outlineColor } : undefined}
-              >
-                {title}
-              </h4>
-            )}
+  return (
+    <div ref={ref} role="alert" className={classes} style={computedStyle} {...props}>
+      {(title || onClose || onUndo) && (
+        <div className={`flex items-center ${sizing.headerGap}`}>
+          {title && (
+            <h4
+              className={cn('font-black uppercase tracking-tighter leading-none m-0', sizing.title)}
+              style={!isFilled ? { color: outlineColor } : undefined}
+            >
+              {title}
+            </h4>
+          )}
 
-            {(onClose || onUndo) && (
-              <div className="flex items-center shrink-0 ml-auto">
-                {onUndo && (
-                  <Button
-                    onClick={onUndo}
-                    aria-label="Undo"
-                    className={cn('shrink-0 bg-transparent', onClose && 'mr-3')}
-                    style={{ borderColor: actionColor, color: actionColor, '--lithos-shadow': actionColor } as React.CSSProperties}
-                  >
-                    <IconUndo />
-                  </Button>
-                )}
+          {(onClose || onUndo) && (
+            <div className="flex items-center shrink-0 ml-auto">
+              {onUndo && (
+                <Button
+                  onClick={onUndo}
+                  aria-label="Undo"
+                  className={cn('shrink-0 bg-transparent', onClose && 'mr-3')}
+                  style={
+                    {
+                      borderColor: actionColor,
+                      color: actionColor,
+                      '--lithos-shadow': actionColor,
+                    } as React.CSSProperties
+                  }
+                >
+                  <IconUndo />
+                </Button>
+              )}
 
-                {onClose && (
-                  <Button
-                    onClick={onClose}
-                    aria-label="Close alert"
-                    className="shrink-0 bg-transparent"
-                    style={{ borderColor: actionColor, color: actionColor, '--lithos-shadow': actionColor } as React.CSSProperties}
-                  >
-                    <IconClose />
-                  </Button>
-                )}
-              </div>
-            )}
-          </div>
-        )}
+              {onClose && (
+                <Button
+                  onClick={onClose}
+                  aria-label="Close alert"
+                  className="shrink-0 bg-transparent"
+                  style={
+                    {
+                      borderColor: actionColor,
+                      color: actionColor,
+                      '--lithos-shadow': actionColor,
+                    } as React.CSSProperties
+                  }
+                >
+                  <IconClose />
+                </Button>
+              )}
+            </div>
+          )}
+        </div>
+      )}
 
-        <p className={cn('leading-tight m-0 font-body', sizing.message)}>{children}</p>
-      </div>
-    )
-  }
+      <p className={cn('leading-tight m-0 font-body', sizing.message)}>{children}</p>
+    </div>
+  )
+}

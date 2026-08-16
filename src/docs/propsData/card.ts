@@ -6,7 +6,8 @@ export const cardPropsData: PropItem[] = [
     type: "'default' | 'accent' | 'image' | 'blueprint' | 'physics' | 'solid'",
     defaultValue: "'default'",
     required: false,
-    description: 'Visual treatment. image drops padding/background for edge-to-edge media; solid permanently fills with the theme accent color.',
+    description:
+      'Visual treatment. image drops padding/background for edge-to-edge media; solid permanently fills with the theme accent color.',
   },
   {
     name: 'interactive',

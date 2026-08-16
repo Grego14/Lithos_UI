@@ -5,7 +5,7 @@
 import type { ComponentPropsWithoutRef } from 'react'
 import { cn } from '../../../utils/cn'
 import { CarouselNext, CarouselPrev } from './CarouselButton'
-import type { ClassValue, ClassArray } from "clsx"
+import type { ClassValue, ClassArray } from 'clsx'
 import { useCarousel } from './useCarousel'
 
 interface CarouselControlsProps extends Omit<ComponentPropsWithoutRef<'div'>, 'className'> {
@@ -33,14 +33,10 @@ export const CarouselControls = ({
       )}
       {...rest}
     >
-      {title && (
-        <h3 className='text-center sm:text-start mb-2 sm:mb-0 font-body sm:text-sm lg:text-xl'>
-          {title}
-        </h3>
-      )}
+      {title && <h3 className="text-center sm:text-start mb-2 sm:mb-0 font-body sm:text-sm lg:text-xl">{title}</h3>}
 
-      <div className='flex items-center flex-row'>
-        <CarouselPrev className='mr-4' disabled={!loop && currentIndex === 0} />
+      <div className="flex items-center flex-row">
+        <CarouselPrev className="mr-4" disabled={!loop && currentIndex === 0} />
         <CarouselNext disabled={!loop && currentIndex === totalSlides - 1} />
       </div>
     </div>

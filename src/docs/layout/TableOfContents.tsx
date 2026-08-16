@@ -1,4 +1,4 @@
-import type { TOCItem } from "../types"
+import type { TOCItem } from '../types'
 
 export const TableOfContents = ({ links = [] }: { links: TOCItem[] }) => {
   if (links.length === 0) return null
@@ -32,4 +32,4 @@ export const TableOfContents = ({ links = [] }: { links: TOCItem[] }) => {
       </nav>
     </aside>
   )
-};
+}

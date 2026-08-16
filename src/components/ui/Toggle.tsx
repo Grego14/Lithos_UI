@@ -38,6 +38,6 @@ const Toggle = ({ checked, onToggle, label = 'Theme Changed' }: ToggleProps) => 
       <span className="sr-only">{label}</span>
     </button>
   )
-};
+}
 
 export { Toggle }

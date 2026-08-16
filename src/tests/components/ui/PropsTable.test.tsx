@@ -15,7 +15,7 @@ const mockData = [
     required: true,
     defaultValue: '0',
     description: 'A required property',
-  }
+  },
 ]
 
 describe('PropsTable', () => {

@@ -11,14 +11,16 @@ export const avatarPropsData: PropItem[] = [
     name: 'alt',
     type: 'string',
     required: false,
-    description: "Accessible label and initials source — one word yields one letter, two or more yield the first two words' initials.",
+    description:
+      "Accessible label and initials source — one word yields one letter, two or more yield the first two words' initials.",
   },
   {
     name: 'variant',
     type: "'default' | 'solid'",
     defaultValue: "'default'",
     required: false,
-    description: 'default uses the neutral surface color; solid fills with the theme accent color with computed contrast text.',
+    description:
+      'default uses the neutral surface color; solid fills with the theme accent color with computed contrast text.',
   },
   {
     name: 'size',

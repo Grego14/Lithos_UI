@@ -84,20 +84,24 @@ export const FourteenUserGroup = () => {
           Avatar
         </h1>
         <p className="mt-2 text-lg md:text-xl font-display opacity-70 text-(--lithos-text)">
-          A hard-edge identity primitive that renders a picture and falls back to initials or custom content when none is available.
+          A hard-edge identity primitive that renders a picture and falls back to initials or custom content when none
+          is available.
         </p>
         <hr className="border-t-2 border-(--lithos-border) mt-8 mb-8" />
       </header>
 
       <section className="mb-12">
         <p className="mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          The Avatar is an atomic primitive designed to represent a user or entity. It swaps to its fallback automatically when the image fails to load.
+          The Avatar is an atomic primitive designed to represent a user or entity. It swaps to its fallback
+          automatically when the image fails to load.
         </p>
       </section>
 
       <div className="border-l-4 border-(--lithos-accent) pl-6 py-2 mb-8 bg-(--lithos-surface) p-4">
         <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
-          Fallback initials are rendered whenever `src` is missing or the image fails to load — derived from `alt`. A single-word `alt` renders one letter; two or more words render the first letter of each of the first two words.
+          Fallback initials are rendered whenever `src` is missing or the image fails to load — derived from `alt`. A
+          single-word `alt` renders one letter; two or more words render the first letter of each of the first two
+          words.
         </p>
       </div>
 
@@ -135,17 +139,17 @@ export const FourteenUserGroup = () => {
         States
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-        Image, two-word initials, single-word initial, and the automatic fallback triggered by a broken{' '}
-        <code>src</code> — same markup, no extra prop needed to opt into the fallback.
+        Image, two-word initials, single-word initial, and the automatic fallback triggered by a broken <code>src</code>{' '}
+        — same markup, no extra prop needed to opt into the fallback.
       </p>
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={variantsCode} githubUrl={githubUrl}>
-          <div className='flex items-center space-x-4'>
+          <div className="flex items-center space-x-4">
             <Avatar src="https://picsum.photos/200" alt="Jane Doe" />
             <Avatar alt="Jane Doe" />
             <Avatar alt="Amy" />
-            <Avatar variant='solid' src="https://broken.example/404.png" alt="Jane Doe" />
+            <Avatar variant="solid" src="https://broken.example/404.png" alt="Jane Doe" />
           </div>
         </PreviewBlock>
       </div>
@@ -154,16 +158,16 @@ export const FourteenUserGroup = () => {
         Sizes
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-        <code>size</code> scales the circle diameter and initials font together — <code>sm</code> for dense
-        lists, <code>md</code> (default) for most contexts, <code>lg</code> for a profile header.
+        <code>size</code> scales the circle diameter and initials font together — <code>sm</code> for dense lists,{' '}
+        <code>md</code> (default) for most contexts, <code>lg</code> for a profile header.
       </p>
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={sizesCode} githubUrl={githubUrl}>
-          <div className='flex items-end space-x-4'>
-            <Avatar size='sm' src="https://picsum.photos/200" alt="Jane Doe" />
-            <Avatar size='md' src="https://picsum.photos/200" alt="Jane Doe" />
-            <Avatar size='lg' src="https://picsum.photos/200" alt="Jane Doe" />
+          <div className="flex items-end space-x-4">
+            <Avatar size="sm" src="https://picsum.photos/200" alt="Jane Doe" />
+            <Avatar size="md" src="https://picsum.photos/200" alt="Jane Doe" />
+            <Avatar size="lg" src="https://picsum.photos/200" alt="Jane Doe" />
           </div>
         </PreviewBlock>
       </div>
@@ -172,9 +176,9 @@ export const FourteenUserGroup = () => {
         Group
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-        <code>AvatarGroup</code> takes the full <code>items</code> list and a <code>max</code> (default 4),
-        renders only the first <code>max</code> Avatars, and appends an <code>AvatarGroupCount</code> for
-        whatever's left — no manual slicing needed.
+        <code>AvatarGroup</code> takes the full <code>items</code> list and a <code>max</code> (default 4), renders only
+        the first <code>max</code> Avatars, and appends an <code>AvatarGroupCount</code> for whatever's left — no manual
+        slicing needed.
       </p>
 
       <div className="mt-8 mb-8">
@@ -194,10 +198,21 @@ export const FourteenUserGroup = () => {
           Accessibility
         </h2>
         <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
-          <li>The underlying <code>&lt;img&gt;</code> always carries the <code>alt</code> text passed to Avatar.</li>
-          <li>When falling back to initials, the same <code>alt</code> text is the only accessible label — pass a real name, not decorative text.</li>
-          <li><code>solid</code> variant's text color is computed via the YIQ engine to keep contrast against the accent color.</li>
-          <li><code>AvatarGroupCount</code> renders as plain text (<code>+N</code>), readable by screen readers with no extra markup.</li>
+          <li>
+            The underlying <code>&lt;img&gt;</code> always carries the <code>alt</code> text passed to Avatar.
+          </li>
+          <li>
+            When falling back to initials, the same <code>alt</code> text is the only accessible label — pass a real
+            name, not decorative text.
+          </li>
+          <li>
+            <code>solid</code> variant's text color is computed via the YIQ engine to keep contrast against the accent
+            color.
+          </li>
+          <li>
+            <code>AvatarGroupCount</code> renders as plain text (<code>+N</code>), readable by screen readers with no
+            extra markup.
+          </li>
         </ul>
       </section>
 
@@ -206,7 +221,9 @@ export const FourteenUserGroup = () => {
           API Reference
         </h2>
         <div className="mb-6 p-4 border-l-4 border-(--lithos-accent) bg-(--lithos-surface) text-sm font-body text-(--lithos-text)">
-          <strong>Note:</strong> Avatars intentionally ignore the global <code>--lithos-radius</code> token to remain perfectly circular by design. You can still override this behavior manually via <code>className</code> if necessary.
+          <strong>Note:</strong> Avatars intentionally ignore the global <code>--lithos-radius</code> token to remain
+          perfectly circular by design. You can still override this behavior manually via <code>className</code> if
+          necessary.
         </div>
         <PropsAccordion title="Avatar Props" data={avatarPropsData} />
         <PropsAccordion title="AvatarGroupCount Props" data={avatarGroupCountPropsData} />

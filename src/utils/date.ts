@@ -7,8 +7,7 @@ export const startOfMonth = (date: Date): Date => new Date(date.getFullYear(), d
 
 export const endOfMonth = (date: Date): Date => new Date(date.getFullYear(), date.getMonth() + 1, 0)
 
-export const addMonths = (date: Date, amount: number): Date =>
-  new Date(date.getFullYear(), date.getMonth() + amount, 1)
+export const addMonths = (date: Date, amount: number): Date => new Date(date.getFullYear(), date.getMonth() + amount, 1)
 
 export const addDays = (date: Date, amount: number): Date => {
   const next = new Date(date)
@@ -21,16 +20,11 @@ export const getDaysInMonth = (date: Date): number => endOfMonth(date).getDate()
 export const getFirstWeekdayOfMonth = (date: Date, firstDayOfWeek = 0): number =>
   (startOfMonth(date).getDay() - firstDayOfWeek + 7) % 7
 
-export const normalizeToMidnight = (date: Date): Date =>
-  new Date(date.getFullYear(), date.getMonth(), date.getDate())
+export const normalizeToMidnight = (date: Date): Date => new Date(date.getFullYear(), date.getMonth(), date.getDate())
 
 export const isSameDay = (a: Date | null | undefined, b: Date | null | undefined): boolean => {
   if (!a || !b) return false
-  return (
-    a.getFullYear() === b.getFullYear() &&
-    a.getMonth() === b.getMonth() &&
-    a.getDate() === b.getDate()
-  )
+  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate()
 }
 
 export const isSameMonth = (a: Date, b: Date): boolean =>
@@ -44,10 +38,7 @@ export const isBeforeDay = (a: Date, b: Date): boolean =>
 export const isAfterDay = (a: Date, b: Date): boolean =>
   normalizeToMidnight(a).getTime() > normalizeToMidnight(b).getTime()
 
-export const isDateInRange = (
-  date: Date,
-  range: { from: Date | null; to: Date | null }
-): boolean => {
+export const isDateInRange = (date: Date, range: { from: Date | null; to: Date | null }): boolean => {
   if (!range.from || !range.to) return false
   const time = normalizeToMidnight(date).getTime()
   return time >= normalizeToMidnight(range.from).getTime() && time <= normalizeToMidnight(range.to).getTime()

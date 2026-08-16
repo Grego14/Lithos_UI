@@ -20,13 +20,10 @@ describe('Alert', () => {
     expect(screen.queryByRole('heading')).not.toBeInTheDocument()
   })
 
-  it.each(['default', 'success', 'error', 'warning', 'info', 'accent'] as const)(
-    'renders the %s type',
-    (type) => {
-      render(<Alert type={type}>Message</Alert>)
-      expect(screen.getByRole('alert')).toBeInTheDocument()
-    }
-  )
+  it.each(['default', 'success', 'error', 'warning', 'info', 'accent'] as const)('renders the %s type', (type) => {
+    render(<Alert type={type}>Message</Alert>)
+    expect(screen.getByRole('alert')).toBeInTheDocument()
+  })
 
   it.each(['filled', 'outlined'] as const)('renders the %s variant', (variant) => {
     render(<Alert variant={variant}>Message</Alert>)

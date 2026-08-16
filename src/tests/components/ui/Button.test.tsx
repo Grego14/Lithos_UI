@@ -41,18 +41,25 @@ describe('Button', () => {
   it('is disabled and does not fire onClick when disabled', async () => {
     const handleClick = vi.fn()
     const user = userEvent.setup()
-    render(<Button disabled onClick={handleClick}>Click me</Button>)
+    render(
+      <Button disabled onClick={handleClick}>
+        Click me
+      </Button>
+    )
     const button = screen.getByRole('button')
     expect(button).toBeDisabled()
     await user.click(button)
     expect(handleClick).not.toHaveBeenCalled()
   })
 
-  it.each(['primary', 'secondary', 'accent', 'text'] as const)('has no accessibility violations — %s intent', async (intent) => {
-    const { container } = render(<Button intent={intent}>Accessible</Button>)
-    const results = await axe(container)
-    expect(results).toHaveNoViolations()
-  })
+  it.each(['primary', 'secondary', 'accent', 'text'] as const)(
+    'has no accessibility violations — %s intent',
+    async (intent) => {
+      const { container } = render(<Button intent={intent}>Accessible</Button>)
+      const results = await axe(container)
+      expect(results).toHaveNoViolations()
+    }
+  )
 
   it('renders icon-only with an accessible name from aria-label', async () => {
     render(
@@ -67,9 +74,7 @@ describe('Button', () => {
   })
 
   it('renders iconLeft before children', () => {
-    render(
-      <Button iconLeft={<span data-testid="icon-left">L</span>}>Click me</Button>
-    )
+    render(<Button iconLeft={<span data-testid="icon-left">L</span>}>Click me</Button>)
     const button = screen.getByRole('button')
     const icon = screen.getByTestId('icon-left')
     expect(button).toContainElement(icon)
@@ -77,9 +82,7 @@ describe('Button', () => {
   })
 
   it('renders iconRight after children', () => {
-    render(
-      <Button iconRight={<span data-testid="icon-right">R</span>}>Click me</Button>
-    )
+    render(<Button iconRight={<span data-testid="icon-right">R</span>}>Click me</Button>)
     const button = screen.getByRole('button')
     const icon = screen.getByTestId('icon-right')
     expect(button).toContainElement(icon)

@@ -27,7 +27,16 @@ const inactiveBtnClass =
   'lithos-click bg-(--lithos-surface) text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)'
 const activeBtnClass = 'lithos-click bg-(--lithos-accent) text-(--lithos-accent-text)'
 
-export const PreviewBlock = ({ children, code, githubUrl, language = 'tsx', height, noPadding, slug, installGuide }: PreviewBlockProps) => {
+export const PreviewBlock = ({
+  children,
+  code,
+  githubUrl,
+  language = 'tsx',
+  height,
+  noPadding,
+  slug,
+  installGuide,
+}: PreviewBlockProps) => {
   const [activeTab, setActiveTab] = useState<AvailableTabs>('preview')
   const [breakpoint, setBreakpoint] = useState<Breakpoint>('desktop')
   const [showInstall, setShowInstall] = useState(false)
@@ -50,10 +59,7 @@ export const PreviewBlock = ({ children, code, githubUrl, language = 'tsx', heig
             >
               Preview
             </Button>
-            <Button
-              onClick={() => setActiveTab('code')}
-              className={activeTab !== 'code' ? inactiveBtnClass : ''}
-            >
+            <Button onClick={() => setActiveTab('code')} className={activeTab !== 'code' ? inactiveBtnClass : ''}>
               Code
             </Button>
           </div>
@@ -96,12 +102,22 @@ export const PreviewBlock = ({ children, code, githubUrl, language = 'tsx', heig
             </Button>
           )}
           {slug && (
-            <Button intent="secondary" onClick={() => window.open(`/blocks/preview/${slug}`, '_blank')} aria-label="Open" className="inline-flex items-center justify-center hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)">
+            <Button
+              intent="secondary"
+              onClick={() => window.open(`/blocks/preview/${slug}`, '_blank')}
+              aria-label="Open"
+              className="inline-flex items-center justify-center hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)"
+            >
               <IconExternalLink />
             </Button>
           )}
           {githubUrl ? (
-            <Button intent="secondary" onClick={() => window.open(githubUrl, '_blank')} aria-label="Source" className="inline-flex items-center justify-center hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)">
+            <Button
+              intent="secondary"
+              onClick={() => window.open(githubUrl, '_blank')}
+              aria-label="Source"
+              className="inline-flex items-center justify-center hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)"
+            >
               <IconCode />
             </Button>
           ) : null}
@@ -110,9 +126,7 @@ export const PreviewBlock = ({ children, code, githubUrl, language = 'tsx', heig
 
       {/* Expandable Install Guide Panel */}
       {showInstall && installGuide && (
-        <div className="border-b-2 border-(--lithos-border) bg-(--lithos-bg)">
-          {installGuide}
-        </div>
+        <div className="border-b-2 border-(--lithos-border) bg-(--lithos-bg)">{installGuide}</div>
       )}
 
       {/* 3. Main Content Pane */}
@@ -125,7 +139,9 @@ export const PreviewBlock = ({ children, code, githubUrl, language = 'tsx', heig
               </div>
             </div>
           ) : (
-            <div className={`flex min-h-48 items-center justify-center w-full h-full ${noPadding ? '' : 'p-4 md:p-6'}`}>{children}</div>
+            <div className={`flex min-h-48 items-center justify-center w-full h-full ${noPadding ? '' : 'p-4 md:p-6'}`}>
+              {children}
+            </div>
           )
         ) : (
           <div className="h-full w-full overflow-y-auto">

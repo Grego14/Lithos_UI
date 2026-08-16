@@ -6,7 +6,7 @@ import { PreviewBlock } from '../../../components/ui/PreviewBlock'
 
 // Mock CodeViewer as it's not the subject under test
 vi.mock('../../../components/ui/CodeViewer', () => ({
-  CodeViewer: ({ code }: { code: string }) => <div data-testid="mock-code-viewer">{code}</div>
+  CodeViewer: ({ code }: { code: string }) => <div data-testid="mock-code-viewer">{code}</div>,
 }))
 
 describe('PreviewBlock', () => {
@@ -31,10 +31,10 @@ describe('PreviewBlock', () => {
         <div data-testid="preview-content">Hello</div>
       </PreviewBlock>
     )
-    
+
     const codeBtn = screen.getByRole('button', { name: /code/i })
     await user.click(codeBtn)
-    
+
     expect(screen.getByTestId('mock-code-viewer')).toBeInTheDocument()
     expect(screen.queryByTestId('preview-content')).not.toBeInTheDocument()
   })
@@ -42,18 +42,26 @@ describe('PreviewBlock', () => {
   it('renders install guide when button is clicked', async () => {
     const user = userEvent.setup()
     const installGuide = <div data-testid="install-guide">npm install test</div>
-    render(<PreviewBlock {...defaultProps} installGuide={installGuide}>Hello</PreviewBlock>)
-    
+    render(
+      <PreviewBlock {...defaultProps} installGuide={installGuide}>
+        Hello
+      </PreviewBlock>
+    )
+
     const installBtn = screen.getByRole('button', { name: /install/i })
     await user.click(installBtn)
-    
+
     expect(screen.getByTestId('install-guide')).toBeInTheDocument()
   })
 
   it('renders iframe and breakpoint buttons when slug is provided', async () => {
     const user = userEvent.setup()
-    render(<PreviewBlock {...defaultProps} slug="test-slug">Hello</PreviewBlock>)
-    
+    render(
+      <PreviewBlock {...defaultProps} slug="test-slug">
+        Hello
+      </PreviewBlock>
+    )
+
     const iframe = screen.getByTitle('Block preview')
     expect(iframe).toBeInTheDocument()
     expect(iframe).toHaveAttribute('src', '/blocks/preview/test-slug')
@@ -82,11 +90,15 @@ describe('PreviewBlock', () => {
   it('renders github button if githubUrl is provided', async () => {
     const user = userEvent.setup()
     const openSpy = vi.spyOn(window, 'open').mockImplementation(() => null)
-    
-    render(<PreviewBlock {...defaultProps} githubUrl="https://github.com/test">Hello</PreviewBlock>)
+
+    render(
+      <PreviewBlock {...defaultProps} githubUrl="https://github.com/test">
+        Hello
+      </PreviewBlock>
+    )
     const button = screen.getByRole('button', { name: /source/i })
     expect(button).toBeInTheDocument()
-    
+
     await user.click(button)
     expect(openSpy).toHaveBeenCalledWith('https://github.com/test', '_blank')
     openSpy.mockRestore()

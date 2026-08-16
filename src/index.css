@@ -82,7 +82,6 @@ body {
 }
 
 @layer base {
-
   /* - Custom Highlight Tag: <ht> wrapping text highlights it dynamically */
   ht {
     @apply bg-(--lithos-accent) text-(--lithos-accent-text) px-1 box-decoration-clone;
@@ -105,7 +104,7 @@ body {
   }
 
   code:not([data-code-viewer]) {
-    @apply bg-(--lithos-surface) px-1 py-0.5
+    @apply bg-(--lithos-surface) px-1 py-0.5;
   }
 }
 
@@ -116,7 +115,7 @@ body {
   }
 
   .no-scrollbar {
-    -ms-overflow-style: none;  /* IE & Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE & Edge */
+    scrollbar-width: none; /* Firefox */
   }
 }

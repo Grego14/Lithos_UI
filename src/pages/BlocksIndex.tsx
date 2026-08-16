@@ -23,7 +23,8 @@ export const BlocksIndex = ({ isDarkMode, toggleObsidian }: BlocksIndexProps) =>
                   ASSEMBLE PAGES, NOT ATOMS
                 </p>
                 <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tighter leading-none md:text-7xl lg:text-8xl text-(--lithos-text)">
-                  BLOCKS THAT<br /> HOLD WEIGHT
+                  BLOCKS THAT
+                  <br /> HOLD WEIGHT
                 </h1>
                 <h2 className="mt-4 text-3xl sm:text-4xl font-display md:text-5xl italic font-medium text-(--lithos-accent) max-w-4xl mx-auto lg:mx-0">
                   Pre-composed, production-ready sections built from Lithos primitives.
@@ -41,7 +42,7 @@ export const BlocksIndex = ({ isDarkMode, toggleObsidian }: BlocksIndexProps) =>
                 const firstVariant = category.variants[0]
                 if (!firstVariant) return null
                 const FirstComponent = firstVariant.component
-                
+
                 return (
                   <div key={category.slug} className="w-full sm:w-[50%] lg:w-[33.333%] p-3">
                     <Link

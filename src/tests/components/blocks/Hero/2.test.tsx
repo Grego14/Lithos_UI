@@ -18,7 +18,7 @@ describe('Hero2', () => {
     // Check links/buttons
     expect(screen.getByText('Start Free Trial')).toBeInTheDocument()
     expect(screen.getByText('View Pricing')).toBeInTheDocument()
-    
+
     // Check visual panel
     expect(screen.getByText('[ Application Interface ]')).toBeInTheDocument()
   })

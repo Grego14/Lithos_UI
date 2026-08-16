@@ -53,10 +53,7 @@ export const ToggleExample = () => {
         Installation
       </h2>
 
-      <SetupGuide
-        componentNames={['Toggle']}
-        manualPath="../../components/ui/Toggle"
-      />
+      <SetupGuide componentNames={['Toggle']} manualPath="../../components/ui/Toggle" />
 
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Examples
@@ -78,10 +75,20 @@ export const ToggleExample = () => {
           Accessibility
         </h2>
         <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
-          <li>Rendered as a native <code>&lt;button&gt;</code> with <code>type="button"</code>, ensuring keyboard accessibility and focus management.</li>
-          <li>Uses <code>aria-pressed</code> attribute to announce the toggle state (true/false) to assistive technology.</li>
-          <li>Accepts a custom <code>label</code> prop that powers both <code>aria-label</code> and a visually-hidden <code>.sr-only</code> span for screen readers.</li>
-          <li>High-contrast borders (2px black) and sharp state changes ensure visibility for users with low vision.</li>
+          <li>
+            Rendered as a native <code>&lt;button&gt;</code> with <code>type="button"</code>, ensuring keyboard
+            accessibility and focus management.
+          </li>
+          <li>
+            Uses <code>aria-pressed</code> attribute to announce the toggle state (true/false) to assistive technology.
+          </li>
+          <li>
+            Accepts a custom <code>label</code> prop that powers both <code>aria-label</code> and a visually-hidden{' '}
+            <code>.sr-only</code> span for screen readers.
+          </li>
+          <li>
+            High-contrast borders (2px black) and sharp state changes ensure visibility for users with low vision.
+          </li>
           <li>Stationary shell design prevents layout shifts, reducing cognitive load and motion-triggered issues.</li>
         </ul>
       </section>
@@ -91,7 +98,8 @@ export const ToggleExample = () => {
           API Reference
         </h2>
         <div className="mb-6 p-4 border-l-4 border-(--lithos-accent) bg-(--lithos-surface) text-sm font-body text-(--lithos-text)">
-          <strong>Note:</strong> Border radius is configurable globally via the <code>--lithos-radius</code> CSS token, or per-instance via <code>className</code> (e.g. <code>rounded-full</code>). No custom prop is required.
+          <strong>Note:</strong> Border radius is configurable globally via the <code>--lithos-radius</code> CSS token,
+          or per-instance via <code>className</code> (e.g. <code>rounded-full</code>). No custom prop is required.
         </div>
         <PropsAccordion title="Toggle Props" data={toggleProps} />
       </section>

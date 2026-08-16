@@ -32,7 +32,7 @@ const features: FeatureItem[] = [
     title: '24/7 Support',
     icon: '⬣',
     description: 'Our dedicated team is here around the clock to ensure you never face downtime.',
-  }
+  },
 ]
 
 const FeatureGrid1 = () => {
@@ -47,12 +47,7 @@ const FeatureGrid1 = () => {
         {/* - Negative outer margin cancels the card margin so the field stays centered. */}
         <div className="mt-20 -m-4 flex flex-wrap justify-center">
           {features.map((feature) => (
-            <Card
-              key={feature.title}
-              variant="accent"
-              interactive
-              className="group m-4 w-full sm:w-[calc(50%-2rem)]"
-            >
+            <Card key={feature.title} variant="accent" interactive className="group m-4 w-full sm:w-[calc(50%-2rem)]">
               <CardContent className="flex flex-col h-full">
                 {/* - 56px icon tile: enough mass to anchor the card without crowding copy. */}
                 <div
@@ -61,12 +56,8 @@ const FeatureGrid1 = () => {
                 >
                   {feature.icon}
                 </div>
-                <CardTitle className="mt-6 text-2xl mb-4">
-                  {feature.title}
-                </CardTitle>
-                <CardDescription className="text-base font-medium">
-                  {feature.description}
-                </CardDescription>
+                <CardTitle className="mt-6 text-2xl mb-4">{feature.title}</CardTitle>
+                <CardDescription className="text-base font-medium">{feature.description}</CardDescription>
               </CardContent>
             </Card>
           ))}
@@ -84,6 +75,6 @@ const FeatureGrid1 = () => {
       </div>
     </section>
   )
-};
+}
 
 export { FeatureGrid1 }
