@@ -3,12 +3,12 @@
  * - Dynamic contrast text resolution based on YIQ color space calculated from custom HEX or preset variant backgrounds.
  * - Integrates theme-aware accentColor fallback with hard-edged neo-brutalist border and shadow geometry.
  */
-import type { ComponentPropsWithRef } from "react";
-import { getContrastText } from "../../utils/yiq";
-import { colors } from "../../utils/colors";
-import { useAccentColor } from "../../core/useAccentColor";
-import type { HexColor } from "../../core/types";
-import { cn } from "../../utils/cn";
+import type { ComponentPropsWithRef } from 'react'
+import { getContrastText } from '../../utils/yiq'
+import { colors } from '../../utils/colors'
+import { useAccentColor } from '../../core/useAccentColor'
+import type { HexColor } from '../../core/types'
+import { cn } from '../../utils/cn'
 
 type BadgeSizes = 'default' | 'sm' | 'md' | 'lg'
 type BadgeVariants = 'default' | 'accent' | 'success' | 'error' | 'warning' | 'info'
@@ -24,7 +24,7 @@ const sizeStyles = {
   sm: 'text-[0.65rem] px-1.5',
   default: 'text-xs px-1.75',
   md: 'text-sm px-2',
-  lg: 'text-lg px-3'
+  lg: 'text-lg px-3',
 }
 
 export const Badge = ({

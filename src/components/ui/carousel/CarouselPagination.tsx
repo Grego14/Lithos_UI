@@ -6,7 +6,7 @@ import type { ComponentPropsWithoutRef } from 'react'
 import { Button } from '../Button'
 import { cn } from '../../../utils/cn'
 import type { ScrollFunc, SliderSelector } from './CarouselContext'
-import type { ClassValue, ClassArray } from "clsx"
+import type { ClassValue, ClassArray } from 'clsx'
 import { IconCircle } from '../icons/IconCircle'
 
 const iconClass = {
@@ -68,7 +68,7 @@ export const CarouselPagination = ({
         aria-hidden={shouldHide || undefined}
         tabIndex={shouldHide ? -1 : undefined}
       >
-        {sliderIsDots && <IconCircle className={dotSize} aria-hidden='true' />}
+        {sliderIsDots && <IconCircle className={dotSize} aria-hidden="true" />}
         {sliderSelector === 'numbers' && i + 1}
       </Button>
     )
@@ -85,7 +85,7 @@ export const CarouselPagination = ({
     <div className={containerClass} {...rest}>
       {!vertical && <div className={selectorsContainerClass}>{selectors}</div>}
       {showCounter && (
-        <span className='sm:ml-auto mt-4 sm:mt-0'>
+        <span className="sm:ml-auto mt-4 sm:mt-0">
           {index + 1}/{slides}
         </span>
       )}

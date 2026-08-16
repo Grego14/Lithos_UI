@@ -19,7 +19,13 @@ interface CodeViewerProps {
   className?: string
 }
 
-export const CodeViewer = ({ code, language = 'tsx', showLanguage = false, embedded = false, className = '' }: CodeViewerProps) => {
+export const CodeViewer = ({
+  code,
+  language = 'tsx',
+  showLanguage = false,
+  embedded = false,
+  className = '',
+}: CodeViewerProps) => {
   const toast = useToast()
   const { accentColor } = useLithosTheme()
 
@@ -49,7 +55,9 @@ export const CodeViewer = ({ code, language = 'tsx', showLanguage = false, embed
   }
 
   const classes = cn(
-    embedded ? 'bg-transparent mb-0 relative overflow-hidden' : 'border-2 border-(--lithos-border) bg-(--lithos-bg) mb-8 relative rounded-(--lithos-radius) overflow-hidden',
+    embedded
+      ? 'bg-transparent mb-0 relative overflow-hidden'
+      : 'border-2 border-(--lithos-border) bg-(--lithos-bg) mb-8 relative rounded-(--lithos-radius) overflow-hidden',
     className
   )
 
@@ -61,9 +69,18 @@ export const CodeViewer = ({ code, language = 'tsx', showLanguage = false, embed
             <p className="text-xs font-black uppercase tracking-widest text-(--lithos-text) font-code">{language}</p>
           ) : (
             <div className="flex items-center">
-              <div className="mr-2 h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent) rounded-(--lithos-radius)" aria-hidden="true" />
-              <div className="mr-2 h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent) rounded-(--lithos-radius)" aria-hidden="true" />
-              <div className="h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent) rounded-(--lithos-radius)" aria-hidden="true" />
+              <div
+                className="mr-2 h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent) rounded-(--lithos-radius)"
+                aria-hidden="true"
+              />
+              <div
+                className="mr-2 h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent) rounded-(--lithos-radius)"
+                aria-hidden="true"
+              />
+              <div
+                className="h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent) rounded-(--lithos-radius)"
+                aria-hidden="true"
+              />
             </div>
           )}
         </div>
@@ -90,7 +107,7 @@ export const CodeViewer = ({ code, language = 'tsx', showLanguage = false, embed
             fontFamily: 'var(--font-code)',
           }}
           codeTagProps={{
-            style: { fontFamily: 'inherit' }
+            style: { fontFamily: 'inherit' },
           }}
           CodeTag={({ children }) => <code data-code-viewer>{children}</code>}
         >
@@ -99,4 +116,4 @@ export const CodeViewer = ({ code, language = 'tsx', showLanguage = false, embed
       </div>
     </div>
   )
-};
+}

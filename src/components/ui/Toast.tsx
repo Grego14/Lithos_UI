@@ -20,8 +20,8 @@ interface ToastItemType {
 }
 
 type DurationObjType = {
-  success?: number,
-  error?: number,
+  success?: number
+  error?: number
   warning?: number
   info?: number
   default?: number
@@ -37,38 +37,34 @@ const positionStyles = {
   'top-left': 'top-0 left-0',
   'top-right': 'top-0 right-0',
   'bottom-left': 'bottom-0 left-0',
-  'bottom-right': 'bottom-0 right-0'
+  'bottom-right': 'bottom-0 right-0',
 }
 
 const DEFAULT_DURATION = 5000
 
-export const ToastProvider = ({
-  children,
-  duration,
-  position = 'bottom-right'
-}: ToastProviderProps) => {
+export const ToastProvider = ({ children, duration, position = 'bottom-right' }: ToastProviderProps) => {
   const [toasts, setToasts] = useState<IdentifiedToastProps[]>([])
 
-  const durationConfig = typeof duration == 'object' && Object.assign({
-    success: 5000,
-    error: 8000,
-    warning: 5000,
-    info: 5000,
-    default: 5000
-  }, duration) || null
+  const durationConfig =
+    (typeof duration == 'object' &&
+      Object.assign(
+        {
+          success: 5000,
+          error: 8000,
+          warning: 5000,
+          info: 5000,
+          default: 5000,
+        },
+        duration
+      )) ||
+    null
 
   const removeToast = useCallback((id: string) => {
     setToasts((prev) => prev.filter((toast) => toast.id !== id))
   }, [])
 
   const addToast = useCallback(
-    ({
-      message,
-      type = 'default',
-      color,
-      title,
-      duration: customDuration,
-    }: ToastProps) => {
+    ({ message, type = 'default', color, title, duration: customDuration }: ToastProps) => {
       const id = Math.random().toString(36).substring(2, 9)
       let toastDuration = customDuration
 
@@ -83,31 +79,36 @@ export const ToastProvider = ({
       }
 
       // fallback duration
-      if (!toastDuration) { toastDuration = DEFAULT_DURATION }
+      if (!toastDuration) {
+        toastDuration = DEFAULT_DURATION
+      }
 
-      setToasts((prev) => [...prev, {
-        id,
-        message,
-        type,
-        color,
-        title,
-        duration: toastDuration
-      }])
+      setToasts((prev) => [
+        ...prev,
+        {
+          id,
+          message,
+          type,
+          color,
+          title,
+          duration: toastDuration,
+        },
+      ])
 
       return id
-    }, [durationConfig, duration])
+    },
+    [durationConfig, duration]
+  )
 
   return (
     <ToastContext.Provider value={{ addToast, removeToast }}>
       {children}
       {/* - Fixed corner stack uses explicit padding and margins, not gap, so each toast remains independently dismissible. */}
-      <div className={`fixed ${positionStyles[position]} p-4 sm:p-6 md:p-8 z-50 pointer-events-none flex flex-col ${position.includes('left') ? 'items-start' : 'items-end'} w-full max-w-xs`}>
+      <div
+        className={`fixed ${positionStyles[position]} p-4 sm:p-6 md:p-8 z-50 pointer-events-none flex flex-col ${position.includes('left') ? 'items-start' : 'items-end'} w-full max-w-xs`}
+      >
         {toasts.map((toast) => (
-          <ToastItem
-            key={toast.id}
-            toast={toast}
-            onRemove={() => removeToast(toast.id)}
-          />
+          <ToastItem key={toast.id} toast={toast} onRemove={() => removeToast(toast.id)} />
         ))}
       </div>
     </ToastContext.Provider>
@@ -143,7 +144,9 @@ export const ToastItem = ({ toast, onRemove }: ToastItemType) => {
     if (isHovered) return
 
     let timeout = duration
-    if (!timeout) { timeout = DEFAULT_DURATION }
+    if (!timeout) {
+      timeout = DEFAULT_DURATION
+    }
 
     const timer = setTimeout(onRemove, timeout)
     return () => clearTimeout(timer)

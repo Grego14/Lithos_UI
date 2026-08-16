@@ -6,11 +6,5 @@ export const IconChevronLeft = ({
   strokeWidth = iconDefaults.strokeWidth,
   ...props
 }: IconProps) => {
-  return (
-    <FiChevronLeft
-      size={size}
-      strokeWidth={strokeWidth}
-      {...props}
-    />
-  )
+  return <FiChevronLeft size={size} strokeWidth={strokeWidth} {...props} />
 }

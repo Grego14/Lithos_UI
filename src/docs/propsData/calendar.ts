@@ -6,97 +6,97 @@ export const calendarPropsData: PropItem[] = [
     type: '"single" | "multiple" | "range"',
     defaultValue: '"single"',
     required: false,
-    description: 'Selection mode for the calendar.'
+    description: 'Selection mode for the calendar.',
   },
   {
     name: 'value',
     type: 'CalendarValue',
     required: false,
-    description: 'Controlled selected date(s).'
+    description: 'Controlled selected date(s).',
   },
   {
     name: 'defaultValue',
     type: 'CalendarValue',
     required: false,
-    description: 'Initial selected date(s).'
+    description: 'Initial selected date(s).',
   },
   {
     name: 'onChange',
     type: '(value: CalendarValue) => void',
     required: false,
-    description: 'Callback when selection changes.'
+    description: 'Callback when selection changes.',
   },
   {
     name: 'month',
     type: 'Date',
     required: false,
-    description: 'Controlled displayed month.'
+    description: 'Controlled displayed month.',
   },
   {
     name: 'defaultMonth',
     type: 'Date',
     required: false,
-    description: 'Initial displayed month.'
+    description: 'Initial displayed month.',
   },
   {
     name: 'onMonthChange',
     type: '(month: Date) => void',
     required: false,
-    description: 'Callback when month changes.'
+    description: 'Callback when month changes.',
   },
   {
     name: 'minDate',
     type: 'Date',
     required: false,
-    description: 'Minimum selectable date.'
+    description: 'Minimum selectable date.',
   },
   {
     name: 'maxDate',
     type: 'Date',
     required: false,
-    description: 'Maximum selectable date.'
+    description: 'Maximum selectable date.',
   },
   {
     name: 'disabledDates',
     type: 'Date[]',
     required: false,
-    description: 'Specific dates that cannot be selected.'
+    description: 'Specific dates that cannot be selected.',
   },
   {
     name: 'isDateDisabled',
     type: '(date: Date) => boolean',
     required: false,
-    description: 'Callback to determine if a date should be disabled.'
+    description: 'Callback to determine if a date should be disabled.',
   },
   {
     name: 'getDateColor',
     type: '(date: Date) => HexColor | string | undefined',
     required: false,
-    description: 'Assigns a distinct color per selected date.'
+    description: 'Assigns a distinct color per selected date.',
   },
   {
     name: 'firstDayOfWeek',
     type: '0 | 1 | 2 | 3 | 4 | 5 | 6',
     defaultValue: '0',
     required: false,
-    description: 'First day of the week (0 = Sunday, 1 = Monday, etc).'
+    description: 'First day of the week (0 = Sunday, 1 = Monday, etc).',
   },
   {
     name: 'locale',
     type: 'string',
     required: false,
-    description: 'Locale string for date formatting.'
+    description: 'Locale string for date formatting.',
   },
   {
     name: 'yearRange',
     type: '[number, number]',
     required: false,
-    description: 'Min and max year range in the year dropdown.'
+    description: 'Min and max year range in the year dropdown.',
   },
   {
     name: 'classes',
     type: 'object',
     required: false,
-    description: 'Custom class overrides for calendar internal elements.'
-  }
+    description: 'Custom class overrides for calendar internal elements.',
+  },
 ]

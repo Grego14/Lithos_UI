@@ -171,10 +171,20 @@ export const IconNameBreadcrumb = () => {
           Accessibility
         </h2>
         <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
-          <li>Breadcrumbs are wrapped in a <code>&lt;nav aria-label="Breadcrumb"&gt;</code> element to define a navigation landmark.</li>
-          <li>The currently active page is indicated to assistive technologies using <code>aria-current="page"</code>.</li>
-          <li>Separators between items are hidden from screen readers using <code>aria-hidden="true"</code>.</li>
-          <li>The collapsible ellipsis button provides a descriptive <code>aria-label</code> that updates dynamically when expanded.</li>
+          <li>
+            Breadcrumbs are wrapped in a <code>&lt;nav aria-label="Breadcrumb"&gt;</code> element to define a navigation
+            landmark.
+          </li>
+          <li>
+            The currently active page is indicated to assistive technologies using <code>aria-current="page"</code>.
+          </li>
+          <li>
+            Separators between items are hidden from screen readers using <code>aria-hidden="true"</code>.
+          </li>
+          <li>
+            The collapsible ellipsis button provides a descriptive <code>aria-label</code> that updates dynamically when
+            expanded.
+          </li>
         </ul>
       </section>
 

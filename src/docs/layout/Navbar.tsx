@@ -93,10 +93,7 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
           <div className="mr-4 flex items-center">
             <Toggle checked={isDarkMode} onToggle={handleToggleObsidian} label="Toggle Obsidian Mode" />
           </div>
-          <Button
-            intent="primary"
-            onClick={() => window.open('https://github.com/lithosui/Lithos_UI', '_blank')}
-          >
+          <Button intent="primary" onClick={() => window.open('https://github.com/lithosui/Lithos_UI', '_blank')}>
             GitHub
           </Button>
         </div>
@@ -108,7 +105,7 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           >
-            <ActionToggle className='w-6 h-6' />
+            <ActionToggle className="w-6 h-6" />
           </Button>
         </div>
       </div>
@@ -182,4 +179,4 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
       )}
     </header>
   )
-};
+}

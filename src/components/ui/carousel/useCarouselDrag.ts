@@ -34,7 +34,7 @@ export const useCarouselDrag = ({ containerRef, scroll, vertical = false }: UseC
 
     if (!carousel || !isDragging) return
 
-    const delta = e[vertical? 'clientY' : 'clientX'] - start.current
+    const delta = e[vertical ? 'clientY' : 'clientX'] - start.current
     carousel[vertical ? 'scrollTop' : 'scrollLeft'] = scrollPosition.current - delta
   }
 

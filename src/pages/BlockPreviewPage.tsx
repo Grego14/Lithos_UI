@@ -6,8 +6,8 @@ export const BlockPreviewPage = () => {
   const { slug } = useParams<{ slug: string }>()
 
   // Flatten the registry to find the specific variant by slug
-  const allVariants = blockCategories.flatMap(c => c.variants)
-  const variant = allVariants.find(v => v.slug === slug)
+  const allVariants = blockCategories.flatMap((c) => c.variants)
+  const variant = allVariants.find((v) => v.slug === slug)
 
   if (!slug || !variant) {
     return (

@@ -12,9 +12,9 @@ afterEach(() => {
 })
 
 const ResizeObserverMock = class {
-  observe() { }
-  unobserve() { }
-  disconnect() { }
+  observe() {}
+  unobserve() {}
+  disconnect() {}
 }
 
 window.ResizeObserver = ResizeObserverMock

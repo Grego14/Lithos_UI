@@ -15,20 +15,24 @@ describe('FAQ1', () => {
 
   it('expands answers when a question is clicked', () => {
     render(<FAQ1 />)
-    
+
     // Initially the answer is not visible
-    expect(screen.queryByText('Absolutely. We handle millions of requests a day without breaking a sweat.')).not.toBeInTheDocument()
-    
+    expect(
+      screen.queryByText('Absolutely. We handle millions of requests a day without breaking a sweat.')
+    ).not.toBeInTheDocument()
+
     const firstQuestion = screen.getByText('Is this product scalable?')
-    
+
     // The button containing the question
     const button = firstQuestion.closest('button')!
     expect(button).toHaveAttribute('aria-expanded', 'false')
-    
+
     fireEvent.click(button)
-    
+
     // After clicking, the answer is visible
-    expect(screen.getByText('Absolutely. We handle millions of requests a day without breaking a sweat.')).toBeInTheDocument()
+    expect(
+      screen.getByText('Absolutely. We handle millions of requests a day without breaking a sweat.')
+    ).toBeInTheDocument()
     expect(button).toHaveAttribute('aria-expanded', 'true')
   })
 

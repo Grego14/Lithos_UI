@@ -90,18 +90,18 @@ export const ControlledExample = () => {
           Calendar
         </h1>
         <p className="mt-2 text-lg md:text-xl font-display opacity-70 text-(--lithos-text)">
-          A date grid for picking single dates, multiple dates, or ranges — with month/year jump, bounds, and disabled dates.
+          A date grid for picking single dates, multiple dates, or ranges — with month/year jump, bounds, and disabled
+          dates.
         </p>
         <hr className="border-t-2 border-(--lithos-border) mt-8 mb-8" />
       </header>
 
       <section className="mb-12">
         <p className="mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          Calendar supports three selection modes via the <code>mode</code> prop: <code>single</code> for
-          one date, <code>multiple</code> for any set of individual dates, and <code>range</code> for a
-          contiguous start-to-end span. The displayed month and the selection are independently
-          controlled or uncontrolled, so jumping years via the header selects never disturbs the current
-          selection.
+          Calendar supports three selection modes via the <code>mode</code> prop: <code>single</code> for one date,{' '}
+          <code>multiple</code> for any set of individual dates, and <code>range</code> for a contiguous start-to-end
+          span. The displayed month and the selection are independently controlled or uncontrolled, so jumping years via
+          the header selects never disturbs the current selection.
         </p>
       </section>
 
@@ -125,7 +125,7 @@ export const ControlledExample = () => {
           'utils/date.ts',
           'components/ui/Button.tsx',
           'components/ui/icons/IconChevronDown.tsx',
-          'components/ui/icons/IconChevronLeft.tsx'
+          'components/ui/icons/IconChevronLeft.tsx',
         ]}
       />
 
@@ -227,11 +227,24 @@ export const ControlledExample = () => {
           Accessibility
         </h2>
         <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
-          <li>Uses <code>role="grid"</code>, <code>role="row"</code>, and <code>role="gridcell"</code> to create a semantically correct grid structure.</li>
-          <li>Uses <code>display: contents</code> on rows to preserve the zero-gap grid layout while maintaining standard ARIA parent-child relationships.</li>
-          <li>Uses <code>aria-selected</code> on the gridcells to indicate active selections.</li>
-          <li>Applies <code>aria-disabled</code> to dates out of bounds or marked as disabled.</li>
-          <li>Fully keyboard navigable (arrow keys to move between days, PageUp/PageDown for months, Home/End for week boundaries).</li>
+          <li>
+            Uses <code>role="grid"</code>, <code>role="row"</code>, and <code>role="gridcell"</code> to create a
+            semantically correct grid structure.
+          </li>
+          <li>
+            Uses <code>display: contents</code> on rows to preserve the zero-gap grid layout while maintaining standard
+            ARIA parent-child relationships.
+          </li>
+          <li>
+            Uses <code>aria-selected</code> on the gridcells to indicate active selections.
+          </li>
+          <li>
+            Applies <code>aria-disabled</code> to dates out of bounds or marked as disabled.
+          </li>
+          <li>
+            Fully keyboard navigable (arrow keys to move between days, PageUp/PageDown for months, Home/End for week
+            boundaries).
+          </li>
         </ul>
       </section>
 

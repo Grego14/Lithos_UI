@@ -39,7 +39,6 @@ const radii = [
 ]
 
 const ThemeEngine = ({ accentColor, updateAccentColor, radius, updateRadius }: ThemeEngineProps) => {
-
   const handleThemeChange = (hex: string) => {
     updateAccentColor(hex as HexColor)
   }
@@ -75,7 +74,7 @@ const ThemeEngine = ({ accentColor, updateAccentColor, radius, updateRadius }: T
                   className={`m-2 h-16 w-[calc(50%-1rem)] sm:m-4 sm:h-24 sm:w-24 shrink-0 ${isActive ? '!border-4 !border-(--lithos-text)' : ''}`}
                   style={{
                     backgroundColor: theme.hex,
-                    color: 'transparent'
+                    color: 'transparent',
                   }}
                 >
                   <span className="sr-only">{theme.name}</span>
@@ -113,43 +112,37 @@ const ThemeEngine = ({ accentColor, updateAccentColor, radius, updateRadius }: T
             </div>
           </div>
 
-            {/* - Radius Control Row */}
-            <div className="mb-8 mt-12 flex items-center justify-between border-t-2 border-(--lithos-border) pt-12">
-              <span className="text-sm font-black uppercase tracking-widest text-(--lithos-text) opacity-60">
-                Radius
-              </span>
-              <div className="flex items-center space-x-4 sm:space-x-6">
-                {radii.map((r) => {
-                  const isActive = radius === r.value
-                  const Icon = r.Icon
-                  return (
-                    <button
-                      key={r.label}
-                      type="button"
-                      onClick={() => updateRadius(r.value)}
-                      aria-label={`Set border radius to ${r.label}`}
-                      title={r.label}
-                      className="focus:outline-none transition-transform active:scale-95 cursor-pointer"
-                    >
-                      <Icon
-                        size={28}
-                        strokeWidth={isActive ? 3 : 2}
-                        className={`transition-colors ${isActive ? 'text-(--lithos-text)' : 'text-(--lithos-text) opacity-30 hover:opacity-60'}`}
-                        fill={isActive ? 'var(--lithos-accent)' : 'transparent'}
-                      />
-                    </button>
-                  )
-                })}
-              </div>
+          {/* - Radius Control Row */}
+          <div className="mb-8 mt-12 flex items-center justify-between border-t-2 border-(--lithos-border) pt-12">
+            <span className="text-sm font-black uppercase tracking-widest text-(--lithos-text) opacity-60">Radius</span>
+            <div className="flex items-center space-x-4 sm:space-x-6">
+              {radii.map((r) => {
+                const isActive = radius === r.value
+                const Icon = r.Icon
+                return (
+                  <button
+                    key={r.label}
+                    type="button"
+                    onClick={() => updateRadius(r.value)}
+                    aria-label={`Set border radius to ${r.label}`}
+                    title={r.label}
+                    className="focus:outline-none transition-transform active:scale-95 cursor-pointer"
+                  >
+                    <Icon
+                      size={28}
+                      strokeWidth={isActive ? 3 : 2}
+                      className={`transition-colors ${isActive ? 'text-(--lithos-text)' : 'text-(--lithos-text) opacity-30 hover:opacity-60'}`}
+                      fill={isActive ? 'var(--lithos-accent)' : 'transparent'}
+                    />
+                  </button>
+                )
+              })}
             </div>
+          </div>
 
           {/* - Reset sits below a hard divider so the board reads as one rooted module. */}
           <div className="mt-10 sm:mt-12 flex w-full justify-center border-t-2 border-(--lithos-border) pt-10 sm:pt-12">
-            <Button
-              onClick={handleReset}
-              intent="secondary"
-              className="text-sm sm:text-base"
-            >
+            <Button onClick={handleReset} intent="secondary" className="text-sm sm:text-base">
               Reset to Default Theme
             </Button>
           </div>
@@ -157,6 +150,6 @@ const ThemeEngine = ({ accentColor, updateAccentColor, radius, updateRadius }: T
       </div>
     </section>
   )
-};
+}
 
 export { ThemeEngine }

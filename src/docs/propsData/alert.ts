@@ -38,7 +38,8 @@ export const alertPropsData: PropItem[] = [
     name: 'onClose',
     type: '() => void',
     required: false,
-    description: 'Renders a close button in the header when provided. Alert does not remove itself — call site owns the dismissed state.',
+    description:
+      'Renders a close button in the header when provided. Alert does not remove itself — call site owns the dismissed state.',
   },
   {
     name: 'onUndo',

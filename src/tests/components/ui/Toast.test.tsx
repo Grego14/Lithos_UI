@@ -6,7 +6,7 @@ import { ToastProvider, ToastItem } from '../../../components/ui/Toast'
 import { useToast } from '../../../core/hooks/useToast'
 
 const TestComponent = ({
-  toastProps = { title: 'Toast toast', message: 'Test notification' }
+  toastProps = { title: 'Toast toast', message: 'Test notification' },
 }: {
   toastProps?: Parameters<ReturnType<typeof useToast>['addToast']>[0]
 }) => {
@@ -45,11 +45,9 @@ describe('Toast Component', () => {
   })
 
   it('throws an error when useToast is used outside of ToastProvider', () => {
-    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => { })
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
-    expect(() => render(<TestComponent />)).toThrow(
-      'useToast must be used within a ToastProvider'
-    )
+    expect(() => render(<TestComponent />)).toThrow('useToast must be used within a ToastProvider')
 
     consoleErrorSpy.mockRestore()
   })
@@ -85,9 +83,7 @@ describe('Toast Component', () => {
 
     render(
       <ToastProvider>
-        <TestComponent
-          toastProps={{ title: 'Transient title', message: 'Transient message' }}
-        />
+        <TestComponent toastProps={{ title: 'Transient title', message: 'Transient message' }} />
       </ToastProvider>
     )
 
@@ -173,12 +169,8 @@ describe('Toast Component', () => {
 
     render(
       <ToastProvider>
-        <TestComponent
-          toastProps={{ title: 'Standard!', message: 'Standard status', type: 'info' }}
-        />
-        <TestComponent
-          toastProps={{ title: 'Critical!', message: 'Critical alert', type: 'error' }}
-        />
+        <TestComponent toastProps={{ title: 'Standard!', message: 'Standard status', type: 'info' }} />
+        <TestComponent toastProps={{ title: 'Critical!', message: 'Critical alert', type: 'error' }} />
       </ToastProvider>
     )
 
@@ -200,9 +192,7 @@ describe('Toast Component', () => {
 
     render(
       <ToastProvider>
-        <TestComponent
-          toastProps={{ title: 'Error!', message: 'Error occurred', type: 'error' }}
-        />
+        <TestComponent toastProps={{ title: 'Error!', message: 'Error occurred', type: 'error' }} />
       </ToastProvider>
     )
 
@@ -228,7 +218,7 @@ describe('Toast Component', () => {
           message: 'Accessible message',
           title: 'A11y Test',
           type: 'default',
-          duration: 5000
+          duration: 5000,
         }}
         onRemove={vi.fn()}
       />

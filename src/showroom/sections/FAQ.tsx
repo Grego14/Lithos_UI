@@ -101,6 +101,6 @@ const FAQ = () => {
       </div>
     </section>
   )
-};
+}
 
 export { FAQ }

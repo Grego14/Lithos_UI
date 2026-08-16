@@ -38,7 +38,8 @@ export const breadcrumbPropsData: PropItem[] = [
     type: 'number',
     defaultValue: '4',
     required: false,
-    description: 'Maximum items to show before collapsing (used with collapsible variant or automatically triggers collapse if exceeded).',
+    description:
+      'Maximum items to show before collapsing (used with collapsible variant or automatically triggers collapse if exceeded).',
   },
   {
     name: 'itemsBeforeCollapse',

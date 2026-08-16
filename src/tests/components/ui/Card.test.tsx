@@ -26,13 +26,21 @@ describe('Card Component', () => {
   })
 
   it('applies solid variant styles', () => {
-    render(<Card variant="solid" data-testid="card">Content</Card>)
+    render(
+      <Card variant="solid" data-testid="card">
+        Content
+      </Card>
+    )
 
     expect(screen.getByTestId('card')).toHaveClass('bg-(--lithos-accent)', 'text-(--lithos-accent-text)')
   })
 
   it('applies accent variant hover styles', () => {
-    render(<Card variant="accent" data-testid="card">Content</Card>)
+    render(
+      <Card variant="accent" data-testid="card">
+        Content
+      </Card>
+    )
 
     expect(screen.getByTestId('card')).toHaveClass('hover:bg-(--lithos-accent)')
   })
@@ -52,23 +60,43 @@ describe('Card Component', () => {
     const { rerender } = render(<Card data-testid="card">Content</Card>)
     expect(screen.getByTestId('card')).not.toHaveClass('hover:-translate-y-1')
 
-    rerender(<Card interactive data-testid="card">Content</Card>)
+    rerender(
+      <Card interactive data-testid="card">
+        Content
+      </Card>
+    )
     expect(screen.getByTestId('card')).toHaveClass('hover:-translate-y-1')
   })
 
   it('CardContent applies spacing scale', () => {
-    const { rerender } = render(<CardContent spacing="sm" data-testid="content">Body</CardContent>)
+    const { rerender } = render(
+      <CardContent spacing="sm" data-testid="content">
+        Body
+      </CardContent>
+    )
     expect(screen.getByTestId('content')).toHaveClass('p-3')
 
-    rerender(<CardContent spacing="lg" data-testid="content">Body</CardContent>)
+    rerender(
+      <CardContent spacing="lg" data-testid="content">
+        Body
+      </CardContent>
+    )
     expect(screen.getByTestId('content')).toHaveClass('p-9')
   })
 
   it('CardFooter applies spacing scale', () => {
-    const { rerender } = render(<CardFooter spacing="sm" data-testid="footer">Actions</CardFooter>)
+    const { rerender } = render(
+      <CardFooter spacing="sm" data-testid="footer">
+        Actions
+      </CardFooter>
+    )
     expect(screen.getByTestId('footer')).toHaveClass('px-3', 'pt-2', 'pb-3')
 
-    rerender(<CardFooter spacing="lg" data-testid="footer">Actions</CardFooter>)
+    rerender(
+      <CardFooter spacing="lg" data-testid="footer">
+        Actions
+      </CardFooter>
+    )
     expect(screen.getByTestId('footer')).toHaveClass('px-9', 'pt-6', 'pb-9')
   })
 
@@ -79,13 +107,21 @@ describe('Card Component', () => {
   })
 
   it('CardImage requires alt text and forwards it', () => {
-    render(<Card><CardImage src="/photo.jpg" alt="A landscape" /></Card>)
+    render(
+      <Card>
+        <CardImage src="/photo.jpg" alt="A landscape" />
+      </Card>
+    )
 
     expect(screen.getByAltText('A landscape')).toBeInTheDocument()
   })
 
   it('merges additional custom classNames', () => {
-    render(<Card className="custom-class" data-testid="card">Content</Card>)
+    render(
+      <Card className="custom-class" data-testid="card">
+        Content
+      </Card>
+    )
 
     expect(screen.getByTestId('card')).toHaveClass('custom-class')
   })
@@ -98,7 +134,11 @@ describe('Card Component', () => {
   })
 
   it('passes through extra HTML attributes', () => {
-    render(<Card data-testid="card" id="card-1">Content</Card>)
+    render(
+      <Card data-testid="card" id="card-1">
+        Content
+      </Card>
+    )
 
     expect(screen.getByTestId('card')).toHaveAttribute('id', 'card-1')
   })

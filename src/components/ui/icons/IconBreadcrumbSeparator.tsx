@@ -6,11 +6,5 @@ export const IconBreadcrumbSeparator = ({
   strokeWidth = iconDefaults.strokeWidth,
   ...props
 }: IconProps) => {
-  return (
-    <FiChevronRight
-      size={size}
-      strokeWidth={strokeWidth}
-      {...props}
-    />
-  )
+  return <FiChevronRight size={size} strokeWidth={strokeWidth} {...props} />
 }

@@ -52,7 +52,7 @@ export const blockCategories: BlockCategory[] = [
         exportName: 'Hero1',
         component: Hero1,
         code: hero1Code,
-        githubUrl: `${GITHUB_BASE}/Hero/1.tsx`
+        githubUrl: `${GITHUB_BASE}/Hero/1.tsx`,
       },
       {
         slug: 'hero-2',
@@ -60,9 +60,9 @@ export const blockCategories: BlockCategory[] = [
         exportName: 'Hero2',
         component: Hero2,
         code: hero2Code,
-        githubUrl: `${GITHUB_BASE}/Hero/2.tsx`
-      }
-    ]
+        githubUrl: `${GITHUB_BASE}/Hero/2.tsx`,
+      },
+    ],
   },
   {
     slug: 'footers',
@@ -75,7 +75,7 @@ export const blockCategories: BlockCategory[] = [
         exportName: 'Footer1',
         component: Footer1,
         code: footer1Code,
-        githubUrl: `${GITHUB_BASE}/Footer/1.tsx`
+        githubUrl: `${GITHUB_BASE}/Footer/1.tsx`,
       },
       {
         slug: 'footer-2',
@@ -83,9 +83,9 @@ export const blockCategories: BlockCategory[] = [
         exportName: 'Footer2',
         component: Footer2,
         code: footer2Code,
-        githubUrl: `${GITHUB_BASE}/Footer/2.tsx`
-      }
-    ]
+        githubUrl: `${GITHUB_BASE}/Footer/2.tsx`,
+      },
+    ],
   },
   {
     slug: 'testimonials',
@@ -98,9 +98,9 @@ export const blockCategories: BlockCategory[] = [
         exportName: 'Testimonials1',
         component: Testimonials1,
         code: testimonials1Code,
-        githubUrl: `${GITHUB_BASE}/Testimonials/1.tsx`
-      }
-    ]
+        githubUrl: `${GITHUB_BASE}/Testimonials/1.tsx`,
+      },
+    ],
   },
   {
     slug: 'navbars',
@@ -113,9 +113,9 @@ export const blockCategories: BlockCategory[] = [
         exportName: 'Navbar1',
         component: Navbar1,
         code: navbar1Code,
-        githubUrl: `${GITHUB_BASE}/Navbar/1.tsx`
-      }
-    ]
+        githubUrl: `${GITHUB_BASE}/Navbar/1.tsx`,
+      },
+    ],
   },
   {
     slug: 'pricing',
@@ -128,9 +128,9 @@ export const blockCategories: BlockCategory[] = [
         exportName: 'Pricing1',
         component: Pricing1,
         code: pricing1Code,
-        githubUrl: `${GITHUB_BASE}/Pricing/1.tsx`
-      }
-    ]
+        githubUrl: `${GITHUB_BASE}/Pricing/1.tsx`,
+      },
+    ],
   },
   {
     slug: 'faq',
@@ -143,9 +143,9 @@ export const blockCategories: BlockCategory[] = [
         exportName: 'FAQ1',
         component: FAQ1,
         code: faq1Code,
-        githubUrl: `${GITHUB_BASE}/FAQ/1.tsx`
-      }
-    ]
+        githubUrl: `${GITHUB_BASE}/FAQ/1.tsx`,
+      },
+    ],
   },
   {
     slug: 'feature-grids',
@@ -158,8 +158,8 @@ export const blockCategories: BlockCategory[] = [
         exportName: 'FeatureGrid1',
         component: FeatureGrid1,
         code: featureGrid1Code,
-        githubUrl: `${GITHUB_BASE}/FeatureGrid/1.tsx`
-      }
-    ]
-  }
+        githubUrl: `${GITHUB_BASE}/FeatureGrid/1.tsx`,
+      },
+    ],
+  },
 ]

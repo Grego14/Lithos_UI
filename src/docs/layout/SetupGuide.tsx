@@ -1,12 +1,12 @@
-import { useInstallPreference, type PackageManager } from "../../core/useInstallPreference"
-import { Button } from "../../components/ui/Button"
-import { CodeViewer } from "../../components/ui/CodeViewer"
+import { useInstallPreference, type PackageManager } from '../../core/useInstallPreference'
+import { Button } from '../../components/ui/Button'
+import { CodeViewer } from '../../components/ui/CodeViewer'
 
 const commands = {
   pnpm: 'pnpm add lithos-ui',
   npm: 'npm install lithos-ui',
   yarn: 'yarn add lithos-ui',
-  bun: 'bun add lithos-ui'
+  bun: 'bun add lithos-ui',
 }
 
 interface SetupGuideProps {
@@ -17,7 +17,13 @@ interface SetupGuideProps {
   bordered?: boolean
 }
 
-export const SetupGuide = ({ componentNames, manualPath, requires, manualOnly = false, bordered = true }: SetupGuideProps) => {
+export const SetupGuide = ({
+  componentNames,
+  manualPath,
+  requires,
+  manualOnly = false,
+  bordered = true,
+}: SetupGuideProps) => {
   const { installTab, updateInstallTab, packageManager, updatePackageManager } = useInstallPreference()
 
   const commandImport = `import { ${componentNames.join(', ')} } from 'lithos-ui'`
@@ -28,7 +34,7 @@ export const SetupGuide = ({ componentNames, manualPath, requires, manualOnly = 
   } else {
     // Group component names by their specific manual path
     const pathsToNames: Record<string, string[]> = {}
-    componentNames.forEach(name => {
+    componentNames.forEach((name) => {
       // Default to root if not mapped, though users should map all if using Record
       const path = manualPath[name]
       if (path) {
@@ -37,20 +43,22 @@ export const SetupGuide = ({ componentNames, manualPath, requires, manualOnly = 
       }
     })
 
-    manualImport = Object.entries(pathsToNames).map(([path, names]) => {
-      return `import { ${names.join(', ')} } from '${path}'`
-    }).join('\n')
+    manualImport = Object.entries(pathsToNames)
+      .map(([path, names]) => {
+        return `import { ${names.join(', ')} } from '${path}'`
+      })
+      .join('\n')
   }
 
   // If manualOnly is true, we force it to act like the manual tab is selected.
   const isManual = manualOnly || installTab === 'manual'
 
-  const containerClasses = bordered 
-    ? "border-2 border-(--lithos-border) bg-(--lithos-bg) p-4 md:p-6 overflow-hidden transform-[translateZ(0)] rounded-(--lithos-radius)"
-    : "bg-(--lithos-bg) p-4 md:p-6"
+  const containerClasses = bordered
+    ? 'border-2 border-(--lithos-border) bg-(--lithos-bg) p-4 md:p-6 overflow-hidden transform-[translateZ(0)] rounded-(--lithos-radius)'
+    : 'bg-(--lithos-bg) p-4 md:p-6'
 
   return (
-    <div className={bordered ? "mb-8" : ""}>
+    <div className={bordered ? 'mb-8' : ''}>
       {!manualOnly && (
         <div className="flex space-x-4 mb-4">
           <Button
@@ -59,10 +67,7 @@ export const SetupGuide = ({ componentNames, manualPath, requires, manualOnly = 
           >
             Command
           </Button>
-          <Button
-            onClick={() => updateInstallTab('manual')}
-            intent={installTab !== 'manual' ? 'secondary' : 'primary'}
-          >
+          <Button onClick={() => updateInstallTab('manual')} intent={installTab !== 'manual' ? 'secondary' : 'primary'}>
             Manual
           </Button>
         </div>
@@ -71,12 +76,13 @@ export const SetupGuide = ({ componentNames, manualPath, requires, manualOnly = 
       <div className={containerClasses}>
         {!isManual ? (
           <>
-            <div className='mb-6 space-x-4'>
+            <div className="mb-6 space-x-4">
               {(Object.keys(commands) as PackageManager[]).map((command) => (
                 <Button
                   key={`commands-${command}`}
                   intent={command === packageManager ? 'primary' : 'text'}
-                  onClick={() => updatePackageManager(command)}>
+                  onClick={() => updatePackageManager(command)}
+                >
                   {command}
                 </Button>
               ))}
@@ -89,12 +95,18 @@ export const SetupGuide = ({ componentNames, manualPath, requires, manualOnly = 
           </>
         ) : (
           <>
-            <p className="mb-4 text-sm font-body opacity-80 text-(--lithos-text)">Copy the source components and import:</p>
+            <p className="mb-4 text-sm font-body opacity-80 text-(--lithos-text)">
+              Copy the source components and import:
+            </p>
             <CodeViewer code={manualImport} language="tsx" className="mb-6" />
             {Array.isArray(requires) && (
-              <p className="mt-6 text-sm font-body opacity-80 text-(--lithos-text) wrap-break-word"><strong>Requires:</strong>{' '}
+              <p className="mt-6 text-sm font-body opacity-80 text-(--lithos-text) wrap-break-word">
+                <strong>Requires:</strong>{' '}
                 {requires.map((res, i) => (
-                  <span key={res}>{res}{i !== requires.length - 1 ? ', ' : ''}</span>
+                  <span key={res}>
+                    {res}
+                    {i !== requires.length - 1 ? ', ' : ''}
+                  </span>
                 ))}
               </p>
             )}

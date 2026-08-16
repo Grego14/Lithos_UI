@@ -8,7 +8,7 @@ import {
   type KeyboardEvent,
   type ReactElement,
   isValidElement,
-  type UIEvent
+  type UIEvent,
 } from 'react'
 import { cn } from '../../utils/cn'
 import { scrollTo } from '../../utils/scrollTo'
@@ -18,7 +18,7 @@ import { CarouselControls } from './carousel/CarouselControls'
 import { CarouselPagination } from './carousel/CarouselPagination'
 import { CarouselSlide, type CarouselSlideProps } from './carousel/CarouselSlide'
 import { useCarouselDrag } from './carousel/useCarouselDrag'
-import type { ClassValue, ClassArray } from "clsx"
+import type { ClassValue, ClassArray } from 'clsx'
 
 export interface CarouselProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   controlsPosition?: 'top' | 'bottom'
@@ -120,17 +120,24 @@ export const Carousel = ({
       }
 
       // don't scroll if is the last/initial slider and loop !== true
-      if ((!loop && (moveToFirst || moveToLast))) return
+      if (!loop && (moveToFirst || moveToLast)) return
 
       scrollTo({ element: carousel, amount: getMoveTo(), vertical })
 
-      if (isNext) { newIndex = index + 1 }
-      else { newIndex = index - 1 }
+      if (isNext) {
+        newIndex = index + 1
+      } else {
+        newIndex = index - 1
+      }
 
       // infinite scroll
       if (loop) {
-        if (moveToFirst) { newIndex = 0 }
-        if (moveToLast) { newIndex = normalizedSlides }
+        if (moveToFirst) {
+          newIndex = 0
+        }
+        if (moveToLast) {
+          newIndex = normalizedSlides
+        }
       }
     }
 
@@ -148,8 +155,12 @@ export const Carousel = ({
       setIndex((prevIndex) => {
         let nextIndex = prevIndex + (playDirection === 'forwards' ? 1 : -1)
 
-        if (nextIndex < 0) { nextIndex = normalizedSlides }
-        if (nextIndex > normalizedSlides) { nextIndex = 0 }
+        if (nextIndex < 0) {
+          nextIndex = normalizedSlides
+        }
+        if (nextIndex > normalizedSlides) {
+          nextIndex = 0
+        }
 
         const amount = carousel[vertical ? 'clientHeight' : 'clientWidth']
         scrollTo({ element: carousel, amount: nextIndex * amount, vertical })
@@ -159,15 +170,7 @@ export const Carousel = ({
     }, playInterval)
 
     return () => clearInterval(timer)
-  }, [
-    playInfinite,
-    isPaused,
-    playInterval,
-    playDirection,
-    normalizedSlides,
-    totalSlides,
-    vertical
-  ])
+  }, [playInfinite, isPaused, playInterval, playDirection, normalizedSlides, totalSlides, vertical])
 
   const { isDragging, ...dragHandlers } = useCarouselDrag({ containerRef, scroll })
 
@@ -202,9 +205,7 @@ export const Carousel = ({
   const pauseRotation = () => stopOnHover && setIsPaused(true)
   const continueRotation = () => stopOnHover && setIsPaused(false)
 
-  const Controls = !hideControls && (
-    <CarouselControls title={title} bottomPositioned={!isTop} loop={loop} />
-  )
+  const Controls = !hideControls && <CarouselControls title={title} bottomPositioned={!isTop} loop={loop} />
 
   const Extras = !hidePagination && (
     <CarouselPagination
@@ -231,7 +232,7 @@ export const Carousel = ({
         index: slideIndex,
       })
 
-      slideIndex++;
+      slideIndex++
       return slide
     }
 
@@ -240,20 +241,13 @@ export const Carousel = ({
 
   const trackClass = cn(
     'flex no-scrollbar select-none cursor-pointer w-full',
-    vertical
-      ? 'overflow-y-auto snap-y touch-pan-x flex-col h-80'
-      : 'overflow-x-auto snap-x touch-pan-y flex-row'
+    vertical ? 'overflow-y-auto snap-y touch-pan-x flex-col h-80' : 'overflow-x-auto snap-x touch-pan-y flex-row'
   )
 
   const liveRegionPoliteness = playInfinite && !isPaused ? 'off' : 'polite'
 
   return (
-    <CarouselProvider
-      scroll={scroll}
-      currentIndex={index}
-      totalSlides={totalSlides}
-      vertical={vertical}
-    >
+    <CarouselProvider scroll={scroll} currentIndex={index} totalSlides={totalSlides} vertical={vertical}>
       <div
         className={classes}
         ref={ref}
@@ -263,8 +257,8 @@ export const Carousel = ({
         onMouseLeave={continueRotation}
         onFocus={pauseRotation}
         onBlur={continueRotation}
-        role='region'
-        aria-roledescription='carousel'
+        role="region"
+        aria-roledescription="carousel"
         aria-label={title || 'Carousel'}
         {...rest}
       >
@@ -273,18 +267,13 @@ export const Carousel = ({
 
         {/* Hard-Snap horizontal/vertical slab */}
 
-        <div className='w-full'>
-          <div
-            ref={containerRef}
-            className={trackClass}
-            onScroll={handleScroll}
-            {...dragHandlers}
-          >
+        <div className="w-full">
+          <div ref={containerRef} className={trackClass} onScroll={handleScroll} {...dragHandlers}>
             {renderedChildren}
           </div>
         </div>
 
-        <div className='sr-only' aria-live={liveRegionPoliteness} aria-atomic='true'>
+        <div className="sr-only" aria-live={liveRegionPoliteness} aria-atomic="true">
           {`Slide ${index + 1} of ${totalSlides}`}
         </div>
 

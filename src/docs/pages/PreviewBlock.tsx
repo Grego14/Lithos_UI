@@ -48,9 +48,8 @@ export const PreviewBlockExample = () => {
 
       <section className="mb-12">
         <p className="mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          This structural shell manages state between a live interactive component and its raw string import. It
-          carries heavy brutalist borders to explicitly separate documentation logic from the component being
-          demonstrated.
+          This structural shell manages state between a live interactive component and its raw string import. It carries
+          heavy brutalist borders to explicitly separate documentation logic from the component being demonstrated.
         </p>
       </section>
 

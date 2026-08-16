@@ -15,7 +15,7 @@ const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/component
 const newToast: ToastProps = {
   title: 'SYSTEM TOAST',
   message: 'Structural integrity verified.',
-  type: 'success'
+  type: 'success',
 }
 
 // inner component that consumes the nested context
@@ -24,20 +24,15 @@ const ToastTriggerButton = () => {
   const { accentColor } = useLithosTheme()
 
   const triggerToast = () => {
-    if (toast && toast.addToast)
-      toast.addToast({ ...newToast, color: accentColor })
+    if (toast && toast.addToast) toast.addToast({ ...newToast, color: accentColor })
   }
 
-  return (
-    <Button onClick={triggerToast}>
-      Trigger Toast
-    </Button>
-  )
+  return <Button onClick={triggerToast}>Trigger Toast</Button>
 }
 
 const PositionedToast = () => {
   return (
-    <ToastProvider position='top-left'>
+    <ToastProvider position="top-left">
       <ToastTriggerButton />
     </ToastProvider>
   )
@@ -48,8 +43,7 @@ export const ToastDoc = () => {
   const { accentColor } = useLithosTheme()
 
   const triggerToast = () => {
-    if (toast && toast.addToast)
-      toast.addToast({ ...newToast, color: accentColor })
+    if (toast && toast.addToast) toast.addToast({ ...newToast, color: accentColor })
   }
 
   const usageCode = `import { useToast } from '../../core/hooks/useToast'
@@ -160,7 +154,7 @@ export const App = () => {
           'components/ui/icons/IconClose.tsx',
           'components/ui/Button.tsx',
           'core/hooks/useToast.ts',
-          'utils/colors.ts'
+          'utils/colors.ts',
         ]}
       />
 
@@ -169,7 +163,8 @@ export const App = () => {
       </h2>
       <div className="mb-12">
         <p className="mb-4 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          Toasts require a global provider to wrap your application, enabling any nested component to dispatch notifications using the hook.
+          Toasts require a global provider to wrap your application, enabling any nested component to dispatch
+          notifications using the hook.
         </p>
         <CodeViewer
           language="tsx"
@@ -193,9 +188,7 @@ const { addToast } = useToast()
       </h3>
 
       <PreviewBlock code={usageCode} githubUrl={githubUrl}>
-        <Button onClick={triggerToast}>
-          Trigger Toast
-        </Button>
+        <Button onClick={triggerToast}>Trigger Toast</Button>
       </PreviewBlock>
 
       <h3 id="custom-position" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
@@ -211,10 +204,21 @@ const { addToast } = useToast()
           Accessibility
         </h2>
         <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
-          <li>Uses <code>role="alert"</code> and <code>aria-live="assertive"</code> for error toasts so critical feedback is announced immediately to screen readers.</li>
-          <li>Uses <code>role="status"</code> and <code>aria-live="polite"</code> for non-critical notifications (success, info, warning) to avoid interrupting ongoing screen reader speech.</li>
-          <li>Automatically shifts focus to error notifications when mounted and restores focus to the previously active element upon dismissal.</li>
-          <li>Pauses the auto-dismiss timer on hover, allowing users extra time to read or interact with the content.</li>
+          <li>
+            Uses <code>role="alert"</code> and <code>aria-live="assertive"</code> for error toasts so critical feedback
+            is announced immediately to screen readers.
+          </li>
+          <li>
+            Uses <code>role="status"</code> and <code>aria-live="polite"</code> for non-critical notifications (success,
+            info, warning) to avoid interrupting ongoing screen reader speech.
+          </li>
+          <li>
+            Automatically shifts focus to error notifications when mounted and restores focus to the previously active
+            element upon dismissal.
+          </li>
+          <li>
+            Pauses the auto-dismiss timer on hover, allowing users extra time to read or interact with the content.
+          </li>
         </ul>
       </section>
 
@@ -223,7 +227,8 @@ const { addToast } = useToast()
           API Reference
         </h2>
         <div className="mb-6 p-4 border-l-4 border-(--lithos-accent) bg-(--lithos-surface) text-sm font-body text-(--lithos-text)">
-          <strong>Note:</strong> Border radius is configurable globally via the <code>--lithos-radius</code> CSS token, or per-instance via <code>className</code> (e.g. <code>rounded-full</code>). No custom prop is required.
+          <strong>Note:</strong> Border radius is configurable globally via the <code>--lithos-radius</code> CSS token,
+          or per-instance via <code>className</code> (e.g. <code>rounded-full</code>). No custom prop is required.
         </div>
         <PropsAccordion title="ToastProvider Props" data={toastProviderPropsData} />
       </section>

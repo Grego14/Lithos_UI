@@ -24,7 +24,6 @@ const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
       {/* Deploying the tracking engine to the main landing viewport */}
       <KineticGrid baseOpacity="opacity-10" className="py-12 md:py-24 w-full">
         <div className="mx-auto max-w-7xl px-6 w-full flex flex-col lg:flex-row items-center lg:items-start lg:justify-between">
-
           {/* Left Column: Copy & CTAs */}
           <div className="w-full lg:w-[55%] text-center lg:text-left flex flex-col items-center lg:items-start">
             <p className="mb-4 text-sm font-bold uppercase tracking-widest text-(--lithos-text) opacity-60">
@@ -35,9 +34,7 @@ const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
               BUILD FRONTENDS THAT REFUSE TO BREAK
             </h1>
 
-            <h2
-              className="mt-4 text-3xl sm:text-4xl font-display md:text-5xl italic font-medium text-(--lithos-accent)"
-            >
+            <h2 className="mt-4 text-3xl sm:text-4xl font-display md:text-5xl italic font-medium text-(--lithos-accent)">
               Free Forever
             </h2>
 
@@ -52,11 +49,7 @@ const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
             </p>
 
             <div className="mt-10 flex flex-col items-center lg:items-start sm:flex-row flex-wrap">
-              <Button
-                intent="primary"
-                onClick={() => navigate('/docs')}
-                className="mb-4 sm:mb-0 sm:mr-6 px-4 py-2"
-              >
+              <Button intent="primary" onClick={() => navigate('/docs')} className="mb-4 sm:mb-0 sm:mr-6 px-4 py-2">
                 Documentation
               </Button>
               <Button
@@ -79,9 +72,7 @@ const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
               <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b-2 border-r-2 border-(--lithos-accent)" />
 
               <div className="flex justify-between items-center mb-6 border-b-2 border-(--lithos-border) pb-4">
-                <h3 className="text-sm font-black uppercase tracking-widest text-(--lithos-text)">
-                  Live Theme Engine
-                </h3>
+                <h3 className="text-sm font-black uppercase tracking-widest text-(--lithos-text)">Live Theme Engine</h3>
                 <span className="font-mono text-xs font-bold bg-(--lithos-bg) px-2 py-1 border-2 border-(--lithos-border) text-(--lithos-text)">
                   {accentColor}
                 </span>
@@ -143,8 +134,8 @@ const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
           </div>
         </div>
       </KineticGrid>
-    </section >
+    </section>
   )
-};
+}
 
 export { Hero }

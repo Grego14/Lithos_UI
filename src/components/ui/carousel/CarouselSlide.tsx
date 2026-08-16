@@ -5,7 +5,7 @@
 import type { ComponentPropsWithRef } from 'react'
 import { cn } from '../../../utils/cn'
 import type { ClassArray, ClassValue } from 'clsx'
-import { useCarousel } from "./useCarousel"
+import { useCarousel } from './useCarousel'
 
 export interface CarouselSlideProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   index?: number
@@ -13,14 +13,7 @@ export interface CarouselSlideProps extends Omit<ComponentPropsWithRef<'div'>, '
   className?: ClassValue | ClassArray
 }
 
-export const CarouselSlide = ({
-  index,
-  label,
-  className,
-  children,
-  ref,
-  ...rest
-}: CarouselSlideProps) => {
+export const CarouselSlide = ({ index, label, className, children, ref, ...rest }: CarouselSlideProps) => {
   const { currentIndex, totalSlides } = useCarousel()
 
   const slideIndex = index ?? 0
@@ -38,8 +31,8 @@ export const CarouselSlide = ({
     <div
       className={classes}
       ref={ref}
-      role='group'
-      aria-roledescription='slide'
+      role="group"
+      aria-roledescription="slide"
       aria-label={slideLabel}
       aria-hidden={!isActive}
       inert={!isActive ? true : undefined}

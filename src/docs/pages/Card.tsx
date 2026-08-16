@@ -68,7 +68,6 @@ export const SolidCard = () => {
   )
 }`
 
-
   const spacingCode = `import { Card, CardContent, CardTitle, CardDescription, CardFooter } from '../../components/ui/Card'
 import { Button } from '../../components/ui/Button'
 
@@ -103,12 +102,10 @@ export const ImageBackgroundCard = () => {
   return (
     <div className="max-w-5xl mx-auto px-6">
       <header className="mt-0">
-        <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-none text-(--lithos-text) mb-6">
-          Card
-        </h1>
+        <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-none text-(--lithos-text) mb-6">Card</h1>
         <p className="mt-2 text-lg md:text-xl font-display opacity-70 text-(--lithos-text)">
-          A hard-bordered container with hard-shadow lift physics on hover, built from composable image, content,
-          and footer parts.
+          A hard-bordered container with hard-shadow lift physics on hover, built from composable image, content, and
+          footer parts.
         </p>
         <hr className="border-t-2 border-(--lithos-border) mt-6 mb-6" />
       </header>
@@ -116,15 +113,16 @@ export const ImageBackgroundCard = () => {
       <section className="mb-6">
         <p className="text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
           Card is a foundational container composed of <code>CardImage</code>, <code>CardContent</code> (with{' '}
-          <code>CardTitle</code> and <code>CardDescription</code>) and <code>CardFooter</code>. Every part is optional — compose only what the content needs.
+          <code>CardTitle</code> and <code>CardDescription</code>) and <code>CardFooter</code>. Every part is optional —
+          compose only what the content needs.
         </p>
       </section>
 
       <div className="border-l-4 border-(--lithos-accent) pl-6 py-2 mb-8 bg-(--lithos-surface) p-4">
         <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
-          <strong>Default</strong>, <strong>accent</strong>, <strong>solid</strong>, and <strong>image</strong> are
-          the available variants, all shown below. Hover lift is opt-in via the{' '}
-          <code>interactive</code> prop and off by default.
+          <strong>Default</strong>, <strong>accent</strong>, <strong>solid</strong>, and <strong>image</strong> are the
+          available variants, all shown below. Hover lift is opt-in via the <code>interactive</code> prop and off by
+          default.
         </p>
       </div>
 
@@ -132,11 +130,7 @@ export const ImageBackgroundCard = () => {
         Installation
       </h2>
 
-      <SetupGuide
-        componentNames={['Card']}
-        manualPath="../../components/ui/Card"
-        requires={['utils/cn.ts']}
-      />
+      <SetupGuide componentNames={['Card']} manualPath="../../components/ui/Card" requires={['utils/cn.ts']} />
 
       <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Anatomy
@@ -186,7 +180,9 @@ export const ImageBackgroundCard = () => {
           <CardImage src="https://picsum.photos/600/400?1" alt="Preview" />
           <CardContent>
             <CardTitle>Accent Card</CardTitle>
-            <CardDescription>Hover over this card to see the background fill with the active theme color.</CardDescription>
+            <CardDescription>
+              Hover over this card to see the background fill with the active theme color.
+            </CardDescription>
           </CardContent>
         </Card>
       </PreviewBlock>
@@ -199,7 +195,9 @@ export const ImageBackgroundCard = () => {
           <CardImage src="https://picsum.photos/600/400?2" alt="Preview" />
           <CardContent>
             <CardTitle>Solid Card</CardTitle>
-            <CardDescription>A card that permanently stays in the accent color rather than waiting for a hover interaction.</CardDescription>
+            <CardDescription>
+              A card that permanently stays in the accent color rather than waiting for a hover interaction.
+            </CardDescription>
           </CardContent>
         </Card>
       </PreviewBlock>
@@ -210,14 +208,30 @@ export const ImageBackgroundCard = () => {
       <PreviewBlock code={spacingCode} githubUrl={githubUrl}>
         <div className="flex flex-col">
           <div className="flex mb-6">
-            <Button intent={spacing === 'sm' ? 'primary' : 'secondary'} onClick={() => setSpacing('sm')} className="mr-4">Small</Button>
-            <Button intent={spacing === 'md' ? 'primary' : 'secondary'} onClick={() => setSpacing('md')} className="mr-4">Medium</Button>
-            <Button intent={spacing === 'lg' ? 'primary' : 'secondary'} onClick={() => setSpacing('lg')}>Large</Button>
+            <Button
+              intent={spacing === 'sm' ? 'primary' : 'secondary'}
+              onClick={() => setSpacing('sm')}
+              className="mr-4"
+            >
+              Small
+            </Button>
+            <Button
+              intent={spacing === 'md' ? 'primary' : 'secondary'}
+              onClick={() => setSpacing('md')}
+              className="mr-4"
+            >
+              Medium
+            </Button>
+            <Button intent={spacing === 'lg' ? 'primary' : 'secondary'} onClick={() => setSpacing('lg')}>
+              Large
+            </Button>
           </div>
           <Card className="max-w-sm">
             <CardContent spacing={spacing}>
               <CardTitle>Spacious Card</CardTitle>
-              <CardDescription>This card uses the {spacing} spacing token for maximum internal breathing room.</CardDescription>
+              <CardDescription>
+                This card uses the {spacing} spacing token for maximum internal breathing room.
+              </CardDescription>
             </CardContent>
             <CardFooter spacing={spacing}>
               <Button>Action</Button>
@@ -234,7 +248,9 @@ export const ImageBackgroundCard = () => {
           <CardImage src="https://picsum.photos/600/600" alt="Full bleed background" isBackground />
           <CardContent>
             <CardTitle>Full Bleed Overlay</CardTitle>
-            <CardDescription className="opacity-90">Using isBackground on CardImage to compose a rich media card.</CardDescription>
+            <CardDescription className="opacity-90">
+              Using isBackground on CardImage to compose a rich media card.
+            </CardDescription>
           </CardContent>
         </Card>
       </PreviewBlock>
@@ -244,11 +260,26 @@ export const ImageBackgroundCard = () => {
           Accessibility
         </h2>
         <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
-          <li>Card renders a plain <code>div</code> — it carries no implicit role or focus behavior of its own.</li>
-          <li><code>CardTitle</code> renders an <code>h3</code>, so cards compose into the surrounding document heading order rather than skipping levels.</li>
-          <li>Always pass descriptive <code>alt</code> text to <code>CardImage</code>; it is required, not optional, on the component's props.</li>
-          <li>When a Card wraps interactive controls (links, buttons), keyboard focus and activation come from those native elements, not from the Card itself.</li>
-          <li>If an entire Card is meant to be a single click target, wrap it in a native <code>a</code> or <code>button</code> rather than relying on an <code>onClick</code> on the <code>div</code>, so it stays keyboard operable.</li>
+          <li>
+            Card renders a plain <code>div</code> — it carries no implicit role or focus behavior of its own.
+          </li>
+          <li>
+            <code>CardTitle</code> renders an <code>h3</code>, so cards compose into the surrounding document heading
+            order rather than skipping levels.
+          </li>
+          <li>
+            Always pass descriptive <code>alt</code> text to <code>CardImage</code>; it is required, not optional, on
+            the component's props.
+          </li>
+          <li>
+            When a Card wraps interactive controls (links, buttons), keyboard focus and activation come from those
+            native elements, not from the Card itself.
+          </li>
+          <li>
+            If an entire Card is meant to be a single click target, wrap it in a native <code>a</code> or{' '}
+            <code>button</code> rather than relying on an <code>onClick</code> on the <code>div</code>, so it stays
+            keyboard operable.
+          </li>
         </ul>
       </section>
 
@@ -257,7 +288,8 @@ export const ImageBackgroundCard = () => {
           API Reference
         </h2>
         <div className="mb-6 p-4 border-l-4 border-(--lithos-accent) bg-(--lithos-surface) text-sm font-body text-(--lithos-text)">
-          <strong>Note:</strong> Border radius is configurable globally via the <code>--lithos-radius</code> CSS token, or per-instance via <code>className</code> (e.g. <code>rounded-full</code>). No custom prop is required.
+          <strong>Note:</strong> Border radius is configurable globally via the <code>--lithos-radius</code> CSS token,
+          or per-instance via <code>className</code> (e.g. <code>rounded-full</code>). No custom prop is required.
         </div>
         <PropsAccordion title="Card Props" data={cardPropsData} />
         <PropsAccordion title="CardImage Props" data={cardImagePropsData} />
@@ -269,4 +301,3 @@ export const ImageBackgroundCard = () => {
     </div>
   )
 }
-

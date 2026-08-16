@@ -8,12 +8,8 @@ describe('Carousel', () => {
   it('renders with 2 children (slides)', () => {
     render(
       <Carousel>
-        <Carousel.Slide>
-          Slide 1
-        </Carousel.Slide>
-        <Carousel.Slide>
-          Slide 2
-        </Carousel.Slide>
+        <Carousel.Slide>Slide 1</Carousel.Slide>
+        <Carousel.Slide>Slide 2</Carousel.Slide>
       </Carousel>
     )
 
@@ -27,12 +23,8 @@ describe('Carousel', () => {
   it('renders controls and pagination by default', () => {
     render(
       <Carousel>
-        <Carousel.Slide>
-          Slide 1
-        </Carousel.Slide>
-        <Carousel.Slide>
-          Slide 2
-        </Carousel.Slide>
+        <Carousel.Slide>Slide 1</Carousel.Slide>
+        <Carousel.Slide>Slide 2</Carousel.Slide>
       </Carousel>
     )
 

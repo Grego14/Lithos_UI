@@ -13,7 +13,7 @@ describe('Footer2', () => {
     )
 
     expect(screen.getByText('BRAND MARK')).toBeInTheDocument()
-    
+
     // Check navigation links
     expect(screen.getByText('Features')).toBeInTheDocument()
     expect(screen.getByText('Pricing')).toBeInTheDocument()

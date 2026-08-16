@@ -14,13 +14,13 @@ describe('Accordion', () => {
   it('toggles content visibility on click', async () => {
     const user = userEvent.setup()
     render(<Accordion title="Test Title">Test Content</Accordion>)
-    
+
     const button = screen.getByRole('button', { name: /Test Title/i })
     expect(button).toHaveAttribute('aria-expanded', 'false')
-    
+
     await user.click(button)
     expect(button).toHaveAttribute('aria-expanded', 'true')
-    
+
     await user.click(button)
     expect(button).toHaveAttribute('aria-expanded', 'false')
   })
@@ -37,8 +37,12 @@ describe('AccordionGroup', () => {
     const user = userEvent.setup()
     render(
       <AccordionGroup>
-        <Accordion title="Item 1" value="1">Content 1</Accordion>
-        <Accordion title="Item 2" value="2">Content 2</Accordion>
+        <Accordion title="Item 1" value="1">
+          Content 1
+        </Accordion>
+        <Accordion title="Item 2" value="2">
+          Content 2
+        </Accordion>
       </AccordionGroup>
     )
 
@@ -58,8 +62,12 @@ describe('AccordionGroup', () => {
     const user = userEvent.setup()
     render(
       <AccordionGroup allowMultiple>
-        <Accordion title="Item 1" value="1">Content 1</Accordion>
-        <Accordion title="Item 2" value="2">Content 2</Accordion>
+        <Accordion title="Item 1" value="1">
+          Content 1
+        </Accordion>
+        <Accordion title="Item 2" value="2">
+          Content 2
+        </Accordion>
       </AccordionGroup>
     )
 
@@ -76,8 +84,12 @@ describe('AccordionGroup', () => {
   it('has no accessibility violations', async () => {
     const { container } = render(
       <AccordionGroup>
-        <Accordion title="Item 1" value="1">Content 1</Accordion>
-        <Accordion title="Item 2" value="2">Content 2</Accordion>
+        <Accordion title="Item 1" value="1">
+          Content 1
+        </Accordion>
+        <Accordion title="Item 2" value="2">
+          Content 2
+        </Accordion>
       </AccordionGroup>
     )
     const results = await axe(container)

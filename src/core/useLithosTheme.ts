@@ -77,4 +77,4 @@ export const useLithosTheme = () => {
   }
 
   return { isDarkMode, toggleObsidian, accentColor, updateAccentColor, radius, updateRadius } as const
-};
+}

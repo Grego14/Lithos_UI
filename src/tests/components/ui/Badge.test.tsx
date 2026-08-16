@@ -7,7 +7,7 @@ import { colors } from '../../../utils/colors'
 
 // Mock de las utilidades y hooks dependientes
 vi.mock('../../../core/useAccentColor', () => ({
-  useAccentColor: () => ({ accentColor: '#ff5722' })
+  useAccentColor: () => ({ accentColor: '#ff5722' }),
 }))
 
 describe('Badge Component', () => {
@@ -24,7 +24,7 @@ describe('Badge Component', () => {
     expect(badge).toHaveClass('text-xs', 'px-1.75', 'uppercase', 'font-bold')
     expect(badge).toHaveStyle({
       backgroundColor: '#ffffff',
-      color: '#000000'
+      color: '#000000',
     })
   })
 
@@ -47,7 +47,7 @@ describe('Badge Component', () => {
     // getYiqValue('#ff5722') -> 131.19 (the color should be #000000)
     expect(badge).toHaveStyle({
       backgroundColor: '#ff5722',
-      color: '#000000'
+      color: '#000000',
     })
   })
 
@@ -60,12 +60,16 @@ describe('Badge Component', () => {
   })
 
   it('prioritizes custom color prop over variant color', () => {
-    render(<Badge variant="success" color="#000000">Custom Color</Badge>)
+    render(
+      <Badge variant="success" color="#000000">
+        Custom Color
+      </Badge>
+    )
 
     const badge = screen.getByText('Custom Color')
     expect(badge).toHaveStyle({
       backgroundColor: '#000000',
-      color: '#ffffff'
+      color: '#ffffff',
     })
   })
 
@@ -85,7 +89,11 @@ describe('Badge Component', () => {
   })
 
   it('passes through extra HTML attributes', () => {
-    render(<Badge data-testid="badge-element" id="badge-1">Extra Props</Badge>)
+    render(
+      <Badge data-testid="badge-element" id="badge-1">
+        Extra Props
+      </Badge>
+    )
 
     const badge = screen.getByTestId('badge-element')
     expect(badge).toHaveAttribute('id', 'badge-1')

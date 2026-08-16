@@ -3,10 +3,10 @@
  * - Always circular — the shape that reads correctly both standalone and stacked in a Group.
  * - Image swaps to initials from `alt` on load failure via onError, so a dead `src` never leaves a blank box.
  */
-import { useState, type ComponentPropsWithRef } from "react";
-import { getContrastText } from "../../utils/yiq";
-import { useAccentColor } from "../../core/useAccentColor";
-import { cn } from "../../utils/cn";
+import { useState, type ComponentPropsWithRef } from 'react'
+import { getContrastText } from '../../utils/yiq'
+import { useAccentColor } from '../../core/useAccentColor'
+import { cn } from '../../utils/cn'
 
 type AvatarSizes = 'sm' | 'md' | 'lg'
 type AvatarVariants = 'default' | 'solid'
@@ -26,44 +26,52 @@ const sizeStyles = {
 }
 
 const getInitials = (value: string) =>
-  value.trim().split(/\s+/).filter(Boolean).slice(0, 2).map((word) => word[0]).join('') || null
+  value
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join('') || null
 
-export const Avatar = (
-  { src, alt = '', variant = 'default', size = 'md', className = '', ref, ...props }: AvatarProps) => {
-    const [imgFailed, setImgFailed] = useState(false)
-    const { accentColor } = useAccentColor()
+export const Avatar = ({
+  src,
+  alt = '',
+  variant = 'default',
+  size = 'md',
+  className = '',
+  ref,
+  ...props
+}: AvatarProps) => {
+  const [imgFailed, setImgFailed] = useState(false)
+  const { accentColor } = useAccentColor()
 
-    const showImage = !!src && !imgFailed
-    const bgColor = variant === 'solid' ? accentColor : undefined
-    const contrastedColor = bgColor ? getContrastText(bgColor) : undefined
+  const showImage = !!src && !imgFailed
+  const bgColor = variant === 'solid' ? accentColor : undefined
+  const contrastedColor = bgColor ? getContrastText(bgColor) : undefined
 
-    const classes = cn(
-      'relative inline-flex items-center justify-center shrink-0 overflow-hidden rounded-full border-2 border-(--lithos-border) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] font-(--font-sans) font-bold uppercase',
-      variant === 'default' && 'bg-(--lithos-surface) text-(--lithos-text)',
-      sizeStyles[size],
-      className
-    )
+  const classes = cn(
+    'relative inline-flex items-center justify-center shrink-0 overflow-hidden rounded-full border-2 border-(--lithos-border) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] font-(--font-sans) font-bold uppercase',
+    variant === 'default' && 'bg-(--lithos-surface) text-(--lithos-text)',
+    sizeStyles[size],
+    className
+  )
 
-    return (
-      <div
-        ref={ref}
-        className={classes}
-        style={bgColor ? { backgroundColor: bgColor, color: contrastedColor } : undefined}
-        {...props}
-      >
-        {showImage ? (
-          <img
-            src={src}
-            alt={alt}
-            className="w-full h-full object-cover"
-            onError={() => setImgFailed(true)}
-          />
-        ) : (
-          getInitials(alt)
-        )}
-      </div>
-    )
-  }
+  return (
+    <div
+      ref={ref}
+      className={classes}
+      style={bgColor ? { backgroundColor: bgColor, color: contrastedColor } : undefined}
+      {...props}
+    >
+      {showImage ? (
+        <img src={src} alt={alt} className="w-full h-full object-cover" onError={() => setImgFailed(true)} />
+      ) : (
+        getInitials(alt)
+      )}
+    </div>
+  )
+}
 
 export interface AvatarGroupCountProps extends Omit<ComponentPropsWithRef<'div'>, 'children'> {
   count: number
@@ -71,20 +79,19 @@ export interface AvatarGroupCountProps extends Omit<ComponentPropsWithRef<'div'>
   className?: string
 }
 
-export const AvatarGroupCount = (
-  { count, size = 'md', className = '', ref, ...props }: AvatarGroupCountProps) => {
-    const classes = cn(
-      'relative inline-flex items-center justify-center shrink-0 rounded-full border-2 border-(--lithos-border) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] bg-(--lithos-surface) text-(--lithos-text) font-(--font-sans) font-bold uppercase',
-      sizeStyles[size],
-      className
-    )
+export const AvatarGroupCount = ({ count, size = 'md', className = '', ref, ...props }: AvatarGroupCountProps) => {
+  const classes = cn(
+    'relative inline-flex items-center justify-center shrink-0 rounded-full border-2 border-(--lithos-border) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] bg-(--lithos-surface) text-(--lithos-text) font-(--font-sans) font-bold uppercase',
+    sizeStyles[size],
+    className
+  )
 
-    return (
-      <div ref={ref} className={classes} {...props}>
-        +{count}
-      </div>
-    )
-  }
+  return (
+    <div ref={ref} className={classes} {...props}>
+      +{count}
+    </div>
+  )
+}
 
 export interface AvatarGroupItem {
   src?: string | undefined
@@ -98,17 +105,16 @@ export interface AvatarGroupProps extends Omit<ComponentPropsWithRef<'div'>, 'ch
   className?: string
 }
 
-export const AvatarGroup = (
-  { items, max = 4, size = 'md', className = '', ref, ...props }: AvatarGroupProps) => {
-    const visible = items.slice(0, max)
-    const overflow = items.length - max
+export const AvatarGroup = ({ items, max = 4, size = 'md', className = '', ref, ...props }: AvatarGroupProps) => {
+  const visible = items.slice(0, max)
+  const overflow = items.length - max
 
-    return (
-      <div ref={ref} className={cn('flex -space-x-3', className)} {...props}>
-        {visible.map((item, index) => (
-          <Avatar key={`${item.alt}-${index}`} src={item.src} alt={item.alt} size={size} />
-        ))}
-        {overflow > 0 && <AvatarGroupCount count={overflow} size={size} />}
-      </div>
-    )
-  }
+  return (
+    <div ref={ref} className={cn('flex -space-x-3', className)} {...props}>
+      {visible.map((item, index) => (
+        <Avatar key={`${item.alt}-${index}`} src={item.src} alt={item.alt} size={size} />
+      ))}
+      {overflow > 0 && <AvatarGroupCount count={overflow} size={size} />}
+    </div>
+  )
+}

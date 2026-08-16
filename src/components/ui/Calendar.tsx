@@ -27,14 +27,7 @@
  *   contiguous selection, not a set of independently colorable dates.
  */
 
-import {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type ComponentPropsWithRef,
-  type KeyboardEvent,
-} from 'react'
+import { useEffect, useMemo, useRef, useState, type ComponentPropsWithRef, type KeyboardEvent } from 'react'
 import { Button } from './Button'
 import { cn } from '../../utils/cn'
 import { IconChevronDown } from './icons/IconChevronDown'
@@ -208,321 +201,322 @@ const NavIcon = ({ direction }: { direction: 'prev' | 'next' }) => (
   </div>
 )
 
-export const Calendar = 
-  (
-    {
-      mode = 'single',
-      value,
-      defaultValue,
-      onChange,
-      month,
-      defaultMonth,
-      onMonthChange,
-      minDate,
-      maxDate,
-      disabledDates,
-      isDateDisabled,
-      getDateColor,
-      firstDayOfWeek = 0,
-      locale,
-      yearRange,
-      classes = {},
-      className,
-      ref,
-      ...rest
-  }: CalendarProps
-) => {
-    const isValueControlled = value !== undefined
-    const [localValue, setLocalValue] = useState<CalendarValue>(() => defaultValue ?? getEmptyValue(mode))
-    const currentValue = isValueControlled ? value! : localValue
+export const Calendar = ({
+  mode = 'single',
+  value,
+  defaultValue,
+  onChange,
+  month,
+  defaultMonth,
+  onMonthChange,
+  minDate,
+  maxDate,
+  disabledDates,
+  isDateDisabled,
+  getDateColor,
+  firstDayOfWeek = 0,
+  locale,
+  yearRange,
+  classes = {},
+  className,
+  ref,
+  ...rest
+}: CalendarProps) => {
+  const isValueControlled = value !== undefined
+  const [localValue, setLocalValue] = useState<CalendarValue>(() => defaultValue ?? getEmptyValue(mode))
+  const currentValue = isValueControlled ? value! : localValue
 
-    const isMonthControlled = month !== undefined
-    const [localMonth, setLocalMonth] = useState<Date>(() =>
-      startOfMonth(defaultMonth ?? inferSeedDate(mode, defaultValue ?? value) ?? new Date())
-    )
-    const displayedMonth = isMonthControlled ? startOfMonth(month!) : localMonth
+  const isMonthControlled = month !== undefined
+  const [localMonth, setLocalMonth] = useState<Date>(() =>
+    startOfMonth(defaultMonth ?? inferSeedDate(mode, defaultValue ?? value) ?? new Date())
+  )
+  const displayedMonth = isMonthControlled ? startOfMonth(month!) : localMonth
 
-    const [hoverDate, setHoverDate] = useState<Date | null>(null)
-    const [focusedDate, setFocusedDate] = useState<Date>(
-      () => inferSeedDate(mode, defaultValue ?? value) ?? displayedMonth
-    )
+  const [hoverDate, setHoverDate] = useState<Date | null>(null)
+  const [focusedDate, setFocusedDate] = useState<Date>(
+    () => inferSeedDate(mode, defaultValue ?? value) ?? displayedMonth
+  )
 
-    const dayButtonRefs = useRef<Map<string, HTMLButtonElement>>(new Map())
+  const dayButtonRefs = useRef<Map<string, HTMLButtonElement>>(new Map())
 
-    const changeMonth = (next: Date) => {
-      const normalized = startOfMonth(next)
-      if (!isMonthControlled) setLocalMonth(normalized)
-      onMonthChange?.(normalized)
+  const changeMonth = (next: Date) => {
+    const normalized = startOfMonth(next)
+    if (!isMonthControlled) setLocalMonth(normalized)
+    onMonthChange?.(normalized)
+  }
+
+  const commitValue = (next: CalendarValue) => {
+    if (!isValueControlled) setLocalValue(next)
+    onChange?.(next)
+  }
+
+  const isDisabled = (date: Date): boolean => {
+    if (isDateOutOfBounds(date, minDate, maxDate)) return true
+    if (disabledDates?.some((d) => isSameDay(d, date))) return true
+    if (isDateDisabled?.(date)) return true
+    return false
+  }
+
+  const handleDayClick = (date: Date) => {
+    if (isDisabled(date)) return
+    if (!isSameMonth(date, displayedMonth)) changeMonth(date)
+
+    if (mode === 'single') {
+      commitValue(date)
+      return
     }
 
-    const commitValue = (next: CalendarValue) => {
-      if (!isValueControlled) setLocalValue(next)
-      onChange?.(next)
+    if (mode === 'multiple') {
+      const arr = asArray(currentValue)
+      const exists = arr.some((d) => isSameDay(d, date))
+      commitValue(exists ? arr.filter((d) => !isSameDay(d, date)) : [...arr, date])
+      return
     }
 
-    const isDisabled = (date: Date): boolean => {
-      if (isDateOutOfBounds(date, minDate, maxDate)) return true
-      if (disabledDates?.some((d) => isSameDay(d, date))) return true
-      if (isDateDisabled?.(date)) return true
-      return false
+    const range = asRange(currentValue)
+    if (!range.from || range.to) {
+      commitValue({ from: date, to: null })
+    } else {
+      const from = isBeforeDay(date, range.from) ? date : range.from
+      const to = isBeforeDay(date, range.from) ? range.from : date
+      commitValue({ from, to })
     }
+  }
 
-    const handleDayClick = (date: Date) => {
-      if (isDisabled(date)) return
-      if (!isSameMonth(date, displayedMonth)) changeMonth(date)
-
-      if (mode === 'single') {
-        commitValue(date)
-        return
-      }
-
-      if (mode === 'multiple') {
-        const arr = asArray(currentValue)
-        const exists = arr.some((d) => isSameDay(d, date))
-        commitValue(exists ? arr.filter((d) => !isSameDay(d, date)) : [...arr, date])
-        return
-      }
-
-      const range = asRange(currentValue)
-      if (!range.from || range.to) {
-        commitValue({ from: date, to: null })
-      } else {
-        const from = isBeforeDay(date, range.from) ? date : range.from
-        const to = isBeforeDay(date, range.from) ? range.from : date
-        commitValue({ from, to })
-      }
+  const previewRange: DateRange | null = useMemo(() => {
+    if (mode !== 'range') return null
+    const range = asRange(currentValue)
+    if (range.from && !range.to && hoverDate) {
+      return isBeforeDay(hoverDate, range.from)
+        ? { from: hoverDate, to: range.from }
+        : { from: range.from, to: hoverDate }
     }
+    return range
+  }, [mode, currentValue, hoverDate])
 
-    const previewRange: DateRange | null = useMemo(() => {
-      if (mode !== 'range') return null
-      const range = asRange(currentValue)
-      if (range.from && !range.to && hoverDate) {
-        return isBeforeDay(hoverDate, range.from)
-          ? { from: hoverDate, to: range.from }
-          : { from: range.from, to: hoverDate }
-      }
-      return range
-    }, [mode, currentValue, hoverDate])
+  /** True for the start, end, and every day between — the whole range renders as one uniform color. */
+  const isRangeMember = (date: Date): boolean => {
+    if (mode !== 'range') return false
+    const range = previewRange ?? asRange(currentValue)
+    if (!range.from) return false
+    if (isSameDay(range.from, date)) return true
+    if (range.to && isDateInRange(date, range)) return true
+    return false
+  }
 
-    /** True for the start, end, and every day between — the whole range renders as one uniform color. */
-    const isRangeMember = (date: Date): boolean => {
-      if (mode !== 'range') return false
-      const range = previewRange ?? asRange(currentValue)
-      if (!range.from) return false
-      if (isSameDay(range.from, date)) return true
-      if (range.to && isDateInRange(date, range)) return true
-      return false
+  const gridDays = useMemo(() => getCalendarGridDays(displayedMonth, firstDayOfWeek), [displayedMonth, firstDayOfWeek])
+  const weekdayLabels = useMemo(() => getWeekdayLabels(firstDayOfWeek, locale), [firstDayOfWeek, locale])
+  const monthLabels = useMemo(() => getMonthLabels(locale), [locale])
+
+  const currentYear = new Date().getFullYear()
+  const [minYear, maxYear] = yearRange ?? [currentYear - 100, currentYear + 10]
+  const yearOptions = useMemo(
+    () => Array.from({ length: maxYear - minYear + 1 }, (_, i) => minYear + i),
+    [minYear, maxYear]
+  )
+
+  const isKeyboardNavigating = useRef(false)
+  useEffect(() => {
+    if (!isKeyboardNavigating.current) return
+    isKeyboardNavigating.current = false
+    const button = dayButtonRefs.current.get(toDateKey(focusedDate))
+    button?.focus()
+  }, [focusedDate])
+
+  const moveFocus = (next: Date) => {
+    const clamped = isDateOutOfBounds(next, minDate, maxDate) ? focusedDate : next
+    if (!isSameMonth(clamped, displayedMonth)) changeMonth(clamped)
+    setFocusedDate(clamped)
+  }
+
+  const handleGridKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    switch (event.key) {
+      case 'ArrowLeft':
+        event.preventDefault()
+        isKeyboardNavigating.current = true
+        moveFocus(addDays(focusedDate, -1))
+        break
+      case 'ArrowRight':
+        event.preventDefault()
+        isKeyboardNavigating.current = true
+        moveFocus(addDays(focusedDate, 1))
+        break
+      case 'ArrowUp':
+        event.preventDefault()
+        isKeyboardNavigating.current = true
+        moveFocus(addDays(focusedDate, -7))
+        break
+      case 'ArrowDown':
+        event.preventDefault()
+        isKeyboardNavigating.current = true
+        moveFocus(addDays(focusedDate, 7))
+        break
+      case 'Home':
+        event.preventDefault()
+        isKeyboardNavigating.current = true
+        moveFocus(addDays(focusedDate, -((focusedDate.getDay() - firstDayOfWeek + 7) % 7)))
+        break
+      case 'End':
+        event.preventDefault()
+        isKeyboardNavigating.current = true
+        moveFocus(addDays(focusedDate, 6 - ((focusedDate.getDay() - firstDayOfWeek + 7) % 7)))
+        break
+      case 'PageUp':
+        event.preventDefault()
+        isKeyboardNavigating.current = true
+        moveFocus(addMonths(focusedDate, -1))
+        break
+      case 'PageDown':
+        event.preventDefault()
+        isKeyboardNavigating.current = true
+        moveFocus(addMonths(focusedDate, 1))
+        break
+      case 'Enter':
+      case ' ':
+        event.preventDefault()
+        handleDayClick(focusedDate)
+        break
     }
+  }
 
-    const gridDays = useMemo(
-      () => getCalendarGridDays(displayedMonth, firstDayOfWeek),
-      [displayedMonth, firstDayOfWeek]
-    )
-    const weekdayLabels = useMemo(() => getWeekdayLabels(firstDayOfWeek, locale), [firstDayOfWeek, locale])
-    const monthLabels = useMemo(() => getMonthLabels(locale), [locale])
+  const isPrevDisabled = minDate ? displayedMonth.getTime() <= startOfMonth(minDate).getTime() : false
+  const isNextDisabled = maxDate ? displayedMonth.getTime() >= startOfMonth(maxDate).getTime() : false
 
-    const currentYear = new Date().getFullYear()
-    const [minYear, maxYear] = yearRange ?? [currentYear - 100, currentYear + 10]
-    const yearOptions = useMemo(
-      () => Array.from({ length: maxYear - minYear + 1 }, (_, i) => minYear + i),
-      [minYear, maxYear]
-    )
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        'inline-block border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[2px_2px_0_0_var(--lithos-shadow)] p-3 rounded-(--lithos-radius)',
+        classes.container,
+        className
+      )}
+      {...rest}
+    >
+      <div className={cn('flex items-center justify-between mb-3', classes.header)}>
+        <Button
+          intent="text"
+          aria-label="Previous month"
+          disabled={isPrevDisabled}
+          onClick={() => changeMonth(addMonths(displayedMonth, -1))}
+          className={cn('translate-x-0 translate-y-0 active:translate-x-0 active:translate-y-0 p-1', classes.nav)}
+        >
+          <NavIcon direction="prev" />
+        </Button>
 
-    const isKeyboardNavigating = useRef(false)
-    useEffect(() => {
-      if (!isKeyboardNavigating.current) return
-      isKeyboardNavigating.current = false
-      const button = dayButtonRefs.current.get(toDateKey(focusedDate))
-      button?.focus()
-    }, [focusedDate])
+        <div className="flex items-center">
+          <HeaderDropdown
+            label="Month"
+            value={displayedMonth.getMonth()}
+            options={monthLabels.map((label, index) => ({ value: index, label }))}
+            onChange={(monthIndex) => changeMonth(new Date(displayedMonth.getFullYear(), monthIndex, 1))}
+            className={cn('mr-2', classes.monthSelect)}
+          />
 
-    const moveFocus = (next: Date) => {
-      const clamped = isDateOutOfBounds(next, minDate, maxDate) ? focusedDate : next
-      if (!isSameMonth(clamped, displayedMonth)) changeMonth(clamped)
-      setFocusedDate(clamped)
-    }
-
-    const handleGridKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-      switch (event.key) {
-        case 'ArrowLeft':
-          event.preventDefault()
-          isKeyboardNavigating.current = true
-          moveFocus(addDays(focusedDate, -1))
-          break
-        case 'ArrowRight':
-          event.preventDefault()
-          isKeyboardNavigating.current = true
-          moveFocus(addDays(focusedDate, 1))
-          break
-        case 'ArrowUp':
-          event.preventDefault()
-          isKeyboardNavigating.current = true
-          moveFocus(addDays(focusedDate, -7))
-          break
-        case 'ArrowDown':
-          event.preventDefault()
-          isKeyboardNavigating.current = true
-          moveFocus(addDays(focusedDate, 7))
-          break
-        case 'Home':
-          event.preventDefault()
-          isKeyboardNavigating.current = true
-          moveFocus(addDays(focusedDate, -((focusedDate.getDay() - firstDayOfWeek + 7) % 7)))
-          break
-        case 'End':
-          event.preventDefault()
-          isKeyboardNavigating.current = true
-          moveFocus(addDays(focusedDate, 6 - ((focusedDate.getDay() - firstDayOfWeek + 7) % 7)))
-          break
-        case 'PageUp':
-          event.preventDefault()
-          isKeyboardNavigating.current = true
-          moveFocus(addMonths(focusedDate, -1))
-          break
-        case 'PageDown':
-          event.preventDefault()
-          isKeyboardNavigating.current = true
-          moveFocus(addMonths(focusedDate, 1))
-          break
-        case 'Enter':
-        case ' ':
-          event.preventDefault()
-          handleDayClick(focusedDate)
-          break
-      }
-    }
-
-    const isPrevDisabled = minDate ? displayedMonth.getTime() <= startOfMonth(minDate).getTime() : false
-    const isNextDisabled = maxDate ? displayedMonth.getTime() >= startOfMonth(maxDate).getTime() : false
-
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          'inline-block border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[2px_2px_0_0_var(--lithos-shadow)] p-3 rounded-(--lithos-radius)',
-          classes.container,
-          className
-        )}
-        {...rest}
-      >
-        <div className={cn('flex items-center justify-between mb-3', classes.header)}>
-          <Button
-            intent="text"
-            aria-label="Previous month"
-            disabled={isPrevDisabled}
-            onClick={() => changeMonth(addMonths(displayedMonth, -1))}
-            className={cn('translate-x-0 translate-y-0 active:translate-x-0 active:translate-y-0 p-1', classes.nav)}
-          >
-            <NavIcon direction="prev" />
-          </Button>
-
-          <div className="flex items-center">
-            <HeaderDropdown
-              label="Month"
-              value={displayedMonth.getMonth()}
-              options={monthLabels.map((label, index) => ({ value: index, label }))}
-              onChange={(monthIndex) => changeMonth(new Date(displayedMonth.getFullYear(), monthIndex, 1))}
-              className={cn('mr-2', classes.monthSelect)}
-            />
-
-            <HeaderDropdown
-              label="Year"
-              value={displayedMonth.getFullYear()}
-              options={yearOptions.map((year) => ({ value: year, label: String(year) }))}
-              onChange={(year) => changeMonth(new Date(year, displayedMonth.getMonth(), 1))}
-              className={classes.yearSelect}
-            />
-          </div>
-
-          <Button
-            intent="text"
-            aria-label="Next month"
-            disabled={isNextDisabled}
-            onClick={() => changeMonth(addMonths(displayedMonth, 1))}
-            className={cn('translate-x-0 translate-y-0 active:translate-x-0 active:translate-y-0 p-1', classes.nav)}
-          >
-            <NavIcon direction="next" />
-          </Button>
+          <HeaderDropdown
+            label="Year"
+            value={displayedMonth.getFullYear()}
+            options={yearOptions.map((year) => ({ value: year, label: String(year) }))}
+            onChange={(year) => changeMonth(new Date(year, displayedMonth.getMonth(), 1))}
+            className={classes.yearSelect}
+          />
         </div>
 
-        <span className="sr-only" aria-live="polite">
-          {formatMonthYear(displayedMonth, locale)}
-        </span>
-
-        <div
-          role="grid"
-          aria-label="Calendar"
-          aria-multiselectable={mode === 'multiple'}
-          onMouseLeave={() => setHoverDate(null)}
-          onKeyDown={handleGridKeyDown}
-          className={cn('grid grid-cols-7 border-t-2 border-l-2 border-(--lithos-border)', classes.grid)}
+        <Button
+          intent="text"
+          aria-label="Next month"
+          disabled={isNextDisabled}
+          onClick={() => changeMonth(addMonths(displayedMonth, 1))}
+          className={cn('translate-x-0 translate-y-0 active:translate-x-0 active:translate-y-0 p-1', classes.nav)}
         >
-          <div role="row" className="contents">
-            {weekdayLabels.map((label) => (
-              <div
-                key={label}
-                role="columnheader"
-                className={cn(
-                  'border-r-2 border-b-2 border-(--lithos-border) h-8 flex items-center justify-center font-sans font-bold text-xs',
-                  classes.weekdays
-                )}
-              >
-                {label}
-              </div>
-            ))}
-          </div>
+          <NavIcon direction="next" />
+        </Button>
+      </div>
 
-          {Array.from({ length: gridDays.length / 7 }).map((_, rowIndex) => (
-            <div key={rowIndex} role="row" className="contents">
-              {gridDays.slice(rowIndex * 7, (rowIndex + 1) * 7).map(({ date, isCurrentMonth }) => {
-                const disabled = isDisabled(date)
-                const selected =
-                  mode === 'single'
-                    ? isSameDay(currentValue as Date | null, date)
-                    : mode === 'multiple'
-                      ? asArray(currentValue).some((d) => isSameDay(d, date))
-                      : isRangeMember(date)
-                const customColor = mode === 'multiple' && selected ? getDateColor?.(date) : undefined
-                const today = isToday(date)
-                const key = toDateKey(date)
+      <span className="sr-only" aria-live="polite">
+        {formatMonthYear(displayedMonth, locale)}
+      </span>
 
-                return (
-                  <div key={key} role="gridcell" aria-selected={selected} className={cn('border-r-2 border-b-2 border-(--lithos-border)', classes.cell)}>
-                    <button
-                      ref={(el) => {
-                        if (el) dayButtonRefs.current.set(key, el)
-                        else dayButtonRefs.current.delete(key)
-                      }}
-                      type="button"
-                      tabIndex={isSameDay(date, focusedDate) ? 0 : -1}
-                      aria-disabled={disabled}
-                      aria-label={new Intl.DateTimeFormat(locale, { dateStyle: 'full' }).format(date)}
-                      disabled={disabled}
-                      onClick={() => {
-                        setFocusedDate(date)
-                        handleDayClick(date)
-                      }}
-                      onMouseEnter={() => setHoverDate(date)}
-                      style={customColor ? { backgroundColor: customColor, color: getContrastText(customColor) } : undefined}
-                      className={cn(
-                        'w-10 h-10 flex items-center justify-center font-sans text-sm cursor-pointer transition-colors duration-75',
-                        !isCurrentMonth && 'text-(--lithos-muted)',
-                        today && !selected && 'font-black underline',
-                        selected && !customColor && 'bg-(--lithos-accent) text-(--lithos-accent-text) font-black',
-                        selected && customColor && 'font-black',
-                        !selected && 'hover:bg-(--lithos-muted)',
-                        disabled && 'opacity-40 pointer-events-none cursor-not-allowed',
-                        classes.day
-                      )}
-                    >
-                      {date.getDate()}
-                    </button>
-                  </div>
-                )
-              })}
+      <div
+        role="grid"
+        aria-label="Calendar"
+        aria-multiselectable={mode === 'multiple'}
+        onMouseLeave={() => setHoverDate(null)}
+        onKeyDown={handleGridKeyDown}
+        className={cn('grid grid-cols-7 border-t-2 border-l-2 border-(--lithos-border)', classes.grid)}
+      >
+        <div role="row" className="contents">
+          {weekdayLabels.map((label) => (
+            <div
+              key={label}
+              role="columnheader"
+              className={cn(
+                'border-r-2 border-b-2 border-(--lithos-border) h-8 flex items-center justify-center font-sans font-bold text-xs',
+                classes.weekdays
+              )}
+            >
+              {label}
             </div>
           ))}
         </div>
+
+        {Array.from({ length: gridDays.length / 7 }).map((_, rowIndex) => (
+          <div key={rowIndex} role="row" className="contents">
+            {gridDays.slice(rowIndex * 7, (rowIndex + 1) * 7).map(({ date, isCurrentMonth }) => {
+              const disabled = isDisabled(date)
+              const selected =
+                mode === 'single'
+                  ? isSameDay(currentValue as Date | null, date)
+                  : mode === 'multiple'
+                    ? asArray(currentValue).some((d) => isSameDay(d, date))
+                    : isRangeMember(date)
+              const customColor = mode === 'multiple' && selected ? getDateColor?.(date) : undefined
+              const today = isToday(date)
+              const key = toDateKey(date)
+
+              return (
+                <div
+                  key={key}
+                  role="gridcell"
+                  aria-selected={selected}
+                  className={cn('border-r-2 border-b-2 border-(--lithos-border)', classes.cell)}
+                >
+                  <button
+                    ref={(el) => {
+                      if (el) dayButtonRefs.current.set(key, el)
+                      else dayButtonRefs.current.delete(key)
+                    }}
+                    type="button"
+                    tabIndex={isSameDay(date, focusedDate) ? 0 : -1}
+                    aria-disabled={disabled}
+                    aria-label={new Intl.DateTimeFormat(locale, { dateStyle: 'full' }).format(date)}
+                    disabled={disabled}
+                    onClick={() => {
+                      setFocusedDate(date)
+                      handleDayClick(date)
+                    }}
+                    onMouseEnter={() => setHoverDate(date)}
+                    style={
+                      customColor ? { backgroundColor: customColor, color: getContrastText(customColor) } : undefined
+                    }
+                    className={cn(
+                      'w-10 h-10 flex items-center justify-center font-sans text-sm cursor-pointer transition-colors duration-75',
+                      !isCurrentMonth && 'text-(--lithos-muted)',
+                      today && !selected && 'font-black underline',
+                      selected && !customColor && 'bg-(--lithos-accent) text-(--lithos-accent-text) font-black',
+                      selected && customColor && 'font-black',
+                      !selected && 'hover:bg-(--lithos-muted)',
+                      disabled && 'opacity-40 pointer-events-none cursor-not-allowed',
+                      classes.day
+                    )}
+                  >
+                    {date.getDate()}
+                  </button>
+                </div>
+              )
+            })}
+          </div>
+        ))}
       </div>
-    )
+    </div>
+  )
 }

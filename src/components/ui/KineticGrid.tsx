@@ -1,10 +1,10 @@
 /**
  * @fileoverview Lithos UI KineticGrid interactive background component.
- * - Interactive dual-layer SVG grid structure featuring a static base wireframe and a dynamic accent overlay. 
+ * - Interactive dual-layer SVG grid structure featuring a static base wireframe and a dynamic accent overlay.
  * - Dynamic shadow offset shifts from 2px to 4px on open state to retain hard geometry.
  * - Performance-optimized mouse tracking via Direct DOM mutation update of --mouse-x and --mouse-y CSS custom properties, bypassing React state re-renders.
  * - Highlighting effect powered by CSS radial-gradient masking scoped to cursor coordinates.
-*/
+ */
 import { useRef, type ReactNode, type MouseEvent } from 'react'
 import { cn } from '../../utils/cn'
 
@@ -26,17 +26,10 @@ export const KineticGrid = ({ children, baseOpacity = 'opacity-10', className = 
     containerRef.current.style.setProperty('--mouse-y', `${y}px`)
   }
 
-  const classes = cn(
-    'relative overflow-hidden flex items-center justify-center rounded-(--lithos-radius)',
-    className
-  )
+  const classes = cn('relative overflow-hidden flex items-center justify-center rounded-(--lithos-radius)', className)
 
   return (
-    <div
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      className={classes}
-    >
+    <div ref={containerRef} onMouseMove={handleMouseMove} className={classes}>
       {/* Base Structural Grid (Static) */}
       <div className={`absolute inset-0 pointer-events-none ${baseOpacity}`}>
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -73,4 +66,4 @@ export const KineticGrid = ({ children, baseOpacity = 'opacity-10', className = 
       <div className="relative z-10 w-full flex flex-col items-center justify-center">{children}</div>
     </div>
   )
-};
+}

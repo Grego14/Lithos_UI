@@ -30,11 +30,11 @@ interface ComingSoonProps {
 }
 
 export const ComingSoon = ({
-  eyebrow = "ACTIVE ENGINEERING ZONE",
+  eyebrow = 'ACTIVE ENGINEERING ZONE',
   title,
   description,
-  primaryAction = { label: "Go to Docs", to: "/docs" },
-  secondaryAction = { label: "Contribute Code", href: "https://github.com/lithosui/Lithos_UI/issues" }
+  primaryAction = { label: 'Go to Docs', to: '/docs' },
+  secondaryAction = { label: 'Contribute Code', href: 'https://github.com/lithosui/Lithos_UI/issues' },
 }: ComingSoonProps) => {
   const navigate = useNavigate()
   return (
@@ -57,18 +57,12 @@ export const ComingSoon = ({
         {/* Zero-Gap enforcement: stacking behavior controlled by explicit margins */}
         <div className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
           {/* Return button */}
-          <Button
-            intent="primary"
-            onClick={() => navigate(primaryAction.to)}
-          >
+          <Button intent="primary" onClick={() => navigate(primaryAction.to)}>
             {primaryAction.label}
           </Button>
 
           {/* Contribute button */}
-          <Button
-            intent="secondary"
-            onClick={() => window.open(secondaryAction.href, '_blank')}
-          >
+          <Button intent="secondary" onClick={() => window.open(secondaryAction.href, '_blank')}>
             {secondaryAction.label}
           </Button>
         </div>

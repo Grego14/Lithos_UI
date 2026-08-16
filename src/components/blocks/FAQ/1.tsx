@@ -15,8 +15,7 @@ interface FAQItem {
 const faqs: FAQItem[] = [
   {
     question: 'Is this product scalable?',
-    answer:
-      'Absolutely. We handle millions of requests a day without breaking a sweat.',
+    answer: 'Absolutely. We handle millions of requests a day without breaking a sweat.',
   },
   {
     question: 'Can I cancel anytime?',
@@ -24,13 +23,11 @@ const faqs: FAQItem[] = [
   },
   {
     question: 'Do you offer a free trial?',
-    answer:
-      'Yes, we offer a 14-day free trial on all plans. No credit card required.',
+    answer: 'Yes, we offer a 14-day free trial on all plans. No credit card required.',
   },
   {
     question: 'What happens if I go over my plan limits?',
-    answer:
-      'We will notify you before you hit your limits. We never cut off service unexpectedly.',
+    answer: 'We will notify you before you hit your limits. We never cut off service unexpectedly.',
   },
 ]
 
@@ -101,6 +98,6 @@ const FAQ1 = () => {
       </div>
     </section>
   )
-};
+}
 
 export { FAQ1 }
