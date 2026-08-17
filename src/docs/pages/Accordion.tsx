@@ -32,7 +32,7 @@ export const FAQItem = () => {
       <Accordion title='What is the Zero-Gap rule?'>
         The Zero-Gap layout system means we strictly avoid CSS \`gap\` utilities for core layouts. Instead, we use explicit mathematically proportional margins to ensure perfect geometric stacking and rendering predictability across all viewports without flex/grid wrapping failures.
       </Accordion>
-    <AccordionGroup>
+    </AccordionGroup>
   )
 }`
 

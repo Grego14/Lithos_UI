@@ -1,4 +1,5 @@
 import { Accordion, type AccordionProps } from './Accordion'
+import { cn } from '../../utils/cn'
 
 export interface PropItem {
   name: string
@@ -58,7 +59,7 @@ export const PropsAccordion = ({
   ...rest
 }: AccordionProps & { data: PropItem[] }) => {
   return (
-    <Accordion title={title} classes={{ container: `my-4 ${className}` }} defaultOpen={defaultOpen} {...rest}>
+    <Accordion title={title} className={cn('my-4', className)} defaultOpen={defaultOpen} {...rest}>
       <PropsTable data={data} />
     </Accordion>
   )
