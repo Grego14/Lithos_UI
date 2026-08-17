@@ -2,6 +2,8 @@ import { useInstallPreference, type PackageManager } from '../../core/useInstall
 import { Button } from '../../components/ui/Button'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 
+import { deriveImportLines, type ManualPath } from '../utils/deriveUsageCode'
+
 const commands = {
   pnpm: 'pnpm add lithos-ui',
   npm: 'npm install lithos-ui',
@@ -11,7 +13,7 @@ const commands = {
 
 interface SetupGuideProps {
   componentNames: string[]
-  manualPath: string | Partial<Record<string, string>>
+  manualPath: ManualPath
   requires?: string[]
   manualOnly?: boolean
   bordered?: boolean
@@ -26,29 +28,8 @@ export const SetupGuide = ({
 }: SetupGuideProps) => {
   const { installTab, updateInstallTab, packageManager, updatePackageManager } = useInstallPreference()
 
-  const commandImport = `import { ${componentNames.join(', ')} } from 'lithos-ui'`
-
-  let manualImport: string
-  if (typeof manualPath === 'string') {
-    manualImport = `import { ${componentNames.join(', ')} } from '${manualPath}'`
-  } else {
-    // Group component names by their specific manual path
-    const pathsToNames: Record<string, string[]> = {}
-    componentNames.forEach((name) => {
-      // Default to root if not mapped, though users should map all if using Record
-      const path = manualPath[name]
-      if (path) {
-        if (!pathsToNames[path]) pathsToNames[path] = []
-        pathsToNames[path].push(name)
-      }
-    })
-
-    manualImport = Object.entries(pathsToNames)
-      .map(([path, names]) => {
-        return `import { ${names.join(', ')} } from '${path}'`
-      })
-      .join('\n')
-  }
+  const commandImport = deriveImportLines(componentNames, manualPath, 'command')
+  const manualImport = deriveImportLines(componentNames, manualPath, 'manual')
 
   // If manualOnly is true, we force it to act like the manual tab is selected.
   const isManual = manualOnly || installTab === 'manual'

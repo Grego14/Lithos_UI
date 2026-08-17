@@ -7,19 +7,27 @@ import { IconSmartphone } from './icons/IconSmartphone'
 import { IconExternalLink } from './icons/IconExternalLink'
 import { IconCode } from './icons/IconCode'
 import { IconDownload } from './icons/IconDownload'
+import { useInstallPreference } from '../../core/useInstallPreference'
+import { deriveUsageCode, type ManualPath } from '../../docs/utils/deriveUsageCode'
 
 type AvailableTabs = 'preview' | 'code'
 type Breakpoint = 'mobile' | 'tablet' | 'desktop'
 
 interface PreviewBlockProps {
-  children: ReactNode
-  code: string
+  code:
+    | string
+    | {
+        body: string
+        componentNames: string[]
+        manualPath: ManualPath
+      }
   githubUrl?: string
   language?: string
   height?: string
   noPadding?: boolean
   slug?: string
   installGuide?: ReactNode
+  children: ReactNode
 }
 
 // 1. Decoupled, floating tab classes relying purely on the primitive
@@ -40,6 +48,10 @@ export const PreviewBlock = ({
   const [activeTab, setActiveTab] = useState<AvailableTabs>('preview')
   const [breakpoint, setBreakpoint] = useState<Breakpoint>('desktop')
   const [showInstall, setShowInstall] = useState(false)
+  const { installTab } = useInstallPreference()
+
+  const resolvedCode =
+    typeof code === 'string' ? code : deriveUsageCode(code.componentNames, code.manualPath, code.body, installTab)
 
   const getIframeWidth = () => {
     if (breakpoint === 'mobile') return '375px'
@@ -145,7 +157,7 @@ export const PreviewBlock = ({
           )
         ) : (
           <div className="h-full w-full overflow-y-auto">
-            <CodeViewer code={code} language={language} embedded />
+            <CodeViewer code={resolvedCode} language={language} embedded />
           </div>
         )}
       </div>

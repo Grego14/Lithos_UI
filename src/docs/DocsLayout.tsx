@@ -41,8 +41,6 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#custom-position', label: 'Custom position', level: 2 },
     { id: '#accessibility', label: 'Accessibility', level: 1 },
     { id: '#api', label: 'API Reference', level: 1 },
-    { id: '#hooks', label: 'Hooks', level: 1 },
-    { id: '#useToast', label: 'useToast', level: 2 },
   ],
   '/docs/toggle': [
     { id: '#installation', label: 'Installation', level: 1 },
