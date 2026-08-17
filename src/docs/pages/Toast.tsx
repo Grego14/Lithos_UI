@@ -1,11 +1,10 @@
 import { useToast } from '../../core/hooks/useToast'
-import { useLithosTheme } from '../../core/useLithosTheme'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { SetupGuide } from '../layout/SetupGuide'
 import { Button } from '../../components/ui/Button'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { CodeViewer } from '../../components/ui/CodeViewer'
-import { colors } from '../../utils/colors'
+
 import { toastPropsData, toastProviderPropsData } from '../propsData/toast'
 import { ToastProvider } from '../../components/ui/Toast'
 import type { ToastProps } from '../../core/types'
@@ -21,10 +20,9 @@ const newToast: ToastProps = {
 // inner component that consumes the nested context
 const ToastTriggerButton = () => {
   const toast = useToast()
-  const { accentColor } = useLithosTheme()
 
   const triggerToast = () => {
-    if (toast && toast.addToast) toast.addToast({ ...newToast, color: accentColor })
+    if (toast && toast.addToast) toast.addToast({ ...newToast })
   }
 
   return <Button onClick={triggerToast}>Trigger Toast</Button>
@@ -40,19 +38,14 @@ const PositionedToast = () => {
 
 export const ToastDoc = () => {
   const toast = useToast()
-  const { accentColor } = useLithosTheme()
 
   const triggerToast = () => {
-    if (toast && toast.addToast) toast.addToast({ ...newToast, color: accentColor })
+    if (toast && toast.addToast) toast.addToast({ ...newToast })
   }
 
-  const usageCode = `import { useToast } from '../../core/hooks/useToast'
-import { useLithosTheme } from '../../core/useLithosTheme'
-import { Button } from '../../components/ui/Button'
-
-export const ToastExample = () => {
+  const usageCode = {
+    body: `export const DefaultToast = () => {
   const { addToast } = useToast()
-  const { accentColor } = useLithosTheme()
 
   const triggerToast = () => {
     if (addToast) {
@@ -60,7 +53,6 @@ export const ToastExample = () => {
         title: 'SYSTEM TOAST',
         message: 'Structural integrity verified.',
         type: 'success',
-        color: accentColor,
       })
     }
   }
@@ -70,27 +62,18 @@ export const ToastExample = () => {
       Trigger Toast
     </Button>
   )
-}`
+}`,
+    componentNames: ['ToastProvider', 'useToast', 'Button'],
+    manualPath: {
+      ToastProvider: '../../components/ui/Toast',
+      useToast: '../../core/hooks/useToast',
+      Button: '../../components/ui/Button',
+    },
+  }
 
-  const hookUsageCode = `import { useToast } from '../../core/hooks/useToast'
-
-const { addToast } = useToast()
-`
-
-  const hookReturnCode = `type ToastContextType = {
-  addToast: (props: ToastProps) => string
-  removeToast: (id: string) => void
-}
-`
-
-  const positionedCode = `import { ToastProvider } from '../../components/ui/Toast'
-import { useToast } from '../../core/hooks/useToast'
-import { useLithosTheme } from '../../core/useLithosTheme'
-import { Button } from '../../components/ui/Button'
-
-export const TriggerToastButton = () => {
+  const positionedCode = {
+    body: `export const CustomPositionToast = () => {
   const { addToast } = useToast()
-  const { accentColor } = useLithosTheme()
 
   const triggerToast = () => {
     if (addToast) {
@@ -98,7 +81,6 @@ export const TriggerToastButton = () => {
         title: 'SYSTEM TOAST',
         message: 'Structural integrity verified.',
         type: 'success',
-        color: accentColor,
       })
     }
   }
@@ -113,11 +95,17 @@ export const TriggerToastButton = () => {
 export const App = () => {
   return (
     <ToastProvider position='top-left'>
-      <TriggerToastButton />
+      <CustomPositionToast />
     </ToastProvider>
   )
-}
-`
+}`,
+    componentNames: ['ToastProvider', 'useToast', 'Button'],
+    manualPath: {
+      ToastProvider: '../../components/ui/Toast',
+      useToast: '../../core/hooks/useToast',
+      Button: '../../components/ui/Button',
+    },
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-6">
@@ -148,13 +136,20 @@ export const App = () => {
       </h2>
 
       <SetupGuide
-        componentNames={['ToastProvider', 'useToast']}
-        manualPath={{ ToastProvider: '../../components/ui/Toast', useToast: '../../core/hooks/useToast' }}
+        componentNames={['ToastProvider', 'useToast', 'Button']}
+        manualPath={{
+          ToastProvider: '../../components/ui/Toast',
+          useToast: '../../core/hooks/useToast',
+          Button: '../../components/ui/Button',
+        }}
         requires={[
           'components/ui/icons/IconClose.tsx',
           'components/ui/Button.tsx',
           'core/hooks/useToast.ts',
+          'core/types.ts',
           'utils/colors.ts',
+          'utils/yiq.ts',
+          'utils/cn.ts',
         ]}
       />
 
@@ -231,35 +226,9 @@ const { addToast } = useToast()
           or per-instance via <code>className</code> (e.g. <code>rounded-full</code>). No custom prop is required.
         </div>
         <PropsAccordion title="ToastProvider Props" data={toastProviderPropsData} />
-      </section>
 
-      <section className="mb-12">
-        <h2 id="hooks" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
-          Hooks
-        </h2>
-
-        <h3 id="useToast" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
-          useToast
-        </h3>
-        <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-          Hook to access dispatch actions for trigger-based toasts.
-        </p>
-
-        <CodeViewer code={hookUsageCode} />
-
-        <div className="mt-6">
+        <div className="mt-8">
           <PropsAccordion title="addToast Options (ToastProps)" data={toastPropsData} />
-        </div>
-
-        <CodeViewer code={hookReturnCode} />
-
-        <div
-          className="border-l-4 border-(--lithos-accent) pl-6 py-2 mb-8 bg-(--lithos-surface) p-4"
-          style={{ borderColor: colors.warning }}
-        >
-          <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
-            The removeToast dispatch action is not documented as it is automatically called when a ToastItem is created.
-          </p>
         </div>
       </section>
     </div>

@@ -5,18 +5,21 @@
  * - Applies per-toast contrast and heavy borders so alerts read as hard objects.
  */
 import { useState, useCallback, useEffect, useRef, type ReactNode } from 'react'
+import { createPortal } from 'react-dom'
 import { getContrastText } from '../../utils/yiq'
 import { ToastContext } from '../../core/hooks/useToast'
 import type { ToastProps, ToastPosition } from '../../core/types'
 import { colors } from '../../utils/colors'
 import { Button } from './Button'
 import { IconClose } from './icons/IconClose'
+import { cn } from '../../utils/cn'
 
 type IdentifiedToastProps = ToastProps & { id: string }
 
-interface ToastItemType {
+export interface ToastItemProps {
   toast: IdentifiedToastProps
   onRemove: () => void
+  className?: string
 }
 
 type DurationObjType = {
@@ -27,10 +30,11 @@ type DurationObjType = {
   default?: number
 }
 
-interface ToastProviderProps {
+export interface ToastProviderProps {
   children: ReactNode
   duration?: DurationObjType | number
   position?: ToastPosition
+  className?: string
 }
 
 const positionStyles = {
@@ -42,7 +46,7 @@ const positionStyles = {
 
 const DEFAULT_DURATION = 5000
 
-export const ToastProvider = ({ children, duration, position = 'bottom-right' }: ToastProviderProps) => {
+export const ToastProvider = ({ children, duration, position = 'bottom-right', className }: ToastProviderProps) => {
   const [toasts, setToasts] = useState<IdentifiedToastProps[]>([])
 
   const durationConfig =
@@ -104,18 +108,27 @@ export const ToastProvider = ({ children, duration, position = 'bottom-right' }:
     <ToastContext.Provider value={{ addToast, removeToast }}>
       {children}
       {/* - Fixed corner stack uses explicit padding and margins, not gap, so each toast remains independently dismissible. */}
-      <div
-        className={`fixed ${positionStyles[position]} p-4 sm:p-6 md:p-8 z-50 pointer-events-none flex flex-col ${position.includes('left') ? 'items-start' : 'items-end'} w-full max-w-xs`}
-      >
-        {toasts.map((toast) => (
-          <ToastItem key={toast.id} toast={toast} onRemove={() => removeToast(toast.id)} />
-        ))}
-      </div>
+      {typeof document !== 'undefined' &&
+        createPortal(
+          <div
+            className={cn(
+              'fixed p-4 sm:p-6 md:p-8 z-50 pointer-events-none flex flex-col w-full max-w-xs',
+              positionStyles[position],
+              position.includes('left') ? 'items-start' : 'items-end',
+              className
+            )}
+          >
+            {toasts.map((toast) => (
+              <ToastItem key={toast.id} toast={toast} onRemove={() => removeToast(toast.id)} />
+            ))}
+          </div>,
+          document.body
+        )}
     </ToastContext.Provider>
   )
 }
 
-export const ToastItem = ({ toast, onRemove }: ToastItemType) => {
+export const ToastItem = ({ toast, onRemove, className }: ToastItemProps) => {
   const { id, message, type = 'default', color, title, duration } = toast
   const [isHovered, setIsHovered] = useState(false)
   const toastRef = useRef<HTMLDivElement | null>(null)
@@ -180,7 +193,10 @@ export const ToastItem = ({ toast, onRemove }: ToastItemType) => {
         tabIndex={isError ? -1 : undefined}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className={`toast-override-${id} pointer-events-auto border-2 p-3 sm:p-4 mb-4 w-full flex flex-row items-start shadow-[4px_4px_0_0_var(--lithos-shadow)] animate-[slide-up_0.3s_ease-out_forwards] rounded-(--lithos-radius)`}
+        className={cn(
+          `toast-override-${id} pointer-events-auto border-2 p-3 sm:p-4 mb-4 w-full flex flex-row items-start shadow-[4px_4px_0_0_var(--lithos-shadow)] animate-[slide-up_0.3s_ease-out_forwards] rounded-(--lithos-radius)`,
+          className
+        )}
       >
         <div className="flex-1 mr-4">
           {title && <h4 className="font-black text-lg uppercase tracking-tighter leading-none mb-2 m-0">{title}</h4>}
