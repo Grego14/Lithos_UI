@@ -1,10 +1,10 @@
 export type ManualPath = string | Record<string, string>
 
-export function deriveImportLines(
+export const deriveImportLines = (
   componentNames: string[],
   manualPath: ManualPath,
   mode: 'command' | 'manual'
-): string {
+): string => {
   if (mode === 'command') {
     return `import { ${componentNames.join(', ')} } from 'lithos-ui'`
   }
@@ -14,11 +14,11 @@ export function deriveImportLines(
   return componentNames.map((name) => `import { ${name} } from '${manualPath[name]}'`).join('\n')
 }
 
-export function deriveUsageCode(
+export const deriveUsageCode = (
   componentNames: string[],
   manualPath: ManualPath,
   body: string,
   mode: 'command' | 'manual'
-): string {
+): string => {
   return `${deriveImportLines(componentNames, manualPath, mode)}\n\n${body}`
 }

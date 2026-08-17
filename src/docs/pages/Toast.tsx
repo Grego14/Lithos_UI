@@ -4,9 +4,7 @@ import { SetupGuide } from '../layout/SetupGuide'
 import { Button } from '../../components/ui/Button'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { CodeViewer } from '../../components/ui/CodeViewer'
-import { useInstallPreference } from '../../core/useInstallPreference'
-import { deriveUsageCode } from '../utils/deriveUsageCode'
-import { colors } from '../../utils/colors'
+
 import { toastPropsData, toastProviderPropsData } from '../propsData/toast'
 import { ToastProvider } from '../../components/ui/Toast'
 import type { ToastProps } from '../../core/types'
@@ -40,7 +38,6 @@ const PositionedToast = () => {
 
 export const ToastDoc = () => {
   const toast = useToast()
-  const { installTab } = useInstallPreference()
 
   const triggerToast = () => {
     if (toast && toast.addToast) toast.addToast({ ...newToast })
