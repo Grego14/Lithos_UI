@@ -1,6 +1,8 @@
 /**
- * CarouselPagination.tsx
- * Renders the slide selector (the dots or numbers design) usually located at the middle top or bottom.
+ * @fileoverview Lithos UI carousel pagination primitive (`CarouselPagination`).
+ * - Dual selector mode: renders interactive dot indicators or numeric buttons to trigger direct slide navigation.
+ * - Dynamic viewport windowing: scales active dot sizes and hides off-screen indicators (outside ±2 index range) with `tabIndex={-1}` for cleaner DOM flow.
+ * - Optional slide counter and horizontal rendering safeguard for vertical layout mode.
  */
 import type { ComponentPropsWithoutRef } from 'react'
 import { Button } from '../Button'
@@ -15,7 +17,7 @@ const iconClass = {
   selected: 'w-4 h-4',
 }
 
-interface CarouselPaginationProps extends Omit<ComponentPropsWithoutRef<'div'>, 'className'> {
+export interface CarouselPaginationProps extends Omit<ComponentPropsWithoutRef<'div'>, 'className'> {
   index: number
   slides: number
   scroll: ScrollFunc

@@ -1,6 +1,8 @@
 /**
- * CarouselButton.tsx
- * Renders the Previous and Next arrow buttons used to navigate slides.
+ * @fileoverview Lithos UI carousel navigation controls (`CarouselButton`, `CarouselPrev`, `CarouselNext`).
+ * - Direction-aware navigation primitives that consume `CarouselContext` to trigger vertical or horizontal scrolling.
+ * - Dynamic icon switching (arrows up/down vs. left/right) based on the carousel orientation state.
+ * - Accessible compound triggers providing default `aria-label` fallbacks for screen reader interactions.
  */
 import { type ComponentPropsWithRef, type MouseEvent } from 'react'
 import { Button } from '../Button'

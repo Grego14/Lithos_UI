@@ -1,8 +1,10 @@
-/**
- * CarouselContext.tsx
- * Provides the React context and state (like currentIndex) shared across all Carousel sub-components.
- */
 /* eslint-disable react-refresh/only-export-components */
+
+/**
+ * @fileoverview Lithos UI carousel context provider and type definitions.
+ * - Centralizes navigation methods, orientation flags, and indexing state for sub-components via `CarouselContext`.
+ * - Memoizes provider value to prevent unnecessary re-renders across consumers (`CarouselControls`, `CarouselPagination`, `CarouselButton`).
+ */
 import { createContext, useMemo, type ReactNode } from 'react'
 
 export type CarouselDirection = 'forwards' | 'backwards'
