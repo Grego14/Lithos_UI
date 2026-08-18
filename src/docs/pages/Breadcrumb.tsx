@@ -11,15 +11,15 @@ import { breadcrumbPropsData, breadcrumbItemDataPropsData } from '../propsData/b
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Breadcrumb.tsx'
 
 export const BreadcrumbDoc = () => {
-  const collapsibleCode = `import { Breadcrumb } from '../../components/ui/Breadcrumb'
-
+  const collapsibleCode = {
+    body: `
 export const CollapsibleBreadcrumb = () => {
-  items={[
-    { label: 'Lithos UI', href: '#', onClick: (e) => e.preventDefault() },
-    { label: 'Components', href: '#', onClick: (e) => e.preventDefault() },
-    { label: 'Breadcrumb', href: '#', onClick: (e) => e.preventDefault() },
+  const items = [
+    { label: 'Lithos UI', href: '#' },
+    { label: 'Components', href: '#' },
+    { label: 'Breadcrumb', href: '#' },
     { label: 'Collapsible Breadcrumb', active: true },
-  ]}
+  ]
 
   return (
     <Breadcrumb
@@ -30,23 +30,33 @@ export const CollapsibleBreadcrumb = () => {
       items={items}
     />
   )
-}`
+}`,
+    componentNames: ['Breadcrumb'],
+    manualPath: {
+      Breadcrumb: '../../components/ui/Breadcrumb',
+    },
+  }
 
-  const iconNameCode = `import { Breadcrumb } from '../../components/ui/Breadcrumb'
-import { IconFolder } from '../../components/ui/icons/IconFolder'
-import { IconSettings } from '../../components/ui/icons/IconSettings'
-import { IconFileText } from '../../components/ui/icons/IconFileText'
-
+  const iconNameCode = {
+    body: `
 export const IconNameBreadcrumb = () => {
-  items={[
+  const items = [
     { label: 'Lithos UI', href: '#', onClick: (e) => e.preventDefault() },
     { label: 'Components', href: '#', icon: <IconFolder />, onClick: (e) => e.preventDefault() },
     { label: 'Breadcrumb', href: '#', icon: <IconSettings />, onClick: (e) => e.preventDefault() },
     { label: 'Icon', active: true, icon: <IconFileText /> },
-  ]}
+  ]
 
   return <Breadcrumb variant="icon" items={items} />
-}`
+}`,
+    componentNames: ['Breadcrumb', 'IconFolder', 'IconSettings', 'IconFileText'],
+    manualPath: {
+      Breadcrumb: '../../components/ui/Breadcrumb',
+      IconFolder: '../../components/ui/icons/IconFolder',
+      IconSettings: '../../components/ui/icons/IconSettings',
+      IconFileText: '../../components/ui/icons/IconFileText',
+    },
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-6">
@@ -82,8 +92,14 @@ export const IconNameBreadcrumb = () => {
 
       <SetupGuide
         componentNames={['Breadcrumb']}
-        manualPath="../../components/ui/Breadcrumb"
-        requires={['utils/cn.ts', 'components/ui/icons/IconHome.tsx', 'components/ui/icons/IconBreadcrumbSeparator']}
+        manualPath={{
+          Breadcrumb: '../../components/ui/Breadcrumb',
+        }}
+        requires={[
+          'utils/cn.ts',
+          'components/ui/icons/IconHome.tsx',
+          'components/ui/icons/IconBreadcrumbSeparator.tsx',
+        ]}
       />
 
       <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
