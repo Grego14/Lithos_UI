@@ -162,6 +162,7 @@ export const AlertWithUndo = () => {
           'utils/cn.ts',
           'utils/yiq.ts',
           'utils/colors.ts',
+          'core/types.ts',
           'components/ui/Button.tsx',
           'components/ui/icons/IconUndo.tsx',
           'components/ui/icons/IconClose.tsx'
