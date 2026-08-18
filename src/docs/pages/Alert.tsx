@@ -31,7 +31,7 @@ export const AlertDoc = () => {
   )
 }`,
     componentNames: ['Alert'],
-    manualPath: '../../components/ui/Alert'
+    manualPath: '../../components/ui/Alert',
   }
 
   const outlineCode = {
@@ -48,7 +48,7 @@ export const AlertDoc = () => {
   )
 }`,
     componentNames: ['Alert'],
-    manualPath: '../../components/ui/Alert'
+    manualPath: '../../components/ui/Alert',
   }
 
   const sizesCode = {
@@ -63,7 +63,7 @@ export const AlertDoc = () => {
 }`,
 
     componentNames: ['Alert'],
-    manualPath: '../../components/ui/Alert'
+    manualPath: '../../components/ui/Alert',
   }
 
   const titlelessCode = {
@@ -75,7 +75,7 @@ export const AlertDoc = () => {
   )
 }`,
     componentNames: ['Alert'],
-    manualPath: '../../components/ui/Alert'
+    manualPath: '../../components/ui/Alert',
   }
 
   const actionsCode = {
@@ -99,7 +99,7 @@ export const AlertWithUndo = () => {
   )
 }`,
     componentNames: ['useState', 'Alert'],
-    manualPath: { useState: 'react', Alert: '../../components/ui/Alert' }
+    manualPath: { useState: 'react', Alert: '../../components/ui/Alert' },
   }
 
   const customCode = {
@@ -109,7 +109,7 @@ export const AlertWithUndo = () => {
   )
 }`,
     componentNames: ['Alert'],
-    manualPath: '../../components/ui/Alert'
+    manualPath: '../../components/ui/Alert',
   }
 
   const handleFocus = () => setError('')
@@ -165,7 +165,7 @@ export const AlertWithUndo = () => {
           'core/types.ts',
           'components/ui/Button.tsx',
           'components/ui/icons/IconUndo.tsx',
-          'components/ui/icons/IconClose.tsx'
+          'components/ui/icons/IconClose.tsx',
         ]}
       />
 
