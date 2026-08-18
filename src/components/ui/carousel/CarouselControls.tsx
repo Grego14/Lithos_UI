@@ -3,13 +3,13 @@
  * - Header/footer toolbar providing title display and next/previous navigation triggers.
  * - Reactive button boundary guards: automatically disables navigation triggers at bounds when loop mode is inactive.
  */
-import type { ComponentPropsWithoutRef } from 'react'
+import type { ComponentPropsWithRef } from 'react'
 import { cn } from '../../../utils/cn'
 import { CarouselNext, CarouselPrev } from './CarouselButton'
 import type { ClassValue, ClassArray } from 'clsx'
 import { useCarousel } from './useCarousel'
 
-export interface CarouselControlsProps extends Omit<ComponentPropsWithoutRef<'div'>, 'className'> {
+export interface CarouselControlsProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   title?: string | undefined
   bottomPositioned?: boolean
   className?: ClassValue | ClassArray
@@ -21,12 +21,14 @@ export const CarouselControls = ({
   bottomPositioned = false,
   className,
   loop = false,
+  ref,
   ...rest
 }: CarouselControlsProps) => {
   const { currentIndex, totalSlides } = useCarousel()
 
   return (
     <div
+      ref={ref}
       className={cn(
         bottomPositioned ? 'mt-3' : 'mb-3',
         'flex flex-col sm:flex-row items-center justify-between',

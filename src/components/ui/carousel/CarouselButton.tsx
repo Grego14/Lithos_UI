@@ -26,6 +26,7 @@ export const CarouselButton = ({
   className,
   label,
   onClick,
+  ref,
   ...props
 }: CarouselButtonProps) => {
   const { scroll, vertical } = useCarousel()
@@ -39,7 +40,7 @@ export const CarouselButton = ({
     direction === 'forwards' ? (vertical ? IconArrowDown : IconArrowRight) : vertical ? IconArrowUp : IconArrowLeft
 
   return (
-    <Button aria-label={label} onClick={handleClick} className={className} {...props}>
+    <Button aria-label={label} onClick={handleClick} className={className} {...props} ref={ref}>
       {children || <ArrowIcon aria-hidden="true" />}
     </Button>
   )
