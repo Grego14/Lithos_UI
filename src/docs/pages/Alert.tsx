@@ -17,9 +17,8 @@ export const AlertDoc = () => {
 
   const inputRef = useRef<null | HTMLInputElement>(null)
 
-  const filledCode = `import { Alert } from '../../components/ui/Alert'
-
-export const AlertFilled = () => {
+  const filledCode = {
+    body: `export const AlertFilled = () => {
   return (
     <div className='flex flex-col w-full'>
       <Alert className='mb-4' size='lg' variant='filled' title='Default'>Structural review pending.</Alert>
@@ -30,11 +29,13 @@ export const AlertFilled = () => {
       <Alert size='lg' type='accent' variant='filled' title='Accent'>Theme accent applied.</Alert>
     </div>
   )
-}`
+}`,
+    componentNames: ['Alert'],
+    manualPath: '../../components/ui/Alert',
+  }
 
-  const outlineCode = `import { Alert } from '../../components/ui/Alert'
-
-export const AlertOutline = () => {
+  const outlineCode = {
+    body: `export const AlertOutline = () => {
   return (
     <div className='flex flex-col w-full'>
       <Alert className='mb-4' size='lg' variant='outlined' title='Default'>Structural review pending.</Alert>
@@ -45,11 +46,13 @@ export const AlertOutline = () => {
       <Alert size='lg' type='accent' variant='outlined' title='Accent'>Theme accent applied.</Alert>
     </div>
   )
-}`
+}`,
+    componentNames: ['Alert'],
+    manualPath: '../../components/ui/Alert',
+  }
 
-  const sizesCode = `import { Alert } from '../../components/ui/Alert'
-
-export const AlertSizes = () => {
+  const sizesCode = {
+    body: `export const AlertSizes = () => {
   return (
     <div className='flex flex-col w-full'>
       <Alert className='mb-4' size='sm' title='Small'>Structural review pending.</Alert>
@@ -57,22 +60,26 @@ export const AlertSizes = () => {
       <Alert size='lg' title='Large'>Structural review pending.</Alert>
     </div>
   )
-}`
+}`,
 
-  const titlelessCode = `import { Alert } from '../../components/ui/Alert'
+    componentNames: ['Alert'],
+    manualPath: '../../components/ui/Alert',
+  }
 
-export const AlertNoTitle = () => {
+  const titlelessCode = {
+    body: `export const AlertNoTitle = () => {
   return (
     <div className='flex flex-col w-full'>
       <Alert size='md' type='warning'>Load tolerance nearing limit.</Alert>
     </div>
   )
-}`
+}`,
+    componentNames: ['Alert'],
+    manualPath: '../../components/ui/Alert',
+  }
 
-  const actionsCode = `import { useState } from 'react'
-import { Alert } from '../../components/ui/Alert'
-
-export const AlertWithClose = () => {
+  const actionsCode = {
+    body: `export const AlertWithClose = () => {
   const [dismissed, setDismissed] = useState(false)
 
   if (dismissed) return null
@@ -90,15 +97,20 @@ export const AlertWithUndo = () => {
       Timeout threshold updated to 30s.
     </Alert>
   )
-}`
+}`,
+    componentNames: ['useState', 'Alert'],
+    manualPath: { useState: 'react', Alert: '../../components/ui/Alert' },
+  }
 
-  const customCode = `import { Alert } from '../../components/ui/Alert'
-
-export const CustomizedAlert = () => {
+  const customCode = {
+    body: `export const CustomizedAlert = () => {
   return (
     <Alert size='md' color='#FF0033' title='Custom'>Custom color alert.</Alert>
   )
-}`
+}`,
+    componentNames: ['Alert'],
+    manualPath: '../../components/ui/Alert',
+  }
 
   const handleFocus = () => setError('')
 
@@ -146,7 +158,15 @@ export const CustomizedAlert = () => {
       <SetupGuide
         componentNames={['Alert']}
         manualPath="../../components/ui/Alert"
-        requires={['utils/cn.ts', 'utils/yiq.ts', 'components/ui/Button.tsx']}
+        requires={[
+          'utils/cn.ts',
+          'utils/yiq.ts',
+          'utils/colors.ts',
+          'core/types.ts',
+          'components/ui/Button.tsx',
+          'components/ui/icons/IconUndo.tsx',
+          'components/ui/icons/IconClose.tsx',
+        ]}
       />
 
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
