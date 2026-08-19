@@ -8,20 +8,21 @@ import { SetupGuide } from '../layout/SetupGuide'
 export const ToggleDoc = () => {
   const [checked, setChecked] = useState(false)
 
-  const usageCode = `import { useState } from 'react'
-import { Toggle } from '../../components/ui/Toggle'
-
-export const ToggleExample = () => {
+  const usageCode = {
+    body: `export const ToggleExample = () => {
   const [checked, setChecked] = useState(false)
 
   return (
-    <Toggle 
-      checked={checked} 
-      onToggle={() => setChecked(!checked)} 
-      label="Documentation Toggle" 
+    <Toggle
+      checked={checked}
+      onToggle={() => setChecked(!checked)}
+      label="Documentation Toggle"
     />
   )
-}`
+}`,
+    componentNames: ['Toggle', 'useState'],
+    manualPath: { useState: 'react', Toggle: '../../components/ui/Toggle' },
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-6">
@@ -53,7 +54,11 @@ export const ToggleExample = () => {
         Installation
       </h2>
 
-      <SetupGuide componentNames={['Toggle']} manualPath="../../components/ui/Toggle" />
+      <SetupGuide
+        componentNames={['Toggle']}
+        manualPath="../../components/ui/Toggle"
+        requires={['utils/cn.ts', 'components/ui/Button.tsx']}
+      />
 
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Examples
