@@ -1,3 +1,12 @@
+/**
+ * @fileoverview
+ * Breadcrumb navigation primitive with support for:
+ * - Default, collapsible, and icon variants
+ * - Custom separators and home icons
+ * - Expandable collapsed breadcrumb items
+ * - Accessible breadcrumb semantics
+ */
+
 import { Fragment, useState } from 'react'
 import type { ComponentPropsWithRef, MouseEventHandler, ReactNode } from 'react'
 import { IconHome } from './icons/IconHome'
