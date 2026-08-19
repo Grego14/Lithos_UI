@@ -95,6 +95,17 @@ describe('Button', () => {
     expect(button.className).toContain('rounded-full')
     expect(button.className).not.toContain('rounded-(--lithos-radius)')
   })
+
+  it('passes id and other native props through to the root element', () => {
+    render(
+      <Button id="custom-id" data-testid="custom-button">
+        Click me
+      </Button>
+    )
+    const button = screen.getByRole('button')
+    expect(button).toHaveAttribute('id', 'custom-id')
+    expect(button).toHaveAttribute('data-testid', 'custom-button')
+  })
 })
 
 describe('ButtonGroup', () => {
@@ -137,5 +148,17 @@ describe('ButtonGroup', () => {
     )
     const results = await axe(container)
     expect(results).toHaveNoViolations()
+  })
+
+  it('passes className, id, and other native props through to the root element', () => {
+    const { container } = render(
+      <ButtonGroup className="custom-class" id="custom-id" data-testid="custom-group">
+        <Button>One</Button>
+      </ButtonGroup>
+    )
+    const root = container.firstElementChild
+    expect(root).toHaveClass('custom-class')
+    expect(root).toHaveAttribute('id', 'custom-id')
+    expect(root).toHaveAttribute('data-testid', 'custom-group')
   })
 })
