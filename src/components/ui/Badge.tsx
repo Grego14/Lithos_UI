@@ -9,13 +9,14 @@ import { colors } from '../../utils/colors'
 import { useAccentColor } from '../../core/useAccentColor'
 import type { HexColor } from '../../core/types'
 import { cn } from '../../utils/cn'
+import type { ClassArray, ClassValue } from 'clsx'
 
 type BadgeSizes = 'default' | 'sm' | 'md' | 'lg'
 type BadgeVariants = 'default' | 'accent' | 'success' | 'error' | 'warning' | 'info'
 
-export interface BadgeProps extends ComponentPropsWithRef<'div'> {
+export interface BadgeProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   variant?: BadgeVariants
-  className?: string
+  className?: ClassValue | ClassArray
   size?: BadgeSizes
   color?: HexColor | string
 }

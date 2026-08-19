@@ -9,7 +9,7 @@ export const badgePropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'string',
+    type: 'ClassValue | ClassArray',
     defaultValue: '""',
     required: false,
     description: 'Additional CSS classes to apply custom styles.',
