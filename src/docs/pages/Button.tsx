@@ -11,102 +11,103 @@ import { buttonPropsData, buttonGroupPropsData } from '../propsData/button'
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Button.tsx'
 
 export const ButtonDoc = () => {
-  const defaultCode = `import { Button } from '../../components/ui/Button'
+  const defaultCode = {
+    body: `export const DefaultButton = () => {
+  return <Button>Default</Button>
+}`,
+    componentNames: ['Button'],
+    manualPath: '../../components/ui/Button',
+  }
 
-export const DefaultButton = () => {
-  return <Button className="cursor-pointer">Default</Button>
-}`
+  const secondaryCode = {
+    body: `export const SecondaryButton = () => {
+  return <Button intent="secondary">Secondary</Button>
+}`,
+    componentNames: ['Button'],
+    manualPath: '../../components/ui/Button',
+  }
 
-  const secondaryCode = `import { Button } from '../../components/ui/Button'
+  const accentCode = {
+    body: `export const AccentButton = () => {
+  return <Button intent="accent">Accent</Button>
+}`,
+    componentNames: ['Button'],
+    manualPath: '../../components/ui/Button',
+  }
 
-export const SecondaryButton = () => {
-  return (
-    <Button intent="secondary" className="cursor-pointer">
-      Secondary
-    </Button>
-  )
-}`
+  const textCode = {
+    body: `export const TextButton = () => {
+  return <Button intent="text">Text</Button>
+}`,
+    componentNames: ['Button'],
+    manualPath: '../../components/ui/Button',
+  }
 
-  const accentCode = `import { Button } from '../../components/ui/Button'
-
-export const AccentButton = () => {
-  return (
-    <Button intent="accent" className="cursor-pointer">
-      Accent
-    </Button>
-  )
-}`
-
-  const textCode = `import { Button } from '../../components/ui/Button'
-
-export const TextButton = () => {
-  return (
-    <Button intent="text" className="cursor-pointer">
-      Text
-    </Button>
-  )
-}`
-
-  const withIconCode = `import { Button } from '../../components/ui/Button'
-import { IconHome } from '../../components/ui/icons/IconHome'
-import { IconSettings } from '../../components/ui/icons/IconSettings'
-
-export const WithIconButtons = () => {
+  const withIconCode = {
+    body: `export const WithIconButtons = () => {
   return (
     <div className="flex items-center">
-      <Button iconLeft={<IconHome />} className="cursor-pointer">
-        Home
-      </Button>
-      <Button intent="secondary" iconRight={<IconSettings />} className="cursor-pointer ml-3">
+      <Button iconLeft={<IconHome />}>Home</Button>
+      <Button intent="secondary" iconRight={<IconSettings />} className="ml-3">
         Settings
       </Button>
     </div>
   )
-}`
+}`,
+    componentNames: ['Button'],
+    manualPath: '../../components/ui/Button',
+  }
 
-  const iconCode = `import { Button } from '../../components/ui/Button'
-import { IconDownload } from '../../components/ui/icons/IconDownload'
-
-export const IconButton = () => {
+  const iconCode = {
+    body: `export const IconButton = () => {
   return (
-    <Button aria-label="Download" className="cursor-pointer">
+    <Button aria-label="Download">
       <IconDownload />
     </Button>
   )
-}`
+}`,
+    componentNames: ['Button'],
+    manualPath: '../../components/ui/Button',
+  }
 
-  const groupHorizontalCode = `import { Button, ButtonGroup } from '../../components/ui/Button'
-
-export const HorizontalButtonGroup = () => {
+  const groupHorizontalCode = {
+    body: `export const HorizontalButtonGroup = () => {
   return (
     <ButtonGroup>
-      <Button intent="secondary" className="cursor-pointer">Cancel</Button>
-      <Button intent="primary" className="cursor-pointer">Save Changes</Button>
+      <Button intent="secondary">Cancel</Button>
+      <Button intent="primary">Save Changes</Button>
     </ButtonGroup>
   )
-}`
+}`,
+    componentNames: ['Button', 'ButtonGroup'],
+    manualPath: '../../components/ui/Button',
+  }
 
-  const groupVerticalCode = `import { Button, ButtonGroup } from '../../components/ui/Button'
-
-export const VerticalButtonGroup = () => {
+  const groupVerticalCode = {
+    body: `export const VerticalButtonGroup = () => {
   return (
     <ButtonGroup orientation="vertical">
-      <Button intent="primary" className="cursor-pointer">Save Changes</Button>
-      <Button intent="secondary" className="cursor-pointer">Cancel</Button>
+      <Button intent="primary">Save Changes</Button>
+      <Button intent="secondary">Cancel</Button>
     </ButtonGroup>
   )
-}`
+}`,
+    componentNames: ['Button', 'ButtonGroup'],
+    manualPath: '../../components/ui/Button',
+  }
 
-  const groupAttachedCode = `import { Button, ButtonGroup } from '../../components/ui/Button'
-
-export const AttachedButtonGroup = () => {
+  const groupAttachedCode = {
+    body: `export const AttachedButtonGroup = () => {
   return (
     <ButtonGroup attached>
-      <Button intent="secondary" className="cursor-pointer">Cancel</Button>
-      <Button intent="primary" className="cursor-pointer">Save Changes</Button>
+      <Button intent="secondary">Cancel</Button>
+      <Button intent="primary">Save Changes</Button>
     </ButtonGroup>
   )
-}`
+}`,
+    componentNames: ['Button', 'ButtonGroup'],
+    manualPath: '../../components/ui/Button',
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-6">
@@ -141,7 +142,11 @@ export const AttachedButtonGroup = () => {
         Installation
       </h2>
 
-      <SetupGuide componentNames={['Button']} manualPath="../../components/ui/Button" requires={['utils/cn.ts']} />
+      <SetupGuide
+        componentNames={['Button']}
+        manualPath="../../components/ui/Button"
+        requires={['utils/cn.ts', 'core/types.ts']}
+      />
 
       <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
         Anatomy
@@ -173,7 +178,7 @@ export const AttachedButtonGroup = () => {
       </p>
 
       <PreviewBlock code={defaultCode} githubUrl={githubUrl}>
-        <Button className="cursor-pointer">Default</Button>
+        <Button>Default</Button>
       </PreviewBlock>
 
       <h4 id="secondary" className="mb-3 text-lg font-black uppercase tracking-tight text-(--lithos-text)">
@@ -185,9 +190,7 @@ export const AttachedButtonGroup = () => {
       </p>
 
       <PreviewBlock code={secondaryCode} githubUrl={githubUrl}>
-        <Button intent="secondary" className="cursor-pointer">
-          Secondary
-        </Button>
+        <Button intent="secondary">Secondary</Button>
       </PreviewBlock>
 
       <h4 id="accent" className="mb-3 text-lg font-black uppercase tracking-tight text-(--lithos-text)">
@@ -199,9 +202,7 @@ export const AttachedButtonGroup = () => {
       </p>
 
       <PreviewBlock code={accentCode} githubUrl={githubUrl}>
-        <Button intent="accent" className="cursor-pointer">
-          Accent
-        </Button>
+        <Button intent="accent">Accent</Button>
       </PreviewBlock>
 
       <h4 id="text" className="mb-3 text-lg font-black uppercase tracking-tight text-(--lithos-text)">
@@ -213,9 +214,7 @@ export const AttachedButtonGroup = () => {
       </p>
 
       <PreviewBlock code={textCode} githubUrl={githubUrl}>
-        <Button intent="text" className="cursor-pointer">
-          Text
-        </Button>
+        <Button intent="text">Text</Button>
       </PreviewBlock>
 
       <h4 id="with-icon" className="mb-3 text-lg font-black uppercase tracking-tight text-(--lithos-text)">
@@ -229,10 +228,8 @@ export const AttachedButtonGroup = () => {
 
       <PreviewBlock code={withIconCode} githubUrl={githubUrl}>
         <div className="flex items-center">
-          <Button iconLeft={<IconHome />} className="cursor-pointer">
-            Home
-          </Button>
-          <Button intent="secondary" iconRight={<IconSettings />} className="cursor-pointer ml-3">
+          <Button iconLeft={<IconHome />}>Home</Button>
+          <Button intent="secondary" iconRight={<IconSettings />} className="ml-3">
             Settings
           </Button>
         </div>
@@ -248,7 +245,7 @@ export const AttachedButtonGroup = () => {
       </p>
 
       <PreviewBlock code={iconCode} githubUrl={githubUrl}>
-        <Button aria-label="Download" className="cursor-pointer">
+        <Button aria-label="Download">
           <IconDownload />
         </Button>
       </PreviewBlock>
@@ -271,12 +268,8 @@ export const AttachedButtonGroup = () => {
 
       <PreviewBlock code={groupHorizontalCode} githubUrl={githubUrl}>
         <ButtonGroup>
-          <Button intent="secondary" className="cursor-pointer">
-            Cancel
-          </Button>
-          <Button intent="primary" className="cursor-pointer">
-            Save Changes
-          </Button>
+          <Button intent="secondary">Cancel</Button>
+          <Button intent="primary">Save Changes</Button>
         </ButtonGroup>
       </PreviewBlock>
 
@@ -290,12 +283,8 @@ export const AttachedButtonGroup = () => {
 
       <PreviewBlock code={groupVerticalCode} githubUrl={githubUrl}>
         <ButtonGroup orientation="vertical">
-          <Button intent="primary" className="cursor-pointer">
-            Save Changes
-          </Button>
-          <Button intent="secondary" className="cursor-pointer">
-            Cancel
-          </Button>
+          <Button intent="primary">Save Changes</Button>
+          <Button intent="secondary">Cancel</Button>
         </ButtonGroup>
       </PreviewBlock>
 
@@ -310,12 +299,8 @@ export const AttachedButtonGroup = () => {
 
       <PreviewBlock code={groupAttachedCode} githubUrl={githubUrl}>
         <ButtonGroup attached>
-          <Button intent="secondary" className="cursor-pointer">
-            Cancel
-          </Button>
-          <Button intent="primary" className="cursor-pointer">
-            Save Changes
-          </Button>
+          <Button intent="secondary">Cancel</Button>
+          <Button intent="primary">Save Changes</Button>
         </ButtonGroup>
       </PreviewBlock>
 
