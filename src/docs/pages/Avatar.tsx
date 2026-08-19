@@ -20,9 +20,8 @@ const tenUsers = [...namedUsers, ...restOfUsers(4, 10)]
 const fourteenUsers = [...namedUsers, ...restOfUsers(4, 14)]
 
 export const AvatarDoc = () => {
-  const variantsCode = `import { Avatar } from '../../components/ui/Avatar'
-
-export const AvatarVariants = () => {
+  const variantsCode = {
+    body: `export const AvatarVariants = () => {
   return (
     <div className='flex items-center space-x-4'>
       {/* default: image */}
@@ -35,11 +34,13 @@ export const AvatarVariants = () => {
       <Avatar variant='solid' src="https://broken.example/404.png" alt="Jane Doe" />
     </div>
   )
-}`
+}`,
+    componentNames: ['Avatar'],
+    manualPath: '../../components/ui/Avatar',
+  }
 
-  const sizesCode = `import { Avatar } from '../../components/ui/Avatar'
-
-export const AvatarSizes = () => {
+  const sizesCode = {
+    body: `export const AvatarSizes = () => {
   return (
     <div className='flex items-end space-x-4'>
       <Avatar size='sm' src="https://picsum.photos/200" alt="Jane Doe" />
@@ -47,11 +48,13 @@ export const AvatarSizes = () => {
       <Avatar size='lg' src="https://picsum.photos/200" alt="Jane Doe" />
     </div>
   )
-}`
+}`,
+    componentNames: ['Avatar'],
+    manualPath: '../../components/ui/Avatar',
+  }
 
-  const autoGroupTenCode = `import { AvatarGroup } from '../../components/ui/Avatar'
-
-const users = [
+  const autoGroupTenCode = {
+    body: `const users = [
   { src: 'https://picsum.photos/id/64/200', alt: 'Jane Doe' },
   { src: 'https://picsum.photos/id/91/200', alt: 'John Smith' },
   { src: 'https://picsum.photos/id/22/200', alt: 'Amy Lee' },
@@ -61,11 +64,13 @@ const users = [
 export const TenUserGroup = () => {
   // 10 users, max 4 shown -> renders 4 Avatars + a "+6" AvatarGroupCount
   return <AvatarGroup items={users} max={4} />
-}`
+}`,
+    componentNames: ['AvatarGroup'],
+    manualPath: '../../components/ui/Avatar',
+  }
 
-  const autoGroupFourteenCode = `import { AvatarGroup } from '../../components/ui/Avatar'
-
-const users = [
+  const autoGroupFourteenCode = {
+    body: `const users = [
   { src: 'https://picsum.photos/id/64/200', alt: 'Jane Doe' },
   { src: 'https://picsum.photos/id/91/200', alt: 'John Smith' },
   { src: 'https://picsum.photos/id/22/200', alt: 'Amy Lee' },
@@ -75,7 +80,10 @@ const users = [
 export const FourteenUserGroup = () => {
   // 14 users, max 4 shown -> renders 4 Avatars + a "+10" AvatarGroupCount
   return <AvatarGroup items={users} max={4} />
-}`
+}`,
+    componentNames: ['AvatarGroup'],
+    manualPath: '../../components/ui/Avatar',
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-6">
@@ -121,13 +129,14 @@ export const FourteenUserGroup = () => {
       <div className="mb-12">
         <CodeViewer
           language="tsx"
-          code={`<AvatarGroup>
-  <Avatar>
-    <AvatarImage />
-    <AvatarFallback />
-  </Avatar>
-  <AvatarGroupCount />
-</AvatarGroup>`}
+          code={`<AvatarGroup items={items} max={4} />
+{/* internally renders: */}
+<div>
+  <Avatar src={item.src} alt={item.alt} />
+  {/* ...one per visible item, up to max */}
+  <AvatarGroupCount count={overflow} />
+  {/* only when items.length > max */}
+</div>`}
         />
       </div>
 

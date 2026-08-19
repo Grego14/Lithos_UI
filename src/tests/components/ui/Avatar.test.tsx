@@ -40,6 +40,16 @@ describe('Avatar', () => {
     const results = await axe(container)
     expect(results).toHaveNoViolations()
   })
+
+  it('passes className, id, and other native props through to the root element', () => {
+    const { container } = render(
+      <Avatar alt="Jane Doe" className="custom-class" id="custom-id" data-testid="custom-avatar" />
+    )
+    const root = container.firstElementChild
+    expect(root).toHaveClass('custom-class')
+    expect(root).toHaveAttribute('id', 'custom-id')
+    expect(root).toHaveAttribute('data-testid', 'custom-avatar')
+  })
 })
 
 describe('AvatarGroupCount', () => {
@@ -57,6 +67,16 @@ describe('AvatarGroupCount', () => {
     const { container } = render(<AvatarGroupCount count={3} />)
     const results = await axe(container)
     expect(results).toHaveNoViolations()
+  })
+
+  it('passes className, id, and other native props through to the root element', () => {
+    const { container } = render(
+      <AvatarGroupCount count={3} className="custom-class" id="custom-id" data-testid="custom-count" />
+    )
+    const root = container.firstElementChild
+    expect(root).toHaveClass('custom-class')
+    expect(root).toHaveAttribute('id', 'custom-id')
+    expect(root).toHaveAttribute('data-testid', 'custom-count')
   })
 })
 
@@ -85,5 +105,15 @@ describe('AvatarGroup', () => {
     const { container } = render(<AvatarGroup items={users(10)} max={4} />)
     const results = await axe(container)
     expect(results).toHaveNoViolations()
+  })
+
+  it('passes className, id, and other native props through to the root element', () => {
+    const { container } = render(
+      <AvatarGroup items={users(3)} className="custom-class" id="custom-id" data-testid="custom-group" />
+    )
+    const root = container.firstElementChild
+    expect(root).toHaveClass('custom-class')
+    expect(root).toHaveAttribute('id', 'custom-id')
+    expect(root).toHaveAttribute('data-testid', 'custom-group')
   })
 })
