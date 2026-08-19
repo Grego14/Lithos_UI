@@ -11,21 +11,24 @@ export const CalendarDoc = () => {
   const [controlledValue, setControlledValue] = useState<CalendarValue>(null)
   const [controlledMonth, setControlledMonth] = useState(new Date())
 
-  const singleCode = `import { Calendar } from '../../components/ui/Calendar'
-
-export const MeetingPicker = () => {
+  const singleCode = {
+    body: `export const MeetingPicker = () => {
   return <Calendar mode='single' />
-}`
+}`,
+    componentNames: ['Calendar'],
+    manualPath: '../../components/ui/Calendar',
+  }
 
-  const multipleCode = `import { Calendar } from '../../components/ui/Calendar'
-
-export const LeaveDaysPicker = () => {
+  const multipleCode = {
+    body: `export const LeaveDaysPicker = () => {
   return <Calendar mode='multiple' />
-}`
+}`,
+    componentNames: ['Calendar'],
+    manualPath: '../../components/ui/Calendar',
+  }
 
-  const multiColorCode = `import { Calendar } from '../../components/ui/Calendar'
-
-const sickLeave = [new Date(2026, 7, 4), new Date(2026, 7, 5)]
+  const multiColorCode = {
+    body: `const sickLeave = [new Date(2026, 7, 4), new Date(2026, 7, 5)]
 const vacation = [new Date(2026, 7, 17), new Date(2026, 7, 18), new Date(2026, 7, 19)]
 
 export const LeaveTypePicker = () => {
@@ -39,17 +42,21 @@ export const LeaveTypePicker = () => {
       }}
     />
   )
-}`
+}`,
+    componentNames: ['Calendar'],
+    manualPath: '../../components/ui/Calendar',
+  }
 
-  const rangeCode = `import { Calendar } from '../../components/ui/Calendar'
-
-export const TravelBookingPicker = () => {
+  const rangeCode = {
+    body: `export const TravelBookingPicker = () => {
   return <Calendar mode='range' />
-}`
+}`,
+    componentNames: ['Calendar'],
+    manualPath: '../../components/ui/Calendar',
+  }
 
-  const disabledDatesCode = `import { Calendar } from '../../components/ui/Calendar'
-
-const bookedDates = [
+  const disabledDatesCode = {
+    body: `const bookedDates = [
   new Date(2026, 7, 10),
   new Date(2026, 7, 11),
   new Date(2026, 7, 18),
@@ -57,18 +64,21 @@ const bookedDates = [
 
 export const AvailabilityPicker = () => {
   return <Calendar mode='single' disabledDates={bookedDates} minDate={new Date()} />
-}`
+}`,
+    componentNames: ['Calendar'],
+    manualPath: '../../components/ui/Calendar',
+  }
 
-  const boundedYearsCode = `import { Calendar } from '../../components/ui/Calendar'
-
-export const BirthdatePicker = () => {
+  const boundedYearsCode = {
+    body: `export const BirthdatePicker = () => {
   return <Calendar mode='single' yearRange={[1940, new Date().getFullYear()]} />
-}`
+}`,
+    componentNames: ['Calendar'],
+    manualPath: '../../components/ui/Calendar',
+  }
 
-  const controlledCode = `import { useState } from 'react'
-import { Calendar, type CalendarValue } from '../../components/ui/Calendar'
-
-export const ControlledExample = () => {
+  const controlledCode = {
+    body: `export const ControlledExample = () => {
   const [value, setValue] = useState<CalendarValue>(null)
   const [month, setMonth] = useState(new Date())
 
@@ -81,7 +91,10 @@ export const ControlledExample = () => {
       onMonthChange={setMonth}
     />
   )
-}`
+}`,
+    componentNames: ['Calendar'],
+    manualPath: '../../components/ui/Calendar',
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-6">
