@@ -9,6 +9,7 @@ import { badgePropsData } from '../propsData/badge'
 import { SetupGuide } from '../layout/SetupGuide'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Badge.tsx'
+const BADGE_PATH = '../../components/ui/Badge'
 
 export const BadgeDoc = () => {
   const [customColor, setCustomColor] = useState('#FF00FF')
@@ -16,9 +17,8 @@ export const BadgeDoc = () => {
 
   const inputRef = useRef<null | HTMLInputElement>(null)
 
-  const variantsCode = `import { Badge } from '../../components/ui/Badge'
-
-export const BadgeVariants = () => {
+  const variantsCode = {
+    body: `export const BadgeVariants = () => {
   return (
     <div className='flex flex-col items-center text-center flex-wrap'>
       <Badge className='mb-4'>Default</Badge>
@@ -29,11 +29,13 @@ export const BadgeVariants = () => {
       <Badge variant='info'>Info</Badge>
     </div>
   )
-}`
+}`,
+    componentNames: ['Badge'],
+    manualPath: BADGE_PATH,
+  }
 
-  const sizesCode = `import { Badge } from '../../components/ui/Badge'
-
-export const BadgeVariants = () => {
+  const sizesCode = {
+    body: `export const BadgeVariants = () => {
   return (
     <div className='flex flex-col items-center text-center'>
       <Badge>Default</Badge>
@@ -42,15 +44,20 @@ export const BadgeVariants = () => {
       <Badge className='mt-4' size='lg'>Large</Badge>
     </div>
   )
-}`
+}`,
+    componentNames: ['Badge'],
+    manualPath: BADGE_PATH,
+  }
 
-  const customCode = `import { Badge } from '../../components/ui/Badge'
-
-export const CustomizedBadge = () => {
+  const customCode = {
+    body: `export const CustomizedBadge = () => {
   return (
     <Badge color='#FF0033' size='medium'>Custom Color</Badge>
   )
-}`
+}`,
+    componentNames: ['Badge'],
+    manualPath: BADGE_PATH,
+  }
 
   const handleFocus = () => setError('')
 
@@ -97,7 +104,7 @@ export const CustomizedBadge = () => {
       <SetupGuide
         componentNames={['Badge']}
         manualPath="../../components/ui/Badge"
-        requires={['utils/cn.ts', 'core/useAccentColor.ts']}
+        requires={['utils/cn.ts', 'core/useAccentColor.ts', 'utils/yiq.ts', 'utils/colors.ts', 'core/types.ts']}
       />
 
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
