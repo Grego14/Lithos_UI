@@ -68,13 +68,13 @@ describe('Toast Component', () => {
   })
 
   it('applies correct position classes to the stack container', () => {
-    const { container } = render(
+    const { baseElement } = render(
       <ToastProvider position="top-left">
         <div>Content</div>
       </ToastProvider>
     )
 
-    const stackContainer = container.querySelector('.fixed')
+    const stackContainer = baseElement.querySelector('.fixed')
     expect(stackContainer).toHaveClass('top-0', 'left-0')
   })
 
