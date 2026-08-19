@@ -3,7 +3,7 @@
  * - Always circular — the shape that reads correctly both standalone and stacked in a Group.
  * - Image swaps to initials from `alt` on load failure via onError, so a dead `src` never leaves a blank box.
  */
-import { useState, type ComponentPropsWithRef } from 'react'
+import { useState, type ComponentPropsWithRef, type Ref } from 'react'
 import { getContrastText } from '../../utils/yiq'
 import { useAccentColor } from '../../core/useAccentColor'
 import { cn } from '../../utils/cn'
@@ -11,7 +11,8 @@ import { cn } from '../../utils/cn'
 type AvatarSizes = 'sm' | 'md' | 'lg'
 type AvatarVariants = 'default' | 'solid'
 
-export interface AvatarProps extends Omit<ComponentPropsWithRef<'div'>, 'children'> {
+export interface AvatarProps extends Omit<ComponentPropsWithRef<'span'>, 'children' | 'ref'> {
+  ref?: Ref<HTMLSpanElement | HTMLImageElement>
   src?: string | undefined
   alt?: string | undefined
   variant?: AvatarVariants
@@ -57,19 +58,22 @@ export const Avatar = ({
     className
   )
 
-  return (
-    <div
-      ref={ref}
-      className={classes}
-      style={bgColor ? { backgroundColor: bgColor, color: contrastedColor } : undefined}
+  const style = bgColor ? { backgroundColor: bgColor, color: contrastedColor } : undefined
+
+  return showImage ? (
+    <img
+      ref={ref as Ref<HTMLImageElement>}
+      src={src}
+      alt={alt}
+      className={cn(classes, 'object-cover')}
+      style={style}
+      onError={() => setImgFailed(true)}
       {...props}
-    >
-      {showImage ? (
-        <img src={src} alt={alt} className="w-full h-full object-cover" onError={() => setImgFailed(true)} />
-      ) : (
-        getInitials(alt)
-      )}
-    </div>
+    />
+  ) : (
+    <span ref={ref as Ref<HTMLSpanElement>} className={classes} style={style} {...props}>
+      {getInitials(alt)}
+    </span>
   )
 }
 
