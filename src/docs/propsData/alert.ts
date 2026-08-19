@@ -55,7 +55,7 @@ export const alertPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'string',
+    type: 'ClassValue | ClassArray',
     required: false,
     description: 'Additional CSS classes.',
   },
