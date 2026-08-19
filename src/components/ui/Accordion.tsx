@@ -38,6 +38,7 @@ export const AccordionGroup = ({
   defaultActive,
   className,
   ref,
+  ...rest
 }: AccordionGroupProps) => {
   const [activedValues, setActivedValues] = useState<string | string[]>(() => {
     if (allowMultiple) {
@@ -73,7 +74,7 @@ export const AccordionGroup = ({
 
   return (
     <AccordionContext.Provider value={{ toggleItem, isItemOpen }}>
-      <div ref={ref} className={containerClass}>
+      <div ref={ref} className={containerClass} {...rest}>
         {children}
       </div>
     </AccordionContext.Provider>
@@ -87,7 +88,17 @@ const defaultClasses = {
   header: 'justify-between text-lg text-start p-3',
 }
 
-export const Accordion = ({ defaultOpen = false, open, children, title, value, classes = {}, ref }: AccordionProps) => {
+export const Accordion = ({
+  defaultOpen = false,
+  open,
+  children,
+  title,
+  value,
+  classes = {},
+  className,
+  ref,
+  ...rest
+}: AccordionProps) => {
   const context = useContext(AccordionContext)
 
   // local state fallback if Accordion is used standalone without group
@@ -113,7 +124,8 @@ export const Accordion = ({ defaultOpen = false, open, children, title, value, c
     defaultClasses.container,
     isOpen && 'shadow-[4px_4px_0_0_var(--lithos-shadow)] h-auto',
     isGrouped && 'mt-4',
-    classes.container
+    classes.container,
+    className
   )
 
   const generatedId = useId()
@@ -122,7 +134,7 @@ export const Accordion = ({ defaultOpen = false, open, children, title, value, c
   const contentId = `accordion-content-${itemId}`
 
   return (
-    <div className={containerClass} ref={ref}>
+    <div className={containerClass} ref={ref} {...rest}>
       <h3 className="m-0 p-0 antialiased">
         <Button
           className={cn(

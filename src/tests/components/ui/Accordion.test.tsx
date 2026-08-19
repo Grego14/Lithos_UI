@@ -30,6 +30,18 @@ describe('Accordion', () => {
     const results = await axe(container)
     expect(results).toHaveNoViolations()
   })
+
+  it('passes className, id, and other native props through to the root element', () => {
+    const { container } = render(
+      <Accordion title="Test Title" className="custom-class" id="custom-id" data-testid="custom-accordion">
+        Test Content
+      </Accordion>
+    )
+    const root = container.firstElementChild
+    expect(root).toHaveClass('custom-class')
+    expect(root).toHaveAttribute('id', 'custom-id')
+    expect(root).toHaveAttribute('data-testid', 'custom-accordion')
+  })
 })
 
 describe('AccordionGroup', () => {
@@ -94,5 +106,19 @@ describe('AccordionGroup', () => {
     )
     const results = await axe(container)
     expect(results).toHaveNoViolations()
+  })
+
+  it('passes className, id, and other native props through to the root element', () => {
+    const { container } = render(
+      <AccordionGroup className="custom-class" id="custom-id" data-testid="custom-group">
+        <Accordion title="Item 1" value="1">
+          Content 1
+        </Accordion>
+      </AccordionGroup>
+    )
+    const root = container.firstElementChild
+    expect(root).toHaveClass('custom-class')
+    expect(root).toHaveAttribute('id', 'custom-id')
+    expect(root).toHaveAttribute('data-testid', 'custom-group')
   })
 })

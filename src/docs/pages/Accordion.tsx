@@ -8,19 +8,20 @@ import { accordionPropsData } from '../propsData/accordion'
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Accordion.tsx'
 
 export const AccordionDoc = () => {
-  const usageCode = `import { Accordion } from '../../components/ui/Accordion'
-
-export const FAQItem = () => {
+  const usageCode = {
+    body: `export const FAQItem = () => {
   return (
     <Accordion title='Is Lithos UI really free forever?'>
       Yes. Absolutely free, forever. There is no paid tier, no 'Pro' version, and no locked features. The entire architecture and all components are open-source.
     </Accordion>
   )
-}`
+}`,
+    componentNames: ['Accordion'],
+    manualPath: '../../components/ui/Accordion',
+  }
 
-  const groupedCode = `import { Accordion } from '../../components/ui/Accordion'
-
-export const FAQItem = () => {
+  const groupedCode = {
+    body: `export const FAQItem = () => {
   return (
     <AccordionGroup>
       <Accordion title='Is Lithos UI really free forever?'>
@@ -32,13 +33,15 @@ export const FAQItem = () => {
       <Accordion title='What is the Zero-Gap rule?'>
         The Zero-Gap layout system means we strictly avoid CSS \`gap\` utilities for core layouts. Instead, we use explicit mathematically proportional margins to ensure perfect geometric stacking and rendering predictability across all viewports without flex/grid wrapping failures.
       </Accordion>
-    <AccordionGroup>
+    </AccordionGroup>
   )
-}`
+}`,
+    componentNames: ['Accordion', 'AccordionGroup'],
+    manualPath: '../../components/ui/Accordion',
+  }
 
-  const groupedMultipleCode = `import { Accordion, AccordionGroup } from '../../components/ui/Accordion'
-
-export const FAQItem = () => {
+  const groupedMultipleCode = {
+    body: `export const FAQItem = () => {
   return (
     <AccordionGroup defaultActive={['faq-1', 'faq-3']} allowMultiple>
       <Accordion title='Is Lithos UI really free forever?' value='faq-1'>
@@ -52,7 +55,10 @@ export const FAQItem = () => {
       </Accordion>
     </AccordionGroup>
   )
-}`
+}`,
+    componentNames: ['Accordion', 'AccordionGroup'],
+    manualPath: '../../components/ui/Accordion',
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-6">
