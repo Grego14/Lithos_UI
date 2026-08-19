@@ -20,4 +20,10 @@ export const toggleProps: PropItem[] = [
     required: false,
     description: 'Accessible label announced by screen readers and used as aria-label.',
   },
+  {
+    name: 'className',
+    type: 'ClassValue | ClassArray',
+    required: false,
+    description: 'Custom CSS classes passed to the button.',
+  },
 ]

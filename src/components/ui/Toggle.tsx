@@ -4,21 +4,27 @@
  * - Neo-brutalist physics: shadow steps move; the parent never translates.
  * - Binary contrast: thumb and track invert as one hard state change.
  */
-interface ToggleProps {
+import type { ComponentPropsWithRef } from 'react'
+import type { ClassValue, ClassArray } from 'clsx'
+import { Button } from './Button'
+import { cn } from '../../utils/cn'
+
+export interface ToggleProps extends Omit<ComponentPropsWithRef<'button'>, 'className'> {
   checked: boolean
   onToggle: () => void
   label?: string
+  className?: ClassValue | ClassArray
 }
 
-const Toggle = ({ checked, onToggle, label = 'Theme Changed' }: ToggleProps) => {
+export const Toggle = ({ checked, onToggle, label = 'Theme Changed', className, ref }: ToggleProps) => {
   // - Stationary shell: only the shadow changes, so surrounding layout never shifts.
   return (
-    <button
-      type="button"
+    <Button
+      ref={ref}
       onClick={onToggle}
       aria-pressed={checked}
       aria-label={label}
-      className="inline-flex cursor-pointer items-center border-2 border-black bg-white px-1 py-1 text-black transition-shadow duration-200 rounded-(--lithos-radius)"
+      className={cn('bg-white px-1 py-1 shadow-none active:translate-none rounded-(--lithos-radius)', className)}
     >
       {/* Track math (reduced ~1/3): previously 80x40; now approx 24x13 with border/padding scaled down. */}
       <span
@@ -36,8 +42,6 @@ const Toggle = ({ checked, onToggle, label = 'Theme Changed' }: ToggleProps) => 
 
       {/* Screen-reader label stays outside the visual math. */}
       <span className="sr-only">{label}</span>
-    </button>
+    </Button>
   )
 }
-
-export { Toggle }
