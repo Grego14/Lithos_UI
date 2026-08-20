@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Lithos UI PropsTable component.
+ * - Displays a standard table of component properties, types, defaults, and descriptions.
+ * - Used exclusively in documentation; excluded from the public package.
+ */
 import { Accordion, type AccordionProps } from './Accordion'
 import { cn } from '../../utils/cn'
 

@@ -11,7 +11,7 @@ import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { cn } from '../../utils/cn'
 import { Button } from './Button'
 
-interface CodeViewerProps {
+export interface CodeViewerProps {
   code: string
   language?: string
   showLanguage?: boolean

@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "vitest Toast.test.tsx",
+    "test": "vitest",
     "coverage": "vitest run --coverage",
     "prepare": "husky"
   },

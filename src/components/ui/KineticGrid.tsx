@@ -8,7 +8,7 @@
 import { useRef, type ReactNode, type MouseEvent } from 'react'
 import { cn } from '../../utils/cn'
 
-interface KineticGridProps {
+export interface KineticGridProps {
   children: ReactNode
   baseOpacity?: string
   className?: string
