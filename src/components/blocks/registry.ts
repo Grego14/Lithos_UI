@@ -131,6 +131,7 @@ export const blockCategories: BlockCategory[] = [
         component: Pricing1,
         code: pricing1Code,
         githubUrl: `${GITHUB_BASE}/Pricing/1.tsx`,
+        requires: ['components/ui/Card.tsx', 'components/ui/Button.tsx'],
       },
     ],
   },
