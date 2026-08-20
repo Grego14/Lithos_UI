@@ -16,10 +16,10 @@ describe('FAQ1', () => {
   it('expands answers when a question is clicked', () => {
     render(<FAQ1 />)
 
-    // Initially the answer is not visible
-    expect(
-      screen.queryByText('Absolutely. We handle millions of requests a day without breaking a sweat.')
-    ).not.toBeInTheDocument()
+    // Initially the answer is hidden
+    const answer = screen.getByText('Absolutely. We handle millions of requests a day without breaking a sweat.')
+    const region = answer.closest('[role="region"]')!
+    expect(region).toHaveAttribute('aria-hidden', 'true')
 
     const firstQuestion = screen.getByText('Is this product scalable?')
 
@@ -30,9 +30,7 @@ describe('FAQ1', () => {
     fireEvent.click(button)
 
     // After clicking, the answer is visible
-    expect(
-      screen.getByText('Absolutely. We handle millions of requests a day without breaking a sweat.')
-    ).toBeInTheDocument()
+    expect(region).toHaveAttribute('aria-hidden', 'false')
     expect(button).toHaveAttribute('aria-expanded', 'true')
   })
 

@@ -29,6 +29,7 @@ export interface BlockVariant {
   component: React.ComponentType
   code: string
   githubUrl: string
+  requires?: string[]
 }
 
 export interface BlockCategory {
@@ -144,6 +145,7 @@ export const blockCategories: BlockCategory[] = [
         component: FAQ1,
         code: faq1Code,
         githubUrl: `${GITHUB_BASE}/FAQ/1.tsx`,
+        requires: ['components/ui/Accordion.tsx'],
       },
     ],
   },
