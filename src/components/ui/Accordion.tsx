@@ -83,9 +83,9 @@ export const AccordionGroup = ({
 
 const defaultClasses = {
   container:
-    'w-full self-start border-2 border-(--lithos-border) duration-75 ease-out transition-shadow shadow-[2px_2px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)',
+    'w-full self-start border-2 border-(--lithos-border) duration-75 ease-out transition-shadow shadow-[2px_2px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius) overflow-hidden',
   content: 'p-4 min-h-0 overflow-hidden font-body',
-  header: 'justify-between text-lg text-start p-3',
+  header: 'justify-between text-lg text-start p-3 rounded-none',
 }
 
 export const Accordion = ({
