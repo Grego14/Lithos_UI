@@ -83,6 +83,22 @@ export const CardDoc = () => {
     manualPath: cardManualPath,
   }
 
+  const elevateCode = {
+    body: `export const ElevateCard = () => {
+  return (
+    <Card interactive="elevate" className="max-w-sm">
+      <CardImage src="https://picsum.photos/600/400?3" alt="Preview" />
+      <CardContent>
+        <CardTitle>Elevate Physics</CardTitle>
+        <CardDescription>This interactive mode restores the legacy translation lift on hover instead of expanding the shadow.</CardDescription>
+      </CardContent>
+    </Card>
+  )
+}`,
+    componentNames: ['Card', 'CardImage', 'CardContent', 'CardTitle', 'CardDescription'],
+    manualPath: cardManualPath,
+  }
+
   const spacingCode = {
     body: `export const SpacingCard = () => {
   return (
@@ -215,6 +231,21 @@ export const CardDoc = () => {
             <CardTitle>Solid Card</CardTitle>
             <CardDescription>
               A card that permanently stays in the accent color rather than waiting for a hover interaction.
+            </CardDescription>
+          </CardContent>
+        </Card>
+      </PreviewBlock>
+
+      <h3 id="elevate" className="mt-12 mb-3 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Interactive: Elevate
+      </h3>
+      <PreviewBlock code={elevateCode} githubUrl={githubUrl}>
+        <Card interactive="elevate" className="max-w-sm">
+          <CardImage src="https://picsum.photos/600/400?3" alt="Preview" />
+          <CardContent>
+            <CardTitle>Elevate Physics</CardTitle>
+            <CardDescription>
+              This interactive mode restores the legacy translation lift on hover instead of expanding the shadow.
             </CardDescription>
           </CardContent>
         </Card>
