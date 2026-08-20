@@ -143,7 +143,7 @@ describe('Card Component', () => {
     expect(screen.getByTestId('card')).toHaveAttribute('id', 'card-1')
   })
 
-  it('passes className, id, and other native props through to each part\'s root element', () => {
+  it("passes className, id, and other native props through to each part's root element", () => {
     render(
       <Card className="custom-card" id="card-id" data-testid="card">
         <CardImage src="/photo.jpg" alt="Photo" className="custom-image" id="image-id" data-testid="image" />
