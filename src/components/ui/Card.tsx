@@ -7,9 +7,11 @@
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { cn } from '../../utils/cn'
 
+type CardVariants = 'default' | 'accent' | 'image' | 'solid'
+
 export interface CardProps extends ComponentPropsWithRef<'div'> {
   interactive?: boolean | undefined
-  variant?: 'default' | 'accent' | 'image' | 'solid' | undefined
+  variant?: CardVariants | undefined
   children: ReactNode
 }
 
