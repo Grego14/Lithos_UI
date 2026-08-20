@@ -1,6 +1,6 @@
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { CodeViewer } from '../../components/ui/CodeViewer'
-import { Carousel } from '../../components/ui/Carousel'
+import { Carousel, CarouselSlide } from '../../components/ui/Carousel'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
 import {
@@ -11,119 +11,152 @@ import {
 } from '../propsData/carousel'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Carousel.tsx'
+const CAROUSEL_PATH = '../../components/ui/Carousel'
 
 export const CarouselDoc = () => {
-  const usageCode = `import { Carousel } from '../../components/ui/Carousel'
-
-export const AppCarousel = () => {
+  const usageCode = {
+    body: `export const AppCarousel = () => {
   return (
     <Carousel title='Default carousel, everything included!'>
-      <Carousel.Slide>Slide 1</Carousel.Slide>
-      <Carousel.Slide>Slide 2</Carousel.Slide>
-      <Carousel.Slide>Slide 3</Carousel.Slide>
-      <Carousel.Slide>Slide 4</Carousel.Slide>
-      <Carousel.Slide>Slide 5</Carousel.Slide>
-      <Carousel.Slide>Slide 6</Carousel.Slide>
-      <Carousel.Slide>Slide 7</Carousel.Slide>
+      <CarouselSlide>Slide 1</CarouselSlide>
+      <CarouselSlide>Slide 2</CarouselSlide>
+      <CarouselSlide>Slide 3</CarouselSlide>
+      <CarouselSlide>Slide 4</CarouselSlide>
+      <CarouselSlide>Slide 5</CarouselSlide>
+      <CarouselSlide>Slide 6</CarouselSlide>
+      <CarouselSlide>Slide 7</CarouselSlide>
     </Carousel>
   )
-}`
+}`,
+    componentNames: ['Carousel', 'CarouselSlide'],
+    manualPath: CAROUSEL_PATH,
+  }
 
-  const bottomControlsCode = `import { Carousel } from '../../components/ui/Carousel'
+  const loopCode = {
+    body: `export const AppCarousel = () => {
+  return (
+    <Carousel title='Carousel with looping!' loop>
+      <CarouselSlide>Slide 1</CarouselSlide>
+      <CarouselSlide>Slide 2</CarouselSlide>
+      <CarouselSlide>Slide 3</CarouselSlide>
+      <CarouselSlide>Slide 4</CarouselSlide>
+      <CarouselSlide>Slide 5</CarouselSlide>
+      <CarouselSlide>Slide 6</CarouselSlide>
+      <CarouselSlide>Slide 7</CarouselSlide>
+    </Carousel>
+  )
+}`,
+    componentNames: ['Carousel', 'CarouselSlide'],
+    manualPath: CAROUSEL_PATH,
+  }
 
-export const AppCarousel = () => {
+  const bottomControlsCode = {
+    body: `export const AppCarousel = () => {
   return (
     <Carousel title='Carousel with controls at the bottom!' controlsPosition='bottom'>
-      <Carousel.Slide>Slide 1</Carousel.Slide>
-      <Carousel.Slide>Slide 2</Carousel.Slide>
-      <Carousel.Slide>Slide 3</Carousel.Slide>
-      <Carousel.Slide>Slide 4</Carousel.Slide>
-      <Carousel.Slide>Slide 5</Carousel.Slide>
-      <Carousel.Slide>Slide 6</Carousel.Slide>
-      <Carousel.Slide>Slide 7</Carousel.Slide>
+      <CarouselSlide>Slide 1</CarouselSlide>
+      <CarouselSlide>Slide 2</CarouselSlide>
+      <CarouselSlide>Slide 3</CarouselSlide>
+      <CarouselSlide>Slide 4</CarouselSlide>
+      <CarouselSlide>Slide 5</CarouselSlide>
+      <CarouselSlide>Slide 6</CarouselSlide>
+      <CarouselSlide>Slide 7</CarouselSlide>
     </Carousel>
   )
-}`
+}`,
+    componentNames: ['Carousel', 'CarouselSlide'],
+    manualPath: CAROUSEL_PATH,
+  }
 
-  const numbersSelectorCode = `import { Carousel } from '../../components/ui/Carousel'
-
-export const AppCarousel = () => {
+  const numbersSelectorCode = {
+    body: `export const AppCarousel = () => {
   return (
     <Carousel title='Carousel using the numbers sliders selector!' slideSelector='numbers'>
-      <Carousel.Slide>Slide 1</Carousel.Slide>
-      <Carousel.Slide>Slide 2</Carousel.Slide>
-      <Carousel.Slide>Slide 3</Carousel.Slide>
-      <Carousel.Slide>Slide 4</Carousel.Slide>
-      <Carousel.Slide>Slide 5</Carousel.Slide>
-      <Carousel.Slide>Slide 6</Carousel.Slide>
-      <Carousel.Slide>Slide 7</Carousel.Slide>
+      <CarouselSlide>Slide 1</CarouselSlide>
+      <CarouselSlide>Slide 2</CarouselSlide>
+      <CarouselSlide>Slide 3</CarouselSlide>
+      <CarouselSlide>Slide 4</CarouselSlide>
+      <CarouselSlide>Slide 5</CarouselSlide>
+      <CarouselSlide>Slide 6</CarouselSlide>
+      <CarouselSlide>Slide 7</CarouselSlide>
     </Carousel>
   )
-}`
+}`,
+    componentNames: ['Carousel', 'CarouselSlide'],
+    manualPath: CAROUSEL_PATH,
+  }
 
-  const noCurrentSliderCode = `import { Carousel } from '../../components/ui/Carousel'
-
-export const AppCarousel = () => {
+  const noCurrentSliderCode = {
+    body: `export const AppCarousel = () => {
   return (
     <Carousel title='Carousel without the current slider identifier!' showCounter={false}>
-      <Carousel.Slide>Slide 1</Carousel.Slide>
-      <Carousel.Slide>Slide 2</Carousel.Slide>
-      <Carousel.Slide>Slide 3</Carousel.Slide>
-      <Carousel.Slide>Slide 4</Carousel.Slide>
-      <Carousel.Slide>Slide 5</Carousel.Slide>
-      <Carousel.Slide>Slide 6</Carousel.Slide>
-      <Carousel.Slide>Slide 7</Carousel.Slide>
+      <CarouselSlide>Slide 1</CarouselSlide>
+      <CarouselSlide>Slide 2</CarouselSlide>
+      <CarouselSlide>Slide 3</CarouselSlide>
+      <CarouselSlide>Slide 4</CarouselSlide>
+      <CarouselSlide>Slide 5</CarouselSlide>
+      <CarouselSlide>Slide 6</CarouselSlide>
+      <CarouselSlide>Slide 7</CarouselSlide>
     </Carousel>
   )
-}`
+}`,
+    componentNames: ['Carousel', 'CarouselSlide'],
+    manualPath: CAROUSEL_PATH,
+  }
 
-  const noControlsCode = `import { Carousel } from '../../components/ui/Carousel'
-
-export const AppCarousel = () => {
+  const noControlsCode = {
+    body: `export const AppCarousel = () => {
   return (
     <Carousel title='Headless Carousel!' hideControls>
-      <Carousel.Slide>Slide 1</Carousel.Slide>
-      <Carousel.Slide>Slide 2</Carousel.Slide>
-      <Carousel.Slide>Slide 3</Carousel.Slide>
-      <Carousel.Slide>Slide 4</Carousel.Slide>
-      <Carousel.Slide>Slide 5</Carousel.Slide>
-      <Carousel.Slide>Slide 6</Carousel.Slide>
-      <Carousel.Slide>Slide 7</Carousel.Slide>
+      <CarouselSlide>Slide 1</CarouselSlide>
+      <CarouselSlide>Slide 2</CarouselSlide>
+      <CarouselSlide>Slide 3</CarouselSlide>
+      <CarouselSlide>Slide 4</CarouselSlide>
+      <CarouselSlide>Slide 5</CarouselSlide>
+      <CarouselSlide>Slide 6</CarouselSlide>
+      <CarouselSlide>Slide 7</CarouselSlide>
     </Carousel>
   )
-}`
+}`,
+    componentNames: ['Carousel', 'CarouselSlide'],
+    manualPath: CAROUSEL_PATH,
+  }
 
-  const infinitePlayCode = `import { Carousel } from '../../components/ui/Carousel'
-
-export const AppCarousel = () => {
+  const infinitePlayCode = {
+    body: `export const AppCarousel = () => {
   return (
     <Carousel title='Carousel that plays infinitely!' playInfinite>
-      <Carousel.Slide>Slide 1</Carousel.Slide>
-      <Carousel.Slide>Slide 2</Carousel.Slide>
-      <Carousel.Slide>Slide 3</Carousel.Slide>
-      <Carousel.Slide>Slide 4</Carousel.Slide>
-      <Carousel.Slide>Slide 5</Carousel.Slide>
-      <Carousel.Slide>Slide 6</Carousel.Slide>
-      <Carousel.Slide>Slide 7</Carousel.Slide>
+      <CarouselSlide>Slide 1</CarouselSlide>
+      <CarouselSlide>Slide 2</CarouselSlide>
+      <CarouselSlide>Slide 3</CarouselSlide>
+      <CarouselSlide>Slide 4</CarouselSlide>
+      <CarouselSlide>Slide 5</CarouselSlide>
+      <CarouselSlide>Slide 6</CarouselSlide>
+      <CarouselSlide>Slide 7</CarouselSlide>
     </Carousel>
   )
-}`
+}`,
+    componentNames: ['Carousel', 'CarouselSlide'],
+    manualPath: CAROUSEL_PATH,
+  }
 
-  const verticalCode = `import { Carousel } from '../../components/ui/Carousel'
-
-export const AppCarousel = () => {
+  const verticalCode = {
+    body: `export const AppCarousel = () => {
   return (
     <Carousel title='Carousel with vertical sliding!' vertical>
-      <Carousel.Slide>Slide 1</Carousel.Slide>
-      <Carousel.Slide>Slide 2</Carousel.Slide>
-      <Carousel.Slide>Slide 3</Carousel.Slide>
-      <Carousel.Slide>Slide 4</Carousel.Slide>
-      <Carousel.Slide>Slide 5</Carousel.Slide>
-      <Carousel.Slide>Slide 6</Carousel.Slide>
-      <Carousel.Slide>Slide 7</Carousel.Slide>
+      <CarouselSlide>Slide 1</CarouselSlide>
+      <CarouselSlide>Slide 2</CarouselSlide>
+      <CarouselSlide>Slide 3</CarouselSlide>
+      <CarouselSlide>Slide 4</CarouselSlide>
+      <CarouselSlide>Slide 5</CarouselSlide>
+      <CarouselSlide>Slide 6</CarouselSlide>
+      <CarouselSlide>Slide 7</CarouselSlide>
     </Carousel>
   )
-}`
+}`,
+    componentNames: ['Carousel', 'CarouselSlide'],
+    manualPath: CAROUSEL_PATH,
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-6">
@@ -156,6 +189,12 @@ export const AppCarousel = () => {
           'utils/cn.ts',
           'utils/scrollTo.ts',
           'components/ui/Button.tsx',
+          'components/ui/carousel/CarouselButton.tsx',
+          'components/ui/carousel/CarouselContext.tsx',
+          'components/ui/carousel/CarouselControls.tsx',
+          'components/ui/carousel/CarouselSlide.tsx',
+          'components/ui/carousel/CarouselPagination.tsx',
+          'components/ui/carousel/useCarouselDrag.ts',
           'components/ui/icons/IconArrowLeft.tsx',
           'components/ui/icons/IconArrowRight.tsx',
           'components/ui/icons/IconArrowDown.tsx',
@@ -171,15 +210,15 @@ export const AppCarousel = () => {
         <CodeViewer
           language="tsx"
           code={`<Carousel>
-  <Carousel.Controls>
-    <Carousel.PrevButton />
-    <Carousel.NextButton />
-  </Carousel.Controls>
-  
-  <Carousel.Slide>...</Carousel.Slide>
-  <Carousel.Slide>...</Carousel.Slide>
-  
-  <Carousel.Pagination />
+  <CarouselControls>
+    <CarouselPrev />
+    <CarouselNext />
+  </CarouselControls>
+
+  <CarouselSlide>...</CarouselSlide>
+  <CarouselSlide>...</CarouselSlide>
+
+  <CarouselPagination />
 </Carousel>`}
         />
       </div>
@@ -198,13 +237,13 @@ export const AppCarousel = () => {
       <div className="mt-8 mb-16">
         <PreviewBlock code={usageCode} githubUrl={githubUrl}>
           <Carousel title="Default carousel, everything included!">
-            <Carousel.Slide>Slide 1</Carousel.Slide>
-            <Carousel.Slide>Slide 2</Carousel.Slide>
-            <Carousel.Slide>Slide 3</Carousel.Slide>
-            <Carousel.Slide>Slide 4</Carousel.Slide>
-            <Carousel.Slide>Slide 5</Carousel.Slide>
-            <Carousel.Slide>Slide 6</Carousel.Slide>
-            <Carousel.Slide>Slide 7</Carousel.Slide>
+            <CarouselSlide>Slide 1</CarouselSlide>
+            <CarouselSlide>Slide 2</CarouselSlide>
+            <CarouselSlide>Slide 3</CarouselSlide>
+            <CarouselSlide>Slide 4</CarouselSlide>
+            <CarouselSlide>Slide 5</CarouselSlide>
+            <CarouselSlide>Slide 6</CarouselSlide>
+            <CarouselSlide>Slide 7</CarouselSlide>
           </Carousel>
         </PreviewBlock>
       </div>
@@ -217,15 +256,15 @@ export const AppCarousel = () => {
       </p>
 
       <div className="mt-8 mb-16">
-        <PreviewBlock code={usageCode} githubUrl={githubUrl}>
+        <PreviewBlock code={loopCode} githubUrl={githubUrl}>
           <Carousel title="Carousel with looping!" loop>
-            <Carousel.Slide>Slide 1</Carousel.Slide>
-            <Carousel.Slide>Slide 2</Carousel.Slide>
-            <Carousel.Slide>Slide 3</Carousel.Slide>
-            <Carousel.Slide>Slide 4</Carousel.Slide>
-            <Carousel.Slide>Slide 5</Carousel.Slide>
-            <Carousel.Slide>Slide 6</Carousel.Slide>
-            <Carousel.Slide>Slide 7</Carousel.Slide>
+            <CarouselSlide>Slide 1</CarouselSlide>
+            <CarouselSlide>Slide 2</CarouselSlide>
+            <CarouselSlide>Slide 3</CarouselSlide>
+            <CarouselSlide>Slide 4</CarouselSlide>
+            <CarouselSlide>Slide 5</CarouselSlide>
+            <CarouselSlide>Slide 6</CarouselSlide>
+            <CarouselSlide>Slide 7</CarouselSlide>
           </Carousel>
         </PreviewBlock>
       </div>
@@ -240,13 +279,13 @@ export const AppCarousel = () => {
       <div className="mt-8 mb-16">
         <PreviewBlock code={bottomControlsCode} githubUrl={githubUrl}>
           <Carousel title="Carousel with the controls at the bottom!" controlsPosition="bottom">
-            <Carousel.Slide>Slide 1</Carousel.Slide>
-            <Carousel.Slide>Slide 2</Carousel.Slide>
-            <Carousel.Slide>Slide 3</Carousel.Slide>
-            <Carousel.Slide>Slide 4</Carousel.Slide>
-            <Carousel.Slide>Slide 5</Carousel.Slide>
-            <Carousel.Slide>Slide 6</Carousel.Slide>
-            <Carousel.Slide>Slide 7</Carousel.Slide>
+            <CarouselSlide>Slide 1</CarouselSlide>
+            <CarouselSlide>Slide 2</CarouselSlide>
+            <CarouselSlide>Slide 3</CarouselSlide>
+            <CarouselSlide>Slide 4</CarouselSlide>
+            <CarouselSlide>Slide 5</CarouselSlide>
+            <CarouselSlide>Slide 6</CarouselSlide>
+            <CarouselSlide>Slide 7</CarouselSlide>
           </Carousel>
         </PreviewBlock>
       </div>
@@ -261,13 +300,13 @@ export const AppCarousel = () => {
       <div className="mt-8 mb-16">
         <PreviewBlock code={numbersSelectorCode} githubUrl={githubUrl}>
           <Carousel title="Carousel using the numbers sliders selector!" slideSelector="numbers">
-            <Carousel.Slide>Slide 1</Carousel.Slide>
-            <Carousel.Slide>Slide 2</Carousel.Slide>
-            <Carousel.Slide>Slide 3</Carousel.Slide>
-            <Carousel.Slide>Slide 4</Carousel.Slide>
-            <Carousel.Slide>Slide 5</Carousel.Slide>
-            <Carousel.Slide>Slide 6</Carousel.Slide>
-            <Carousel.Slide>Slide 7</Carousel.Slide>
+            <CarouselSlide>Slide 1</CarouselSlide>
+            <CarouselSlide>Slide 2</CarouselSlide>
+            <CarouselSlide>Slide 3</CarouselSlide>
+            <CarouselSlide>Slide 4</CarouselSlide>
+            <CarouselSlide>Slide 5</CarouselSlide>
+            <CarouselSlide>Slide 6</CarouselSlide>
+            <CarouselSlide>Slide 7</CarouselSlide>
           </Carousel>
         </PreviewBlock>
       </div>
@@ -282,13 +321,13 @@ export const AppCarousel = () => {
       <div className="mt-8 mb-16">
         <PreviewBlock code={noCurrentSliderCode} githubUrl={githubUrl}>
           <Carousel title="Carousel without the current slider identifier!" showCounter={false}>
-            <Carousel.Slide>Slide 1</Carousel.Slide>
-            <Carousel.Slide>Slide 2</Carousel.Slide>
-            <Carousel.Slide>Slide 3</Carousel.Slide>
-            <Carousel.Slide>Slide 4</Carousel.Slide>
-            <Carousel.Slide>Slide 5</Carousel.Slide>
-            <Carousel.Slide>Slide 6</Carousel.Slide>
-            <Carousel.Slide>Slide 7</Carousel.Slide>
+            <CarouselSlide>Slide 1</CarouselSlide>
+            <CarouselSlide>Slide 2</CarouselSlide>
+            <CarouselSlide>Slide 3</CarouselSlide>
+            <CarouselSlide>Slide 4</CarouselSlide>
+            <CarouselSlide>Slide 5</CarouselSlide>
+            <CarouselSlide>Slide 6</CarouselSlide>
+            <CarouselSlide>Slide 7</CarouselSlide>
           </Carousel>
         </PreviewBlock>
       </div>
@@ -303,13 +342,13 @@ export const AppCarousel = () => {
       <div className="mt-8 mb-16">
         <PreviewBlock code={noControlsCode} githubUrl={githubUrl}>
           <Carousel title="Headless Carousel!" hideControls>
-            <Carousel.Slide>Slide 1</Carousel.Slide>
-            <Carousel.Slide>Slide 2</Carousel.Slide>
-            <Carousel.Slide>Slide 3</Carousel.Slide>
-            <Carousel.Slide>Slide 4</Carousel.Slide>
-            <Carousel.Slide>Slide 5</Carousel.Slide>
-            <Carousel.Slide>Slide 6</Carousel.Slide>
-            <Carousel.Slide>Slide 7</Carousel.Slide>
+            <CarouselSlide>Slide 1</CarouselSlide>
+            <CarouselSlide>Slide 2</CarouselSlide>
+            <CarouselSlide>Slide 3</CarouselSlide>
+            <CarouselSlide>Slide 4</CarouselSlide>
+            <CarouselSlide>Slide 5</CarouselSlide>
+            <CarouselSlide>Slide 6</CarouselSlide>
+            <CarouselSlide>Slide 7</CarouselSlide>
           </Carousel>
         </PreviewBlock>
       </div>
@@ -325,13 +364,13 @@ export const AppCarousel = () => {
       <div className="mt-8 mb-16">
         <PreviewBlock code={infinitePlayCode} githubUrl={githubUrl}>
           <Carousel title="Carousel that plays infinitely!" playInfinite>
-            <Carousel.Slide>Slide 1</Carousel.Slide>
-            <Carousel.Slide>Slide 2</Carousel.Slide>
-            <Carousel.Slide>Slide 3</Carousel.Slide>
-            <Carousel.Slide>Slide 4</Carousel.Slide>
-            <Carousel.Slide>Slide 5</Carousel.Slide>
-            <Carousel.Slide>Slide 6</Carousel.Slide>
-            <Carousel.Slide>Slide 7</Carousel.Slide>
+            <CarouselSlide>Slide 1</CarouselSlide>
+            <CarouselSlide>Slide 2</CarouselSlide>
+            <CarouselSlide>Slide 3</CarouselSlide>
+            <CarouselSlide>Slide 4</CarouselSlide>
+            <CarouselSlide>Slide 5</CarouselSlide>
+            <CarouselSlide>Slide 6</CarouselSlide>
+            <CarouselSlide>Slide 7</CarouselSlide>
           </Carousel>
         </PreviewBlock>
       </div>
@@ -346,13 +385,13 @@ export const AppCarousel = () => {
       <div className="mt-8 mb-16">
         <PreviewBlock code={verticalCode} githubUrl={githubUrl}>
           <Carousel title="Carousel with vertical sliding!" vertical>
-            <Carousel.Slide>Slide 1</Carousel.Slide>
-            <Carousel.Slide>Slide 2</Carousel.Slide>
-            <Carousel.Slide>Slide 3</Carousel.Slide>
-            <Carousel.Slide>Slide 4</Carousel.Slide>
-            <Carousel.Slide>Slide 5</Carousel.Slide>
-            <Carousel.Slide>Slide 6</Carousel.Slide>
-            <Carousel.Slide>Slide 7</Carousel.Slide>
+            <CarouselSlide>Slide 1</CarouselSlide>
+            <CarouselSlide>Slide 2</CarouselSlide>
+            <CarouselSlide>Slide 3</CarouselSlide>
+            <CarouselSlide>Slide 4</CarouselSlide>
+            <CarouselSlide>Slide 5</CarouselSlide>
+            <CarouselSlide>Slide 6</CarouselSlide>
+            <CarouselSlide>Slide 7</CarouselSlide>
           </Carousel>
         </PreviewBlock>
       </div>
@@ -391,9 +430,9 @@ export const AppCarousel = () => {
         </h2>
 
         <PropsAccordion title="Carousel Props" data={carouselPropsData} className="mb-6" />
-        <PropsAccordion title="Carousel.Slide Props" data={carouselSlidePropsData} className="mb-6" />
-        <PropsAccordion title="Carousel.PrevButton Props" data={carouselPrevPropsData} className="mb-6" />
-        <PropsAccordion title="Carousel.NextButton Props" data={carouselNextPropsData} />
+        <PropsAccordion title="CarouselSlide Props" data={carouselSlidePropsData} className="mb-6" />
+        <PropsAccordion title="CarouselPrev Button Props" data={carouselPrevPropsData} className="mb-6" />
+        <PropsAccordion title="CarouselNext Button Props" data={carouselNextPropsData} />
       </section>
     </div>
   )

@@ -1,12 +1,14 @@
 /**
- * useCarouselDrag.ts
- * Custom hook that handles the pointer events (mouse drag/touch swipe) logic for the carousel.
+ * @fileoverview Lithos UI touch and drag gesture hook (`useCarouselDrag`).
+ * - Pointer Events API handler: provides unified mouse and touch drag scrolling across vertical and horizontal axes.
+ * - Snap-or-revert threshold logic: advances to the next/previous slide when swipe distance exceeds 50px, or scrolls back to origin if released below threshold.
+ * - Pointer capture lifecycle management (`setPointerCapture` / `releasePointerCapture`) to maintain gesture tracking across element boundaries.
  */
 import { useRef, useState, type PointerEvent } from 'react'
 import { scrollTo } from '../../../utils/scrollTo'
 import type { ScrollFunc } from './CarouselContext'
 
-interface UseCarouselDragOptions {
+export interface UseCarouselDragOptions {
   containerRef: React.RefObject<HTMLDivElement | null>
   scroll: ScrollFunc
   vertical?: boolean

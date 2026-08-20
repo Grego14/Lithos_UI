@@ -1,6 +1,8 @@
 /**
- * CarouselSlide.tsx
- * Wrapper component for an individual slide. Wraps the content that the user wants to display.
+ * @fileoverview Lithos UI carousel slide item (`CarouselSlide`).
+ * - CSS snap-point target (`snap-start`) designed for zero-shrink layouts within the carousel viewport track.
+ * - Accessible slide container utilizing `role="group"`, `aria-roledescription="slide"`, and automatic indexing labels.
+ * - Focus and accessibility boundary management: applies `inert` and `aria-hidden` attributes to non-active slides to prevent off-screen tab focus.
  */
 import type { ComponentPropsWithRef } from 'react'
 import { cn } from '../../../utils/cn'

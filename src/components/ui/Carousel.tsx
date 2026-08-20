@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Lithos UI carousel primitive.
+ * - Multi-axis scroll container (horizontal/vertical) driven by native CSS snap points, touch-drag gestures, and ResizeObserver realignments.
+ * - Compound component pattern with sub-component filtering to allow arbitrary non-slide children while indexing `CarouselSlide` elements.
+ * - Accessible auto-rotation loop with focus/hover pausing and dynamic `aria-live` politeness management.
+ */
 import {
   useEffect,
   useRef,
@@ -36,7 +42,7 @@ export interface CarouselProps extends Omit<ComponentPropsWithRef<'div'>, 'class
   className?: ClassValue | ClassArray
 }
 
-export const Carousel = ({
+const Carousel = ({
   controlsPosition = 'top',
   title,
   children,
@@ -284,8 +290,4 @@ export const Carousel = ({
   )
 }
 
-Carousel.NextButton = CarouselNext
-Carousel.PrevButton = CarouselPrev
-Carousel.Pagination = CarouselPagination
-Carousel.Controls = CarouselControls
-Carousel.Slide = CarouselSlide
+export { Carousel, CarouselPrev, CarouselNext, CarouselPagination, CarouselControls, CarouselSlide }
