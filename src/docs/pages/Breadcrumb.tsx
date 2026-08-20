@@ -86,7 +86,7 @@ export const IconNameBreadcrumb = () => {
         </p>
       </div>
 
-      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Installation
       </h2>
 
@@ -102,7 +102,7 @@ export const IconNameBreadcrumb = () => {
         ]}
       />
 
-      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Anatomy
       </h2>
       <div className="mb-12">
@@ -126,12 +126,12 @@ export const IconNameBreadcrumb = () => {
         />
       </div>
 
-      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Examples
       </h2>
 
       {/* Type 1: Collapsible */}
-      <h3 id="collapsible" className="mb-2 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="collapsible" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
         Collapsible
       </h3>
       <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
@@ -159,7 +159,7 @@ export const IconNameBreadcrumb = () => {
       </div>
 
       {/* Type 2: Icon */}
-      <h3 id="icon" className="mb-2 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="icon" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
         Icon
       </h3>
       <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
@@ -183,7 +183,7 @@ export const IconNameBreadcrumb = () => {
       </div>
 
       <section className="mb-12">
-        <h2 id="accessibility" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           Accessibility
         </h2>
         <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
@@ -205,7 +205,7 @@ export const IconNameBreadcrumb = () => {
       </section>
 
       <section className="mb-12">
-        <h2 id="api" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        <h2 id="api" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           API Reference
         </h2>
         <PropsAccordion title="Breadcrumb Props" data={breadcrumbPropsData} />

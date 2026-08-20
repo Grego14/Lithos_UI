@@ -113,7 +113,7 @@ export const FourteenUserGroup = () => {
         </p>
       </div>
 
-      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Installation
       </h2>
 
@@ -123,7 +123,7 @@ export const FourteenUserGroup = () => {
         requires={['utils/cn.ts', 'utils/yiq.ts', 'core/useAccentColor.ts']}
       />
 
-      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Anatomy
       </h2>
       <div className="mb-12">
@@ -140,11 +140,11 @@ export const FourteenUserGroup = () => {
         />
       </div>
 
-      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Examples
       </h2>
 
-      <h3 id="variants" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="variants" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         States
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
@@ -163,7 +163,7 @@ export const FourteenUserGroup = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="sizes" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="sizes" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Sizes
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
@@ -181,7 +181,7 @@ export const FourteenUserGroup = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="group" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="group" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Group
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
@@ -203,7 +203,7 @@ export const FourteenUserGroup = () => {
       </div>
 
       <section className="mb-12">
-        <h2 id="accessibility" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           Accessibility
         </h2>
         <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
@@ -226,7 +226,7 @@ export const FourteenUserGroup = () => {
       </section>
 
       <section className="mb-12">
-        <h2 id="api" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        <h2 id="api" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           API Reference
         </h2>
         <div className="mb-6 p-4 border-l-4 border-(--lithos-accent) bg-(--lithos-surface) text-sm font-body text-(--lithos-text)">

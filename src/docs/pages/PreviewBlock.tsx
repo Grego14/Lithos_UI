@@ -59,11 +59,11 @@ export const PreviewBlockExample = () => {
         </p>
       </div>
 
-      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Examples
       </h2>
 
-      <h3 id="default" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="default" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Default
       </h3>
 

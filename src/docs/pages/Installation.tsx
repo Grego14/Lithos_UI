@@ -27,7 +27,7 @@ export const Installation = () => {
         physics, and styling of your application.
       </p>
 
-      <h2 id="base-template" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="base-template" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         1. The Base Template
       </h2>
       <p className="mb-6 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
@@ -41,7 +41,7 @@ export const Installation = () => {
         language="bash"
       />
 
-      <h2 id="global-css" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="global-css" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         2. Global CSS Configuration
       </h2>
       <p className="mb-6 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
@@ -50,10 +50,7 @@ export const Installation = () => {
       </p>
       <CodeViewer code={cssConfig} language="css" />
 
-      <h2
-        id="theming-configuration"
-        className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)"
-      >
+      <h2 id="theming-configuration" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         3. Theming & Configuration
       </h2>
       <p className="mb-4 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
@@ -61,23 +58,21 @@ export const Installation = () => {
         aesthetic:
       </p>
 
-      <h3 className="text-xl font-bold uppercase tracking-tighter text-(--lithos-text) mb-2">
-        Static Override (Recommended)
-      </h3>
+      <h3 className="text-xl font-bold tracking-tighter text-(--lithos-text) mb-2">Static Override (Recommended)</h3>
       <p className="mb-6 text-sm md:text-base text-(--lithos-text) max-w-3xl font-body">
         The primary and most performant way to theme your application is to simply override the root tokens in your
         global CSS after importing <code>tokens.css</code>. For instance, updating <code>--lithos-accent</code> and{' '}
         <code>--lithos-radius</code> globally. No JavaScript is required.
       </p>
 
-      <h3 className="text-xl font-bold uppercase tracking-tighter text-(--lithos-text) mb-2">Live In-App Theming</h3>
+      <h3 className="text-xl font-bold tracking-tighter text-(--lithos-text) mb-2">Live In-App Theming</h3>
       <p className="mb-6 text-sm md:text-base text-(--lithos-text) max-w-3xl font-body">
         If you want your users to change themes dynamically at runtime, you can opt-in to using the{' '}
         <code>useLithosTheme</code> hook. This hook automatically injects live overrides into the DOM without forcing
         React to re-render the entire component tree.
       </p>
 
-      <h3 className="text-xl font-bold uppercase tracking-tighter text-(--lithos-text) mb-2">Obsidian Mode</h3>
+      <h3 className="text-xl font-bold tracking-tighter text-(--lithos-text) mb-2">Obsidian Mode</h3>
       <p className="mb-6 text-sm md:text-base text-(--lithos-text) max-w-3xl font-body">
         Dark mode is handled entirely by a single class. Simply toggle the <code>.obsidian</code> or <code>.dark</code>{' '}
         class on your <code>&lt;html&gt;</code> element to instantly invert the environmental tokens across your app.

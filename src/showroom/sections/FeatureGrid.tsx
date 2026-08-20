@@ -40,7 +40,6 @@ const features: FeatureItem[] = [
 ]
 
 const FeatureGrid = () => {
-  // - 24px shell keeps the block aligned with the page rhythm above and below.
   return (
     <section id="features" className="border-b-2 border-(--lithos-border) bg-(--lithos-surface) py-24">
       <div className="mx-auto max-w-6xl px-6">
@@ -48,12 +47,10 @@ const FeatureGrid = () => {
           Four Architectural Pillars
         </h2>
 
-        {/* - Negative outer margin cancels the card margin so the field stays centered. */}
         <div className="mt-20 -m-4 flex flex-wrap justify-center">
           {features.map((feature) => (
             <Card key={feature.title} variant="accent" interactive className="group m-4 w-full sm:w-[calc(50%-2rem)]">
               <CardContent className="flex flex-col h-full">
-                {/* - 56px icon tile: enough mass to anchor the card without crowding copy. */}
                 <div
                   className="flex h-14 w-14 items-center justify-center border-2 border-(--lithos-border) bg-(--lithos-accent) text-3xl text-(--lithos-accent-text) group-hover:bg-(--lithos-text) group-hover:text-(--lithos-surface) transition-colors duration-300"
                   aria-hidden="true"
@@ -67,7 +64,6 @@ const FeatureGrid = () => {
           ))}
         </div>
 
-        {/* - Footer link is centered to keep the card field visually sealed. */}
         <div className="mt-12 flex justify-center">
           <a
             href="/docs"
