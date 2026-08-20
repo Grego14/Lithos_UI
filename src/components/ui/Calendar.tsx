@@ -19,8 +19,8 @@
  *      it only ever anchors directly under its own trigger.
  * - Prev/next nav buttons are NOT exceptions: they route through `Button intent='text'` exactly
  *   like Accordion's header toggle, with full `.lithos-click` physics.
- * - Multi-color selection (mode='multiple' only): `getDateColor` lets a consumer assign a distinct
- *   color per selected date (e.g. sick leave vs vacation). Custom colors are resolved to a readable
+ * - Multicolor selection (mode='multiple' only): `dateColors` lets a consumer assign distinct
+ *   colors per group of selected dates (e.g. sick leave vs vacation). Custom colors are resolved to a readable
  *   foreground via the YIQ contrast engine (`src/utils/yiq.ts`), same as Badge's `color` prop.
  *   Range mode intentionally does NOT support per-date color — every day inside a selected range
  *   (endpoints and the days between) renders in one uniform accent color, since a range is a single
@@ -51,7 +51,7 @@ import {
   toDateKey,
 } from '../../utils/date'
 
-export type CalendarMode = 'single' | 'multiple' | 'range'
+export type CalendarMode = 'single' | 'multiple' | 'range' | 'rainbow'
 
 export interface DateRange {
   from: Date | null
@@ -70,10 +70,10 @@ export interface CalendarProps extends Omit<ComponentPropsWithRef<'div'>, 'defau
   onMonthChange?: (month: Date) => void
   minDate?: Date
   maxDate?: Date
-  disabledDates?: Date[]
+  disabledDates?: (Date | number)[]
   isDateDisabled?: (date: Date) => boolean
-  /** mode='multiple' only — assigns a distinct color per selected date (e.g. leave type). */
-  getDateColor?: (date: Date) => HexColor | string | undefined
+  /** mode='multiple' only — assigns distinct colors per group of selected dates (e.g. leave types). */
+  dateColors?: { dates: (Date | number)[]; color: HexColor | string }[]
   firstDayOfWeek?: 0 | 1 | 2 | 3 | 4 | 5 | 6
   locale?: string
   yearRange?: [number, number]
@@ -91,7 +91,7 @@ export interface CalendarProps extends Omit<ComponentPropsWithRef<'div'>, 'defau
 }
 
 const getEmptyValue = (mode: CalendarMode): CalendarValue => {
-  if (mode === 'multiple') return []
+  if (mode === 'multiple' || mode === 'rainbow') return []
   if (mode === 'range') return { from: null, to: null }
   return null
 }
@@ -101,10 +101,20 @@ const asRange = (value: CalendarValue): DateRange =>
 
 const asArray = (value: CalendarValue): Date[] => (Array.isArray(value) ? value : [])
 
+const ROYGBIV = [
+  '#fa5252', // Red
+  '#fd7e14', // Orange
+  '#fcc419', // Yellow
+  '#40c057', // Green
+  '#228be6', // Blue
+  '#4c6ef5', // Indigo
+  '#be4bdb', // Violet
+]
+
 const inferSeedDate = (mode: CalendarMode, value: CalendarValue | undefined): Date | null => {
   if (!value) return null
   if (mode === 'single') return value as Date
-  if (mode === 'multiple') return (value as Date[])[0] ?? null
+  if (mode === 'multiple' || mode === 'rainbow') return (value as Date[])[0] ?? null
   return (value as DateRange).from
 }
 
@@ -213,7 +223,7 @@ export const Calendar = ({
   maxDate,
   disabledDates,
   isDateDisabled,
-  getDateColor,
+  dateColors,
   firstDayOfWeek = 0,
   locale,
   yearRange,
@@ -225,12 +235,36 @@ export const Calendar = ({
   const isValueControlled = value !== undefined
   const [localValue, setLocalValue] = useState<CalendarValue>(() => defaultValue ?? getEmptyValue(mode))
   const currentValue = isValueControlled ? value! : localValue
+  const currentArray = useMemo(() => asArray(currentValue), [currentValue])
 
   const isMonthControlled = month !== undefined
   const [localMonth, setLocalMonth] = useState<Date>(() =>
     startOfMonth(defaultMonth ?? inferSeedDate(mode, defaultValue ?? value) ?? new Date())
   )
   const displayedMonth = isMonthControlled ? startOfMonth(month!) : localMonth
+
+  const colorAssignmentRef = useRef<Map<string, string>>(new Map())
+  const colorIndexRef = useRef(0)
+
+  if (mode === 'rainbow') {
+    const currentKeys = new Set(currentArray.map(toDateKey))
+
+    // Assign colors to newly selected dates in exact selection order
+    currentArray.forEach((date) => {
+      const key = toDateKey(date)
+      if (!colorAssignmentRef.current.has(key)) {
+        colorAssignmentRef.current.set(key, ROYGBIV[colorIndexRef.current % 7])
+        colorIndexRef.current++
+      }
+    })
+
+    // Cleanup unselected dates so they get a fresh color if selected again later
+    for (const key of colorAssignmentRef.current.keys()) {
+      if (!currentKeys.has(key)) {
+        colorAssignmentRef.current.delete(key)
+      }
+    }
+  }
 
   const [hoverDate, setHoverDate] = useState<Date | null>(null)
   const [focusedDate, setFocusedDate] = useState<Date>(
@@ -252,7 +286,7 @@ export const Calendar = ({
 
   const isDisabled = (date: Date): boolean => {
     if (isDateOutOfBounds(date, minDate, maxDate)) return true
-    if (disabledDates?.some((d) => isSameDay(d, date))) return true
+    if (disabledDates?.some((d) => (typeof d === 'number' ? d === date.getDate() : isSameDay(d, date)))) return true
     if (isDateDisabled?.(date)) return true
     return false
   }
@@ -266,7 +300,7 @@ export const Calendar = ({
       return
     }
 
-    if (mode === 'multiple') {
+    if (mode === 'multiple' || mode === 'rainbow') {
       const arr = asArray(currentValue)
       const exists = arr.some((d) => isSameDay(d, date))
       commitValue(exists ? arr.filter((d) => !isSameDay(d, date)) : [...arr, date])
@@ -439,7 +473,7 @@ export const Calendar = ({
       <div
         role="grid"
         aria-label="Calendar"
-        aria-multiselectable={mode === 'multiple'}
+        aria-multiselectable={mode === 'multiple' || mode === 'rainbow'}
         onMouseLeave={() => setHoverDate(null)}
         onKeyDown={handleGridKeyDown}
         className={cn('grid grid-cols-7 border-t-2 border-l-2 border-(--lithos-border)', classes.grid)}
@@ -466,10 +500,17 @@ export const Calendar = ({
               const selected =
                 mode === 'single'
                   ? isSameDay(currentValue as Date | null, date)
-                  : mode === 'multiple'
+                  : mode === 'multiple' || mode === 'rainbow'
                     ? asArray(currentValue).some((d) => isSameDay(d, date))
                     : isRangeMember(date)
-              const customColor = mode === 'multiple' && selected ? getDateColor?.(date) : undefined
+              const customColor =
+                mode === 'rainbow' && selected
+                  ? colorAssignmentRef.current.get(toDateKey(date))
+                  : mode === 'multiple' && selected
+                    ? dateColors?.find((dc) =>
+                        dc.dates.some((d) => (typeof d === 'number' ? d === date.getDate() : isSameDay(d, date)))
+                      )?.color
+                    : undefined
               const today = isToday(date)
               const key = toDateKey(date)
 

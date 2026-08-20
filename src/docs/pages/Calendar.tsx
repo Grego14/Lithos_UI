@@ -12,7 +12,7 @@ export const CalendarDoc = () => {
   const [controlledMonth, setControlledMonth] = useState(new Date())
 
   const singleCode = {
-    body: `export const MeetingPicker = () => {
+    body: `export const SingleCalendar = () => {
   return <Calendar mode='single' />
 }`,
     componentNames: ['Calendar'],
@@ -20,7 +20,7 @@ export const CalendarDoc = () => {
   }
 
   const multipleCode = {
-    body: `export const LeaveDaysPicker = () => {
+    body: `export const MultipleCalendar = () => {
   return <Calendar mode='multiple' />
 }`,
     componentNames: ['Calendar'],
@@ -28,18 +28,16 @@ export const CalendarDoc = () => {
   }
 
   const multiColorCode = {
-    body: `const sickLeave = [new Date(2026, 7, 4), new Date(2026, 7, 5)]
-const vacation = [new Date(2026, 7, 17), new Date(2026, 7, 18), new Date(2026, 7, 19)]
+    body: `const gymColors = [
+  { dates: [4, 5], color: '#ff6b6b' },
+  { dates: [17, 18, 19], color: '#4dabf7' },
+]
 
-export const LeaveTypePicker = () => {
+export const MultiColorCalendar = () => {
   return (
     <Calendar
       mode='multiple'
-      getDateColor={(date) => {
-        if (sickLeave.some((d) => d.toDateString() === date.toDateString())) return '#ff6b6b'
-        if (vacation.some((d) => d.toDateString() === date.toDateString())) return '#4dabf7'
-        return undefined
-      }}
+      dateColors={gymColors}
     />
   )
 }`,
@@ -47,8 +45,16 @@ export const LeaveTypePicker = () => {
     manualPath: '../../components/ui/Calendar',
   }
 
+  const rainbowCode = {
+    body: `export const RainbowCalendar = () => {
+  return <Calendar mode="rainbow" />
+}`,
+    componentNames: ['Calendar'],
+    manualPath: '../../components/ui/Calendar',
+  }
+
   const rangeCode = {
-    body: `export const TravelBookingPicker = () => {
+    body: `export const RangeCalendar = () => {
   return <Calendar mode='range' />
 }`,
     componentNames: ['Calendar'],
@@ -56,21 +62,23 @@ export const LeaveTypePicker = () => {
   }
 
   const disabledDatesCode = {
-    body: `const bookedDates = [
-  new Date(2026, 7, 10),
-  new Date(2026, 7, 11),
-  new Date(2026, 7, 18),
-]
+    body: `const bookedDates = [10, 11, 18]
 
-export const AvailabilityPicker = () => {
-  return <Calendar mode='single' disabledDates={bookedDates} minDate={new Date()} />
+export const DisabledDatesCalendar = () => {
+  return (
+    <Calendar 
+      mode='single' 
+      disabledDates={bookedDates} 
+      minDate={new Date()} 
+    />
+  )
 }`,
     componentNames: ['Calendar'],
     manualPath: '../../components/ui/Calendar',
   }
 
   const boundedYearsCode = {
-    body: `export const BirthdatePicker = () => {
+    body: `export const BoundedYearsCalendar = () => {
   return <Calendar mode='single' yearRange={[1940, new Date().getFullYear()]} />
 }`,
     componentNames: ['Calendar'],
@@ -78,7 +86,7 @@ export const AvailabilityPicker = () => {
   }
 
   const controlledCode = {
-    body: `export const ControlledExample = () => {
+    body: `export const ControlledCalendar = () => {
   const [value, setValue] = useState<CalendarValue>(null)
   const [month, setMonth] = useState(new Date())
 
@@ -166,22 +174,29 @@ export const AvailabilityPicker = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="multi-color" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
-        Multi-color selection
+      <h3 id="multicolor" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Multicolor selection
       </h3>
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={multiColorCode} githubUrl={githubUrl}>
           <Calendar
             mode="multiple"
-            getDateColor={(date) => {
-              const sickLeave = [new Date(2026, 7, 4), new Date(2026, 7, 5)]
-              const vacation = [new Date(2026, 7, 17), new Date(2026, 7, 18), new Date(2026, 7, 19)]
-              if (sickLeave.some((d) => d.toDateString() === date.toDateString())) return '#ff6b6b'
-              if (vacation.some((d) => d.toDateString() === date.toDateString())) return '#4dabf7'
-              return undefined
-            }}
+            dateColors={[
+              { dates: [4, 5], color: '#ff6b6b' },
+              { dates: [17, 18, 19], color: '#4dabf7' },
+            ]}
           />
+        </PreviewBlock>
+      </div>
+
+      <h3 id="rainbow" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+        Rainbow
+      </h3>
+
+      <div className="mt-8 mb-16">
+        <PreviewBlock code={rainbowCode} githubUrl={githubUrl}>
+          <Calendar mode="rainbow" />
         </PreviewBlock>
       </div>
 
@@ -201,11 +216,7 @@ export const AvailabilityPicker = () => {
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={disabledDatesCode} githubUrl={githubUrl}>
-          <Calendar
-            mode="single"
-            disabledDates={[new Date(2026, 7, 10), new Date(2026, 7, 11), new Date(2026, 7, 18)]}
-            minDate={new Date()}
-          />
+          <Calendar mode="single" disabledDates={[10, 11, 18]} minDate={new Date()} />
         </PreviewBlock>
       </div>
 

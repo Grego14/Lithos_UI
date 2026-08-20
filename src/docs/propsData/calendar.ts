@@ -3,7 +3,7 @@ import type { PropItem } from '../../components/ui/PropsTable'
 export const calendarPropsData: PropItem[] = [
   {
     name: 'mode',
-    type: '"single" | "multiple" | "range"',
+    type: '"single" | "multiple" | "range" | "rainbow"',
     defaultValue: '"single"',
     required: false,
     description: 'Selection mode for the calendar.',
@@ -58,7 +58,7 @@ export const calendarPropsData: PropItem[] = [
   },
   {
     name: 'disabledDates',
-    type: 'Date[]',
+    type: '(Date | number)[]',
     required: false,
     description: 'Specific dates that cannot be selected.',
   },
@@ -69,10 +69,10 @@ export const calendarPropsData: PropItem[] = [
     description: 'Callback to determine if a date should be disabled.',
   },
   {
-    name: 'getDateColor',
-    type: '(date: Date) => HexColor | string | undefined',
+    name: 'dateColors',
+    type: '{ dates: (Date | number)[], color: HexColor | string }[]',
     required: false,
-    description: 'Assigns a distinct color per selected date.',
+    description: 'Assigns distinct colors per group of selected dates (e.g. leave types).',
   },
   {
     name: 'firstDayOfWeek',
