@@ -86,7 +86,7 @@ export const AccordionDoc = () => {
         </p>
       </div>
 
-      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Installation
       </h2>
 
@@ -96,7 +96,7 @@ export const AccordionDoc = () => {
         requires={['utils/cn.ts', 'components/ui/Button.tsx', 'components/ui/icons/IconChevronUp.tsx']}
       />
 
-      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Anatomy
       </h2>
       <div className="mb-12">
@@ -110,11 +110,11 @@ export const AccordionDoc = () => {
         />
       </div>
 
-      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Examples
       </h2>
 
-      <h3 id="default" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="default" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Default
       </h3>
 
@@ -127,7 +127,7 @@ export const AccordionDoc = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="grouped-default" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="grouped-default" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Grouped default
       </h3>
 
@@ -152,7 +152,7 @@ export const AccordionDoc = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="grouped-multiple" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="grouped-multiple" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Grouped multiple
       </h3>
 
@@ -178,7 +178,7 @@ export const AccordionDoc = () => {
       </div>
 
       <section className="mb-12">
-        <h2 id="accessibility" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           Accessibility
         </h2>
         <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
@@ -198,7 +198,7 @@ export const AccordionDoc = () => {
       </section>
 
       <section className="mb-12">
-        <h2 id="api" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        <h2 id="api" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           API Reference
         </h2>
         <div className="mb-6 p-4 border-l-4 border-(--lithos-accent) bg-(--lithos-surface) text-sm font-body text-(--lithos-text)">

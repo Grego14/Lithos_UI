@@ -138,7 +138,7 @@ export const ButtonDoc = () => {
         </p>
       </div>
 
-      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Installation
       </h2>
 
@@ -148,7 +148,7 @@ export const ButtonDoc = () => {
         requires={['utils/cn.ts', 'core/types.ts']}
       />
 
-      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Anatomy
       </h2>
       <div className="mb-12">
@@ -161,15 +161,15 @@ export const ButtonDoc = () => {
         />
       </div>
 
-      <h2 id="examples" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="examples" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Examples
       </h2>
 
-      <h2 id="button" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="button" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Button
       </h2>
 
-      <h4 id="default" className="mb-3 text-lg font-black uppercase tracking-tight text-(--lithos-text)">
+      <h4 id="default" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
         Default
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
@@ -181,7 +181,7 @@ export const ButtonDoc = () => {
         <Button>Default</Button>
       </PreviewBlock>
 
-      <h4 id="secondary" className="mb-3 text-lg font-black uppercase tracking-tight text-(--lithos-text)">
+      <h4 id="secondary" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
         Secondary
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
@@ -193,7 +193,7 @@ export const ButtonDoc = () => {
         <Button intent="secondary">Secondary</Button>
       </PreviewBlock>
 
-      <h4 id="accent" className="mb-3 text-lg font-black uppercase tracking-tight text-(--lithos-text)">
+      <h4 id="accent" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
         Accent
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
@@ -205,7 +205,7 @@ export const ButtonDoc = () => {
         <Button intent="accent">Accent</Button>
       </PreviewBlock>
 
-      <h4 id="text" className="mb-3 text-lg font-black uppercase tracking-tight text-(--lithos-text)">
+      <h4 id="text" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
         Text
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
@@ -217,7 +217,7 @@ export const ButtonDoc = () => {
         <Button intent="text">Text</Button>
       </PreviewBlock>
 
-      <h4 id="with-icon" className="mb-3 text-lg font-black uppercase tracking-tight text-(--lithos-text)">
+      <h4 id="with-icon" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
         With Icon
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
@@ -235,7 +235,7 @@ export const ButtonDoc = () => {
         </div>
       </PreviewBlock>
 
-      <h4 id="icon" className="mb-3 text-lg font-black uppercase tracking-tight text-(--lithos-text)">
+      <h4 id="icon" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
         Icon
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
@@ -250,7 +250,7 @@ export const ButtonDoc = () => {
         </Button>
       </PreviewBlock>
 
-      <h2 id="button-group" className="mb-4 mt-8 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="button-group" className="mb-4 mt-8 text-2xl font-black tracking-tight text-(--lithos-text)">
         Button Group
       </h2>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-6 opacity-80">
@@ -258,7 +258,7 @@ export const ButtonDoc = () => {
         <code>attached</code> to fuse adjacent buttons into a single hard-bordered strip.
       </p>
 
-      <h4 id="group-horizontal" className="mb-3 text-lg font-black uppercase tracking-tight text-(--lithos-text)">
+      <h4 id="group-horizontal" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
         Default
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
@@ -273,7 +273,7 @@ export const ButtonDoc = () => {
         </ButtonGroup>
       </PreviewBlock>
 
-      <h4 id="group-vertical" className="mb-3 text-lg font-black uppercase tracking-tight text-(--lithos-text)">
+      <h4 id="group-vertical" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
         Vertical
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
@@ -288,7 +288,7 @@ export const ButtonDoc = () => {
         </ButtonGroup>
       </PreviewBlock>
 
-      <h4 id="group-attached" className="mb-3 text-lg font-black uppercase tracking-tight text-(--lithos-text)">
+      <h4 id="group-attached" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
         Attached
       </h4>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
@@ -305,7 +305,7 @@ export const ButtonDoc = () => {
       </PreviewBlock>
 
       <section className="mb-12">
-        <h2 id="accessibility" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           Accessibility
         </h2>
         <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
@@ -321,7 +321,7 @@ export const ButtonDoc = () => {
       </section>
 
       <section className="mb-12">
-        <h2 id="api" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        <h2 id="api" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           API Reference
         </h2>
         <div className="mb-6 p-4 border-l-4 border-(--lithos-accent) bg-(--lithos-surface) text-sm font-body text-(--lithos-text)">

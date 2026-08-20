@@ -97,7 +97,7 @@ export const BadgeDoc = () => {
         </p>
       </div>
 
-      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Installation
       </h2>
 
@@ -107,11 +107,11 @@ export const BadgeDoc = () => {
         requires={['utils/cn.ts', 'core/useAccentColor.ts', 'utils/yiq.ts', 'utils/colors.ts', 'core/types.ts']}
       />
 
-      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Examples
       </h2>
 
-      <h3 id="variants" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="variants" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Variants
       </h3>
 
@@ -136,7 +136,7 @@ export const BadgeDoc = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="sizes" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="sizes" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Sizes
       </h3>
 
@@ -157,7 +157,7 @@ export const BadgeDoc = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="custom-color" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="custom-color" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Custom color
       </h3>
 
@@ -193,7 +193,7 @@ export const BadgeDoc = () => {
       </div>
 
       <section className="mb-12">
-        <h2 id="accessibility" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           Accessibility
         </h2>
         <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
@@ -203,7 +203,7 @@ export const BadgeDoc = () => {
       </section>
 
       <section className="mb-12">
-        <h2 id="api" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        <h2 id="api" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           API Reference
         </h2>
         <div className="mb-6 p-4 border-l-4 border-(--lithos-accent) bg-(--lithos-surface) text-sm font-body text-(--lithos-text)">

@@ -145,7 +145,7 @@ export const AppCarousel = () => {
         </p>
       </section>
 
-      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Installation
       </h2>
 
@@ -164,7 +164,7 @@ export const AppCarousel = () => {
         ]}
       />
 
-      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Anatomy
       </h2>
       <div className="mb-12">
@@ -184,11 +184,11 @@ export const AppCarousel = () => {
         />
       </div>
 
-      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Examples
       </h2>
 
-      <h3 id="default" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="default" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Default
       </h3>
       <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
@@ -209,7 +209,7 @@ export const AppCarousel = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="looping" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="looping" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Infinite Looping
       </h3>
       <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
@@ -230,7 +230,7 @@ export const AppCarousel = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="bottom-controls" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="bottom-controls" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Bottom controls
       </h3>
       <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
@@ -251,7 +251,7 @@ export const AppCarousel = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="numbers-selector" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="numbers-selector" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Numbers Selector
       </h3>
       <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
@@ -272,7 +272,7 @@ export const AppCarousel = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="no-current-slider" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="no-current-slider" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         No current slider
       </h3>
       <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
@@ -293,7 +293,7 @@ export const AppCarousel = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="no-controls" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="no-controls" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         No controls
       </h3>
       <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
@@ -314,7 +314,7 @@ export const AppCarousel = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="play-infinite" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="play-infinite" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Play infinitely
       </h3>
       <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
@@ -336,7 +336,7 @@ export const AppCarousel = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="vertical-orientation" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="vertical-orientation" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Vertical Oreientation
       </h3>
       <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
@@ -358,7 +358,7 @@ export const AppCarousel = () => {
       </div>
 
       <section className="mb-12">
-        <h2 id="accessibility" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           Accessibility
         </h2>
         <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
@@ -386,7 +386,7 @@ export const AppCarousel = () => {
       </section>
 
       <section className="mb-12">
-        <h2 id="api" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        <h2 id="api" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           API Reference
         </h2>
 

@@ -160,13 +160,13 @@ export const CardDoc = () => {
         </p>
       </div>
 
-      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Installation
       </h2>
 
       <SetupGuide componentNames={['Card']} manualPath="../../components/ui/Card" requires={['utils/cn.ts']} />
 
-      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Anatomy
       </h2>
       <div className="mb-12">
@@ -183,11 +183,11 @@ export const CardDoc = () => {
         />
       </div>
 
-      <h2 id="examples" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="examples" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Examples
       </h2>
 
-      <h3 id="default" className="mb-3 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="default" className="mb-3 text-xl font-black tracking-tight text-(--lithos-text)">
         Default
       </h3>
       <PreviewBlock code={defaultCode} githubUrl={githubUrl}>
@@ -206,7 +206,7 @@ export const CardDoc = () => {
         </Card>
       </PreviewBlock>
 
-      <h3 id="accent" className="mt-12 mb-3 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="accent" className="mt-12 mb-3 text-xl font-black tracking-tight text-(--lithos-text)">
         Accent
       </h3>
       <PreviewBlock code={accentCode} githubUrl={githubUrl}>
@@ -221,7 +221,7 @@ export const CardDoc = () => {
         </Card>
       </PreviewBlock>
 
-      <h3 id="solid" className="mt-12 mb-3 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="solid" className="mt-12 mb-3 text-xl font-black tracking-tight text-(--lithos-text)">
         Solid
       </h3>
       <PreviewBlock code={solidCode} githubUrl={githubUrl}>
@@ -236,7 +236,7 @@ export const CardDoc = () => {
         </Card>
       </PreviewBlock>
 
-      <h3 id="elevate" className="mt-12 mb-3 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="elevate" className="mt-12 mb-3 text-xl font-black tracking-tight text-(--lithos-text)">
         Interactive: Elevate
       </h3>
       <PreviewBlock code={elevateCode} githubUrl={githubUrl}>
@@ -251,7 +251,7 @@ export const CardDoc = () => {
         </Card>
       </PreviewBlock>
 
-      <h3 id="spacing" className="mt-12 mb-3 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="spacing" className="mt-12 mb-3 text-xl font-black tracking-tight text-(--lithos-text)">
         Spacing
       </h3>
       <PreviewBlock code={spacingCode} githubUrl={githubUrl}>
@@ -289,7 +289,7 @@ export const CardDoc = () => {
         </div>
       </PreviewBlock>
 
-      <h3 id="image" className="mt-12 mb-3 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="image" className="mt-12 mb-3 text-xl font-black tracking-tight text-(--lithos-text)">
         Image
       </h3>
       <PreviewBlock code={imageCode} githubUrl={githubUrl}>
@@ -305,7 +305,7 @@ export const CardDoc = () => {
       </PreviewBlock>
 
       <section className="mt-12 mb-12">
-        <h2 id="accessibility" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           Accessibility
         </h2>
         <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
@@ -333,7 +333,7 @@ export const CardDoc = () => {
       </section>
 
       <section className="mb-12">
-        <h2 id="api" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        <h2 id="api" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           API Reference
         </h2>
         <div className="mb-6 p-4 border-l-4 border-(--lithos-accent) bg-(--lithos-surface) text-sm font-body text-(--lithos-text)">

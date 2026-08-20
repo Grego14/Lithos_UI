@@ -151,7 +151,7 @@ export const AlertWithUndo = () => {
         </p>
       </div>
 
-      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Installation
       </h2>
 
@@ -169,11 +169,11 @@ export const AlertWithUndo = () => {
         ]}
       />
 
-      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Examples
       </h2>
 
-      <h3 id="filled" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="filled" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Filled
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
@@ -206,7 +206,7 @@ export const AlertWithUndo = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="outline" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="outline" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Outline
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
@@ -239,7 +239,7 @@ export const AlertWithUndo = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="sizes" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="sizes" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Sizes
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
@@ -263,7 +263,7 @@ export const AlertWithUndo = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="no-title" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="no-title" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         No title
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
@@ -281,7 +281,7 @@ export const AlertWithUndo = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="actions" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="actions" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Actions
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
@@ -315,7 +315,7 @@ export const AlertWithUndo = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="custom-color" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="custom-color" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Custom color
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
@@ -355,7 +355,7 @@ export const AlertWithUndo = () => {
       </div>
 
       <section className="mb-12">
-        <h2 id="accessibility" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           Accessibility
         </h2>
         <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
@@ -372,7 +372,7 @@ export const AlertWithUndo = () => {
       </section>
 
       <section className="mb-12">
-        <h2 id="api" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        <h2 id="api" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           API Reference
         </h2>
         <div className="mb-6 p-4 border-l-4 border-(--lithos-accent) bg-(--lithos-surface) text-sm font-body text-(--lithos-text)">

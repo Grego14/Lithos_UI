@@ -133,7 +133,7 @@ export const DisabledDatesCalendar = () => {
         </p>
       </div>
 
-      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Installation
       </h2>
 
@@ -150,11 +150,11 @@ export const DisabledDatesCalendar = () => {
         ]}
       />
 
-      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Examples
       </h2>
 
-      <h3 id="single" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="single" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Single
       </h3>
 
@@ -164,7 +164,7 @@ export const DisabledDatesCalendar = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="multiple" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="multiple" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Multiple
       </h3>
 
@@ -174,7 +174,7 @@ export const DisabledDatesCalendar = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="multicolor" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="multicolor" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Multicolor selection
       </h3>
 
@@ -190,7 +190,7 @@ export const DisabledDatesCalendar = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="rainbow" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="rainbow" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Rainbow
       </h3>
 
@@ -200,7 +200,7 @@ export const DisabledDatesCalendar = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="range" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="range" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Range
       </h3>
 
@@ -210,7 +210,7 @@ export const DisabledDatesCalendar = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="disabled-dates" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="disabled-dates" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Disabled dates
       </h3>
 
@@ -220,7 +220,7 @@ export const DisabledDatesCalendar = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="bounded-years" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="bounded-years" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Bounded years
       </h3>
 
@@ -230,7 +230,7 @@ export const DisabledDatesCalendar = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="controlled" className="mb-4 text-xl font-black uppercase tracking-tight text-(--lithos-text)">
+      <h3 id="controlled" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Controlled
       </h3>
 
@@ -247,7 +247,7 @@ export const DisabledDatesCalendar = () => {
       </div>
 
       <section className="mb-12">
-        <h2 id="accessibility" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           Accessibility
         </h2>
         <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
@@ -273,7 +273,7 @@ export const DisabledDatesCalendar = () => {
       </section>
 
       <section className="mb-12">
-        <h2 id="api" className="mb-4 text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+        <h2 id="api" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           API Reference
         </h2>
         <PropsAccordion title="Calendar Props" data={calendarPropsData} />
