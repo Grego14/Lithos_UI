@@ -19,10 +19,18 @@ const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/component
 export const CardDoc = () => {
   const [spacing, setSpacing] = useState<'sm' | 'md' | 'lg'>('md')
 
-  const defaultCode = `import { Card, CardImage, CardContent, CardTitle, CardDescription, CardFooter } from '../../components/ui/Card'
-import { Button } from '../../components/ui/Button'
+  const cardManualPath = {
+    Card: '../../components/ui/Card',
+    CardImage: '../../components/ui/Card',
+    CardContent: '../../components/ui/Card',
+    CardTitle: '../../components/ui/Card',
+    CardDescription: '../../components/ui/Card',
+    CardFooter: '../../components/ui/Card',
+    Button: '../../components/ui/Button',
+  }
 
-export const DefaultCard = () => {
+  const defaultCode = {
+    body: `export const DefaultCard = () => {
   return (
     <Card interactive className="max-w-sm">
       <CardImage src="https://picsum.photos/600/400" alt="Thumbnail" />
@@ -38,11 +46,13 @@ export const DefaultCard = () => {
       </CardFooter>
     </Card>
   );
-};`
+};`,
+    componentNames: ['Card', 'CardImage', 'CardContent', 'CardTitle', 'CardDescription', 'CardFooter', 'Button'],
+    manualPath: cardManualPath,
+  }
 
-  const accentCode = `import { Card, CardImage, CardContent, CardTitle, CardDescription } from '../../components/ui/Card'
-
-export const AccentCard = () => {
+  const accentCode = {
+    body: `export const AccentCard = () => {
   return (
     <Card variant="accent" interactive className="max-w-sm">
       <CardImage src="https://picsum.photos/600/400?1" alt="Preview" />
@@ -52,11 +62,13 @@ export const AccentCard = () => {
       </CardContent>
     </Card>
   )
-}`
+}`,
+    componentNames: ['Card', 'CardImage', 'CardContent', 'CardTitle', 'CardDescription'],
+    manualPath: cardManualPath,
+  }
 
-  const solidCode = `import { Card, CardImage, CardContent, CardTitle, CardDescription } from '../../components/ui/Card'
-
-export const SolidCard = () => {
+  const solidCode = {
+    body: `export const SolidCard = () => {
   return (
     <Card variant="solid" interactive className="max-w-sm">
       <CardImage src="https://picsum.photos/600/400?2" alt="Preview" />
@@ -66,12 +78,13 @@ export const SolidCard = () => {
       </CardContent>
     </Card>
   )
-}`
+}`,
+    componentNames: ['Card', 'CardImage', 'CardContent', 'CardTitle', 'CardDescription'],
+    manualPath: cardManualPath,
+  }
 
-  const spacingCode = `import { Card, CardContent, CardTitle, CardDescription, CardFooter } from '../../components/ui/Card'
-import { Button } from '../../components/ui/Button'
-
-export const SpacingCard = () => {
+  const spacingCode = {
+    body: `export const SpacingCard = () => {
   return (
     <Card className="max-w-sm">
       <CardContent spacing="${spacing}">
@@ -83,11 +96,13 @@ export const SpacingCard = () => {
       </CardFooter>
     </Card>
   )
-}`
+}`,
+    componentNames: ['Card', 'CardContent', 'CardTitle', 'CardDescription', 'CardFooter', 'Button'],
+    manualPath: cardManualPath,
+  }
 
-  const imageCode = `import { Card, CardImage, CardContent, CardTitle, CardDescription } from '../../components/ui/Card'
-
-export const ImageBackgroundCard = () => {
+  const imageCode = {
+    body: `export const ImageBackgroundCard = () => {
   return (
     <Card variant="image" className="w-full max-w-sm min-h-[300px]">
       <CardImage src="https://picsum.photos/600/600" alt="Full bleed background" isBackground />
@@ -97,7 +112,10 @@ export const ImageBackgroundCard = () => {
       </CardContent>
     </Card>
   )
-}`
+}`,
+    componentNames: ['Card', 'CardImage', 'CardContent', 'CardTitle', 'CardDescription'],
+    manualPath: cardManualPath,
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-6">
