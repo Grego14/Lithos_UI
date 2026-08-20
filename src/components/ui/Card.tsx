@@ -9,7 +9,7 @@ import { cn } from '../../utils/cn'
 
 export interface CardProps extends ComponentPropsWithRef<'div'> {
   interactive?: boolean | undefined
-  variant?: 'default' | 'accent' | 'image' | 'blueprint' | 'physics' | 'solid' | undefined
+  variant?: 'default' | 'accent' | 'image' | 'solid' | undefined
   children: ReactNode
 }
 

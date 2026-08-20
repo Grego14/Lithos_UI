@@ -143,6 +143,40 @@ describe('Card Component', () => {
     expect(screen.getByTestId('card')).toHaveAttribute('id', 'card-1')
   })
 
+  it('passes className, id, and other native props through to each part\'s root element', () => {
+    render(
+      <Card className="custom-card" id="card-id" data-testid="card">
+        <CardImage src="/photo.jpg" alt="Photo" className="custom-image" id="image-id" data-testid="image" />
+        <CardContent className="custom-content" id="content-id" data-testid="content">
+          <CardTitle className="custom-title" id="title-id" data-testid="title">
+            Title
+          </CardTitle>
+          <CardDescription className="custom-desc" id="desc-id" data-testid="desc">
+            Description
+          </CardDescription>
+        </CardContent>
+        <CardFooter className="custom-footer" id="footer-id" data-testid="footer">
+          Actions
+        </CardFooter>
+      </Card>
+    )
+
+    const cases = [
+      ['card', 'custom-card', 'card-id'],
+      ['image', 'custom-image', 'image-id'],
+      ['content', 'custom-content', 'content-id'],
+      ['title', 'custom-title', 'title-id'],
+      ['desc', 'custom-desc', 'desc-id'],
+      ['footer', 'custom-footer', 'footer-id'],
+    ] as const
+
+    cases.forEach(([testId, className, id]) => {
+      const el = screen.getByTestId(testId)
+      expect(el).toHaveClass(className)
+      expect(el).toHaveAttribute('id', id)
+    })
+  })
+
   it('should have no accessibility violations', async () => {
     const { container } = render(
       <Card>

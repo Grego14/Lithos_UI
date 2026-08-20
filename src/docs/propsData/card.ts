@@ -3,7 +3,7 @@ import type { PropItem } from '../../components/ui/PropsTable'
 export const cardPropsData: PropItem[] = [
   {
     name: 'variant',
-    type: "'default' | 'accent' | 'image' | 'blueprint' | 'physics' | 'solid'",
+    type: "'default' | 'accent' | 'image' | 'solid'",
     defaultValue: "'default'",
     required: false,
     description:
