@@ -66,7 +66,7 @@ const FeatureGrid1 = () => {
         {/* - Footer link is centered to keep the card field visually sealed. */}
         <div className="mt-12 flex justify-center">
           <a
-            href="/docs"
+            href="#"
             className="font-black uppercase tracking-tighter text-(--lithos-text) transition-colors hover:text-(--lithos-accent) cursor-pointer"
           >
             Explore all Features →

@@ -22,7 +22,7 @@ describe('FeatureGrid1', () => {
     ).toBeInTheDocument()
 
     // Check footer link
-    expect(screen.getByRole('link', { name: /explore all features/i })).toHaveAttribute('href', '/docs')
+    expect(screen.getByRole('link', { name: /explore all features/i })).toHaveAttribute('href', '#')
   })
 
   it('has no accessibility violations', async () => {
