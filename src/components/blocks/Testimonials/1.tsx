@@ -1,9 +1,3 @@
-/**
- * @fileoverview Lithos UI testimonial wall.
- * - Turns social proof into the same hard-surfaced card language as the rest of the system.
- * - Uses explicit margins and shadow steps so the quotes read as physical plaques.
- * - Keeps the grid wide and stable to avoid visual drift in the proof section.
- */
 import { Card, CardContent } from '../../ui/Card'
 import { Avatar } from '../../ui/Avatar'
 
@@ -13,7 +7,7 @@ interface Testimonial {
   title: string
 }
 
-// NOTE: These are example names/quotes for template purposes, not real Lithos testimonials.
+// Replace this array with data from your API
 const testimonials: Testimonial[] = [
   {
     quote: 'This product completely transformed how we operate. The workflow is incredibly smooth and efficient.',
@@ -39,7 +33,6 @@ const Testimonials1 = () => (
         Proof From the Front Lines
       </h2>
 
-      {/* - Negative outer margin keeps the quote grid centered without gap-based layout math. */}
       <div className="mt-20 -m-4 flex flex-wrap justify-center">
         {testimonials.map((testimonial) => (
           <Card
@@ -54,7 +47,6 @@ const Testimonials1 = () => (
                 {testimonial.quote}
               </p>
 
-              {/* - Avatar + byline stay compact so the plaque weight remains on the quote. */}
               <div className="mt-8 flex items-center">
                 <Avatar alt={testimonial.name} />
                 <div className="ml-4">

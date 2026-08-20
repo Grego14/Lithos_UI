@@ -1,10 +1,3 @@
-/**
- * @fileoverview Lithos UI accordion stack.
- * - This block is the reference pattern for composing Blocks from real primitives.
- * - Uses Accordion/AccordionGroup rather than reinventing disclosure logic.
- * - Packs questions into a hard-edged vertical wall with explicit open/closed slabs.
- */
-
 import { Accordion, AccordionGroup } from '../../ui/Accordion'
 
 interface FAQItem {
@@ -12,6 +5,7 @@ interface FAQItem {
   answer: string
 }
 
+// Replace this array with data from your API
 const faqs: FAQItem[] = [
   {
     question: 'Is this product scalable?',
@@ -39,7 +33,6 @@ const FAQ1 = () => {
           Frequently Asked Questions
         </h2>
 
-        {/* - 24px shell keeps the accordion aligned with the page rhythm. */}
         <AccordionGroup className="mt-20 w-full" allowMultiple={false}>
           {faqs.map((faq) => (
             <Accordion
