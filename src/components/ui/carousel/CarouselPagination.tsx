@@ -76,7 +76,7 @@ export const CarouselPagination = ({
 
   const selectorsContainerClass = cn('flex sm:ml-auto', !showCounter && 'mx-auto')
   const containerClass = cn(
-    'flex items-center justify-center flex-col sm:flex-row overflow-x-hidden',
+    'flex items-center justify-center flex-col sm:flex-row',
     bottomControls ? 'mb-3' : 'mt-3',
     className
   )
