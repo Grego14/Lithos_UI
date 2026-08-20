@@ -38,7 +38,7 @@ const Testimonials1 = () => (
           <Card
             key={testimonial.name}
             variant="accent"
-            interactive={true}
+            interactive="elevate"
             className="m-4 flex w-[calc(100%-2rem)] sm:w-[calc(50%-2rem)] lg:w-[calc(33.333%-2rem)] flex-col"
           >
             <CardContent className="flex flex-col h-full">

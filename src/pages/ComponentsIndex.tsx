@@ -123,9 +123,9 @@ const componentsList = [
     preview: (
       <Card
         variant="accent"
-        className="pointer-events-none w-32 group-hover:bg-(--lithos-accent) group-hover:text-(--lithos-accent-text) transition-colors"
+        className="pointer-events-none w-32 group-hover/link:bg-(--lithos-accent) group-hover/link:text-(--lithos-accent-text) transition-colors"
       >
-        <CardImage src="https://picsum.photos/600/400?1" alt="Preview" className="!h-16" />
+        <CardImage src="https://picsum.photos/600/400?1" alt="Preview" className="h-16!" />
         <CardContent className="p-2">
           <p className="font-black uppercase text-[10px] tracking-tight leading-none mb-1">Accent Card</p>
           <p className="font-body opacity-70 text-[8px] leading-tight">Hover to see fill.</p>
@@ -177,19 +177,20 @@ export const ComponentsIndex = ({ isDarkMode, toggleObsidian }: ComponentsIndexP
           <div className="flex flex-wrap -m-3">
             {componentsList.map((comp) => (
               <div key={comp.name} className="w-full sm:w-[50%] md:w-[33.333%] lg:w-[25%] p-3">
-                <Link
-                  to={comp.to}
-                  className="block group lithos-click h-full p-0 flex flex-col items-stretch rounded-(--lithos-radius) overflow-hidden"
-                >
-                  {/* Top Zone: Live Preview */}
-                  <div className="w-full aspect-[4/3] sm:aspect-[3/2] md:aspect-video flex items-center justify-center bg-(--lithos-surface) p-2 overflow-hidden relative border-b-2 border-(--lithos-border) font-normal tracking-normal leading-normal">
-                    {comp.preview}
-                  </div>
+                <Link to={comp.to} className="block group/link h-full outline-none">
+                  <Card interactive className="h-full flex flex-col p-0">
+                    {/* Top Zone: Live Preview */}
+                    <div className="w-full aspect-4/3 sm:aspect-3/2 md:aspect-video flex items-center justify-center bg-(--lithos-surface) p-2 overflow-hidden relative border-b-2 border-(--lithos-border) font-normal tracking-normal leading-normal">
+                      {comp.preview}
+                    </div>
 
-                  {/* Bottom Zone: Thin Label Strip */}
-                  <div className="p-3 flex-grow w-full text-left">
-                    <h2 className="text-xl font-black uppercase tracking-tighter text-(--lithos-text)">{comp.name}</h2>
-                  </div>
+                    {/* Bottom Zone: Thin Label Strip */}
+                    <CardContent spacing="sm" className="grow flex flex-col justify-center">
+                      <h2 className="text-xl font-black tracking-tighter leading-none text-(--lithos-text)">
+                        {comp.name}
+                      </h2>
+                    </CardContent>
+                  </Card>
                 </Link>
               </div>
             ))}

@@ -10,7 +10,7 @@ import { cn } from '../../utils/cn'
 type CardVariants = 'default' | 'accent' | 'image' | 'solid'
 
 export interface CardProps extends ComponentPropsWithRef<'div'> {
-  interactive?: boolean | undefined
+  interactive?: boolean | 'elevate' | undefined
   variant?: CardVariants | undefined
   children: ReactNode
 }
@@ -26,7 +26,10 @@ export const Card = ({ interactive = false, variant = 'default', className, chil
         ? 'bg-(--lithos-accent) text-(--lithos-accent-text)'
         : 'bg-(--lithos-surface) text-(--lithos-text)',
     variant === 'accent' && 'transition-colors hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)',
-    interactive && 'transition-transform hover:-translate-y-1',
+    interactive &&
+      (interactive === 'elevate'
+        ? 'transition-transform hover:-translate-y-1'
+        : 'transition-shadow duration-150 ease-out hover:shadow-[6px_6px_0px_0px_var(--lithos-shadow)]'),
     className
   )
 

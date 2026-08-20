@@ -3,6 +3,7 @@ import { Footer } from '../showroom/sections/Footer'
 import { KineticGrid } from '../components/ui/KineticGrid'
 import { blockCategories } from '../components/blocks/registry'
 import { Link } from 'react-router-dom'
+import { Card, CardContent } from '../components/ui/Card'
 
 interface BlocksIndexProps {
   isDarkMode: boolean
@@ -45,25 +46,24 @@ export const BlocksIndex = ({ isDarkMode, toggleObsidian }: BlocksIndexProps) =>
 
                 return (
                   <div key={category.slug} className="w-full sm:w-[50%] lg:w-[33.333%] p-3">
-                    <Link
-                      to={`/blocks/${category.slug}`}
-                      className="block group lithos-click h-full flex flex-col p-0 items-stretch rounded-(--lithos-radius) overflow-hidden"
-                    >
-                      <div className="w-full h-48 overflow-hidden bg-(--lithos-surface) relative border-b-2 border-(--lithos-border) font-normal tracking-normal leading-normal">
-                        <div className="absolute inset-0 pointer-events-none">
-                          <div className="w-[200%] scale-[0.5] origin-top-left">
-                            <FirstComponent />
+                    <Link to={`/blocks/${category.slug}`} className="block h-full outline-none">
+                      <Card interactive className="h-full flex flex-col p-0">
+                        <div className="w-full h-48 overflow-hidden bg-(--lithos-surface) relative border-b-2 border-(--lithos-border) font-normal tracking-normal leading-normal">
+                          <div className="absolute inset-0 pointer-events-none">
+                            <div className="w-[200%] scale-[0.5] origin-top-left">
+                              <FirstComponent />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="p-3 flex-grow w-full text-left flex flex-col justify-between">
-                        <h3 className="text-xl font-black uppercase tracking-tighter text-(--lithos-text)">
-                          {category.title}
-                        </h3>
-                        <div className="mt-4 text-xs font-bold uppercase tracking-widest text-(--lithos-accent)">
-                          {category.variants.length} Variant{category.variants.length !== 1 ? 's' : ''}
-                        </div>
-                      </div>
+                        <CardContent spacing="sm" className="grow flex flex-col justify-between">
+                          <h3 className="text-xl font-black tracking-tighter leading-none text-(--lithos-text)">
+                            {category.title}
+                          </h3>
+                          <div className="mt-4 text-xs font-bold tracking-widest text-(--lithos-accent)">
+                            {category.variants.length} Variant{category.variants.length !== 1 ? 's' : ''}
+                          </div>
+                        </CardContent>
+                      </Card>
                     </Link>
                   </div>
                 )

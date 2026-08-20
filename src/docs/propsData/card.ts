@@ -11,10 +11,11 @@ export const cardPropsData: PropItem[] = [
   },
   {
     name: 'interactive',
-    type: 'boolean',
+    type: "boolean | 'elevate'",
     defaultValue: 'false',
     required: false,
-    description: 'Enables the hover lift transform. Off by default so static cards stay still.',
+    description:
+      "Enables hover physics. true expands the shadow (default offset). 'elevate' translates the card on the Y-axis.",
   },
   {
     name: 'className',
