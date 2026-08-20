@@ -55,9 +55,9 @@ export const ComingSoon = ({
 
         {/* Vertical spacer for button positioning */}
         {/* Zero-Gap enforcement: stacking behavior controlled by explicit margins */}
-        <div className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
+        <div className="mt-8 flex flex-col sm:flex-row justify-center items-center">
           {/* Return button */}
-          <Button intent="primary" onClick={() => navigate(primaryAction.to)}>
+          <Button intent="primary" className="mb-4 sm:mb-0 sm:mr-4" onClick={() => navigate(primaryAction.to)}>
             {primaryAction.label}
           </Button>
 
