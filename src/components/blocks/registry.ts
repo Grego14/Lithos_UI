@@ -100,6 +100,7 @@ export const blockCategories: BlockCategory[] = [
         component: Testimonials1,
         code: testimonials1Code,
         githubUrl: `${GITHUB_BASE}/Testimonials/1.tsx`,
+        requires: ['components/ui/Card.tsx', 'components/ui/Avatar.tsx'],
       },
     ],
   },

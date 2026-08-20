@@ -4,7 +4,7 @@
  * - Uses explicit margins and shadow steps so the quotes read as physical plaques.
  * - Keeps the grid wide and stable to avoid visual drift in the proof section.
  */
-import { Card } from '../../ui/Card'
+import { Card, CardContent } from '../../ui/Card'
 import { Avatar } from '../../ui/Avatar'
 
 interface Testimonial {
@@ -45,20 +45,24 @@ const Testimonials1 = () => (
           <Card
             key={testimonial.name}
             variant="accent"
-            className="m-4 flex w-[calc(100%-2rem)] sm:w-[calc(50%-2rem)] lg:w-[calc(33.333%-2rem)] flex-col p-6 shadow-[4px_4px_0px_0px_var(--lithos-shadow)] transition-all duration-150 ease-out hover:shadow-[6px_6px_0px_0px_var(--lithos-shadow)] active:shadow-[2px_2px_0px_var(--lithos-shadow)]"
+            interactive={true}
+            className="m-4 flex w-[calc(100%-2rem)] sm:w-[calc(50%-2rem)] lg:w-[calc(33.333%-2rem)] flex-col"
           >
-            {/* - 6px shadow offset gives the quote plaque a clear physical edge. */}
-            <p className="text-lg font-black uppercase tracking-tighter leading-none">★★★★★</p>
-            <p className="mt-4 text-2xl font-black uppercase tracking-tighter leading-none">{testimonial.quote}</p>
+            <CardContent className="flex flex-col h-full">
+              <p className="text-lg font-black uppercase tracking-tighter leading-none">★★★★★</p>
+              <p className="mt-4 text-2xl font-black uppercase tracking-tighter leading-none flex-1">
+                {testimonial.quote}
+              </p>
 
-            {/* - Avatar + byline stay compact so the plaque weight remains on the quote. */}
-            <div className="mt-8 flex items-center">
-              <Avatar alt={testimonial.name} />
-              <div className="ml-4">
-                <p className="font-black uppercase tracking-tighter leading-none">{testimonial.name}</p>
-                <p className="mt-2 font-bold uppercase tracking-tighter leading-none">{testimonial.title}</p>
+              {/* - Avatar + byline stay compact so the plaque weight remains on the quote. */}
+              <div className="mt-8 flex items-center">
+                <Avatar alt={testimonial.name} />
+                <div className="ml-4">
+                  <p className="font-black uppercase tracking-tighter leading-none">{testimonial.name}</p>
+                  <p className="mt-2 font-bold uppercase tracking-tighter leading-none">{testimonial.title}</p>
+                </div>
               </div>
-            </div>
+            </CardContent>
           </Card>
         ))}
       </div>
