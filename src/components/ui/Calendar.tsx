@@ -180,7 +180,7 @@ const HeaderDropdown = ({ label, options, value, onChange, className }: HeaderDr
                 setOpen(false)
               }}
               className={cn(
-                'block w-full text-left px-3 py-1.5 text-sm font-sans font-bold cursor-pointer whitespace-nowrap',
+                'block w-full text-left px-3 py-1.5 text-sm font-mono font-bold cursor-pointer whitespace-nowrap',
                 option.value === value
                   ? 'bg-(--lithos-accent) text-(--lithos-accent-text)'
                   : 'hover:bg-(--lithos-muted)'
@@ -450,7 +450,7 @@ export const Calendar = ({
               key={label}
               role="columnheader"
               className={cn(
-                'border-r-2 border-b-2 border-(--lithos-border) h-8 flex items-center justify-center font-sans font-bold text-xs',
+                'border-r-2 border-b-2 border-(--lithos-border) h-8 flex items-center justify-center font-mono font-bold text-xs',
                 classes.weekdays
               )}
             >
@@ -499,7 +499,7 @@ export const Calendar = ({
                       customColor ? { backgroundColor: customColor, color: getContrastText(customColor) } : undefined
                     }
                     className={cn(
-                      'w-10 h-10 flex items-center justify-center font-sans text-sm cursor-pointer transition-colors duration-75',
+                      'w-10 h-10 flex items-center justify-center font-mono text-sm cursor-pointer transition-colors duration-75',
                       !isCurrentMonth && 'text-(--lithos-muted)',
                       today && !selected && 'font-black underline',
                       selected && !customColor && 'bg-(--lithos-accent) text-(--lithos-accent-text) font-black',

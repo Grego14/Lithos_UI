@@ -52,7 +52,7 @@ export const Avatar = ({
   const contrastedColor = bgColor ? getContrastText(bgColor) : undefined
 
   const classes = cn(
-    'relative inline-flex items-center justify-center shrink-0 overflow-hidden rounded-full border-2 border-(--lithos-border) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] font-(--font-sans) font-bold uppercase',
+    'relative inline-flex items-center justify-center shrink-0 overflow-hidden rounded-full border-2 border-(--lithos-border) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] font-(--font-mono) font-bold uppercase',
     variant === 'default' && 'bg-(--lithos-surface) text-(--lithos-text)',
     sizeStyles[size],
     className
@@ -85,7 +85,7 @@ export interface AvatarGroupCountProps extends Omit<ComponentPropsWithRef<'div'>
 
 export const AvatarGroupCount = ({ count, size = 'md', className = '', ref, ...props }: AvatarGroupCountProps) => {
   const classes = cn(
-    'relative inline-flex items-center justify-center shrink-0 rounded-full border-2 border-(--lithos-border) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] bg-(--lithos-surface) text-(--lithos-text) font-(--font-sans) font-bold uppercase',
+    'relative inline-flex items-center justify-center shrink-0 rounded-full border-2 border-(--lithos-border) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] bg-(--lithos-surface) text-(--lithos-text) font-(--font-mono) font-bold uppercase',
     sizeStyles[size],
     className
   )
