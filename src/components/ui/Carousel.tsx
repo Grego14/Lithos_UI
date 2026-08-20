@@ -42,7 +42,7 @@ export interface CarouselProps extends Omit<ComponentPropsWithRef<'div'>, 'class
   className?: ClassValue | ClassArray
 }
 
-export const Carousel = ({
+const Carousel = ({
   controlsPosition = 'top',
   title,
   children,
@@ -290,8 +290,4 @@ export const Carousel = ({
   )
 }
 
-Carousel.NextButton = CarouselNext
-Carousel.PrevButton = CarouselPrev
-Carousel.Pagination = CarouselPagination
-Carousel.Controls = CarouselControls
-Carousel.Slide = CarouselSlide
+export { Carousel, CarouselPrev, CarouselNext, CarouselPagination, CarouselControls, CarouselSlide }

@@ -1,14 +1,14 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { Carousel } from '../../../components/ui/Carousel'
+import { Carousel, CarouselSlide } from '../../../components/ui/Carousel'
 import { describe, it, expect } from 'vitest'
 
 describe('CarouselSlide Accessibility', () => {
   it('applies correct ARIA attributes and inert state based on active slide', () => {
     render(
       <Carousel>
-        <Carousel.Slide>Slide 1</Carousel.Slide>
-        <Carousel.Slide>Slide 2</Carousel.Slide>
+        <CarouselSlide>Slide 1</CarouselSlide>
+        <CarouselSlide>Slide 2</CarouselSlide>
       </Carousel>
     )
 
@@ -30,8 +30,8 @@ describe('CarouselSlide Accessibility', () => {
 
     render(
       <Carousel>
-        <Carousel.Slide>Slide 1</Carousel.Slide>
-        <Carousel.Slide>Slide 2</Carousel.Slide>
+        <CarouselSlide>Slide 1</CarouselSlide>
+        <CarouselSlide>Slide 2</CarouselSlide>
       </Carousel>
     )
 

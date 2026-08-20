@@ -2,14 +2,14 @@ import { render, screen, fireEvent, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { axe } from 'jest-axe'
 import { describe, it, expect, vi } from 'vitest'
-import { Carousel } from '../../../components/ui/Carousel'
+import { Carousel, CarouselSlide } from '../../../components/ui/Carousel'
 
 describe('Carousel', () => {
   it('renders with 2 children (slides)', () => {
     render(
       <Carousel>
-        <Carousel.Slide>Slide 1</Carousel.Slide>
-        <Carousel.Slide>Slide 2</Carousel.Slide>
+        <CarouselSlide>Slide 1</CarouselSlide>
+        <CarouselSlide>Slide 2</CarouselSlide>
       </Carousel>
     )
 
@@ -23,8 +23,8 @@ describe('Carousel', () => {
   it('renders controls and pagination by default', () => {
     render(
       <Carousel>
-        <Carousel.Slide>Slide 1</Carousel.Slide>
-        <Carousel.Slide>Slide 2</Carousel.Slide>
+        <CarouselSlide>Slide 1</CarouselSlide>
+        <CarouselSlide>Slide 2</CarouselSlide>
       </Carousel>
     )
 
@@ -47,9 +47,9 @@ describe('Carousel', () => {
 
     render(
       <Carousel>
-        <Carousel.Slide>Slide 1</Carousel.Slide>
-        <Carousel.Slide>Slide 2</Carousel.Slide>
-        <Carousel.Slide>Slide 3</Carousel.Slide>
+        <CarouselSlide>Slide 1</CarouselSlide>
+        <CarouselSlide>Slide 2</CarouselSlide>
+        <CarouselSlide>Slide 3</CarouselSlide>
       </Carousel>
     )
 
@@ -74,9 +74,9 @@ describe('Carousel', () => {
 
     render(
       <Carousel>
-        <Carousel.Slide>Slide 1</Carousel.Slide>
-        <Carousel.Slide>Slide 2</Carousel.Slide>
-        <Carousel.Slide>Slide 3</Carousel.Slide>
+        <CarouselSlide>Slide 1</CarouselSlide>
+        <CarouselSlide>Slide 2</CarouselSlide>
+        <CarouselSlide>Slide 3</CarouselSlide>
       </Carousel>
     )
 
@@ -89,9 +89,9 @@ describe('Carousel', () => {
   it('previous button should be disabled if we are at the first slide and not using loop', async () => {
     render(
       <Carousel>
-        <Carousel.Slide>Slide 1</Carousel.Slide>
-        <Carousel.Slide>Slide 2</Carousel.Slide>
-        <Carousel.Slide>Slide 3</Carousel.Slide>
+        <CarouselSlide>Slide 1</CarouselSlide>
+        <CarouselSlide>Slide 2</CarouselSlide>
+        <CarouselSlide>Slide 3</CarouselSlide>
       </Carousel>
     )
 
@@ -104,9 +104,9 @@ describe('Carousel', () => {
 
     render(
       <Carousel loop>
-        <Carousel.Slide>Slide 1</Carousel.Slide>
-        <Carousel.Slide>Slide 2</Carousel.Slide>
-        <Carousel.Slide>Slide 3</Carousel.Slide>
+        <CarouselSlide>Slide 1</CarouselSlide>
+        <CarouselSlide>Slide 2</CarouselSlide>
+        <CarouselSlide>Slide 3</CarouselSlide>
       </Carousel>
     )
 
@@ -121,8 +121,8 @@ describe('Carousel', () => {
 
     render(
       <Carousel>
-        <Carousel.Slide>Slide 1</Carousel.Slide>
-        <Carousel.Slide>Slide 2</Carousel.Slide>
+        <CarouselSlide>Slide 1</CarouselSlide>
+        <CarouselSlide>Slide 2</CarouselSlide>
       </Carousel>
     )
 
@@ -144,8 +144,8 @@ describe('Carousel', () => {
   it('hides controls and pagination when respective props are true', () => {
     render(
       <Carousel hideControls hidePagination>
-        <Carousel.Slide>Slide 1</Carousel.Slide>
-        <Carousel.Slide>Slide 2</Carousel.Slide>
+        <CarouselSlide>Slide 1</CarouselSlide>
+        <CarouselSlide>Slide 2</CarouselSlide>
       </Carousel>
     )
 
@@ -159,9 +159,9 @@ describe('Carousel', () => {
 
     render(
       <Carousel playInfinite playInterval={interval}>
-        <Carousel.Slide>Slide 1</Carousel.Slide>
-        <Carousel.Slide>Slide 2</Carousel.Slide>
-        <Carousel.Slide>Slide 3</Carousel.Slide>
+        <CarouselSlide>Slide 1</CarouselSlide>
+        <CarouselSlide>Slide 2</CarouselSlide>
+        <CarouselSlide>Slide 3</CarouselSlide>
       </Carousel>
     )
 
@@ -185,8 +185,8 @@ describe('Carousel', () => {
 
     render(
       <Carousel playInfinite playInterval={interval} stopOnHover>
-        <Carousel.Slide>Slide 1</Carousel.Slide>
-        <Carousel.Slide>Slide 2</Carousel.Slide>
+        <CarouselSlide>Slide 1</CarouselSlide>
+        <CarouselSlide>Slide 2</CarouselSlide>
       </Carousel>
     )
 
@@ -214,8 +214,8 @@ describe('Carousel', () => {
 
     render(
       <Carousel playInfinite playInterval={interval} stopOnHover>
-        <Carousel.Slide>Slide 1</Carousel.Slide>
-        <Carousel.Slide>Slide 2</Carousel.Slide>
+        <CarouselSlide>Slide 1</CarouselSlide>
+        <CarouselSlide>Slide 2</CarouselSlide>
       </Carousel>
     )
 
@@ -239,8 +239,8 @@ describe('Carousel', () => {
   it('has no accessibility violations', async () => {
     const { container } = render(
       <Carousel title="Featured Gallery">
-        <Carousel.Slide>Slide 1</Carousel.Slide>
-        <Carousel.Slide>Slide 2</Carousel.Slide>
+        <CarouselSlide>Slide 1</CarouselSlide>
+        <CarouselSlide>Slide 2</CarouselSlide>
       </Carousel>
     )
 
