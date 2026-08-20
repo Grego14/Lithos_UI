@@ -8,13 +8,13 @@ import { useState, useCallback, useEffect, useRef, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { getContrastText } from '../../utils/yiq'
 import { ToastContext } from '../../core/hooks/useToast'
-import type { ToastProps, ToastPosition } from '../../core/types'
+import type { ToastProps as CoreToastProps, ToastPosition } from '../../core/types'
 import { colors } from '../../utils/colors'
 import { Button } from './Button'
 import { IconClose } from './icons/IconClose'
 import { cn } from '../../utils/cn'
 
-type IdentifiedToastProps = ToastProps & { id: string }
+type IdentifiedToastProps = CoreToastProps & { id: string }
 
 export interface ToastItemProps {
   toast: IdentifiedToastProps
@@ -30,7 +30,7 @@ type DurationObjType = {
   default?: number
 }
 
-export interface ToastProviderProps {
+export interface ToastProps {
   children: ReactNode
   duration?: DurationObjType | number
   position?: ToastPosition
@@ -46,7 +46,7 @@ const positionStyles = {
 
 const DEFAULT_DURATION = 5000
 
-export const ToastProvider = ({ children, duration, position = 'bottom-right', className }: ToastProviderProps) => {
+export const ToastProvider = ({ children, duration, position = 'bottom-right', className }: ToastProps) => {
   const [toasts, setToasts] = useState<IdentifiedToastProps[]>([])
 
   const durationConfig =
@@ -68,7 +68,7 @@ export const ToastProvider = ({ children, duration, position = 'bottom-right', c
   }, [])
 
   const addToast = useCallback(
-    ({ message, type = 'default', color, title, duration: customDuration }: ToastProps) => {
+    ({ message, type = 'default', color, title, duration: customDuration }: CoreToastProps) => {
       const id = Math.random().toString(36).substring(2, 9)
       let toastDuration = customDuration
 

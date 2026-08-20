@@ -1,4 +1,11 @@
+/**
+ * @fileoverview Lithos UI PreviewBlock component.
+ * - Displays a preview block with tabs for interactive preview and raw code.
+ * - Resolves example code imports and usage blocks dynamically.
+ * - Excluded from the public package as it's meant for docs tooling.
+ */
 import { useState, type ReactNode } from 'react'
+import { cn } from '../../utils/cn'
 import { CodeViewer } from './CodeViewer'
 import { Button } from './Button'
 import { IconMonitor } from './icons/IconMonitor'
@@ -13,7 +20,7 @@ import { deriveUsageCode, type ManualPath } from '../../docs/utils/deriveUsageCo
 type AvailableTabs = 'preview' | 'code'
 type Breakpoint = 'mobile' | 'tablet' | 'desktop'
 
-interface PreviewBlockProps {
+export interface PreviewBlockProps {
   code:
     | string
     | {
@@ -67,7 +74,7 @@ export const PreviewBlock = ({
           <div className="flex items-center mr-4">
             <Button
               onClick={() => setActiveTab('preview')}
-              className={`mr-4 ${activeTab !== 'preview' ? inactiveBtnClass : ''}`}
+              className={cn('mr-4', activeTab !== 'preview' && inactiveBtnClass)}
             >
               Preview
             </Button>
@@ -145,13 +152,13 @@ export const PreviewBlock = ({
       <div className="w-full bg-(--lithos-bg)" style={height ? { height: height } : undefined}>
         {activeTab === 'preview' ? (
           slug ? (
-            <div className={`flex items-center justify-center w-full h-full ${noPadding ? '' : 'p-4 md:p-6'}`}>
+            <div className={cn('flex items-center justify-center w-full h-full', !noPadding && 'p-4 md:p-6')}>
               <div style={{ width: getIframeWidth() }} className="h-full transition-all duration-300">
                 <iframe src={`/blocks/preview/${slug}`} className="w-full h-full border-0" title="Block preview" />
               </div>
             </div>
           ) : (
-            <div className={`flex min-h-48 items-center justify-center w-full h-full ${noPadding ? '' : 'p-4 md:p-6'}`}>
+            <div className={cn('flex min-h-48 items-center justify-center w-full h-full', !noPadding && 'p-4 md:p-6')}>
               {children}
             </div>
           )
