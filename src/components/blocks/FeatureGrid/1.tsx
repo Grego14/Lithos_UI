@@ -1,9 +1,3 @@
-/**
- * @fileoverview Lithos UI feature matrix.
- * - Presents the system as a rigid card field with explicit margins and hard edges.
- * - Uses scale-on-hover and shadow steps to imply physical lift without layout drift.
- * - Keeps the grid readable by controlling wrap math instead of relying on soft spacing.
- */
 import { Card, CardContent, CardTitle, CardDescription } from '../../ui/Card'
 
 interface FeatureItem {
@@ -12,6 +6,7 @@ interface FeatureItem {
   description: string
 }
 
+// Replace this array with data from your API or CMS
 const features: FeatureItem[] = [
   {
     title: 'Real-time Analytics',
@@ -66,7 +61,7 @@ const FeatureGrid1 = () => {
         {/* - Footer link is centered to keep the card field visually sealed. */}
         <div className="mt-12 flex justify-center">
           <a
-            href="/docs"
+            href="#"
             className="font-black uppercase tracking-tighter text-(--lithos-text) transition-colors hover:text-(--lithos-accent) cursor-pointer"
           >
             Explore all Features →

@@ -163,6 +163,7 @@ export const blockCategories: BlockCategory[] = [
         component: FeatureGrid1,
         code: featureGrid1Code,
         githubUrl: `${GITHUB_BASE}/FeatureGrid/1.tsx`,
+        requires: ['components/ui/Card.tsx'],
       },
     ],
   },
