@@ -134,7 +134,7 @@ export const BreadcrumbEllipsis = ({
 }
 
 export const BreadcrumbList = ({ className, children, ref, ...rest }: ComponentPropsWithRef<'ol'>) => {
-  const classes = cn('inline-flex flex-wrap items-center font-sans text-sm tracking-tight', className)
+  const classes = cn('inline-flex flex-wrap items-center font-mono text-sm tracking-tight', className)
 
   return (
     <ol ref={ref} className={classes} {...rest}>

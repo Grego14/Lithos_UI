@@ -43,7 +43,7 @@ export const Badge = ({
   const contrastedColor = getContrastText(bgColor)
 
   const classes = cn(
-    'uppercase font-(--font-sans) font-bold border-2 border-(--lithos-border) shadow-[1px_1px_0_0_var(--lithos-border)] py-1 w-max rounded-(--lithos-radius)',
+    'uppercase font-(--font-mono) font-bold border-2 border-(--lithos-border) shadow-[1px_1px_0_0_var(--lithos-border)] py-1 w-max rounded-(--lithos-radius)',
     sizeStyles[size],
     className
   )
