@@ -17,6 +17,7 @@ interface PricingPlan {
   cta: string
 }
 
+// Replace this array with data from your API
 const plans: PricingPlan[] = [
   {
     key: 'starter',
