@@ -12,7 +12,7 @@ export type ToastType = 'success' | 'error' | 'warning' | 'info' | 'default'
 export type ToastPosition = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
 
 export interface ToastProps {
-  type?: ToastType | undefined
+  intent?: ToastType | undefined
   title: string
   message: string
   color?: HexColor | string | undefined

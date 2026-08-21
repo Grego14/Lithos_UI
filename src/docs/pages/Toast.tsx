@@ -81,6 +81,7 @@ export const ToastDoc = () => {
         title: 'SYSTEM TOAST',
         message: 'Structural integrity verified.',
         intent: 'success',
+        duration: 10000,
       })
     }
   }

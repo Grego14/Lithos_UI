@@ -39,7 +39,7 @@ export const CodeViewer = ({
         toast.addToast({
           title: 'SUCCESS',
           message: 'Copied to clipboard',
-          type: 'success',
+          intent: 'success',
           color: accentColor,
         })
       }
@@ -48,7 +48,7 @@ export const CodeViewer = ({
         toast.addToast({
           title: 'ERROR',
           message: 'Failed to copy code to clipboard',
-          type: 'error',
+          intent: 'error',
         })
       }
     }

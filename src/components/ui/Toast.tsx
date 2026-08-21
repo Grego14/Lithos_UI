@@ -72,9 +72,8 @@ export const ToastProvider = ({ children, duration, position = 'bottom-right', c
       const id = Math.random().toString(36).substring(2, 9)
       let toastDuration = customDuration
 
-      // use the duration config object
       if (!customDuration && durationConfig) {
-        toastDuration = durationConfig[type]
+        toastDuration = durationConfig[intent]
       }
 
       // consumer passes a single duration for all the toast types
@@ -92,7 +91,7 @@ export const ToastProvider = ({ children, duration, position = 'bottom-right', c
         {
           id,
           message,
-          type,
+          intent,
           color,
           title,
           duration: toastDuration,

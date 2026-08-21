@@ -39,7 +39,7 @@ const Navbar = ({ isDarkMode = false, onToggleObsidian }: NavbarProps) => {
     addToast({
       title: 'THEME CHANGED',
       message: nextMode ? 'Obsidian Mode Activated.' : 'Light Mode Activated.',
-      type: 'default',
+      intent: 'default',
       color: nextMode ? '#000000' : '#FFFFFF',
     })
   }

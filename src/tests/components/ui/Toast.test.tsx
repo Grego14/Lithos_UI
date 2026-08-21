@@ -102,7 +102,7 @@ describe('Toast Component', () => {
 
     render(
       <ToastProvider duration={{ error: 8000, default: 3000 }}>
-        <TestComponent toastProps={{ title: 'ERROR!', message: 'Error toast', type: 'error' }} />
+        <TestComponent toastProps={{ title: 'ERROR!', message: 'Error toast', intent: 'error' }} />
       </ToastProvider>
     )
 
@@ -169,8 +169,8 @@ describe('Toast Component', () => {
 
     render(
       <ToastProvider>
-        <TestComponent toastProps={{ title: 'Standard!', message: 'Standard status', type: 'info' }} />
-        <TestComponent toastProps={{ title: 'Critical!', message: 'Critical alert', type: 'error' }} />
+        <TestComponent toastProps={{ title: 'Standard!', message: 'Standard status', intent: 'info' }} />
+        <TestComponent toastProps={{ title: 'Critical!', message: 'Critical alert', intent: 'error' }} />
       </ToastProvider>
     )
 
@@ -192,7 +192,7 @@ describe('Toast Component', () => {
 
     render(
       <ToastProvider>
-        <TestComponent toastProps={{ title: 'Error!', message: 'Error occurred', type: 'error' }} />
+        <TestComponent toastProps={{ title: 'Error!', message: 'Error occurred', intent: 'error' }} />
       </ToastProvider>
     )
 
@@ -217,7 +217,7 @@ describe('Toast Component', () => {
           id: 'test-a11y',
           message: 'Accessible message',
           title: 'A11y Test',
-          type: 'default',
+          intent: 'default',
           duration: 5000,
         }}
         onRemove={vi.fn()}
