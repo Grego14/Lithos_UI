@@ -44,10 +44,10 @@ export const Navbar1 = () => {
 
           {/* - Action block balances the brand block and keeps the header geometry stable. */}
           <div className="hidden items-center justify-end lg:flex lg:flex-1">
-            <Button intent="secondary" className="mr-3">
+            <Button variant="secondary" className="mr-3">
               Log In
             </Button>
-            <Button intent="primary">Sign Up</Button>
+            <Button variant="primary">Sign Up</Button>
           </div>
 
           {/* - Mobile Action Toggle (Hamburger / X) */}
@@ -76,10 +76,10 @@ export const Navbar1 = () => {
             </a>
           ))}
           <div className="mt-auto self-start flex flex-col w-full">
-            <Button intent="secondary" fullWidth className="mb-4">
+            <Button variant="secondary" fullWidth className="mb-4">
               Log In
             </Button>
-            <Button intent="primary" fullWidth>
+            <Button variant="primary" fullWidth>
               Sign Up
             </Button>
           </div>

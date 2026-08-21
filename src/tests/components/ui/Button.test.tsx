@@ -21,7 +21,7 @@ describe('Button', () => {
   })
 
   it.each(['primary', 'secondary', 'accent', 'text'] as const)('renders the %s intent variant', (intent) => {
-    render(<Button intent={intent}>Click me</Button>)
+    render(<Button variant={intent}>Click me</Button>)
     expect(screen.getByRole('button')).toBeInTheDocument()
   })
 
@@ -55,7 +55,7 @@ describe('Button', () => {
   it.each(['primary', 'secondary', 'accent', 'text'] as const)(
     'has no accessibility violations — %s intent',
     async (intent) => {
-      const { container } = render(<Button intent={intent}>Accessible</Button>)
+      const { container } = render(<Button variant={intent}>Accessible</Button>)
       const results = await axe(container)
       expect(results).toHaveNoViolations()
     }

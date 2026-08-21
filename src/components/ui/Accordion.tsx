@@ -146,7 +146,7 @@ export const Accordion = ({
           aria-expanded={isOpen}
           aria-controls={contentId}
           onClick={handleToggle}
-          intent="text"
+          variant="text"
           fullWidth
         >
           <span>{title}</span>

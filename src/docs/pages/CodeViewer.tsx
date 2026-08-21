@@ -10,16 +10,15 @@ export const CodeViewerDoc = () => {
   )
 }`
 
-  const usageCode = `import { CodeViewer } from '../../components/ui/CodeViewer'
-
-export const CodeViewerExample = () => {
-  const sampleCode = \`export const BrutalistButton = () => {
+  const usageCode = {
+    body: `export const CodeViewerExample = () => {
+  const sampleCode = \\\`export const BrutalistButton = () => {
   return (
     <button className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click">
       Click Me
     </button>
   )
-}\`
+}\\\`
 
   return (
     <CodeViewer 
@@ -29,7 +28,10 @@ export const CodeViewerExample = () => {
       className="mb-0" 
     />
   )
-}`
+}`,
+    componentNames: ['CodeViewer'],
+    manualPath: '../../components/ui/CodeViewer',
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-6">

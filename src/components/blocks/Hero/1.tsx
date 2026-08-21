@@ -10,7 +10,7 @@ const Hero1 = () => (
   <section id="hero-block" className="bg-(--lithos-surface) py-24 md:py-32">
     <div className="mx-auto max-w-5xl px-6 text-center flex flex-col items-center">
       <div className="mb-6">
-        <Badge variant="default" size="sm">
+        <Badge intent="default" size="sm">
           New Feature Announcement
         </Badge>
       </div>
@@ -26,7 +26,7 @@ const Hero1 = () => (
 
       <div className="mt-12 flex flex-col sm:flex-row items-center justify-center">
         <Button className="w-full sm:w-auto text-lg px-8 py-4 sm:mr-6 mb-4 sm:mb-0">Start Free Trial</Button>
-        <Button intent="secondary" className="w-full sm:w-auto text-lg px-8 py-4">
+        <Button variant="secondary" className="w-full sm:w-auto text-lg px-8 py-4">
           Read Documentation
         </Button>
       </div>

@@ -6,12 +6,12 @@
  * - Native `type="button"` default prevents accidental form submission; opt into `type="submit"` explicitly.
  */
 import type { ComponentPropsWithRef, ReactNode } from 'react'
-import type { ButtonIntent } from '../../core/types'
+import type { ButtonVariant } from '../../core/types'
 import { cn } from '../../utils/cn'
 import type { ClassArray, ClassValue } from 'clsx'
 
 export interface ButtonProps extends Omit<ComponentPropsWithRef<'button'>, 'type' | 'className'> {
-  intent?: ButtonIntent | undefined
+  variant?: ButtonVariant | undefined
   fullWidth?: boolean | undefined
   type?: 'button' | 'submit' | 'reset' | undefined
   iconLeft?: ReactNode
@@ -20,7 +20,7 @@ export interface ButtonProps extends Omit<ComponentPropsWithRef<'button'>, 'type
   className?: ClassValue | ClassArray
 }
 
-const intentClass: Record<ButtonIntent, string> = {
+const variantClass: Record<ButtonVariant, string> = {
   primary: 'bg-(--lithos-accent) text-(--lithos-accent-text)',
   secondary: 'bg-(--lithos-surface) text-(--lithos-text)',
   accent: 'bg-(--lithos-surface) text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)',
@@ -28,7 +28,7 @@ const intentClass: Record<ButtonIntent, string> = {
 }
 
 export const Button = ({
-  intent = 'primary',
+  variant = 'primary',
   fullWidth = false,
   type = 'button',
   iconLeft,
@@ -41,7 +41,7 @@ export const Button = ({
   const classes = [
     'lithos-click',
     'rounded-(--lithos-radius)',
-    intentClass[intent],
+    variantClass[variant],
     fullWidth && 'w-full',
     'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
     className,

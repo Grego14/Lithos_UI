@@ -16,12 +16,12 @@ import { Button } from './Button'
 import { IconUndo } from './icons/IconUndo'
 import { IconClose } from './icons/IconClose'
 
-export type AlertType = 'default' | 'success' | 'error' | 'warning' | 'info' | 'accent'
+export type AlertIntent = 'default' | 'success' | 'error' | 'warning' | 'info' | 'accent'
 export type AlertVariant = 'filled' | 'outlined'
 export type AlertSize = 'sm' | 'md' | 'lg'
 
 export interface AlertProps extends ComponentPropsWithRef<'div'> {
-  type?: AlertType
+  intent?: AlertIntent
   variant?: AlertVariant
   size?: AlertSize
   title?: string
@@ -38,7 +38,7 @@ const sizeStyles: Record<AlertSize, { container: string; title: string; headerGa
 }
 
 export const Alert = ({
-  type = 'default',
+  intent = 'default',
   variant = 'filled',
   size = 'lg',
   title,
@@ -51,9 +51,9 @@ export const Alert = ({
   ref,
   ...props
 }: AlertProps) => {
-  const isAccent = type === 'accent' && !color
-  const isDefault = type === 'default' && !color
-  const accentColor = color || (type === 'accent' ? 'var(--lithos-accent)' : colors[type])
+  const isAccent = intent === 'accent' && !color
+  const isDefault = intent === 'default' && !color
+  const accentColor = color || (intent === 'accent' ? 'var(--lithos-accent)' : colors[intent])
   const outlineColor = isDefault ? 'var(--lithos-border)' : accentColor
   const isFilled = variant === 'filled'
   const textColor = isFilled

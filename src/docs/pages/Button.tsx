@@ -21,7 +21,7 @@ export const ButtonDoc = () => {
 
   const secondaryCode = {
     body: `export const SecondaryButton = () => {
-  return <Button intent="secondary">Secondary</Button>
+  return <Button variant="secondary">Secondary</Button>
 }`,
     componentNames: ['Button'],
     manualPath: '../../components/ui/Button',
@@ -29,7 +29,7 @@ export const ButtonDoc = () => {
 
   const accentCode = {
     body: `export const AccentButton = () => {
-  return <Button intent="accent">Accent</Button>
+  return <Button variant="accent">Accent</Button>
 }`,
     componentNames: ['Button'],
     manualPath: '../../components/ui/Button',
@@ -37,7 +37,7 @@ export const ButtonDoc = () => {
 
   const textCode = {
     body: `export const TextButton = () => {
-  return <Button intent="text">Text</Button>
+  return <Button variant="text">Text</Button>
 }`,
     componentNames: ['Button'],
     manualPath: '../../components/ui/Button',
@@ -48,7 +48,7 @@ export const ButtonDoc = () => {
   return (
     <div className="flex items-center">
       <Button iconLeft={<IconHome />}>Home</Button>
-      <Button intent="secondary" iconRight={<IconSettings />} className="ml-3">
+      <Button variant="secondary" iconRight={<IconSettings />} className="ml-3">
         Settings
       </Button>
     </div>
@@ -74,8 +74,8 @@ export const ButtonDoc = () => {
     body: `export const HorizontalButtonGroup = () => {
   return (
     <ButtonGroup>
-      <Button intent="secondary">Cancel</Button>
-      <Button intent="primary">Save Changes</Button>
+      <Button variant="secondary">Cancel</Button>
+      <Button variant="primary">Save Changes</Button>
     </ButtonGroup>
   )
 }`,
@@ -87,8 +87,8 @@ export const ButtonDoc = () => {
     body: `export const VerticalButtonGroup = () => {
   return (
     <ButtonGroup orientation="vertical">
-      <Button intent="primary">Save Changes</Button>
-      <Button intent="secondary">Cancel</Button>
+      <Button variant="primary">Save Changes</Button>
+      <Button variant="secondary">Cancel</Button>
     </ButtonGroup>
   )
 }`,
@@ -100,8 +100,8 @@ export const ButtonDoc = () => {
     body: `export const AttachedButtonGroup = () => {
   return (
     <ButtonGroup attached>
-      <Button intent="secondary">Cancel</Button>
-      <Button intent="primary">Save Changes</Button>
+      <Button variant="secondary">Cancel</Button>
+      <Button variant="primary">Save Changes</Button>
     </ButtonGroup>
   )
 }`,
@@ -190,7 +190,7 @@ export const ButtonDoc = () => {
       </p>
 
       <PreviewBlock code={secondaryCode} githubUrl={githubUrl}>
-        <Button intent="secondary">Secondary</Button>
+        <Button variant="secondary">Secondary</Button>
       </PreviewBlock>
 
       <h4 id="accent" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
@@ -202,7 +202,7 @@ export const ButtonDoc = () => {
       </p>
 
       <PreviewBlock code={accentCode} githubUrl={githubUrl}>
-        <Button intent="accent">Accent</Button>
+        <Button variant="accent">Accent</Button>
       </PreviewBlock>
 
       <h4 id="text" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
@@ -214,7 +214,7 @@ export const ButtonDoc = () => {
       </p>
 
       <PreviewBlock code={textCode} githubUrl={githubUrl}>
-        <Button intent="text">Text</Button>
+        <Button variant="text">Text</Button>
       </PreviewBlock>
 
       <h4 id="with-icon" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
@@ -229,7 +229,7 @@ export const ButtonDoc = () => {
       <PreviewBlock code={withIconCode} githubUrl={githubUrl}>
         <div className="flex items-center">
           <Button iconLeft={<IconHome />}>Home</Button>
-          <Button intent="secondary" iconRight={<IconSettings />} className="ml-3">
+          <Button variant="secondary" iconRight={<IconSettings />} className="ml-3">
             Settings
           </Button>
         </div>
@@ -268,8 +268,8 @@ export const ButtonDoc = () => {
 
       <PreviewBlock code={groupHorizontalCode} githubUrl={githubUrl}>
         <ButtonGroup>
-          <Button intent="secondary">Cancel</Button>
-          <Button intent="primary">Save Changes</Button>
+          <Button variant="secondary">Cancel</Button>
+          <Button variant="primary">Save Changes</Button>
         </ButtonGroup>
       </PreviewBlock>
 
@@ -283,8 +283,8 @@ export const ButtonDoc = () => {
 
       <PreviewBlock code={groupVerticalCode} githubUrl={githubUrl}>
         <ButtonGroup orientation="vertical">
-          <Button intent="primary">Save Changes</Button>
-          <Button intent="secondary">Cancel</Button>
+          <Button variant="primary">Save Changes</Button>
+          <Button variant="secondary">Cancel</Button>
         </ButtonGroup>
       </PreviewBlock>
 
@@ -299,8 +299,8 @@ export const ButtonDoc = () => {
 
       <PreviewBlock code={groupAttachedCode} githubUrl={githubUrl}>
         <ButtonGroup attached>
-          <Button intent="secondary">Cancel</Button>
-          <Button intent="primary">Save Changes</Button>
+          <Button variant="secondary">Cancel</Button>
+          <Button variant="primary">Save Changes</Button>
         </ButtonGroup>
       </PreviewBlock>
 

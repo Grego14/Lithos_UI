@@ -101,7 +101,7 @@ describe('Breadcrumb', () => {
   it('renders collapsible breadcrumbs when variant is collapsible', () => {
     render(
       <Breadcrumb
-        variant="collapsible"
+        mode="collapsible"
         items={[
           { label: 'Home', href: '/' },
           { label: 'Products', href: '/products' },
@@ -122,7 +122,7 @@ describe('Breadcrumb', () => {
 
     render(
       <Breadcrumb
-        variant="collapsible"
+        mode="collapsible"
         items={[
           { label: 'Home', href: '/' },
           { label: 'Products', href: '/products' },
@@ -146,7 +146,7 @@ describe('Breadcrumb', () => {
 
     render(
       <Breadcrumb
-        variant="collapsible"
+        mode="collapsible"
         items={[
           { label: 'Home', href: '/' },
           { label: 'Products', href: '/products' },

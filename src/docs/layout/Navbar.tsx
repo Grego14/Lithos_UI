@@ -59,7 +59,7 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
     addToast({
       title: 'THEME CHANGED',
       message: nextMode ? 'Obsidian Mode Activated.' : 'Light Mode Activated.',
-      type: 'default',
+      intent: 'default',
       color: nextMode ? '#000000' : '#FFFFFF',
     })
   }
@@ -70,7 +70,7 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
     <header className="fixed top-0 z-50 w-full border-b-2 border-(--lithos-border) bg-(--lithos-surface)">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         <div className="flex items-center justify-start lg:w-1/3">
-          <Button intent="primary" onClick={() => navigate('/')}>
+          <Button variant="primary" onClick={() => navigate('/')}>
             Lithos UI
           </Button>
         </div>
@@ -93,7 +93,7 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
           <div className="mr-4 flex items-center">
             <Toggle checked={isDarkMode} onToggle={handleToggleObsidian} label="Toggle Obsidian Mode" />
           </div>
-          <Button intent="primary" onClick={() => window.open('https://github.com/lithosui/Lithos_UI', '_blank')}>
+          <Button variant="primary" onClick={() => window.open('https://github.com/lithosui/Lithos_UI', '_blank')}>
             GitHub
           </Button>
         </div>
@@ -101,7 +101,7 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
         {/* - Mobile Action Toggle (Hamburger / X) */}
         <div className="flex lg:hidden items-center">
           <Button
-            intent="primary"
+            variant="primary"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           >
@@ -163,7 +163,7 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
           {/* Mobile Menu GitHub CTA */}
           <div className="mt-auto flex items-center justify-between">
             <Button
-              intent="primary"
+              variant="primary"
               onClick={() => {
                 setIsMenuOpen(false)
                 window.open('https://github.com/lithosui/Lithos_UI', '_blank')
