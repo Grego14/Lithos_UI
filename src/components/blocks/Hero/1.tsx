@@ -1,8 +1,3 @@
-/**
- * @fileoverview Generic hero block (Variant 1).
- * - Heavy, high-contrast entry section.
- * - Centers on a dominant headline with supporting copy and dual CTAs.
- */
 import { Badge } from '../../ui/Badge'
 import { Button } from '../../ui/Button'
 
