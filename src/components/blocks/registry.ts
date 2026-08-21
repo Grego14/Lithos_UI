@@ -54,6 +54,7 @@ export const blockCategories: BlockCategory[] = [
         component: Hero1,
         code: hero1Code,
         githubUrl: `${GITHUB_BASE}/Hero/1.tsx`,
+        requires: ['components/ui/Badge.tsx', 'components/ui/Button.tsx'],
       },
       {
         slug: 'hero-2',
@@ -62,6 +63,7 @@ export const blockCategories: BlockCategory[] = [
         component: Hero2,
         code: hero2Code,
         githubUrl: `${GITHUB_BASE}/Hero/2.tsx`,
+        requires: ['components/ui/Badge.tsx', 'components/ui/Button.tsx', 'components/ui/Card.tsx'],
       },
     ],
   },

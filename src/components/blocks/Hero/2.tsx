@@ -1,8 +1,3 @@
-/**
- * @fileoverview Generic hero block (Variant 2).
- * - Split-pane layout for product showcase.
- * - Text content on the left, visual asset placeholder on the right.
- */
 import { Badge } from '../../ui/Badge'
 import { Button } from '../../ui/Button'
 import { Card } from '../../ui/Card'
