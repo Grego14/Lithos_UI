@@ -5,7 +5,7 @@ import { Navbar1 } from '../../../../components/blocks/Navbar/1'
 
 describe('Navbar1', () => {
   it('renders correctly', () => {
-    render( <Navbar1 /> )
+    render(<Navbar1 />)
 
     // Logo
     expect(screen.getByRole('link', { name: /logo/i })).toBeInTheDocument()
@@ -26,7 +26,7 @@ describe('Navbar1', () => {
   })
 
   it('toggles mobile menu open and closed', () => {
-    render( <Navbar1 /> )
+    render(<Navbar1 />)
 
     // Mobile menu button
     const menuButton = screen.getByRole('button', { name: /open menu/i })
@@ -43,12 +43,12 @@ describe('Navbar1', () => {
     // Button label changes
     expect(screen.getByRole('button', { name: /close menu/i })).toBeInTheDocument()
 
-    // Mobile links appear, so now there should be 2 "Products" links (desktop + mobile)
-    expect(screen.getAllByRole('link', { name: /products/i })).toHaveLength(2)
+    // Mobile links appear
+    const productsLinks = screen.getAllByRole('link', { name: /products/i })
+    expect(productsLinks).toHaveLength(2)
 
-    // Click a mobile link to close
-    const mobileLink = screen.getAllByRole('link', { name: /products/i })[1]
-    fireEvent.click(mobileLink)
+    // Click a mobile link to close the menu
+    fireEvent.click(productsLinks[1]!)
 
     // Menu is closed again
     expect(screen.getByRole('button', { name: /open menu/i })).toBeInTheDocument()
@@ -56,8 +56,10 @@ describe('Navbar1', () => {
   })
 
   it('has no accessibility violations', async () => {
-    const { container } = render( <Navbar1 /> )
+    const { container } = render(<Navbar1 />)
+
     const results = await axe(container)
+
     expect(results).toHaveNoViolations()
   })
 })
