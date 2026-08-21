@@ -40,7 +40,7 @@ describe('Badge Component', () => {
   })
 
   it('resolves color for accent variant using useAccentColor', () => {
-    render(<Badge variant="accent">Accent</Badge>)
+    render(<Badge intent="accent">Accent</Badge>)
 
     const badge = screen.getByText('Accent')
 
@@ -52,16 +52,16 @@ describe('Badge Component', () => {
   })
 
   it('resolves color for predefined variants (e.g. success, error)', () => {
-    const { rerender } = render(<Badge variant="success">Success</Badge>)
+    const { rerender } = render(<Badge intent="success">Success</Badge>)
     expect(screen.getByText('Success')).toHaveStyle({ backgroundColor: colors.success })
 
-    rerender(<Badge variant="error">Error</Badge>)
+    rerender(<Badge intent="error">Error</Badge>)
     expect(screen.getByText('Error')).toHaveStyle({ backgroundColor: colors.error })
   })
 
   it('prioritizes custom color prop over variant color', () => {
     render(
-      <Badge variant="success" color="#000000">
+      <Badge intent="success" color="#000000">
         Custom Color
       </Badge>
     )

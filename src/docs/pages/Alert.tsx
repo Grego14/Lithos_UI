@@ -293,7 +293,7 @@ export const AlertWithUndo = () => {
         <PreviewBlock code={actionsCode} githubUrl={githubUrl}>
           <div className="flex flex-col w-full">
             {closeDismissed ? (
-              <Button intent="secondary" className="mb-4 text-sm" onClick={() => setCloseDismissed(false)}>
+              <Button variant="secondary" className="mb-4 text-sm" onClick={() => setCloseDismissed(false)}>
                 Reset example
               </Button>
             ) : (
@@ -333,14 +333,14 @@ export const AlertWithUndo = () => {
             <div className="mt-4 text-center flex items-center justify-center">
               <input
                 ref={inputRef}
-                intent="text"
+                type="text"
                 onFocus={handleFocus}
                 defaultValue={customColor}
                 max={7}
                 min={4}
                 className="p-1.5 text-sm outline-none border-2 border-(--lithos-border) shadow-[2px_2px_0_0_var(--lithos-shadow)] focus:shadow-[4px_4px_0_0_var(--lithos-shadow)] hover:shadow-[4px_4px_0_0_var(--lithos-shadow)] max-w-30"
               />
-              <Button intent="primary" className="ml-6 text-sm" onClick={handleCustomColor}>
+              <Button variant="primary" className="ml-6 text-sm" onClick={handleCustomColor}>
                 Use color
               </Button>
             </div>

@@ -163,7 +163,7 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
           {/* Mobile Menu GitHub CTA */}
           <div className="mt-auto flex items-center justify-between">
             <Button
-              intent="primary"
+              variant="primary"
               onClick={() => {
                 setIsMenuOpen(false)
                 window.open('https://github.com/lithosui/Lithos_UI', '_blank')

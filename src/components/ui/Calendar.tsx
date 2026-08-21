@@ -253,7 +253,7 @@ export const Calendar = ({
     currentArray.forEach((date) => {
       const key = toDateKey(date)
       if (!colorAssignmentRef.current.has(key)) {
-        colorAssignmentRef.current.set(key, ROYGBIV[colorIndexRef.current % 7])
+        colorAssignmentRef.current.set(key, ROYGBIV[colorIndexRef.current % 7] as string)
         colorIndexRef.current++
       }
     })

@@ -39,7 +39,7 @@ export const Badge = ({
 }: BadgeProps) => {
   const { accentColor } = useAccentColor()
 
-  const bgColor = color || (intent === 'accent' ? accentColor : colors[variant])
+  const bgColor = color || (intent === 'accent' ? accentColor : colors[intent])
   const contrastedColor = getContrastText(bgColor)
 
   const classes = cn(

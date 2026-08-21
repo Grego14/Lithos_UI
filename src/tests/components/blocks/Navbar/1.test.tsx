@@ -57,7 +57,7 @@ describe('Navbar1', () => {
 
     // Click a mobile link to close
     const mobileLink = screen.getAllByRole('link', { name: /products/i })[1]
-    fireEvent.click(mobileLink)
+    fireEvent.click(mobileLink as HTMLElement)
 
     // Menu is closed again
     expect(screen.getByRole('button', { name: /open menu/i })).toBeInTheDocument()

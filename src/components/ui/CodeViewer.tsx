@@ -87,7 +87,7 @@ export const CodeViewer = ({
 
         <Button
           onClick={handleCopy}
-          intent="secondary"
+          variant="secondary"
           className="hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)"
           aria-label="Copy code"
           title="Copy code"

@@ -116,7 +116,7 @@ export const Pricing1 = () => {
                   </div>
 
                   <div className="mt-8">
-                    <Button intent={highlighted ? 'secondary' : 'primary'} fullWidth>
+                    <Button variant={highlighted ? 'secondary' : 'primary'} fullWidth>
                       {tier.cta}
                     </Button>
                   </div>

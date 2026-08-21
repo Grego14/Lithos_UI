@@ -142,7 +142,7 @@ const ThemeEngine = ({ accentColor, updateAccentColor, radius, updateRadius }: T
 
           {/* - Reset sits below a hard divider so the board reads as one rooted module. */}
           <div className="mt-10 sm:mt-12 flex w-full justify-center border-t-2 border-(--lithos-border) pt-10 sm:pt-12">
-            <Button onClick={handleReset} intent="secondary" className="text-sm sm:text-base">
+            <Button onClick={handleReset} variant="secondary" className="text-sm sm:text-base">
               Reset to Default Theme
             </Button>
           </div>

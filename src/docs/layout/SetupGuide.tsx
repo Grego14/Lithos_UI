@@ -44,11 +44,14 @@ export const SetupGuide = ({
         <div className="flex space-x-4 mb-4">
           <Button
             onClick={() => updateInstallTab('command')}
-            intent={installTab !== 'command' ? 'secondary' : 'primary'}
+            variant={installTab !== 'command' ? 'secondary' : 'primary'}
           >
             Command
           </Button>
-          <Button onClick={() => updateInstallTab('manual')} intent={installTab !== 'manual' ? 'secondary' : 'primary'}>
+          <Button
+            onClick={() => updateInstallTab('manual')}
+            variant={installTab !== 'manual' ? 'secondary' : 'primary'}
+          >
             Manual
           </Button>
         </div>
@@ -61,7 +64,7 @@ export const SetupGuide = ({
               {(Object.keys(commands) as PackageManager[]).map((command) => (
                 <Button
                   key={`commands-${command}`}
-                  intent={command === packageManager ? 'primary' : 'text'}
+                  variant={command === packageManager ? 'primary' : 'text'}
                   onClick={() => updatePackageManager(command)}
                 >
                   {command}

@@ -49,11 +49,11 @@ const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
             </p>
 
             <div className="mt-10 flex flex-col items-center lg:items-start sm:flex-row flex-wrap">
-              <Button intent="primary" onClick={() => navigate('/docs')} className="mb-4 sm:mb-0 sm:mr-6 px-4 py-2">
+              <Button variant="primary" onClick={() => navigate('/docs')} className="mb-4 sm:mb-0 sm:mr-6 px-4 py-2">
                 Documentation
               </Button>
               <Button
-                intent="secondary"
+                variant="secondary"
                 onClick={() => window.open('https://github.com/lithosui/Lithos_UI', '_blank')}
                 className="mb-4 sm:mb-0 px-4 py-2"
               >

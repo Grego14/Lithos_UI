@@ -88,7 +88,7 @@ const componentsList = [
     name: 'Badge',
     to: '/docs/badge',
     preview: (
-      <Badge variant="accent" size="md">
+      <Badge intent="accent" size="md">
         Feature
       </Badge>
     ),

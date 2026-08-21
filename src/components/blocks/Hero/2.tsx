@@ -12,7 +12,7 @@ const Hero2 = () => (
     <div className="mx-auto max-w-7xl px-6 py-16 md:py-24 lg:flex lg:items-center">
       <div className="lg:w-1/2 flex flex-col items-start text-left mb-16 lg:mb-0 lg:pr-6">
         <div className="mb-6">
-          <Badge variant="default" size="sm">
+          <Badge intent="default" size="sm">
             Deployment Engine
           </Badge>
         </div>
@@ -28,7 +28,7 @@ const Hero2 = () => (
 
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-start w-full sm:w-auto">
           <Button className="w-full sm:w-auto text-lg px-8 py-4 sm:mr-4 mb-4 sm:mb-0">Start Free Trial</Button>
-          <Button intent="secondary" className="w-full sm:w-auto text-lg px-8 py-4">
+          <Button variant="secondary" className="w-full sm:w-auto text-lg px-8 py-4">
             View Pricing
           </Button>
         </div>
