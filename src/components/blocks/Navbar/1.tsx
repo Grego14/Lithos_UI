@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { Button } from '../../ui/Button'
 import { IconMenu } from '../../ui/icons/IconMenu'
 import { IconClose } from '../../ui/icons/IconClose'
@@ -25,21 +24,21 @@ export const Navbar1 = () => {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
           {/* - Brand block flex-1 balances the center lane. */}
           <div className="flex items-center justify-start lg:flex-1">
-            <Link to="#" className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click">
+            <a href="#" className="bg-(--lithos-accent) text-(--lithos-accent-text) lithos-click">
               Logo
-            </Link>
+            </a>
           </div>
 
           {/* - Center lane is reserved for wayfinding and sized exactly to its content. */}
           <nav className="hidden items-center justify-center lg:flex lg:flex-none">
             {links.map((link) => (
-              <Link
+              <a
                 key={link.label}
-                to={link.to}
+                href={link.to}
                 className="mx-4 font-black uppercase tracking-tighter leading-none text-(--lithos-text) transition-all duration-150 ease-out hover:text-(--lithos-accent) cursor-pointer"
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
           </nav>
 
@@ -67,14 +66,14 @@ export const Navbar1 = () => {
       {isMenuOpen && (
         <nav className="fixed inset-0 z-40 pt-32 pb-6 px-6 bg-(--lithos-surface) overflow-y-auto flex flex-col justify-start lg:hidden">
           {links.map((link) => (
-            <Link
+            <a
               key={link.label}
-              to={link.to}
+              href={link.to}
               onClick={() => setIsMenuOpen(false)}
               className="block w-full text-left text-4xl sm:text-5xl font-black uppercase tracking-tighter text-(--lithos-text) opacity-80 hover:opacity-100 hover:text-(--lithos-text) hover:translate-x-2 mb-8 cursor-pointer transition-all duration-150"
             >
               {link.label}
-            </Link>
+            </a>
           ))}
           <div className="mt-auto self-start flex flex-col w-full">
             <Button variant="secondary" fullWidth className="mb-4">
