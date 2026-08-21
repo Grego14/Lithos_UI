@@ -37,7 +37,7 @@ export const toastPropsData: PropItem[] = [
     description: 'Optional headline text rendered at the top of the toast.',
   },
   {
-    name: 'type',
+    name: 'intent',
     type: '"default" | "success" | "error" | "warning" | "info"',
     defaultValue: '"default"',
     required: false,

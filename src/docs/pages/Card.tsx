@@ -198,7 +198,7 @@ export const CardDoc = () => {
             <CardDescription>Short supporting copy goes here.</CardDescription>
           </CardContent>
           <CardFooter>
-            <Button intent="secondary" className="mr-3">
+            <Button variant="secondary" className="mr-3">
               Cancel
             </Button>
             <Button>Confirm</Button>
@@ -258,20 +258,20 @@ export const CardDoc = () => {
         <div className="flex flex-col">
           <div className="flex mb-6">
             <Button
-              intent={spacing === 'sm' ? 'primary' : 'secondary'}
+              variant={spacing === 'sm' ? 'primary' : 'secondary'}
               onClick={() => setSpacing('sm')}
               className="mr-4"
             >
               Small
             </Button>
             <Button
-              intent={spacing === 'md' ? 'primary' : 'secondary'}
+              variant={spacing === 'md' ? 'primary' : 'secondary'}
               onClick={() => setSpacing('md')}
               className="mr-4"
             >
               Medium
             </Button>
-            <Button intent={spacing === 'lg' ? 'primary' : 'secondary'} onClick={() => setSpacing('lg')}>
+            <Button variant={spacing === 'lg' ? 'primary' : 'secondary'} onClick={() => setSpacing('lg')}>
               Large
             </Button>
           </div>

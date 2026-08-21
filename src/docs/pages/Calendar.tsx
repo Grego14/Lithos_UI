@@ -143,6 +143,7 @@ export const DisabledDatesCalendar = () => {
         requires={[
           'utils/cn.ts',
           'utils/yiq.ts',
+          'core/types.ts',
           'utils/date.ts',
           'components/ui/Button.tsx',
           'components/ui/icons/IconChevronDown.tsx',

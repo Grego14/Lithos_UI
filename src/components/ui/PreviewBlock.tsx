@@ -122,7 +122,7 @@ export const PreviewBlock = ({
           )}
           {slug && (
             <Button
-              intent="secondary"
+              variant="secondary"
               onClick={() => window.open(`/blocks/preview/${slug}`, '_blank')}
               aria-label="Open"
               className="inline-flex items-center justify-center hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)"
@@ -132,7 +132,7 @@ export const PreviewBlock = ({
           )}
           {githubUrl ? (
             <Button
-              intent="secondary"
+              variant="secondary"
               onClick={() => window.open(githubUrl, '_blank')}
               aria-label="Source"
               className="inline-flex items-center justify-center hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)"

@@ -21,7 +21,7 @@ describe('Alert', () => {
   })
 
   it.each(['default', 'success', 'error', 'warning', 'info', 'accent'] as const)('renders the %s type', (type) => {
-    render(<Alert type={type}>Message</Alert>)
+    render(<Alert intent={type}>Message</Alert>)
     expect(screen.getByRole('alert')).toBeInTheDocument()
   })
 
@@ -84,7 +84,7 @@ describe('Alert', () => {
     'has no accessibility violations — %s type',
     async (type) => {
       const { container } = render(
-        <Alert type={type} title="Accessible">
+        <Alert intent={type} title="Accessible">
           Message
         </Alert>
       )

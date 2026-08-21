@@ -22,11 +22,11 @@ export const BadgeDoc = () => {
   return (
     <div className='flex flex-col items-center text-center flex-wrap'>
       <Badge className='mb-4'>Default</Badge>
-      <Badge className='mb-4' variant='accent'>Accent</Badge>
-      <Badge className='mb-4' variant='success'>Success</Badge>
-      <Badge className='mb-4' variant='warning'>Warning</Badge>
-      <Badge className='mb-4' variant='error'>Error</Badge>
-      <Badge variant='info'>Info</Badge>
+      <Badge className='mb-4' intent='accent'>Accent</Badge>
+      <Badge className='mb-4' intent='success'>Success</Badge>
+      <Badge className='mb-4' intent='warning'>Warning</Badge>
+      <Badge className='mb-4' intent='error'>Error</Badge>
+      <Badge intent='info'>Info</Badge>
     </div>
   )
 }`,
@@ -119,19 +119,19 @@ export const BadgeDoc = () => {
         <PreviewBlock code={variantsCode} githubUrl={githubUrl}>
           <div className="flex flex-col items-center text-center flex-wrap">
             <Badge className="mb-4">Default</Badge>
-            <Badge className="mb-4" variant="accent">
+            <Badge className="mb-4" intent="accent">
               Accent
             </Badge>
-            <Badge className="mb-4" variant="success">
+            <Badge className="mb-4" intent="success">
               Success
             </Badge>
-            <Badge className="mb-4" variant="warning">
+            <Badge className="mb-4" intent="warning">
               Warning
             </Badge>
-            <Badge className="mb-4" variant="error">
+            <Badge className="mb-4" intent="error">
               Error
             </Badge>
-            <Badge variant="info">Info</Badge>
+            <Badge intent="info">Info</Badge>
           </div>
         </PreviewBlock>
       </div>
@@ -178,7 +178,7 @@ export const BadgeDoc = () => {
                 min={4}
                 className="p-1.5 text-sm outline-none border-2 border-(--lithos-border) shadow-[2px_2px_0_0_var(--lithos-shadow)] focus:shadow-[4px_4px_0_0_var(--lithos-shadow)] hover:shadow-[4px_4px_0_0_var(--lithos-shadow)] max-w-[7.5rem]"
               />
-              <Button intent="primary" className="ml-6 text-sm" onClick={handleCustomColor}>
+              <Button variant="primary" className="ml-6 text-sm" onClick={handleCustomColor}>
                 Use color
               </Button>
             </div>

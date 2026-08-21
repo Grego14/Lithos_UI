@@ -23,7 +23,8 @@ export interface BreadcrumbItemData {
 
 export interface BreadcrumbProps extends ComponentPropsWithRef<'nav'> {
   items?: BreadcrumbItemData[] | undefined
-  variant?: 'default' | 'collapsible' | 'icon' | undefined
+  mode?: 'collapsible' | undefined
+  showIcons?: boolean | undefined
   separator?: ReactNode | undefined
   showHomeIcon?: boolean | undefined
   humanPrefix?: ReactNode | undefined
@@ -145,7 +146,7 @@ export const BreadcrumbList = ({ className, children, ref, ...rest }: ComponentP
 
 export const Breadcrumb = ({
   items,
-  variant = 'default',
+  mode,
   separator = <IconBreadcrumbSeparator />,
   showHomeIcon = true,
   humanPrefix,
@@ -170,7 +171,7 @@ export const Breadcrumb = ({
     )
   }
 
-  const isCollapsible = variant === 'collapsible' || items.length > maxItems
+  const isCollapsible = mode === 'collapsible' || items.length > maxItems
   const hasEnoughToCollapse = items.length > itemsBeforeCollapse + itemsAfterCollapse
 
   type RenderedEntry =

@@ -55,7 +55,7 @@ export const Footer = () => {
         {/* - Sponsor CTA uses the same hard-surface language so the support action matches the system physics. */}
         <div className="mt-12 flex w-full flex-col lg:mt-0 lg:w-1/4 lg:items-end">
           <Button
-            intent="secondary"
+            variant="secondary"
             onClick={() => window.open('https://incrediblestand.gumroad.com/l/lithos-ui', '_blank')}
             className="group text-2xl hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) md:text-3xl py-4 px-6"
           >

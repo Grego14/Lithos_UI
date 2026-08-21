@@ -5,14 +5,14 @@ export type HexColor = string & { readonly __brand: 'HexColor' }
 
 export const isHexColor = (value: string): value is HexColor => HEX_COLOR_PATTERN.test(value)
 
-export type ButtonIntent = 'primary' | 'secondary' | 'accent' | 'text'
+export type ButtonVariant = 'primary' | 'secondary' | 'accent' | 'text'
 
 export type ToastType = 'success' | 'error' | 'warning' | 'info' | 'default'
 
 export type ToastPosition = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
 
 export interface ToastProps {
-  type?: ToastType | undefined
+  intent?: ToastType | undefined
   title: string
   message: string
   color?: HexColor | string | undefined

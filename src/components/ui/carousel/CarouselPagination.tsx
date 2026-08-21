@@ -63,7 +63,7 @@ export const CarouselPagination = ({
     selectors.push(
       <Button
         className={classes}
-        intent={isSelected ? 'primary' : 'text'}
+        variant={isSelected ? 'primary' : 'text'}
         onClick={() => scroll(i)}
         key={`slider-selector-${i}`}
         aria-label={label.replace('$', String(i + 1))}

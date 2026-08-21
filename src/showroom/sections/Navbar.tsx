@@ -39,7 +39,7 @@ const Navbar = ({ isDarkMode = false, onToggleObsidian }: NavbarProps) => {
     addToast({
       title: 'THEME CHANGED',
       message: nextMode ? 'Obsidian Mode Activated.' : 'Light Mode Activated.',
-      type: 'default',
+      intent: 'default',
       color: nextMode ? '#000000' : '#FFFFFF',
     })
   }
@@ -54,7 +54,7 @@ const Navbar = ({ isDarkMode = false, onToggleObsidian }: NavbarProps) => {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
           {/* - Brand block flex-1 balances the center lane. */}
           <div className="flex items-center justify-start lg:flex-1">
-            <Button intent="primary" onClick={() => navigate('/')}>
+            <Button variant="primary" onClick={() => navigate('/')}>
               Lithos UI
             </Button>
           </div>
@@ -78,7 +78,7 @@ const Navbar = ({ isDarkMode = false, onToggleObsidian }: NavbarProps) => {
             <div className="mr-4 flex items-center">
               <Toggle checked={isDarkMode} onToggle={handleToggleObsidian} label="Toggle Obsidian Mode" />
             </div>
-            <Button intent="primary" onClick={() => window.open('https://github.com/lithosui/Lithos_UI', '_blank')}>
+            <Button variant="primary" onClick={() => window.open('https://github.com/lithosui/Lithos_UI', '_blank')}>
               GitHub
             </Button>
           </div>
@@ -86,7 +86,7 @@ const Navbar = ({ isDarkMode = false, onToggleObsidian }: NavbarProps) => {
           {/* - Mobile Action Toggle (Hamburger / X) */}
           <div className="flex lg:hidden items-center">
             <Button
-              intent="primary"
+              variant="primary"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
@@ -114,7 +114,7 @@ const Navbar = ({ isDarkMode = false, onToggleObsidian }: NavbarProps) => {
           ))}
           <div className="mt-auto flex items-center justify-between">
             <Button
-              intent="primary"
+              variant="primary"
               onClick={() => {
                 setIsMenuOpen(false)
                 window.open('https://github.com/lithosui/Lithos_UI', '_blank')

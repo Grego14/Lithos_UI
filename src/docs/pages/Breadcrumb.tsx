@@ -23,7 +23,7 @@ export const CollapsibleBreadcrumb = () => {
 
   return (
     <Breadcrumb
-      variant="collapsible"
+      mode="collapsible"
       maxItems={3}
       itemsBeforeCollapse={1}
       itemsAfterCollapse={1}
@@ -47,7 +47,7 @@ export const IconNameBreadcrumb = () => {
     { label: 'Icon', active: true, icon: <IconFileText /> },
   ]
 
-  return <Breadcrumb variant="icon" items={items} />
+  return <Breadcrumb showIcons items={items} />
 }`,
     componentNames: ['Breadcrumb', 'IconFolder', 'IconSettings', 'IconFileText'],
     manualPath: {
@@ -143,7 +143,7 @@ export const IconNameBreadcrumb = () => {
         <PreviewBlock code={collapsibleCode} githubUrl={githubUrl}>
           <div className="flex flex-col items-center justify-center p-4">
             <Breadcrumb
-              variant="collapsible"
+              mode="collapsible"
               maxItems={3}
               itemsBeforeCollapse={1}
               itemsAfterCollapse={1}
@@ -170,7 +170,7 @@ export const IconNameBreadcrumb = () => {
         <PreviewBlock code={iconNameCode} githubUrl={githubUrl}>
           <div className="flex flex-col items-center justify-center p-4">
             <Breadcrumb
-              variant="icon"
+              showIcons
               items={[
                 { label: 'Lithos UI', href: '#', onClick: (e) => e.preventDefault() },
                 { label: 'Components', href: '#', icon: <IconFolder />, onClick: (e) => e.preventDefault() },

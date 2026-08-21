@@ -57,12 +57,12 @@ export const ComingSoon = ({
         {/* Zero-Gap enforcement: stacking behavior controlled by explicit margins */}
         <div className="mt-8 flex flex-col sm:flex-row justify-center items-center">
           {/* Return button */}
-          <Button intent="primary" className="mb-4 sm:mb-0 sm:mr-4" onClick={() => navigate(primaryAction.to)}>
+          <Button variant="primary" className="mb-4 sm:mb-0 sm:mr-4" onClick={() => navigate(primaryAction.to)}>
             {primaryAction.label}
           </Button>
 
           {/* Contribute button */}
-          <Button intent="secondary" onClick={() => window.open(secondaryAction.href, '_blank')}>
+          <Button variant="secondary" onClick={() => window.open(secondaryAction.href, '_blank')}>
             {secondaryAction.label}
           </Button>
         </div>
