@@ -1,16 +1,11 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { axe } from 'jest-axe'
 import { describe, it, expect } from 'vitest'
-import { MemoryRouter } from 'react-router-dom'
 import { Navbar1 } from '../../../../components/blocks/Navbar/1'
 
 describe('Navbar1', () => {
   it('renders correctly', () => {
-    render(
-      <MemoryRouter>
-        <Navbar1 />
-      </MemoryRouter>
-    )
+    render( <Navbar1 /> )
 
     // Logo
     expect(screen.getByRole('link', { name: /logo/i })).toBeInTheDocument()
@@ -31,11 +26,7 @@ describe('Navbar1', () => {
   })
 
   it('toggles mobile menu open and closed', () => {
-    render(
-      <MemoryRouter>
-        <Navbar1 />
-      </MemoryRouter>
-    )
+    render( <Navbar1 /> )
 
     // Mobile menu button
     const menuButton = screen.getByRole('button', { name: /open menu/i })
@@ -65,11 +56,7 @@ describe('Navbar1', () => {
   })
 
   it('has no accessibility violations', async () => {
-    const { container } = render(
-      <MemoryRouter>
-        <Navbar1 />
-      </MemoryRouter>
-    )
+    const { container } = render( <Navbar1 /> )
     const results = await axe(container)
     expect(results).toHaveNoViolations()
   })

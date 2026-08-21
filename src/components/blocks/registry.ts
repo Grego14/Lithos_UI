@@ -116,6 +116,7 @@ export const blockCategories: BlockCategory[] = [
         component: Navbar1,
         code: navbar1Code,
         githubUrl: `${GITHUB_BASE}/Navbar/1.tsx`,
+        requires: ['components/ui/Button.tsx'],
       },
     ],
   },
