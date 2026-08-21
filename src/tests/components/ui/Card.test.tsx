@@ -61,7 +61,7 @@ describe('Card Component', () => {
     expect(screen.getByTestId('card')).not.toHaveClass('hover:-translate-y-1')
 
     rerender(
-      <Card interactive data-testid="card">
+      <Card interactive="elevate" data-testid="card">
         Content
       </Card>
     )

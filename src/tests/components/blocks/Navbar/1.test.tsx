@@ -47,7 +47,6 @@ describe('Navbar1', () => {
     const productsLinks = screen.getAllByRole('link', { name: /products/i })
     expect(productsLinks).toHaveLength(2)
 
-
     // Click a mobile link to close
     const mobileLink = screen.getAllByRole('link', { name: /products/i })[1]
     fireEvent.click(mobileLink as HTMLElement)
