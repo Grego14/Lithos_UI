@@ -68,7 +68,7 @@ export const ToastProvider = ({ children, duration, position = 'bottom-right', c
   }, [])
 
   const addToast = useCallback(
-    ({ message, type = 'default', color, title, duration: customDuration }: CoreToastProps) => {
+    ({ message, intent = 'default', color, title, duration: customDuration }: CoreToastProps) => {
       const id = Math.random().toString(36).substring(2, 9)
       let toastDuration = customDuration
 
@@ -129,11 +129,11 @@ export const ToastProvider = ({ children, duration, position = 'bottom-right', c
 }
 
 export const ToastItem = ({ toast, onRemove, className }: ToastItemProps) => {
-  const { id, message, type = 'default', color, title, duration } = toast
+  const { id, message, intent = 'default', color, title, duration } = toast
   const [isHovered, setIsHovered] = useState(false)
   const toastRef = useRef<HTMLDivElement | null>(null)
 
-  const isError = type === 'error'
+  const isError = intent === 'error'
 
   useEffect(() => {
     if (!isError || !toastRef.current) return
@@ -165,7 +165,7 @@ export const ToastItem = ({ toast, onRemove, className }: ToastItemProps) => {
     return () => clearTimeout(timer)
   }, [isHovered, onRemove, isError, duration])
 
-  const bgColor = color || colors[type] || colors.default
+  const bgColor = color || colors[intent] || colors.default
   const textColor = getContrastText(bgColor)
 
   const label = 'Close notification'

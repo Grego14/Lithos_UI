@@ -170,7 +170,7 @@ export const Breadcrumb = ({
     )
   }
 
-  const isCollapsible = variant === 'collapsible' || items.length > maxItems
+  const isCollapsible = mode === 'collapsible' || items.length > maxItems
   const hasEnoughToCollapse = items.length > itemsBeforeCollapse + itemsAfterCollapse
 
   type RenderedEntry =

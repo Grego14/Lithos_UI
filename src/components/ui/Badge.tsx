@@ -12,10 +12,10 @@ import { cn } from '../../utils/cn'
 import type { ClassArray, ClassValue } from 'clsx'
 
 type BadgeSizes = 'default' | 'sm' | 'md' | 'lg'
-type BadgeVariants = 'default' | 'accent' | 'success' | 'error' | 'warning' | 'info'
+type BadgeIntents = 'default' | 'accent' | 'success' | 'error' | 'warning' | 'info'
 
 export interface BadgeProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
-  variant?: BadgeVariants
+  intent?: BadgeIntents
   className?: ClassValue | ClassArray
   size?: BadgeSizes
   color?: HexColor | string
@@ -32,14 +32,14 @@ export const Badge = ({
   children,
   className = '',
   size = 'default',
-  variant = 'default',
+  intent = 'default',
   color,
   ref,
   ...props
 }: BadgeProps) => {
   const { accentColor } = useAccentColor()
 
-  const bgColor = color || (variant === 'accent' ? accentColor : colors[variant])
+  const bgColor = color || (intent === 'accent' ? accentColor : colors[variant])
   const contrastedColor = getContrastText(bgColor)
 
   const classes = cn(

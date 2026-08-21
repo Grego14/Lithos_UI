@@ -17,7 +17,7 @@
  *      an absolutely-positioned bordered option panel, so it keeps `.lithos-click` physics on the
  *      trigger and full token/shadow styling on the panel — no positioning library needed since
  *      it only ever anchors directly under its own trigger.
- * - Prev/next nav buttons are NOT exceptions: they route through `Button intent='text'` exactly
+ * - Prev/next nav buttons are NOT exceptions: they route through `Button variant='text'` exactly
  *   like Accordion's header toggle, with full `.lithos-click` physics.
  * - Multicolor selection (mode='multiple' only): `dateColors` lets a consumer assign distinct
  *   colors per group of selected dates (e.g. sick leave vs vacation). Custom colors are resolved to a readable
@@ -155,7 +155,7 @@ const HeaderDropdown = ({ label, options, value, onChange, className }: HeaderDr
   return (
     <div ref={containerRef} className={cn('relative', className)}>
       <Button
-        intent="secondary"
+        variant="secondary"
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={label}
@@ -428,7 +428,7 @@ export const Calendar = ({
     >
       <div className={cn('flex items-center justify-between mb-3', classes.header)}>
         <Button
-          intent="text"
+          variant="text"
           aria-label="Previous month"
           disabled={isPrevDisabled}
           onClick={() => changeMonth(addMonths(displayedMonth, -1))}
@@ -456,7 +456,7 @@ export const Calendar = ({
         </div>
 
         <Button
-          intent="text"
+          variant="text"
           aria-label="Next month"
           disabled={isNextDisabled}
           onClick={() => changeMonth(addMonths(displayedMonth, 1))}

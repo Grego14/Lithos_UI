@@ -22,11 +22,11 @@ export const AlertDoc = () => {
   return (
     <div className='flex flex-col w-full'>
       <Alert className='mb-4' size='lg' variant='filled' title='Default'>Structural review pending.</Alert>
-      <Alert className='mb-4' size='lg' type='success' variant='filled' title='Success'>Deployment verified.</Alert>
-      <Alert className='mb-4' size='lg' type='warning' variant='filled' title='Warning'>Load tolerance nearing limit.</Alert>
-      <Alert className='mb-4' size='lg' type='error' variant='filled' title='Error'>Integrity check failed.</Alert>
-      <Alert className='mb-4' size='lg' type='info' variant='filled' title='Info'>Maintenance window scheduled.</Alert>
-      <Alert size='lg' type='accent' variant='filled' title='Accent'>Theme accent applied.</Alert>
+      <Alert className='mb-4' size='lg' intent='success' variant='filled' title='Success'>Deployment verified.</Alert>
+      <Alert className='mb-4' size='lg' intent='warning' variant='filled' title='Warning'>Load tolerance nearing limit.</Alert>
+      <Alert className='mb-4' size='lg' intent='error' variant='filled' title='Error'>Integrity check failed.</Alert>
+      <Alert className='mb-4' size='lg' intent='info' variant='filled' title='Info'>Maintenance window scheduled.</Alert>
+      <Alert size='lg' intent='accent' variant='filled' title='Accent'>Theme accent applied.</Alert>
     </div>
   )
 }`,
@@ -39,11 +39,11 @@ export const AlertDoc = () => {
   return (
     <div className='flex flex-col w-full'>
       <Alert className='mb-4' size='lg' variant='outlined' title='Default'>Structural review pending.</Alert>
-      <Alert className='mb-4' size='lg' type='success' variant='outlined' title='Success'>Deployment verified.</Alert>
-      <Alert className='mb-4' size='lg' type='warning' variant='outlined' title='Warning'>Load tolerance nearing limit.</Alert>
-      <Alert className='mb-4' size='lg' type='error' variant='outlined' title='Error'>Integrity check failed.</Alert>
-      <Alert className='mb-4' size='lg' type='info' variant='outlined' title='Info'>Maintenance window scheduled.</Alert>
-      <Alert size='lg' type='accent' variant='outlined' title='Accent'>Theme accent applied.</Alert>
+      <Alert className='mb-4' size='lg' intent='success' variant='outlined' title='Success'>Deployment verified.</Alert>
+      <Alert className='mb-4' size='lg' intent='warning' variant='outlined' title='Warning'>Load tolerance nearing limit.</Alert>
+      <Alert className='mb-4' size='lg' intent='error' variant='outlined' title='Error'>Integrity check failed.</Alert>
+      <Alert className='mb-4' size='lg' intent='info' variant='outlined' title='Info'>Maintenance window scheduled.</Alert>
+      <Alert size='lg' intent='accent' variant='outlined' title='Accent'>Theme accent applied.</Alert>
     </div>
   )
 }`,
@@ -70,7 +70,7 @@ export const AlertDoc = () => {
     body: `export const AlertNoTitle = () => {
   return (
     <div className='flex flex-col w-full'>
-      <Alert size='md' type='warning'>Load tolerance nearing limit.</Alert>
+      <Alert size='md' intent='warning'>Load tolerance nearing limit.</Alert>
     </div>
   )
 }`,
@@ -85,7 +85,7 @@ export const AlertDoc = () => {
   if (dismissed) return null
 
   return (
-    <Alert size='md' type='error' title='Deployment failed' onClose={() => setDismissed(true)}>
+    <Alert size='md' intent='error' title='Deployment failed' onClose={() => setDismissed(true)}>
       Build #482 failed structural checks.
     </Alert>
   )
@@ -93,7 +93,7 @@ export const AlertDoc = () => {
 
 export const AlertWithUndo = () => {
   return (
-    <Alert size='md' type='warning' title='Config changed' onUndo={() => alert('Reverting configuration change.')}>
+    <Alert size='md' intent='warning' title='Config changed' onUndo={() => alert('Reverting configuration change.')}>
       Timeout threshold updated to 30s.
     </Alert>
   )
@@ -187,19 +187,19 @@ export const AlertWithUndo = () => {
             <Alert className="mb-4" size="lg" variant="filled" title="Default">
               Structural review pending.
             </Alert>
-            <Alert className="mb-4" size="lg" type="success" variant="filled" title="Success">
+            <Alert className="mb-4" size="lg" intent="success" variant="filled" title="Success">
               Deployment verified.
             </Alert>
-            <Alert className="mb-4" size="lg" type="warning" variant="filled" title="Warning">
+            <Alert className="mb-4" size="lg" intent="warning" variant="filled" title="Warning">
               Load tolerance nearing limit.
             </Alert>
-            <Alert className="mb-4" size="lg" type="error" variant="filled" title="Error">
+            <Alert className="mb-4" size="lg" intent="error" variant="filled" title="Error">
               Integrity check failed.
             </Alert>
-            <Alert className="mb-4" size="lg" type="info" variant="filled" title="Info">
+            <Alert className="mb-4" size="lg" intent="info" variant="filled" title="Info">
               Maintenance window scheduled.
             </Alert>
-            <Alert size="lg" type="accent" variant="filled" title="Accent">
+            <Alert size="lg" intent="accent" variant="filled" title="Accent">
               Theme accent applied.
             </Alert>
           </div>
@@ -220,19 +220,19 @@ export const AlertWithUndo = () => {
             <Alert className="mb-4" size="lg" variant="outlined" title="Default">
               Structural review pending.
             </Alert>
-            <Alert className="mb-4" size="lg" type="success" variant="outlined" title="Success">
+            <Alert className="mb-4" size="lg" intent="success" variant="outlined" title="Success">
               Deployment verified.
             </Alert>
-            <Alert className="mb-4" size="lg" type="warning" variant="outlined" title="Warning">
+            <Alert className="mb-4" size="lg" intent="warning" variant="outlined" title="Warning">
               Load tolerance nearing limit.
             </Alert>
-            <Alert className="mb-4" size="lg" type="error" variant="outlined" title="Error">
+            <Alert className="mb-4" size="lg" intent="error" variant="outlined" title="Error">
               Integrity check failed.
             </Alert>
-            <Alert className="mb-4" size="lg" type="info" variant="outlined" title="Info">
+            <Alert className="mb-4" size="lg" intent="info" variant="outlined" title="Info">
               Maintenance window scheduled.
             </Alert>
-            <Alert size="lg" type="accent" variant="outlined" title="Accent">
+            <Alert size="lg" intent="accent" variant="outlined" title="Accent">
               Theme accent applied.
             </Alert>
           </div>
@@ -274,7 +274,7 @@ export const AlertWithUndo = () => {
       <div className="mt-8 mb-16">
         <PreviewBlock code={titlelessCode} githubUrl={githubUrl}>
           <div className="flex flex-col w-full">
-            <Alert size="md" type="warning">
+            <Alert size="md" intent="warning">
               Load tolerance nearing limit.
             </Alert>
           </div>
@@ -300,7 +300,7 @@ export const AlertWithUndo = () => {
               <Alert
                 className="mb-4"
                 size="md"
-                type="error"
+                intent="error"
                 title="Deployment failed"
                 onClose={() => setCloseDismissed(true)}
               >
@@ -308,7 +308,7 @@ export const AlertWithUndo = () => {
               </Alert>
             )}
 
-            <Alert size="md" type="warning" title="Config changed" onUndo={() => {}}>
+            <Alert size="md" intent="warning" title="Config changed" onUndo={() => {}}>
               Timeout threshold updated to 30s.
             </Alert>
           </div>
@@ -333,7 +333,7 @@ export const AlertWithUndo = () => {
             <div className="mt-4 text-center flex items-center justify-center">
               <input
                 ref={inputRef}
-                type="text"
+                intent="text"
                 onFocus={handleFocus}
                 defaultValue={customColor}
                 max={7}

@@ -22,11 +22,11 @@ export const BadgeDoc = () => {
   return (
     <div className='flex flex-col items-center text-center flex-wrap'>
       <Badge className='mb-4'>Default</Badge>
-      <Badge className='mb-4' variant='accent'>Accent</Badge>
-      <Badge className='mb-4' variant='success'>Success</Badge>
-      <Badge className='mb-4' variant='warning'>Warning</Badge>
-      <Badge className='mb-4' variant='error'>Error</Badge>
-      <Badge variant='info'>Info</Badge>
+      <Badge className='mb-4' intent='accent'>Accent</Badge>
+      <Badge className='mb-4' intent='success'>Success</Badge>
+      <Badge className='mb-4' intent='warning'>Warning</Badge>
+      <Badge className='mb-4' intent='error'>Error</Badge>
+      <Badge intent='info'>Info</Badge>
     </div>
   )
 }`,
@@ -119,19 +119,19 @@ export const BadgeDoc = () => {
         <PreviewBlock code={variantsCode} githubUrl={githubUrl}>
           <div className="flex flex-col items-center text-center flex-wrap">
             <Badge className="mb-4">Default</Badge>
-            <Badge className="mb-4" variant="accent">
+            <Badge className="mb-4" intent="accent">
               Accent
             </Badge>
-            <Badge className="mb-4" variant="success">
+            <Badge className="mb-4" intent="success">
               Success
             </Badge>
-            <Badge className="mb-4" variant="warning">
+            <Badge className="mb-4" intent="warning">
               Warning
             </Badge>
-            <Badge className="mb-4" variant="error">
+            <Badge className="mb-4" intent="error">
               Error
             </Badge>
-            <Badge variant="info">Info</Badge>
+            <Badge intent="info">Info</Badge>
           </div>
         </PreviewBlock>
       </div>

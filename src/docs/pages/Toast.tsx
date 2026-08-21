@@ -14,7 +14,7 @@ const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/component
 const newToast: ToastProps = {
   title: 'SYSTEM TOAST',
   message: 'Structural integrity verified.',
-  type: 'success',
+  intent: 'success',
 }
 
 // inner component that consumes the nested context
@@ -52,7 +52,7 @@ export const ToastDoc = () => {
       addToast({
         title: 'SYSTEM TOAST',
         message: 'Structural integrity verified.',
-        type: 'success',
+        intent: 'success',
       })
     }
   }
@@ -80,7 +80,7 @@ export const ToastDoc = () => {
       addToast({
         title: 'SYSTEM TOAST',
         message: 'Structural integrity verified.',
-        type: 'success',
+        intent: 'success',
       })
     }
   }
