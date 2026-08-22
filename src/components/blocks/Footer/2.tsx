@@ -1,10 +1,4 @@
-/**
- * @fileoverview Generic footer block (Variant 2).
- * - Minimal, centered layout.
- * - Prioritizes brand focus and simplified navigation.
- */
-
-const Footer2 = () => (
+export const Footer2 = () => (
   <section id="footer-block" className="border-t-2 border-(--lithos-border) bg-(--lithos-bg) py-16 px-6">
     <div className="mx-auto max-w-4xl text-center flex flex-col items-center">
       <div className="mb-8">
@@ -52,5 +46,3 @@ const Footer2 = () => (
     </div>
   </section>
 )
-
-export { Footer2 }
