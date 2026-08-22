@@ -1,10 +1,4 @@
-/**
- * @fileoverview Generic footer block (Variant 1).
- * - Standard multi-column link layout closing slab.
- * - Prioritizes deep navigation and corporate context.
- */
-
-const Footer1 = () => (
+export const Footer1 = () => (
   <section id="footer-block" className="bg-(--lithos-surface) pt-20 pb-10 px-6">
     <div className="mx-auto max-w-7xl">
       <div className="flex flex-col lg:flex-row lg:justify-between mb-16">
@@ -97,5 +91,3 @@ const Footer1 = () => (
     </div>
   </section>
 )
-
-export { Footer1 }
