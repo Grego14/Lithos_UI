@@ -38,7 +38,7 @@ export interface CarouselProps extends Omit<ComponentPropsWithRef<'div'>, 'class
   playDirection?: 'forwards' | 'backwards'
   stopOnHover?: boolean
   loop?: boolean
-  vertical?: boolean
+  mode?: 'horizontal' | 'vertical'
   className?: ClassValue | ClassArray
 }
 
@@ -56,13 +56,14 @@ const Carousel = ({
   playDirection = 'forwards',
   stopOnHover = true,
   loop = false,
-  vertical = false,
+  mode = 'horizontal',
   ref,
   ...rest
 }: CarouselProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [index, setIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
+  const vertical = mode === 'vertical'
 
   const totalSlides = Children.toArray(children).filter(
     (child) => isValidElement(child) && child.type === CarouselSlide
