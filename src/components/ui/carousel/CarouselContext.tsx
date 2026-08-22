@@ -11,12 +11,13 @@ export type CarouselDirection = 'forwards' | 'backwards'
 export type ScrollFuncProp = CarouselDirection | number
 export type ScrollFunc = (direction: ScrollFuncProp) => void
 export type SliderSelector = 'dots' | 'numbers'
+export type CarouselMode = 'horizontal' | 'vertical'
 
 export interface CarouselContextValue {
   scroll: ScrollFunc
   currentIndex: number
   totalSlides: number
-  vertical: boolean
+  mode: CarouselMode
 }
 
 export const CarouselContext = createContext<CarouselContextValue | null>(null)
@@ -26,7 +27,7 @@ export interface CarouselProviderProps {
   scroll: ScrollFunc
   currentIndex?: number
   totalSlides?: number
-  vertical?: boolean
+  mode?: CarouselMode
 }
 
 export const CarouselProvider = ({
@@ -34,16 +35,16 @@ export const CarouselProvider = ({
   scroll,
   currentIndex = 0,
   totalSlides = 0,
-  vertical = false,
+  mode = 'horizontal',
 }: CarouselProviderProps) => {
   const value = useMemo(
     () => ({
       scroll,
       currentIndex,
       totalSlides,
-      vertical,
+      mode,
     }),
-    [scroll, currentIndex, totalSlides, vertical]
+    [scroll, currentIndex, totalSlides, mode]
   )
 
   return <CarouselContext.Provider value={value}>{children}</CarouselContext.Provider>

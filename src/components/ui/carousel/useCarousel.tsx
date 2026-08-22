@@ -1,6 +1,6 @@
 /**
  * @fileoverview Lithos UI custom hook for consuming carousel context.
- * - Provides type-safe access to carousel state (`currentIndex`, `totalSlides`, `vertical`) and action dispatchers (`scroll`).
+ * - Provides type-safe access to carousel state (`currentIndex`, `totalSlides`, `mode`) and action dispatchers (`scroll`).
  */
 import { useContext } from 'react'
 import { type CarouselContextValue, CarouselContext } from './CarouselContext'

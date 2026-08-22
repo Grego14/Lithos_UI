@@ -26,7 +26,7 @@ export interface CarouselPaginationProps extends Omit<ComponentPropsWithRef<'div
   label?: string
   className?: ClassValue | ClassArray
   bottomControls?: boolean
-  vertical?: boolean
+  mode?: 'horizontal' | 'vertical'
 }
 
 export const CarouselPagination = ({
@@ -38,11 +38,12 @@ export const CarouselPagination = ({
   className,
   label = 'Move to the slide $',
   bottomControls = false,
-  vertical = false,
+  mode = 'horizontal',
   ref,
   ...rest
 }: CarouselPaginationProps) => {
   const selectors = []
+  const vertical = mode === 'vertical'
 
   for (let i = 0; i < slides; i++) {
     const isLast = i === slides - 1

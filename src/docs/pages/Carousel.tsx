@@ -143,7 +143,7 @@ export const CarouselDoc = () => {
   const verticalCode = {
     body: `export const AppCarousel = () => {
   return (
-    <Carousel title='Carousel with vertical sliding!' vertical>
+    <Carousel title='Carousel with vertical sliding!' mode="vertical">
       <CarouselSlide>Slide 1</CarouselSlide>
       <CarouselSlide>Slide 2</CarouselSlide>
       <CarouselSlide>Slide 3</CarouselSlide>
@@ -384,7 +384,7 @@ export const CarouselDoc = () => {
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={verticalCode} githubUrl={githubUrl}>
-          <Carousel title="Carousel with vertical sliding!" vertical>
+          <Carousel title="Carousel with vertical sliding!" mode="vertical">
             <CarouselSlide>Slide 1</CarouselSlide>
             <CarouselSlide>Slide 2</CarouselSlide>
             <CarouselSlide>Slide 3</CarouselSlide>
