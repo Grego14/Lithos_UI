@@ -145,7 +145,13 @@ export const ButtonDoc = () => {
       <SetupGuide
         componentNames={['Button']}
         manualPath="../../components/ui/Button"
-        requires={['utils/cn.ts', 'core/types.ts']}
+        requires={[
+          'utils/cn.ts',
+          'core/types.ts',
+          'components/ui/icons/IconHome.tsx',
+          'components/ui/icons/IconSettings.tsx',
+          'components/ui/icons/IconDownload.tsx',
+        ]}
       />
 
       <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">

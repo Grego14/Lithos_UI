@@ -99,6 +99,9 @@ export const IconNameBreadcrumb = () => {
           'utils/cn.ts',
           'components/ui/icons/IconHome.tsx',
           'components/ui/icons/IconBreadcrumbSeparator.tsx',
+          'components/ui/icons/IconFolder.tsx',
+          'components/ui/icons/IconSettings.tsx',
+          'components/ui/icons/IconFileText.tsx',
         ]}
       />
 

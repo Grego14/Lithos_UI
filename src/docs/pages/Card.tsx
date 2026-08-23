@@ -164,7 +164,11 @@ export const CardDoc = () => {
         Installation
       </h2>
 
-      <SetupGuide componentNames={['Card']} manualPath="../../components/ui/Card" requires={['utils/cn.ts']} />
+      <SetupGuide
+        componentNames={['Card']}
+        manualPath="../../components/ui/Card"
+        requires={['utils/cn.ts', 'components/ui/Button.tsx']}
+      />
 
       <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Anatomy

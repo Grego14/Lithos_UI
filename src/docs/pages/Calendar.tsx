@@ -100,8 +100,8 @@ export const DisabledDatesCalendar = () => {
     />
   )
 }`,
-    componentNames: ['Calendar'],
-    manualPath: '../../components/ui/Calendar',
+    componentNames: ['Calendar', 'useState'],
+    manualPath: { Calendar: '../../components/ui/Calendar', useState: 'react' },
   }
 
   return (
