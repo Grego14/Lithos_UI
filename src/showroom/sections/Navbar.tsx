@@ -101,7 +101,7 @@ const Navbar = ({ isDarkMode = false, onToggleObsidian }: NavbarProps) => {
 
       {/* - Full-Screen Mobile Overlay */}
       {isMenuOpen && (
-        <nav className="fixed inset-0 z-[40] pt-32 pb-6 px-6 bg-(--lithos-surface) overflow-y-auto flex flex-col justify-start lg:hidden">
+        <nav className="fixed inset-0 z-40 pt-32 pb-6 px-6 bg-(--lithos-surface) overflow-y-auto flex flex-col justify-start lg:hidden">
           {links.map((link) => (
             <Link
               key={link.label}
