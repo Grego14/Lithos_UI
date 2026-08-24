@@ -125,7 +125,7 @@ export const dialogFooterPropsData: PropItem[] = [
   },
 ]
 
-export const alertDialogPropsData: PropItem[] = [
+export const customDialogPropsData: PropItem[] = [
   {
     name: 'open',
     type: 'boolean',
@@ -136,7 +136,14 @@ export const alertDialogPropsData: PropItem[] = [
     name: 'onClose',
     type: '() => void',
     required: true,
-    description: 'Called on Escape, backdrop click, the header close button, and the action button.',
+    description: 'Called on Escape, backdrop click, the header close button, and the Cancel button.',
+  },
+  {
+    name: 'onAction',
+    type: '() => void',
+    required: true,
+    description:
+      'Called when the action button is clicked. Does not also call onClose — call it yourself if the action should close the dialog.',
   },
   {
     name: 'title',
@@ -153,70 +160,9 @@ export const alertDialogPropsData: PropItem[] = [
   {
     name: 'actionLabel',
     type: 'string',
-    defaultValue: "'OK'",
-    required: false,
-    description: 'Label for the single acknowledgement button.',
-  },
-  {
-    name: 'intent',
-    type: "'default' | 'success' | 'error' | 'warning' | 'info'",
-    defaultValue: "'default'",
-    required: false,
-    description: 'Forwarded to Dialog for the semantic accent color and ARIA role.',
-  },
-  {
-    name: 'size',
-    type: "'sm' | 'md' | 'lg' | 'xl'",
-    defaultValue: "'md'",
-    required: false,
-    description: 'Forwarded to Dialog for panel max-width.',
-  },
-  {
-    name: 'icon',
-    type: 'ReactNode',
-    required: false,
-    description: 'Optional leading icon rendered to the left of the title.',
-  },
-]
-
-export const confirmDialogPropsData: PropItem[] = [
-  {
-    name: 'open',
-    type: 'boolean',
-    required: true,
-    description: 'Controls whether the dialog is mounted and visible.',
-  },
-  {
-    name: 'onClose',
-    type: '() => void',
-    required: true,
-    description: 'Called on Escape, backdrop click, the header close button, and the Cancel button.',
-  },
-  {
-    name: 'onConfirm',
-    type: '() => void',
-    required: true,
-    description:
-      'Called when the Confirm button is clicked. Does not also call onClose — call it yourself if the action should close the dialog.',
-  },
-  {
-    name: 'title',
-    type: 'string',
-    required: true,
-    description: 'Dialog heading.',
-  },
-  {
-    name: 'message',
-    type: 'ReactNode',
-    required: true,
-    description: 'Body content. Strings are wrapped in a styled paragraph automatically.',
-  },
-  {
-    name: 'confirmLabel',
-    type: 'string',
     defaultValue: "'Confirm'",
     required: false,
-    description: 'Label for the confirm action button.',
+    description: 'Label for the action button.',
   },
   {
     name: 'cancelLabel',
@@ -226,11 +172,23 @@ export const confirmDialogPropsData: PropItem[] = [
     description: 'Label for the cancel action button.',
   },
   {
-    name: 'intent',
-    type: "'default' | 'success' | 'error' | 'warning' | 'info'",
-    defaultValue: "'default'",
+    name: 'buttonVariant',
+    type: 'ButtonVariant',
+    defaultValue: "'primary'",
     required: false,
-    description: "Forwarded to Dialog. Use 'error' for destructive confirmations.",
+    description: 'Variant of the action button.',
+  },
+  {
+    name: 'buttonColor',
+    type: 'string',
+    required: false,
+    description: 'Custom color for the action button.',
+  },
+  {
+    name: 'offsetColor',
+    type: 'string',
+    required: false,
+    description: 'Custom color for the offset box-shadow of the dialog.',
   },
   {
     name: 'size',

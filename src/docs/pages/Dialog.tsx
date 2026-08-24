@@ -4,15 +4,7 @@ import { SetupGuide } from '../layout/SetupGuide'
 import { Button } from '../../components/ui/Button'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { CodeViewer } from '../../components/ui/CodeViewer'
-import {
-  Dialog,
-  DialogHeader,
-  DialogTitle,
-  DialogBody,
-  DialogFooter,
-  AlertDialog,
-  ConfirmDialog,
-} from '../../components/ui/Dialog'
+import { Dialog, DialogHeader, DialogTitle, DialogBody, DialogFooter, CustomDialog } from '../../components/ui/Dialog'
 import { IconSettings } from '../../components/ui/icons/IconSettings'
 import { IconAlertTriangle } from '../../components/ui/icons/IconAlertTriangle'
 import { colors } from '../../utils/colors'
@@ -23,29 +15,19 @@ import {
   dialogTitlePropsData,
   dialogBodyPropsData,
   dialogFooterPropsData,
-  alertDialogPropsData,
-  confirmDialogPropsData,
+  customDialogPropsData,
 } from '../propsData/dialog'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Dialog.tsx'
 
-const componentNames = [
-  'Dialog',
-  'DialogHeader',
-  'DialogTitle',
-  'DialogBody',
-  'DialogFooter',
-  'AlertDialog',
-  'ConfirmDialog',
-]
+const componentNames = ['Dialog', 'DialogHeader', 'DialogTitle', 'DialogBody', 'DialogFooter', 'CustomDialog']
 const manualPath = {
   Dialog: '../../components/ui/Dialog',
   DialogHeader: '../../components/ui/Dialog',
   DialogTitle: '../../components/ui/Dialog',
   DialogBody: '../../components/ui/Dialog',
   DialogFooter: '../../components/ui/Dialog',
-  AlertDialog: '../../components/ui/Dialog',
-  ConfirmDialog: '../../components/ui/Dialog',
+  CustomDialog: '../../components/ui/Dialog',
   Button: '../../components/ui/Button',
 }
 
@@ -160,38 +142,22 @@ const NoCloseDialogDemo = () => {
   )
 }
 
-const AlertDialogDemo = () => {
-  const [open, setOpen] = useState(false)
-
-  return (
-    <>
-      <Button onClick={() => setOpen(true)}>Show Alert</Button>
-      <AlertDialog
-        open={open}
-        onClose={() => setOpen(false)}
-        title="Session Expiring"
-        message="Your session will expire in 2 minutes. Save your work."
-        intent="warning"
-        icon={<IconSettings className="w-5 h-5" />}
-      />
-    </>
-  )
-}
-
-const ConfirmDialogDemo = () => {
+const CustomDialogDemo = () => {
   const [open, setOpen] = useState(false)
 
   return (
     <>
       <Button onClick={() => setOpen(true)}>Delete Account</Button>
-      <ConfirmDialog
+      <CustomDialog
         open={open}
         onClose={() => setOpen(false)}
-        onConfirm={() => setOpen(false)}
+        onAction={() => setOpen(false)}
         title="Delete Account"
         message="This action is irreversible. Choose Cancel or Delete to continue."
-        confirmLabel="Delete"
-        intent="error"
+        actionLabel="Delete"
+        buttonVariant="solid"
+        buttonColor="#FF0000"
+        offsetColor="#FF0000"
         icon={<IconAlertTriangle className="w-5 h-5" style={{ color: colors.error }} />}
       />
     </>
@@ -309,49 +275,29 @@ export const SizeDialogDemo = () => {
     manualPath,
   }
 
-  const alertDialogCode = {
-    body: `export const AlertDialogDemo = () => {
-  const [open, setOpen] = useState(false)
-
-  return (
-    <>
-      <Button onClick={() => setOpen(true)}>Show Alert</Button>
-      <AlertDialog
-        open={open}
-        onClose={() => setOpen(false)}
-        title="Session Expiring"
-        message="Your session will expire in 2 minutes. Save your work."
-        intent="warning"
-        icon={<IconSettings className="w-5 h-5" />}
-      />
-    </>
-  )
-}`,
-    componentNames: ['AlertDialog', 'Button', 'IconSettings'],
-    manualPath: { ...manualPath, IconSettings: '../../components/ui/icons/IconSettings' },
-  }
-
-  const confirmDialogCode = {
-    body: `export const ConfirmDialogDemo = () => {
+  const customDialogCode = {
+    body: `export const CustomDialogDemo = () => {
   const [open, setOpen] = useState(false)
 
   return (
     <>
       <Button onClick={() => setOpen(true)}>Delete Account</Button>
-      <ConfirmDialog
+      <CustomDialog
         open={open}
         onClose={() => setOpen(false)}
-        onConfirm={() => setOpen(false)}
+        onAction={() => setOpen(false)}
         title="Delete Account"
         message="This action is irreversible. Choose Cancel or Delete to continue."
-        confirmLabel="Delete"
-        intent="error"
+        actionLabel="Delete"
+        buttonVariant="solid"
+        buttonColor="#FF0000"
+        offsetColor="#FF0000"
         icon={<IconAlertTriangle style={{ color: '#FF0000' }} />}
       />
     </>
   )
 }`,
-    componentNames: ['ConfirmDialog', 'Button', 'IconAlertTriangle'],
+    componentNames: ['CustomDialog', 'Button', 'IconAlertTriangle'],
     manualPath: { ...manualPath, IconAlertTriangle: '../../components/ui/icons/IconAlertTriangle' },
   }
 
@@ -473,31 +419,19 @@ export const SizeDialogDemo = () => {
         Convenience Components
       </h2>
       <p className="mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-        <code>AlertDialog</code> and <code>ConfirmDialog</code> are Header/Body/Footer compositions of Dialog for the
-        two most common call sites, so most consumers never hand-compose the subcomponents from the Anatomy example
-        above.
+        <code>CustomDialog</code> is a Header/Body/Footer composition of Dialog for the most common call site, so most
+        consumers never hand-compose the subcomponents from the Anatomy example above.
       </p>
 
-      <h3 id="alert-dialog" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
-        AlertDialog — single acknowledgement
+      <h3 id="custom-dialog" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
+        CustomDialog — cancel / action
       </h3>
       <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
-        One action button, no cancel path — for notices the user just needs to acknowledge.
+        Cancel/Action pair with highly customizable styling for destructive confirmations.
       </p>
 
-      <PreviewBlock code={alertDialogCode} githubUrl={githubUrl}>
-        <AlertDialogDemo />
-      </PreviewBlock>
-
-      <h3 id="confirm-dialog" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
-        ConfirmDialog — cancel / confirm
-      </h3>
-      <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
-        Cancel/Confirm pair with <code>intent="error"</code> for the destructive-action case.
-      </p>
-
-      <PreviewBlock code={confirmDialogCode} githubUrl={githubUrl}>
-        <ConfirmDialogDemo />
+      <PreviewBlock code={customDialogCode} githubUrl={githubUrl}>
+        <CustomDialogDemo />
       </PreviewBlock>
 
       <section className="mb-12">
@@ -539,11 +473,9 @@ export const SizeDialogDemo = () => {
         <div className="mt-8">
           <PropsAccordion title="DialogFooter Props" data={dialogFooterPropsData} />
         </div>
+
         <div className="mt-8">
-          <PropsAccordion title="AlertDialog Props" data={alertDialogPropsData} />
-        </div>
-        <div className="mt-8">
-          <PropsAccordion title="ConfirmDialog Props" data={confirmDialogPropsData} />
+          <PropsAccordion title="CustomDialog Props" data={customDialogPropsData} />
         </div>
       </section>
     </div>

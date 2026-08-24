@@ -8,8 +8,7 @@ import {
   DialogTitle,
   DialogBody,
   DialogFooter,
-  AlertDialog,
-  ConfirmDialog,
+  CustomDialog,
 } from '../../../components/ui/Dialog'
 import { Button } from '../../../components/ui/Button'
 
@@ -184,45 +183,30 @@ describe('Dialog Component', () => {
     expect(screen.queryByRole('button', { name: 'Close dialog' })).not.toBeInTheDocument()
   })
 })
-
-describe('AlertDialog Component', () => {
-  it('renders title/message and closes on the single action button', async () => {
+describe('CustomDialog Component', () => {
+  it('calls onClose on Cancel and onAction (not onClose) on action click', async () => {
     const user = userEvent.setup()
     const onClose = vi.fn()
-
-    render(<AlertDialog open onClose={onClose} title="Heads Up" message="Something happened." actionLabel="Got it" />)
-
-    expect(screen.getByText('Heads Up')).toBeInTheDocument()
-    expect(screen.getByText('Something happened.')).toBeInTheDocument()
-
-    await user.click(screen.getByRole('button', { name: 'Got it' }))
-    expect(onClose).toHaveBeenCalledTimes(1)
-  })
-})
-
-describe('ConfirmDialog Component', () => {
-  it('calls onClose on Cancel and onConfirm (not onClose) on Confirm', async () => {
-    const user = userEvent.setup()
-    const onClose = vi.fn()
-    const onConfirm = vi.fn()
+    const onAction = vi.fn()
 
     render(
-      <ConfirmDialog
+      <CustomDialog
         open
         onClose={onClose}
-        onConfirm={onConfirm}
+        onAction={onAction}
         title="Delete Item"
         message="Are you sure?"
-        confirmLabel="Delete"
+        actionLabel="Delete"
+        offsetColor="#FF0000"
       />
     )
 
     await user.click(screen.getByRole('button', { name: 'Cancel' }))
     expect(onClose).toHaveBeenCalledTimes(1)
-    expect(onConfirm).not.toHaveBeenCalled()
+    expect(onAction).not.toHaveBeenCalled()
 
     await user.click(screen.getByRole('button', { name: 'Delete' }))
-    expect(onConfirm).toHaveBeenCalledTimes(1)
+    expect(onAction).toHaveBeenCalledTimes(1)
     expect(onClose).toHaveBeenCalledTimes(1)
   })
 })
