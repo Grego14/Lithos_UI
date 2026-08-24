@@ -229,7 +229,7 @@ export const ButtonDoc = () => {
       </p>
 
       <PreviewBlock code={solidCode} githubUrl={githubUrl}>
-        <Button variant="solid" color="#FF0000">
+        <Button variant="solid" color="#0000FF">
           Solid
         </Button>
       </PreviewBlock>
