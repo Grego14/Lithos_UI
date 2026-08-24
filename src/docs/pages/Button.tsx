@@ -35,6 +35,14 @@ export const ButtonDoc = () => {
     manualPath: '../../components/ui/Button',
   }
 
+  const solidCode = {
+    body: `export const SolidButton = () => {
+  return <Button variant="solid" color="#FF0000">Solid</Button>
+}`,
+    componentNames: ['Button'],
+    manualPath: '../../components/ui/Button',
+  }
+
   const textCode = {
     body: `export const TextButton = () => {
   return <Button variant="text">Text</Button>
@@ -133,7 +141,8 @@ export const ButtonDoc = () => {
         <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
           <strong>Default</strong> is the primary call to action and requires no <code>intent</code> prop.{' '}
           <strong>Secondary</strong> is a secondary call-to-action with an outlined style. <strong>Accent</strong> is a
-          secondary button that fills solid with the accent color on hover. <strong>Text</strong> is a text-only button
+          secondary button that fills solid with the accent color on hover. <strong>Solid</strong> allows a custom
+          background color with an automatically adapting contrast text. <strong>Text</strong> is a text-only button
           variant with no border or background, typically used for secondary or low-emphasis actions.
         </p>
       </div>
@@ -209,6 +218,20 @@ export const ButtonDoc = () => {
 
       <PreviewBlock code={accentCode} githubUrl={githubUrl}>
         <Button variant="accent">Accent</Button>
+      </PreviewBlock>
+
+      <h4 id="solid" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
+        Solid
+      </h4>
+      <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
+        A customizable variant for specific actions. Provide a custom <code>color</code> to set the background; the text
+        color automatically adapts using a YIQ contrast check.
+      </p>
+
+      <PreviewBlock code={solidCode} githubUrl={githubUrl}>
+        <Button variant="solid" color="#FF0000">
+          Solid
+        </Button>
       </PreviewBlock>
 
       <h4 id="text" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">

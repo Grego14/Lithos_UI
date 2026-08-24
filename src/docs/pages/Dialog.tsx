@@ -393,8 +393,8 @@ export const SizeDialogDemo = () => {
         <SizeDialogDemo />
       </PreviewBlock>
 
-      <h3 id="scrollable" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
-        Scrollable content, sticky footer
+      <h3 id="scrollable-content" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
+        Scrollable Content
       </h3>
       <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
         Twelve paragraphs force DialogBody to scroll while DialogHeader/DialogFooter stay pinned.
@@ -415,16 +415,8 @@ export const SizeDialogDemo = () => {
         <NoCloseDialogDemo />
       </PreviewBlock>
 
-      <h2 id="convenience" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Convenience Components
-      </h2>
-      <p className="mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-        <code>CustomDialog</code> is a Header/Body/Footer composition of Dialog for the most common call site, so most
-        consumers never hand-compose the subcomponents from the Anatomy example above.
-      </p>
-
       <h3 id="custom-dialog" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
-        CustomDialog — cancel / action
+        Custom Dialog
       </h3>
       <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
         Cancel/Action pair with highly customizable styling for destructive confirmations.
