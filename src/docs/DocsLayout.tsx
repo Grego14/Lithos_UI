@@ -47,7 +47,7 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
     { id: '#sizes', label: 'Sizes', level: 2 },
-    { id: '#scrollable-content', label: 'Scrollable Content', level: 2 },
+    { id: '#scrollable', label: 'Scrollable', level: 2 },
     { id: '#no-close', label: 'No close icon', level: 2 },
     { id: '#custom-dialog', label: 'Custom Dialog', level: 2 },
     { id: '#anatomy', label: 'Anatomy', level: 1 },
