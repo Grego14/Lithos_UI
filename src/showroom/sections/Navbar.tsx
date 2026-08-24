@@ -54,7 +54,7 @@ const Navbar = ({ isDarkMode = false, onToggleObsidian }: NavbarProps) => {
       >
         {/* - Fixed rail: the 4px bottom border marks the top boundary of the app. */}
         {/* - 24px vertical padding gives the bar enough mass to read as a slab, not a strip. */}
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+        <div className="mx-auto flex max-w-screen-2xl items-center justify-between px-6 py-5">
           {/* - Brand block flex-1 balances the center lane. */}
           <div className="flex items-center justify-start lg:flex-1">
             <Button variant="primary" onClick={() => navigate('/')}>
