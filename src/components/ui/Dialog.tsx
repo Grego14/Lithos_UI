@@ -5,8 +5,7 @@
  * - Panel is a flex column: DialogHeader/DialogFooter stay fixed, DialogBody is the only scrollable region.
  * - Traps focus inside the panel while open (`useFocusTrap`) and restores it to the trigger element on close.
  * - Contrast integrity: `intent` accents route through the shared color map, matching Alert/Toast.
- * - `AlertDialog`/`ConfirmDialog` are Header/Body/Footer compositions of Dialog for the two most
- *   common call sites (single acknowledgement vs. cancel/confirm), same relationship as Button/ButtonGroup.
+ * - `CustomDialog` is a Header/Body/Footer composition of Dialog for custom action prompts.
  */
 import {
   useEffect,
@@ -20,8 +19,8 @@ import {
 } from 'react'
 import { createPortal } from 'react-dom'
 import { useFocusTrap } from '../../core/hooks/useFocusTrap'
-import { colors } from '../../utils/colors'
 import { Button } from './Button'
+import type { ButtonVariant } from '../../core/types'
 import { IconClose } from './icons/IconClose'
 import { cn } from '../../utils/cn'
 
@@ -66,6 +65,7 @@ export interface DialogProps extends Omit<ComponentPropsWithRef<'div'>, 'classNa
   variant?: DialogVariant | undefined
   intent?: DialogIntent | undefined
   size?: DialogSize | undefined
+  offsetColor?: string | undefined
   initialFocusRef?: RefObject<HTMLElement | null> | undefined
   className?: string
   children: ReactNode
@@ -77,9 +77,11 @@ export const Dialog = ({
   variant = 'default',
   intent = 'default',
   size = 'md',
+  offsetColor,
   initialFocusRef,
   className,
   children,
+  style,
   ref,
   ...rest
 }: DialogProps) => {
@@ -111,18 +113,17 @@ export const Dialog = ({
     document.body.style.overflow = 'hidden'
     if (scrollbarWidth > 0) {
       document.body.style.paddingRight = `${scrollbarWidth}px`
+      document.body.style.setProperty('--removed-scrollbar-width', `${scrollbarWidth}px`)
     }
 
     return () => {
       document.body.style.overflow = previousOverflow
       document.body.style.paddingRight = previousPaddingRight
+      document.body.style.removeProperty('--removed-scrollbar-width')
     }
   }, [open])
 
   if (!open || typeof document === 'undefined') return null
-
-  const accentColor = intent !== 'default' ? colors[intent] : undefined
-  const bordered = variant === 'default' || variant === 'simple'
 
   const classes = cn(
     'relative w-full flex flex-col max-h-[calc(100vh-2rem)] overflow-hidden animate-[brutalist-pop_0.15s_ease-out] rounded-(--lithos-radius)',
@@ -151,14 +152,10 @@ export const Dialog = ({
           aria-labelledby={titleId}
           tabIndex={-1}
           className={classes}
-          style={
-            bordered && accentColor
-              ? {
-                  borderColor: accentColor,
-                  ...(variant === 'default' ? { boxShadow: `6px 6px 0px 0px ${accentColor}` } : {}),
-                }
-              : undefined
-          }
+          style={{
+            ...(offsetColor && variant === 'default' ? { boxShadow: `6px 6px 0px 0px ${offsetColor}` } : {}),
+            ...style,
+          }}
           {...rest}
         >
           {children}
@@ -252,72 +249,41 @@ export const DialogFooter = ({ className, children, ref, ...rest }: DialogFooter
   )
 }
 
-export interface AlertDialogProps {
+export interface CustomDialogProps {
   open: boolean
   onClose: () => void
+  onAction: () => void
   title: string
   message: ReactNode
   actionLabel?: string
-  intent?: DialogIntent | undefined
-  size?: DialogSize | undefined
+  cancelLabel?: string
+  buttonVariant?: ButtonVariant
+  buttonColor?: string
+  offsetColor?: string
+  size?: DialogSize
   icon?: ReactNode
 }
 
 /**
- * Single-acknowledgement composition of Dialog: one action button, no cancel path.
- * For anything with a cancel/confirm choice, use ConfirmDialog instead.
+ * Flexible cancel/action composition of Dialog.
+ * Exposes offset shadow and button styling for custom prompts like destructive deletes.
  */
-export const AlertDialog = ({
+export const CustomDialog = ({
   open,
   onClose,
+  onAction,
   title,
   message,
-  actionLabel = 'OK',
-  intent = 'default',
-  size = 'md',
-  icon,
-}: AlertDialogProps) => {
-  return (
-    <Dialog open={open} onClose={onClose} intent={intent} size={size}>
-      <DialogHeader icon={icon}>
-        <DialogTitle>{title}</DialogTitle>
-      </DialogHeader>
-      <DialogBody>{typeof message === 'string' ? <p className="m-0 font-body">{message}</p> : message}</DialogBody>
-      <DialogFooter>
-        <Button onClick={onClose}>{actionLabel}</Button>
-      </DialogFooter>
-    </Dialog>
-  )
-}
-
-export interface ConfirmDialogProps {
-  open: boolean
-  onClose: () => void
-  onConfirm: () => void
-  title: string
-  message: ReactNode
-  confirmLabel?: string
-  cancelLabel?: string
-  intent?: DialogIntent | undefined
-  size?: DialogSize | undefined
-  icon?: ReactNode
-}
-
-/** Cancel/confirm composition of Dialog — the shape most destructive and form-submit prompts need. */
-export const ConfirmDialog = ({
-  open,
-  onClose,
-  onConfirm,
-  title,
-  message,
-  confirmLabel = 'Confirm',
+  actionLabel = 'Confirm',
   cancelLabel = 'Cancel',
-  intent = 'default',
+  buttonVariant = 'primary',
+  buttonColor,
+  offsetColor,
   size = 'md',
   icon,
-}: ConfirmDialogProps) => {
+}: CustomDialogProps) => {
   return (
-    <Dialog open={open} onClose={onClose} intent={intent} size={size}>
+    <Dialog open={open} onClose={onClose} size={size} offsetColor={offsetColor}>
       <DialogHeader icon={icon}>
         <DialogTitle>{title}</DialogTitle>
       </DialogHeader>
@@ -326,7 +292,9 @@ export const ConfirmDialog = ({
         <Button variant="text" onClick={onClose} className="mr-2">
           {cancelLabel}
         </Button>
-        <Button onClick={onConfirm}>{confirmLabel}</Button>
+        <Button onClick={onAction} variant={buttonVariant} color={buttonColor}>
+          {actionLabel}
+        </Button>
       </DialogFooter>
     </Dialog>
   )
