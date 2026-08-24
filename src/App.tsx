@@ -23,6 +23,7 @@ import { CardDoc } from './docs/pages/Card'
 import { CarouselDoc } from './docs/pages/Carousel'
 import { ComingSoon } from './showroom/sections/ComingSoon'
 import { ComponentsIndex } from './pages/ComponentsIndex'
+import { DialogDoc } from './docs/pages/Dialog'
 import { DocsLayout } from './docs/DocsLayout'
 import { Faq } from './pages/Faq'
 import { Installation } from './docs/pages/Installation'
@@ -66,6 +67,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
     { path: 'calendar', component: CalendarDoc },
     { path: 'card', component: CardDoc },
     { path: 'carousel', component: CarouselDoc },
+    { path: 'dialog', component: DialogDoc },
     { path: 'installation', component: Installation },
     { path: 'toast', component: ToastDoc },
     { path: 'toggle', component: ToggleDoc },
