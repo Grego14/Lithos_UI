@@ -7,7 +7,6 @@ import { CodeViewer } from '../../components/ui/CodeViewer'
 import { Dialog, DialogHeader, DialogTitle, DialogBody, DialogFooter, CustomDialog } from '../../components/ui/Dialog'
 import { IconSettings } from '../../components/ui/icons/IconSettings'
 import { IconAlertTriangle } from '../../components/ui/icons/IconAlertTriangle'
-import { colors } from '../../utils/colors'
 
 import {
   dialogPropsData,
@@ -158,7 +157,7 @@ const CustomDialogDemo = () => {
         buttonVariant="solid"
         buttonColor="#FF0000"
         offsetColor="#FF0000"
-        icon={<IconAlertTriangle className="w-5 h-5" style={{ color: colors.error }} />}
+        icon={<IconAlertTriangle className="w-5 h-5" style={{ color: '#FF0000' }} />}
       />
     </>
   )
@@ -337,9 +336,11 @@ export const SizeDialogDemo = () => {
         manualPath={manualPath}
         requires={[
           'components/ui/icons/IconClose.tsx',
+          'components/ui/icons/IconSettings.tsx',
+          'components/ui/icons/IconAlertTriangle.tsx',
           'components/ui/Button.tsx',
           'core/hooks/useFocusTrap.ts',
-          'utils/colors.ts',
+          'core/types.ts',
           'utils/cn.ts',
         ]}
       />
@@ -354,16 +355,15 @@ export const SizeDialogDemo = () => {
         </p>
         <CodeViewer
           language="tsx"
-          code={`<Dialog open={open} onClose={() => setOpen(false)}>
+          code={`<Dialog>
   <DialogHeader>
     <DialogTitle>Title</DialogTitle>
   </DialogHeader>
   <DialogBody>Content</DialogBody>
   <DialogFooter>
-    <Button onClick={() => setOpen(false)}>Confirm</Button>
+    <Button>Confirm</Button>
   </DialogFooter>
-</Dialog>
-`}
+</Dialog>`}
         />
       </div>
 
