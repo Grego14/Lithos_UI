@@ -15,6 +15,7 @@ import { Accordion } from '../components/ui/Accordion'
 import { Breadcrumb } from '../components/ui/Breadcrumb'
 import { Calendar } from '../components/ui/Calendar'
 import { Carousel, CarouselSlide } from '../components/ui/Carousel'
+import { IconClose } from '../components/ui/icons/IconClose'
 
 interface ComponentsIndexProps {
   isDarkMode: boolean
@@ -60,6 +61,19 @@ const CarouselPreview = () => {
     </Carousel>
   )
 }
+
+const DialogPreview = () => (
+  <div className="w-[130%] scale-[0.45] origin-center pointer-events-none border-2 border-(--lithos-border) bg-(--lithos-surface) text-(--lithos-text) shadow-[6px_6px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)">
+    <div className="flex items-center justify-between p-4 border-b-2 border-(--lithos-border)">
+      <p className="font-black uppercase tracking-tight leading-none m-0 text-lg">Confirm</p>
+      <IconClose aria-hidden="true" className="w-4 h-4" />
+    </div>
+    <div className="p-4 font-body text-sm opacity-70">Delete this item?</div>
+    <div className="flex items-center justify-end p-4 border-t-2 border-(--lithos-border)">
+      <Button className="text-sm">Delete</Button>
+    </div>
+  </div>
+)
 
 const componentsList = [
   {
@@ -137,6 +151,11 @@ const componentsList = [
     name: 'Carousel',
     to: '/docs/carousel',
     preview: <CarouselPreview />,
+  },
+  {
+    name: 'Dialog',
+    to: '/docs/dialog',
+    preview: <DialogPreview />,
   },
   {
     name: 'Toast',
