@@ -45,6 +45,7 @@ const variantClass: Record<DialogVariant, string> = {
 interface DialogContextType {
   onClose: () => void
   titleId: string
+  scrollable?: boolean
 }
 
 const DialogContext = createContext<DialogContextType | null>(null)
@@ -66,6 +67,7 @@ export interface DialogProps extends Omit<ComponentPropsWithRef<'div'>, 'classNa
   intent?: DialogIntent | undefined
   size?: DialogSize | undefined
   offsetColor?: string | undefined
+  scrollable?: boolean | undefined
   initialFocusRef?: RefObject<HTMLElement | null> | undefined
   className?: string
   children: ReactNode
@@ -78,6 +80,7 @@ export const Dialog = ({
   intent = 'default',
   size = 'md',
   offsetColor,
+  scrollable = false,
   initialFocusRef,
   className,
   children,
@@ -133,7 +136,7 @@ export const Dialog = ({
   )
 
   return createPortal(
-    <DialogContext.Provider value={{ onClose, titleId }}>
+    <DialogContext.Provider value={{ onClose, titleId, scrollable }}>
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
         <div
           className="absolute inset-0 bg-black/60 animate-[fade-in_0.15s_ease-out]"
@@ -173,13 +176,14 @@ export interface DialogHeaderProps extends ComponentPropsWithRef<'div'> {
 }
 
 export const DialogHeader = ({ icon, hideClose = false, className, children, ref, ...rest }: DialogHeaderProps) => {
-  const { onClose } = useDialogContext()
+  const { onClose, scrollable } = useDialogContext()
 
   return (
     <div
       ref={ref}
       className={cn(
-        'flex items-start justify-between shrink-0 p-4 sm:p-6 border-b-2 border-(--lithos-border)',
+        'flex items-start justify-between shrink-0 p-4 sm:p-6',
+        scrollable && 'border-b-2 border-(--lithos-border)',
         className
       )}
       {...rest}
@@ -238,10 +242,16 @@ export interface DialogFooterProps extends ComponentPropsWithRef<'div'> {
 }
 
 export const DialogFooter = ({ className, children, ref, ...rest }: DialogFooterProps) => {
+  const { scrollable } = useDialogContext()
+
   return (
     <div
       ref={ref}
-      className={cn('flex items-center justify-end shrink-0 p-4 sm:p-6 border-t-2 border-(--lithos-border)', className)}
+      className={cn(
+        'flex items-center justify-end shrink-0 p-4 sm:p-6',
+        scrollable && 'border-t-2 border-(--lithos-border)',
+        className
+      )}
       {...rest}
     >
       {children}
@@ -260,6 +270,7 @@ export interface CustomDialogProps {
   buttonVariant?: ButtonVariant
   buttonColor?: string
   offsetColor?: string
+  scrollable?: boolean
   size?: DialogSize
   icon?: ReactNode
 }
@@ -279,11 +290,12 @@ export const CustomDialog = ({
   buttonVariant = 'primary',
   buttonColor,
   offsetColor,
+  scrollable = false,
   size = 'md',
   icon,
 }: CustomDialogProps) => {
   return (
-    <Dialog open={open} onClose={onClose} size={size} offsetColor={offsetColor}>
+    <Dialog open={open} onClose={onClose} size={size} offsetColor={offsetColor} scrollable={scrollable}>
       <DialogHeader icon={icon}>
         <DialogTitle>{title}</DialogTitle>
       </DialogHeader>
