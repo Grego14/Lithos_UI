@@ -37,6 +37,14 @@ export const dialogPropsData: PropItem[] = [
     description: 'Panel max-width, MUI Dialog maxWidth-style scale.',
   },
   {
+    name: 'scrollable',
+    type: 'boolean',
+    defaultValue: 'false',
+    required: false,
+    description:
+      'Enables border dividers on DialogHeader and DialogFooter to visually separate scrollable content in DialogBody.',
+  },
+  {
     name: 'initialFocusRef',
     type: 'RefObject<HTMLElement | null>',
     required: false,
@@ -195,12 +203,19 @@ export const customDialogPropsData: PropItem[] = [
     type: "'sm' | 'md' | 'lg' | 'xl'",
     defaultValue: "'md'",
     required: false,
-    description: 'Forwarded to Dialog for panel max-width.',
+    description: 'Panel max-width, matching the underlying Dialog scale.',
+  },
+  {
+    name: 'scrollable',
+    type: 'boolean',
+    defaultValue: 'false',
+    required: false,
+    description: 'Enables border dividers on the header and footer to visually separate scrollable content.',
   },
   {
     name: 'icon',
     type: 'ReactNode',
     required: false,
-    description: 'Optional leading icon rendered to the left of the title.',
+    description: 'Optional icon rendered next to the title.',
   },
 ]
