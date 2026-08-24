@@ -7,7 +7,6 @@ import { CodeViewer } from '../../components/ui/CodeViewer'
 import { Dialog, DialogHeader, DialogTitle, DialogBody, DialogFooter, CustomDialog } from '../../components/ui/Dialog'
 import { IconSettings } from '../../components/ui/icons/IconSettings'
 import { IconAlertTriangle } from '../../components/ui/icons/IconAlertTriangle'
-import { colors } from '../../utils/colors'
 
 import {
   dialogPropsData,
@@ -158,7 +157,7 @@ const CustomDialogDemo = () => {
         buttonVariant="solid"
         buttonColor="#FF0000"
         offsetColor="#FF0000"
-        icon={<IconAlertTriangle className="w-5 h-5" style={{ color: colors.error }} />}
+        icon={<IconAlertTriangle className="w-5 h-5" style={{ color: '#FF0000' }} />}
       />
     </>
   )
@@ -337,9 +336,11 @@ export const SizeDialogDemo = () => {
         manualPath={manualPath}
         requires={[
           'components/ui/icons/IconClose.tsx',
+          'components/ui/icons/IconSettings.tsx',
+          'components/ui/icons/IconAlertTriangle.tsx',
           'components/ui/Button.tsx',
           'core/hooks/useFocusTrap.ts',
-          'utils/colors.ts',
+          'core/types.ts',
           'utils/cn.ts',
         ]}
       />
@@ -354,16 +355,15 @@ export const SizeDialogDemo = () => {
         </p>
         <CodeViewer
           language="tsx"
-          code={`<Dialog open={open} onClose={() => setOpen(false)}>
+          code={`<Dialog>
   <DialogHeader>
     <DialogTitle>Title</DialogTitle>
   </DialogHeader>
   <DialogBody>Content</DialogBody>
   <DialogFooter>
-    <Button onClick={() => setOpen(false)}>Confirm</Button>
+    <Button>Confirm</Button>
   </DialogFooter>
-</Dialog>
-`}
+</Dialog>`}
         />
       </div>
 
@@ -393,8 +393,8 @@ export const SizeDialogDemo = () => {
         <SizeDialogDemo />
       </PreviewBlock>
 
-      <h3 id="scrollable" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
-        Scrollable content, sticky footer
+      <h3 id="scrollable-content" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
+        Scrollable Content
       </h3>
       <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
         Twelve paragraphs force DialogBody to scroll while DialogHeader/DialogFooter stay pinned.
@@ -415,16 +415,8 @@ export const SizeDialogDemo = () => {
         <NoCloseDialogDemo />
       </PreviewBlock>
 
-      <h2 id="convenience" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Convenience Components
-      </h2>
-      <p className="mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-        <code>CustomDialog</code> is a Header/Body/Footer composition of Dialog for the most common call site, so most
-        consumers never hand-compose the subcomponents from the Anatomy example above.
-      </p>
-
       <h3 id="custom-dialog" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
-        CustomDialog — cancel / action
+        Custom Dialog
       </h3>
       <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
         Cancel/Action pair with highly customizable styling for destructive confirmations.
