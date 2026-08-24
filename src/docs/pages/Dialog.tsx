@@ -97,7 +97,7 @@ const ScrollDialogDemo = () => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open Terms</Button>
-      <Dialog open={open} onClose={() => setOpen(false)} scrollable>
+      <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogHeader>
           <DialogTitle>Terms of Service</DialogTitle>
         </DialogHeader>
@@ -229,7 +229,7 @@ export const SizeDialogDemo = () => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open Terms</Button>
-      <Dialog open={open} onClose={() => setOpen(false)} scrollable>
+      <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogHeader>
           <DialogTitle>Terms of Service</DialogTitle>
         </DialogHeader>
