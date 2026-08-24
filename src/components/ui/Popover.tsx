@@ -25,13 +25,13 @@ interface PopoverOptions {
   onOpenChange?: (open: boolean) => void
 }
 
-export function usePopover({
+export const usePopover = ({
   initialOpen = false,
   placement = 'bottom-start',
   modal,
   open: controlledOpen,
   onOpenChange: setControlledOpen,
-}: PopoverOptions = {}) {
+}: PopoverOptions = {}) => {
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(initialOpen)
   const labelId = useId()
   const descriptionId = useId()
