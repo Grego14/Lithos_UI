@@ -120,7 +120,7 @@ export const ButtonDoc = () => {
   return (
     <div className="max-w-5xl mx-auto px-6">
       <header className="mt-0">
-        <h1 className="text-4xl md:text-5xl font-display tracking-tight leading-none text-(--lithos-text) mb-6">
+        <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-none text-(--lithos-text) mb-8">
           Button
         </h1>
         <p className="mt-2 text-lg md:text-xl font-display opacity-70 text-(--lithos-text)">
