@@ -37,7 +37,7 @@ export const ButtonDoc = () => {
 
   const solidCode = {
     body: `export const SolidButton = () => {
-  return <Button variant="solid" color="#FF0000">Solid</Button>
+  return <Button variant="solid" color="#0000FF">Solid</Button>
 }`,
     componentNames: ['Button'],
     manualPath: '../../components/ui/Button',
