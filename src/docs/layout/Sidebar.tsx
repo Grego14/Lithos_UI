@@ -9,7 +9,7 @@ export const Sidebar = () => {
       'inline-block w-fit px-3 py-1.5 text-xs font-bold transition-all duration-150 ease-out border-2 rounded-(--lithos-radius)'
 
     return isActive
-      ? `${baseClass} border-(--lithos-border) bg-(--lithos-accent) text-(--lithos-text) shadow-[4px_4px_0_0_var(--lithos-border)]`
+      ? `${baseClass} border-(--lithos-border) bg-(--lithos-accent) text-(--lithos-accent-text) shadow-[4px_4px_0_0_var(--lithos-border)]`
       : `${baseClass} border-transparent text-(--lithos-text) hover:bg-[color-mix(in_srgb,var(--lithos-text)_5%,transparent)] hover:text-(--lithos-text)`
   }
 
