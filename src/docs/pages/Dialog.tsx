@@ -374,8 +374,11 @@ export const SizeDialogDemo = () => {
       <h3 id="default" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
         Default
       </h3>
-      <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
-        Header, body, footer composed by hand — the raw anatomy from a controlled open/onClose pair.
+      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
+        Use this as the standard modal overlay for forms, alerts, or complex interactions that require focused
+        attention. It renders a centered panel over a darkened backdrop. Interaction with the underlying page is blocked
+        while open. Focus is automatically trapped within the modal, and the page scroll is locked. Fully accessible via
+        keyboard escape bindings and ARIA modal roles.
       </p>
 
       <PreviewBlock code={dialogCode} githubUrl={githubUrl}>
@@ -385,19 +388,25 @@ export const SizeDialogDemo = () => {
       <h3 id="sizes" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
         Sizes
       </h3>
-      <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
-        Same dialog re-opened at each of the four <code>size</code> values to compare panel max-width.
+      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
+        Use the <code>size</code> prop to constrain the maximum width of the dialog panel (<code>sm</code> for alerts,{' '}
+        <code>md</code> for standard forms, <code>lg</code> for data-heavy views, <code>full</code> for immersive
+        takeovers). It scales the width without altering internal padding or structural layout. Content reflows
+        standardly based on the constrained width. Does not affect accessibility behaviors.
       </p>
 
       <PreviewBlock code={sizeDialogCode} githubUrl={githubUrl}>
         <SizeDialogDemo />
       </PreviewBlock>
 
-      <h3 id="scrollable-content" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
-        Scrollable Content
+      <h3 id="scrollable" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
+        Scrollable
       </h3>
-      <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
-        Twelve paragraphs force DialogBody to scroll while DialogHeader/DialogFooter stay pinned.
+      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
+        Use this when the modal content exceeds the viewport height. It forces the <code>DialogBody</code> to scroll
+        vertically while pinning the <code>DialogHeader</code> and <code>DialogFooter</code> in place, ensuring actions
+        remain accessible at all times. The outer panel itself never scrolls. Standard focus trapping within the
+        scrolling container prevents losing context.
       </p>
 
       <PreviewBlock code={scrollDialogCode} githubUrl={githubUrl}>
@@ -407,8 +416,11 @@ export const SizeDialogDemo = () => {
       <h3 id="no-close" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
         No close icon
       </h3>
-      <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
-        <code>hideClose</code> on DialogHeader drops the X. Escape and backdrop click still work.
+      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
+        Use this when the modal requires an explicit user choice (like 'Accept' or 'Decline') rather than casual
+        dismissal. Passing <code>hideClose</code> to the <code>DialogHeader</code> removes the top-right X button. It
+        renders identically otherwise. Keyboard users can still press <code>Escape</code> to close it, maintaining
+        safety guidelines for modal traps.
       </p>
 
       <PreviewBlock code={noCloseDialogCode} githubUrl={githubUrl}>
@@ -418,8 +430,11 @@ export const SizeDialogDemo = () => {
       <h3 id="custom-dialog" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
         Custom Dialog
       </h3>
-      <p className="mb-4 text-sm font-body opacity-70 text-(--lithos-text)">
-        Cancel/Action pair with highly customizable styling for destructive confirmations.
+      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
+        Use this for destructive or high-risk confirmations where standard styling isn't aggressive enough. It accepts
+        custom <code>offsetColor</code> props and button variants to explicitly signal danger (e.g., solid red for
+        deletion). The internal 2px container border remains standard, but the offset shadow/border adopts the warning
+        color. ARIA role upgrades to <code>alertdialog</code> when used for critical errors.
       </p>
 
       <PreviewBlock code={customDialogCode} githubUrl={githubUrl}>
