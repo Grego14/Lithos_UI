@@ -19,7 +19,6 @@ import {
 } from 'react'
 import { createPortal } from 'react-dom'
 import { useFocusTrap } from '../../core/hooks/useFocusTrap'
-import { colors } from '../../utils/colors'
 import { Button } from './Button'
 import type { ButtonVariant } from '../../core/types'
 import { IconClose } from './icons/IconClose'
@@ -155,7 +154,7 @@ export const Dialog = ({
           className={classes}
           style={{
             ...(offsetColor && variant === 'default' ? { boxShadow: `6px 6px 0px 0px ${offsetColor}` } : {}),
-            ...(style as any),
+            ...style,
           }}
           {...rest}
         >
