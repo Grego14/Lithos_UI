@@ -28,6 +28,7 @@ import { DocsLayout } from './docs/DocsLayout'
 import { Faq } from './pages/Faq'
 import { Installation } from './docs/pages/Installation'
 import { Introduction } from './docs/pages/Introduction'
+import { PopoverPage } from './docs/pages/Popover'
 import { NotFound } from './showroom/sections/NotFound'
 import { Showroom } from './showroom/Index'
 import { ToastDoc } from './docs/pages/Toast'
@@ -69,6 +70,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
     { path: 'carousel', component: CarouselDoc },
     { path: 'dialog', component: DialogDoc },
     { path: 'installation', component: Installation },
+    { path: 'popover', component: PopoverPage },
     { path: 'toast', component: ToastDoc },
     { path: 'toggle', component: ToggleDoc },
   ]
