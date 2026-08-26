@@ -59,6 +59,9 @@ export const Sidebar = () => {
           <Link to="/docs/carousel" className={getLinkClass('/docs/carousel')}>
             Carousel
           </Link>
+          <Link to="/docs/input" className={getLinkClass('/docs/input')}>
+            Input
+          </Link>
           <Link to="/docs/checkbox" className={getLinkClass('/docs/checkbox')}>
             Checkbox
           </Link>
@@ -67,6 +70,9 @@ export const Sidebar = () => {
           </Link>
           <Link to="/docs/popover" className={getLinkClass('/docs/popover')}>
             Popover
+          </Link>
+          <Link to="/docs/select" className={getLinkClass('/docs/select')}>
+            Select
           </Link>
           <Link to="/docs/toast" className={getLinkClass('/docs/toast')}>
             Toast
