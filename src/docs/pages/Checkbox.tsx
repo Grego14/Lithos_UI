@@ -262,24 +262,6 @@ export const CheckboxDoc = () => {
         requires={['utils/cn.ts', 'utils/yiq.ts', 'core/types.ts']}
       />
 
-      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Anatomy
-      </h2>
-      <div className="mb-12">
-        <p className="mb-4 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          A standalone Checkbox needs no wrapper. Group several under one controlled array with CheckboxGroup:
-        </p>
-        <CodeViewer
-          language="tsx"
-          code={`<Checkbox label="Accept terms" checked={checked} onChange={(e) => setChecked(e.target.checked)} />
-
-<CheckboxGroup value={value} onChange={setValue} label="Toppings">
-  <Checkbox value="cheese" label="Cheese" />
-  <Checkbox value="olives" label="Olives" />
-</CheckboxGroup>`}
-        />
-      </div>
-
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Examples
       </h2>
@@ -399,6 +381,24 @@ export const CheckboxDoc = () => {
       <PreviewBlock code={horizontalGroupCode} githubUrl={githubUrl}>
         <HorizontalGroupCheckboxDemo />
       </PreviewBlock>
+
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
+        Anatomy
+      </h2>
+      <div className="mb-12">
+        <p className="mb-4 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
+          A standalone Checkbox needs no wrapper. Group several under one controlled array with CheckboxGroup:
+        </p>
+        <CodeViewer
+          language="tsx"
+          code={`<Checkbox label="Accept terms" checked={checked} onChange={(e) => setChecked(e.target.checked)} />
+
+<CheckboxGroup value={value} onChange={setValue} label="Toppings">
+  <Checkbox value="cheese" label="Cheese" />
+  <Checkbox value="olives" label="Olives" />
+</CheckboxGroup>`}
+        />
+      </div>
 
       <section className="mb-12">
         <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">

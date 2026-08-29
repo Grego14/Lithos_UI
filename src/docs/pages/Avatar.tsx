@@ -123,23 +123,6 @@ export const FourteenUserGroup = () => {
         requires={['utils/cn.ts', 'utils/yiq.ts', 'core/useAccentColor.ts']}
       />
 
-      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Anatomy
-      </h2>
-      <div className="mb-12">
-        <CodeViewer
-          language="tsx"
-          code={`<AvatarGroup items={items} max={4} />
-{/* internally renders: */}
-<div>
-  <Avatar src={item.src} alt={item.alt} />
-  {/* ...one per visible item, up to max */}
-  <AvatarGroupCount count={overflow} />
-  {/* only when items.length > max */}
-</div>`}
-        />
-      </div>
-
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Examples
       </h2>
@@ -207,6 +190,23 @@ export const FourteenUserGroup = () => {
         <PreviewBlock code={autoGroupFourteenCode} githubUrl={githubUrl}>
           <AvatarGroup items={fourteenUsers} max={4} />
         </PreviewBlock>
+      </div>
+
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
+        Anatomy
+      </h2>
+      <div className="mb-12">
+        <CodeViewer
+          language="tsx"
+          code={`<AvatarGroup items={items} max={4} />
+{/* internally renders: */}
+<div>
+  <Avatar src={item.src} alt={item.alt} />
+  {/* ...one per visible item, up to max */}
+  <AvatarGroupCount count={overflow} />
+  {/* only when items.length > max */}
+</div>`}
+        />
       </div>
 
       <section className="mb-12">

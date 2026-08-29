@@ -96,20 +96,6 @@ export const AccordionDoc = () => {
         requires={['utils/cn.ts', 'components/ui/Button.tsx', 'components/ui/icons/IconChevronUp.tsx']}
       />
 
-      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Anatomy
-      </h2>
-      <div className="mb-12">
-        <CodeViewer
-          language="tsx"
-          code={`<AccordionGroup>
-  <Accordion title="Heading">
-    Content
-  </Accordion>
-</AccordionGroup>`}
-        />
-      </div>
-
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Examples
       </h2>
@@ -193,6 +179,20 @@ export const AccordionDoc = () => {
             </Accordion>
           </AccordionGroup>
         </PreviewBlock>
+      </div>
+
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
+        Anatomy
+      </h2>
+      <div className="mb-12">
+        <CodeViewer
+          language="tsx"
+          code={`<AccordionGroup>
+  <Accordion title="Heading">
+    Content
+  </Accordion>
+</AccordionGroup>`}
+        />
       </div>
 
       <section className="mb-12">

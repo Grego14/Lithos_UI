@@ -345,28 +345,6 @@ export const SizeDialogDemo = () => {
         ]}
       />
 
-      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Anatomy
-      </h2>
-      <div className="mb-12">
-        <p className="mb-4 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          Dialog is a controlled component: it owns no open state of its own. Compose it from the four subcomponents
-          below inside a consumer-managed <code>open</code>/<code>onClose</code> pair.
-        </p>
-        <CodeViewer
-          language="tsx"
-          code={`<Dialog>
-  <DialogHeader>
-    <DialogTitle>Title</DialogTitle>
-  </DialogHeader>
-  <DialogBody>Content</DialogBody>
-  <DialogFooter>
-    <Button>Confirm</Button>
-  </DialogFooter>
-</Dialog>`}
-        />
-      </div>
-
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Examples
       </h2>
@@ -440,6 +418,28 @@ export const SizeDialogDemo = () => {
       <PreviewBlock code={customDialogCode} githubUrl={githubUrl}>
         <CustomDialogDemo />
       </PreviewBlock>
+
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
+        Anatomy
+      </h2>
+      <div className="mb-12">
+        <p className="mb-4 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
+          Dialog is a controlled component: it owns no open state of its own. Compose it from the four subcomponents
+          below inside a consumer-managed <code>open</code>/<code>onClose</code> pair.
+        </p>
+        <CodeViewer
+          language="tsx"
+          code={`<Dialog>
+  <DialogHeader>
+    <DialogTitle>Title</DialogTitle>
+  </DialogHeader>
+  <DialogBody>Content</DialogBody>
+  <DialogFooter>
+    <Button>Confirm</Button>
+  </DialogFooter>
+</Dialog>`}
+        />
+      </div>
 
       <section className="mb-12">
         <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">

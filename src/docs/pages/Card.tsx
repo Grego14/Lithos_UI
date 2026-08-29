@@ -170,23 +170,6 @@ export const CardDoc = () => {
         requires={['utils/cn.ts', 'components/ui/Button.tsx']}
       />
 
-      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Anatomy
-      </h2>
-      <div className="mb-12">
-        <CodeViewer
-          language="tsx"
-          code={`<Card>
-  <CardImage />
-  <CardContent>
-    <CardTitle />
-    <CardDescription />
-  </CardContent>
-  <CardFooter />
-</Card>`}
-        />
-      </div>
-
       <h2 id="examples" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Examples
       </h2>
@@ -344,6 +327,23 @@ export const CardDoc = () => {
           </CardContent>
         </Card>
       </PreviewBlock>
+
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
+        Anatomy
+      </h2>
+      <div className="mb-12">
+        <CodeViewer
+          language="tsx"
+          code={`<Card>
+  <CardImage />
+  <CardContent>
+    <CardTitle />
+    <CardDescription />
+  </CardContent>
+  <CardFooter />
+</Card>`}
+        />
+      </div>
 
       <section className="mt-12 mb-12">
         <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">

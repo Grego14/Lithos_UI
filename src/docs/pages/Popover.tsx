@@ -105,6 +105,23 @@ export const PopoverPage = () => {
         requires={['@floating-ui/react', '../../utils/cn']}
       />
 
+      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
+        Examples
+      </h2>
+
+      <div className="mb-12">
+        <h3 className="text-xl font-bold mb-4 font-display">Default</h3>
+        <p className="mb-4 text-sm font-body opacity-80 max-w-2xl">
+          By default, the popover opens below its trigger. It will automatically flip to the top if it collides with the
+          bottom of the viewport. Focus is trapped inside while open.
+        </p>
+        <PreviewBlock code={defaultCode} githubUrl={githubUrl}>
+          <div className="flex justify-center py-12">
+            <PopoverDemo />
+          </div>
+        </PreviewBlock>
+      </div>
+
       <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Anatomy
       </h2>
@@ -123,23 +140,6 @@ export const PopoverPage = () => {
 </Popover>`}
           language="tsx"
         />
-      </div>
-
-      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Examples
-      </h2>
-
-      <div className="mb-12">
-        <h3 className="text-xl font-bold mb-4 font-display">Default</h3>
-        <p className="mb-4 text-sm font-body opacity-80 max-w-2xl">
-          By default, the popover opens below its trigger. It will automatically flip to the top if it collides with the
-          bottom of the viewport. Focus is trapped inside while open.
-        </p>
-        <PreviewBlock code={defaultCode} githubUrl={githubUrl}>
-          <div className="flex justify-center py-12">
-            <PopoverDemo />
-          </div>
-        </PreviewBlock>
       </div>
 
       <h2 id="accessibility" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
