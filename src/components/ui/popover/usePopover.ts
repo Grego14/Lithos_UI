@@ -10,16 +10,10 @@ import {
   useRole,
   useInteractions,
   useId,
+  size,
+  type ElementProps,
 } from '@floating-ui/react'
-import type { Placement, ReferenceType, UseFloatingReturn, UseInteractionsReturn } from '@floating-ui/react'
-
-export interface PopoverReturn extends UseFloatingReturn<ReferenceType>, UseInteractionsReturn {
-  open: boolean
-  setOpen: (open: boolean) => void
-  modal: boolean | undefined
-  labelId: string | undefined
-  descriptionId: string | undefined
-}
+import type { Placement } from '@floating-ui/react'
 
 export interface PopoverOptions {
   initialOpen?: boolean
@@ -27,6 +21,7 @@ export interface PopoverOptions {
   modal?: boolean
   open?: boolean
   onOpenChange?: (open: boolean) => void
+  interactions?: ElementProps[]
 }
 
 export const usePopover = ({
@@ -35,7 +30,8 @@ export const usePopover = ({
   modal,
   open: controlledOpen,
   onOpenChange: setControlledOpen,
-}: PopoverOptions = {}): PopoverReturn => {
+  interactions: extraInteractions = [],
+}: PopoverOptions = {}) => {
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(initialOpen)
   const labelId = useId()
   const descriptionId = useId()
@@ -49,11 +45,18 @@ export const usePopover = ({
     onOpenChange: setOpen,
     whileElementsMounted: autoUpdate,
     middleware: [
-      offset(8),
+      offset(0),
       flip({
         fallbackAxisSideDirection: 'end',
       }),
       shift({ padding: 8 }),
+      size({
+        apply: ({ rects, elements }) => {
+          Object.assign(elements.floating.style, {
+            width: `${rects.reference.width}px`,
+          })
+        },
+      }),
     ],
   })
 
@@ -63,7 +66,7 @@ export const usePopover = ({
   const dismiss = useDismiss(context)
   const role = useRole(context)
 
-  const interactions = useInteractions([click, dismiss, role])
+  const interactions = useInteractions([click, dismiss, role, ...extraInteractions])
 
   return React.useMemo(
     () => ({
@@ -79,11 +82,11 @@ export const usePopover = ({
   )
 }
 
-type ContextType = PopoverReturn | null
+type ContextType = ReturnType<typeof usePopover> | null
 
 export const PopoverContext = React.createContext<ContextType>(null)
 
-export const usePopoverContext = (): PopoverReturn => {
+export const usePopoverContext = () => {
   const context = React.useContext(PopoverContext)
   if (context == null) {
     throw new Error('Popover components must be wrapped in <Popover />')

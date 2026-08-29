@@ -108,6 +108,29 @@ body {
   }
 }
 
+/* *
+  * Any bundled/opinionated "physics" or component-base class (like .lithos-click)
+  * MUST live in @layer components, never @layer utilities. Components-layer rules
+  * always lose to Tailwind utilities by cascade-layer order, regardless of source
+  * position. That's what makes these classes safely overridable by any consumer
+  * utility class. Putting a new bundled class in @layer utilities by mistake
+  * re-creates the override bugs commented in https://github.com/lithosui/Lithos_UI/pull/89
+  * and documented in https://github.com/lithosui/Lithos_UI/issues/93.
+*/
+
+@layer components {
+  .lithos-click {
+    @apply inline-flex items-center justify-center font-black tracking-tighter leading-none border-2 border-(--lithos-border) cursor-pointer transition-all duration-75 shadow-[2px_2px_0px_0px_var(--lithos-shadow)] hover:shadow-[4px_4px_0px_0px_var(--lithos-shadow)] focus:shadow-[4px_4px_0px_0px_var(--lithos-shadow)] active:shadow-none active:translate-x-0.5 active:translate-y-0.5 p-2;
+  }
+
+  code:not([data-code-viewer]) {
+    @apply bg-(--lithos-surface) px-1 py-0.5;
+  }
+
+  kbd {
+    @apply px-1.5 py-0.5 text-xs font-mono rounded bg-(--lithos-accent)/15 border border-(--lithos-accent)/30;
+  }
+}
 @layer utilities {
   /* Chrome, Safari & Opera */
   .no-scrollbar::-webkit-scrollbar {
