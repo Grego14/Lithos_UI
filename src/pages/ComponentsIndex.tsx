@@ -21,6 +21,8 @@ import { Select } from '../components/ui/Select'
 import { IconClose } from '../components/ui/icons/IconClose'
 import { Input } from '../components/ui/Input'
 
+import card1 from '../docs/assets/images/card1.webp'
+
 interface ComponentsIndexProps {
   isDarkMode: boolean
   toggleObsidian: () => void
@@ -167,7 +169,7 @@ const componentsList = [
         variant="accent"
         className="pointer-events-none w-32 group-hover/link:bg-(--lithos-accent) group-hover/link:text-(--lithos-accent-text) transition-colors"
       >
-        <CardImage src="https://picsum.photos/600/400?1" alt="Preview" className="h-16!" />
+        <CardImage src={card1} alt="Preview" className="h-16!" />
         <CardContent className="p-2">
           <p className="font-black uppercase text-[10px] tracking-tight leading-none mb-1">Accent Card</p>
           <p className="font-body opacity-70 text-[8px] leading-tight">Hover to see fill.</p>
