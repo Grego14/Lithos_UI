@@ -7,10 +7,14 @@ import { avatarPropsData, avatarGroupPropsData, avatarGroupCountPropsData } from
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Avatar.tsx'
 
+import avatar1 from '../assets/images/avatar1.webp'
+import avatar2 from '../assets/images/avatar2.webp'
+import avatar3 from '../assets/images/avatar3.webp'
+
 const namedUsers = [
-  { src: 'https://picsum.photos/id/64/200', alt: 'Jane Doe' },
-  { src: 'https://picsum.photos/id/91/200', alt: 'John Smith' },
-  { src: 'https://picsum.photos/id/22/200', alt: 'Amy Lee' },
+  { src: avatar1, alt: 'Jane Doe' },
+  { src: avatar2, alt: 'John Smith' },
+  { src: avatar3, alt: 'Amy Lee' },
 ]
 
 const restOfUsers = (from: number, to: number) =>
@@ -25,7 +29,7 @@ export const AvatarDoc = () => {
   return (
     <div className='flex items-center space-x-4'>
       {/* default: image */}
-      <Avatar src="https://picsum.photos/200" alt="Jane Doe" />
+      <Avatar src="/example-avatar.webp" alt="Jane Doe" />
       {/* default: no src, two-word alt falls back to double-letter initials */}
       <Avatar alt="Jane Doe" />
       {/* default: single-word alt falls back to single-letter initial */}
@@ -43,9 +47,9 @@ export const AvatarDoc = () => {
     body: `export const AvatarSizes = () => {
   return (
     <div className='flex items-end space-x-4'>
-      <Avatar size='sm' src="https://picsum.photos/200" alt="Jane Doe" />
-      <Avatar size='md' src="https://picsum.photos/200" alt="Jane Doe" />
-      <Avatar size='lg' src="https://picsum.photos/200" alt="Jane Doe" />
+      <Avatar size='sm' src="/example-avatar.webp" alt="Jane Doe" />
+      <Avatar size='md' src="/example-avatar.webp" alt="Jane Doe" />
+      <Avatar size='lg' src="/example-avatar.webp" alt="Jane Doe" />
     </div>
   )
 }`,
@@ -55,9 +59,9 @@ export const AvatarDoc = () => {
 
   const autoGroupTenCode = {
     body: `const users = [
-  { src: 'https://picsum.photos/id/64/200', alt: 'Jane Doe' },
-  { src: 'https://picsum.photos/id/91/200', alt: 'John Smith' },
-  { src: 'https://picsum.photos/id/22/200', alt: 'Amy Lee' },
+  { src: '/example-avatar1.webp', alt: 'Jane Doe' },
+  { src: '/example-avatar2.webp', alt: 'John Smith' },
+  { src: '/example-avatar3.webp', alt: 'Amy Lee' },
   /* ...7 more, no src -> initials fallback */
 ]
 
@@ -71,9 +75,9 @@ export const TenUserGroup = () => {
 
   const autoGroupFourteenCode = {
     body: `const users = [
-  { src: 'https://picsum.photos/id/64/200', alt: 'Jane Doe' },
-  { src: 'https://picsum.photos/id/91/200', alt: 'John Smith' },
-  { src: 'https://picsum.photos/id/22/200', alt: 'Amy Lee' },
+  { src: '/example-avatar1.webp', alt: 'Jane Doe' },
+  { src: '/example-avatar2.webp', alt: 'John Smith' },
+  { src: '/example-avatar3.webp', alt: 'Amy Lee' },
   /* ...11 more, no src -> initials fallback */
 ]
 
@@ -141,7 +145,7 @@ export const FourteenUserGroup = () => {
       <div className="mt-8 mb-16">
         <PreviewBlock code={variantsCode} githubUrl={githubUrl}>
           <div className="flex items-center space-x-4">
-            <Avatar src="https://picsum.photos/200" alt="Jane Doe" />
+            <Avatar src={avatar1} alt="Jane Doe" />
             <Avatar alt="Jane Doe" />
             <Avatar alt="Amy" />
             <Avatar variant="solid" src="https://broken.example/404.png" alt="Jane Doe" />
@@ -162,9 +166,9 @@ export const FourteenUserGroup = () => {
       <div className="mt-8 mb-16">
         <PreviewBlock code={sizesCode} githubUrl={githubUrl}>
           <div className="flex items-end space-x-4">
-            <Avatar size="sm" src="https://picsum.photos/200" alt="Jane Doe" />
-            <Avatar size="md" src="https://picsum.photos/200" alt="Jane Doe" />
-            <Avatar size="lg" src="https://picsum.photos/200" alt="Jane Doe" />
+            <Avatar size="sm" src={avatar1} alt="Jane Doe" />
+            <Avatar size="md" src={avatar1} alt="Jane Doe" />
+            <Avatar size="lg" src={avatar1} alt="Jane Doe" />
           </div>
         </PreviewBlock>
       </div>
@@ -198,14 +202,12 @@ export const FourteenUserGroup = () => {
       <div className="mb-12">
         <CodeViewer
           language="tsx"
-          code={`<AvatarGroup items={items} max={4} />
-{/* internally renders: */}
-<div>
-  <Avatar src={item.src} alt={item.alt} />
-  {/* ...one per visible item, up to max */}
-  <AvatarGroupCount count={overflow} />
-  {/* only when items.length > max */}
-</div>`}
+          code={`<Avatar />
+
+<AvatarGroup>
+  <Avatar />
+  <AvatarGroupCount />
+</AvatarGroup>`}
         />
       </div>
 
