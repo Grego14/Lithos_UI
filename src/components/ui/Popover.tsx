@@ -20,7 +20,15 @@ import {
   FloatingFocusManager,
   useId,
 } from '@floating-ui/react'
-import type { Placement } from '@floating-ui/react'
+import type { Placement, ReferenceType, UseFloatingReturn, UseInteractionsReturn } from '@floating-ui/react'
+
+export interface PopoverReturn extends UseFloatingReturn<ReferenceType>, UseInteractionsReturn {
+  open: boolean
+  setOpen: (open: boolean) => void
+  modal: boolean | undefined
+  labelId: string | undefined
+  descriptionId: string | undefined
+}
 import { cn } from '../../utils/cn'
 
 interface PopoverOptions {
@@ -38,7 +46,7 @@ export const usePopover = ({
   modal,
   open: controlledOpen,
   onOpenChange: setControlledOpen,
-}: PopoverOptions = {}) => {
+}: PopoverOptions = {}): PopoverReturn => {
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(initialOpen)
   const labelId = useId()
   const descriptionId = useId()
@@ -82,12 +90,12 @@ export const usePopover = ({
   )
 }
 
-type ContextType = ReturnType<typeof usePopover> | null
+type ContextType = PopoverReturn | null
 
 const PopoverContext = React.createContext<ContextType>(null)
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const usePopoverContext = () => {
+export const usePopoverContext = (): PopoverReturn => {
   const context = React.useContext(PopoverContext)
   if (context == null) {
     throw new Error('Popover components must be wrapped in <Popover />')
