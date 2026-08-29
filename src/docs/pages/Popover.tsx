@@ -102,7 +102,7 @@ export const PopoverPage = () => {
       <SetupGuide
         componentNames={componentNames}
         manualPath={manualPath}
-        requires={['@floating-ui/react', '../../utils/cn']}
+        requires={['@floating-ui/react', '../../utils/cn', 'components/ui/Button.tsx']}
       />
 
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">

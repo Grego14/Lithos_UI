@@ -2,7 +2,6 @@ import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { Input, InputGroup, InputGroupAddon, InputGroupInput } from '../../components/ui/Input'
 import { IconSearch } from '../../components/ui/icons/IconSearch'
 import { IconSettings } from '../../components/ui/icons/IconSettings'
-import { Button } from '../../components/ui/Button'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import {
   inputPropsData,
@@ -186,7 +185,12 @@ export const InputDoc = () => {
       <SetupGuide
         componentNames={['Input', 'InputGroup', 'InputGroupInput', 'InputGroupAddon']}
         manualPath={INPUT_PATH}
-        requires={['utils/cn.ts', 'utils/colors.ts', 'components/ui/icons/IconSearch.tsx']}
+        requires={[
+          'utils/cn.ts',
+          'utils/colors.ts',
+          'components/ui/icons/IconSearch.tsx',
+          'components/ui/icons/IconSettings.tsx',
+        ]}
       />
 
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
@@ -273,9 +277,6 @@ export const InputDoc = () => {
               placeholder="Styled via className"
               className="border-2 border-(--lithos-border) shadow-[2px_2px_0_0_var(--lithos-border)] p-2 font-(--font-mono)"
             />
-            <Button variant="primary" className="mt-6 text-sm">
-              Submit
-            </Button>
           </div>
         </PreviewBlock>
       </div>
