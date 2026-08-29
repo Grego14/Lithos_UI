@@ -1,0 +1,71 @@
+/**
+ * @fileoverview Lithos UI Entry Point
+ * Exports all public components, hooks, and utilities for the npm package.
+ * Excludes documentation tooling and block templates.
+ */
+
+// Components
+export * from './components/ui/Accordion'
+export * from './components/ui/Alert'
+export * from './components/ui/Avatar'
+export * from './components/ui/Badge'
+export * from './components/ui/Breadcrumb'
+export * from './components/ui/Button'
+export * from './components/ui/Calendar'
+export * from './components/ui/Card'
+export * from './components/ui/Carousel'
+export * from './components/ui/Checkbox'
+export * from './components/ui/Dialog'
+export * from './components/ui/Input'
+export * from './components/ui/KineticGrid'
+export * from './components/ui/Popover'
+export * from './components/ui/Toast'
+export * from './components/ui/Toggle'
+
+// Hooks
+export * from './core/hooks/useFocusTrap'
+export * from './core/hooks/useToast'
+export * from './components/ui/popover/usePopover'
+export * from './components/ui/carousel/useCarousel'
+export * from './components/ui/carousel/CarouselContext'
+
+// Utilities
+export * from './utils/cn'
+export * from './utils/colors'
+export * from './utils/yiq'
+export * from './utils/date'
+
+// Icons
+export * from './components/ui/icons/IconAlertTriangle'
+export * from './components/ui/icons/IconArrowDown'
+export * from './components/ui/icons/IconArrowLeft'
+export * from './components/ui/icons/IconArrowRight'
+export * from './components/ui/icons/IconArrowUp'
+export * from './components/ui/icons/IconBase'
+export * from './components/ui/icons/IconBreadcrumbSeparator'
+export * from './components/ui/icons/IconCheck'
+export * from './components/ui/icons/IconChevronDown'
+export * from './components/ui/icons/IconChevronLeft'
+export * from './components/ui/icons/IconChevronUp'
+export * from './components/ui/icons/IconCircle'
+export * from './components/ui/icons/IconClose'
+export * from './components/ui/icons/IconCode'
+export * from './components/ui/icons/IconDownload'
+export * from './components/ui/icons/IconExternalLink'
+export * from './components/ui/icons/IconFileText'
+export * from './components/ui/icons/IconFolder'
+export * from './components/ui/icons/IconHeart'
+export * from './components/ui/icons/IconHeartOutline'
+export * from './components/ui/icons/IconHome'
+export * from './components/ui/icons/IconMenu'
+export * from './components/ui/icons/IconMinus'
+export * from './components/ui/icons/IconMonitor'
+export * from './components/ui/icons/IconRadiusLg'
+export * from './components/ui/icons/IconRadiusMd'
+export * from './components/ui/icons/IconRadiusNone'
+export * from './components/ui/icons/IconRadiusSm'
+export * from './components/ui/icons/IconSearch'
+export * from './components/ui/icons/IconSettings'
+export * from './components/ui/icons/IconSmartphone'
+export * from './components/ui/icons/IconTablet'
+export * from './components/ui/icons/IconUndo'

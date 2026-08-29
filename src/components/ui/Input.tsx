@@ -16,7 +16,7 @@ import type { ClassArray, ClassValue } from 'clsx'
 
 type InputSizes = 'default' | 'sm' | 'md' | 'lg'
 
-export interface InputProps extends Omit<ComponentPropsWithRef<'input'>, 'className'> {
+export interface InputProps extends Omit<ComponentPropsWithRef<'input'>, 'className' | 'size'> {
   className?: ClassValue | ClassArray
   invalid?: boolean
   size?: InputSizes

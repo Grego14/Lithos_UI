@@ -7,7 +7,8 @@
 import type { ReactNode, PointerEvent } from 'react'
 import { useListNavigation, useInteractions, FloatingList } from '@floating-ui/react'
 import { cn, type LithosClass } from '../../../utils/cn'
-import { PopoverContent, usePopoverContext } from '../Popover'
+import { PopoverContent } from '../Popover'
+import { usePopoverContext } from '../popover/usePopover'
 import { useSelect } from './useSelect'
 
 export interface SelectContentProps {
