@@ -1,9 +1,3 @@
-/**
- * @fileoverview Lithos UI Popover components.
- * - Floating overlay primitive powered by @floating-ui/react.
- * - Handles collision-detection, placement, and focus trapping.
- * - Composed of Popover, PopoverTrigger, PopoverContent, and PopoverClose.
- */
 import * as React from 'react'
 import {
   useFloating,
@@ -19,6 +13,8 @@ import {
   FloatingPortal,
   FloatingFocusManager,
   useId,
+  size,
+  type ElementProps,
 } from '@floating-ui/react'
 import type { Placement } from '@floating-ui/react'
 import { cn } from '../../utils/cn'
@@ -29,6 +25,7 @@ interface PopoverOptions {
   modal?: boolean
   open?: boolean
   onOpenChange?: (open: boolean) => void
+  interactions?: ElementProps[]
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -38,6 +35,7 @@ export const usePopover = ({
   modal,
   open: controlledOpen,
   onOpenChange: setControlledOpen,
+  interactions: extraInteractions = [],
 }: PopoverOptions = {}) => {
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(initialOpen)
   const labelId = useId()
@@ -52,11 +50,18 @@ export const usePopover = ({
     onOpenChange: setOpen,
     whileElementsMounted: autoUpdate,
     middleware: [
-      offset(8),
+      offset(0),
       flip({
         fallbackAxisSideDirection: 'end',
       }),
       shift({ padding: 8 }),
+      size({
+        apply: ({ rects, elements }) => {
+          Object.assign(elements.floating.style, {
+            width: `${rects.reference.width}px`,
+          })
+        },
+      }),
     ],
   })
 
@@ -66,7 +71,7 @@ export const usePopover = ({
   const dismiss = useDismiss(context)
   const role = useRole(context)
 
-  const interactions = useInteractions([click, dismiss, role])
+  const interactions = useInteractions([click, dismiss, role, ...extraInteractions])
 
   return React.useMemo(
     () => ({
@@ -106,46 +111,45 @@ export const Popover = ({
   return <PopoverContext.Provider value={popover}>{children}</PopoverContext.Provider>
 }
 
-export interface PopoverTriggerProps extends React.HTMLProps<HTMLElement> {
+interface PopoverTriggerProps extends React.HTMLProps<HTMLElement> {
   asChild?: boolean
-  ref?: React.Ref<HTMLElement>
 }
 
-export const PopoverTrigger = ({ children, asChild = false, ref: propRef, ...props }: PopoverTriggerProps) => {
-  const context = usePopoverContext()
-  const childrenRef = (children as React.ReactElement & { ref?: React.Ref<unknown> }).ref
-  const ref = useMergeRefs([context.refs.setReference, propRef, childrenRef])
+export const PopoverTrigger = React.forwardRef<HTMLElement, PopoverTriggerProps>(
+  ({ children, asChild = false, ...props }, propRef) => {
+    const context = usePopoverContext()
+    const childrenRef = (children as React.ReactElement & { ref?: React.Ref<unknown> }).ref
+    const ref = useMergeRefs([context.refs.setReference, propRef, childrenRef])
 
-  if (asChild && React.isValidElement(children)) {
-    return React.cloneElement(
-      children as React.ReactElement<React.HTMLProps<HTMLElement>>,
-      context.getReferenceProps({
-        ref,
-        ...props,
-        ...(children.props as Record<string, unknown>),
-        'data-state': context.open ? 'open' : 'closed',
-      } as React.HTMLProps<HTMLElement> & { 'data-state'?: string })
+    if (asChild && React.isValidElement(children)) {
+      return React.cloneElement(
+        children as React.ReactElement<React.HTMLProps<HTMLElement>>,
+        context.getReferenceProps({
+          ref,
+          ...props,
+          ...(children.props as Record<string, unknown>),
+          'data-state': context.open ? 'open' : 'closed',
+        } as React.HTMLProps<HTMLElement> & { 'data-state'?: string })
+      )
+    }
+
+    return (
+      <button
+        ref={ref as React.LegacyRef<HTMLButtonElement>}
+        type="button"
+        data-state={context.open ? 'open' : 'closed'}
+        {...context.getReferenceProps(props)}
+      >
+        {children}
+      </button>
     )
   }
+)
 
-  return (
-    <button
-      ref={ref as React.LegacyRef<HTMLButtonElement>}
-      type="button"
-      data-state={context.open ? 'open' : 'closed'}
-      {...context.getReferenceProps(props)}
-    >
-      {children}
-    </button>
-  )
-}
-
-export interface PopoverContentProps extends React.HTMLProps<HTMLDivElement> {
-  portaled?: boolean
-  ref?: React.Ref<HTMLDivElement>
-}
-
-export const PopoverContent = ({ style, className, portaled = true, ref: propRef, ...props }: PopoverContentProps) => {
+export const PopoverContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLProps<HTMLDivElement> & { portaled?: boolean }
+>(({ style, className, portaled = true, ...props }, propRef) => {
   const { context: floatingContext, ...context } = usePopoverContext()
   const ref = useMergeRefs([context.refs.setFloating, propRef])
 
@@ -172,49 +176,51 @@ export const PopoverContent = ({ style, className, portaled = true, ref: propRef
   if (!portaled) return content
 
   return <FloatingPortal>{content}</FloatingPortal>
-}
+})
 
 export interface PopoverCloseProps extends React.ComponentPropsWithRef<'button'> {
   asChild?: boolean
 }
 
-export const PopoverClose = ({ children, asChild = false, onClick, ref: propRef, ...props }: PopoverCloseProps) => {
-  const { setOpen } = usePopoverContext()
-  const childrenRef = React.isValidElement(children)
-    ? (children as React.ReactElement & { ref?: React.Ref<unknown> }).ref
-    : undefined
-  const ref = useMergeRefs([propRef, childrenRef])
+export const PopoverClose = React.forwardRef<HTMLButtonElement, PopoverCloseProps>(
+  ({ children, asChild = false, onClick, ...props }, propRef) => {
+    const { setOpen } = usePopoverContext()
+    const childrenRef = React.isValidElement(children)
+      ? (children as React.ReactElement & { ref?: React.Ref<unknown> }).ref
+      : undefined
+    const ref = useMergeRefs([propRef, childrenRef])
 
-  if (asChild && React.isValidElement(children)) {
-    return React.cloneElement(
-      children as React.ReactElement<React.HTMLProps<HTMLElement>>,
-      {
-        ref,
-        ...props,
-        ...(children.props as Record<string, unknown>),
-        onClick: (e: React.MouseEvent<HTMLElement>) => {
-          onClick?.(e as React.MouseEvent<HTMLButtonElement>)
-          const childOnClick = (children.props as Record<string, unknown>)['onClick']
-          if (typeof childOnClick === 'function') {
-            childOnClick(e)
-          }
+    if (asChild && React.isValidElement(children)) {
+      return React.cloneElement(
+        children as React.ReactElement<React.HTMLProps<HTMLElement>>,
+        {
+          ref,
+          ...props,
+          ...(children.props as Record<string, unknown>),
+          onClick: (e: React.MouseEvent<HTMLElement>) => {
+            onClick?.(e as React.MouseEvent<HTMLButtonElement>)
+            const childOnClick = (children.props as Record<string, unknown>)['onClick']
+            if (typeof childOnClick === 'function') {
+              childOnClick(e)
+            }
+            setOpen(false)
+          },
+        } as React.HTMLProps<HTMLElement>
+      )
+    }
+
+    return (
+      <button
+        type="button"
+        ref={propRef}
+        onClick={(e) => {
+          onClick?.(e)
           setOpen(false)
-        },
-      } as React.HTMLProps<HTMLElement>
+        }}
+        {...props}
+      >
+        {children}
+      </button>
     )
   }
-
-  return (
-    <button
-      type="button"
-      ref={propRef}
-      onClick={(e) => {
-        onClick?.(e)
-        setOpen(false)
-      }}
-      {...props}
-    >
-      {children}
-    </button>
-  )
-}
+)
