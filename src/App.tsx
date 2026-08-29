@@ -70,12 +70,9 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
     { path: 'calendar', component: CalendarDoc },
     { path: 'card', component: CardDoc },
     { path: 'carousel', component: CarouselDoc },
-<<<<<<< HEAD
     { path: 'input', component: InputDoc },
-=======
     { path: 'checkbox', component: CheckboxDoc },
     { path: 'dialog', component: DialogDoc },
->>>>>>> refs/rewritten/main
     { path: 'installation', component: Installation },
     { path: 'popover', component: PopoverPage },
     { path: 'toast', component: ToastDoc },
