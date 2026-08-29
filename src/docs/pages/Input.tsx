@@ -2,7 +2,6 @@ import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { Input, InputGroup, InputGroupAddon, InputGroupInput } from '../../components/ui/Input'
 import { IconSearch } from '../../components/ui/icons/IconSearch'
 import { IconSettings } from '../../components/ui/icons/IconSettings'
-import { Button } from '../../components/ui/Button'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import {
   inputPropsData,
