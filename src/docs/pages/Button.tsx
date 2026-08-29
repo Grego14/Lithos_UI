@@ -163,19 +163,6 @@ export const ButtonDoc = () => {
         ]}
       />
 
-      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Anatomy
-      </h2>
-      <div className="mb-12">
-        <CodeViewer
-          language="tsx"
-          code={`<ButtonGroup>
-  <Button />
-  <Button />
-</ButtonGroup>`}
-        />
-      </div>
-
       <h2 id="examples" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Examples
       </h2>
@@ -340,6 +327,19 @@ export const ButtonDoc = () => {
           <Button variant="primary">Save Changes</Button>
         </ButtonGroup>
       </PreviewBlock>
+
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
+        Anatomy
+      </h2>
+      <div className="mb-12">
+        <CodeViewer
+          language="tsx"
+          code={`<ButtonGroup>
+  <Button />
+  <Button />
+</ButtonGroup>`}
+        />
+      </div>
 
       <section className="mb-12">
         <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">

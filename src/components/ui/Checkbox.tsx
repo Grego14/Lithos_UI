@@ -110,11 +110,14 @@ const createCheckbox = (showCheck: boolean) => {
 
     const iconColorStyle = { color: 'var(--cb-contrast)' }
 
-    const iconBase =
-      'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-opacity duration-75'
-
-    const checkClasses = cn(iconBase, 'opacity-0 peer-checked:opacity-100 peer-indeterminate:opacity-0')
-    const minusClasses = cn(iconBase, 'opacity-0 peer-indeterminate:opacity-100')
+    const checkClasses = cn(
+      'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] w-3 h-3 transition-opacity duration-75',
+      'opacity-0 peer-checked:opacity-100 peer-indeterminate:opacity-0'
+    )
+    const minusClasses = cn(
+      'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 transition-opacity duration-75',
+      'opacity-0 peer-indeterminate:opacity-100'
+    )
 
     return (
       <label

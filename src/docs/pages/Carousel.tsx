@@ -203,24 +203,6 @@ export const CarouselDoc = () => {
         ]}
       />
 
-      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Anatomy
-      </h2>
-      <div className="mb-12">
-        <CodeViewer
-          language="tsx"
-          code={`<Carousel>
-  <CarouselControls>
-    <CarouselPrev />
-    <CarouselNext />
-  </CarouselControls>
-  <CarouselSlide>...</CarouselSlide>
-  <CarouselSlide>...</CarouselSlide>
-  <CarouselPagination />
-</Carousel>`}
-        />
-      </div>
-
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Examples
       </h2>
@@ -410,6 +392,24 @@ export const CarouselDoc = () => {
             <CarouselSlide>Slide 7</CarouselSlide>
           </Carousel>
         </PreviewBlock>
+      </div>
+
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
+        Anatomy
+      </h2>
+      <div className="mb-12">
+        <CodeViewer
+          language="tsx"
+          code={`<Carousel>
+  <CarouselControls>
+    <CarouselPrev />
+    <CarouselNext />
+  </CarouselControls>
+  <CarouselSlide>...</CarouselSlide>
+  <CarouselSlide>...</CarouselSlide>
+  <CarouselPagination />
+</Carousel>`}
+        />
       </div>
 
       <section className="mb-12">

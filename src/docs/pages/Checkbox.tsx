@@ -262,30 +262,12 @@ export const CheckboxDoc = () => {
         requires={['utils/cn.ts', 'utils/yiq.ts', 'core/types.ts']}
       />
 
-      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Anatomy
-      </h2>
-      <div className="mb-12">
-        <p className="mb-4 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          A standalone Checkbox needs no wrapper. Group several under one controlled array with CheckboxGroup:
-        </p>
-        <CodeViewer
-          language="tsx"
-          code={`<Checkbox label="Accept terms" checked={checked} onChange={(e) => setChecked(e.target.checked)} />
-
-<CheckboxGroup value={value} onChange={setValue} label="Toppings">
-  <Checkbox value="cheese" label="Cheese" />
-  <Checkbox value="olives" label="Olives" />
-</CheckboxGroup>`}
-        />
-      </div>
-
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Examples
       </h2>
 
       <h3 id="single" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
-        Single checkbox
+        Single
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
         A controlled on/off choice, same as a native input. Works uncontrolled with <code>defaultChecked</code> too.
@@ -296,7 +278,7 @@ export const CheckboxDoc = () => {
       </PreviewBlock>
 
       <h3 id="plain" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
-        Plain checkbox
+        Plain
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
         Use <code>PlainCheckbox</code> when the check mark would be redundant, like a settings toggle where the filled
@@ -307,7 +289,7 @@ export const CheckboxDoc = () => {
       </PreviewBlock>
 
       <h3 id="icon" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
-        Icon checkbox
+        Icon
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
         <code>IconCheckbox</code> drops the box entirely: an outlined icon toggles to a filled one, for a favorite/like
@@ -379,7 +361,7 @@ export const CheckboxDoc = () => {
       </PreviewBlock>
 
       <h3 id="group" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
-        Checkbox group
+        Group
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
         CheckboxGroup owns one controlled <code>string[]</code>. Children declare a <code>value</code> and pick up
@@ -399,6 +381,24 @@ export const CheckboxDoc = () => {
       <PreviewBlock code={horizontalGroupCode} githubUrl={githubUrl}>
         <HorizontalGroupCheckboxDemo />
       </PreviewBlock>
+
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
+        Anatomy
+      </h2>
+      <div className="mb-12">
+        <p className="mb-4 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
+          A standalone Checkbox needs no wrapper. Group several under one controlled array with CheckboxGroup:
+        </p>
+        <CodeViewer
+          language="tsx"
+          code={`<Checkbox />
+
+<CheckboxGroup>
+  <Checkbox />
+  <Checkbox />
+</CheckboxGroup>`}
+        />
+      </div>
 
       <section className="mb-12">
         <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
