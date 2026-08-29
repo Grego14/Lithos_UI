@@ -165,7 +165,9 @@ const createCheckbox = (showCheck: boolean) => {
   return CheckboxComponent
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const Checkbox = createCheckbox(true)
+// eslint-disable-next-line react-refresh/only-export-components
 export const PlainCheckbox = createCheckbox(false)
 
 export interface IconCheckboxProps extends CheckboxProps {
