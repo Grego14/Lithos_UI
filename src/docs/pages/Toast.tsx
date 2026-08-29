@@ -165,13 +165,8 @@ export const App = () => {
         <CodeViewer
           language="tsx"
           code={`<ToastProvider>
-  {/* Wrap your application router or main layout here */}
   <App />
-</ToastProvider>
-
-// Inside a child component:
-const { addToast } = useToast()
-`}
+</ToastProvider>`}
         />
       </div>
 
