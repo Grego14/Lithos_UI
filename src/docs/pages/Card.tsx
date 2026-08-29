@@ -16,6 +16,9 @@ import {
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Card.tsx'
 
+import card1 from '../assets/images/card1.webp'
+import card2 from '../assets/images/card2.webp'
+
 export const CardDoc = () => {
   const [spacing, setSpacing] = useState<'sm' | 'md' | 'lg'>('md')
 
@@ -33,10 +36,10 @@ export const CardDoc = () => {
     body: `export const DefaultCard = () => {
   return (
     <Card interactive className="max-w-sm">
-      <CardImage src="https://picsum.photos/600/400" alt="Thumbnail" />
+      <CardImage src="/example-card.webp" alt="Thumbnail" />
       <CardContent>
-        <CardTitle>Card Title</CardTitle>
-        <CardDescription>Short supporting copy goes here.</CardDescription>
+        <CardTitle>John 10:11</CardTitle>
+        <CardDescription>I am the good shepherd: the good shepherd giveth his life for the sheep.</CardDescription>
       </CardContent>
       <CardFooter>
         <Button intent="secondary" className="mr-3">
@@ -55,7 +58,7 @@ export const CardDoc = () => {
     body: `export const AccentCard = () => {
   return (
     <Card variant="accent" interactive className="max-w-sm">
-      <CardImage src="https://picsum.photos/600/400?1" alt="Preview" />
+      <CardImage src="/example-card.webp" alt="Preview" />
       <CardContent>
         <CardTitle>Accent Card</CardTitle>
         <CardDescription>Hover over this card to see the background fill with the active theme color.</CardDescription>
@@ -71,7 +74,7 @@ export const CardDoc = () => {
     body: `export const SolidCard = () => {
   return (
     <Card variant="solid" interactive className="max-w-sm">
-      <CardImage src="https://picsum.photos/600/400?2" alt="Preview" />
+      <CardImage src="/example-card.webp" alt="Preview" />
       <CardContent>
         <CardTitle>Solid Card</CardTitle>
         <CardDescription>A card that permanently stays in the accent color rather than waiting for a hover interaction.</CardDescription>
@@ -87,7 +90,7 @@ export const CardDoc = () => {
     body: `export const ElevateCard = () => {
   return (
     <Card interactive="elevate" className="max-w-sm">
-      <CardImage src="https://picsum.photos/600/400?3" alt="Preview" />
+      <CardImage src="/example-card.webp" alt="Preview" />
       <CardContent>
         <CardTitle>Elevate Physics</CardTitle>
         <CardDescription>This interactive mode restores the legacy translation lift on hover instead of expanding the shadow.</CardDescription>
@@ -121,7 +124,7 @@ export const CardDoc = () => {
     body: `export const ImageBackgroundCard = () => {
   return (
     <Card variant="image" className="w-full max-w-sm min-h-75">
-      <CardImage src="https://picsum.photos/600/600" alt="Full bleed background" isBackground />
+      <CardImage src="/example-card.webp" alt="Full bleed background" isBackground />
       <CardContent>
         <CardTitle>Full Bleed Overlay</CardTitle>
         <CardDescription className="opacity-90">Using isBackground on CardImage to compose a rich media card.</CardDescription>
@@ -186,10 +189,10 @@ export const CardDoc = () => {
       </p>
       <PreviewBlock code={defaultCode} githubUrl={githubUrl}>
         <Card interactive className="max-w-sm">
-          <CardImage src="https://picsum.photos/600/400" alt="Preview thumbnail" />
+          <CardImage src={card1} alt="Preview thumbnail" />
           <CardContent>
-            <CardTitle>Card Title</CardTitle>
-            <CardDescription>Short supporting copy goes here.</CardDescription>
+            <CardTitle>John 10:11</CardTitle>
+            <CardDescription>I am the good shepherd: the good shepherd giveth his life for the sheep.</CardDescription>
           </CardContent>
           <CardFooter>
             <Button variant="secondary" className="mr-3">
@@ -211,7 +214,7 @@ export const CardDoc = () => {
       </p>
       <PreviewBlock code={accentCode} githubUrl={githubUrl}>
         <Card variant="accent" interactive className="max-w-sm">
-          <CardImage src="https://picsum.photos/600/400?1" alt="Preview" />
+          <CardImage src={card2} alt="Preview" />
           <CardContent>
             <CardTitle>Accent Card</CardTitle>
             <CardDescription>
@@ -232,7 +235,7 @@ export const CardDoc = () => {
       </p>
       <PreviewBlock code={solidCode} githubUrl={githubUrl}>
         <Card variant="solid" interactive className="max-w-sm">
-          <CardImage src="https://picsum.photos/600/400?2" alt="Preview" />
+          <CardImage src={card1} alt="Preview" />
           <CardContent>
             <CardTitle>Solid Card</CardTitle>
             <CardDescription>
@@ -253,7 +256,7 @@ export const CardDoc = () => {
       </p>
       <PreviewBlock code={elevateCode} githubUrl={githubUrl}>
         <Card interactive="elevate" className="max-w-sm">
-          <CardImage src="https://picsum.photos/600/400?3" alt="Preview" />
+          <CardImage src={card1} alt="Preview" />
           <CardContent>
             <CardTitle>Elevate Physics</CardTitle>
             <CardDescription>
@@ -318,7 +321,7 @@ export const CardDoc = () => {
       </p>
       <PreviewBlock code={imageCode} githubUrl={githubUrl}>
         <Card variant="image" className="w-full max-w-sm min-h-75">
-          <CardImage src="https://picsum.photos/600/600" alt="Full bleed background" isBackground />
+          <CardImage src={card1} alt="Full bleed background" isBackground />
           <CardContent>
             <CardTitle>Full Bleed Overlay</CardTitle>
             <CardDescription className="opacity-90">
