@@ -25,6 +25,9 @@ export * from './components/ui/Toggle'
 // Hooks
 export * from './core/hooks/useFocusTrap'
 export * from './core/hooks/useToast'
+export * from './components/ui/popover/usePopover'
+export * from './components/ui/carousel/useCarousel'
+export * from './components/ui/carousel/CarouselContext'
 
 // Utilities
 export * from './utils/cn'

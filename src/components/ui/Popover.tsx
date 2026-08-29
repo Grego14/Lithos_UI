@@ -5,103 +5,11 @@
  * - Composed of Popover, PopoverTrigger, PopoverContent, and PopoverClose.
  */
 import * as React from 'react'
-import {
-  useFloating,
-  autoUpdate,
-  offset,
-  flip,
-  shift,
-  useClick,
-  useDismiss,
-  useRole,
-  useInteractions,
-  useMergeRefs,
-  FloatingPortal,
-  FloatingFocusManager,
-  useId,
-} from '@floating-ui/react'
-import type { Placement, ReferenceType, UseFloatingReturn, UseInteractionsReturn } from '@floating-ui/react'
+import { useMergeRefs, FloatingPortal, FloatingFocusManager } from '@floating-ui/react'
 
-export interface PopoverReturn extends UseFloatingReturn<ReferenceType>, UseInteractionsReturn {
-  open: boolean
-  setOpen: (open: boolean) => void
-  modal: boolean | undefined
-  labelId: string | undefined
-  descriptionId: string | undefined
-}
 import { cn } from '../../utils/cn'
 
-interface PopoverOptions {
-  initialOpen?: boolean
-  placement?: Placement
-  modal?: boolean
-  open?: boolean
-  onOpenChange?: (open: boolean) => void
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const usePopover = ({
-  initialOpen = false,
-  placement = 'bottom-start',
-  modal,
-  open: controlledOpen,
-  onOpenChange: setControlledOpen,
-}: PopoverOptions = {}): PopoverReturn => {
-  const [uncontrolledOpen, setUncontrolledOpen] = React.useState(initialOpen)
-  const labelId = useId()
-  const descriptionId = useId()
-
-  const open = controlledOpen ?? uncontrolledOpen
-  const setOpen = setControlledOpen ?? setUncontrolledOpen
-
-  const data = useFloating({
-    placement,
-    open,
-    onOpenChange: setOpen,
-    whileElementsMounted: autoUpdate,
-    middleware: [
-      offset(8),
-      flip({
-        fallbackAxisSideDirection: 'end',
-      }),
-      shift({ padding: 8 }),
-    ],
-  })
-
-  const context = data.context
-
-  const click = useClick(context)
-  const dismiss = useDismiss(context)
-  const role = useRole(context)
-
-  const interactions = useInteractions([click, dismiss, role])
-
-  return React.useMemo(
-    () => ({
-      open,
-      setOpen,
-      ...interactions,
-      ...data,
-      modal,
-      labelId,
-      descriptionId,
-    }),
-    [open, setOpen, interactions, data, modal, labelId, descriptionId]
-  )
-}
-
-type ContextType = PopoverReturn | null
-
-const PopoverContext = React.createContext<ContextType>(null)
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const usePopoverContext = (): PopoverReturn => {
-  const context = React.useContext(PopoverContext)
-  if (context == null) {
-    throw new Error('Popover components must be wrapped in <Popover />')
-  }
-  return context
-}
+import { PopoverContext, usePopover, usePopoverContext, type PopoverOptions } from './popover/usePopover'
 
 export const Popover = ({
   children,

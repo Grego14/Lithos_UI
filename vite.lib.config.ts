@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import dts from 'vite-plugin-dts'
 import { resolve } from 'path'
 
+// eslint-disable-next-line import/no-default-export
 export default defineConfig({
   plugins: [
     react(),
