@@ -32,7 +32,7 @@ const inputSizeStyles = {
 export const Input = ({ className = '', ref, invalid, size = 'default', style, ...props }: InputProps) => {
   const classes = cn(
     'rounded-(--lithos-radius)',
-    'font-(--font-mono) font-bold w-full outline-none border-2 border-(--lithos-border) shadow-[2px_2px_0_0_var(--lithos-shadow)] focus:shadow-[4px_4px_0_0_var(--lithos-shadow)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
+    'font-mono font-bold w-full outline-none border-2 border-(--lithos-border) shadow-[2px_2px_0_0_var(--lithos-shadow)] focus:shadow-[4px_4px_0_0_var(--lithos-shadow)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
     inputSizeStyles[size],
     {
       'transition hover:shadow-[4px_4px_0_0_var(--lithos-shadow)]': !props.disabled,
@@ -135,7 +135,7 @@ export const InputGroupAddon = ({
     <div
       ref={ref}
       className={cn(
-        'inline-flex shrink-0 select-none items-center self-stretch border-(--lithos-border) bg-(--lithos-surface) px-3 font-(--font-mono) text-sm font-bold text-(--lithos-text)',
+        'inline-flex shrink-0 select-none items-center self-stretch border-(--lithos-border) bg-(--lithos-surface) px-3 font-mono text-sm font-bold text-(--lithos-text)',
         addonAlignClasses[align],
         className
       )}
