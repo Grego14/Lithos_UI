@@ -68,7 +68,7 @@ export const Tabs = ({
   )
 }
 
-export interface TabsListProps extends ComponentPropsWithRef<'div'> {}
+export type TabsListProps = ComponentPropsWithRef<'div'>
 
 export const TabsList = ({ className, children, ref, ...rest }: TabsListProps) => {
   const { variant } = useTabs()

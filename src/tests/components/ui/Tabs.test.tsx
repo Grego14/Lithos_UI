@@ -2,10 +2,10 @@ import { createRef } from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { axe } from 'jest-axe'
 import { describe, it, expect, vi } from 'vitest'
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../../components/ui/Tabs'
+import { Tabs, TabsList, TabsTrigger, TabsContent, type TabsProps } from '../../../components/ui/Tabs'
 
 describe('Tabs Component', () => {
-  const renderTabs = (props: any = {}) => {
+  const renderTabs = (props: Partial<TabsProps> = {}) => {
     return render(
       <Tabs defaultValue="tab1" {...props}>
         <TabsList data-testid="tabs-list">
