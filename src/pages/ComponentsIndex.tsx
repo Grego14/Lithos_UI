@@ -20,7 +20,7 @@ import { Popover, PopoverTrigger, PopoverContent } from '../components/ui/Popove
 import { Select } from '../components/ui/Select'
 import { IconClose } from '../components/ui/icons/IconClose'
 import { Input } from '../components/ui/Input'
-
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs'
 import card1 from '../docs/assets/images/card1.webp'
 
 interface ComponentsIndexProps {
@@ -102,6 +102,19 @@ const PopoverPreview = () => (
         <p className="text-[10px] opacity-70 m-0 leading-tight mt-1">Preferences.</p>
       </PopoverContent>
     </Popover>
+  </div>
+)
+
+const TabsPreview = () => (
+  <div className="w-[120%] scale-[0.55] origin-center pointer-events-none mt-2">
+    <Tabs defaultValue="1">
+      <TabsList>
+        <TabsTrigger value="1">Tab 1</TabsTrigger>
+        <TabsTrigger value="2">Tab 2</TabsTrigger>
+      </TabsList>
+      <TabsContent value="1">Content 1</TabsContent>
+      <TabsContent value="2">Content 2</TabsContent>
+    </Tabs>
   </div>
 )
 
@@ -211,6 +224,11 @@ const componentsList = [
     name: 'Select',
     to: '/docs/select',
     preview: <Select options={FRAMEWORK_OPTIONS} placeholder="Select a framework..." />,
+  },
+  {
+    name: 'Tabs',
+    to: '/docs/tabs',
+    preview: <TabsPreview />,
   },
   {
     name: 'Toast',
