@@ -6,7 +6,6 @@ import { tabsPropsData, tabsTriggerPropsData, tabsContentPropsData } from '../pr
 import { SetupGuide } from '../layout/SetupGuide'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Tabs.tsx'
-const TABS_PATH = '../../components/ui/Tabs'
 
 export const TabsDoc = () => {
   const defaultCode = {
@@ -29,7 +28,7 @@ export const TabsDoc = () => {
   )
 }`,
     componentNames: ['Tabs', 'TabsList', 'TabsTrigger', 'TabsContent'],
-    manualPath: TABS_PATH,
+    manualPath: { Tabs: '../../components/ui/Tabs' },
   }
 
   const underlineCode = {
@@ -52,7 +51,7 @@ export const TabsDoc = () => {
   )
 }`,
     componentNames: ['Tabs', 'TabsList', 'TabsTrigger', 'TabsContent'],
-    manualPath: TABS_PATH,
+    manualPath: { Tabs: '../../components/ui/Tabs' },
   }
 
   const verticalCode = {
@@ -75,7 +74,7 @@ export const TabsDoc = () => {
   )
 }`,
     componentNames: ['Tabs', 'TabsList', 'TabsTrigger', 'TabsContent'],
-    manualPath: TABS_PATH,
+    manualPath: { Tabs: '../../components/ui/Tabs' },
   }
 
   return (
