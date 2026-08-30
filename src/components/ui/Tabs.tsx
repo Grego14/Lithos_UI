@@ -4,6 +4,7 @@ import { cn } from '../../utils/cn'
 interface TabsContextValue {
   value: string
   onValueChange: (value: string) => void
+  variant?: 'default' | 'underline' | 'vertical'
 }
 
 const TabsContext = createContext<TabsContextValue | undefined>(undefined)
@@ -20,6 +21,7 @@ export interface TabsProps extends Omit<ComponentPropsWithRef<'div'>, 'defaultVa
   defaultValue?: string
   value?: string
   onValueChange?: (value: string) => void
+  variant?: 'default' | 'underline' | 'vertical'
   children: ReactNode
 }
 
@@ -27,6 +29,7 @@ export const Tabs = ({
   defaultValue,
   value: controlledValue,
   onValueChange,
+  variant = 'default',
   className,
   children,
   ref,
@@ -45,8 +48,13 @@ export const Tabs = ({
   }
 
   return (
-    <TabsContext.Provider value={{ value, onValueChange: handleValueChange }}>
-      <div ref={ref} className={cn('w-full', className)} data-state={value} {...rest}>
+    <TabsContext.Provider value={{ value, onValueChange: handleValueChange, variant }}>
+      <div
+        ref={ref}
+        className={cn('w-full', variant === 'vertical' && 'flex flex-col sm:flex-row gap-6', className)}
+        data-state={value}
+        {...rest}
+      >
         {children}
       </div>
     </TabsContext.Provider>
@@ -56,11 +64,19 @@ export const Tabs = ({
 export interface TabsListProps extends ComponentPropsWithRef<'div'> {}
 
 export const TabsList = ({ className, children, ref, ...rest }: TabsListProps) => {
+  const { variant } = useTabs()
+
   return (
     <div
       ref={ref}
       role="tablist"
-      className={cn('flex flex-wrap items-center [&>*:not(:first-child)]:ml-4', className)}
+      className={cn(
+        'flex',
+        variant === 'vertical' && 'flex-col items-stretch [&>*:not(:first-child)]:mt-4 min-w-[150px]',
+        variant === 'underline' && 'flex-row items-center border-b-4 border-(--lithos-border) gap-6 w-full',
+        variant === 'default' && 'flex-row flex-wrap items-center [&>*:not(:first-child)]:ml-4',
+        className
+      )}
       {...rest}
     >
       {children}
@@ -73,7 +89,7 @@ export interface TabsTriggerProps extends Omit<ComponentPropsWithRef<'button'>, 
 }
 
 export const TabsTrigger = ({ value, className, children, ref, ...rest }: TabsTriggerProps) => {
-  const { value: selectedValue, onValueChange } = useTabs()
+  const { value: selectedValue, onValueChange, variant } = useTabs()
   const isSelected = selectedValue === value
 
   return (
@@ -86,15 +102,24 @@ export const TabsTrigger = ({ value, className, children, ref, ...rest }: TabsTr
       onClick={() => onValueChange(value)}
       className={cn(
         'lithos-click',
-        'inline-flex items-center justify-center whitespace-nowrap px-6 py-2.5',
-        'border-2 border-(--lithos-border) text-sm font-bold transition-all',
+        'inline-flex items-center justify-center whitespace-nowrap text-sm font-bold transition-all',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--lithos-accent)',
         'disabled:pointer-events-none disabled:opacity-50',
-        'bg-(--lithos-surface) text-(--lithos-text)',
-        'shadow-[4px_4px_0_0_var(--lithos-border)]',
-        'hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--lithos-border)]',
-        'data-[state=active]:translate-x-[4px] data-[state=active]:translate-y-[4px] data-[state=active]:shadow-none',
-        'data-[state=active]:bg-(--lithos-accent) data-[state=active]:text-(--lithos-accent-text)',
+
+        variant === 'underline' && [
+          'border-0 border-b-4 border-transparent mb-[-4px] px-2 py-2',
+          'hover:border-(--lithos-border) shadow-none! bg-transparent! text-(--lithos-text)',
+          'data-[state=active]:border-(--lithos-accent) data-[state=active]:text-(--lithos-accent)',
+        ],
+
+        variant !== 'underline' && [
+          'px-6 py-2.5 border-2 border-(--lithos-border)',
+          'bg-(--lithos-surface) text-(--lithos-text)',
+          'shadow-[4px_4px_0_0_var(--lithos-border)]',
+          'hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--lithos-border)]',
+          'data-[state=active]:translate-x-[4px] data-[state=active]:translate-y-[4px] data-[state=active]:shadow-none',
+          'data-[state=active]:bg-(--lithos-accent) data-[state=active]:text-(--lithos-accent-text)',
+        ],
         className
       )}
       {...rest}
@@ -109,7 +134,7 @@ export interface TabsContentProps extends Omit<ComponentPropsWithRef<'div'>, 'va
 }
 
 export const TabsContent = ({ value, className, children, ref, ...rest }: TabsContentProps) => {
-  const { value: selectedValue } = useTabs()
+  const { value: selectedValue, variant } = useTabs()
   const isSelected = selectedValue === value
 
   if (!isSelected) return null
@@ -120,8 +145,9 @@ export const TabsContent = ({ value, className, children, ref, ...rest }: TabsCo
       role="tabpanel"
       data-state={isSelected ? 'active' : 'inactive'}
       className={cn(
-        'mt-6 border-2 border-(--lithos-border) bg-(--lithos-surface) p-6 text-(--lithos-text)',
+        'border-2 border-(--lithos-border) bg-(--lithos-surface) p-6 text-(--lithos-text)',
         'shadow-[8px_8px_0_0_var(--lithos-border)]',
+        variant === 'vertical' ? 'mt-0 flex-1 w-full' : 'mt-6',
         className
       )}
       {...rest}

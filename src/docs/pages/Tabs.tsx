@@ -31,6 +31,52 @@ export const TabsDoc = () => {
     manualPath: TABS_PATH,
   }
 
+  const underlineCode = {
+    body: `export const UnderlineTabs = () => {
+  return (
+    <Tabs defaultValue="account" variant="underline">
+      <TabsList>
+        <TabsTrigger value="account">Account</TabsTrigger>
+        <TabsTrigger value="password">Password</TabsTrigger>
+      </TabsList>
+      <TabsContent value="account">
+        <p className="text-sm font-bold">Account Settings</p>
+        <p className="text-sm mt-2 opacity-80">Make changes to your account here.</p>
+      </TabsContent>
+      <TabsContent value="password">
+        <p className="text-sm font-bold">Password Settings</p>
+        <p className="text-sm mt-2 opacity-80">Change your password here.</p>
+      </TabsContent>
+    </Tabs>
+  )
+}`,
+    componentNames: ['Tabs', 'TabsList', 'TabsTrigger', 'TabsContent'],
+    manualPath: TABS_PATH,
+  }
+
+  const verticalCode = {
+    body: `export const VerticalTabs = () => {
+  return (
+    <Tabs defaultValue="account" variant="vertical">
+      <TabsList>
+        <TabsTrigger value="account">Account</TabsTrigger>
+        <TabsTrigger value="password">Password</TabsTrigger>
+      </TabsList>
+      <TabsContent value="account">
+        <p className="text-sm font-bold">Account Settings</p>
+        <p className="text-sm mt-2 opacity-80">Make changes to your account here.</p>
+      </TabsContent>
+      <TabsContent value="password">
+        <p className="text-sm font-bold">Password Settings</p>
+        <p className="text-sm mt-2 opacity-80">Change your password here.</p>
+      </TabsContent>
+    </Tabs>
+  )
+}`,
+    componentNames: ['Tabs', 'TabsList', 'TabsTrigger', 'TabsContent'],
+    manualPath: TABS_PATH,
+  }
+
   return (
     <div className="max-w-5xl mx-auto px-6">
       <header className="mt-0">
@@ -90,6 +136,62 @@ export const TabsDoc = () => {
         </PreviewBlock>
       </div>
 
+      <h3 id="underline" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
+        Underline
+      </h3>
+      <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
+        A cleaner variant with a thick bottom border, ideal for subtle page navigation while retaining the brutalist
+        aesthetic.
+      </p>
+
+      <div className="mt-8 mb-16">
+        <PreviewBlock code={underlineCode} githubUrl={githubUrl}>
+          <div className="flex flex-col w-full max-w-md mx-auto">
+            <Tabs defaultValue="account" variant="underline">
+              <TabsList>
+                <TabsTrigger value="account">Account</TabsTrigger>
+                <TabsTrigger value="password">Password</TabsTrigger>
+              </TabsList>
+              <TabsContent value="account">
+                <p className="text-sm font-bold">Account Settings</p>
+                <p className="text-sm mt-2 opacity-80">Make changes to your account here.</p>
+              </TabsContent>
+              <TabsContent value="password">
+                <p className="text-sm font-bold">Password Settings</p>
+                <p className="text-sm mt-2 opacity-80">Change your password here.</p>
+              </TabsContent>
+            </Tabs>
+          </div>
+        </PreviewBlock>
+      </div>
+
+      <h3 id="vertical" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
+        Vertical
+      </h3>
+      <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
+        A vertical variant where the tabs are stacked to the side of the content.
+      </p>
+
+      <div className="mt-8 mb-16">
+        <PreviewBlock code={verticalCode} githubUrl={githubUrl}>
+          <div className="flex w-full max-w-2xl mx-auto">
+            <Tabs defaultValue="account" variant="vertical">
+              <TabsList>
+                <TabsTrigger value="account">Account</TabsTrigger>
+                <TabsTrigger value="password">Password</TabsTrigger>
+              </TabsList>
+              <TabsContent value="account">
+                <p className="text-sm font-bold">Account Settings</p>
+                <p className="text-sm mt-2 opacity-80">Make changes to your account here.</p>
+              </TabsContent>
+              <TabsContent value="password">
+                <p className="text-sm font-bold">Password Settings</p>
+                <p className="text-sm mt-2 opacity-80">Change your password here.</p>
+              </TabsContent>
+            </Tabs>
+          </div>
+        </PreviewBlock>
+      </div>
       <section className="mb-12">
         <h2 id="api" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           API Reference

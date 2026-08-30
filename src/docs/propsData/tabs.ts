@@ -21,6 +21,13 @@ export const tabsPropsData: PropItem[] = [
     description: 'Event handler called when the value changes.',
   },
   {
+    name: 'variant',
+    type: '"default" | "underline" | "vertical"',
+    defaultValue: '"default"',
+    required: false,
+    description: 'The visual variant of the tabs component.',
+  },
+  {
     name: 'children',
     type: 'ReactNode',
     required: true,
