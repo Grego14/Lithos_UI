@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Lithos UI tabs component primitive.
+ * - Context-driven architecture: manages active state across internal boundaries using React Context.
+ * - Supports three visual variants: Default (brutalist block), Underline (clean bottom border), and Vertical (side-stacked list).
+ * - Underline variant explicitly strips the base `.lithos-click` borders in favor of a minimal bottom stroke.
+ * - Implements native WAI-ARIA roles (\`tablist\`, \`tab\`, \`tabpanel\`) out of the box.
+ */
 import { createContext, useContext, useState, type ComponentPropsWithRef, type ReactNode } from 'react'
 import { cn } from '../../utils/cn'
 
