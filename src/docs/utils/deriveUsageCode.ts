@@ -1,72 +1,86 @@
-export type ManualPath = string | Record<string, string>
+export type ManualPath = string | Record<string, string | string[]>
 
-export const deriveImportLines = (
-  componentNames: string[],
-  manualPath: ManualPath,
+interface DeriveImportOptions {
+  componentNames: string[]
+  types?: string[]
+  manualPath: ManualPath
   mode: 'command' | 'manual'
-): string => {
-  if (mode === 'command') {
-    if (typeof manualPath === 'string') {
-      return `import { ${componentNames.join(', ')} } from 'lithos-ui'`
-    }
+}
 
-    const lithosImports: string[] = []
-    const otherImports: Record<string, string[]> = {}
+export const deriveImportLines = ({ componentNames, types = [], manualPath, mode }: DeriveImportOptions): string => {
+  const typeSet = new Set(types)
+  const groups: Record<string, { path: string; values: string[]; types: string[] }> = {}
 
-    componentNames.forEach((name) => {
-      const path = manualPath[name] || manualPath['others']
-      // Assume paths not starting with '.' (or '/') are external dependencies like 'react'
-      if (path && !path.startsWith('.') && !path.startsWith('/')) {
-        if (!otherImports[path]) {
-          otherImports[path] = []
-        }
-        otherImports[path].push(name)
-      } else {
-        lithosImports.push(name)
+  // map manualPath explicit names if is a Record
+  const customPathMap = new Map<string, string>()
+
+  if (typeof manualPath === 'object' && manualPath !== null) {
+    Object.entries(manualPath).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        value.forEach((name) => customPathMap.set(name, key))
       }
     })
+  }
 
-    const lines: string[] = []
+  componentNames.forEach((name) => {
+    let path: string | null | undefined
 
-    // Add external imports
-    Object.entries(otherImports).forEach(([path, names]) => {
-      lines.push(`import { ${names.join(', ')} } from '${path}'`)
-    })
-
-    // Add lithos-ui imports
-    if (lithosImports.length > 0) {
-      lines.push(`import { ${lithosImports.join(', ')} } from 'lithos-ui'`)
+    // e.g: manualPath = { react: ['useState'] }
+    if (customPathMap.has(name)) {
+      path = customPathMap.get(name)
+    } else if (mode === 'command') {
+      path = 'lithos-ui'
+    } else if (typeof manualPath === 'string') {
+      path = manualPath
     }
 
-    return lines.join('\n')
-  }
+    // direct key-value map or fallback to 'others'
+    else {
+      const pathValue = manualPath[name] || manualPath['others']
+      path = typeof pathValue === 'string' ? pathValue : null
+    }
 
-  if (typeof manualPath === 'string') {
-    return `import { ${componentNames.join(', ')} } from '${manualPath}'`
-  }
-
-  // Group manual imports by path to avoid multiple lines for the same module
-  const manualGroups: Record<string, string[]> = {}
-  componentNames.forEach((name) => {
-    const path = manualPath[name] || manualPath['others']
     if (!path) return
 
-    if (!manualGroups[path]) {
-      manualGroups[path] = []
+    if (!groups[path]) {
+      groups[path] = { path, values: [], types: [] }
     }
-    manualGroups[path].push(name)
+
+    if (typeSet.has(name)) {
+      groups[path]?.types.push(name)
+    } else {
+      groups[path]?.values.push(name)
+    }
   })
 
-  return Object.entries(manualGroups)
-    .map(([path, names]) => `import { ${names.join(', ')} } from '${path}'`)
+  return Object.values(groups)
+    .map(({ path, values, types: groupTypes }) => {
+      const typeItems = groupTypes.map((t) => `type ${t}`)
+      const allImports = [...values, ...typeItems]
+
+      if (allImports.length === 0) return ''
+      return `import { ${allImports.join(', ')} } from '${path}'`
+    })
+    .filter(Boolean)
     .join('\n')
 }
 
-export const deriveUsageCode = (
-  componentNames: string[],
-  manualPath: ManualPath,
-  body: string,
-  mode: 'command' | 'manual'
-): string => {
-  return `${deriveImportLines(componentNames, manualPath, mode)}\n\n${body}`
+export interface UsageCodeConfig {
+  body: string
+  componentNames: string[]
+  types?: string[]
+  manualPath: ManualPath
+}
+
+export const deriveUsageCode = (config: UsageCodeConfig, mode: 'command' | 'manual'): string => {
+  const { componentNames, types = [], manualPath, body } = config
+
+  const importLines = deriveImportLines({
+    componentNames,
+    types,
+    manualPath,
+    mode,
+  })
+
+  return `${importLines}\n\n${body}`
 }
