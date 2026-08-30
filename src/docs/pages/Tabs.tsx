@@ -1,4 +1,5 @@
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
+import { CodeViewer } from '../../components/ui/CodeViewer'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../components/ui/Tabs'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { tabsPropsData, tabsTriggerPropsData, tabsContentPropsData } from '../propsData/tabs'
@@ -192,6 +193,40 @@ export const TabsDoc = () => {
           </div>
         </PreviewBlock>
       </div>
+
+      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
+        Anatomy
+      </h2>
+      <div className="mb-12">
+        <CodeViewer
+          language="tsx"
+          code={`<Tabs defaultValue="1">
+  <TabsList>
+    <TabsTrigger value="1">Tab 1</TabsTrigger>
+    <TabsTrigger value="2">Tab 2</TabsTrigger>
+  </TabsList>
+  <TabsContent value="1">Panel 1</TabsContent>
+  <TabsContent value="2">Panel 2</TabsContent>
+</Tabs>`}
+        />
+      </div>
+
+      <section className="mb-12">
+        <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
+          Accessibility
+        </h2>
+        <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
+          <li>
+            Uses standard WAI-ARIA roles (<code>tablist</code>, <code>tab</code>, and <code>tabpanel</code>).
+          </li>
+          <li>
+            <code>TabsTrigger</code> uses native <code>&lt;button&gt;</code> elements and automatically manages the{' '}
+            <code>aria-selected</code> state.
+          </li>
+          <li>Keyboard navigation is inherently supported through native button focus management.</li>
+        </ul>
+      </section>
+
       <section className="mb-12">
         <h2 id="api" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           API Reference
