@@ -1,4 +1,9 @@
-import * as React from 'react'
+/**
+ * @fileoverview Lithos UI popover state primitive.
+ * - Manages floating placement, backdrop interactions, open state (controlled/uncontrolled), and ARIA attributes.
+ * - Encapsulates `@floating-ui/react` logic into a single reusable hook and Context provider.
+ */
+import { useState, useMemo, createContext, useContext, useId } from 'react'
 import {
   useFloating,
   autoUpdate,
@@ -7,21 +12,11 @@ import {
   shift,
   useClick,
   useDismiss,
-  useRole,
   useInteractions,
-  useId,
   size,
   type ElementProps,
+  type Placement,
 } from '@floating-ui/react'
-import type { Placement, ReferenceType, UseFloatingReturn, UseInteractionsReturn } from '@floating-ui/react'
-
-export interface PopoverReturn extends UseFloatingReturn<ReferenceType>, UseInteractionsReturn {
-  open: boolean
-  setOpen: (open: boolean) => void
-  modal: boolean | undefined
-  labelId: string | undefined
-  descriptionId: string | undefined
-}
 
 export interface PopoverOptions {
   initialOpen?: boolean
@@ -30,6 +25,7 @@ export interface PopoverOptions {
   open?: boolean
   onOpenChange?: (open: boolean) => void
   interactions?: ElementProps[]
+  offset?: number
 }
 
 export const usePopover = ({
@@ -39,8 +35,9 @@ export const usePopover = ({
   open: controlledOpen,
   onOpenChange: setControlledOpen,
   interactions: extraInteractions = [],
-}: PopoverOptions = {}): PopoverReturn => {
-  const [uncontrolledOpen, setUncontrolledOpen] = React.useState(initialOpen)
+  offset: consumerOffset,
+}: PopoverOptions = {}) => {
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(initialOpen)
   const labelId = useId()
   const descriptionId = useId()
 
@@ -53,7 +50,7 @@ export const usePopover = ({
     onOpenChange: setOpen,
     whileElementsMounted: autoUpdate,
     middleware: [
-      offset(0),
+      offset(consumerOffset ?? 0),
       flip({
         fallbackAxisSideDirection: 'end',
       }),
@@ -72,11 +69,10 @@ export const usePopover = ({
 
   const click = useClick(context)
   const dismiss = useDismiss(context)
-  const role = useRole(context)
 
-  const interactions = useInteractions([click, dismiss, role, ...extraInteractions])
+  const interactions = useInteractions([click, dismiss, ...extraInteractions])
 
-  return React.useMemo(
+  return useMemo(
     () => ({
       open,
       setOpen,
@@ -90,14 +86,13 @@ export const usePopover = ({
   )
 }
 
-type ContextType = PopoverReturn | null
+export type PopoverContextType = ReturnType<typeof usePopover> | null
 
-export const PopoverContext = React.createContext<ContextType>(null)
+export const PopoverContext = createContext<PopoverContextType>(null)
 
-export const usePopoverContext = (): PopoverReturn => {
-  const context = React.useContext(PopoverContext)
-  if (context == null) {
-    throw new Error('Popover components must be wrapped in <Popover />')
-  }
+export const usePopoverContext = () => {
+  const context = useContext(PopoverContext)
+  if (!context) throw new Error('Popover components must be wrapped in <Popover />')
+
   return context
 }
