@@ -29,3 +29,5 @@ Object.defineProperty(window, 'localStorage', {
     clear: vi.fn(),
   },
 })
+
+window.HTMLElement.prototype.scrollIntoView = vi.fn()
