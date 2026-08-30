@@ -182,8 +182,8 @@ export const CheckboxDoc = () => {
     </>
   )
 }`,
-    componentNames: ['Checkbox'],
-    manualPath,
+    componentNames: ['Checkbox', 'useState'],
+    manualPath: { ...manualPath, react: ['useState'] },
   }
 
   const disabledCode = {
@@ -209,8 +209,8 @@ export const CheckboxDoc = () => {
     </CheckboxGroup>
   )
 }`,
-    componentNames: ['Checkbox', 'CheckboxGroup'],
-    manualPath,
+    componentNames: ['Checkbox', 'CheckboxGroup', 'useState'],
+    manualPath: { ...manualPath, react: ['useState'] },
   }
 
   const horizontalGroupCode = {

@@ -218,8 +218,8 @@ export const SizeDialogDemo = () => {
     </>
   )
 }`,
-    componentNames: ['Dialog', 'DialogHeader', 'DialogTitle', 'DialogBody', 'DialogFooter', 'Button'],
-    manualPath,
+    componentNames: ['Dialog', 'DialogHeader', 'DialogTitle', 'DialogBody', 'DialogFooter', 'Button', 'useState'],
+    manualPath: { ...manualPath, react: ['useState'] },
   }
 
   const scrollDialogCode = {
@@ -270,8 +270,8 @@ export const SizeDialogDemo = () => {
     </>
   )
 }`,
-    componentNames: ['Dialog', 'DialogHeader', 'DialogTitle', 'DialogBody', 'DialogFooter', 'Button'],
-    manualPath,
+    componentNames: ['Dialog', 'DialogHeader', 'DialogTitle', 'DialogBody', 'DialogFooter', 'Button', 'useState'],
+    manualPath: { ...manualPath, react: ['useState'] },
   }
 
   const customDialogCode = {
@@ -296,8 +296,12 @@ export const SizeDialogDemo = () => {
     </>
   )
 }`,
-    componentNames: ['CustomDialog', 'Button', 'IconAlertTriangle'],
-    manualPath: { ...manualPath, IconAlertTriangle: '../../components/ui/icons/IconAlertTriangle' },
+    componentNames: ['CustomDialog', 'Button', 'IconAlertTriangle', 'useState'],
+    manualPath: {
+      ...manualPath,
+      IconAlertTriangle: '../../components/ui/icons/IconAlertTriangle',
+      react: ['useState'],
+    },
   }
 
   return (
