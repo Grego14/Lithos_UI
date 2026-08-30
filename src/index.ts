@@ -20,6 +20,7 @@ export * from './components/ui/Input'
 export * from './components/ui/KineticGrid'
 export * from './components/ui/Popover'
 export * from './components/ui/Select'
+export * from './components/ui/Tabs'
 export * from './components/ui/Toast'
 export * from './components/ui/Toggle'
 
