@@ -42,7 +42,7 @@ export const CardDoc = () => {
         <CardDescription>I am the good shepherd: the good shepherd giveth his life for the sheep.</CardDescription>
       </CardContent>
       <CardFooter>
-        <Button intent="secondary" className="mr-3">
+        <Button variant="secondary" className="mr-3">
           Cancel
         </Button>
         <Button>Confirm</Button>
