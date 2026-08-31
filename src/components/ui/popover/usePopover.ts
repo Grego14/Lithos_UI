@@ -16,6 +16,7 @@ import {
   size,
   type ElementProps,
   type Placement,
+  type UseFloatingReturn,
 } from '@floating-ui/react'
 
 export interface PopoverOptions {
@@ -28,6 +29,15 @@ export interface PopoverOptions {
   offset?: number
 }
 
+export type PopoverReturn = {
+  open: boolean
+  setOpen: (open: boolean) => void
+  modal?: boolean | undefined
+  labelId: string
+  descriptionId: string
+} & ReturnType<typeof useInteractions> &
+  UseFloatingReturn
+
 export const usePopover = ({
   initialOpen = false,
   placement = 'bottom-start',
@@ -36,7 +46,7 @@ export const usePopover = ({
   onOpenChange: setControlledOpen,
   interactions: extraInteractions = [],
   offset: consumerOffset,
-}: PopoverOptions = {}) => {
+}: PopoverOptions = {}): PopoverReturn => {
   const [uncontrolledOpen, setUncontrolledOpen] = useState(initialOpen)
   const labelId = useId()
   const descriptionId = useId()
@@ -86,11 +96,11 @@ export const usePopover = ({
   )
 }
 
-export type PopoverContextType = ReturnType<typeof usePopover> | null
+export type PopoverContextType = PopoverReturn | null
 
 export const PopoverContext = createContext<PopoverContextType>(null)
 
-export const usePopoverContext = () => {
+export const usePopoverContext = (): PopoverReturn => {
   const context = useContext(PopoverContext)
   if (!context) throw new Error('Popover components must be wrapped in <Popover />')
 

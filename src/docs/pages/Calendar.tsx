@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { Calendar } from '../../components/ui/Calendar'
-import type { CalendarValue } from '../../components/ui/calendar/calendar.types'
+import type { CalendarValue } from '../../components/ui/Calendar'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
 import { calendarPropsData } from '../propsData/calendar'
