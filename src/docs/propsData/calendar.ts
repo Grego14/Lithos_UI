@@ -1,4 +1,5 @@
 import type { PropItem } from '../../components/ui/PropsTable'
+import type { LithosClass } from '../../utils/cn'
 
 export const calendarPropsData: PropItem[] = [
   {
@@ -95,7 +96,7 @@ export const calendarPropsData: PropItem[] = [
   },
   {
     name: 'classes',
-    type: 'object',
+    type: '{ [key in "container" | "header" | "nav" | "monthSelect" | "yearSelect" | "weekdays" | "grid" | "cell" | "day"]?: LithosClass }',
     required: false,
     description: 'Custom class overrides for calendar internal elements.',
   },
