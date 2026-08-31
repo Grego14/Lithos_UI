@@ -1,5 +1,4 @@
 import type { PropItem } from '../../components/ui/PropsTable'
-import type { LithosClass } from '../../utils/cn'
 
 export const calendarPropsData: PropItem[] = [
   {
