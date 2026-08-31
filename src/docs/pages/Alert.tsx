@@ -99,7 +99,7 @@ export const AlertWithUndo = () => {
   )
 }`,
     componentNames: ['useState', 'Alert'],
-    manualPath: { useState: 'react', Alert: '../../components/ui/Alert' },
+    manualPath: { react: ['useState'], Alert: '../../components/ui/Alert' },
   }
 
   const customCode = {

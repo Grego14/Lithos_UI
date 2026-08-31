@@ -1,34 +1,31 @@
 import { useState } from 'react'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
-import { Calendar, type CalendarValue } from '../../components/ui/Calendar'
+import { Calendar } from '../../components/ui/Calendar'
+import type { CalendarValue } from '../../components/ui/calendar/calendar.types'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
 import { calendarPropsData } from '../propsData/calendar'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Calendar.tsx'
 
-export const CalendarDoc = () => {
-  const [controlledValue, setControlledValue] = useState<CalendarValue>(null)
-  const [controlledMonth, setControlledMonth] = useState(new Date())
-
-  const singleCode = {
-    body: `export const SingleCalendar = () => {
+const singleCode = {
+  body: `export const SingleCalendar = () => {
   return <Calendar mode='single' />
 }`,
-    componentNames: ['Calendar'],
-    manualPath: '../../components/ui/Calendar',
-  }
+  componentNames: ['Calendar'],
+  manualPath: '../../components/ui/Calendar',
+}
 
-  const multipleCode = {
-    body: `export const MultipleCalendar = () => {
+const multipleCode = {
+  body: `export const MultipleCalendar = () => {
   return <Calendar mode='multiple' />
 }`,
-    componentNames: ['Calendar'],
-    manualPath: '../../components/ui/Calendar',
-  }
+  componentNames: ['Calendar'],
+  manualPath: '../../components/ui/Calendar',
+}
 
-  const multiColorCode = {
-    body: `const gymColors = [
+const multiColorCode = {
+  body: `const gymColors = [
   { dates: [4, 5], color: '#ff6b6b' },
   { dates: [17, 18, 19], color: '#4dabf7' },
 ]
@@ -41,52 +38,52 @@ export const MultiColorCalendar = () => {
     />
   )
 }`,
-    componentNames: ['Calendar'],
-    manualPath: '../../components/ui/Calendar',
-  }
+  componentNames: ['Calendar'],
+  manualPath: '../../components/ui/Calendar',
+}
 
-  const rainbowCode = {
-    body: `export const RainbowCalendar = () => {
+const rainbowCode = {
+  body: `export const RainbowCalendar = () => {
   return <Calendar mode="rainbow" />
 }`,
-    componentNames: ['Calendar'],
-    manualPath: '../../components/ui/Calendar',
-  }
+  componentNames: ['Calendar'],
+  manualPath: '../../components/ui/Calendar',
+}
 
-  const rangeCode = {
-    body: `export const RangeCalendar = () => {
+const rangeCode = {
+  body: `export const RangeCalendar = () => {
   return <Calendar mode='range' />
 }`,
-    componentNames: ['Calendar'],
-    manualPath: '../../components/ui/Calendar',
-  }
+  componentNames: ['Calendar'],
+  manualPath: '../../components/ui/Calendar',
+}
 
-  const disabledDatesCode = {
-    body: `const bookedDates = [10, 11, 18]
+const disabledDatesCode = {
+  body: `const bookedDates = [10, 11, 18]
 
 export const DisabledDatesCalendar = () => {
   return (
-    <Calendar 
-      mode='single' 
-      disabledDates={bookedDates} 
-      minDate={new Date()} 
+    <Calendar
+      mode='single'
+      disabledDates={bookedDates}
+      minDate={new Date()}
     />
   )
 }`,
-    componentNames: ['Calendar'],
-    manualPath: '../../components/ui/Calendar',
-  }
+  componentNames: ['Calendar'],
+  manualPath: '../../components/ui/Calendar',
+}
 
-  const boundedYearsCode = {
-    body: `export const BoundedYearsCalendar = () => {
+const boundedYearsCode = {
+  body: `export const BoundedYearsCalendar = () => {
   return <Calendar mode='single' yearRange={[1940, new Date().getFullYear()]} />
 }`,
-    componentNames: ['Calendar'],
-    manualPath: '../../components/ui/Calendar',
-  }
+  componentNames: ['Calendar'],
+  manualPath: '../../components/ui/Calendar',
+}
 
-  const controlledCode = {
-    body: `export const ControlledCalendar = () => {
+const controlledCode = {
+  body: `export const ControlledCalendar = () => {
   const [value, setValue] = useState<CalendarValue>(null)
   const [month, setMonth] = useState(new Date())
 
@@ -100,10 +97,29 @@ export const DisabledDatesCalendar = () => {
     />
   )
 }`,
-    componentNames: ['Calendar', 'useState'],
-    manualPath: { Calendar: '../../components/ui/Calendar', useState: 'react' },
-  }
+  componentNames: ['Calendar', 'useState'],
+  manualPath: {
+    Calendar: '../../components/ui/Calendar',
+    react: ['useState'],
+  },
+}
 
+const ControlledCalendar = () => {
+  const [controlledValue, setControlledValue] = useState<CalendarValue>(null)
+  const [controlledMonth, setControlledMonth] = useState(new Date())
+
+  return (
+    <Calendar
+      mode="single"
+      value={controlledValue}
+      onChange={setControlledValue}
+      month={controlledMonth}
+      onMonthChange={setControlledMonth}
+    />
+  )
+}
+
+export const CalendarDoc = () => {
   return (
     <div className="max-w-5xl mx-auto px-6">
       <header className="mt-0">
@@ -278,13 +294,7 @@ export const DisabledDatesCalendar = () => {
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={controlledCode} githubUrl={githubUrl}>
-          <Calendar
-            mode="single"
-            value={controlledValue}
-            onChange={setControlledValue}
-            month={controlledMonth}
-            onMonthChange={setControlledMonth}
-          />
+          <ControlledCalendar />
         </PreviewBlock>
       </div>
 

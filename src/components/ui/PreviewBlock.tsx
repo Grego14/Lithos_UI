@@ -57,8 +57,7 @@ export const PreviewBlock = ({
   const [showInstall, setShowInstall] = useState(false)
   const { installTab } = useInstallPreference()
 
-  const resolvedCode =
-    typeof code === 'string' ? code : deriveUsageCode(code.componentNames, code.manualPath, code.body, installTab)
+  const resolvedCode = typeof code === 'string' ? code : deriveUsageCode(code, installTab)
 
   const getIframeWidth = () => {
     if (breakpoint === 'mobile') return '375px'

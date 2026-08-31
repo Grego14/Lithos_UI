@@ -62,8 +62,12 @@ export const ButtonDoc = () => {
     </div>
   )
 }`,
-    componentNames: ['Button'],
-    manualPath: '../../components/ui/Button',
+    componentNames: ['Button', 'IconHome', 'IconSettings'],
+    manualPath: {
+      Button: '../../components/ui/Button',
+      IconHome: '../../components/ui/icons/IconHome',
+      IconSettings: '../../components/ui/icons/IconSettings',
+    },
   }
 
   const iconCode = {
@@ -74,8 +78,11 @@ export const ButtonDoc = () => {
     </Button>
   )
 }`,
-    componentNames: ['Button'],
-    manualPath: '../../components/ui/Button',
+    componentNames: ['Button', 'IconDownload'],
+    manualPath: {
+      Button: '../../components/ui/Button',
+      IconDownload: '../../components/ui/icons/IconDownload',
+    },
   }
 
   const groupHorizontalCode = {

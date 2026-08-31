@@ -21,7 +21,7 @@ export const ToggleDoc = () => {
   )
 }`,
     componentNames: ['Toggle', 'useState'],
-    manualPath: { useState: 'react', Toggle: '../../components/ui/Toggle' },
+    manualPath: { react: ['useState'], Toggle: '../../components/ui/Toggle' },
   }
 
   return (

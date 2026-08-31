@@ -28,8 +28,8 @@ export const SetupGuide = ({
 }: SetupGuideProps) => {
   const { installTab, updateInstallTab, packageManager, updatePackageManager } = useInstallPreference()
 
-  const commandImport = deriveImportLines(componentNames, manualPath, 'command')
-  const manualImport = deriveImportLines(componentNames, manualPath, 'manual')
+  const commandImport = deriveImportLines({ componentNames, manualPath, mode: 'command' })
+  const manualImport = deriveImportLines({ componentNames, manualPath, mode: 'manual' })
 
   // If manualOnly is true, we force it to act like the manual tab is selected.
   const isManual = manualOnly || installTab === 'manual'
