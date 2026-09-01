@@ -64,18 +64,36 @@ To prevent Tailwind class bloat ("DRY" architecture), Lithos UI packages its mec
 
 ## Installation
 
-Lithos UI is currently a **Code Ownership Kit**. You copy the raw blocks into your project so you retain absolute control over the markup. It will eventually become a published **NPM package**, but it will always remain **100% free and open-source**.
+Lithos UI is a published NPM package. It will always remain **100% free and open-source**.
 
-As we continue to grow, more ready-made components, layout blocks, and dynamic features will be added to the library.
+You can install it using your favorite package manager:
 
-**Starting a new project?**
-Click the Fork button at the top of the repository to instantly generate a fresh React app with the global design tokens and Theme Engine pre-configured.
+```bash
+pnpm add lithos-ui
+# or
+npm install lithos-ui
+# or
+yarn add lithos-ui
+```
 
-**Adding to an existing project?**
+### Setup
 
 1. Ensure your project is running **React** and **Tailwind CSS v4+**.
-2. Copy the `index.css` global tokens into your main stylesheet.
-3. Drop the components from the `/components` folder into your standard architecture.
+2. Import the global CSS tokens into your main application file (e.g., `main.tsx` or `App.tsx`):
+
+```tsx
+import 'lithos-ui/tokens.css'
+```
+
+3. Start using the components:
+
+```tsx
+import { Button } from 'lithos-ui'
+
+export default function App() {
+  return <Button>Click me</Button>
+}
+```
 
 ## Versioning
 

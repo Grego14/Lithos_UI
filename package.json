@@ -1,5 +1,23 @@
 {
-  "name": "lithosui",
+  "name": "lithos-ui",
+  "description": "A free, neo-brutalist React component library built with absolute structural integrity.",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "ui",
+    "components",
+    "tailwind",
+    "neobrutalism",
+    "lithos"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lithosui/Lithos_UI.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lithosui/Lithos_UI/issues"
+  },
+  "homepage": "https://github.com/lithosui/Lithos_UI#readme",
   "private": false,
   "version": "0.1.0",
   "author": "David Akinloye",
