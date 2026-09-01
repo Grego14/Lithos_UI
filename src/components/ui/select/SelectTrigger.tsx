@@ -36,11 +36,7 @@ export const SelectTrigger = ({
       <Button
         id={labelId}
         variant="secondary"
-        className={[
-          'justify-start',
-          isOpen && 'shadow-[0px_0px_0_0_var(--lithos-shadow)] shadow-none translate-x-0.5 translate-y-0.5',
-          className,
-        ]}
+        className={['justify-start', isOpen && 'hover:shadow-[2px_2px_0_0_var(--lithos-shadow)]', className]}
         aria-label={computedAriaLabel}
         {...rest}
       >
