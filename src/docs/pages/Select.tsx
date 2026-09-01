@@ -291,7 +291,7 @@ export const SelectDoc = () => {
           'components/ui/select/useSelect.ts',
           'components/ui/select/select.types.ts',
           '@floating-ui/react',
-          '@tanstack/react-virtual',
+          'core/hooks/useVirtualizer.ts',
         ]}
       />
 
