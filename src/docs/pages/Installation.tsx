@@ -58,10 +58,27 @@ export const Installation = () => {
         3. Global CSS Configuration
       </h2>
       <p className="mb-6 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
-        If you are integrating into an existing project, you must define the Lithos UI physics engine and root tokens in
-        your global CSS file. This powers the zero-render theme switching.
+        If you are integrating into an existing project, you must define the Lithos UI physics engine and root tokens.
+        If you are importing these in your JavaScript entrypoint (like <code>main.tsx</code> or <code>App.tsx</code>),{' '}
+        <strong>the import order is critical</strong>.
       </p>
-      <CodeViewer code={cssConfig} language="css" />
+
+      <div className="border-l-4 border-red-500 pl-6 py-2 mb-8 bg-(--lithos-surface) p-4">
+        <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
+          <strong>CRITICAL: Tailwind v4 Layer Ordering</strong>
+          <br />
+          You must import your Tailwind CSS file <strong>before</strong> importing <code>lithos-ui/tokens.css</code>. If
+          you import Lithos UI first, the browser will drop its <code>@layer components</code> to the bottom of the
+          priority stack, causing Tailwind's Preflight to accidentally erase button padding and interactive physics.
+        </p>
+      </div>
+
+      <CodeViewer
+        code={`// Correct Import Order
+import './index.css' // Your Tailwind configuration MUST come first
+import 'lithos-ui/tokens.css' // Lithos UI tokens come second`}
+        language="tsx"
+      />
 
       <h2 id="theming-configuration" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         4. Theming & Configuration
