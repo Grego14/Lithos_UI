@@ -4,11 +4,10 @@
  * - Handles keyboard activation (Enter/Space) and mouse click events to trigger value changes.
  * - Registers item index dynamically with Floating UI for smooth keyboard list navigation.
  */
-import type { ReactNode, ComponentPropsWithRef, MouseEvent } from 'react'
+import type { ReactNode, ComponentPropsWithRef } from 'react'
 import { useListItem } from '@floating-ui/react'
 import { cn, type LithosClass } from '../../../utils/cn'
 import { useSelect } from './useSelect'
-import { getContrastText } from '../../../utils/yiq'
 import { useAccentColor } from '../../../core/useAccentColor'
 import { usePopoverContext } from '../popover/usePopover'
 
@@ -18,21 +17,11 @@ export interface SelectItemProps extends Omit<ComponentPropsWithRef<'li'>, 'clas
   children: ReactNode
   className?: LithosClass
   index?: number
-  shouldVirtualize?: boolean
 }
 
-export const SelectItem = ({
-  value,
-  disabled,
-  children,
-  className,
-  index,
-  shouldVirtualize = false,
-  ...rest
-}: SelectItemProps) => {
-  const { selectedValue, activeIndex, multiple, registerElement, handleSelect } = useSelect()
-  const { accentColor } = useAccentColor()
-  const fgColor = getContrastText(accentColor)
+export const SelectItem = ({ value, disabled, children, className, index, style, ...rest }: SelectItemProps) => {
+  const { selectedValue, activeIndex, multiple, registerElement } = useSelect()
+  const { contrastedAccentColor } = useAccentColor()
 
   const { getItemProps } = usePopoverContext()
 
@@ -53,23 +42,16 @@ export const SelectItem = ({
           registerElement(currentIndex, node)
         }
       }}
-      aria-disabled={disabled || undefined}
+      aria-disabled={disabled}
       data-active={isActive ? 'true' : undefined}
       data-value={value}
       data-index={index}
       tabIndex={currentIndex === index ? 0 : -1}
-      style={{ color: isSelected ? fgColor : 'var(--lithos-text)' }}
+      style={{ ...style, color: isSelected ? contrastedAccentColor : 'var(--lithos-text)' }}
       {...getItemProps({
         active: isActive,
         selected: isSelected,
         disabled,
-        onClick: (e: MouseEvent<HTMLLIElement>) => {
-          if (disabled) return
-
-          if (!shouldVirtualize) {
-            handleSelect(value, e)
-          }
-        },
       })}
       className={cn(
         'cursor-pointer select-none px-3 py-1.5 text-sm outline-none',

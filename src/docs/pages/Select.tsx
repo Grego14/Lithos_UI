@@ -36,15 +36,15 @@ const CustomSelectLayout = () => {
       <SelectTrigger className="w-full justify-between">
         <span className="flex items-center space-x-2 truncate min-w-0">
           {currentOption && <span className={cn('size-2 rounded-full shrink-0', currentOption.color)} />}
-          <span className="truncate min-w-0 font-medium">
+          <span className="truncate min-w-0 font-medium leading-[1.15]">
             {currentOption ? currentOption.label : 'Select a framework...'}
           </span>
         </span>
         <IconChevronDown className="ml-2 size-4 shrink-0 opacity-60" />
       </SelectTrigger>
       <SelectContent>
-        {FRAMEWORK_OPTIONS.map((opt) => (
-          <SelectItem key={opt.value} value={opt.value}>
+        {FRAMEWORK_OPTIONS.map((opt, i) => (
+          <SelectItem key={opt.value} value={opt.value} index={i}>
             <div className="flex items-center justify-between w-full space-x-4">
               <span className="flex items-center space-x-2 min-w-0">
                 <span className={cn('size-2 rounded-full shrink-0', opt.color)} />
@@ -158,7 +158,7 @@ const CustomSelectLayout = () => {
           {currentOption && (
             <span className={\`size-2 rounded-full shrink-0 \${currentOption.color}\`} />
           )}
-          <span className='truncate min-w-0 font-medium'>
+          <span className='truncate min-w-0 font-medium leading-[1.15]'>
             {currentOption ? currentOption.label : 'Select a framework...'}
           </span>
         </span>
@@ -166,8 +166,8 @@ const CustomSelectLayout = () => {
       </SelectTrigger>
 
       <SelectContent>
-        {FRAMEWORK_OPTIONS.map(opt => (
-          <SelectItem key={opt.value} value={opt.value}>
+        {FRAMEWORK_OPTIONS.map((opt, i) => (
+          <SelectItem key={opt.value} value={opt.value} index={i}>
             <div className='flex items-center justify-between w-full space-x-4'>
               <span className='flex items-center space-x-2 min-w-0'>
                 <span className={\`size-2 rounded-full shrink-0 \${opt.color}\`} />
@@ -354,6 +354,11 @@ export const SelectDoc = () => {
           When using a custom composition layout with the <code>multiple</code> prop, retrieve{' '}
           <code>selectedValue</code> and <code>multiple</code> via the <code>useSelect()</code> hook to manage custom
           label rendering or multi-selection tags inside your trigger.
+        </p>
+
+        <p className="text-sm font-medium font-body opacity-80 mt-4">
+          Don't forget to add the <code>index</code>prop to the SelectItem, otherwise you will need to add an onClick
+          event to the SelectContent component.
         </p>
       </div>
 

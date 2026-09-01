@@ -6,13 +6,14 @@
  */
 import type { ReactNode, ComponentPropsWithRef, MouseEvent, KeyboardEvent } from 'react'
 import { useEffect, useCallback } from 'react'
-import { useVirtualizer } from '@tanstack/react-virtual'
 import type { LithosClass } from '../../../utils/cn'
 import { PopoverContent } from '../popover/PopoverContent'
 import { usePopoverContext } from '../popover/usePopover'
 import { useSelect } from './useSelect'
 import { FloatingList } from '@floating-ui/react'
 import { SelectItem } from './SelectItem'
+import { useVirtualizer } from '../../../core/hooks/useVirtualizer'
+import type { SelectOption } from './select.types'
 
 export interface SelectContentProps extends Omit<ComponentPropsWithRef<'ul'>, 'className'> {
   children?: ReactNode
@@ -29,7 +30,7 @@ export const SelectContent = ({
   loop = true,
   virtualizeThreshold = 30,
   estimateSize = 32,
-  overscan = 20,
+  overscan = 15,
   ...rest
 }: SelectContentProps) => {
   const { selectedValue, activeIndex, setActiveIndex, elementsRef, labelsRef, handleSelect, open, options, setOpen } =
@@ -40,53 +41,56 @@ export const SelectContent = ({
     Array.isArray(options) &&
     (typeof virtualizeThreshold === 'boolean' ? virtualizeThreshold : options.length >= virtualizeThreshold)
 
-  const rowVirtualizer = useVirtualizer({
+  const { containerRef, virtualItems, totalHeight, scrollToIndex } = useVirtualizer<HTMLDivElement>({
     count: shouldVirtualize ? options.length : 0,
-    getScrollElement: () => refs.floating.current,
-    estimateSize: () => estimateSize,
+    itemHeight: estimateSize,
     overscan,
+    initialIndex: activeIndex ?? 0,
   })
 
   const scrollToOption = useCallback(
     (index: number | null) => {
       if (index === null || index === undefined) return
 
-      requestAnimationFrame(() => {
-        if (shouldVirtualize) {
-          rowVirtualizer.scrollToIndex(index, { align: 'start', behavior: 'instant' })
+      if (shouldVirtualize) {
+        // updates the visible range
+        scrollToIndex(index)
 
+        // wait until React renders the virtual items on the new position
+        requestAnimationFrame(() => {
           requestAnimationFrame(() => {
-            const el = elementsRef.current[index]
-            if (el) {
-              el.focus({ preventScroll: true })
-            } else if (refs.floating.current) {
+            // force the floating element to retain the focus
+            if (refs.floating.current && document.activeElement !== refs.floating.current) {
               refs.floating.current.focus({ preventScroll: true })
             }
           })
-          return
-        }
+        })
+        return
+      }
 
+      requestAnimationFrame(() => {
         const activeElement = elementsRef.current[index]
-        if (activeElement) {
-          activeElement.scrollIntoView({ behavior: 'instant', block: 'nearest' })
-        }
+
+        if (activeElement) activeElement.scrollIntoView({ behavior: 'instant', block: 'nearest' })
       })
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [shouldVirtualize, rowVirtualizer, elementsRef]
+    [shouldVirtualize, elementsRef, scrollToIndex, refs.floating]
   )
 
   useEffect(() => {
-    if (!open) return
+    if (!open || !options?.length) return
 
-    if (shouldVirtualize) rowVirtualizer.measure()
+    const optsLength = options?.length || 0
+    if (optsLength === 0) {
+      setActiveIndex(null)
+      return
+    }
 
     let targetIndex = activeIndex
-    const optsLength = options?.length || 0
 
     if (targetIndex === null || targetIndex === undefined || targetIndex >= optsLength) {
       if (selectedValue) {
-        targetIndex = options?.findIndex((opt) => String(opt.value) === String(selectedValue)) ?? -1
+        targetIndex = options?.findIndex((opt) => opt.value === selectedValue) ?? -1
       }
 
       if (targetIndex === -1) {
@@ -94,31 +98,31 @@ export const SelectContent = ({
       }
     }
 
-    if (optsLength > 0) {
-      targetIndex = Math.max(0, Math.min(targetIndex ?? 0, optsLength - 1))
+    targetIndex = Math.max(0, Math.min(targetIndex ?? 0, optsLength - 1))
 
-      if (targetIndex !== activeIndex) setActiveIndex(targetIndex)
+    if (targetIndex !== activeIndex) setActiveIndex(targetIndex)
 
-      requestAnimationFrame(() => {
-        scrollToOption(targetIndex)
-      })
-    } else {
-      setActiveIndex(null)
-    }
+    const timer = requestAnimationFrame(() => {
+      requestAnimationFrame(() => scrollToOption(targetIndex))
+    })
 
+    return () => cancelAnimationFrame(timer)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, options, selectedValue])
+  }, [open])
 
   const getNextNavigableIndex = (currentIndex: number | null, direction: 'down' | 'up') => {
     const totalItems = shouldVirtualize ? (options?.length ?? 0) : elementsRef.current.length
     if (totalItems === 0) return null
 
+    // resolve the initial index
     if (currentIndex === null || currentIndex === undefined) {
       const initialIndex = direction === 'down' ? 0 : totalItems - 1
-      const initialEl = elementsRef.current[initialIndex]
-      const isDisabled = initialEl?.getAttribute('aria-disabled') === 'true'
 
-      if (initialEl && !isDisabled) return initialIndex
+      const isInitialDisabled = shouldVirtualize
+        ? !!options?.[initialIndex]?.disabled
+        : elementsRef.current[initialIndex]?.getAttribute('aria-disabled') === 'true'
+
+      if (!isInitialDisabled) return initialIndex
       currentIndex = initialIndex
     }
 
@@ -126,9 +130,19 @@ export const SelectContent = ({
 
     for (let i = 0; i < totalItems; i++) {
       if (direction === 'down') {
-        nextIndex = nextIndex + 1 >= totalItems ? (loop ? 0 : totalItems - 1) : nextIndex + 1
+        // user tries to go down on the last option
+        if (nextIndex + 1 >= totalItems) {
+          nextIndex = loop ? 0 : totalItems - 1
+        } else {
+          nextIndex++
+        }
       } else {
-        nextIndex = nextIndex - 1 < 0 ? (loop ? totalItems - 1 : 0) : nextIndex - 1
+        // user tries to go up on the initial option
+        if (nextIndex - 1 < 0) {
+          nextIndex = loop ? totalItems - 1 : 0
+        } else {
+          nextIndex -= 1
+        }
       }
 
       const isDisabled = shouldVirtualize
@@ -158,6 +172,13 @@ export const SelectContent = ({
       const nextIndex = getNextNavigableIndex(startingIndex, dir)
 
       if (nextIndex !== null) {
+        const option = options?.[nextIndex]
+        const element = elementsRef.current[nextIndex]
+
+        const isDisabled = shouldVirtualize ? !!option?.disabled : element?.getAttribute('aria-disabled') === 'true'
+
+        if (isDisabled || !(option && element)) return
+
         setActiveIndex(nextIndex)
         scrollToOption(nextIndex)
       }
@@ -193,7 +214,7 @@ export const SelectContent = ({
         if (!option) return
 
         isDisabled = !!option.disabled
-        value = option.value !== undefined && option.value !== null ? String(option.value) : null
+        value = option.value !== undefined && option.value !== null ? option.value : null
       } else {
         const element = elementsRef.current[activeIndex]
         if (!element) return
@@ -218,14 +239,23 @@ export const SelectContent = ({
     if (indexAttr === null) return
 
     const index = Number(indexAttr)
-    const option = options?.[index]
+    const option = options?.[index] ?? elementsRef.current[index]
 
-    if (option && !option.disabled) handleSelect(String(option.value), e)
+    if (!option) return
+
+    const isDisabled =
+      (option as SelectOption).disabled ?? (option as HTMLElement).getAttribute?.('aria-disabled') === 'true'
+    const value = (option as SelectOption).value || (option as HTMLElement).getAttribute?.('data-value')
+
+    if (value === null) return
+
+    if (option && !isDisabled) handleSelect(value, e)
   }
 
   return (
     <FloatingList elementsRef={elementsRef} labelsRef={labelsRef}>
       <PopoverContent
+        ref={containerRef}
         className={['p-1 flex flex-col space-y-1 max-h-60 overflow-y-auto outline-none', className]}
         {...getFloatingProps({
           onKeyDown: handleKeyDown,
@@ -235,33 +265,27 @@ export const SelectContent = ({
         })}
       >
         {shouldVirtualize && options ? (
-          <div
+          <ul
             style={{
-              height: `${rowVirtualizer.getTotalSize()}px`,
+              height: `${totalHeight}px`,
               width: '100%',
               position: 'relative',
             }}
           >
-            {rowVirtualizer.getVirtualItems().map((virtualItem) => {
+            {virtualItems.map((virtualItem) => {
               const option = options[virtualItem.index]
-
               if (!option) return null
 
               return (
                 <SelectItem
-                  key={virtualItem.key}
+                  key={option.value}
                   index={virtualItem.index}
                   data-index={virtualItem.index}
-                  ref={rowVirtualizer.measureElement}
-                  value={String(option.value)}
+                  value={option.value}
                   disabled={!!option.disabled}
-                  shouldVirtualize={shouldVirtualize}
+                  className="absolute top-0 left-0 w-full will-change-transform"
                   style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: `${virtualItem.size}px`,
+                    height: `${estimateSize}px`,
                     transform: `translateY(${virtualItem.start}px)`,
                   }}
                 >
@@ -270,7 +294,7 @@ export const SelectContent = ({
                 </SelectItem>
               )
             })}
-          </div>
+          </ul>
         ) : (
           children
         )}

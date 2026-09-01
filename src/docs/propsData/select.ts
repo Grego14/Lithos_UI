@@ -9,7 +9,7 @@ export const selectProps: PropItem[] = [
   },
   {
     name: 'placeholder',
-    type: 'string | number',
+    type: 'string',
     defaultValue: '"Select an option..."',
     required: false,
     description: 'Placeholder text displayed when no option is selected.',
@@ -29,13 +29,13 @@ export const selectProps: PropItem[] = [
   },
   {
     name: 'value',
-    type: 'string | number | (string | number)[]',
+    type: 'string | string[]',
     required: false,
     description: 'Controlled value or array of values for the selected option(s).',
   },
   {
     name: 'defaultValue',
-    type: 'string | number | (string | number)[]',
+    type: 'string | string[]',
     required: false,
     description: 'Initial value or values for uncontrolled usage.',
   },
@@ -112,7 +112,7 @@ export const selectContentProps: PropItem[] = [
   {
     name: 'overscan',
     type: 'number',
-    defaultValue: '20',
+    defaultValue: '15',
     required: false,
     description: 'Number of additional items to render above and below the visible viewport.',
   },
@@ -149,13 +149,6 @@ export const selectItemProps: PropItem[] = [
     type: 'number',
     required: false,
     description: 'Explicit index of the item used for keyboard navigation within the list.',
-  },
-  {
-    name: 'shouldVirtualize',
-    type: 'boolean',
-    defaultValue: 'false',
-    required: false,
-    description: 'Internal flag passed when rendered within a virtualized list.',
   },
   {
     name: 'className',

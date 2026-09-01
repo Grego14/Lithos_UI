@@ -4,7 +4,7 @@
  * - Supports automatic data-driven option rendering or flexible sub-component composition via Context API.
  * - Integrates popover positioning and overlay controls for accessible dropdown behaviors.
  */
-import { useState, useRef } from 'react'
+import { useState, useRef, useMemo } from 'react'
 import { cn } from '../../../utils/cn'
 import { Popover } from '../popover/Popover'
 import { IconChevronDown } from '../icons/IconChevronDown'
@@ -39,8 +39,8 @@ export const Select = ({
   label = undefined,
 }: SelectProps) => {
   const [uncontrolledValue, setUncontrolledValue] = useState<string | string[]>(() => {
-    if (Array.isArray(defaultValue)) return defaultValue.map(String)
-    if (defaultValue) return String(defaultValue)
+    if (Array.isArray(defaultValue)) return defaultValue
+    if (defaultValue) return defaultValue
 
     return multiple ? [] : ''
   })
@@ -51,8 +51,8 @@ export const Select = ({
     controlledValue === undefined
       ? uncontrolledValue
       : Array.isArray(controlledValue)
-        ? controlledValue.map(String)
-        : String(controlledValue)
+        ? controlledValue
+        : controlledValue
 
   const targetValue = Array.isArray(selectedValue) ? selectedValue.at(-1) : selectedValue
 
@@ -61,7 +61,9 @@ export const Select = ({
   const [activeIndex, setActiveIndex] = useState<number | null>(initialCalculatedIndex)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(initialCalculatedIndex)
 
-  const labelsRef = useRef(options?.map((opt) => opt.label) ?? [])
+  const optionsLabels = useMemo(() => options?.map((opt) => opt.label) ?? [], [options])
+  const labelsRef = useRef(optionsLabels)
+  labelsRef.current = optionsLabels
 
   const { context } = useFloating()
 
@@ -81,11 +83,11 @@ export const Select = ({
 
   const role = useRole(context, { role: 'select' })
 
-  const handleSelect: SelectOnChangeEvent<string | number> = (optionValue, e) => {
-    const strValue = String(optionValue)
+  const handleSelect: SelectOnChangeEvent<string> = (optionValue, e) => {
+    const strValue = optionValue
 
     if (multiple) {
-      const currentValues = Array.isArray(selectedValue) ? selectedValue.map(String) : []
+      const currentValues = Array.isArray(selectedValue) ? selectedValue : []
       const exists = currentValues.includes(strValue)
 
       const nextValues = exists ? currentValues.filter((val) => val !== strValue) : [...currentValues, strValue]
@@ -99,9 +101,9 @@ export const Select = ({
       setActiveIndex(nextIndex)
       setSelectedIndex(nextIndex)
     } else {
-      if (controlledValue === undefined) setUncontrolledValue(String(optionValue))
+      if (controlledValue === undefined) setUncontrolledValue(optionValue)
 
-      ;(onChange as SelectOnChangeEvent<string>)?.(String(optionValue), e)
+      ;(onChange as SelectOnChangeEvent<string>)?.(optionValue, e)
       setOpen(false)
 
       const targetIndex = getOptionIndex(options, strValue)
@@ -110,36 +112,45 @@ export const Select = ({
     }
   }
 
+  const selectedOption = useMemo(() => {
+    if (multiple) return null
+    return options?.find((opt) => opt.value === selectedValue)
+  }, [options, selectedValue, multiple])
+
   const renderTriggerContent = () => {
     if (multiple) {
       const selectedArray = Array.isArray(selectedValue) ? selectedValue : []
 
       if (selectedArray.length === 0) return placeholder
 
-      const matchedLabels = options?.filter((opt) => selectedArray.includes(String(opt.value)))?.map((opt) => opt.label)
+      const matchedLabels = options?.filter((opt) => selectedArray.includes(opt.value))?.map((opt) => opt.label)
 
       return matchedLabels?.length ? matchedLabels.join(', ') : placeholder
     }
 
-    const selectedOption = options?.find((opt) => String(opt.value) === String(selectedValue))
-
     return (
       <span className="flex items-baseline space-x-2 min-w-0">
-        {selectedOption?.icon && <span className="shrink-0">{selectedOption.icon}</span>}
-        <span className="truncate min-w-0 leading-[1.15]">{selectedOption ? selectedOption.label : placeholder}</span>
+        {selectedOption?.icon ? (
+          <>
+            {selectedOption?.icon && <span className="shrink-0">{selectedOption.icon}</span>}
+            <span>{selectedOption ? selectedOption.label : placeholder}</span>
+          </>
+        ) : selectedOption ? (
+          selectedOption.label
+        ) : (
+          placeholder
+        )}
       </span>
     )
   }
 
   const handleOpenChange = (isOpen: boolean) => {
-    if (options && options.length > 0 && isOpen) {
+    if (isOpen && options?.length) {
       const currentTarget = Array.isArray(selectedValue) ? selectedValue.at(-1) : selectedValue
+      const index = getOptionIndex(options, currentTarget) ?? 0
 
-      const index = getOptionIndex(options, currentTarget)
-      if (index !== null) {
-        setSelectedIndex(index)
-        setActiveIndex(index)
-      }
+      setActiveIndex(index)
+      setSelectedIndex(index)
     }
 
     setOpen(isOpen)
@@ -151,8 +162,10 @@ export const Select = ({
     }
   }
 
+  const interactions = useMemo(() => [listNav, typeahead, role], [listNav, typeahead, role])
+
   return (
-    <Popover open={open} onOpenChange={handleOpenChange} interactions={[listNav, typeahead, role]}>
+    <Popover open={open} onOpenChange={handleOpenChange} interactions={interactions}>
       <SelectContext.Provider
         value={{
           open,
@@ -180,13 +193,13 @@ export const Select = ({
               label={label}
               placeholder={typeof placeholder === 'string' ? placeholder : undefined}
             >
-              <span className="min-w-0">{renderTriggerContent()}</span>
+              <span className="min-w-0 truncate leading-[1.15]">{renderTriggerContent()}</span>
               <IconChevronDown className="ml-2 shrink-0 opacity-60" />
             </SelectTrigger>
 
             <SelectContent>
               {options?.map((opt, i) => (
-                <SelectItem key={opt.value} value={String(opt.value)} index={i} disabled={!!opt.disabled}>
+                <SelectItem key={opt.value} value={opt.value} index={i} disabled={!!opt.disabled}>
                   {opt.icon && <span className="mr-2 shrink-0">{opt.icon}</span>}
                   {opt.label}
                 </SelectItem>
