@@ -17,9 +17,10 @@ import type { TOCItem } from './types.ts'
 const tocRegistry: Record<string, TOCItem[]> = {
   '/docs': [{ id: '#welcome-video', label: 'Intro To Lithos UI', level: 1 }],
   '/docs/installation': [
-    { id: '#base-template', label: '1. The Base Template', level: 1 },
-    { id: '#global-css', label: '2. Global CSS Configuration', level: 1 },
-    { id: '#theming-configuration', label: '3. Theming & Configuration', level: 1 },
+    { id: '#npm', label: 'NPM', level: 1 },
+    { id: '#manual', label: 'Manual', level: 1 },
+    { id: '#global-css', label: 'Global CSS', level: 1 },
+    { id: '#theming', label: 'Theming', level: 1 },
   ],
   '/docs/hero': [
     { id: '#examples', label: 'Examples', level: 1 },
