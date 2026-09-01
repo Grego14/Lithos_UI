@@ -26,6 +26,10 @@ export const Introduction = () => {
           brutalist aesthetics, and creating interfaces that are actually useful and durable in production.
         </p>
         <p className="mb-4 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
+          You can now install Lithos UI via NPM for a streamlined workflow, or continue using our manual copy-paste
+          approach for absolute control.
+        </p>
+        <p className="mb-4 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
           Follow the{' '}
           <Link
             to="/docs/installation"
