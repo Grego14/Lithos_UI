@@ -31,7 +31,7 @@ export const Installation = () => {
       </p>
 
       <h2 id="npm-installation" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        1. NPM Installation
+        NPM
       </h2>
       <p className="mb-6 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
         Install the package directly into your project. You can then import components and global tokens out of the box.
@@ -42,8 +42,8 @@ export const Installation = () => {
       </p>
       <CodeViewer code={"import 'lithos-ui/tokens.css'\nimport { Button } from 'lithos-ui'"} language="tsx" />
 
-      <h2 id="base-template" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        2. Manual Installation & The Base Template
+      <h2 id="manual" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
+        Manual
       </h2>
       <p className="mb-6 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
         If you prefer the original code-ownership model, the fastest way to start is by cloning the official Vite
@@ -55,7 +55,7 @@ export const Installation = () => {
       />
 
       <h2 id="global-css" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        3. Global CSS Configuration
+        Global CSS
       </h2>
       <p className="mb-6 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
         If you are integrating into an existing project, you must define the Lithos UI physics engine and root tokens.
@@ -80,8 +80,8 @@ import 'lithos-ui/tokens.css' // Lithos UI tokens come second`}
         language="tsx"
       />
 
-      <h2 id="theming-configuration" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        4. Theming & Configuration
+      <h2 id="theming" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
+        Theming
       </h2>
       <p className="mb-4 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
         Lithos UI relies entirely on native CSS custom properties for theming. You have two paths to configure your
@@ -94,6 +94,7 @@ import 'lithos-ui/tokens.css' // Lithos UI tokens come second`}
         global CSS after importing <code>tokens.css</code>. For instance, updating <code>--lithos-accent</code> and{' '}
         <code>--lithos-radius</code> globally. No JavaScript is required.
       </p>
+      <CodeViewer code={cssConfig} language="css" />
 
       <h3 className="text-xl font-bold tracking-tighter text-(--lithos-text) mb-2">Live In-App Theming</h3>
       <p className="mb-6 text-sm md:text-base text-(--lithos-text) max-w-3xl font-body">
