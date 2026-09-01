@@ -219,20 +219,20 @@ export const Calendar = ({
         <div className="flex items-center">
           <Select
             label="Month"
-            value={selectedMonth}
-            options={monthLabels.map((label, index) => ({ value: index, label }))}
+            value={String(selectedMonth)}
+            options={monthLabels.map((label, index) => ({ value: String(index), label }))}
             onChange={(monthIndex) => changeMonth(new Date(displayedMonth.getFullYear(), +monthIndex, 1))}
-            className={['mr-2', classes.monthSelect]}
+            className={['mr-2 min-w-30 text-sm', classes.monthSelect]}
             placeholder={monthLabel}
           />
 
           <Select
             label="Year"
-            value={selectedYear}
-            options={yearOptions.map((year) => ({ value: year, label: String(year) }))}
+            value={String(selectedYear)}
+            options={yearOptions.map((year) => ({ value: String(year), label: String(year) }))}
             onChange={(year) => changeMonth(new Date(+year, displayedMonth.getMonth(), 1))}
-            className={classes.yearSelect}
-            placeholder={selectedYear}
+            className={['min-w-20 text-sm', classes.yearSelect]}
+            placeholder={String(selectedYear)}
           />
         </div>
 
