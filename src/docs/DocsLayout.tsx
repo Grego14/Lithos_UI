@@ -199,6 +199,7 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#simple-usage', label: 'Simple usage', level: 2 },
     { id: '#multiple-selection', label: 'Multiple Selection', level: 2 },
     { id: '#custom-layout', label: 'Custom layout', level: 2 },
+    { id: '#async-virtualized', label: 'Async Data & Virtualization', level: 2 },
     { id: '#anatomy', label: 'Anatomy', level: 1 },
     { id: '#accessibility', label: 'Accessibility', level: 1 },
     { id: '#api', label: 'API Reference', level: 1 },

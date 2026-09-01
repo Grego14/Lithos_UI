@@ -8,6 +8,19 @@ export const selectProps: PropItem[] = [
     description: 'Array of option objects for auto-rendering the dropdown list.',
   },
   {
+    name: 'placeholder',
+    type: 'string',
+    defaultValue: '"Select an option..."',
+    required: false,
+    description: 'Placeholder text displayed when no option is selected.',
+  },
+  {
+    name: 'label',
+    type: 'string',
+    required: false,
+    description: 'Accessible label assigned to the select trigger.',
+  },
+  {
     name: 'multiple',
     type: 'boolean',
     defaultValue: 'false',
@@ -18,7 +31,7 @@ export const selectProps: PropItem[] = [
     name: 'value',
     type: 'string | string[]',
     required: false,
-    description: 'Controlled value of the selected option or options.',
+    description: 'Controlled value or array of values for the selected option(s).',
   },
   {
     name: 'defaultValue',
@@ -28,16 +41,9 @@ export const selectProps: PropItem[] = [
   },
   {
     name: 'onChange',
-    type: 'SelectOnChangeEvent<string | string[]>',
+    type: 'SelectOnChangeEvent',
     required: false,
-    description: 'Callback fired when an option is selected.',
-  },
-  {
-    name: 'placeholder',
-    type: 'string',
-    defaultValue: '"Select an option..."',
-    required: false,
-    description: 'Placeholder text displayed when no option is selected.',
+    description: 'Callback fired when an option selection changes.',
   },
   {
     name: 'disabled',
@@ -67,41 +73,54 @@ export const selectTriggerProps: PropItem[] = [
     required: false,
     description: 'Controls or overrides the trigger visual state.',
   },
+  {
+    name: 'label',
+    type: 'string',
+    required: false,
+    description: 'Accessible text label for the trigger element.',
+  },
 ]
 
 export const selectContentProps: PropItem[] = [
   {
     name: 'children',
     type: 'ReactNode',
-    required: true,
+    required: false,
     description: 'Collection of SelectItem elements or custom option content.',
+  },
+  {
+    name: 'loop',
+    type: 'boolean',
+    defaultValue: 'true',
+    required: false,
+    description: 'Enables looping keyboard navigation when reaching the start or end of the list.',
+  },
+  {
+    name: 'virtualizeThreshold',
+    type: 'number | boolean',
+    defaultValue: '30',
+    required: false,
+    description: 'Minimum item count to trigger virtualization, or boolean to toggle it.',
+  },
+  {
+    name: 'estimateSize',
+    type: 'number',
+    defaultValue: '32',
+    required: false,
+    description: 'Estimated height in pixels for each item in the virtualized list.',
+  },
+  {
+    name: 'overscan',
+    type: 'number',
+    defaultValue: '15',
+    required: false,
+    description: 'Number of additional items to render above and below the visible viewport.',
   },
   {
     name: 'className',
     type: 'LithosClass',
     required: false,
     description: 'Custom CSS classes applied to the popover content container.',
-  },
-  {
-    name: 'listLabel',
-    type: 'string',
-    required: false,
-    defaultValue: '"Options"',
-    description: 'Accessible ARIA label for the listbox element used by screen readers.',
-  },
-  {
-    name: 'loop',
-    type: 'boolean',
-    required: false,
-    defaultValue: 'true',
-    description: 'Enables looping keyboard navigation when reaching the start or end of the list.',
-  },
-  {
-    name: 'focusOnHover',
-    type: 'boolean',
-    required: false,
-    defaultValue: 'true',
-    description: 'Updates the active index automatically when hovering over options with the pointer.',
   },
 ]
 
@@ -113,8 +132,15 @@ export const selectItemProps: PropItem[] = [
     description: 'Unique value associated with this option.',
   },
   {
+    name: 'children',
+    type: 'ReactNode',
+    required: true,
+    description: 'Label content or custom layout rendered inside the option item.',
+  },
+  {
     name: 'disabled',
     type: 'boolean',
+    defaultValue: 'false',
     required: false,
     description: 'Disables selection and interactions for this specific option.',
   },
@@ -128,23 +154,11 @@ export const selectItemProps: PropItem[] = [
     name: 'className',
     type: 'LithosClass',
     required: false,
-    description: 'Custom CSS classes passed to the option button element.',
-  },
-  {
-    name: 'children',
-    type: 'ReactNode',
-    required: true,
-    description: 'Label content or custom layout rendered inside the option item.',
+    description: 'Custom CSS classes passed to the option list element.',
   },
 ]
 
 export const useSelectProps: PropItem[] = [
-  {
-    name: 'multiple',
-    type: 'boolean',
-    required: true,
-    description: 'Indicates whether the select context allows multiple selection.',
-  },
   {
     name: 'selectedValue',
     type: 'string | string[]',
@@ -153,7 +167,7 @@ export const useSelectProps: PropItem[] = [
   },
   {
     name: 'handleSelect',
-    type: '(value: string, e: MouseEvent | KeyboardEvent) => void',
+    type: 'HandleSelectType',
     required: true,
     description: 'Function to execute selection changes and trigger callbacks.',
   },
@@ -186,5 +200,42 @@ export const useSelectProps: PropItem[] = [
     type: 'RefObject<Array<HTMLElement | null>>',
     required: true,
     description: 'Ref array tracking option DOM nodes for Floating UI navigation.',
+  },
+  {
+    name: 'labelsRef',
+    type: 'RefObject<string[]>',
+    required: true,
+    description: 'Ref array tracking text labels of options for typeahead navigation.',
+  },
+  {
+    name: 'selectedIndex',
+    type: 'number | null',
+    required: true,
+    description: 'Index of the currently selected option item.',
+  },
+  {
+    name: 'setSelectedIndex',
+    type: '(index: number | null) => void',
+    required: true,
+    description: 'State dispatch function to update the selected item index.',
+  },
+  {
+    name: 'registerElement',
+    type: 'RegisterElementProps',
+    required: true,
+    description: 'Callback function to register option DOM nodes into the refs array.',
+  },
+  {
+    name: 'multiple',
+    type: 'boolean',
+    defaultValue: 'false',
+    required: false,
+    description: 'Indicates whether the select context allows multiple selection.',
+  },
+  {
+    name: 'options',
+    type: 'SelectOption[]',
+    required: false,
+    description: 'List of options passed down through the select context.',
   },
 ]

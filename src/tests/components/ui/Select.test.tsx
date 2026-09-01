@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, act } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { axe } from 'jest-axe'
 import { describe, it, expect, vi } from 'vitest'
@@ -13,19 +13,19 @@ const mockOptions = [
 describe('Select Component', () => {
   it('should render trigger with placeholder by default', () => {
     render(<Select options={mockOptions} placeholder="Choose option" />)
-    expect(screen.getByRole('button')).toHaveTextContent('Choose option')
+    expect(screen.getByRole('combobox')).toHaveTextContent('Choose option')
   })
 
   it('should render trigger with default value if provided', () => {
     render(<Select options={mockOptions} defaultValue="opt-2" />)
-    expect(screen.getByRole('button')).toHaveTextContent('Option 2')
+    expect(screen.getByRole('combobox')).toHaveTextContent('Option 2')
   })
 
   it('should open dropdown menu when clicking trigger', async () => {
     const user = userEvent.setup()
     render(<Select options={mockOptions} />)
 
-    const trigger = screen.getByRole('button')
+    const trigger = screen.getByRole('combobox')
     await user.click(trigger)
 
     expect(screen.getByRole('listbox')).toBeInTheDocument()
@@ -38,7 +38,7 @@ describe('Select Component', () => {
 
     render(<Select options={mockOptions} onChange={onChange} />)
 
-    const trigger = screen.getByRole('button')
+    const trigger = screen.getByRole('combobox')
     await user.click(trigger)
 
     const option2 = screen.getByRole('option', { name: 'Option 2' })
@@ -55,7 +55,7 @@ describe('Select Component', () => {
 
     const { rerender } = render(<Select options={mockOptions} value="opt-1" onChange={onChange} />)
 
-    const trigger = screen.getByRole('button')
+    const trigger = screen.getByRole('combobox')
     expect(trigger).toHaveTextContent('Option 1')
 
     await user.click(trigger)
@@ -74,7 +74,7 @@ describe('Select Component', () => {
 
     render(<Select options={mockOptions} onChange={onChange} />)
 
-    await user.click(screen.getByRole('button'))
+    await user.click(screen.getByRole('combobox'))
     const disabledOption = screen.getByRole('option', { name: 'Option 3' })
 
     await user.click(disabledOption)
@@ -90,13 +90,17 @@ describe('Select Component', () => {
       <Select value="val-2" onChange={onChange}>
         <SelectTrigger>Custom Trigger</SelectTrigger>
         <SelectContent>
-          <SelectItem value="val-1">Item 1</SelectItem>
-          <SelectItem value="val-2">Item 2</SelectItem>
+          <SelectItem value="val-1" index={0}>
+            Item 1
+          </SelectItem>
+          <SelectItem value="val-2" index={1}>
+            Item 2
+          </SelectItem>
         </SelectContent>
       </Select>
     )
 
-    const trigger = screen.getByRole('button')
+    const trigger = screen.getByRole('combobox')
     expect(trigger).toHaveTextContent('Custom Trigger')
 
     await user.click(trigger)
@@ -113,20 +117,17 @@ describe('Select Component', () => {
       const user = userEvent.setup()
 
       render(<Select options={mockOptions} />)
-      const trigger = screen.getByRole('button')
+      const trigger = screen.getByRole('combobox')
 
       await user.click(trigger)
       const options = screen.getAllByRole('option')
 
-      act(() => {
-        fireEvent.keyDown(screen.getByRole('listbox'), { key: 'ArrowDown' })
-      })
-      expect(options[0]).toHaveAttribute('data-active', 'true')
-
-      act(() => {
-        fireEvent.keyDown(screen.getByRole('listbox'), { key: 'ArrowDown' })
-      })
+      await user.keyboard('{ArrowDown}')
       expect(options[1]).toHaveAttribute('data-active', 'true')
+
+      // should not navigate to the disabled option
+      await user.keyboard('{ArrowDown}')
+      expect(options[2]).not.toHaveAttribute('data-active')
     })
 
     it('should select active item when pressing Enter key', async () => {
@@ -134,18 +135,10 @@ describe('Select Component', () => {
       const onChange = vi.fn()
 
       render(<Select options={mockOptions} onChange={onChange} />)
-      await user.click(screen.getByRole('button'))
 
-      const options = screen.getAllByRole('option')
-
-      act(() => {
-        fireEvent.keyDown(screen.getByRole('listbox'), { key: 'ArrowDown' })
-      })
-
-      expect(!!options[0]).toBe(true)
-      act(() => {
-        fireEvent.keyDown(options[0] as HTMLElement, { key: 'Enter' })
-      })
+      // (Floating UI positions the initial focus on the first option)
+      await user.click(screen.getByRole('combobox'))
+      await user.keyboard('{Enter}')
 
       expect(onChange).toHaveBeenCalledWith('opt-1', expect.anything())
       expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
@@ -155,14 +148,12 @@ describe('Select Component', () => {
       const user = userEvent.setup()
 
       render(<Select options={mockOptions} />)
-      const trigger = screen.getByRole('button')
+      const trigger = screen.getByRole('combobox')
 
       await user.click(trigger)
       expect(screen.getByRole('listbox')).toBeInTheDocument()
 
-      act(() => {
-        fireEvent.keyDown(document.body, { key: 'Escape' })
-      })
+      await user.keyboard('{Escape}')
 
       expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
     })
@@ -175,7 +166,7 @@ describe('Select Component', () => {
 
       render(<Select options={mockOptions} multiple onChange={onChange} />)
 
-      const trigger = screen.getByRole('button')
+      const trigger = screen.getByRole('combobox')
       await user.click(trigger)
 
       const option1 = screen.getByRole('option', { name: 'Option 1' })
@@ -198,7 +189,7 @@ describe('Select Component', () => {
 
       render(<Select options={mockOptions} multiple defaultValue={['opt-1', 'opt-2']} onChange={onChange} />)
 
-      const trigger = screen.getByRole('button')
+      const trigger = screen.getByRole('combobox')
       expect(trigger).toHaveTextContent('Option 1, Option 2')
 
       await user.click(trigger)
@@ -215,7 +206,7 @@ describe('Select Component', () => {
 
       const { rerender } = render(<Select options={mockOptions} multiple value={['opt-1']} onChange={onChange} />)
 
-      const trigger = screen.getByRole('button')
+      const trigger = screen.getByRole('combobox')
       expect(trigger).toHaveTextContent('Option 1')
 
       await user.click(trigger)
@@ -239,12 +230,16 @@ describe('Select Component', () => {
 
     it('should have no accessibility violations when opened', async () => {
       const user = userEvent.setup()
-      render(<Select options={mockOptions} />)
+      const { container } = render(<Select options={mockOptions} aria-label="Select option" />)
 
-      await user.click(screen.getByRole('button'))
+      await user.click(screen.getByRole('combobox'))
 
-      const listbox = screen.getByRole('listbox')
-      const results = await axe(listbox)
+      const results = await axe(container, {
+        rules: {
+          // ignore the invisible focus guards of Floating UI
+          'aria-command-name': { enabled: false },
+        },
+      })
 
       expect(results).toHaveNoViolations()
     })

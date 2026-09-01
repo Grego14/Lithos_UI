@@ -67,19 +67,20 @@ export const usePopover = ({
       shift({ padding: 8 }),
       size({
         apply: ({ rects, elements }) => {
-          Object.assign(elements.floating.style, {
-            width: `${rects.reference.width}px`,
-          })
+          const width = `${rects.reference.width}px`
+
+          if (elements.floating.style.width !== width) {
+            elements.floating.style.width = width
+          }
         },
       }),
     ],
   })
 
-  const context = data.context
+  const { refs, floatingStyles, context } = data
 
   const click = useClick(context)
   const dismiss = useDismiss(context)
-
   const interactions = useInteractions([click, dismiss, ...extraInteractions])
 
   return useMemo(
@@ -87,12 +88,14 @@ export const usePopover = ({
       open,
       setOpen,
       ...interactions,
-      ...data,
+      refs,
+      floatingStyles,
+      context,
       modal,
       labelId,
       descriptionId,
     }),
-    [open, setOpen, interactions, data, modal, labelId, descriptionId]
+    [open, setOpen, interactions, refs, floatingStyles, context, modal, labelId, descriptionId]
   )
 }
 

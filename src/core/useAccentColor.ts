@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import type { HexColor } from './types'
 import { getYiqValue } from '../utils/yiq'
+import { getContrastText } from '../utils/yiq'
 
 export const useAccentColor = () => {
   const [accentColor, setAccentColor] = useState<HexColor>(() => {
@@ -14,6 +15,8 @@ export const useAccentColor = () => {
 
     return storedColor
   })
+
+  const contrastedAccentColor = getContrastText(accentColor)
 
   useEffect(() => {
     const handleSync = () => {
@@ -39,5 +42,5 @@ export const useAccentColor = () => {
     }
   }, [])
 
-  return { accentColor } as const
+  return { accentColor, contrastedAccentColor } as const
 }

@@ -1,8 +1,11 @@
+import { useState, useCallback } from 'react'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 import { Select, SelectTrigger, SelectItem, SelectContent, useSelect } from '../../components/ui/Select'
+import type { SelectOption } from '../../components/ui/select/select.types'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
+import { Button } from '../../components/ui/Button'
 import {
   selectProps,
   selectTriggerProps,
@@ -33,15 +36,15 @@ const CustomSelectLayout = () => {
       <SelectTrigger className="w-full justify-between">
         <span className="flex items-center space-x-2 truncate min-w-0">
           {currentOption && <span className={cn('size-2 rounded-full shrink-0', currentOption.color)} />}
-          <span className="truncate min-w-0 font-medium">
+          <span className="truncate min-w-0 font-medium leading-[1.15]">
             {currentOption ? currentOption.label : 'Select a framework...'}
           </span>
         </span>
         <IconChevronDown className="ml-2 size-4 shrink-0 opacity-60" />
       </SelectTrigger>
       <SelectContent>
-        {FRAMEWORK_OPTIONS.map((opt) => (
-          <SelectItem key={opt.value} value={opt.value}>
+        {FRAMEWORK_OPTIONS.map((opt, i) => (
+          <SelectItem key={opt.value} value={opt.value} index={i}>
             <div className="flex items-center justify-between w-full space-x-4">
               <span className="flex items-center space-x-2 min-w-0">
                 <span className={cn('size-2 rounded-full shrink-0', opt.color)} />
@@ -53,6 +56,45 @@ const CustomSelectLayout = () => {
         ))}
       </SelectContent>
     </>
+  )
+}
+
+const AsyncVirtualizedSelectExample = () => {
+  const [options, setOptions] = useState<SelectOption[]>([])
+  const [loading, setLoading] = useState(false)
+
+  const fetchOptions = useCallback(() => {
+    setLoading(true)
+    setOptions([])
+
+    new Promise<SelectOption[]>((res) => {
+      setTimeout(() => {
+        res(
+          Array.from({ length: 300 }, (_, i) => ({
+            label: `Option ${i + 1}`,
+            value: `opt-${i + 1}`,
+          }))
+        )
+      }, 600)
+    }).then((data) => {
+      setOptions(data)
+      setLoading(false)
+    })
+  }, [])
+
+  return (
+    <div>
+      <Button onClick={fetchOptions} disabled={loading} className="w-full justify-center mb-4">
+        {loading ? 'Fetching 300 items...' : 'Load Async Options'}
+      </Button>
+
+      <Select
+        options={options || []}
+        placeholder={
+          loading ? 'Loading...' : (options?.length || 0) > 0 ? 'Select option' : 'Click button to load options'
+        }
+      />
+    </div>
   )
 }
 
@@ -116,7 +158,7 @@ const CustomSelectLayout = () => {
           {currentOption && (
             <span className={\`size-2 rounded-full shrink-0 \${currentOption.color}\`} />
           )}
-          <span className='truncate min-w-0 font-medium'>
+          <span className='truncate min-w-0 font-medium leading-[1.15]'>
             {currentOption ? currentOption.label : 'Select a framework...'}
           </span>
         </span>
@@ -124,8 +166,8 @@ const CustomSelectLayout = () => {
       </SelectTrigger>
 
       <SelectContent>
-        {FRAMEWORK_OPTIONS.map(opt => (
-          <SelectItem key={opt.value} value={opt.value}>
+        {FRAMEWORK_OPTIONS.map((opt, i) => (
+          <SelectItem key={opt.value} value={opt.value} index={i}>
             <div className='flex items-center justify-between w-full space-x-4'>
               <span className='flex items-center space-x-2 min-w-0'>
                 <span className={\`size-2 rounded-full shrink-0 \${opt.color}\`} />
@@ -154,6 +196,47 @@ export const SelectCustom = () => {
     others: '../../components/ui/Select',
     IconChevronDown: '../../components/icons/IconChevronDown',
   },
+}
+
+const asyncUsageCode = {
+  body: `export const SelectAsync = () => {
+  const [options, setOptions] = useState<SelectOption[]>([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    const loadOptions = async () => {
+      setLoading(true)
+      try {
+        const response = await fetch('/api/options')
+        const data = await response.json()
+
+        // Transform your API data to match { label, value } structure if needed
+        const formattedOptions = data.map((item: { id: string; name: string }) => ({
+          label: item.name,
+          value: item.id
+        }))
+
+        setOptions(formattedOptions)
+      } catch (error) {
+        console.error('Failed to load options:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadOptions()
+  }, [])
+
+  return (
+    <Select
+      options={options}
+      placeholder={loading ? 'Loading options...' : 'Select a framework'}
+    />
+  )
+}`,
+  componentNames: ['useState', 'useEffect', 'SelectOption', 'Select'],
+  manualPath: { react: ['useState', 'useEffect'], others: '../../components/ui/Select' },
+  types: ['SelectOption'],
 }
 
 export const SelectDoc = () => {
@@ -197,12 +280,18 @@ export const SelectDoc = () => {
           'core/useAccentColor.ts',
           'components/ui/Button.tsx',
           'components/ui/Popover.tsx',
+          'components/ui/popover/PopoverContent.tsx',
+          'components/ui/popover/PopoverTrigger.tsx',
+          'components/ui/popover/usePopover.ts',
           'components/ui/icons/IconChevronDown.tsx',
+          'components/ui/select/Select.tsx',
           'components/ui/select/SelectTrigger.tsx',
           'components/ui/select/SelectContent.tsx',
           'components/ui/select/SelectItem.tsx',
           'components/ui/select/useSelect.ts',
+          'components/ui/select/select.types.ts',
           '@floating-ui/react',
+          'core/hooks/useVirtualizer.ts',
         ]}
       />
 
@@ -266,6 +355,49 @@ export const SelectDoc = () => {
           <code>selectedValue</code> and <code>multiple</code> via the <code>useSelect()</code> hook to manage custom
           label rendering or multi-selection tags inside your trigger.
         </p>
+
+        <p className="text-sm font-medium font-body opacity-80 mt-4">
+          Don't forget to add the <code>index</code>prop to the SelectItem, otherwise you will need to add an onClick
+          event to the SelectContent component.
+        </p>
+      </div>
+
+      <h3 id="async-virtualized" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
+        Async Data & Virtualization
+      </h3>
+      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
+        Seamlessly handle options loaded asynchronously. The virtualizer updates scroll alignment automatically when
+        datasets update dynamically.
+      </p>
+
+      <div className="mt-8 mb-16">
+        <PreviewBlock code={asyncUsageCode} githubUrl={githubUrl}>
+          <div className="max-w-xs w-full">
+            <AsyncVirtualizedSelectExample />
+          </div>
+        </PreviewBlock>
+      </div>
+
+      <div className="border-l-4 pl-6 py-4 mb-12 bg-(--lithos-surface) p-4" style={{ borderColor: colors.warning }}>
+        <h4 className="text-base font-bold text-(--lithos-text) mb-4">Virtualization Performance & Constraints</h4>
+        <p className="text-sm font-body opacity-80 text-(--lithos-text) leading-relaxed">
+          By default, <code>SelectContent</code> automatically enables windowing/virtualization when the options array
+          contains <strong>30 or more items</strong> (configurable via <code>virtualizeThreshold</code>).
+        </p>
+        <ul className="list-disc pl-5 mt-2 text-sm font-body opacity-80 text-(--lithos-text) space-y-1">
+          <li>
+            Automatic virtualization requires passing options via the <code>options</code> prop on{' '}
+            <code>&lt;Select /&gt;</code>.
+          </li>
+          <li>
+            All virtualized items must have uniform height (default: <code>32px</code>, adjustable with{' '}
+            <code>estimateSize</code>).
+          </li>
+          <li>
+            Custom compound components using manual <code>&lt;SelectItem&gt;</code> children will bypass
+            auto-virtualization.
+          </li>
+        </ul>
       </div>
 
       <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">

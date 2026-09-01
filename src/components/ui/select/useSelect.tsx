@@ -1,20 +1,10 @@
 /**
- * @fileoverview Lithos UI select context hook.
+ * @fileoverview Lithos UI select context hook primitive.
  * - Exposes select state, value handlers, and list navigation refs to composite subcomponents.
  * - Guarantees safe usage by asserting context existence inside consumer components.
  */
-import { useContext, createContext, type MouseEvent, type KeyboardEvent, type RefObject } from 'react'
-
-export interface SelectContextType {
-  selectedValue: string | string[]
-  handleSelect: (value: string, e: MouseEvent<HTMLLIElement> | KeyboardEvent<HTMLLIElement>) => void
-  open: boolean
-  setOpen: (open: boolean) => void
-  activeIndex: number | null
-  setActiveIndex: (index: number | null) => void
-  elementsRef: RefObject<Array<HTMLElement | null>>
-  multiple?: boolean
-}
+import { useContext, createContext } from 'react'
+import type { SelectContextType } from './select.types'
 
 export const SelectContext = createContext<SelectContextType | null>(null)
 
