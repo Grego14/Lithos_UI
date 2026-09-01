@@ -90,8 +90,12 @@ describe('Select Component', () => {
       <Select value="val-2" onChange={onChange}>
         <SelectTrigger>Custom Trigger</SelectTrigger>
         <SelectContent>
-          <SelectItem value="val-1">Item 1</SelectItem>
-          <SelectItem value="val-2">Item 2</SelectItem>
+          <SelectItem value="val-1" index={0}>
+            Item 1
+          </SelectItem>
+          <SelectItem value="val-2" index={1}>
+            Item 2
+          </SelectItem>
         </SelectContent>
       </Select>
     )
