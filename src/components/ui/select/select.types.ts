@@ -10,7 +10,7 @@ export type RegisterElementProps = (index: number, node: HTMLElement | null) => 
 
 export interface SelectOption {
   label: string
-  value: string | number
+  value: string
   disabled?: boolean
   icon?: ReactNode
 }
@@ -43,7 +43,7 @@ export type SelectOnChangeEvent<V = string, T extends HTMLElement = HTMLElement>
 
 export type SelectProps = {
   options?: SelectOption[]
-  placeholder?: string | number
+  placeholder?: string
   className?: LithosClass
   disabled?: boolean
   children?: ReactNode
@@ -51,14 +51,14 @@ export type SelectProps = {
 } & (
   | {
       multiple?: false
-      value?: string | number
-      defaultValue?: string | number
+      value?: string
+      defaultValue?: string
       onChange?: SelectOnChangeEvent
     }
   | {
       multiple: true
-      value?: (string | number)[]
-      defaultValue?: (string | number)[]
+      value?: string[]
+      defaultValue?: string[]
       onChange?: SelectOnChangeEvent<string[]>
     }
 )
