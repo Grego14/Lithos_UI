@@ -22,27 +22,40 @@ export const Installation = () => {
       </header>
 
       <p className="mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-        Lithos UI is not distributed as an opaque NPM package. It is a collection of highly engineered React components
-        that you copy directly into your codebase. This guarantees you have absolute ownership over the structure,
-        physics, and styling of your application.
+        Lithos UI offers two ways to build: install components via NPM for quick setup, or copy-paste the source
+        directly into your codebase if you want absolute ownership over the structure and physics.
+      </p>
+      <p className="mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
+        <strong>Note:</strong> Every component's docs page has a Manual tab with the copy-paste source. Blocks remain
+        copy-paste only.
       </p>
 
-      <h2 id="base-template" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        1. The Base Template
+      <h2 id="npm-installation" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
+        1. NPM Installation
       </h2>
       <p className="mb-6 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
-        The fastest way to start is by cloning the official Vite template. It comes pre-configured with Tailwind v4, our
-        dynamic Theme Engine, and the base Obsidian mode CSS.
+        Install the package directly into your project. You can then import components and global tokens out of the box.
+      </p>
+      <CodeViewer code={'pnpm add lithos-ui\n# or npm install / yarn add / bun add'} language="bash" />
+      <p className="mt-6 mb-6 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
+        Import the global tokens in your root file (e.g., <code>App.tsx</code>) and start building:
+      </p>
+      <CodeViewer code={"import 'lithos-ui/tokens.css'\nimport { Button } from 'lithos-ui'"} language="tsx" />
+
+      <h2 id="base-template" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
+        2. Manual Installation & The Base Template
+      </h2>
+      <p className="mb-6 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
+        If you prefer the original code-ownership model, the fastest way to start is by cloning the official Vite
+        template. It comes pre-configured with Tailwind v4, our dynamic Theme Engine, and the base Obsidian mode CSS.
       </p>
       <CodeViewer
-        code={
-          '# Scaffold using degit\nnpx degit lithosui/Lithos_UI my-app\n\n# OR clone directly\ngit clone https://github.com/lithosui/Lithos_UI my-app\n\ncd my-app\npnpm install\npnpm dev'
-        }
+        code={'git clone https://github.com/lithosui/Lithos_UI my-app\ncd my-app\npnpm install\npnpm dev'}
         language="bash"
       />
 
       <h2 id="global-css" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        2. Global CSS Configuration
+        3. Global CSS Configuration
       </h2>
       <p className="mb-6 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
         If you are integrating into an existing project, you must define the Lithos UI physics engine and root tokens in
@@ -51,7 +64,7 @@ export const Installation = () => {
       <CodeViewer code={cssConfig} language="css" />
 
       <h2 id="theming-configuration" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        3. Theming & Configuration
+        4. Theming & Configuration
       </h2>
       <p className="mb-4 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
         Lithos UI relies entirely on native CSS custom properties for theming. You have two paths to configure your
