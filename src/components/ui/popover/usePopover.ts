@@ -77,7 +77,7 @@ export const usePopover = ({
     ],
   })
 
-  const { refs, floatingStyles, context } = data
+  const { context } = data
 
   const click = useClick(context)
   const dismiss = useDismiss(context)
@@ -88,14 +88,12 @@ export const usePopover = ({
       open,
       setOpen,
       ...interactions,
-      refs,
-      floatingStyles,
-      context,
+      ...data,
       modal,
       labelId,
       descriptionId,
     }),
-    [open, setOpen, interactions, refs, floatingStyles, context, modal, labelId, descriptionId]
+    [open, setOpen, interactions, data, modal, labelId, descriptionId]
   )
 }
 
