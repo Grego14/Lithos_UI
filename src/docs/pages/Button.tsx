@@ -9,121 +9,122 @@ import { SetupGuide } from '../layout/SetupGuide'
 import { buttonPropsData, buttonGroupPropsData } from '../propsData/button'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Button.tsx'
+const manualPath = '../../components/ui/Button'
 
-export const ButtonDoc = () => {
-  const defaultCode = {
-    body: `export const DefaultButton = () => {
-  return <Button>Default</Button>
-}`,
-    componentNames: ['Button'],
-    manualPath: '../../components/ui/Button',
-  }
+const defaultCode = {
+  body: `export const DefaultButton = () => {
+    return <Button>Default</Button>
+  }`,
+  componentNames: ['Button'],
+  manualPath,
+}
 
-  const secondaryCode = {
-    body: `export const SecondaryButton = () => {
-  return <Button variant="secondary">Secondary</Button>
-}`,
-    componentNames: ['Button'],
-    manualPath: '../../components/ui/Button',
-  }
+const secondaryCode = {
+  body: `export const SecondaryButton = () => {
+    return <Button variant="secondary">Secondary</Button>
+  }`,
+  componentNames: ['Button'],
+  manualPath,
+}
 
-  const accentCode = {
-    body: `export const AccentButton = () => {
-  return <Button variant="accent">Accent</Button>
-}`,
-    componentNames: ['Button'],
-    manualPath: '../../components/ui/Button',
-  }
+const accentCode = {
+  body: `export const AccentButton = () => {
+    return <Button variant="accent">Accent</Button>
+  }`,
+  componentNames: ['Button'],
+  manualPath,
+}
 
-  const solidCode = {
-    body: `export const SolidButton = () => {
-  return <Button variant="solid" color="#0000FF">Solid</Button>
-}`,
-    componentNames: ['Button'],
-    manualPath: '../../components/ui/Button',
-  }
+const solidCode = {
+  body: `export const SolidButton = () => {
+    return <Button variant="solid" color="#0000FF">Solid</Button>
+  }`,
+  componentNames: ['Button'],
+  manualPath,
+}
 
-  const textCode = {
-    body: `export const TextButton = () => {
-  return <Button variant="text">Text</Button>
-}`,
-    componentNames: ['Button'],
-    manualPath: '../../components/ui/Button',
-  }
+const textCode = {
+  body: `export const TextButton = () => {
+    return <Button variant="text">Text</Button>
+  }`,
+  componentNames: ['Button'],
+  manualPath,
+}
 
-  const withIconCode = {
-    body: `export const WithIconButtons = () => {
-  return (
-    <div className="flex items-center">
+const withIconCode = {
+  body: `export const WithIconButtons = () => {
+    return (
+      <div className="flex items-center">
       <Button iconLeft={<IconHome />}>Home</Button>
       <Button variant="secondary" iconRight={<IconSettings />} className="ml-3">
         Settings
       </Button>
-    </div>
-  )
-}`,
-    componentNames: ['Button', 'IconHome', 'IconSettings'],
-    manualPath: {
-      Button: '../../components/ui/Button',
-      IconHome: '../../components/ui/icons/IconHome',
-      IconSettings: '../../components/ui/icons/IconSettings',
-    },
-  }
+      </div>
+    )
+  }`,
+  componentNames: ['Button', 'IconHome', 'IconSettings'],
+  manualPath: {
+    Button: manualPath,
+    IconHome: '../../components/ui/icons/IconHome',
+    IconSettings: '../../components/ui/icons/IconSettings',
+  },
+}
 
-  const iconCode = {
-    body: `export const IconButton = () => {
-  return (
-    <Button aria-label="Download">
+const iconCode = {
+  body: `export const IconButton = () => {
+    return (
+      <Button aria-label="Download">
       <IconDownload />
-    </Button>
-  )
-}`,
-    componentNames: ['Button', 'IconDownload'],
-    manualPath: {
-      Button: '../../components/ui/Button',
-      IconDownload: '../../components/ui/icons/IconDownload',
-    },
-  }
+      </Button>
+    )
+  }`,
+  componentNames: ['Button', 'IconDownload'],
+  manualPath: {
+    Button: manualPath,
+    IconDownload: '../../components/ui/icons/IconDownload',
+  },
+}
 
-  const groupHorizontalCode = {
-    body: `export const HorizontalButtonGroup = () => {
-  return (
-    <ButtonGroup>
+const groupHorizontalCode = {
+  body: `export const HorizontalButtonGroup = () => {
+    return (
+      <ButtonGroup>
       <Button variant="secondary">Cancel</Button>
       <Button variant="primary">Save Changes</Button>
-    </ButtonGroup>
-  )
-}`,
-    componentNames: ['Button', 'ButtonGroup'],
-    manualPath: '../../components/ui/Button',
-  }
+      </ButtonGroup>
+    )
+  }`,
+  componentNames: ['Button', 'ButtonGroup'],
+  manualPath: manualPath,
+}
 
-  const groupVerticalCode = {
-    body: `export const VerticalButtonGroup = () => {
-  return (
-    <ButtonGroup mode="vertical">
+const groupVerticalCode = {
+  body: `export const VerticalButtonGroup = () => {
+    return (
+      <ButtonGroup mode="vertical">
       <Button variant="primary">Save Changes</Button>
       <Button variant="secondary">Cancel</Button>
-    </ButtonGroup>
-  )
-}`,
-    componentNames: ['Button', 'ButtonGroup'],
-    manualPath: '../../components/ui/Button',
-  }
+      </ButtonGroup>
+    )
+  }`,
+  componentNames: ['Button', 'ButtonGroup'],
+  manualPath: manualPath,
+}
 
-  const groupAttachedCode = {
-    body: `export const AttachedButtonGroup = () => {
-  return (
-    <ButtonGroup attached>
+const groupAttachedCode = {
+  body: `export const AttachedButtonGroup = () => {
+    return (
+      <ButtonGroup attached>
       <Button variant="secondary">Cancel</Button>
       <Button variant="primary">Save Changes</Button>
-    </ButtonGroup>
-  )
-}`,
-    componentNames: ['Button', 'ButtonGroup'],
-    manualPath: '../../components/ui/Button',
-  }
+      </ButtonGroup>
+    )
+  }`,
+  componentNames: ['Button', 'ButtonGroup'],
+  manualPath: manualPath,
+}
 
+export const ButtonDoc = () => {
   return (
     <div className="max-w-5xl mx-auto px-6">
       <header className="mt-0">
