@@ -188,9 +188,7 @@ export const AccordionDoc = () => {
         <CodeViewer
           language="tsx"
           code={`<AccordionGroup>
-  <Accordion title="Heading">
-    Content
-  </Accordion>
+  <Accordion />
 </AccordionGroup>`}
         />
       </div>
