@@ -199,13 +199,11 @@ export const TabsDoc = () => {
       <div className="mb-12">
         <CodeViewer
           language="tsx"
-          code={`<Tabs defaultValue="1">
+          code={`<Tabs>
   <TabsList>
-    <TabsTrigger value="1">Tab 1</TabsTrigger>
-    <TabsTrigger value="2">Tab 2</TabsTrigger>
+    <TabsTrigger />
   </TabsList>
-  <TabsContent value="1">Panel 1</TabsContent>
-  <TabsContent value="2">Panel 2</TabsContent>
+  <TabsContent />
 </Tabs>`}
         />
       </div>

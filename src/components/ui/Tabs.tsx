@@ -80,7 +80,7 @@ export const TabsList = ({ className, children, ref, ...rest }: TabsListProps) =
       className={cn(
         'flex',
         variant === 'vertical' && 'flex-col items-stretch [&>*:not(:first-child)]:mt-4 min-w-[150px]',
-        variant === 'underline' && 'flex-row items-center border-b-4 border-(--lithos-border) gap-6 w-full',
+        variant === 'underline' && 'flex-row items-center gap-6 w-full',
         variant === 'default' && 'flex-row flex-wrap items-center [&>*:not(:first-child)]:ml-4',
         className
       )}
@@ -114,17 +114,14 @@ export const TabsTrigger = ({ value, className, children, ref, ...rest }: TabsTr
         'disabled:pointer-events-none disabled:opacity-50',
 
         variant === 'underline' && [
-          'border-0 border-b-4 border-transparent mb-[-4px] px-2 py-2',
-          'hover:border-(--lithos-border) shadow-none! bg-transparent! text-(--lithos-text)',
-          'data-[state=active]:border-(--lithos-accent) data-[state=active]:text-(--lithos-accent)',
+          'border-0 border-b-4 border-transparent px-2 py-2',
+          'shadow-none! bg-transparent! text-(--lithos-text)',
+          'data-[state=active]:border-(--lithos-accent)',
         ],
 
         variant !== 'underline' && [
-          'px-6 py-2.5 border-2 border-(--lithos-border)',
+          'px-6 py-2.5 rounded-(--lithos-radius)',
           'bg-(--lithos-surface) text-(--lithos-text)',
-          'shadow-[4px_4px_0_0_var(--lithos-border)]',
-          'hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--lithos-border)]',
-          'data-[state=active]:translate-x-[4px] data-[state=active]:translate-y-[4px] data-[state=active]:shadow-none',
           'data-[state=active]:bg-(--lithos-accent) data-[state=active]:text-(--lithos-accent-text)',
         ],
         className
@@ -152,7 +149,7 @@ export const TabsContent = ({ value, className, children, ref, ...rest }: TabsCo
       role="tabpanel"
       data-state={isSelected ? 'active' : 'inactive'}
       className={cn(
-        'border-2 border-(--lithos-border) bg-(--lithos-surface) p-6 text-(--lithos-text)',
+        'border-2 border-(--lithos-border) bg-(--lithos-surface) p-6 text-(--lithos-text) rounded-(--lithos-radius)',
         'shadow-[8px_8px_0_0_var(--lithos-border)]',
         variant === 'vertical' ? 'mt-0 flex-1 w-full' : 'mt-6',
         className
