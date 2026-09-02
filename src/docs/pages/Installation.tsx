@@ -37,7 +37,18 @@ export const Installation = () => {
         Install the package directly into your project. You can then import components and global tokens out of the box.
       </p>
       <CodeViewer code={'pnpm add lithos-ui\n# or npm install / yarn add / bun add'} language="bash" />
-      <p className="mt-6 mb-6 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
+
+      <div className="border-l-4 border-blue-500 pl-6 py-2 mt-8 mb-6 bg-(--lithos-surface) p-4">
+        <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
+          <strong>Tailwind v4 Configuration</strong>
+          <br />
+          If you are using Tailwind CSS v4, you must explicitly tell the compiler to scan the Lithos UI library to
+          generate the correct utility classes for dynamic variants.
+        </p>
+      </div>
+      <CodeViewer code={`@import 'tailwindcss';\n@source '../node_modules/lithos-ui';`} language="css" />
+
+      <p className="mt-8 mb-6 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
         Import the global tokens in your root file (e.g., <code>App.tsx</code>) and start building:
       </p>
       <CodeViewer code={"import 'lithos-ui/tokens.css'\nimport { Button } from 'lithos-ui'"} language="tsx" />
