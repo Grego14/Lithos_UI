@@ -92,11 +92,9 @@ export const ButtonGroup = ({
     'inline-flex flex-row',
     isVertical && 'flex-col',
     attached
-      ? [
-          // '[&>*]:relative [&>*:hover]:z-0',
-          // 'has-[*:hover]:[&>*:not(:hover)]:opacity-60',
-          isVertical ? '[&>*:not(:first-child)]:-mt-0.5' : '[&>*:not(:first-child)]:-ml-0.5',
-        ]
+      ? isVertical
+        ? '[&>*:not(:first-child)]:-mt-0.5'
+        : '[&>*:not(:first-child)]:-ml-0.5'
       : isVertical
         ? 'space-y-2'
         : 'space-x-2',

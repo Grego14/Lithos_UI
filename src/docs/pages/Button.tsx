@@ -55,10 +55,10 @@ const withIconCode = {
   body: `export const WithIconButtons = () => {
     return (
       <div className="flex items-center">
-      <Button iconLeft={<IconHome />}>Home</Button>
-      <Button variant="secondary" iconRight={<IconSettings />} className="ml-3">
-        Settings
-      </Button>
+        <Button iconLeft={<IconHome />}>Home</Button>
+        <Button variant="secondary" iconRight={<IconSettings />} className="ml-3">
+          Settings
+        </Button>
       </div>
     )
   }`,
@@ -74,7 +74,7 @@ const iconCode = {
   body: `export const IconButton = () => {
     return (
       <Button aria-label="Download">
-      <IconDownload />
+        <IconDownload />
       </Button>
     )
   }`,
@@ -89,8 +89,8 @@ const groupHorizontalCode = {
   body: `export const HorizontalButtonGroup = () => {
     return (
       <ButtonGroup>
-      <Button variant="secondary">Cancel</Button>
-      <Button variant="primary">Save Changes</Button>
+        <Button variant="secondary">Cancel</Button>
+        <Button variant="primary">Save Changes</Button>
       </ButtonGroup>
     )
   }`,
@@ -102,8 +102,8 @@ const groupVerticalCode = {
   body: `export const VerticalButtonGroup = () => {
     return (
       <ButtonGroup mode="vertical">
-      <Button variant="primary">Save Changes</Button>
-      <Button variant="secondary">Cancel</Button>
+        <Button variant="primary">Save Changes</Button>
+        <Button variant="secondary">Cancel</Button>
       </ButtonGroup>
     )
   }`,
@@ -115,8 +115,8 @@ const groupAttachedCode = {
   body: `export const AttachedButtonGroup = () => {
     return (
       <ButtonGroup attached>
-      <Button variant="secondary">Cancel</Button>
-      <Button variant="primary">Save Changes</Button>
+        <Button variant="secondary">Cancel</Button>
+        <Button variant="primary">Save Changes</Button>
       </ButtonGroup>
     )
   }`,
