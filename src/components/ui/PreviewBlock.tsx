@@ -109,7 +109,7 @@ export const PreviewBlock = ({
           )}
         </div>
 
-        <div className="flex items-center space-x-4 mt-4 md:mt-0">
+        <div className="flex items-center space-x-4">
           {installGuide && (
             <Button
               aria-label="Install"
