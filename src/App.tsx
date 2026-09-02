@@ -36,6 +36,7 @@ import { SelectDoc } from './docs/pages/Select'
 import { Showroom } from './showroom/Index'
 import { ToastDoc } from './docs/pages/Toast'
 import { ToggleDoc } from './docs/pages/Toggle'
+import { TabsDoc } from './docs/pages/Tabs'
 import { useEffect } from 'react'
 import { useLithosTheme } from './core/useLithosTheme'
 
@@ -79,6 +80,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
     { path: 'select', component: SelectDoc },
     { path: 'toast', component: ToastDoc },
     { path: 'toggle', component: ToggleDoc },
+    { path: 'tabs', component: TabsDoc },
   ]
 
   return docPages.map(({ path, component: Component }) => (
