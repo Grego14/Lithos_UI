@@ -1,6 +1,7 @@
 import { CodeViewer } from '../../components/ui/CodeViewer'
 
-const cssConfig = `@import './tokens.css';
+const cssConfig = `@import "tailwindcss";
+@import "lithos-ui/tokens.css";
 
 /* If you need static global overrides, declare them here: */
 :root {
@@ -49,9 +50,9 @@ export const Installation = () => {
       <CodeViewer code={`@import 'tailwindcss';\n@source '../node_modules/lithos-ui';`} language="css" />
 
       <p className="mt-8 mb-6 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
-        Import the global tokens in your root file (e.g., <code>App.tsx</code>) and start building:
+        Start importing components and building your UI:
       </p>
-      <CodeViewer code={"import 'lithos-ui/tokens.css'\nimport { Button } from 'lithos-ui'"} language="tsx" />
+      <CodeViewer code={"import { Button } from 'lithos-ui'"} language="tsx" />
 
       <h2 id="manual" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Manual
@@ -70,25 +71,33 @@ export const Installation = () => {
       </h2>
       <p className="mb-6 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
         If you are integrating into an existing project, you must define the Lithos UI physics engine and root tokens.
-        If you are importing these in your JavaScript entrypoint (like <code>main.tsx</code> or <code>App.tsx</code>),{' '}
-        <strong>the import order is critical</strong>.
+        The most robust way to do this is by importing our tokens directly inside your main CSS file (e.g.,{' '}
+        <code>index.css</code>), immediately after Tailwind.
       </p>
 
       <div className="border-l-4 border-red-500 pl-6 py-2 mb-8 bg-(--lithos-surface) p-4">
         <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
-          <strong>CRITICAL: Tailwind v4 Layer Ordering</strong>
+          <strong>CRITICAL: Tailwind v4 Layer Ordering & Cascade Rules</strong>
           <br />
-          You must import your Tailwind CSS file <strong>before</strong> importing <code>lithos-ui/tokens.css</code>. If
-          you import Lithos UI first, the browser will drop its <code>@layer components</code> to the bottom of the
-          priority stack, causing Tailwind's Preflight to accidentally erase button padding and interactive physics.
+          You must import Tailwind <strong>before</strong> importing <code>lithos-ui/tokens.css</code> so that our{' '}
+          <code>@layer components</code> are prioritized correctly.
+          <br />
+          <br />
+          Additionally, importing the tokens directly inside your CSS file (rather than in your JS entrypoint) ensures
+          your custom <code>:root</code> overrides evaluate last. This allows them to successfully win the CSS cascade
+          without requiring specificity hacks like <code>html:root</code>.
         </p>
       </div>
 
       <CodeViewer
-        code={`// Correct Import Order
-import './index.css' // Your Tailwind configuration MUST come first
-import 'lithos-ui/tokens.css' // Lithos UI tokens come second`}
-        language="tsx"
+        code={`@import "tailwindcss";
+@import "lithos-ui/tokens.css"; /* Must be imported second */
+
+/* Your overrides safely go here and win the cascade! */
+:root {
+  --lithos-accent: #b910ae;
+}`}
+        language="css"
       />
 
       <h2 id="theming" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">

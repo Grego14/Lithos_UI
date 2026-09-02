@@ -45,3 +45,31 @@ export const accordionPropsData: PropItem[] = [
     description: 'Additional CSS classes applied to the root container.',
   },
 ]
+
+export const accordionGroupPropsData: PropItem[] = [
+  {
+    name: 'allowMultiple',
+    type: 'boolean',
+    defaultValue: 'false',
+    required: false,
+    description: 'Allows multiple accordion items to be open simultaneously.',
+  },
+  {
+    name: 'defaultActive',
+    type: 'string | string[]',
+    required: false,
+    description: 'The value(s) of the accordion item(s) to open by default.',
+  },
+  {
+    name: 'children',
+    type: 'ReactNode',
+    required: false,
+    description: 'The Accordion items to group.',
+  },
+  {
+    name: 'className',
+    type: 'string',
+    required: false,
+    description: 'Additional CSS classes applied to the group container.',
+  },
+]

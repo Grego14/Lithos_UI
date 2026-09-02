@@ -3,7 +3,7 @@ import { CodeViewer } from '../../components/ui/CodeViewer'
 import { Accordion, AccordionGroup } from '../../components/ui/Accordion'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
-import { accordionPropsData } from '../propsData/accordion'
+import { accordionPropsData, accordionGroupPropsData } from '../propsData/accordion'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Accordion.tsx'
 
@@ -188,9 +188,7 @@ export const AccordionDoc = () => {
         <CodeViewer
           language="tsx"
           code={`<AccordionGroup>
-  <Accordion title="Heading">
-    Content
-  </Accordion>
+  <Accordion />
 </AccordionGroup>`}
         />
       </div>
@@ -224,6 +222,9 @@ export const AccordionDoc = () => {
           or per-instance via <code>className</code> (e.g. <code>rounded-full</code>). No custom prop is required.
         </div>
         <PropsAccordion title="Accordion Props" data={accordionPropsData} />
+        <div className="mt-4">
+          <PropsAccordion title="AccordionGroup Props" data={accordionGroupPropsData} />
+        </div>
       </section>
     </div>
   )
