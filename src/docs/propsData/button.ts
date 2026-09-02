@@ -48,7 +48,7 @@ export const buttonPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'string',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes.',
   },
@@ -77,7 +77,7 @@ export const buttonGroupPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'string',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes.',
   },

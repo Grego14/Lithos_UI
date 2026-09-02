@@ -7,9 +7,8 @@
  */
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 import type { ButtonVariant } from '../../core/types'
-import { cn } from '../../utils/cn'
+import { cn, type LithosClass } from '../../utils/cn'
 import { getContrastText } from '../../utils/yiq'
-import type { ClassArray, ClassValue } from 'clsx'
 
 export interface ButtonProps extends Omit<ComponentPropsWithRef<'button'>, 'type' | 'className'> {
   variant?: ButtonVariant | undefined
@@ -18,15 +17,14 @@ export interface ButtonProps extends Omit<ComponentPropsWithRef<'button'>, 'type
   type?: 'button' | 'submit' | 'reset' | undefined
   iconLeft?: ReactNode
   iconRight?: ReactNode
-  children: ReactNode
-  className?: ClassValue | ClassArray
+  className?: LithosClass
 }
 
 const variantClass: Record<ButtonVariant, string> = {
   primary: 'bg-(--lithos-accent) text-(--lithos-accent-text)',
   secondary: 'bg-(--lithos-surface) text-(--lithos-text)',
   accent: 'bg-(--lithos-surface) text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)',
-  text: 'bg-transparent text-(--lithos-text) cursor-pointer !border-transparent !shadow-none hover:!shadow-none',
+  text: 'bg-transparent text-(--lithos-text) border-transparent shadow-none hover:shadow-none',
   solid: '',
 }
 
@@ -40,15 +38,12 @@ export const Button = ({
   className,
   children,
   style,
-  ref,
   ...rest
 }: ButtonProps) => {
   const classes = [
-    'lithos-click',
-    'rounded-(--lithos-radius)',
+    'lithos-click rounded-(--lithos-radius) disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
     variantClass[variant],
     fullWidth && 'w-full',
-    'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
     className,
   ]
 
@@ -57,7 +52,7 @@ export const Button = ({
   const solidStyle = isSolid ? { backgroundColor: solidColor, color: getContrastText(solidColor) } : {}
 
   return (
-    <button ref={ref} type={type} className={cn(classes)} style={{ ...solidStyle, ...style }} {...rest}>
+    <button type={type} className={cn(classes)} style={{ ...solidStyle, ...style }} {...rest}>
       {iconLeft && (
         <span className="inline-flex shrink-0 mr-2" aria-hidden="true">
           {iconLeft}
@@ -81,7 +76,7 @@ export const Button = ({
 export interface ButtonGroupProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   mode?: 'horizontal' | 'vertical' | undefined
   attached?: boolean | undefined
-  className?: ClassValue | ClassArray
+  className?: LithosClass
 }
 
 export const ButtonGroup = ({
@@ -89,27 +84,25 @@ export const ButtonGroup = ({
   attached = false,
   className,
   children,
-  ref,
   ...rest
 }: ButtonGroupProps) => {
   const isVertical = mode === 'vertical'
 
   const classes = [
-    'inline-flex',
-    isVertical ? 'flex-col' : 'flex-row',
+    'inline-flex flex-row',
+    isVertical && 'flex-col',
     attached
-      ? [
-          '[&>*]:relative [&>*:hover]:z-10 [&>*:focus-visible]:z-10',
-          isVertical ? '[&>*:not(:first-child)]:-mt-0.5' : '[&>*:not(:first-child)]:-ml-0.5',
-        ]
+      ? isVertical
+        ? '[&>*:not(:first-child)]:-mt-0.5'
+        : '[&>*:not(:first-child)]:-ml-0.5'
       : isVertical
-        ? '[&>*:not(:first-child)]:mt-2'
-        : '[&>*:not(:first-child)]:ml-2',
+        ? 'space-y-2'
+        : 'space-x-2',
     className,
   ]
 
   return (
-    <div ref={ref} role="group" className={cn(classes)} {...rest}>
+    <div role="group" className={cn(classes)} {...rest}>
       {children}
     </div>
   )
