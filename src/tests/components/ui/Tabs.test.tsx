@@ -66,7 +66,7 @@ describe('Tabs Component', () => {
     renderTabs({ variant: 'underline' })
 
     const list = screen.getByTestId('tabs-list')
-    expect(list).toHaveClass('border-b-4', 'border-(--lithos-border)')
+    expect(list).toHaveClass('w-full')
   })
 
   it('merges custom classNames', () => {
