@@ -8,7 +8,7 @@ describe('Calendar', () => {
   const BASE_MONTH = new Date(2026, 7, 1) // August 2026
 
   it('renders correctly', () => {
-    render(<Calendar mode="single" defaultMonth={BASE_MONTH} />)
+    render(<Calendar locale="en-US" mode="single" defaultMonth={BASE_MONTH} />)
     expect(screen.getByRole('grid')).toBeInTheDocument()
     expect(screen.getByText('August 2026')).toBeInTheDocument()
   })
@@ -17,7 +17,7 @@ describe('Calendar', () => {
     it('selects a date in single mode', async () => {
       const user = userEvent.setup()
       const onChange = vi.fn()
-      render(<Calendar mode="single" defaultMonth={BASE_MONTH} onChange={onChange} />)
+      render(<Calendar locale="en-US" mode="single" defaultMonth={BASE_MONTH} onChange={onChange} />)
 
       const day15 = screen.getByRole('button', { name: /August 15, 2026/i })
       await user.click(day15)
@@ -29,7 +29,7 @@ describe('Calendar', () => {
     it('selects and deselects multiple dates in multiple mode', async () => {
       const user = userEvent.setup()
       const onChange = vi.fn()
-      render(<Calendar mode="multiple" defaultMonth={BASE_MONTH} onChange={onChange} />)
+      render(<Calendar locale="en-US" mode="multiple" defaultMonth={BASE_MONTH} onChange={onChange} />)
 
       const day15 = screen.getByRole('button', { name: /August 15, 2026/i })
       const day16 = screen.getByRole('button', { name: /August 16, 2026/i })
@@ -48,7 +48,7 @@ describe('Calendar', () => {
     it('handles range selection mode', async () => {
       const user = userEvent.setup()
       const onChange = vi.fn()
-      render(<Calendar mode="range" defaultMonth={BASE_MONTH} onChange={onChange} />)
+      render(<Calendar locale="en-US" mode="range" defaultMonth={BASE_MONTH} onChange={onChange} />)
 
       const day10 = screen.getByRole('button', { name: /August 10, 2026/i })
       const day15 = screen.getByRole('button', { name: /August 15, 2026/i })
@@ -70,7 +70,7 @@ describe('Calendar', () => {
 
     it('applies ROYGBIV colors sequentially in rainbow mode', async () => {
       const user = userEvent.setup()
-      render(<Calendar mode="rainbow" defaultMonth={BASE_MONTH} />)
+      render(<Calendar locale="en-US" mode="rainbow" defaultMonth={BASE_MONTH} />)
 
       const day10 = screen.getByRole('button', { name: /August 10, 2026/i })
       const day11 = screen.getByRole('button', { name: /August 11, 2026/i })
@@ -88,6 +88,7 @@ describe('Calendar', () => {
       const targetDate = new Date(2026, 7, 15)
       render(
         <Calendar
+          locale="en-US"
           mode="multiple"
           defaultMonth={BASE_MONTH}
           value={[targetDate]}
@@ -104,7 +105,7 @@ describe('Calendar', () => {
     it('navigates through months with header buttons', async () => {
       const user = userEvent.setup()
       const onMonthChange = vi.fn()
-      render(<Calendar mode="single" defaultMonth={BASE_MONTH} onMonthChange={onMonthChange} />)
+      render(<Calendar locale="en-US" mode="single" defaultMonth={BASE_MONTH} onMonthChange={onMonthChange} />)
 
       const nextButton = screen.getByRole('button', { name: /next month/i })
       await user.click(nextButton)
@@ -121,7 +122,7 @@ describe('Calendar', () => {
       const minDate = new Date(2026, 7, 10)
       const maxDate = new Date(2026, 7, 20)
 
-      render(<Calendar mode="single" defaultMonth={BASE_MONTH} minDate={minDate} maxDate={maxDate} />)
+      render(<Calendar locale="en-US" mode="single" defaultMonth={BASE_MONTH} minDate={minDate} maxDate={maxDate} />)
 
       const day5 = screen.getByRole('button', { name: /August 5, 2026/i })
       const day15 = screen.getByRole('button', { name: /August 15, 2026/i })
@@ -133,7 +134,9 @@ describe('Calendar', () => {
     })
 
     it('disables dates provided in disabledDates array', () => {
-      render(<Calendar mode="single" defaultMonth={BASE_MONTH} disabledDates={[15, new Date(2026, 7, 20)]} />)
+      render(
+        <Calendar locale="en-US" mode="single" defaultMonth={BASE_MONTH} disabledDates={[15, new Date(2026, 7, 20)]} />
+      )
 
       expect(screen.getByRole('button', { name: /August 15, 2026/i })).toBeDisabled()
       expect(screen.getByRole('button', { name: /August 20, 2026/i })).toBeDisabled()
@@ -144,7 +147,7 @@ describe('Calendar', () => {
   describe('Keyboard Navigation (WAI-ARIA)', () => {
     it('navigates grid cells using arrow keys', async () => {
       const user = userEvent.setup()
-      render(<Calendar mode="single" defaultMonth={BASE_MONTH} defaultValue={new Date(2026, 7, 15)} />)
+      render(<Calendar locale="en-US" mode="single" defaultMonth={BASE_MONTH} defaultValue={new Date(2026, 7, 15)} />)
 
       const day15 = screen.getByRole('button', { name: /August 15, 2026/i })
       day15.focus()
@@ -168,7 +171,7 @@ describe('Calendar', () => {
 
     it('jumps to start and end of week row using Home and End', async () => {
       const user = userEvent.setup()
-      render(<Calendar mode="single" defaultMonth={BASE_MONTH} defaultValue={new Date(2026, 7, 12)} />)
+      render(<Calendar locale="en-US" mode="single" defaultMonth={BASE_MONTH} defaultValue={new Date(2026, 7, 12)} />)
 
       const day12 = screen.getByRole('button', { name: /August 22, 2026/i })
       day12.focus()
@@ -183,7 +186,7 @@ describe('Calendar', () => {
     it('selects focused date when pressing Enter or Space', async () => {
       const user = userEvent.setup()
       const onChange = vi.fn()
-      render(<Calendar mode="single" defaultMonth={BASE_MONTH} onChange={onChange} />)
+      render(<Calendar locale="en-US" mode="single" defaultMonth={BASE_MONTH} onChange={onChange} />)
 
       const day15 = screen.getByRole('button', { name: /August 15, 2026/i })
       day15.focus()
@@ -202,7 +205,9 @@ describe('Calendar', () => {
       const controlledDate = new Date(2026, 7, 10)
       const onChange = vi.fn()
 
-      render(<Calendar mode="single" defaultMonth={BASE_MONTH} value={controlledDate} onChange={onChange} />)
+      render(
+        <Calendar locale="en-US" mode="single" defaultMonth={BASE_MONTH} value={controlledDate} onChange={onChange} />
+      )
 
       const day10 = screen.getByRole('button', { name: /August 10, 2026/i })
       const day15 = screen.getByRole('button', { name: /August 15, 2026/i })
@@ -219,7 +224,7 @@ describe('Calendar', () => {
   })
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<Calendar mode="single" defaultMonth={BASE_MONTH} />)
+    const { container } = render(<Calendar locale="en-US" mode="single" defaultMonth={BASE_MONTH} />)
     const results = await axe(container)
     expect(results).toHaveNoViolations()
   })
