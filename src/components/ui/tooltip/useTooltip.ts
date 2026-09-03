@@ -1,4 +1,4 @@
-import { useState, useMemo, createContext, useContext } from 'react'
+import React, { useState, useMemo, createContext, useContext } from 'react'
 import {
   useFloating,
   autoUpdate,
@@ -10,6 +10,7 @@ import {
   useDismiss,
   useRole,
   useInteractions,
+  arrow,
   type Placement,
   type UseFloatingReturn,
 } from '@floating-ui/react'
@@ -25,6 +26,7 @@ export interface TooltipOptions {
 export type TooltipReturn = {
   open: boolean
   setOpen: (open: boolean) => void
+  arrowRef: React.MutableRefObject<SVGSVGElement | null>
 } & ReturnType<typeof useInteractions> &
   UseFloatingReturn
 
@@ -36,6 +38,7 @@ export const useTooltip = ({
   offset: consumerOffset = 4,
 }: TooltipOptions = {}): TooltipReturn => {
   const [uncontrolledOpen, setUncontrolledOpen] = useState(initialOpen)
+  const arrowRef = React.useRef<SVGSVGElement | null>(null)
 
   const open = controlledOpen ?? uncontrolledOpen
   const setOpen = setControlledOpen ?? setUncontrolledOpen
@@ -46,11 +49,12 @@ export const useTooltip = ({
     onOpenChange: setOpen,
     whileElementsMounted: autoUpdate,
     middleware: [
-      offset(consumerOffset),
+      offset(consumerOffset + 8),
       flip({
         fallbackAxisSideDirection: 'start',
       }),
       shift({ padding: 8 }),
+      arrow({ element: arrowRef }),
     ],
   })
 
@@ -67,10 +71,11 @@ export const useTooltip = ({
     () => ({
       open,
       setOpen,
+      arrowRef,
       ...interactions,
       ...data,
     }),
-    [open, setOpen, interactions, data]
+    [open, setOpen, arrowRef, interactions, data]
   )
 }
 

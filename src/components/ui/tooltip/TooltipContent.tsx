@@ -1,5 +1,5 @@
 import { forwardRef, type ComponentPropsWithRef } from 'react'
-import { useMergeRefs, FloatingPortal } from '@floating-ui/react'
+import { useMergeRefs, FloatingPortal, FloatingArrow } from '@floating-ui/react'
 import { cn, type LithosClass } from '../../../utils/cn'
 import { useTooltipContext } from './useTooltip'
 
@@ -10,7 +10,7 @@ export interface TooltipContentProps extends Omit<ComponentPropsWithRef<'div'>, 
 
 export const TooltipContent = forwardRef<HTMLDivElement, TooltipContentProps>(
   ({ style, className, portaled = true, ...props }, propRef) => {
-    const { context: floatingContext, floatingStyles, refs, getFloatingProps } = useTooltipContext()
+    const { context: floatingContext, floatingStyles, refs, getFloatingProps, arrowRef } = useTooltipContext()
     const ref = useMergeRefs([refs.setFloating, propRef])
 
     if (!floatingContext.open) return null
@@ -26,6 +26,13 @@ export const TooltipContent = forwardRef<HTMLDivElement, TooltipContentProps>(
         {...getFloatingProps(props)}
       >
         {props.children}
+        <FloatingArrow
+          ref={arrowRef}
+          context={floatingContext}
+          fill="var(--lithos-surface)"
+          stroke="var(--lithos-border)"
+          strokeWidth={2}
+        />
       </div>
     )
 
