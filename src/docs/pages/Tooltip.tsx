@@ -29,7 +29,7 @@ export const TooltipDoc = () => {
   const sideCode = {
     body: `export const TooltipPlacements = () => {
   return (
-    <div className="flex flex-wrap gap-4 items-center justify-center p-8">
+    <div className="flex flex-wrap items-center justify-center p-8">
       <Tooltip placement="left">
         <TooltipTrigger asChild>
           <Button variant="secondary">Left</Button>
