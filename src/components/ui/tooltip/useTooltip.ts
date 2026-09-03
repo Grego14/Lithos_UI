@@ -54,7 +54,7 @@ export const useTooltip = ({
         fallbackAxisSideDirection: 'start',
       }),
       shift({ padding: 8 }),
-      arrow({ element: arrowRef, padding: 8 }),
+      arrow({ element: arrowRef }),
     ],
   })
 
