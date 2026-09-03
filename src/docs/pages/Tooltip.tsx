@@ -26,6 +26,60 @@ export const TooltipDoc = () => {
     manualPath: { Tooltip: '../../components/ui/Tooltip' },
   }
 
+  const sideCode = {
+    body: `export const TooltipPlacements = () => {
+  return (
+    <div className="grid grid-cols-3 gap-4 items-center justify-items-center p-8">
+      <div className="col-start-2 row-start-1">
+        <Tooltip placement="top">
+          <TooltipTrigger asChild>
+            <Button variant="secondary">Top</Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Top placement</p>
+          </TooltipContent>
+        </Tooltip>
+      </div>
+
+      <div className="col-start-1 row-start-2">
+        <Tooltip placement="left">
+          <TooltipTrigger asChild>
+            <Button variant="secondary">Left</Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Left placement</p>
+          </TooltipContent>
+        </Tooltip>
+      </div>
+
+      <div className="col-start-3 row-start-2">
+        <Tooltip placement="right">
+          <TooltipTrigger asChild>
+            <Button variant="secondary">Right</Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Right placement</p>
+          </TooltipContent>
+        </Tooltip>
+      </div>
+
+      <div className="col-start-2 row-start-3">
+        <Tooltip placement="bottom">
+          <TooltipTrigger asChild>
+            <Button variant="secondary">Bottom</Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Bottom placement</p>
+          </TooltipContent>
+        </Tooltip>
+      </div>
+    </div>
+  )
+}`,
+    componentNames: ['Tooltip', 'TooltipTrigger', 'TooltipContent', 'Button'],
+    manualPath: { Tooltip: '../../components/ui/Tooltip' },
+  }
+
   return (
     <div className="max-w-5xl mx-auto px-6">
       <header className="mt-0">
@@ -77,6 +131,63 @@ export const TooltipDoc = () => {
                 <p>This is a neo-brutalist tooltip.</p>
               </TooltipContent>
             </Tooltip>
+          </div>
+        </PreviewBlock>
+      </div>
+
+      <h3 id="side" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
+        Side
+      </h3>
+      <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
+        Use the <code>placement</code> prop to change the position of the tooltip.
+      </p>
+
+      <div className="mt-8 mb-16">
+        <PreviewBlock code={sideCode} githubUrl={githubUrl}>
+          <div className="grid grid-cols-3 gap-4 items-center justify-items-center p-12 w-full max-w-lg mx-auto">
+            <div className="col-start-2 row-start-1">
+              <Tooltip placement="top">
+                <TooltipTrigger asChild>
+                  <Button variant="secondary">Top</Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Top placement</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
+
+            <div className="col-start-1 row-start-2">
+              <Tooltip placement="left">
+                <TooltipTrigger asChild>
+                  <Button variant="secondary">Left</Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Left placement</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
+
+            <div className="col-start-3 row-start-2">
+              <Tooltip placement="right">
+                <TooltipTrigger asChild>
+                  <Button variant="secondary">Right</Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Right placement</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
+
+            <div className="col-start-2 row-start-3">
+              <Tooltip placement="bottom">
+                <TooltipTrigger asChild>
+                  <Button variant="secondary">Bottom</Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Bottom placement</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
           </div>
         </PreviewBlock>
       </div>
