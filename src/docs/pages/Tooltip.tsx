@@ -136,7 +136,7 @@ export const TooltipDoc = () => {
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={sideCode} githubUrl={githubUrl}>
-          <div className="flex flex-wrap gap-4 items-center justify-center p-12">
+          <div className="flex flex-wrap items-center justify-center p-12">
             <Tooltip placement="left">
               <TooltipTrigger asChild>
                 <Button variant="secondary">Left</Button>
