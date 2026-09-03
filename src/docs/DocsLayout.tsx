@@ -98,8 +98,10 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#installation', label: 'Installation', level: 1 },
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#default', label: 'Default', level: 2 },
+    { id: '#variants', label: 'Variants', level: 2 },
     { id: '#anatomy', label: 'Anatomy', level: 1 },
     { id: '#accessibility', label: 'Accessibility', level: 1 },
+    { id: '#api-reference', label: 'API Reference', level: 1 },
   ],
   '/docs/button': [
     { id: '#installation', label: 'Installation', level: 1 },
