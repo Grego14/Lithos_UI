@@ -25,9 +25,28 @@ export const useLithosTheme = (config?: UseLithosThemeProps) => {
     return '#00FF00' as HexColor
   })
 
+  const [prevConfigAccent, setPrevConfigAccent] = useState(config?.accentColor)
+
+  if (config?.accentColor !== undefined && config.accentColor !== prevConfigAccent) {
+    setPrevConfigAccent(config.accentColor)
+    let validColor = config.accentColor
+    if (!isHexColor(validColor)) {
+      console.warn(`[Lithos UI] Invalid hex color provided: "${validColor}". Falling back to default #00FF00.`)
+      validColor = '#00FF00'
+    }
+    setAccentColor(validColor as HexColor)
+  }
+
   const [radius, setRadius] = useState(() => {
     return parseInt(localStorage.getItem('lithos-theme-radius') || '0', 10)
   })
+
+  const [prevConfigRadius, setPrevConfigRadius] = useState(config?.radius)
+
+  if (config?.radius !== undefined && config.radius !== prevConfigRadius) {
+    setPrevConfigRadius(config.radius)
+    setRadius(config.radius)
+  }
 
   const updateAccentColor = (color: HexColor | string) => {
     let validColor = color
@@ -36,25 +55,35 @@ export const useLithosTheme = (config?: UseLithosThemeProps) => {
       validColor = '#00FF00'
     }
     setAccentColor(validColor as HexColor)
-    localStorage.setItem('lithos-theme-color', validColor)
   }
 
   const updateRadius = (newRadius: number) => {
     setRadius(newRadius)
-    localStorage.setItem('lithos-theme-radius', newRadius.toString())
   }
 
+  // Side-effect: sync accentColor to localStorage and dispatch event
   useEffect(() => {
-    if (config?.accentColor) {
-      updateAccentColor(config.accentColor)
-    }
-  }, [config?.accentColor])
+    localStorage.setItem('lithos-theme-color', accentColor)
+    window.dispatchEvent(new Event('lithos-theme-color-changed'))
+  }, [accentColor])
 
+  // Side-effect: sync radius to localStorage
   useEffect(() => {
-    if (config?.radius !== undefined) {
-      updateRadius(config.radius)
+    localStorage.setItem('lithos-theme-radius', radius.toString())
+  }, [radius])
+
+  // Side-effect: sync dark mode to localStorage, DOM, and dispatch event
+  useEffect(() => {
+    localStorage.setItem('lithos-theme-mode', isDarkMode ? 'dark' : 'light')
+
+    if (isDarkMode) {
+      document.body.classList.add('obsidian', 'dark')
+    } else {
+      document.body.classList.remove('obsidian', 'dark')
     }
-  }, [config?.radius])
+
+    window.dispatchEvent(new Event('lithos-theme-mode-changed'))
+  }, [isDarkMode])
 
   useEffect(() => {
     let styleTag = document.getElementById('lithos-theme-overrides')
@@ -79,29 +108,8 @@ export const useLithosTheme = (config?: UseLithosThemeProps) => {
   }, [accentColor, isDarkMode, radius])
 
   const toggleObsidian = () => {
-    setIsDarkMode((prevMode) => {
-      const newMode = !prevMode
-      localStorage.setItem('lithos-theme-mode', newMode ? 'dark' : 'light')
-
-      if (newMode) {
-        document.body.classList.add('obsidian', 'dark')
-      } else {
-        document.body.classList.remove('obsidian', 'dark')
-      }
-
-      window.dispatchEvent(new Event('lithos-theme-mode-changed'))
-      return newMode
-    })
+    setIsDarkMode((prevMode) => !prevMode)
   }
-
-  // Ensure body receives the initial class on mount
-  useEffect(() => {
-    if (isDarkMode) {
-      document.body.classList.add('obsidian', 'dark')
-    } else {
-      document.body.classList.remove('obsidian', 'dark')
-    }
-  }, [isDarkMode])
 
   return { isDarkMode, toggleObsidian, accentColor, updateAccentColor, radius, updateRadius } as const
 }
