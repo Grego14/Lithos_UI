@@ -79,6 +79,86 @@ export const TooltipDoc = () => {
         </PreviewBlock>
       </div>
 
+      <h3 id="variants" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
+        Variants
+      </h3>
+      <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
+        You can pass the <code>variant</code> prop to <code>TooltipContent</code> to change its style. Supported
+        variants are <code>default</code>, <code>primary</code>, and <code>inverse</code>.
+      </p>
+
+      <div className="mt-8 mb-16">
+        <PreviewBlock
+          code={{
+            body: `export const TooltipVariants = () => {
+  return (
+    <div className="flex gap-4">
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button variant="secondary">Default</Button>
+        </TooltipTrigger>
+        <TooltipContent variant="default">
+          <p>Default variant</p>
+        </TooltipContent>
+      </Tooltip>
+      
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button variant="primary">Primary</Button>
+        </TooltipTrigger>
+        <TooltipContent variant="primary">
+          <p>Primary variant</p>
+        </TooltipContent>
+      </Tooltip>
+      
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button variant="solid" color="#000">Inverse</Button>
+        </TooltipTrigger>
+        <TooltipContent variant="inverse">
+          <p>Inverse variant</p>
+        </TooltipContent>
+      </Tooltip>
+    </div>
+  )
+}`,
+            componentNames: ['Tooltip', 'TooltipTrigger', 'TooltipContent', 'Button'],
+            manualPath: { Tooltip: '../../components/ui/Tooltip' },
+          }}
+        >
+          <div className="flex items-center justify-center gap-4 p-12 flex-wrap">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="secondary">Default</Button>
+              </TooltipTrigger>
+              <TooltipContent variant="default">
+                <p>Default variant</p>
+              </TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="primary">Primary</Button>
+              </TooltipTrigger>
+              <TooltipContent variant="primary">
+                <p>Primary variant</p>
+              </TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="solid" color="var(--lithos-text)">
+                  Inverse
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent variant="inverse">
+                <p>Inverse variant</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+        </PreviewBlock>
+      </div>
+
       <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Anatomy
       </h2>
