@@ -178,9 +178,8 @@ export const AlertWithUndo = () => {
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
         Use this for high-priority messages that demand immediate user attention. It renders with a solid background
-        corresponding to its intent, automatically adjusting text and border colors for contrast. On hover, the border
-        and shadow slightly expand. Restrict content to concise messages without complex child layouts. Inherits the{' '}
-        <code>alert</code> or <code>status</code> ARIA role based on intent.
+        corresponding to its intent, automatically adjusting text and border colors for contrast. Restrict content to
+        concise messages without complex child layouts. Root element carries <code>role="alert"</code>.
       </p>
 
       <div className="mt-8 mb-16">
@@ -214,8 +213,8 @@ export const AlertWithUndo = () => {
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
         Use this for medium-priority notifications that should remain visible without overpowering the surrounding page
         content. It renders with a transparent background, applying the intent color to the border, shadow, and text
-        instead. Interaction behavior mirrors the filled variant. Best suited for inline validation or standard
-        informational messages. Standard ARIA status roles apply.
+        instead. Best suited for inline validation or standard informational messages. Root element carries{' '}
+        <code>role="alert"</code>.
       </p>
 
       <div className="mt-8 mb-16">
@@ -247,10 +246,10 @@ export const AlertWithUndo = () => {
         Sizes
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-        Use the <code>size</code> prop to scale the alert appropriately for its context. It adjusts padding, icon size,
-        and typography (<code>sm</code> for dense lists, <code>md</code> for inline flow, <code>lg</code> for page-level
-        notices). There are no layout differences other than geometric scaling. Ensure text length remains proportional
-        to the chosen size. Does not impact accessibility structure.
+        Use the <code>size</code> prop to scale the alert appropriately for its context. It adjusts padding and
+        typography together (<code>sm</code> for dense lists, <code>md</code> for inline flow, <code>lg</code> for
+        page-level notices). There are no layout differences other than geometric scaling. Ensure text length remains
+        proportional to the chosen size. Does not impact accessibility structure.
       </p>
 
       <div className="mt-8 mb-16">
@@ -349,8 +348,6 @@ export const AlertWithUndo = () => {
                 type="text"
                 onFocus={handleFocus}
                 defaultValue={customColor}
-                max={7}
-                min={4}
                 className="p-1.5 text-sm outline-none border-2 border-(--lithos-border) shadow-[2px_2px_0_0_var(--lithos-shadow)] focus:shadow-[4px_4px_0_0_var(--lithos-shadow)] hover:shadow-[4px_4px_0_0_var(--lithos-shadow)] max-w-30"
               />
               <Button variant="primary" className="ml-6 text-sm" onClick={handleCustomColor}>
