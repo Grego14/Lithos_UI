@@ -1,4 +1,12 @@
-import { cloneElement, isValidElement, type ReactNode, forwardRef, type HTMLProps } from 'react'
+import {
+  cloneElement,
+  isValidElement,
+  type ReactNode,
+  forwardRef,
+  type HTMLProps,
+  type ReactElement,
+  type Ref,
+} from 'react'
 import { useMergeRefs } from '@floating-ui/react'
 import { useTooltipContext } from './useTooltip'
 
@@ -10,7 +18,7 @@ export interface TooltipTriggerProps {
 export const TooltipTrigger = forwardRef<HTMLElement, TooltipTriggerProps>(
   ({ children, asChild = false, ...props }, propRef) => {
     const context = useTooltipContext()
-    const childrenRef = (children as any).ref
+    const childrenRef = isValidElement(children) ? (children as ReactElement & { ref?: Ref<unknown> }).ref : null
     const ref = useMergeRefs([context.refs.setReference, propRef, childrenRef])
 
     if (asChild && isValidElement(children)) {
