@@ -161,11 +161,17 @@ export const TooltipDoc = () => {
         Anatomy
       </h2>
       <div className="mb-12">
+        <p className="mb-4 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
+          Tooltip is a compound component. Compose it from the three subcomponents below to establish the floating
+          context, trigger, and content overlay.
+        </p>
         <CodeViewer
           language="tsx"
           code={`<Tooltip>
-  <TooltipTrigger />
-  <TooltipContent />
+  <TooltipTrigger>
+  </TooltipTrigger>
+  <TooltipContent>
+  </TooltipContent>
 </Tooltip>`}
         />
       </div>
