@@ -29,50 +29,42 @@ export const TooltipDoc = () => {
   const sideCode = {
     body: `export const TooltipPlacements = () => {
   return (
-    <div className="grid grid-cols-3 gap-4 items-center justify-items-center p-8">
-      <div className="col-start-2 row-start-1">
-        <Tooltip placement="top">
-          <TooltipTrigger asChild>
-            <Button variant="secondary">Top</Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Top placement</p>
-          </TooltipContent>
-        </Tooltip>
-      </div>
+    <div className="flex flex-wrap gap-4 items-center justify-center p-8">
+      <Tooltip placement="left">
+        <TooltipTrigger asChild>
+          <Button variant="secondary">Left</Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Left placement</p>
+        </TooltipContent>
+      </Tooltip>
 
-      <div className="col-start-1 row-start-2">
-        <Tooltip placement="left">
-          <TooltipTrigger asChild>
-            <Button variant="secondary">Left</Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Left placement</p>
-          </TooltipContent>
-        </Tooltip>
-      </div>
+      <Tooltip placement="top">
+        <TooltipTrigger asChild>
+          <Button variant="secondary">Top</Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Top placement</p>
+        </TooltipContent>
+      </Tooltip>
 
-      <div className="col-start-3 row-start-2">
-        <Tooltip placement="right">
-          <TooltipTrigger asChild>
-            <Button variant="secondary">Right</Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Right placement</p>
-          </TooltipContent>
-        </Tooltip>
-      </div>
+      <Tooltip placement="bottom">
+        <TooltipTrigger asChild>
+          <Button variant="secondary">Bottom</Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Bottom placement</p>
+        </TooltipContent>
+      </Tooltip>
 
-      <div className="col-start-2 row-start-3">
-        <Tooltip placement="bottom">
-          <TooltipTrigger asChild>
-            <Button variant="secondary">Bottom</Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Bottom placement</p>
-          </TooltipContent>
-        </Tooltip>
-      </div>
+      <Tooltip placement="right">
+        <TooltipTrigger asChild>
+          <Button variant="secondary">Right</Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Right placement</p>
+        </TooltipContent>
+      </Tooltip>
     </div>
   )
 }`,
@@ -144,50 +136,42 @@ export const TooltipDoc = () => {
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={sideCode} githubUrl={githubUrl}>
-          <div className="grid grid-cols-3 gap-4 items-center justify-items-center p-12 w-full max-w-lg mx-auto">
-            <div className="col-start-2 row-start-1">
-              <Tooltip placement="top">
-                <TooltipTrigger asChild>
-                  <Button variant="secondary">Top</Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Top placement</p>
-                </TooltipContent>
-              </Tooltip>
-            </div>
+          <div className="flex flex-wrap gap-4 items-center justify-center p-12">
+            <Tooltip placement="left">
+              <TooltipTrigger asChild>
+                <Button variant="secondary">Left</Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Left placement</p>
+              </TooltipContent>
+            </Tooltip>
 
-            <div className="col-start-1 row-start-2">
-              <Tooltip placement="left">
-                <TooltipTrigger asChild>
-                  <Button variant="secondary">Left</Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Left placement</p>
-                </TooltipContent>
-              </Tooltip>
-            </div>
+            <Tooltip placement="top">
+              <TooltipTrigger asChild>
+                <Button variant="secondary">Top</Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Top placement</p>
+              </TooltipContent>
+            </Tooltip>
 
-            <div className="col-start-3 row-start-2">
-              <Tooltip placement="right">
-                <TooltipTrigger asChild>
-                  <Button variant="secondary">Right</Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Right placement</p>
-                </TooltipContent>
-              </Tooltip>
-            </div>
+            <Tooltip placement="bottom">
+              <TooltipTrigger asChild>
+                <Button variant="secondary">Bottom</Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Bottom placement</p>
+              </TooltipContent>
+            </Tooltip>
 
-            <div className="col-start-2 row-start-3">
-              <Tooltip placement="bottom">
-                <TooltipTrigger asChild>
-                  <Button variant="secondary">Bottom</Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Bottom placement</p>
-                </TooltipContent>
-              </Tooltip>
-            </div>
+            <Tooltip placement="right">
+              <TooltipTrigger asChild>
+                <Button variant="secondary">Right</Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Right placement</p>
+              </TooltipContent>
+            </Tooltip>
           </div>
         </PreviewBlock>
       </div>
