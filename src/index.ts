@@ -4,6 +4,9 @@
  * Excludes documentation tooling and block templates.
  */
 
+// Types
+export * from './core/types'
+
 // Components
 export * from './components/ui/Accordion'
 export * from './components/ui/Alert'
@@ -27,6 +30,9 @@ export * from './components/ui/Toggle'
 // Hooks
 export * from './core/hooks/useFocusTrap'
 export * from './core/hooks/useToast'
+export * from './core/hooks/useVirtualizer'
+export * from './core/useLithosTheme'
+export * from './core/useAccentColor'
 export * from './components/ui/popover/usePopover'
 export * from './components/ui/select/useSelect'
 export * from './components/ui/carousel/useCarousel'
@@ -37,6 +43,7 @@ export * from './utils/cn'
 export * from './utils/colors'
 export * from './utils/yiq'
 export * from './utils/date'
+export * from './utils/scrollTo'
 
 // Icons
 export * from './components/ui/icons/IconAlertTriangle'

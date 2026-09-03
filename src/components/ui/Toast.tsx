@@ -30,7 +30,7 @@ type DurationObjType = {
   default?: number
 }
 
-export interface ToastProps {
+export interface ToastProviderProps {
   children: ReactNode
   duration?: DurationObjType | number
   position?: ToastPosition
@@ -46,7 +46,7 @@ const positionStyles = {
 
 const DEFAULT_DURATION = 5000
 
-export const ToastProvider = ({ children, duration, position = 'bottom-right', className }: ToastProps) => {
+export const ToastProvider = ({ children, duration, position = 'bottom-right', className }: ToastProviderProps) => {
   const [toasts, setToasts] = useState<IdentifiedToastProps[]>([])
 
   const durationConfig =
