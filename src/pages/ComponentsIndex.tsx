@@ -21,6 +21,9 @@ import { Select } from '../components/ui/Select'
 import { IconClose } from '../components/ui/icons/IconClose'
 import { Input } from '../components/ui/Input'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs'
+import { Tooltip } from '../components/ui/tooltip/Tooltip'
+import { TooltipTrigger } from '../components/ui/tooltip/TooltipTrigger'
+import { TooltipContent } from '../components/ui/tooltip/TooltipContent'
 import card1 from '../docs/assets/images/card1.webp'
 
 interface ComponentsIndexProps {
@@ -115,6 +118,17 @@ const TabsPreview = () => (
       <TabsContent value="1">Content 1</TabsContent>
       <TabsContent value="2">Content 2</TabsContent>
     </Tabs>
+  </div>
+)
+
+const TooltipPreview = () => (
+  <div className="w-full scale-[0.7] origin-center flex justify-center pointer-events-none mt-2">
+    <Tooltip initialOpen={true} placement="top">
+      <TooltipTrigger asChild>
+        <Button>Hover Me</Button>
+      </TooltipTrigger>
+      <TooltipContent portaled={false}>Tooltips provide context</TooltipContent>
+    </Tooltip>
   </div>
 )
 
@@ -239,6 +253,11 @@ const componentsList = [
     name: 'Toggle',
     to: '/docs/toggle',
     preview: <TogglePreview />,
+  },
+  {
+    name: 'Tooltip',
+    to: '/docs/tooltip',
+    preview: <TooltipPreview />,
   },
 ]
 
