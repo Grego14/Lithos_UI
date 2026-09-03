@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
-import type { HexColor } from './types'
+import { isHexColor, type HexColor } from './types'
 import { getYiqValue } from '../utils/yiq'
 import { getContrastText } from '../utils/yiq'
 
 export const useAccentColor = () => {
   const [accentColor, setAccentColor] = useState<HexColor>(() => {
     if (typeof window === 'undefined') return '#00FF00' as HexColor
-    const storedColor = (localStorage.getItem('lithos-theme-color') as HexColor | null) || ('#00FF00' as HexColor)
+    const stored = localStorage.getItem('lithos-theme-color')
+    const storedColor = stored && isHexColor(stored) ? (stored as HexColor) : ('#00FF00' as HexColor)
     const isDarkMode = localStorage.getItem('lithos-theme-mode') === 'dark'
 
     const yiq = getYiqValue(storedColor)
@@ -20,7 +21,8 @@ export const useAccentColor = () => {
 
   useEffect(() => {
     const handleSync = () => {
-      const storedColor = (localStorage.getItem('lithos-theme-color') as HexColor | null) || ('#00FF00' as HexColor)
+      const stored = localStorage.getItem('lithos-theme-color')
+      const storedColor = stored && isHexColor(stored) ? (stored as HexColor) : ('#00FF00' as HexColor)
       const isDarkMode =
         document.body.classList.contains('dark') || localStorage.getItem('lithos-theme-mode') === 'dark'
 

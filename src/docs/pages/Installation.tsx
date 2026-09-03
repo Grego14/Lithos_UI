@@ -5,8 +5,9 @@ const cssConfig = `@import "tailwindcss";
 
 /* If you need static global overrides, declare them here: */
 :root {
-  /* --lithos-accent: #FF00FF; */
-  /* --lithos-radius: 8px; */
+  --lithos-accent: #FF00FF; 
+  --lithos-accent-text: #FFFFFF; 
+  --lithos-radius: 8px;
 }`
 
 export const Installation = () => {
@@ -108,26 +109,69 @@ export const Installation = () => {
         aesthetic:
       </p>
 
-      <h3 className="text-xl font-bold tracking-tighter text-(--lithos-text) mb-2">Static Override (Recommended)</h3>
-      <p className="mb-6 text-sm md:text-base text-(--lithos-text) max-w-3xl font-body">
-        The primary and most performant way to theme your application is to simply override the root tokens in your
-        global CSS after importing <code>tokens.css</code>. For instance, updating <code>--lithos-accent</code> and{' '}
-        <code>--lithos-radius</code> globally. No JavaScript is required.
-      </p>
-      <CodeViewer code={cssConfig} language="css" />
-
-      <h3 className="text-xl font-bold tracking-tighter text-(--lithos-text) mb-2">Live In-App Theming</h3>
-      <p className="mb-6 text-sm md:text-base text-(--lithos-text) max-w-3xl font-body">
+      <h3 className="text-xl font-bold tracking-tighter text-(--lithos-text) mb-2">
+        Live In-App Theming (Recommended)
+      </h3>
+      <p className="mb-4 text-sm md:text-base text-(--lithos-text) max-w-3xl font-body">
         If you want your users to change themes dynamically at runtime, you can opt-in to using the{' '}
         <code>useLithosTheme</code> hook. This hook automatically injects live overrides into the DOM without forcing
         React to re-render the entire component tree.
       </p>
 
-      <h3 className="text-xl font-bold tracking-tighter text-(--lithos-text) mb-2">Obsidian Mode</h3>
-      <p className="mb-6 text-sm md:text-base text-(--lithos-text) max-w-3xl font-body">
-        Dark mode is handled entirely by a single class. Simply toggle the <code>.obsidian</code> or <code>.dark</code>{' '}
-        class on your <code>&lt;html&gt;</code> element to instantly invert the environmental tokens across your app.
+      <CodeViewer
+        code={`import { Button, useLithosTheme } from 'lithos-ui'
+
+export function App() {
+  // Destructure toggleObsidian to correctly toggle dark mode
+  const { toggleObsidian } = useLithosTheme({ accentColor: '#123456', radius: 8 })
+
+  return <Button onClick={toggleObsidian}>Toggle Theme</Button>
+}`}
+        language="tsx"
+      />
+
+      <h3 className="text-xl font-bold tracking-tighter text-(--lithos-text) mt-8 mb-2">Static Override</h3>
+      <p className="mb-4 text-sm md:text-base text-(--lithos-text) max-w-3xl font-body">
+        An alternative, highly performant way to theme your application is to simply override the root tokens in your
+        global CSS after importing <code>tokens.css</code>. For instance, updating <code>--lithos-accent</code> and{' '}
+        <code>--lithos-radius</code> globally. No JavaScript is required.
       </p>
+
+      <div className="border-l-4 border-yellow-500 pl-6 py-2 mb-6 bg-(--lithos-surface) p-4">
+        <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
+          <strong>Warning: Static Overrides & Text Contrast</strong>
+          <br />
+          Because pure CSS cannot perform YIQ contrast math, if you override <code>--lithos-accent</code> manually, you{' '}
+          <strong>must</strong> also manually define <code>--lithos-accent-text</code> (e.g. #000000 or #FFFFFF). The
+          dynamic YIQ engine only runs if you use the <code>useLithosTheme</code> React Hook.
+        </p>
+      </div>
+
+      <CodeViewer code={cssConfig} language="css" />
+
+      <h3 className="text-xl font-bold tracking-tighter text-(--lithos-text) mt-8 mb-2">Obsidian Mode (Dark Mode)</h3>
+      <p className="mb-6 text-sm md:text-base text-(--lithos-text) max-w-3xl font-body">
+        <strong>If using Static Overrides:</strong> Dark mode is handled entirely by a single class. Simply toggle the{' '}
+        <code>.obsidian</code> or <code>.dark</code> class on your <code>&lt;html&gt;</code> element to instantly invert
+        the environmental tokens across your app.
+      </p>
+
+      <CodeViewer
+        code={`// Example of a manual toggle for Static Overrides
+const toggleStaticTheme = () => {
+  document.documentElement.classList.toggle('obsidian')
+}`}
+        language="ts"
+      />
+      <div className="border-l-4 border-yellow-500 pl-6 py-2 mb-6 bg-(--lithos-surface) p-4">
+        <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
+          <strong>Warning: Do not manually toggle classes if using useLithosTheme!</strong>
+          <br />
+          If you are using the <code>useLithosTheme</code> hook, you <strong>must</strong> use the{' '}
+          <code>toggleObsidian</code> function it returns to change themes. Manually toggling classes on the DOM will
+          bypass the engine, breaking YIQ contrast calculations and localStorage persistence.
+        </p>
+      </div>
     </div>
   )
 }
