@@ -3,6 +3,8 @@ import { Button } from '../../components/ui/Button'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 import { SetupGuide } from '../layout/SetupGuide'
+import { PropsAccordion } from '../../components/ui/PropsTable'
+import { tooltipPropsData, tooltipTriggerPropsData, tooltipContentPropsData } from '../propsData/tooltip'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/tooltip/Tooltip.tsx'
 
@@ -184,6 +186,21 @@ export const TooltipDoc = () => {
           <li>Uses `@floating-ui/react` to handle focus trapping and ARIA attributes natively.</li>
           <li>The trigger element receives keyboard focus.</li>
         </ul>
+      </section>
+
+      <section className="mb-12">
+        <h2 id="api-reference" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
+          API Reference
+        </h2>
+        <div className="mb-12">
+          <PropsAccordion title="Tooltip Props" data={tooltipPropsData} />
+          <div className="mt-8">
+            <PropsAccordion title="TooltipTrigger Props" data={tooltipTriggerPropsData} />
+          </div>
+          <div className="mt-8">
+            <PropsAccordion title="TooltipContent Props" data={tooltipContentPropsData} />
+          </div>
+        </div>
       </section>
     </div>
   )
