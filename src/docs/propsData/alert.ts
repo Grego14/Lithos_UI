@@ -2,7 +2,7 @@ import type { PropItem } from '../../components/ui/PropsTable'
 
 export const alertPropsData: PropItem[] = [
   {
-    name: 'type',
+    name: 'intent',
     type: "'default' | 'success' | 'error' | 'warning' | 'info' | 'accent'",
     defaultValue: "'default'",
     required: false,
