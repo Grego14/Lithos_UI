@@ -87,46 +87,29 @@ export const TooltipDoc = () => {
         variants are <code>default</code>, <code>primary</code>, and <code>inverse</code>.
       </p>
 
-      <div className="mt-8 mb-16">
+      <h3 id="variant-default" className="mt-8 mb-4 text-lg font-black tracking-tight text-(--lithos-text)">
+        1. Default Variant
+      </h3>
+      <div className="mt-4 mb-8">
         <PreviewBlock
           code={{
-            body: `export const TooltipVariants = () => {
+            body: `export const DefaultVariant = () => {
   return (
-    <div className="flex gap-4">
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="secondary">Default</Button>
-        </TooltipTrigger>
-        <TooltipContent variant="default">
-          <p>Default variant</p>
-        </TooltipContent>
-      </Tooltip>
-      
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="primary">Primary</Button>
-        </TooltipTrigger>
-        <TooltipContent variant="primary">
-          <p>Primary variant</p>
-        </TooltipContent>
-      </Tooltip>
-      
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button className="bg-(--lithos-text) text-(--lithos-bg) border-(--lithos-bg) hover:text-(--lithos-bg)">Inverse</Button>
-        </TooltipTrigger>
-        <TooltipContent variant="inverse">
-          <p>Inverse variant</p>
-        </TooltipContent>
-      </Tooltip>
-    </div>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button variant="secondary">Default</Button>
+      </TooltipTrigger>
+      <TooltipContent variant="default">
+        <p>Default variant</p>
+      </TooltipContent>
+    </Tooltip>
   )
 }`,
             componentNames: ['Tooltip', 'TooltipTrigger', 'TooltipContent', 'Button'],
             manualPath: { Tooltip: '../../components/ui/Tooltip' },
           }}
         >
-          <div className="flex items-center justify-center gap-4 p-12 flex-wrap">
+          <div className="flex items-center justify-center p-12">
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="secondary">Default</Button>
@@ -135,7 +118,33 @@ export const TooltipDoc = () => {
                 <p>Default variant</p>
               </TooltipContent>
             </Tooltip>
+          </div>
+        </PreviewBlock>
+      </div>
 
+      <h3 id="variant-primary" className="mt-8 mb-4 text-lg font-black tracking-tight text-(--lithos-text)">
+        2. Primary Variant
+      </h3>
+      <div className="mt-4 mb-8">
+        <PreviewBlock
+          code={{
+            body: `export const PrimaryVariant = () => {
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button variant="primary">Primary</Button>
+      </TooltipTrigger>
+      <TooltipContent variant="primary">
+        <p>Primary variant</p>
+      </TooltipContent>
+    </Tooltip>
+  )
+}`,
+            componentNames: ['Tooltip', 'TooltipTrigger', 'TooltipContent', 'Button'],
+            manualPath: { Tooltip: '../../components/ui/Tooltip' },
+          }}
+        >
+          <div className="flex items-center justify-center p-12">
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="primary">Primary</Button>
@@ -144,7 +153,33 @@ export const TooltipDoc = () => {
                 <p>Primary variant</p>
               </TooltipContent>
             </Tooltip>
+          </div>
+        </PreviewBlock>
+      </div>
 
+      <h3 id="variant-inverse" className="mt-8 mb-4 text-lg font-black tracking-tight text-(--lithos-text)">
+        3. Inverse Variant
+      </h3>
+      <div className="mt-4 mb-16">
+        <PreviewBlock
+          code={{
+            body: `export const InverseVariant = () => {
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button className="bg-(--lithos-text) text-(--lithos-bg) border-(--lithos-bg) hover:text-(--lithos-bg)">Inverse</Button>
+      </TooltipTrigger>
+      <TooltipContent variant="inverse">
+        <p>Inverse variant</p>
+      </TooltipContent>
+    </Tooltip>
+  )
+}`,
+            componentNames: ['Tooltip', 'TooltipTrigger', 'TooltipContent', 'Button'],
+            manualPath: { Tooltip: '../../components/ui/Tooltip' },
+          }}
+        >
+          <div className="flex items-center justify-center p-12">
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button className="bg-(--lithos-text) text-(--lithos-bg) border-(--lithos-bg) hover:text-(--lithos-bg)">
