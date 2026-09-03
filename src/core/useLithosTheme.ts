@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react'
-import { getContrastText, getYiqValue } from '../utils/yiq'
-import type { HexColor } from './types'
+import { getContrastText } from '../utils/yiq'
+import { isHexColor, type HexColor } from './types'
+
+export interface UseLithosThemeProps {
+  accentColor?: string
+  radius?: number
+}
 
 /**
  * Custom hook for managing theme state with localStorage persistence.
@@ -8,19 +13,48 @@ import type { HexColor } from './types'
  * Manages dark/light mode state by reading from and writing to localStorage.
  * The theme preference is persisted under the key 'lithos-theme-mode'.
  */
-export const useLithosTheme = () => {
+export const useLithosTheme = (config?: UseLithosThemeProps) => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     // Initialize from localStorage using direct string comparison
     return localStorage.getItem('lithos-theme-mode') === 'dark'
   })
 
   const [accentColor, setAccentColor] = useState(() => {
-    return (localStorage.getItem('lithos-theme-color') as HexColor | null) || ('#00FF00' as HexColor)
+    const stored = localStorage.getItem('lithos-theme-color')
+    if (stored && isHexColor(stored)) return stored as HexColor
+    return '#00FF00' as HexColor
   })
 
   const [radius, setRadius] = useState(() => {
     return parseInt(localStorage.getItem('lithos-theme-radius') || '0', 10)
   })
+
+  const updateAccentColor = (color: HexColor | string) => {
+    let validColor = color
+    if (!isHexColor(color)) {
+      console.warn(`[Lithos UI] Invalid hex color provided: "${color}". Falling back to default #00FF00.`)
+      validColor = '#00FF00'
+    }
+    setAccentColor(validColor as HexColor)
+    localStorage.setItem('lithos-theme-color', validColor)
+  }
+
+  const updateRadius = (newRadius: number) => {
+    setRadius(newRadius)
+    localStorage.setItem('lithos-theme-radius', newRadius.toString())
+  }
+
+  useEffect(() => {
+    if (config?.accentColor) {
+      updateAccentColor(config.accentColor)
+    }
+  }, [config?.accentColor])
+
+  useEffect(() => {
+    if (config?.radius !== undefined) {
+      updateRadius(config.radius)
+    }
+  }, [config?.radius])
 
   useEffect(() => {
     let styleTag = document.getElementById('lithos-theme-overrides')
@@ -30,23 +64,10 @@ export const useLithosTheme = () => {
       document.head.appendChild(styleTag)
     }
 
-    // YIQ Logic: Ensure the accent color remains visible against the background.
-    // Instead of a binary light/dark check which breaks bright colors like cyan or yellow in light mode,
-    // we only override colors that are EXTREMELY close to the background color.
-    const yiq = getYiqValue(accentColor)
-    let adaptiveAccent = accentColor
-
-    // YIQ of pure white is 255. YIQ of pure black is 0.
-    if (!isDarkMode && yiq > 240) {
-      adaptiveAccent = '#000000' as HexColor
-    } else if (isDarkMode && yiq < 15) {
-      adaptiveAccent = '#FFFFFF' as HexColor
-    }
-
-    const text = getContrastText(adaptiveAccent)
+    const text = getContrastText(accentColor)
     styleTag.innerHTML = `
       *, :root, .obsidian, body.obsidian, .dark {
-        --lithos-accent: ${adaptiveAccent} !important;
+        --lithos-accent: ${accentColor} !important;
         --lithos-accent-text: ${text} !important;
         --lithos-radius: ${radius}px !important;
       }
@@ -81,16 +102,6 @@ export const useLithosTheme = () => {
       document.body.classList.remove('obsidian', 'dark')
     }
   }, [isDarkMode])
-
-  const updateAccentColor = (color: HexColor) => {
-    setAccentColor(color)
-    localStorage.setItem('lithos-theme-color', color)
-  }
-
-  const updateRadius = (newRadius: number) => {
-    setRadius(newRadius)
-    localStorage.setItem('lithos-theme-radius', newRadius.toString())
-  }
 
   return { isDarkMode, toggleObsidian, accentColor, updateAccentColor, radius, updateRadius } as const
 }
