@@ -1,15 +1,5 @@
 import { CodeViewer } from '../../components/ui/CodeViewer'
 
-const cssConfig = `@import "tailwindcss";
-@import "lithos-ui/tokens.css";
-
-/* If you need static global overrides, declare them here: */
-:root {
-  --lithos-accent: #FF00FF; 
-  --lithos-accent-text: #FFFFFF; 
-  --lithos-radius: 8px;
-}`
-
 export const Installation = () => {
   return (
     <div className="max-w-5xl mx-auto px-6">
@@ -48,12 +38,15 @@ export const Installation = () => {
           generate the correct utility classes for dynamic variants.
         </p>
       </div>
-      <CodeViewer code={`@import 'tailwindcss';\n@source '../node_modules/lithos-ui';`} language="css" />
+      <CodeViewer
+        code={`/* index.css */\n@import 'tailwindcss';\n@source '../node_modules/lithos-ui';`}
+        language="css"
+      />
 
       <p className="mt-8 mb-6 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
         Start importing components and building your UI:
       </p>
-      <CodeViewer code={"import { Button } from 'lithos-ui'"} language="tsx" />
+      <CodeViewer code={`// App.tsx\nimport { Button } from 'lithos-ui'`} language="tsx" />
 
       <h2 id="manual" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Manual
@@ -91,7 +84,8 @@ export const Installation = () => {
       </div>
 
       <CodeViewer
-        code={`@import "tailwindcss";
+        code={`/* index.css */
+@import "tailwindcss";
 @import "lithos-ui/tokens.css"; /* Must be imported second */
 
 /* Your overrides safely go here and win the cascade! */
@@ -105,21 +99,14 @@ export const Installation = () => {
         Theming
       </h2>
       <p className="mb-4 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
-        Lithos UI relies entirely on native CSS custom properties for theming. You have two paths to configure your
-        aesthetic:
-      </p>
-
-      <h3 className="text-xl font-bold tracking-tighter text-(--lithos-text) mb-2">
-        Live In-App Theming (Recommended)
-      </h3>
-      <p className="mb-4 text-sm md:text-base text-(--lithos-text) max-w-3xl font-body">
-        If you want your users to change themes dynamically at runtime, you can opt-in to using the{' '}
-        <code>useLithosTheme</code> hook. This hook automatically injects live overrides into the DOM without forcing
-        React to re-render the entire component tree.
+        Lithos UI relies entirely on native CSS custom properties for theming. To configure your aesthetic and enable
+        dark mode, use the <code>useLithosTheme</code> hook. This hook automatically calculates YIQ contrast for
+        legibility and injects live overrides into the DOM without forcing React to re-render the entire component tree.
       </p>
 
       <CodeViewer
-        code={`import { Button, useLithosTheme } from 'lithos-ui'
+        code={`// App.tsx
+import { Button, useLithosTheme } from 'lithos-ui'
 
 export function App() {
   // Destructure toggleObsidian to correctly toggle dark mode
@@ -130,48 +117,12 @@ export function App() {
         language="tsx"
       />
 
-      <h3 className="text-xl font-bold tracking-tighter text-(--lithos-text) mt-8 mb-2">Static Override</h3>
-      <p className="mb-4 text-sm md:text-base text-(--lithos-text) max-w-3xl font-body">
-        An alternative, highly performant way to theme your application is to simply override the root tokens in your
-        global CSS after importing <code>tokens.css</code>. For instance, updating <code>--lithos-accent</code> and{' '}
-        <code>--lithos-radius</code> globally. No JavaScript is required.
-      </p>
-
-      <div className="border-l-4 border-yellow-500 pl-6 py-2 mb-6 bg-(--lithos-surface) p-4">
-        <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
-          <strong>Warning: Static Overrides & Text Contrast</strong>
-          <br />
-          Because pure CSS cannot perform YIQ contrast math, if you override <code>--lithos-accent</code> manually, you{' '}
-          <strong>must</strong> also manually define <code>--lithos-accent-text</code> (e.g. #000000 or #FFFFFF). The
-          dynamic YIQ engine only runs if you use the <code>useLithosTheme</code> React Hook.
-        </p>
-      </div>
-
-      <CodeViewer code={cssConfig} language="css" />
-
       <h3 className="text-xl font-bold tracking-tighter text-(--lithos-text) mt-8 mb-2">Obsidian Mode (Dark Mode)</h3>
       <p className="mb-6 text-sm md:text-base text-(--lithos-text) max-w-3xl font-body">
-        <strong>If using Static Overrides:</strong> Dark mode is handled entirely by a single class. Simply toggle the{' '}
-        <code>.obsidian</code> or <code>.dark</code> class on your <code>&lt;html&gt;</code> element to instantly invert
-        the environmental tokens across your app.
+        Dark mode is handled natively by the <code>toggleObsidian</code> function returned from the hook. It
+        automatically computes transparent contrast values (YIQ) for maximum legibility on dark backgrounds and persists
+        the user's preference to <code>localStorage</code>.
       </p>
-
-      <CodeViewer
-        code={`// Example of a manual toggle for Static Overrides
-const toggleStaticTheme = () => {
-  document.documentElement.classList.toggle('obsidian')
-}`}
-        language="ts"
-      />
-      <div className="border-l-4 border-yellow-500 pl-6 py-2 mb-6 bg-(--lithos-surface) p-4">
-        <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
-          <strong>Warning: Do not manually toggle classes if using useLithosTheme!</strong>
-          <br />
-          If you are using the <code>useLithosTheme</code> hook, you <strong>must</strong> use the{' '}
-          <code>toggleObsidian</code> function it returns to change themes. Manually toggling classes on the DOM will
-          bypass the engine, breaking YIQ contrast calculations and localStorage persistence.
-        </p>
-      </div>
     </div>
   )
 }
