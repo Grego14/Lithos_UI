@@ -113,7 +113,7 @@ export const TooltipDoc = () => {
       
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="solid" color="#000">Inverse</Button>
+          <Button className="bg-(--lithos-text) text-(--lithos-bg) border-(--lithos-bg) hover:text-(--lithos-bg)">Inverse</Button>
         </TooltipTrigger>
         <TooltipContent variant="inverse">
           <p>Inverse variant</p>
@@ -147,7 +147,7 @@ export const TooltipDoc = () => {
 
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button variant="solid" color="var(--lithos-text)">
+                <Button className="bg-(--lithos-text) text-(--lithos-bg) border-(--lithos-bg) hover:text-(--lithos-bg)">
                   Inverse
                 </Button>
               </TooltipTrigger>

@@ -23,9 +23,9 @@ const variantStyles: Record<TooltipVariant, { container: string; fill: string; s
     stroke: 'var(--lithos-border)',
   },
   inverse: {
-    container: 'bg-(--lithos-text) text-(--lithos-bg) border-(--lithos-border)',
+    container: 'bg-(--lithos-text) text-(--lithos-bg) border-(--lithos-bg)',
     fill: 'var(--lithos-text)',
-    stroke: 'var(--lithos-border)',
+    stroke: 'var(--lithos-bg)',
   },
 }
 
