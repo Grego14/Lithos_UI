@@ -50,7 +50,7 @@ export const checkboxPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'ClassValue | ClassArray',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes on the outer label.',
   },

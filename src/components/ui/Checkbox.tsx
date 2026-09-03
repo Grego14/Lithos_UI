@@ -28,10 +28,9 @@ import {
   type CSSProperties,
   type ReactNode,
 } from 'react'
-import type { ClassArray, ClassValue } from 'clsx'
 import type { HexColor } from '../../core/types'
 import { getContrastText } from '../../utils/yiq'
-import { cn } from '../../utils/cn'
+import { cn, type LithosClass } from '../../utils/cn'
 import { IconCheck } from './icons/IconCheck'
 import { IconMinus } from './icons/IconMinus'
 import { IconHeart } from './icons/IconHeart'
@@ -53,7 +52,7 @@ export interface CheckboxProps extends Omit<ComponentPropsWithRef<'input'>, 'typ
   label?: ReactNode
   description?: ReactNode
   value?: string | undefined
-  className?: ClassValue | ClassArray
+  className?: LithosClass
 }
 
 interface BaseCheckboxProps extends CheckboxProps {
@@ -85,7 +84,7 @@ const BaseCheckbox = ({
 
   const isGroupItem = group !== null && value !== undefined
 
-  const resolvedDisabled = disabled ?? group?.disabled ?? false
+  const isDisabled = disabled ?? group?.disabled ?? false
   const resolvedName = name ?? group?.name
 
   useEffect(() => {
@@ -106,7 +105,7 @@ const BaseCheckbox = ({
   } as CSSProperties
 
   const boxClasses = cn(
-    'inline-block shrink-0 w-5 h-5 border-2 border-(--lithos-border) rounded-(--lithos-radius) transition-all duration-75',
+    'inline-block shrink-0 w-5 h-5 border-2 border-(--lithos-border) rounded-(--lithos-radius) transition-[box-shadow,transform,background-color] duration-75',
     'shadow-[2px_2px_0px_0px_var(--lithos-shadow)] peer-active:shadow-none peer-active:translate-x-0.5 peer-active:translate-y-0.5',
     'peer-focus-visible:ring-2 peer-focus-visible:ring-(--lithos-text) peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-(--lithos-bg)',
     'bg-(--lithos-surface) peer-checked:bg-[var(--cb-color)] peer-indeterminate:bg-[var(--cb-color)]'
@@ -114,13 +113,20 @@ const BaseCheckbox = ({
 
   const iconColorStyle = { color: 'var(--cb-contrast)' }
 
+  // make the icon move along with the box on active
+  // moves 2px as the shadow used on the boxClasses is 2px_2px (change this in
+  // case of updating the boxClasses shadow style)
+  const iconActiveTranslate = 'peer-active:translate-x-[calc(-50%+2px)] peer-active:translate-y-[calc(-45%+2px)]'
+
   const checkClasses = cn(
     'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] w-3 h-3 transition-opacity duration-75',
-    'opacity-0 peer-checked:opacity-100 peer-indeterminate:opacity-0'
+    'opacity-0 peer-checked:opacity-100 peer-indeterminate:opacity-0',
+    iconActiveTranslate
   )
   const minusClasses = cn(
     'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 transition-opacity duration-75',
-    'opacity-0 peer-indeterminate:opacity-100'
+    'opacity-0 peer-indeterminate:opacity-100',
+    iconActiveTranslate
   )
 
   return (
@@ -128,7 +134,7 @@ const BaseCheckbox = ({
       htmlFor={inputId}
       className={cn(
         'inline-flex items-start',
-        resolvedDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
+        isDisabled ? 'opacity-50 pointer-events-none select-none' : 'cursor-pointer',
         className
       )}
       style={style}
@@ -142,10 +148,10 @@ const BaseCheckbox = ({
           }}
           type="checkbox"
           id={inputId}
-          checked={isGroupItem ? group!.value.includes(value!) : checked}
+          checked={isGroupItem ? group.value.includes(value) : checked}
           defaultChecked={isGroupItem ? undefined : defaultChecked}
           onChange={handleChange}
-          disabled={resolvedDisabled}
+          disabled={isDisabled}
           value={value}
           name={resolvedName}
           className="peer sr-only"
@@ -246,7 +252,7 @@ export const IconCheckbox = ({
           }}
           type="checkbox"
           id={inputId}
-          checked={isGroupItem ? group!.value.includes(value!) : checked}
+          checked={isGroupItem ? group.value.includes(value) : checked}
           defaultChecked={isGroupItem ? undefined : defaultChecked}
           onChange={handleChange}
           disabled={resolvedDisabled}
@@ -278,7 +284,7 @@ export interface CheckboxGroupProps {
   mode?: 'horizontal' | 'vertical' | undefined
   disabled?: boolean | undefined
   name?: string | undefined
-  className?: ClassValue | ClassArray
+  className?: LithosClass
   children: ReactNode
 }
 
