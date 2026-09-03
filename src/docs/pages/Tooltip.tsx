@@ -87,43 +87,8 @@ export const TooltipDoc = () => {
         variants are <code>default</code>, <code>primary</code>, and <code>inverse</code>.
       </p>
 
-      <h3 id="variant-default" className="mt-8 mb-4 text-lg font-black tracking-tight text-(--lithos-text)">
-        1. Default Variant
-      </h3>
-      <div className="mt-4 mb-8">
-        <PreviewBlock
-          code={{
-            body: `export const DefaultVariant = () => {
-  return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button variant="secondary">Default</Button>
-      </TooltipTrigger>
-      <TooltipContent variant="default">
-        <p>Default variant</p>
-      </TooltipContent>
-    </Tooltip>
-  )
-}`,
-            componentNames: ['Tooltip', 'TooltipTrigger', 'TooltipContent', 'Button'],
-            manualPath: { Tooltip: '../../components/ui/Tooltip' },
-          }}
-        >
-          <div className="flex items-center justify-center p-12">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="secondary">Default</Button>
-              </TooltipTrigger>
-              <TooltipContent variant="default">
-                <p>Default variant</p>
-              </TooltipContent>
-            </Tooltip>
-          </div>
-        </PreviewBlock>
-      </div>
-
       <h3 id="variant-primary" className="mt-8 mb-4 text-lg font-black tracking-tight text-(--lithos-text)">
-        2. Primary Variant
+        1. Primary Variant
       </h3>
       <div className="mt-4 mb-8">
         <PreviewBlock
@@ -158,7 +123,7 @@ export const TooltipDoc = () => {
       </div>
 
       <h3 id="variant-inverse" className="mt-8 mb-4 text-lg font-black tracking-tight text-(--lithos-text)">
-        3. Inverse Variant
+        2. Inverse Variant
       </h3>
       <div className="mt-4 mb-16">
         <PreviewBlock
