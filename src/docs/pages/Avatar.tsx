@@ -179,9 +179,8 @@ export const FourteenUserGroup = () => {
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
         Use <code>AvatarGroup</code> to display a collection of related avatars in a condensed, overlapping stack. It
         renders up to a specified <code>max</code> number of avatars (default 4), automatically appending an{' '}
-        <code>AvatarGroupCount</code> indicator for any remaining items. Hovering over a grouped avatar slightly
-        elevates it. The overflow count indicator renders as plain text (e.g., <code>+2</code>), readable directly by
-        assistive technologies without manual slicing.
+        <code>AvatarGroupCount</code> indicator for any remaining items. The overflow count indicator renders as plain
+        text (e.g., <code>+2</code>), readable directly by assistive technologies without manual slicing.
       </p>
 
       <div className="mt-8 mb-8">
