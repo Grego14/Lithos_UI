@@ -1,8 +1,16 @@
-import { cloneElement, isValidElement, type ReactNode, type HTMLProps, type ReactElement, type Ref } from 'react'
+import {
+  cloneElement,
+  isValidElement,
+  type ReactNode,
+  type HTMLProps,
+  type ReactElement,
+  type Ref,
+  type ComponentPropsWithRef,
+} from 'react'
 import { useMergeRefs } from '@floating-ui/react'
 import { useTooltipContext } from './useTooltip'
 
-export interface TooltipTriggerProps extends HTMLProps<HTMLElement> {
+export interface TooltipTriggerProps extends ComponentPropsWithRef<'button'> {
   children: ReactNode
   asChild?: boolean
 }
