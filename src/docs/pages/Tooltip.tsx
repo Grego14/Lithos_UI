@@ -29,7 +29,7 @@ export const TooltipDoc = () => {
   const sideCode = {
     body: `export const TooltipPlacements = () => {
   return (
-    <div className="flex flex-wrap items-center justify-center p-8">
+    <div className="flex flex-wrap items-center justify-center space-x-4 p-8">
       <Tooltip placement="left">
         <TooltipTrigger asChild>
           <Button variant="secondary">Left</Button>
@@ -136,7 +136,7 @@ export const TooltipDoc = () => {
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={sideCode} githubUrl={githubUrl}>
-          <div className="flex flex-wrap items-center justify-center p-12">
+          <div className="flex flex-wrap items-center justify-center space-x-4 p-12">
             <Tooltip placement="left">
               <TooltipTrigger asChild>
                 <Button variant="secondary">Left</Button>
