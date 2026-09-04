@@ -8,7 +8,7 @@ import { type ComponentPropsWithRef, type MouseEvent } from 'react'
 import { Button } from '../Button'
 import { type CarouselDirection } from './CarouselContext'
 import { useCarousel } from './useCarousel'
-import type { ClassValue, ClassArray } from 'clsx'
+import type { LithosClass } from '../../../utils/cn'
 import { IconArrowLeft } from '../icons/IconArrowLeft'
 import { IconArrowRight } from '../icons/IconArrowRight'
 import { IconArrowDown } from '../icons/IconArrowDown'
@@ -17,18 +17,10 @@ import { IconArrowUp } from '../icons/IconArrowUp'
 export interface CarouselButtonProps extends Omit<ComponentPropsWithRef<'button'>, 'className'> {
   label?: string
   direction?: CarouselDirection
-  className?: ClassValue | ClassArray
+  className?: LithosClass
 }
 
-export const CarouselButton = ({
-  direction = 'forwards',
-  children,
-  className,
-  label,
-  onClick,
-  ref,
-  ...props
-}: CarouselButtonProps) => {
+export const CarouselButton = ({ direction = 'forwards', children, label, onClick, ...props }: CarouselButtonProps) => {
   const { scroll, mode } = useCarousel()
   const vertical = mode === 'vertical'
 
@@ -41,7 +33,7 @@ export const CarouselButton = ({
     direction === 'forwards' ? (vertical ? IconArrowDown : IconArrowRight) : vertical ? IconArrowUp : IconArrowLeft
 
   return (
-    <Button aria-label={label} onClick={handleClick} className={className} {...props} ref={ref}>
+    <Button aria-label={label} onClick={handleClick} {...props}>
       {children || <ArrowIcon aria-hidden="true" />}
     </Button>
   )

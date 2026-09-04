@@ -86,7 +86,7 @@ export const carouselPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'ClassValue | ClassArray',
+    type: 'LithosClass',
     required: false,
     description: 'Custom CSS classes passed to the main carousel wrapper.',
   },
@@ -107,7 +107,7 @@ export const carouselSlidePropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'ClassValue | ClassArray',
+    type: 'LithosClass',
     required: false,
     description: 'Custom CSS classes passed to the slide wrapper.',
   },
@@ -123,7 +123,7 @@ export const carouselPrevPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'ClassValue | ClassArray',
+    type: 'LithosClass',
     required: false,
     description: 'Custom CSS classes passed to the previous button element.',
   },
@@ -139,7 +139,7 @@ export const carouselNextPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'ClassValue | ClassArray',
+    type: 'LithosClass',
     required: false,
     description: 'Custom CSS classes passed to the next button element.',
   },

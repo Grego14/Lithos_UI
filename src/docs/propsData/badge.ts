@@ -9,7 +9,7 @@ export const badgePropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'ClassValue | ClassArray',
+    type: 'LithosClass',
     defaultValue: '""',
     required: false,
     description: 'Additional CSS classes to apply custom styles.',

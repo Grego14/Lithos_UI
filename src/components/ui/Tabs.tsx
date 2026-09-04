@@ -5,8 +5,9 @@
  * - Underline variant explicitly strips the base `.lithos-click` borders in favor of a minimal bottom stroke.
  * - Implements native WAI-ARIA roles (\`tablist\`, \`tab\`, \`tabpanel\`) out of the box.
  */
-import { createContext, useContext, useState, type ComponentPropsWithRef, type ReactNode } from 'react'
-import { cn } from '../../utils/cn'
+import { createContext, useContext, useState, type ComponentPropsWithRef } from 'react'
+import { cn, type LithosClass } from '../../utils/cn'
+import { Button } from './Button'
 
 interface TabsContextValue {
   value: string
@@ -24,12 +25,12 @@ const useTabs = () => {
   return context
 }
 
-export interface TabsProps extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'value' | 'onChange'> {
+export interface TabsProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   defaultValue?: string
   value?: string
   onValueChange?: (value: string) => void
   variant?: 'default' | 'underline' | 'vertical'
-  children: ReactNode
+  className?: LithosClass
 }
 
 export const Tabs = ({
@@ -39,7 +40,6 @@ export const Tabs = ({
   variant = 'default',
   className,
   children,
-  ref,
   ...rest
 }: TabsProps) => {
   const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue || '')
@@ -57,7 +57,6 @@ export const Tabs = ({
   return (
     <TabsContext.Provider value={{ value, onValueChange: handleValueChange, variant }}>
       <div
-        ref={ref}
         className={cn('w-full', variant === 'vertical' && 'flex flex-col sm:flex-row gap-6', className)}
         data-state={value}
         {...rest}
@@ -68,14 +67,15 @@ export const Tabs = ({
   )
 }
 
-export type TabsListProps = ComponentPropsWithRef<'div'>
+export interface TabsListProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
+  className?: LithosClass
+}
 
-export const TabsList = ({ className, children, ref, ...rest }: TabsListProps) => {
+export const TabsList = ({ className, children, ...rest }: TabsListProps) => {
   const { variant } = useTabs()
 
   return (
     <div
-      ref={ref}
       role="tablist"
       className={cn(
         'flex',
@@ -91,31 +91,29 @@ export const TabsList = ({ className, children, ref, ...rest }: TabsListProps) =
   )
 }
 
-export interface TabsTriggerProps extends Omit<ComponentPropsWithRef<'button'>, 'value'> {
+export interface TabsTriggerProps extends Omit<ComponentPropsWithRef<'button'>, 'className'> {
   value: string
+  className?: LithosClass
 }
 
-export const TabsTrigger = ({ value, className, children, ref, ...rest }: TabsTriggerProps) => {
+export const TabsTrigger = ({ value, className, children, ...rest }: TabsTriggerProps) => {
   const { value: selectedValue, onValueChange, variant } = useTabs()
   const isSelected = selectedValue === value
 
   return (
-    <button
-      ref={ref}
+    <Button
       role="tab"
-      type="button"
       aria-selected={isSelected}
       data-state={isSelected ? 'active' : 'inactive'}
       onClick={() => onValueChange(value)}
       className={cn(
-        'lithos-click',
-        'inline-flex items-center justify-center whitespace-nowrap text-sm font-bold transition-all',
+        'whitespace-nowrap text-sm font-bold',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--lithos-accent)',
         'disabled:pointer-events-none disabled:opacity-50',
 
         variant === 'underline' && [
-          'border-0 border-b-4 border-transparent px-2 py-2',
-          'shadow-none! bg-transparent! text-(--lithos-text)',
+          'border-0 border-b-4 border-transparent px-2 py-2 active:translate-none',
+          'shadow-none bg-transparent text-(--lithos-text)',
           'data-[state=active]:border-(--lithos-accent)',
         ],
 
@@ -129,15 +127,16 @@ export const TabsTrigger = ({ value, className, children, ref, ...rest }: TabsTr
       {...rest}
     >
       {children}
-    </button>
+    </Button>
   )
 }
 
-export interface TabsContentProps extends Omit<ComponentPropsWithRef<'div'>, 'value'> {
+export interface TabsContentProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   value: string
+  className?: LithosClass
 }
 
-export const TabsContent = ({ value, className, children, ref, ...rest }: TabsContentProps) => {
+export const TabsContent = ({ value, className, children, ...rest }: TabsContentProps) => {
   const { value: selectedValue, variant } = useTabs()
   const isSelected = selectedValue === value
 
@@ -145,7 +144,6 @@ export const TabsContent = ({ value, className, children, ref, ...rest }: TabsCo
 
   return (
     <div
-      ref={ref}
       role="tabpanel"
       data-state={isSelected ? 'active' : 'inactive'}
       className={cn(

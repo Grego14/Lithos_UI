@@ -81,7 +81,7 @@ export const dialogHeaderPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'string',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes.',
   },
@@ -96,7 +96,7 @@ export const dialogTitlePropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'string',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes.',
   },
@@ -111,7 +111,7 @@ export const dialogBodyPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'string',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes.',
   },
@@ -127,7 +127,7 @@ export const dialogFooterPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'string',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes.',
   },

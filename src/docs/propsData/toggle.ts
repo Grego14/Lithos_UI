@@ -22,7 +22,7 @@ export const toggleProps: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'ClassValue | ClassArray',
+    type: 'LithosClass',
     required: false,
     description: 'Custom CSS classes passed to the button.',
   },

@@ -6,18 +6,18 @@
 import { useState, type ComponentPropsWithRef, type Ref } from 'react'
 import { getContrastText } from '../../utils/yiq'
 import { useAccentColor } from '../../core/useAccentColor'
-import { cn } from '../../utils/cn'
+import { cn, type LithosClass } from '../../utils/cn'
 
 type AvatarSizes = 'sm' | 'md' | 'lg'
 type AvatarVariants = 'default' | 'solid'
 
-export interface AvatarProps extends Omit<ComponentPropsWithRef<'span'>, 'children' | 'ref'> {
+export interface AvatarProps extends Omit<ComponentPropsWithRef<'span'>, 'children' | 'ref' | 'className'> {
   ref?: Ref<HTMLSpanElement | HTMLImageElement>
   src?: string | undefined
   alt?: string | undefined
   variant?: AvatarVariants
   size?: AvatarSizes
-  className?: string
+  className?: LithosClass
 }
 
 const sizeStyles = {
@@ -77,13 +77,13 @@ export const Avatar = ({
   )
 }
 
-export interface AvatarGroupCountProps extends Omit<ComponentPropsWithRef<'div'>, 'children'> {
+export interface AvatarGroupCountProps extends Omit<ComponentPropsWithRef<'div'>, 'children' | 'className'> {
   count: number
   size?: AvatarSizes
-  className?: string
+  className?: LithosClass
 }
 
-export const AvatarGroupCount = ({ count, size = 'md', className = '', ref, ...props }: AvatarGroupCountProps) => {
+export const AvatarGroupCount = ({ count, size = 'md', className = '', ...props }: AvatarGroupCountProps) => {
   const classes = cn(
     'relative inline-flex items-center justify-center shrink-0 rounded-full border-2 border-(--lithos-border) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] bg-(--lithos-surface) text-(--lithos-text) font-(--font-mono) font-bold uppercase',
     sizeStyles[size],
@@ -91,7 +91,7 @@ export const AvatarGroupCount = ({ count, size = 'md', className = '', ref, ...p
   )
 
   return (
-    <div ref={ref} className={classes} {...props}>
+    <div className={classes} {...props}>
       +{count}
     </div>
   )
@@ -102,19 +102,19 @@ export interface AvatarGroupItem {
   alt: string
 }
 
-export interface AvatarGroupProps extends Omit<ComponentPropsWithRef<'div'>, 'children'> {
+export interface AvatarGroupProps extends Omit<ComponentPropsWithRef<'div'>, 'children' | 'className'> {
   items: AvatarGroupItem[]
   max?: number
   size?: AvatarSizes
-  className?: string
+  className?: LithosClass
 }
 
-export const AvatarGroup = ({ items, max = 4, size = 'md', className = '', ref, ...props }: AvatarGroupProps) => {
+export const AvatarGroup = ({ items, max = 4, size = 'md', className = '', ...props }: AvatarGroupProps) => {
   const visible = items.slice(0, max)
   const overflow = items.length - max
 
   return (
-    <div ref={ref} className={cn('flex -space-x-3', className)} {...props}>
+    <div className={cn('flex -space-x-3', className)} {...props}>
       {visible.map((item, index) => (
         <Avatar key={`${item.alt}-${index}`} src={item.src} alt={item.alt} size={size} />
       ))}

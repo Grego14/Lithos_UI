@@ -5,26 +5,25 @@
  * - Binary contrast: thumb and track invert as one hard state change.
  */
 import type { ComponentPropsWithRef } from 'react'
-import type { ClassValue, ClassArray } from 'clsx'
 import { Button } from './Button'
-import { cn } from '../../utils/cn'
+import { cn, type LithosClass } from '../../utils/cn'
 
 export interface ToggleProps extends Omit<ComponentPropsWithRef<'button'>, 'className'> {
   checked: boolean
   onToggle: () => void
   label?: string
-  className?: ClassValue | ClassArray
+  className?: LithosClass
 }
 
-export const Toggle = ({ checked, onToggle, label = 'Theme Changed', className, ref }: ToggleProps) => {
+export const Toggle = ({ checked, onToggle, label = 'Theme Changed', className, ...rest }: ToggleProps) => {
   // - Stationary shell: only the shadow changes, so surrounding layout never shifts.
   return (
     <Button
-      ref={ref}
       onClick={onToggle}
       aria-pressed={checked}
       aria-label={label}
       className={cn('bg-white px-1 py-1 shadow-none active:translate-none rounded-(--lithos-radius)', className)}
+      {...rest}
     >
       {/* Track math (reduced ~1/3): previously 80x40; now approx 24x13 with border/padding scaled down. */}
       <span

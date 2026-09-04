@@ -5,7 +5,7 @@
  */
 import { useId, createContext, useContext, useState, type ComponentPropsWithRef, type ReactNode } from 'react'
 import { Button } from './Button'
-import { cn } from '../../utils/cn'
+import { cn, type LithosClass } from '../../utils/cn'
 import { IconChevronUp } from './icons/IconChevronUp'
 
 interface AccordionContextType {
@@ -15,21 +15,23 @@ interface AccordionContextType {
 
 const AccordionContext = createContext<AccordionContextType | null>(null)
 
-export interface AccordionProps extends Omit<ComponentPropsWithRef<'div'>, 'title'> {
+export interface AccordionProps extends Omit<ComponentPropsWithRef<'div'>, 'title' | 'className'> {
   defaultOpen?: boolean | undefined
   title: ReactNode
   classes?: {
-    container?: string
-    header?: string
-    content?: string
+    container?: LithosClass
+    header?: LithosClass
+    content?: LithosClass
   }
   open?: boolean
   value?: string
+  className?: LithosClass
 }
 
-export interface AccordionGroupProps extends ComponentPropsWithRef<'div'> {
+export interface AccordionGroupProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   allowMultiple?: boolean
   defaultActive?: string | string[]
+  className?: LithosClass
 }
 
 export const AccordionGroup = ({
@@ -37,7 +39,6 @@ export const AccordionGroup = ({
   children,
   defaultActive,
   className,
-  ref,
   ...rest
 }: AccordionGroupProps) => {
   const [activedValues, setActivedValues] = useState<string | string[]>(() => {
@@ -74,7 +75,7 @@ export const AccordionGroup = ({
 
   return (
     <AccordionContext.Provider value={{ toggleItem, isItemOpen }}>
-      <div ref={ref} className={containerClass} {...rest}>
+      <div className={containerClass} {...rest}>
         {children}
       </div>
     </AccordionContext.Provider>
@@ -96,7 +97,6 @@ export const Accordion = ({
   value,
   classes = {},
   className,
-  ref,
   ...rest
 }: AccordionProps) => {
   const context = useContext(AccordionContext)
@@ -134,7 +134,7 @@ export const Accordion = ({
   const contentId = `accordion-content-${itemId}`
 
   return (
-    <div className={containerClass} ref={ref} {...rest}>
+    <div className={containerClass} {...rest}>
       <h3 className="m-0 p-0 antialiased">
         <Button
           className={cn(

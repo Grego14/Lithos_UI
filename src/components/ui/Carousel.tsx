@@ -16,7 +16,7 @@ import {
   isValidElement,
   type UIEvent,
 } from 'react'
-import { cn } from '../../utils/cn'
+import { cn, type LithosClass } from '../../utils/cn'
 import { scrollTo } from '../../utils/scrollTo'
 import { CarouselNext, CarouselPrev } from './carousel/CarouselButton'
 import { CarouselProvider, type SliderSelector, type ScrollFuncProp } from './carousel/CarouselContext'
@@ -24,7 +24,6 @@ import { CarouselControls } from './carousel/CarouselControls'
 import { CarouselPagination } from './carousel/CarouselPagination'
 import { CarouselSlide, type CarouselSlideProps } from './carousel/CarouselSlide'
 import { useCarouselDrag } from './carousel/useCarouselDrag'
-import type { ClassValue, ClassArray } from 'clsx'
 
 export interface CarouselProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   controlsPosition?: 'top' | 'bottom'
@@ -39,7 +38,7 @@ export interface CarouselProps extends Omit<ComponentPropsWithRef<'div'>, 'class
   stopOnHover?: boolean
   loop?: boolean
   mode?: 'horizontal' | 'vertical'
-  className?: ClassValue | ClassArray
+  className?: LithosClass
 }
 
 const Carousel = ({
@@ -57,7 +56,6 @@ const Carousel = ({
   stopOnHover = true,
   loop = false,
   mode = 'horizontal',
-  ref,
   ...rest
 }: CarouselProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -257,7 +255,6 @@ const Carousel = ({
     <CarouselProvider scroll={scroll} currentIndex={index} totalSlides={totalSlides} mode={mode}>
       <div
         className={classes}
-        ref={ref}
         tabIndex={0}
         onKeyDown={handleKeyDown}
         onMouseEnter={pauseRotation}

@@ -11,7 +11,8 @@ import { Fragment, useState } from 'react'
 import type { ComponentPropsWithRef, MouseEventHandler, ReactNode } from 'react'
 import { IconHome } from './icons/IconHome'
 import { IconBreadcrumbSeparator } from './icons/IconBreadcrumbSeparator'
-import { cn } from '../../utils/cn'
+import { cn, type LithosClass } from '../../utils/cn'
+import { Button } from './Button'
 
 export interface BreadcrumbItemData {
   label: string
@@ -21,55 +22,58 @@ export interface BreadcrumbItemData {
   onClick?: MouseEventHandler<HTMLAnchorElement> | undefined
 }
 
-export interface BreadcrumbProps extends ComponentPropsWithRef<'nav'> {
+// removed unused prop showIcons from BreadcrumbProps
+
+export interface BreadcrumbProps extends Omit<ComponentPropsWithRef<'nav'>, 'className'> {
   items?: BreadcrumbItemData[] | undefined
-  mode?: 'collapsible' | undefined
-  showIcons?: boolean | undefined
-  separator?: ReactNode | undefined
-  showHomeIcon?: boolean | undefined
-  humanPrefix?: ReactNode | undefined
-  maxItems?: number | undefined
-  itemsBeforeCollapse?: number | undefined
-  itemsAfterCollapse?: number | undefined
-  className?: string | undefined
-  children?: ReactNode | undefined
+  mode?: 'collapsible'
+  separator?: ReactNode
+  showHomeIcon?: boolean
+  humanPrefix?: ReactNode
+  maxItems?: number
+  itemsBeforeCollapse?: number
+  itemsAfterCollapse?: number
+  className?: LithosClass
 }
 
-export const BreadcrumbSeparator = ({ children, className, ref, ...rest }: ComponentPropsWithRef<'li'>) => {
+export const BreadcrumbSeparator = ({ children, className, ...rest }: ComponentPropsWithRef<'li'>) => {
   const classes = cn('inline-flex items-center text-sm font-bold opacity-40 mx-2 select-none', className)
 
   return (
-    <li ref={ref} role="presentation" aria-hidden="true" className={classes} {...rest}>
+    <li role="presentation" aria-hidden="true" className={classes} {...rest}>
       {children ?? <IconBreadcrumbSeparator />}
     </li>
   )
 }
 
-export const BreadcrumbItem = ({ className, children, ref, ...rest }: ComponentPropsWithRef<'li'>) => {
+export interface BreadcrumbItemProps extends Omit<ComponentPropsWithRef<'li'>, 'className'> {
+  className?: LithosClass
+}
+
+export const BreadcrumbItem = ({ className, children, ...rest }: BreadcrumbItemProps) => {
   const classes = cn('inline-flex items-center text-sm font-bold', className)
 
   return (
-    <li ref={ref} className={classes} {...rest}>
+    <li className={classes} {...rest}>
       {children}
     </li>
   )
 }
 
-export interface BreadcrumbLinkProps extends ComponentPropsWithRef<'a'> {
+export interface BreadcrumbLinkProps extends Omit<ComponentPropsWithRef<'a'>, 'className'> {
   href?: string | undefined
   onClick?: MouseEventHandler<HTMLAnchorElement> | undefined
-  children: ReactNode
+  className?: LithosClass
 }
 
-export const BreadcrumbLink = ({ href, onClick, className, children, ref, ...rest }: BreadcrumbLinkProps) => {
+export const BreadcrumbLink = ({ href, onClick, className, children, ...rest }: BreadcrumbLinkProps) => {
   const classes = cn(
-    'inline-flex items-center px-2 py-1 border-2 border-transparent hover:border-(--lithos-border) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) transition-all duration-150 rounded-(--lithos-radius) lithos-click cursor-pointer font-bold',
+    'lithos-click py-1 border-2 border-transparent hover:border-(--lithos-border) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) duration-150 rounded-(--lithos-radius) font-bold',
     className
   )
 
   return (
     <a
-      ref={ref}
       href={href ?? '#'}
       onClick={(event) => {
         if (onClick) {
@@ -85,60 +89,54 @@ export const BreadcrumbLink = ({ href, onClick, className, children, ref, ...res
   )
 }
 
-export interface BreadcrumbPageProps extends ComponentPropsWithRef<'span'> {
-  children: ReactNode
+export interface BreadcrumbPageProps extends Omit<ComponentPropsWithRef<'span'>, 'className'> {
+  className?: LithosClass
 }
 
-export const BreadcrumbPage = ({ className, children, ref, ...rest }: BreadcrumbPageProps) => {
+export const BreadcrumbPage = ({ className, children, ...rest }: BreadcrumbPageProps) => {
   const classes = cn(
     'inline-flex items-center px-2.5 py-1 border-2 border-(--lithos-border) bg-(--lithos-accent) text-(--lithos-accent-text) font-black tracking-tight shadow-[2px_2px_0px_0px_var(--lithos-border)] rounded-(--lithos-radius)',
     className
   )
 
   return (
-    <span ref={ref} role="link" aria-disabled="true" aria-current="page" className={classes} {...rest}>
+    <span role="link" aria-disabled="true" aria-current="page" className={classes} {...rest}>
       {children}
     </span>
   )
 }
 
-export interface BreadcrumbEllipsisProps extends ComponentPropsWithRef<'button'> {
-  onClick?: (() => void) | undefined
-  isExpanded?: boolean | undefined
+export interface BreadcrumbEllipsisProps extends Omit<ComponentPropsWithRef<'button'>, 'className'> {
+  onClick?: () => void
+  isExpanded?: boolean
+  className?: LithosClass
 }
 
-export const BreadcrumbEllipsis = ({
-  onClick,
-  isExpanded,
-  className,
-  children,
-  ref,
-  ...rest
-}: BreadcrumbEllipsisProps) => {
-  const classes = cn(
-    'inline-flex items-center justify-center px-2 py-0.5 border-2 border-(--lithos-border) bg-(--lithos-surface) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) text-xs font-black transition-all cursor-pointer lithos-click select-none rounded-(--lithos-radius)',
-    className
-  )
+export const BreadcrumbEllipsis = ({ onClick, isExpanded, className, children, ...rest }: BreadcrumbEllipsisProps) => {
+  const classes = cn('py-0.5 text-xs font-black select-none', className)
 
   return (
-    <button
-      ref={ref}
-      type="button"
+    <Button
+      variant="accent"
       onClick={onClick}
       aria-label={isExpanded ? 'Collapse breadcrumb steps' : 'Expand breadcrumb steps'}
       className={classes}
       {...rest}
     >
       {children ?? (isExpanded ? '‹‹' : '•••')}
-    </button>
+    </Button>
   )
 }
 
-export const BreadcrumbList = ({ className, children, ref, ...rest }: ComponentPropsWithRef<'ol'>) => {
+export interface BreadcrumbListProps extends Omit<ComponentPropsWithRef<'ol'>, 'className'> {
+  className?: LithosClass
+}
+
+export const BreadcrumbList = ({ className, children, ...rest }: BreadcrumbListProps) => {
   const classes = cn('inline-flex flex-wrap items-center font-mono text-sm tracking-tight', className)
 
   return (
-    <ol ref={ref} className={classes} {...rest}>
+    <ol className={classes} {...rest}>
       {children}
     </ol>
   )
@@ -155,7 +153,6 @@ export const Breadcrumb = ({
   itemsAfterCollapse = 1,
   className,
   children,
-  ref,
   ...rest
 }: BreadcrumbProps) => {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -164,7 +161,7 @@ export const Breadcrumb = ({
 
   if (!items || items.length === 0) {
     return (
-      <nav ref={ref} aria-label="Breadcrumb" className={classes} {...rest}>
+      <nav aria-label="Breadcrumb" className={classes} {...rest}>
         {humanPrefix}
         <BreadcrumbList>{children}</BreadcrumbList>
       </nav>
@@ -180,30 +177,28 @@ export const Breadcrumb = ({
   let renderedEntries: RenderedEntry[] = []
 
   if (isCollapsible && hasEnoughToCollapse) {
-    const before = items.slice(0, itemsBeforeCollapse)
-    const after = items.slice(items.length - itemsAfterCollapse)
+    const before = items
+      .slice(0, itemsBeforeCollapse)
+      .map((data, i) => ({ type: 'item' as const, data, originalIndex: i }))
+
+    const after = items.slice(items.length - itemsAfterCollapse).map((data, i) => ({
+      type: 'item' as const,
+      data,
+      originalIndex: items.length - itemsAfterCollapse + i,
+    }))
+
     const middle = items.slice(itemsBeforeCollapse, items.length - itemsAfterCollapse)
 
+    const ellipsis = { type: 'ellipsis' as const, count: middle.length }
+
     if (!isExpanded) {
-      renderedEntries = [
-        ...before.map((data, i) => ({ type: 'item' as const, data, originalIndex: i })),
-        { type: 'ellipsis' as const, count: middle.length },
-        ...after.map((data, i) => ({
-          type: 'item' as const,
-          data,
-          originalIndex: items.length - itemsAfterCollapse + i,
-        })),
-      ]
+      renderedEntries = [...before, ellipsis, ...after]
     } else {
       renderedEntries = [
-        ...before.map((data, i) => ({ type: 'item' as const, data, originalIndex: i })),
-        { type: 'ellipsis' as const, count: middle.length },
+        ...before,
+        ellipsis,
         ...middle.map((data, i) => ({ type: 'item' as const, data, originalIndex: itemsBeforeCollapse + i })),
-        ...after.map((data, i) => ({
-          type: 'item' as const,
-          data,
-          originalIndex: items.length - itemsAfterCollapse + i,
-        })),
+        ...after,
       ]
     }
   } else {
@@ -211,7 +206,7 @@ export const Breadcrumb = ({
   }
 
   return (
-    <nav ref={ref} aria-label="Breadcrumb" className={classes} {...rest}>
+    <nav aria-label="Breadcrumb" className={classes} {...rest}>
       {humanPrefix}
       <BreadcrumbList>
         {renderedEntries.map((entry, index) => {
@@ -220,7 +215,7 @@ export const Breadcrumb = ({
           if (entry.type === 'ellipsis') {
             return (
               <Fragment key={`ellipsis-${index}`}>
-                <BreadcrumbItem>
+                <BreadcrumbItem key={`ellipsis-${index}`}>
                   <BreadcrumbEllipsis
                     isExpanded={isExpanded}
                     onClick={() => setIsExpanded(!isExpanded)}

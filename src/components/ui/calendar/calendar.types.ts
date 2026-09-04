@@ -11,7 +11,7 @@ export interface DateRange {
 
 export type CalendarValue = Date | null | Date[] | DateRange
 
-export interface CalendarProps extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'> {
+export interface CalendarProps extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange' | 'className'> {
   mode?: CalendarMode
   value?: CalendarValue
   defaultValue?: CalendarValue
@@ -28,7 +28,7 @@ export interface CalendarProps extends Omit<ComponentPropsWithRef<'div'>, 'defau
   firstDayOfWeek?: 0 | 1 | 2 | 3 | 4 | 5 | 6
   locale?: string
   yearRange?: [number, number]
-
+  className?: LithosClass
   classes?: {
     container?: LithosClass
     header?: LithosClass

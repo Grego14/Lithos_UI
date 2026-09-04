@@ -6,6 +6,7 @@ import { SetupGuide } from '../layout/SetupGuide'
 import { accordionPropsData, accordionGroupPropsData } from '../propsData/accordion'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Accordion.tsx'
+const manualPath = '../../components/ui/Accordion'
 
 export const AccordionDoc = () => {
   const usageCode = {
@@ -17,7 +18,7 @@ export const AccordionDoc = () => {
   )
 }`,
     componentNames: ['Accordion'],
-    manualPath: '../../components/ui/Accordion',
+    manualPath,
   }
 
   const groupedCode = {
@@ -37,7 +38,7 @@ export const AccordionDoc = () => {
   )
 }`,
     componentNames: ['Accordion', 'AccordionGroup'],
-    manualPath: '../../components/ui/Accordion',
+    manualPath,
   }
 
   const groupedMultipleCode = {
@@ -57,7 +58,7 @@ export const AccordionDoc = () => {
   )
 }`,
     componentNames: ['Accordion', 'AccordionGroup'],
-    manualPath: '../../components/ui/Accordion',
+    manualPath,
   }
 
   return (
@@ -92,7 +93,7 @@ export const AccordionDoc = () => {
 
       <SetupGuide
         componentNames={['Accordion', 'AccordionGroup']}
-        manualPath="../../components/ui/Accordion"
+        manualPath={manualPath}
         requires={['utils/cn.ts', 'components/ui/Button.tsx', 'components/ui/icons/IconChevronUp.tsx']}
       />
 

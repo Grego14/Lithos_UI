@@ -75,7 +75,6 @@ export const Calendar = ({
   yearRange,
   classes = {},
   className,
-  ref,
   ...rest
 }: CalendarProps) => {
   const isValueControlled = value !== undefined
@@ -197,7 +196,6 @@ export const Calendar = ({
 
   return (
     <div
-      ref={ref}
       className={cn(
         'inline-block border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[2px_2px_0_0_var(--lithos-shadow)] p-3 rounded-(--lithos-radius)',
         classes.container,

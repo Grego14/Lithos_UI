@@ -13,14 +13,8 @@ import {
 } from '../propsData/popover'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Popover.tsx'
-
 const componentNames = ['Popover', 'PopoverTrigger', 'PopoverContent', 'PopoverClose']
-const manualPath = {
-  Popover: '../../components/ui/Popover',
-  PopoverTrigger: '../../components/ui/Popover',
-  PopoverContent: '../../components/ui/Popover',
-  PopoverClose: '../../components/ui/Popover',
-}
+const manualPath = '../../components/ui/Popover'
 
 const PopoverDemo = () => {
   return (
@@ -51,7 +45,7 @@ export const PopoverPage = () => {
       <PopoverTrigger asChild>
         <Button>Open Popover</Button>
       </PopoverTrigger>
-      
+
       <PopoverContent className="w-64">
         <div className="flex flex-col">
           <h4 className="font-bold">Settings</h4>
@@ -68,10 +62,7 @@ export const PopoverPage = () => {
 }`,
     componentNames: ['Popover', 'PopoverTrigger', 'PopoverContent', 'PopoverClose', 'Button'],
     manualPath: {
-      Popover: '../../components/ui/Popover',
-      PopoverTrigger: '../../components/ui/Popover',
-      PopoverContent: '../../components/ui/Popover',
-      PopoverClose: '../../components/ui/Popover',
+      others: manualPath,
       Button: '../../components/ui/Button',
     },
   }
@@ -102,7 +93,7 @@ export const PopoverPage = () => {
       <SetupGuide
         componentNames={componentNames}
         manualPath={manualPath}
-        requires={['@floating-ui/react', '../../utils/cn', 'components/ui/Button.tsx']}
+        requires={['@floating-ui/react', 'utils/cn', 'components/ui/Button.tsx']}
       />
 
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
@@ -133,6 +124,7 @@ export const PopoverPage = () => {
         <CodeViewer
           code={`<Popover>
   <PopoverTrigger>Trigger</PopoverTrigger>
+
   <PopoverContent>
     Content
     <PopoverClose>Close</PopoverClose>

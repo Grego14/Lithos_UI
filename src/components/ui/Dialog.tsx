@@ -22,7 +22,7 @@ import { useFocusTrap } from '../../core/hooks/useFocusTrap'
 import { Button } from './Button'
 import type { ButtonVariant } from '../../core/types'
 import { IconClose } from './icons/IconClose'
-import { cn } from '../../utils/cn'
+import { cn, type LithosClass } from '../../utils/cn'
 
 export type DialogVariant = 'default' | 'simple' | 'bare'
 export type DialogIntent = 'default' | 'success' | 'error' | 'warning' | 'info'
@@ -69,8 +69,7 @@ export interface DialogProps extends Omit<ComponentPropsWithRef<'div'>, 'classNa
   offsetColor?: string | undefined
   scrollable?: boolean | undefined
   initialFocusRef?: RefObject<HTMLElement | null> | undefined
-  className?: string
-  children: ReactNode
+  className?: LithosClass
 }
 
 export const Dialog = ({
@@ -169,18 +168,17 @@ export const Dialog = ({
   )
 }
 
-export interface DialogHeaderProps extends ComponentPropsWithRef<'div'> {
+export interface DialogHeaderProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   icon?: ReactNode
   hideClose?: boolean
-  children: ReactNode
+  className?: LithosClass
 }
 
-export const DialogHeader = ({ icon, hideClose = false, className, children, ref, ...rest }: DialogHeaderProps) => {
+export const DialogHeader = ({ icon, hideClose = false, className, children, ...rest }: DialogHeaderProps) => {
   const { onClose, scrollable } = useDialogContext()
 
   return (
     <div
-      ref={ref}
       className={cn(
         'flex items-start justify-between shrink-0 p-4 sm:p-6',
         scrollable && 'border-b-2 border-(--lithos-border)',
@@ -206,17 +204,16 @@ export const DialogHeader = ({ icon, hideClose = false, className, children, ref
   )
 }
 
-export interface DialogTitleProps extends ComponentPropsWithRef<'h2'> {
-  children: ReactNode
+export interface DialogTitleProps extends Omit<ComponentPropsWithRef<'h2'>, 'className'> {
+  className?: LithosClass
 }
 
-export const DialogTitle = ({ className, children, ref, ...rest }: DialogTitleProps) => {
+export const DialogTitle = ({ className, children, ...rest }: DialogTitleProps) => {
   const { titleId } = useDialogContext()
 
   return (
     <h2
       id={titleId}
-      ref={ref}
       className={cn('text-xl font-black uppercase tracking-tight leading-none m-0', className)}
       {...rest}
     >
@@ -225,28 +222,27 @@ export const DialogTitle = ({ className, children, ref, ...rest }: DialogTitlePr
   )
 }
 
-export interface DialogBodyProps extends ComponentPropsWithRef<'div'> {
-  children: ReactNode
+export interface DialogBodyProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
+  className?: LithosClass
 }
 
-export const DialogBody = ({ className, children, ref, ...rest }: DialogBodyProps) => {
+export const DialogBody = ({ className, children, ...rest }: DialogBodyProps) => {
   return (
-    <div ref={ref} className={cn('flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 font-body', className)} {...rest}>
+    <div className={cn('flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 font-body', className)} {...rest}>
       {children}
     </div>
   )
 }
 
-export interface DialogFooterProps extends ComponentPropsWithRef<'div'> {
-  children: ReactNode
+export interface DialogFooterProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
+  className?: LithosClass
 }
 
-export const DialogFooter = ({ className, children, ref, ...rest }: DialogFooterProps) => {
+export const DialogFooter = ({ className, children, ...rest }: DialogFooterProps) => {
   const { scrollable } = useDialogContext()
 
   return (
     <div
-      ref={ref}
       className={cn(
         'flex items-center justify-end shrink-0 p-4 sm:p-6',
         scrollable && 'border-t-2 border-(--lithos-border)',

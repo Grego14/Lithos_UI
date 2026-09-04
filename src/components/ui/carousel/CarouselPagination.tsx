@@ -6,9 +6,8 @@
  */
 import type { ComponentPropsWithRef } from 'react'
 import { Button } from '../Button'
-import { cn } from '../../../utils/cn'
+import { cn, type LithosClass } from '../../../utils/cn'
 import type { ScrollFunc, SliderSelector } from './CarouselContext'
-import type { ClassValue, ClassArray } from 'clsx'
 import { IconCircle } from '../icons/IconCircle'
 
 const iconClass = {
@@ -24,7 +23,7 @@ export interface CarouselPaginationProps extends Omit<ComponentPropsWithRef<'div
   sliderSelector?: SliderSelector
   showCounter?: boolean
   label?: string
-  className?: ClassValue | ClassArray
+  className?: LithosClass
   bottomControls?: boolean
   mode?: 'horizontal' | 'vertical'
 }
@@ -39,7 +38,6 @@ export const CarouselPagination = ({
   label = 'Move to the slide $',
   bottomControls = false,
   mode = 'horizontal',
-  ref,
   ...rest
 }: CarouselPaginationProps) => {
   const selectors = []
@@ -86,7 +84,7 @@ export const CarouselPagination = ({
   )
 
   return (
-    <div className={containerClass} {...rest} ref={ref}>
+    <div className={containerClass} {...rest}>
       {!vertical && <div className={selectorsContainerClass}>{selectors}</div>}
       {showCounter && (
         <span className="sm:ml-auto mt-4 sm:mt-0">

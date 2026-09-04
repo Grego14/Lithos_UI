@@ -6,13 +6,13 @@
 import type { ComponentPropsWithRef } from 'react'
 import { cn } from '../../../utils/cn'
 import { CarouselNext, CarouselPrev } from './CarouselButton'
-import type { ClassValue, ClassArray } from 'clsx'
 import { useCarousel } from './useCarousel'
+import type { LithosClass } from '../../../utils/cn'
 
 export interface CarouselControlsProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
-  title?: string | undefined
+  title?: string
   bottomPositioned?: boolean
-  className?: ClassValue | ClassArray
+  className?: LithosClass
   loop?: boolean
 }
 
@@ -21,14 +21,12 @@ export const CarouselControls = ({
   bottomPositioned = false,
   className,
   loop = false,
-  ref,
   ...rest
 }: CarouselControlsProps) => {
   const { currentIndex, totalSlides } = useCarousel()
 
   return (
     <div
-      ref={ref}
       className={cn(
         bottomPositioned ? 'mt-3' : 'mb-3',
         'flex flex-col sm:flex-row items-center justify-between',

@@ -10,7 +10,7 @@ export const inputPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'ClassValue | ClassArray',
+    type: 'LithosClass',
     defaultValue: '""',
     required: false,
     description: 'Additional CSS classes to apply custom styles.',
@@ -58,7 +58,7 @@ export const inputGroupPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'ClassValue | ClassArray',
+    type: 'LithosClass',
     defaultValue: '""',
     required: false,
     description: 'Additional CSS classes for the frame. Use max-w-* here to constrain the group width.',
@@ -97,7 +97,7 @@ export const inputGroupAddonPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'ClassValue | ClassArray',
+    type: 'LithosClass',
     defaultValue: '""',
     required: false,
     description: 'Additional CSS classes for the addon segment.',

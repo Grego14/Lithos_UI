@@ -11,13 +11,12 @@
  */
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { colors } from '../../utils/colors'
-import { cn } from '../../utils/cn'
-import type { ClassArray, ClassValue } from 'clsx'
+import { cn, type LithosClass } from '../../utils/cn'
 
 type InputSizes = 'default' | 'sm' | 'md' | 'lg'
 
 export interface InputProps extends Omit<ComponentPropsWithRef<'input'>, 'className' | 'size'> {
-  className?: ClassValue | ClassArray
+  className?: LithosClass
   invalid?: boolean
   size?: InputSizes
 }
@@ -29,7 +28,7 @@ const inputSizeStyles = {
   lg: 'text-lg h-12 px-4 py-3',
 }
 
-export const Input = ({ className = '', ref, invalid, size = 'default', style, ...props }: InputProps) => {
+export const Input = ({ className = '', invalid, size = 'default', style, ...props }: InputProps) => {
   const classes = cn(
     'rounded-(--lithos-radius)',
     'font-mono font-bold w-full outline-none border-2 border-(--lithos-border) shadow-[2px_2px_0_0_var(--lithos-shadow)] focus:shadow-[4px_4px_0_0_var(--lithos-shadow)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
@@ -41,9 +40,7 @@ export const Input = ({ className = '', ref, invalid, size = 'default', style, .
     className
   )
 
-  return (
-    <input ref={ref} className={classes} {...props} style={invalid ? { borderColor: colors.error, ...style } : style} />
-  )
+  return <input className={classes} {...props} style={invalid ? { borderColor: colors.error, ...style } : style} />
 }
 
 /**
@@ -51,22 +48,14 @@ export const Input = ({ className = '', ref, invalid, size = 'default', style, .
  */
 
 export interface InputGroupProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
-  className?: ClassValue | ClassArray
+  className?: LithosClass
   startAdornment?: ReactNode
   endAdornment?: ReactNode
 }
 
-export const InputGroup = ({
-  className = '',
-  ref,
-  children,
-  startAdornment,
-  endAdornment,
-  ...props
-}: InputGroupProps) => {
+export const InputGroup = ({ className = '', children, startAdornment, endAdornment, ...props }: InputGroupProps) => {
   return (
     <div
-      ref={ref}
       role="group"
       className={cn(
         'relative flex w-full items-stretch overflow-hidden rounded-(--lithos-radius) border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[2px_2px_0_0_var(--lithos-shadow)] transition focus-within:shadow-[4px_4px_0_0_var(--lithos-shadow)]',
@@ -113,10 +102,9 @@ export const InputGroupInput = ({ className = '', ...props }: InputGroupInputPro
 
 type AddonAlign = 'inline-start' | 'inline-end'
 
-export interface InputGroupAddonProps extends Omit<ComponentPropsWithRef<'div'>, 'className' | 'children'> {
+export interface InputGroupAddonProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   align?: AddonAlign
-  className?: ClassValue | ClassArray
-  children: ReactNode
+  className?: LithosClass
 }
 
 const addonAlignClasses = {
@@ -128,12 +116,10 @@ export const InputGroupAddon = ({
   align = 'inline-start',
   className = '',
   children,
-  ref,
   ...props
 }: InputGroupAddonProps) => {
   return (
     <div
-      ref={ref}
       className={cn(
         'inline-flex shrink-0 select-none items-center self-stretch border-(--lithos-border) bg-(--lithos-surface) px-3 font-mono text-sm font-bold text-(--lithos-text)',
         addonAlignClasses[align],

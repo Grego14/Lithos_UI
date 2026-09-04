@@ -1,6 +1,8 @@
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 
+// should this file be removed?
+
 export const CodeViewerDoc = () => {
   const sampleCode = `export const BrutalistButton = () => {
   return (
@@ -21,11 +23,11 @@ export const CodeViewerDoc = () => {
 }\\\`
 
   return (
-    <CodeViewer 
-      code={sampleCode} 
-      language="tsx" 
-      showLanguage={true} 
-      className="mb-0" 
+    <CodeViewer
+      code={sampleCode}
+      language="tsx"
+      showLanguage={true}
+      className="mb-0"
     />
   )
 }`,

@@ -19,7 +19,7 @@ export const cardPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'string',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes.',
   },
@@ -47,7 +47,7 @@ export const cardImagePropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'string',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes.',
   },
@@ -63,7 +63,7 @@ export const cardContentPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'string',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes.',
   },
@@ -72,7 +72,7 @@ export const cardContentPropsData: PropItem[] = [
 export const cardTitlePropsData: PropItem[] = [
   {
     name: 'className',
-    type: 'string',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes.',
   },
@@ -81,7 +81,7 @@ export const cardTitlePropsData: PropItem[] = [
 export const cardDescriptionPropsData: PropItem[] = [
   {
     name: 'className',
-    type: 'string',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes.',
   },
@@ -97,7 +97,7 @@ export const cardFooterPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'string',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes.',
   },

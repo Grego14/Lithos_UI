@@ -8,15 +8,14 @@ import { getContrastText } from '../../utils/yiq'
 import { colors } from '../../utils/colors'
 import { useAccentColor } from '../../core/useAccentColor'
 import type { HexColor } from '../../core/types'
-import { cn } from '../../utils/cn'
-import type { ClassArray, ClassValue } from 'clsx'
+import { cn, type LithosClass } from '../../utils/cn'
 
 type BadgeSizes = 'default' | 'sm' | 'md' | 'lg'
 type BadgeIntents = 'default' | 'accent' | 'success' | 'error' | 'warning' | 'info'
 
 export interface BadgeProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   intent?: BadgeIntents
-  className?: ClassValue | ClassArray
+  className?: LithosClass
   size?: BadgeSizes
   color?: HexColor | string
 }
@@ -34,7 +33,6 @@ export const Badge = ({
   size = 'default',
   intent = 'default',
   color,
-  ref,
   ...props
 }: BadgeProps) => {
   const { accentColor } = useAccentColor()
@@ -49,7 +47,7 @@ export const Badge = ({
   )
 
   return (
-    <div ref={ref} className={classes} style={{ backgroundColor: bgColor, color: contrastedColor }} {...props}>
+    <div className={classes} style={{ backgroundColor: bgColor, color: contrastedColor }} {...props}>
       {children}
     </div>
   )
