@@ -83,6 +83,9 @@ export const Sidebar = () => {
           <Link to="/docs/toggle" className={getLinkClass('/docs/toggle')}>
             Toggle
           </Link>
+          <Link to="/docs/tooltip" className={getLinkClass('/docs/tooltip')}>
+            Tooltip
+          </Link>
         </nav>
       </div>
     </aside>

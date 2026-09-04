@@ -26,6 +26,7 @@ const variantClass: Record<ButtonVariant, string> = {
   accent: 'bg-(--lithos-surface) text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)',
   text: 'bg-transparent text-(--lithos-text) border-transparent shadow-none hover:shadow-none',
   solid: '',
+  inverse: 'bg-(--lithos-text) text-(--lithos-bg) border-(--lithos-bg)',
 }
 
 export const Button = ({
