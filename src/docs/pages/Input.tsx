@@ -108,8 +108,7 @@ export const InputDoc = () => {
 }`,
     componentNames: ['InputGroup', 'InputGroupInput', 'IconSearch', 'IconSettings'],
     manualPath: {
-      InputGroup: INPUT_PATH,
-      InputGroupInput: INPUT_PATH,
+      others: INPUT_PATH,
       IconSearch: '../../components/ui/icons/IconSearch',
       IconSettings: '../../components/ui/icons/IconSettings',
     },
@@ -129,9 +128,7 @@ export const InputDoc = () => {
 }`,
     componentNames: ['InputGroup', 'InputGroupInput', 'InputGroupAddon', 'IconSearch'],
     manualPath: {
-      InputGroup: INPUT_PATH,
-      InputGroupInput: INPUT_PATH,
-      InputGroupAddon: INPUT_PATH,
+      others: INPUT_PATH,
       IconSearch: '../../components/ui/icons/IconSearch',
     },
   }
@@ -146,11 +143,7 @@ export const InputDoc = () => {
   )
 }`,
     componentNames: ['InputGroup', 'InputGroupInput', 'InputGroupAddon'],
-    manualPath: {
-      InputGroup: INPUT_PATH,
-      InputGroupInput: INPUT_PATH,
-      InputGroupAddon: INPUT_PATH,
-    },
+    manualPath: INPUT_PATH,
   }
 
   return (

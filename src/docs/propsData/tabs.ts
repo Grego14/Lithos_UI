@@ -33,6 +33,12 @@ export const tabsPropsData: PropItem[] = [
     required: true,
     description: 'The content of the Tabs, typically TabsList and TabsContent.',
   },
+  {
+    name: 'className',
+    type: 'LithosClass',
+    required: false,
+    description: 'Additional CSS classes.',
+  },
 ]
 
 export const tabsTriggerPropsData: PropItem[] = [
@@ -48,6 +54,12 @@ export const tabsTriggerPropsData: PropItem[] = [
     required: true,
     description: 'The text or content to display inside the trigger.',
   },
+  {
+    name: 'className',
+    type: 'LithosClass',
+    required: false,
+    description: 'Additional CSS classes.',
+  },
 ]
 
 export const tabsContentPropsData: PropItem[] = [
@@ -62,5 +74,11 @@ export const tabsContentPropsData: PropItem[] = [
     type: 'ReactNode',
     required: true,
     description: 'The content to display when the associated tab is active.',
+  },
+  {
+    name: 'className',
+    type: 'LithosClass',
+    required: false,
+    description: 'Additional CSS classes.',
   },
 ]

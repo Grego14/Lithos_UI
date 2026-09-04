@@ -21,12 +21,7 @@ const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/component
 
 const componentNames = ['Dialog', 'DialogHeader', 'DialogTitle', 'DialogBody', 'DialogFooter', 'CustomDialog']
 const manualPath = {
-  Dialog: '../../components/ui/Dialog',
-  DialogHeader: '../../components/ui/Dialog',
-  DialogTitle: '../../components/ui/Dialog',
-  DialogBody: '../../components/ui/Dialog',
-  DialogFooter: '../../components/ui/Dialog',
-  CustomDialog: '../../components/ui/Dialog',
+  others: '../../components/ui/Dialog',
   Button: '../../components/ui/Button',
 }
 
@@ -435,11 +430,13 @@ export const SizeDialogDemo = () => {
           language="tsx"
           code={`<Dialog>
   <DialogHeader>
-    <DialogTitle>Title</DialogTitle>
+    <DialogTitle></DialogTitle>
   </DialogHeader>
-  <DialogBody>Content</DialogBody>
+
+  <DialogBody></DialogBody>
+
   <DialogFooter>
-    <Button>Confirm</Button>
+    <Button></Button>
   </DialogFooter>
 </Dialog>`}
         />

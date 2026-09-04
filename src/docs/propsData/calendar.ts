@@ -94,6 +94,12 @@ export const calendarPropsData: PropItem[] = [
     description: 'Min and max year range in the year dropdown.',
   },
   {
+    name: 'className',
+    type: 'LithosClass',
+    required: false,
+    description: 'Additional CSS classes applied to the calendar container.',
+  },
+  {
     name: 'classes',
     type: '{ [key in "container" | "header" | "nav" | "monthSelect" | "yearSelect" | "weekdays" | "grid" | "cell" | "day"]?: LithosClass }',
     required: false,

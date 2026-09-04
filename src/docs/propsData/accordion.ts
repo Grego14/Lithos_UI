@@ -28,7 +28,7 @@ export const accordionPropsData: PropItem[] = [
   },
   {
     name: 'classes',
-    type: '{ container?: string; header?: string; content?: string }',
+    type: '{ container?: LithosClass; header?: LithosClass; content?: LithosClass }',
     required: false,
     description: 'Custom class overrides for container, header, and content elements.',
   },
@@ -40,7 +40,7 @@ export const accordionPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'string',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes applied to the root container.',
   },
@@ -68,7 +68,7 @@ export const accordionGroupPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'string',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes applied to the group container.',
   },

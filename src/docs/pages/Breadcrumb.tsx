@@ -9,11 +9,11 @@ import { PropsAccordion } from '../../components/ui/PropsTable'
 import { breadcrumbPropsData, breadcrumbItemDataPropsData } from '../propsData/breadcrumb'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Breadcrumb.tsx'
+const manualPath = '../../components/ui/Breadcrumb'
 
 export const BreadcrumbDoc = () => {
   const collapsibleCode = {
-    body: `
-export const CollapsibleBreadcrumb = () => {
+    body: `export const CollapsibleBreadcrumb = () => {
   const items = [
     { label: 'Lithos UI', href: '#' },
     { label: 'Components', href: '#' },
@@ -32,14 +32,11 @@ export const CollapsibleBreadcrumb = () => {
   )
 }`,
     componentNames: ['Breadcrumb'],
-    manualPath: {
-      Breadcrumb: '../../components/ui/Breadcrumb',
-    },
+    manualPath,
   }
 
   const iconNameCode = {
-    body: `
-export const IconNameBreadcrumb = () => {
+    body: `export const IconNameBreadcrumb = () => {
   const items = [
     { label: 'Lithos UI', href: '#', onClick: (e) => e.preventDefault() },
     { label: 'Components', href: '#', icon: <IconFolder />, onClick: (e) => e.preventDefault() },
@@ -47,11 +44,11 @@ export const IconNameBreadcrumb = () => {
     { label: 'Icon', active: true, icon: <IconFileText /> },
   ]
 
-  return <Breadcrumb showIcons items={items} />
+  return <Breadcrumb items={items} />
 }`,
     componentNames: ['Breadcrumb', 'IconFolder', 'IconSettings', 'IconFileText'],
     manualPath: {
-      Breadcrumb: '../../components/ui/Breadcrumb',
+      Breadcrumb: manualPath,
       IconFolder: '../../components/ui/icons/IconFolder',
       IconSettings: '../../components/ui/icons/IconSettings',
       IconFileText: '../../components/ui/icons/IconFileText',
@@ -92,9 +89,7 @@ export const IconNameBreadcrumb = () => {
 
       <SetupGuide
         componentNames={['Breadcrumb']}
-        manualPath={{
-          Breadcrumb: '../../components/ui/Breadcrumb',
-        }}
+        manualPath={manualPath}
         requires={[
           'utils/cn.ts',
           'components/ui/icons/IconHome.tsx',
@@ -109,7 +104,6 @@ export const IconNameBreadcrumb = () => {
         Examples
       </h2>
 
-      {/* Type 1: Collapsible */}
       <h3 id="collapsible" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
         Collapsible
       </h3>
@@ -140,7 +134,6 @@ export const IconNameBreadcrumb = () => {
         </PreviewBlock>
       </div>
 
-      {/* Type 2: Icon */}
       <h3 id="icon" className="mb-2 text-xl font-black tracking-tight text-(--lithos-text)">
         Icon
       </h3>
@@ -155,7 +148,6 @@ export const IconNameBreadcrumb = () => {
         <PreviewBlock code={iconNameCode} githubUrl={githubUrl}>
           <div className="flex flex-col items-center justify-center p-4">
             <Breadcrumb
-              showIcons
               items={[
                 { label: 'Lithos UI', href: '#', onClick: (e) => e.preventDefault() },
                 { label: 'Components', href: '#', icon: <IconFolder />, onClick: (e) => e.preventDefault() },

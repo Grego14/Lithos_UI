@@ -55,7 +55,7 @@ export const alertPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'ClassValue | ClassArray',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes.',
   },

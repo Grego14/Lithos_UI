@@ -57,7 +57,7 @@ export const breadcrumbPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'string',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes applied to the root nav element.',
   },

@@ -7,11 +7,11 @@
  *   edge stays visible against the page regardless of fill color; `outlined` moves border/shadow
  *   onto the accent color itself since the fill no longer carries it.
  */
-import type { ComponentPropsWithRef, CSSProperties, ReactNode } from 'react'
+import type { ComponentPropsWithRef, CSSProperties } from 'react'
 import { getContrastText } from '../../utils/yiq'
 import { colors } from '../../utils/colors'
 import type { HexColor } from '../../core/types'
-import { cn } from '../../utils/cn'
+import { cn, type LithosClass } from '../../utils/cn'
 import { Button } from './Button'
 import { IconUndo } from './icons/IconUndo'
 import { IconClose } from './icons/IconClose'
@@ -20,7 +20,7 @@ export type AlertIntent = 'default' | 'success' | 'error' | 'warning' | 'info' |
 export type AlertVariant = 'filled' | 'outlined'
 export type AlertSize = 'sm' | 'md' | 'lg'
 
-export interface AlertProps extends ComponentPropsWithRef<'div'> {
+export interface AlertProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   intent?: AlertIntent
   variant?: AlertVariant
   size?: AlertSize
@@ -28,7 +28,7 @@ export interface AlertProps extends ComponentPropsWithRef<'div'> {
   color?: HexColor | string
   onClose?: () => void
   onUndo?: () => void
-  children: ReactNode
+  className?: LithosClass
 }
 
 const sizeStyles: Record<AlertSize, { container: string; title: string; headerGap: string; message: string }> = {
@@ -48,7 +48,6 @@ export const Alert = ({
   className = '',
   style,
   children,
-  ref,
   ...props
 }: AlertProps) => {
   const isAccent = intent === 'accent' && !color
@@ -83,7 +82,7 @@ export const Alert = ({
       }
 
   return (
-    <div ref={ref} role="alert" className={classes} style={computedStyle} {...props}>
+    <div role="alert" className={classes} style={computedStyle} {...props}>
       {(title || onClose || onUndo) && (
         <div className={`flex items-center ${sizing.headerGap}`}>
           {title && (

@@ -5,17 +5,16 @@
  * - Focus and accessibility boundary management: applies `inert` and `aria-hidden` attributes to non-active slides to prevent off-screen tab focus.
  */
 import type { ComponentPropsWithRef } from 'react'
-import { cn } from '../../../utils/cn'
-import type { ClassArray, ClassValue } from 'clsx'
+import { cn, type LithosClass } from '../../../utils/cn'
 import { useCarousel } from './useCarousel'
 
 export interface CarouselSlideProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   index?: number
   label?: string
-  className?: ClassValue | ClassArray
+  className?: LithosClass
 }
 
-export const CarouselSlide = ({ index, label, className, children, ref, ...rest }: CarouselSlideProps) => {
+export const CarouselSlide = ({ index, label, className, children, ...rest }: CarouselSlideProps) => {
   const { currentIndex, totalSlides } = useCarousel()
 
   const slideIndex = index ?? 0
@@ -32,7 +31,6 @@ export const CarouselSlide = ({ index, label, className, children, ref, ...rest 
   return (
     <div
       className={classes}
-      ref={ref}
       role="group"
       aria-roledescription="slide"
       aria-label={slideLabel}

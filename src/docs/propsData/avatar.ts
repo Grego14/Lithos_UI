@@ -31,7 +31,7 @@ export const avatarPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'string',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes.',
   },
@@ -53,7 +53,7 @@ export const avatarGroupCountPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'string',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes.',
   },
@@ -82,7 +82,7 @@ export const avatarGroupPropsData: PropItem[] = [
   },
   {
     name: 'className',
-    type: 'string',
+    type: 'LithosClass',
     required: false,
     description: 'Additional CSS classes.',
   },

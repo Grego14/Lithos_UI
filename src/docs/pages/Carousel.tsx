@@ -13,18 +13,20 @@ import {
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Carousel.tsx'
 const CAROUSEL_PATH = '../../components/ui/Carousel'
 
-export const CarouselDoc = () => {
-  const usageCode = {
-    body: `export const AppCarousel = () => {
-  return (
-    <Carousel title='Default carousel, everything included!'>
-      <CarouselSlide>Slide 1</CarouselSlide>
+const SLIDES = `<CarouselSlide>Slide 1</CarouselSlide>
       <CarouselSlide>Slide 2</CarouselSlide>
       <CarouselSlide>Slide 3</CarouselSlide>
       <CarouselSlide>Slide 4</CarouselSlide>
       <CarouselSlide>Slide 5</CarouselSlide>
       <CarouselSlide>Slide 6</CarouselSlide>
-      <CarouselSlide>Slide 7</CarouselSlide>
+      <CarouselSlide>Slide 7</CarouselSlide>`
+
+export const CarouselDoc = () => {
+  const usageCode = {
+    body: `export const AppCarousel = () => {
+  return (
+    <Carousel title='Default carousel, everything included!'>
+      ${SLIDES}
     </Carousel>
   )
 }`,
@@ -36,13 +38,7 @@ export const CarouselDoc = () => {
     body: `export const AppCarousel = () => {
   return (
     <Carousel title='Carousel with looping!' loop>
-      <CarouselSlide>Slide 1</CarouselSlide>
-      <CarouselSlide>Slide 2</CarouselSlide>
-      <CarouselSlide>Slide 3</CarouselSlide>
-      <CarouselSlide>Slide 4</CarouselSlide>
-      <CarouselSlide>Slide 5</CarouselSlide>
-      <CarouselSlide>Slide 6</CarouselSlide>
-      <CarouselSlide>Slide 7</CarouselSlide>
+      ${SLIDES}
     </Carousel>
   )
 }`,
@@ -54,13 +50,7 @@ export const CarouselDoc = () => {
     body: `export const AppCarousel = () => {
   return (
     <Carousel title='Carousel with controls at the bottom!' controlsPosition='bottom'>
-      <CarouselSlide>Slide 1</CarouselSlide>
-      <CarouselSlide>Slide 2</CarouselSlide>
-      <CarouselSlide>Slide 3</CarouselSlide>
-      <CarouselSlide>Slide 4</CarouselSlide>
-      <CarouselSlide>Slide 5</CarouselSlide>
-      <CarouselSlide>Slide 6</CarouselSlide>
-      <CarouselSlide>Slide 7</CarouselSlide>
+      ${SLIDES}
     </Carousel>
   )
 }`,
@@ -72,13 +62,7 @@ export const CarouselDoc = () => {
     body: `export const AppCarousel = () => {
   return (
     <Carousel title='Carousel using the numbers sliders selector!' slideSelector='numbers'>
-      <CarouselSlide>Slide 1</CarouselSlide>
-      <CarouselSlide>Slide 2</CarouselSlide>
-      <CarouselSlide>Slide 3</CarouselSlide>
-      <CarouselSlide>Slide 4</CarouselSlide>
-      <CarouselSlide>Slide 5</CarouselSlide>
-      <CarouselSlide>Slide 6</CarouselSlide>
-      <CarouselSlide>Slide 7</CarouselSlide>
+      ${SLIDES}
     </Carousel>
   )
 }`,
@@ -90,13 +74,7 @@ export const CarouselDoc = () => {
     body: `export const AppCarousel = () => {
   return (
     <Carousel title='Carousel without the current slider identifier!' showCounter={false}>
-      <CarouselSlide>Slide 1</CarouselSlide>
-      <CarouselSlide>Slide 2</CarouselSlide>
-      <CarouselSlide>Slide 3</CarouselSlide>
-      <CarouselSlide>Slide 4</CarouselSlide>
-      <CarouselSlide>Slide 5</CarouselSlide>
-      <CarouselSlide>Slide 6</CarouselSlide>
-      <CarouselSlide>Slide 7</CarouselSlide>
+      ${SLIDES}
     </Carousel>
   )
 }`,
@@ -108,13 +86,7 @@ export const CarouselDoc = () => {
     body: `export const AppCarousel = () => {
   return (
     <Carousel title='Headless Carousel!' hideControls>
-      <CarouselSlide>Slide 1</CarouselSlide>
-      <CarouselSlide>Slide 2</CarouselSlide>
-      <CarouselSlide>Slide 3</CarouselSlide>
-      <CarouselSlide>Slide 4</CarouselSlide>
-      <CarouselSlide>Slide 5</CarouselSlide>
-      <CarouselSlide>Slide 6</CarouselSlide>
-      <CarouselSlide>Slide 7</CarouselSlide>
+      ${SLIDES}
     </Carousel>
   )
 }`,
@@ -126,13 +98,7 @@ export const CarouselDoc = () => {
     body: `export const AppCarousel = () => {
   return (
     <Carousel title='Carousel that plays infinitely!' playInfinite>
-      <CarouselSlide>Slide 1</CarouselSlide>
-      <CarouselSlide>Slide 2</CarouselSlide>
-      <CarouselSlide>Slide 3</CarouselSlide>
-      <CarouselSlide>Slide 4</CarouselSlide>
-      <CarouselSlide>Slide 5</CarouselSlide>
-      <CarouselSlide>Slide 6</CarouselSlide>
-      <CarouselSlide>Slide 7</CarouselSlide>
+      ${SLIDES}
     </Carousel>
   )
 }`,
@@ -144,13 +110,7 @@ export const CarouselDoc = () => {
     body: `export const AppCarousel = () => {
   return (
     <Carousel title='Carousel with vertical sliding!' mode="vertical">
-      <CarouselSlide>Slide 1</CarouselSlide>
-      <CarouselSlide>Slide 2</CarouselSlide>
-      <CarouselSlide>Slide 3</CarouselSlide>
-      <CarouselSlide>Slide 4</CarouselSlide>
-      <CarouselSlide>Slide 5</CarouselSlide>
-      <CarouselSlide>Slide 6</CarouselSlide>
-      <CarouselSlide>Slide 7</CarouselSlide>
+      ${SLIDES}
     </Carousel>
   )
 }`,
@@ -184,7 +144,7 @@ export const CarouselDoc = () => {
 
       <SetupGuide
         componentNames={['Carousel']}
-        manualPath="../../components/ui/Carousel"
+        manualPath={CAROUSEL_PATH}
         requires={[
           'utils/cn.ts',
           'utils/scrollTo.ts',

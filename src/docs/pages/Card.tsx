@@ -23,12 +23,7 @@ export const CardDoc = () => {
   const [spacing, setSpacing] = useState<'sm' | 'md' | 'lg'>('md')
 
   const cardManualPath = {
-    Card: '../../components/ui/Card',
-    CardImage: '../../components/ui/Card',
-    CardContent: '../../components/ui/Card',
-    CardTitle: '../../components/ui/Card',
-    CardDescription: '../../components/ui/Card',
-    CardFooter: '../../components/ui/Card',
+    others: '../../components/ui/Card',
     Button: '../../components/ui/Button',
   }
 
