@@ -1,4 +1,4 @@
-import { forwardRef, type ComponentPropsWithRef } from 'react'
+import { type ComponentPropsWithRef } from 'react'
 import { useMergeRefs, FloatingPortal, FloatingArrow } from '@floating-ui/react'
 import { cn, type LithosClass } from '../../../utils/cn'
 import { useTooltipContext } from './useTooltip'
@@ -29,41 +29,46 @@ const variantStyles: Record<TooltipVariant, { container: string; fill: string; s
   },
 }
 
-export const TooltipContent = forwardRef<HTMLDivElement, TooltipContentProps>(
-  ({ style, className, portaled = true, variant = 'default', ...props }, propRef) => {
-    const { context: floatingContext, floatingStyles, refs, getFloatingProps, arrowRef } = useTooltipContext()
-    const ref = useMergeRefs([refs.setFloating, propRef])
+export const TooltipContent = ({
+  style,
+  className,
+  portaled = true,
+  variant = 'default',
+  ref: propRef,
+  ...props
+}: TooltipContentProps) => {
+  const { context: floatingContext, floatingStyles, refs, getFloatingProps, arrowRef } = useTooltipContext()
+  const ref = useMergeRefs([refs.setFloating, propRef])
 
-    if (!floatingContext.open) return null
+  if (!floatingContext.open) return null
 
-    const currentVariant = variantStyles[variant]
+  const currentVariant = variantStyles[variant]
 
-    const content = (
-      <div
-        ref={ref}
-        style={{ ...floatingStyles, ...style }}
-        className={cn(
-          'z-50 border-2 px-3 py-1.5 text-sm font-bold shadow-[4px_4px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)',
-          currentVariant.container,
-          className
-        )}
-        {...getFloatingProps(props)}
-      >
-        {props.children}
-        <FloatingArrow
-          ref={arrowRef}
-          context={floatingContext}
-          fill={currentVariant.fill}
-          stroke={currentVariant.stroke}
-          strokeWidth={2}
-        />
-      </div>
-    )
+  const content = (
+    <div
+      ref={ref}
+      style={{ ...floatingStyles, ...style }}
+      className={cn(
+        'z-50 border-2 px-3 py-1.5 text-sm font-bold shadow-[4px_4px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)',
+        currentVariant.container,
+        className
+      )}
+      {...getFloatingProps(props)}
+    >
+      {props.children}
+      <FloatingArrow
+        ref={arrowRef}
+        context={floatingContext}
+        fill={currentVariant.fill}
+        stroke={currentVariant.stroke}
+        strokeWidth={2}
+      />
+    </div>
+  )
 
-    if (!portaled) return content
+  if (!portaled) return content
 
-    return <FloatingPortal>{content}</FloatingPortal>
-  }
-)
+  return <FloatingPortal>{content}</FloatingPortal>
+}
 
 TooltipContent.displayName = 'TooltipContent'
