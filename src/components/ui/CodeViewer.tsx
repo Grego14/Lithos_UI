@@ -8,7 +8,7 @@ import { useToast } from '../../core/hooks/useToast'
 import { useLithosTheme } from '../../core/useLithosTheme'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import { cn } from '../../utils/cn'
+import { cn, type LithosClass } from '../../utils/cn'
 import { Button } from './Button'
 
 export interface CodeViewerProps {
@@ -16,7 +16,7 @@ export interface CodeViewerProps {
   language?: string
   showLanguage?: boolean
   embedded?: boolean
-  className?: string
+  className?: LithosClass
 }
 
 export const CodeViewer = ({
@@ -69,18 +69,13 @@ export const CodeViewer = ({
             <p className="text-xs font-black uppercase tracking-widest text-(--lithos-text) font-code">{language}</p>
           ) : (
             <div className="flex items-center">
-              <div
-                className="mr-2 h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent) rounded-(--lithos-radius)"
-                aria-hidden="true"
-              />
-              <div
-                className="mr-2 h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent) rounded-(--lithos-radius)"
-                aria-hidden="true"
-              />
-              <div
-                className="h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent) rounded-(--lithos-radius)"
-                aria-hidden="true"
-              />
+              {[0, 0, 0].map((_, i) => (
+                <div
+                  key={`square-${i}`}
+                  className={`${i !== 2 ? 'mr-2 ' : ''}h-4 w-4 border-2 border-(--lithos-border) bg-(--lithos-accent) rounded-(--lithos-radius)`}
+                  aria-hidden="true"
+                />
+              ))}
             </div>
           )}
         </div>
