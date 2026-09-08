@@ -19,6 +19,7 @@ import {
   carouselTrackPropsData,
   carouselPaginationPropsData,
   carouselControlsPropsData,
+  useCarouselPropsData,
 } from '../propsData/carousel'
 import { colors } from '../../utils/colors'
 
@@ -191,7 +192,7 @@ export const CustomLayoutCarousel = () => {
   return (
     <Carousel
       title='Carousel with a custom layout!'
-      custom
+      asChild
       className='flex flex-col space-y-4 items-center py-4'
     >
       <CarouselCustomContent />
@@ -241,12 +242,15 @@ export const CustomLayoutCarousel = () => {
           'utils/cn.ts',
           'utils/scrollTo.ts',
           'components/ui/Button.tsx',
+          'components/ui/carousel/Carousel.tsx',
           'components/ui/carousel/CarouselButton.tsx',
-          'components/ui/carousel/CarouselContext.tsx',
           'components/ui/carousel/CarouselControls.tsx',
           'components/ui/carousel/CarouselSlide.tsx',
           'components/ui/carousel/CarouselPagination.tsx',
+          'components/ui/carousel/CarouselTrack.tsx',
+          'components/ui/carousel/useCarousel.ts',
           'components/ui/carousel/useCarouselDrag.ts',
+          'components/ui/carousel/carousel.types.ts',
           'components/ui/icons/IconArrowLeft.tsx',
           'components/ui/icons/IconArrowRight.tsx',
           'components/ui/icons/IconArrowDown.tsx',
@@ -452,7 +456,11 @@ export const CustomLayoutCarousel = () => {
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={customLayoutCode} githubUrl={githubUrl}>
-          <Carousel title="Carousel with a custom layout!" className="flex flex-col space-y-4 items-center py-4" custom>
+          <Carousel
+            title="Carousel with a custom layout!"
+            className="flex flex-col space-y-4 items-center py-4"
+            asChild
+          >
             <CarouselCustomLayout />
           </Carousel>
         </PreviewBlock>
@@ -531,6 +539,7 @@ export const CustomLayoutCarousel = () => {
         <PropsAccordion title="CarouselTrack Props" data={carouselTrackPropsData} />
         <PropsAccordion title="CarouselControls Props" data={carouselControlsPropsData} />
         <PropsAccordion title="CarouselPagination Props" data={carouselPaginationPropsData} />
+        <PropsAccordion title="useCarousel Return" data={useCarouselPropsData} isHook />
       </section>
     </div>
   )

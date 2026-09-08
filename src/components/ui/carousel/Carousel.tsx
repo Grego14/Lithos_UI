@@ -43,12 +43,12 @@ export interface CarouselProps extends Omit<ComponentPropsWithRef<'div'>, 'class
   loop?: boolean
   mode?: CarouselMode
   className?: LithosClass
-  custom?: boolean
+  asChild?: boolean
 }
 
 export const Carousel = ({
   controlsPosition = 'top',
-  title,
+  title = '',
   children,
   className,
   hidePagination = false,
@@ -61,7 +61,7 @@ export const Carousel = ({
   stopOnHover = true,
   loop = false,
   mode = 'horizontal',
-  custom = false,
+  asChild = false,
   ...rest
 }: CarouselProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -249,7 +249,7 @@ export const Carousel = ({
       containerRef,
       handleScroll,
       dragHandlers,
-      title: title ?? '',
+      title,
       loop,
       slideSelector,
       showCounter,
@@ -300,7 +300,7 @@ export const Carousel = ({
           {`Slide ${index + 1} of ${totalSlides}`}
         </div>
 
-        {custom ? (
+        {asChild ? (
           children
         ) : (
           /* Default layout */
