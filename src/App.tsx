@@ -40,6 +40,7 @@ import { Showroom } from './showroom/Index'
 import { ToastDoc } from './docs/pages/Toast'
 import { ToggleDoc } from './docs/pages/Toggle'
 import { TabsDoc } from './docs/pages/Tabs'
+import { ThemeBuilder } from './pages/ThemeBuilder'
 import { TooltipDoc } from './docs/pages/Tooltip'
 import { useEffect } from 'react'
 import { useLithosTheme } from './core/useLithosTheme'
@@ -158,6 +159,7 @@ const App = () => {
           {renderDocRoutes(isDarkMode, toggleObsidian)}
 
           <Route path="/faq" element={<Faq isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />} />
+          <Route path="/theme" element={<ThemeBuilder isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />} />
           <Route
             path="/templates"
             element={<TemplatesIndex isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />}
