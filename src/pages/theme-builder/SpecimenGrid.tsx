@@ -1,132 +1,290 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Button } from '../../components/ui/Button'
 import { Input } from '../../components/ui/Input'
-import { Card, CardContent, CardTitle, CardDescription, CardFooter } from '../../components/ui/Card'
+import { Card, CardContent, CardTitle, CardDescription } from '../../components/ui/Card'
 import { Badge } from '../../components/ui/Badge'
 import { Alert } from '../../components/ui/Alert'
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../components/ui/Tabs'
-import { Tooltip } from '../../components/ui/tooltip/Tooltip'
-import { TooltipTrigger } from '../../components/ui/tooltip/TooltipTrigger'
-import { TooltipContent } from '../../components/ui/tooltip/TooltipContent'
-import { Checkbox, PlainCheckbox, IconCheckbox } from '../../components/ui/Checkbox'
 import { Accordion } from '../../components/ui/Accordion'
+import { AvatarGroup } from '../../components/ui/Avatar'
+import { Breadcrumb } from '../../components/ui/Breadcrumb'
+import { Checkbox } from '../../components/ui/Checkbox'
+import { Toggle } from '../../components/ui/Toggle'
+import { Dialog, DialogHeader, DialogTitle, DialogBody, DialogFooter } from '../../components/ui/Dialog'
+import { KineticGrid } from '../../components/ui/KineticGrid'
+import { Popover, PopoverTrigger, PopoverContent } from '../../components/ui/Popover'
+import { Select } from '../../components/ui/Select'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../components/ui/Tabs'
+import { ToastProvider } from '../../components/ui/Toast'
+import { Tooltip, TooltipTrigger, TooltipContent } from '../../components/ui/Tooltip'
+import { CodeViewer } from '../../components/ui/CodeViewer'
+import { PropsTable } from '../../components/ui/PropsTable'
+import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { PANEL } from './constants'
+import { useToast } from '../../core/hooks/useToast'
 
-export const SpecimenGrid = ({ style }: { style: React.CSSProperties }) => {
-  const [checked, setChecked] = useState(true)
-  const [plainChecked, setPlainChecked] = useState(true)
-  const [iconChecked, setIconChecked] = useState(true)
+const LandingPageContent = () => {
+  const [isFullscreen, setIsFullscreen] = useState(false)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [newsletter, setNewsletter] = useState(false)
+  const [yearlyBilling, setYearlyBilling] = useState(true)
+  const { addToast } = useToast()
+
+  const handleSubscribe = () => {
+    addToast({
+      title: 'Subscribed',
+      message: 'You have been added to the waitlist.',
+      intent: 'success',
+    })
+  }
+
+  const toggleFullscreen = () => setIsFullscreen(!isFullscreen)
+
+  const containerClasses = isFullscreen
+    ? 'fixed inset-0 z-[100] overflow-y-auto bg-(--lithos-bg) text-(--lithos-text)'
+    : 'relative overflow-y-auto w-full h-full'
 
   return (
-    <div className="rounded-(--lithos-radius) p-6 space-y-5 bg-(--lithos-bg) text-(--lithos-text)" style={style}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className={`${PANEL} p-4`}>
-          <p className="text-xs font-medium mb-3 opacity-60">Buttons &amp; actions</p>
-          <div className="flex flex-wrap gap-2 items-center">
-            <Button variant="primary" className="px-3 py-1.5 text-xs">
-              Primary
-            </Button>
-            <Button variant="secondary" className="px-3 py-1.5 text-xs">
-              Secondary
-            </Button>
-            <Button variant="accent" className="px-3 py-1.5 text-xs">
-              Accent
-            </Button>
-            <Button variant="inverse" className="px-3 py-1.5 text-xs">
-              Inverse
-            </Button>
+    <div className={containerClasses}>
+      {/* Top Banner */}
+      <Alert title="Global Notice" intent="accent" size="sm" className="rounded-none border-t-0 border-x-0">
+        This is a demonstration of Lithos UI incorporating every single component.
+      </Alert>
+
+      {/* Navbar Mock */}
+      <header className="px-6 py-4 border-b border-(--lithos-border)/15 flex justify-between items-center bg-(--lithos-surface) sticky top-0 z-40 shadow-sm">
+        <div className="flex items-center gap-4">
+          <div className="font-black tracking-tight text-xl">LITHOS</div>
+          <div className="hidden sm:block">
+            <Breadcrumb
+              items={[
+                { label: 'Home', href: '#' },
+                { label: 'Platform', href: '#' },
+                { label: 'Features', active: true },
+              ]}
+            />
           </div>
         </div>
-
-        <div className={`${PANEL} p-4`}>
-          <p className="text-xs font-medium mb-3 opacity-60">Form input &amp; checkboxes</p>
-          <Input placeholder="Type query..." size="sm" className="mb-3" />
-          <div className="flex flex-wrap items-center gap-4 text-xs">
-            <Checkbox label="Check" checked={checked} onChange={(e) => setChecked(e.target.checked)} />
-            <PlainCheckbox label="Plain" checked={plainChecked} onChange={(e) => setPlainChecked(e.target.checked)} />
-            <IconCheckbox label="Fav" checked={iconChecked} onChange={(e) => setIconChecked(e.target.checked)} />
-          </div>
+        <div className="flex items-center gap-4">
+          <Button variant="secondary" onClick={toggleFullscreen} className="text-xs px-3">
+            {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+          </Button>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="primary">Actions</Button>
+            </PopoverTrigger>
+            <PopoverContent className="p-2 space-y-1">
+              <div className="lithos-click p-2 hover:bg-(--lithos-bg) rounded text-sm font-bold cursor-pointer">
+                Settings
+              </div>
+              <div className="lithos-click p-2 hover:bg-(--lithos-bg) rounded text-sm font-bold cursor-pointer">
+                Logout
+              </div>
+            </PopoverContent>
+          </Popover>
         </div>
-      </div>
+      </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card interactive className="h-full">
-          <CardContent spacing="sm">
-            <CardTitle className="text-base mb-1">Card component</CardTitle>
-            <CardDescription className="text-xs">Surface tokens scale seamlessly across depth layers.</CardDescription>
-          </CardContent>
-          <CardFooter spacing="sm">
-            <Button variant="primary" className="px-3 py-1.5 text-xs">
-              Action
-            </Button>
-          </CardFooter>
-        </Card>
-
-        <div className="space-y-3">
-          <div className={`${PANEL} p-4`}>
-            <p className="text-xs font-medium mb-2 opacity-60">Badges</p>
-            <div className="flex flex-wrap gap-1.5">
-              <Badge intent="accent" size="sm">
-                Accent
-              </Badge>
-              <Badge intent="success" size="sm">
-                Success
-              </Badge>
-              <Badge intent="error" size="sm">
-                Error
-              </Badge>
-              <Badge intent="warning" size="sm">
-                Warning
-              </Badge>
-            </div>
-          </div>
-          <Alert title="System notice" size="sm" intent="accent">
-            Dynamic accent contrast test.
-          </Alert>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Accordion title="Interactive accordion" defaultOpen classes={{ content: 'p-4 text-xs' }}>
-          Smooth expand/collapse physics with configurable corner geometry.
-        </Accordion>
-        <div className={`${PANEL} p-4 flex flex-col justify-between gap-4`}>
-          <div>
-            <p className="text-xs font-medium mb-2 opacity-60">Tabs</p>
-            <Tabs defaultValue="t1">
-              <TabsList>
-                <TabsTrigger value="t1">Tab A</TabsTrigger>
-                <TabsTrigger value="t2">Tab B</TabsTrigger>
-              </TabsList>
-              <TabsContent value="t1" className="text-xs font-body pt-2">
-                Active tab container panel.
-              </TabsContent>
-              <TabsContent value="t2" className="text-xs font-body pt-2">
-                Secondary tab panel.
-              </TabsContent>
-            </Tabs>
-          </div>
-          <div className="pt-3 border-t border-(--lithos-border)/15 flex items-center justify-between">
-            <span className="text-xs font-medium opacity-60">Tooltip</span>
+      {/* Hero Section */}
+      <KineticGrid
+        baseOpacity="opacity-20"
+        className="py-24 md:py-32 border-b border-(--lithos-border)/15 rounded-none"
+      >
+        <div className="max-w-4xl mx-auto text-center px-6 space-y-8">
+          <Badge intent="accent" size="md">
+            V2.0 Released
+          </Badge>
+          <h1 className="text-5xl md:text-7xl font-black tracking-tight uppercase leading-[0.9]">
+            Build The Future <br />
+            <span className="text-(--lithos-accent) drop-shadow-[4px_4px_0_var(--lithos-shadow)]">Fast.</span>
+          </h1>
+          <p className="text-lg md:text-xl opacity-70 font-medium max-w-2xl mx-auto font-body">
+            Use the full suite of Lithos UI components to create brutalist, accessible, and stunning interfaces.
+          </p>
+          <div className="flex justify-center gap-4 pt-4">
             <Tooltip placement="top">
               <TooltipTrigger asChild>
-                <Button variant="secondary" className="px-3 py-1.5 text-xs">
-                  Hover me
+                <Button variant="accent" className="px-8 py-4 text-lg" onClick={() => setIsDialogOpen(true)}>
+                  Start Free Trial
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>Themed tooltip content</TooltipContent>
+              <TooltipContent>No credit card required</TooltipContent>
             </Tooltip>
           </div>
         </div>
-      </div>
+      </KineticGrid>
 
-      <div className={`${PANEL} p-4`}>
-        <p className="text-xs font-medium mb-2 opacity-60">Typography</p>
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <span className="text-lg font-semibold tracking-tight">Display heading specimen</span>
-          <code className="text-xs font-code opacity-70">const accent = "var(--lithos-accent)";</code>
+      {/* Testimonials */}
+      <section className="px-6 py-12 bg-(--lithos-surface) border-b border-(--lithos-border)/15 flex flex-col md:flex-row justify-center items-center gap-6 text-center">
+        <span className="text-sm font-bold opacity-50 uppercase tracking-widest">Trusted by builders at</span>
+        <AvatarGroup
+          size="md"
+          items={[
+            { alt: 'Alice Smith' },
+            { alt: 'Bob Jones' },
+            { alt: 'Charlie Brown' },
+            { alt: 'David Lee' },
+            { alt: 'Eve Torres' },
+            { alt: 'Frank Wright' },
+          ]}
+        />
+      </section>
+
+      {/* Interactive Features */}
+      <section className="px-6 py-24 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="space-y-8">
+          <h2 className="text-3xl font-black uppercase border-b-4 border-(--lithos-border) inline-block pb-2">
+            Component Demo
+          </h2>
+          <Tabs defaultValue="code" variant="default">
+            <TabsList>
+              <TabsTrigger value="code">Source Code</TabsTrigger>
+              <TabsTrigger value="preview">Live Preview</TabsTrigger>
+            </TabsList>
+            <TabsContent value="code">
+              <CodeViewer code={`<Button variant="accent">Click Me</Button>`} language="tsx" className="mt-4" />
+            </TabsContent>
+            <TabsContent value="preview">
+              <div className="mt-4 bg-(--lithos-surface) p-8 flex justify-center">
+                <PreviewBlock code={''}>
+                  <Button variant="accent">Click Me</Button>
+                </PreviewBlock>
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
-      </div>
+
+        <div className="space-y-8">
+          <h2 className="text-3xl font-black uppercase border-b-4 border-(--lithos-border) inline-block pb-2">
+            Configuration
+          </h2>
+          <Card interactive className="w-full">
+            <CardContent spacing="lg">
+              <CardTitle>System Settings</CardTitle>
+              <CardDescription>Adjust your preferences below.</CardDescription>
+
+              <div className="space-y-6 mt-6">
+                <div className="flex items-center justify-between border-b border-(--lithos-border)/10 pb-4">
+                  <span className="font-bold text-sm">Yearly Billing</span>
+                  <Toggle
+                    checked={yearlyBilling}
+                    onToggle={() => setYearlyBilling(!yearlyBilling)}
+                    label="Yearly Billing"
+                  />
+                </div>
+
+                <div className="space-y-3 border-b border-(--lithos-border)/10 pb-4">
+                  <span className="font-bold text-sm">Role</span>
+                  <Select
+                    placeholder="Select role"
+                    options={[
+                      { label: 'Developer', value: 'dev' },
+                      { label: 'Designer', value: 'des' },
+                      { label: 'Manager', value: 'man' },
+                    ]}
+                  />
+                </div>
+
+                <div className="pt-2">
+                  <Checkbox
+                    checked={newsletter}
+                    onChange={(e) => setNewsletter(e.target.checked)}
+                    label="Subscribe to newsletter"
+                    description="Get the latest updates from Lithos UI."
+                  />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* Docs / API Section */}
+      <section className="px-6 py-24 bg-(--lithos-surface) border-y border-(--lithos-border)/15">
+        <div className="max-w-5xl mx-auto space-y-12">
+          <h2 className="text-4xl font-black uppercase text-center">Extensive API</h2>
+          <div className="bg-(--lithos-bg) p-6 rounded-(--lithos-radius) border border-(--lithos-border)">
+            <PropsTable
+              data={[
+                {
+                  name: 'variant',
+                  type: "'primary' | 'secondary'",
+                  defaultValue: "'primary'",
+                  description: 'The visual style variant of the component.',
+                },
+                {
+                  name: 'intent',
+                  type: "'default' | 'accent' | 'error'",
+                  defaultValue: "'default'",
+                  description: 'Contextual color intent.',
+                },
+                { name: 'disabled', type: 'boolean', defaultValue: 'false', description: 'Prevents user interaction.' },
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Accordion */}
+      <section className="px-6 py-24 max-w-3xl mx-auto">
+        <h2 className="text-4xl font-black uppercase text-center mb-12">FAQ</h2>
+        <div className="space-y-4">
+          <Accordion title="Is this free to use?">
+            <p className="p-4 m-0 font-body text-sm">
+              Yes, Lithos UI is completely open-source and free to use in your projects.
+            </p>
+          </Accordion>
+          <Accordion title="How do I customize the theme?">
+            <p className="p-4 m-0 font-body text-sm">
+              Use the Theme Builder to adjust colors, radii, and mode, then export the JSON configuration!
+            </p>
+          </Accordion>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="px-6 py-24 bg-(--lithos-accent) text-(--lithos-accent-text) text-center border-t border-(--lithos-border)/15">
+        <div className="max-w-2xl mx-auto space-y-8">
+          <h2 className="text-5xl font-black uppercase leading-tight">Ready to Start?</h2>
+          <div className={`${PANEL} p-8 flex flex-col sm:flex-row gap-4 bg-(--lithos-surface) text-(--lithos-text)`}>
+            <Input placeholder="Email Address" className="w-full sm:flex-1" />
+            <Button variant="primary" onClick={handleSubscribe} className="px-8">
+              Subscribe
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Dialog overlay (rendered when isDialogOpen is true) */}
+      <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)} size="md">
+        <DialogHeader>
+          <DialogTitle>Terms of Service</DialogTitle>
+        </DialogHeader>
+        <DialogBody>
+          <p className="mb-4">By proceeding, you agree to the Lithos UI terms of service and privacy policy.</p>
+          <p>Are you ready to create something amazing?</p>
+        </DialogBody>
+        <DialogFooter>
+          <Button variant="text" onClick={() => setIsDialogOpen(false)} className="mr-2">
+            Cancel
+          </Button>
+          <Button variant="accent" onClick={() => setIsDialogOpen(false)}>
+            Accept
+          </Button>
+        </DialogFooter>
+      </Dialog>
+    </div>
+  )
+}
+
+export const SpecimenGrid = ({ style }: { style: React.CSSProperties }) => {
+  return (
+    <div
+      className="rounded-(--lithos-radius) overflow-hidden border border-(--lithos-border)/15 bg-(--lithos-bg) text-(--lithos-text) h-full"
+      style={style}
+    >
+      <ToastProvider>
+        <LandingPageContent />
+      </ToastProvider>
     </div>
   )
 }

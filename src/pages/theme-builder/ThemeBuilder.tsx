@@ -1,7 +1,7 @@
 /**
  * @fileoverview Lithos UI Theme Studio page.
  * - Full-viewport (100vh) studio workbench, no page-level scroll.
- * - Three horizontal panels — Actions / Tokens / Stage — sized 1 : 3 : 9.
+ * - Three horizontal panels — Actions / Tokens / Stage — sized 2 : 3 : 9.
  * - Each panel scrolls independently when its content overflows.
  * - Complete preset selector, undo/redo, JSON import/export, and live token evaluation.
  */
@@ -16,6 +16,8 @@ import { PropertyControl } from './PropertyControl'
 import { SpecimenGrid } from './SpecimenGrid'
 import type { ThemeBuilderProps } from './types'
 import { Footer } from '../../showroom/sections/Footer'
+import { Select } from '../../components/ui/Select'
+import { Tabs, TabsList, TabsTrigger } from '../../components/ui/Tabs'
 
 type StageTab = 'preview' | 'code' | 'swatches'
 
@@ -67,26 +69,17 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                   <span className="text-sm">{previewMode === 'dark' ? 'Obsidian' : 'Light'}</span>
                 </div>
               </div>
-
               <div>
                 <p className="text-xs font-medium opacity-50 mb-2">Preset</p>
-                <select
-                  aria-label="Select theme preset"
-                  onChange={(e) => handlePresetSelect(e.target.value)}
-                  defaultValue=""
-                  className="w-full bg-transparent text-sm border border-(--lithos-border)/20 px-3 py-1.5 rounded-md cursor-pointer outline-none"
-                >
-                  <option value="" disabled>
-                    Load preset...
-                  </option>
-                  {PRESET_THEMES.map((preset) => (
-                    <option key={preset.id} value={preset.id}>
-                      {preset.name}
-                    </option>
-                  ))}
-                </select>
+                <Select
+                  placeholder="Load preset..."
+                  onChange={(val) => handlePresetSelect(val as string)}
+                  options={PRESET_THEMES.map((preset) => ({
+                    label: preset.name,
+                    value: preset.id,
+                  }))}
+                />
               </div>
-
               <div>
                 <p className="text-xs font-medium opacity-50 mb-2">History</p>
                 <div className="flex flex-col gap-2">
@@ -110,7 +103,6 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                   </Button>
                 </div>
               </div>
-
               <div>
                 <p className="text-xs font-medium opacity-50 mb-2">Import / export</p>
                 <div className="flex flex-col gap-2">
@@ -133,7 +125,6 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                   <input type="file" ref={fileInputRef} onChange={handleImportJSON} accept=".json" className="hidden" />
                 </div>
               </div>
-
               <Button variant="accent" onClick={handleReset} className="w-full px-3 py-1.5 text-xs">
                 Reset
               </Button>
@@ -175,22 +166,19 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
 
           <div className={`${PANEL} rounded-none border-t-0 border-r-0 flex flex-col min-w-0 h-full overflow-hidden`}>
             <div className="px-5 pt-4 border-b border-(--lithos-border)/15 shrink-0">
-              <div className="flex items-center gap-6">
-                {STAGE_TABS.map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setStageTab(tab.id)}
-                    className={`relative pb-3 text-sm transition-colors ${
-                      stageTab === tab.id ? 'font-medium' : 'opacity-50 hover:opacity-80'
-                    }`}
-                  >
-                    {tab.label}
-                    {stageTab === tab.id && (
-                      <span className="absolute left-0 right-0 -bottom-px h-0.5 bg-(--lithos-accent) rounded-full" />
-                    )}
-                  </button>
-                ))}
-              </div>
+              <Tabs value={stageTab} onValueChange={(val) => setStageTab(val as StageTab)} variant="underline">
+                <TabsList className="gap-6">
+                  {STAGE_TABS.map((tab) => (
+                    <TabsTrigger
+                      key={tab.id}
+                      value={tab.id}
+                      className="px-0 pb-3 text-sm opacity-50 data-[state=active]:opacity-100 transition-colors border-b-2 data-[state=inactive]:border-transparent"
+                    >
+                      {tab.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
             </div>
 
             <div className="p-5 flex-1 min-h-0 overflow-y-auto">
