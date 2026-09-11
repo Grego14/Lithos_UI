@@ -1,9 +1,9 @@
 /**
  * @fileoverview Lithos UI Theme Studio page.
  * - Full-viewport (100vh) studio workbench, no page-level scroll.
- * - Three horizontal panels — Actions / Tokens / Stage — sized 2 : 3 : 9.
- * - Each panel scrolls independently when its content overflows.
- * - Complete preset selector, undo/redo, JSON import/export, and live token evaluation.
+ * - Three horizontal panels — Actions / Tokens / Stage.
+ * - High-density, sharp bento-box dashboard orientation.
+ * - Strictly utilizes imported UI components for all interactions.
  */
 
 import { Navbar } from '../../showroom/sections/Navbar'
@@ -22,9 +22,9 @@ import { Tabs, TabsList, TabsTrigger } from '../../components/ui/Tabs'
 type StageTab = 'preview' | 'code' | 'swatches'
 
 const STAGE_TABS: { id: StageTab; label: string }[] = [
-  { id: 'preview', label: 'Live components' },
+  { id: 'preview', label: 'Live Preview' },
   { id: 'code', label: 'Generated CSS' },
-  { id: 'swatches', label: 'Token swatches' },
+  { id: 'swatches', label: 'Token Swatches' },
 ]
 
 export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) => {
@@ -55,40 +55,55 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
     <>
       <Navbar isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
 
-      <main className="h-screen pt-20 flex flex-col overflow-hidden bg-(--lithos-bg) text-(--lithos-text)">
-        <div className="flex-1 min-h-0 grid grid-cols-[1fr_3fr_9fr]">
-          <div className={`${PANEL} rounded-none border-t-0 border-l-0 flex flex-col min-w-0 h-full overflow-y-auto`}>
-            <div className="px-4 py-4 border-b border-(--lithos-border)/15">
-              <h2 className="text-sm font-semibold">Actions</h2>
+      <main className="h-screen pt-16 flex flex-col overflow-hidden bg-(--lithos-bg) text-(--lithos-text) font-sans antialiased">
+        {/* Strict monolithic grid with sharp 0px border divisions */}
+        <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[280px_340px_1fr] divide-y lg:divide-y-0 lg:divide-x divide-(--lithos-border)">
+          {/* PANEL 1: CONFIGURATION */}
+          <div className="flex flex-col min-w-0 h-full overflow-y-auto bg-(--lithos-surface)">
+            <div className="px-6 py-4 border-b border-(--lithos-border) sticky top-0 bg-(--lithos-surface) z-10 flex items-center justify-between">
+              <h2 className="text-sm font-bold tracking-tight">Configuration</h2>
             </div>
-            <div className="p-4 flex flex-col gap-4">
-              <div>
-                <p className="text-xs font-medium opacity-50 mb-2">Mode</p>
-                <div className="flex items-center gap-2">
+
+            <div className="p-6 flex flex-col gap-8">
+              <div className="space-y-3">
+                <p className="text-xs font-semibold uppercase tracking-wider text-(--lithos-text) opacity-70">
+                  Workspace
+                </p>
+                <div className="flex items-center justify-between p-1 border border-(--lithos-border) bg-(--lithos-bg) rounded-none">
+                  <span className="text-sm font-medium pl-3">
+                    {previewMode === 'dark' ? 'Obsidian Mode' : 'Light Mode'}
+                  </span>
                   <Toggle checked={previewMode === 'dark'} onToggle={handleTogglePreviewMode} label="Toggle mode" />
-                  <span className="text-sm">{previewMode === 'dark' ? 'Obsidian' : 'Light'}</span>
                 </div>
               </div>
-              <div>
-                <p className="text-xs font-medium opacity-50 mb-2">Preset</p>
-                <Select
-                  placeholder="Load preset..."
-                  onChange={(val) => handlePresetSelect(val as string)}
-                  options={PRESET_THEMES.map((preset) => ({
-                    label: preset.name,
-                    value: preset.id,
-                  }))}
-                />
+
+              <div className="space-y-3">
+                <p className="text-xs font-semibold uppercase tracking-wider text-(--lithos-text) opacity-70">
+                  Presets
+                </p>
+                <div className="border border-(--lithos-border) rounded-none bg-(--lithos-bg)">
+                  <Select
+                    placeholder="Select preset..."
+                    onChange={(val) => handlePresetSelect(val as string)}
+                    options={PRESET_THEMES.map((preset) => ({
+                      label: preset.name,
+                      value: preset.id,
+                    }))}
+                  />
+                </div>
               </div>
-              <div>
-                <p className="text-xs font-medium opacity-50 mb-2">History</p>
-                <div className="flex flex-col gap-2">
+
+              <div className="space-y-3">
+                <p className="text-xs font-semibold uppercase tracking-wider text-(--lithos-text) opacity-70">
+                  Timeline
+                </p>
+                <div className="flex gap-2">
                   <Button
                     variant="secondary"
                     onClick={handleUndo}
                     disabled={!canUndo}
                     title="Undo (Ctrl+Z)"
-                    className="w-full px-3 py-1.5 text-xs"
+                    className="flex-1 rounded-none border border-(--lithos-border)"
                   >
                     Undo
                   </Button>
@@ -97,82 +112,106 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                     onClick={handleRedo}
                     disabled={!canRedo}
                     title="Redo (Ctrl+Shift+Z)"
-                    className="w-full px-3 py-1.5 text-xs"
+                    className="flex-1 rounded-none border border-(--lithos-border)"
                   >
                     Redo
                   </Button>
                 </div>
               </div>
-              <div>
-                <p className="text-xs font-medium opacity-50 mb-2">Import / export</p>
+
+              <div className="space-y-3">
+                <p className="text-xs font-semibold uppercase tracking-wider text-(--lithos-text) opacity-70">
+                  Data Transfer
+                </p>
                 <div className="flex flex-col gap-2">
                   <Button
                     variant="secondary"
                     onClick={handleExportJSON}
-                    title="Export JSON"
-                    className="w-full px-3 py-1.5 text-xs"
+                    className="w-full justify-start rounded-none border border-(--lithos-border)"
                   >
-                    Export
+                    Export configuration
                   </Button>
                   <Button
                     variant="secondary"
                     onClick={() => fileInputRef.current?.click()}
-                    title="Import JSON"
-                    className="w-full px-3 py-1.5 text-xs"
+                    className="w-full justify-start rounded-none border border-(--lithos-border)"
                   >
-                    Import
+                    Import configuration
                   </Button>
                   <input type="file" ref={fileInputRef} onChange={handleImportJSON} accept=".json" className="hidden" />
                 </div>
               </div>
-              <Button variant="accent" onClick={handleReset} className="w-full px-3 py-1.5 text-xs">
-                Reset
-              </Button>
-            </div>
-          </div>
 
-          <div className={`${PANEL} rounded-none border-t-0 flex flex-col min-w-0 h-full overflow-y-auto`}>
-            <div className="px-5 py-4 border-b border-(--lithos-border)/15 flex items-center justify-between">
-              <h2 className="text-sm font-semibold">Tokens</h2>
-              <span className="text-xs opacity-50">{THEME_PROPERTIES.length} variables</span>
-            </div>
-
-            <div className="px-5 py-1">
-              <p className="text-xs font-medium opacity-50 pt-3">Color</p>
-              <div className="divide-y divide-(--lithos-border)/10">
-                {colorProps.map((prop) => (
-                  <PropertyControl
-                    key={prop.key}
-                    property={prop}
-                    value={currentValues[prop.key] ?? defaults[prop.key] ?? ''}
-                    onChange={handleChange}
-                  />
-                ))}
-              </div>
-
-              <p className="text-xs font-medium opacity-50 pt-3 mt-2 border-t border-(--lithos-border)/10">Geometry</p>
-              <div className="divide-y divide-(--lithos-border)/10 pb-4">
-                {geometryProps.map((prop) => (
-                  <PropertyControl
-                    key={prop.key}
-                    property={prop}
-                    value={currentValues[prop.key] ?? defaults[prop.key] ?? ''}
-                    onChange={handleChange}
-                  />
-                ))}
+              <div className="mt-4 pt-6 border-t border-(--lithos-border)">
+                <Button variant="primary" onClick={handleReset} className="w-full text-sm font-bold rounded-none">
+                  Reset all values
+                </Button>
               </div>
             </div>
           </div>
 
-          <div className={`${PANEL} rounded-none border-t-0 border-r-0 flex flex-col min-w-0 h-full overflow-hidden`}>
-            <div className="px-5 pt-4 border-b border-(--lithos-border)/15 shrink-0">
+          {/* PANEL 2: DESIGN TOKENS */}
+          <div className="flex flex-col min-w-0 h-full overflow-y-auto bg-(--lithos-bg)">
+            <div className="px-6 py-4 border-b border-(--lithos-border) sticky top-0 bg-(--lithos-bg) z-10 flex items-center justify-between">
+              <h2 className="text-sm font-bold tracking-tight">Design Tokens</h2>
+              <span className="text-xs font-medium bg-(--lithos-surface) border border-(--lithos-border) px-2 py-1">
+                {THEME_PROPERTIES.length} variables
+              </span>
+            </div>
+
+            <div className="p-6">
+              <div className="mb-8">
+                <p className="text-xs font-semibold uppercase tracking-wider text-(--lithos-text) opacity-70 mb-4">
+                  Color Palette
+                </p>
+                <div className="flex flex-col gap-4">
+                  {colorProps.map((prop) => (
+                    <div
+                      key={prop.key}
+                      className="border border-(--lithos-border) p-3 bg-(--lithos-surface) rounded-none"
+                    >
+                      <PropertyControl
+                        property={prop}
+                        value={currentValues[prop.key] ?? defaults[prop.key] ?? ''}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-(--lithos-text) opacity-70 mb-4">
+                  Geometry
+                </p>
+                <div className="flex flex-col gap-4 pb-6">
+                  {geometryProps.map((prop) => (
+                    <div
+                      key={prop.key}
+                      className="border border-(--lithos-border) p-3 bg-(--lithos-surface) rounded-none"
+                    >
+                      <PropertyControl
+                        property={prop}
+                        value={currentValues[prop.key] ?? defaults[prop.key] ?? ''}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* PANEL 3: STAGE */}
+          <div className="flex flex-col min-w-0 h-full overflow-hidden bg-(--lithos-surface)">
+            <div className="px-8 pt-4 border-b border-(--lithos-border) shrink-0 bg-(--lithos-bg)">
               <Tabs value={stageTab} onValueChange={(val) => setStageTab(val as StageTab)} variant="underline">
-                <TabsList className="gap-6">
+                <TabsList className="gap-8 bg-transparent p-0 border-none">
                   {STAGE_TABS.map((tab) => (
                     <TabsTrigger
                       key={tab.id}
                       value={tab.id}
-                      className="px-0 pb-3 text-sm opacity-50 data-[state=active]:opacity-100 transition-colors border-b-2 data-[state=inactive]:border-transparent"
+                      className="px-1 pb-4 text-sm font-semibold border-b-2 border-transparent data-[state=active]:border-(--lithos-text) data-[state=active]:text-(--lithos-text) text-(--lithos-text) opacity-60 data-[state=active]:opacity-100 rounded-none transition-none"
                     >
                       {tab.label}
                     </TabsTrigger>
@@ -181,41 +220,55 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
               </Tabs>
             </div>
 
-            <div className="p-5 flex-1 min-h-0 overflow-y-auto">
+            <div className="flex-1 min-h-0 overflow-y-auto p-8 relative bg-(--lithos-surface)">
               {stageTab === 'preview' && (
-                <div className={previewMode === 'dark' ? 'obsidian' : ''}>
+                <div
+                  className={`h-full w-full rounded-none overflow-hidden border border-(--lithos-border) bg-(--lithos-bg) ${previewMode === 'dark' ? 'obsidian' : ''}`}
+                >
                   <SpecimenGrid style={previewStyle} />
                 </div>
               )}
 
               {stageTab === 'code' && (
-                <div className="space-y-3">
-                  <p className="text-sm opacity-60 m-0">
-                    Copy this CSS block directly into your project's stylesheet or root layout.
-                  </p>
-                  <CodeViewer code={generatedCSS} language="css" showLanguage className="mb-0" />
+                <div className="max-w-5xl h-full flex flex-col space-y-4">
+                  <div className="flex items-center justify-between border-b border-(--lithos-border) pb-4">
+                    <h3 className="text-lg font-bold tracking-tight">Generated CSS</h3>
+                  </div>
+                  <div className="flex-1 rounded-none overflow-hidden border border-(--lithos-border)">
+                    <CodeViewer code={generatedCSS} language="css" className="h-full" />
+                  </div>
                 </div>
               )}
 
               {stageTab === 'swatches' && (
-                <div className="space-y-4">
-                  <p className="text-sm opacity-60">Visual color and geometry token evaluation.</p>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="max-w-6xl mx-auto w-full">
+                  <div className="mb-8 border-b border-(--lithos-border) pb-4">
+                    <h3 className="text-lg font-bold tracking-tight">Token Swatches</h3>
+                  </div>
+                  <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                     {THEME_PROPERTIES.map((prop) => {
                       const val = currentValues[prop.key] ?? defaults[prop.key] ?? ''
                       return (
-                        <div key={prop.key} className="border border-(--lithos-border)/15 rounded-lg overflow-hidden">
+                        <div
+                          key={prop.key}
+                          className="border border-(--lithos-border) bg-(--lithos-bg) flex flex-col rounded-none"
+                        >
                           <div
-                            className="h-14 flex items-center justify-center font-code text-xs"
+                            className="h-24 flex items-center justify-center border-b border-(--lithos-border)"
                             style={{
-                              backgroundColor: val.startsWith('rgba') || val.startsWith('#') ? val : 'var(--lithos-bg)',
+                              backgroundColor:
+                                val.startsWith('rgba') || val.startsWith('#') ? val : 'var(--lithos-surface)',
                             }}
                           >
-                            {val}
+                            <span className="text-xs font-mono font-bold bg-(--lithos-bg) text-(--lithos-text) px-2 py-1 border border-(--lithos-border)">
+                              {val}
+                            </span>
                           </div>
-                          <div className="p-2.5">
-                            <p className="text-xs font-medium m-0">{prop.label}</p>
-                            <code className="text-[10px] font-code opacity-50 block mt-0.5">{prop.key}</code>
+                          <div className="p-4">
+                            <p className="text-sm font-bold tracking-tight">{prop.label}</p>
+                            <code className="text-[11px] font-mono text-(--lithos-text) opacity-70 mt-1 block">
+                              {prop.key}
+                            </code>
                           </div>
                         </div>
                       )

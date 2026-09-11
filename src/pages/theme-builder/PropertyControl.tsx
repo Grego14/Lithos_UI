@@ -13,22 +13,24 @@ export const PropertyControl = ({ property, value, onChange }: PropertyControlPr
 
   if (type === 'color') {
     return (
-      <div className="flex items-center justify-between gap-3 py-3">
-        <label className="text-sm font-medium">{label}</label>
+      <div className="flex items-center justify-between gap-3">
+        <label className="text-sm font-medium tracking-tight text-(--lithos-text)">{label}</label>
         <div className="flex items-center gap-2">
-          <input
-            type="color"
-            value={value}
-            aria-label={`${label} color picker`}
-            onChange={(e) => onChange(key, e.target.value)}
-            className="h-7 w-7 cursor-pointer rounded-md border border-(--lithos-border)/20 p-0.5 shrink-0"
-          />
+          {/* Neatly wrapped native color picker */}
+          <div className="h-8 w-8 rounded-[var(--lithos-radius)] overflow-hidden border border-(--lithos-border) bg-(--lithos-bg) p-0.5 shrink-0 flex items-center justify-center focus-within:ring-2 focus-within:ring-(--lithos-accent)">
+            <input
+              type="color"
+              value={value}
+              aria-label={`${label} color picker`}
+              onChange={(e) => onChange(key, e.target.value)}
+              className="w-full h-full cursor-pointer border-0 p-0 bg-transparent block outline-none"
+            />
+          </div>
           <Input
             value={value}
             aria-label={`${label} hex code`}
             onChange={(e) => onChange(key, e.target.value)}
-            className="w-24 font-code text-xs h-8"
-            size="sm"
+            className="w-24 font-mono text-xs h-8 bg-(--lithos-bg) border-(--lithos-border) focus:border-(--lithos-accent)"
           />
         </div>
       </div>
@@ -55,19 +57,23 @@ export const PropertyControl = ({ property, value, onChange }: PropertyControlPr
     }
 
     return (
-      <div className="py-3">
-        <div className="flex items-center justify-between mb-2">
-          <label className="text-sm font-medium">{label}</label>
-          <span className="text-xs font-code opacity-60">{Math.round(opacityValue * 100)}%</span>
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <label className="text-sm font-medium tracking-tight text-(--lithos-text)">{label}</label>
+          <span className="text-xs font-mono text-(--lithos-text) opacity-[var(--lithos-muted,0.6)]">
+            {Math.round(opacityValue * 100)}%
+          </span>
         </div>
-        <div className="flex items-center gap-2">
-          <input
-            type="color"
-            value={hexValue}
-            aria-label={`${label} base color`}
-            onChange={(e) => handleColorChange(e.target.value)}
-            className="h-7 w-7 cursor-pointer rounded-md border border-(--lithos-border)/20 p-0.5 shrink-0"
-          />
+        <div className="flex items-center gap-3">
+          <div className="h-8 w-8 rounded-[var(--lithos-radius)] overflow-hidden border border-(--lithos-border) bg-(--lithos-bg) p-0.5 shrink-0 flex items-center justify-center focus-within:ring-2 focus-within:ring-(--lithos-accent)">
+            <input
+              type="color"
+              value={hexValue}
+              aria-label={`${label} base color`}
+              onChange={(e) => handleColorChange(e.target.value)}
+              className="w-full h-full cursor-pointer border-0 p-0 bg-transparent block outline-none"
+            />
+          </div>
           <input
             type="range"
             min={0}
@@ -76,7 +82,7 @@ export const PropertyControl = ({ property, value, onChange }: PropertyControlPr
             value={opacityValue}
             aria-label={`${label} opacity slider`}
             onChange={(e) => handleOpacityChange(parseFloat(e.target.value))}
-            className="flex-1 accent-(--lithos-accent) cursor-pointer h-1.5"
+            className="flex-1 accent-(--lithos-accent) h-1.5 bg-(--lithos-border) rounded-full appearance-none cursor-pointer outline-none focus:ring-2 focus:ring-(--lithos-accent) focus:ring-offset-2 focus:ring-offset-(--lithos-surface)"
           />
         </div>
       </div>
@@ -86,10 +92,10 @@ export const PropertyControl = ({ property, value, onChange }: PropertyControlPr
   const numericValue = parseNumericValue(value)
 
   return (
-    <div className="py-3">
-      <div className="flex items-center justify-between mb-2">
-        <label className="text-sm font-medium">{label}</label>
-        <span className="text-xs font-code opacity-60">
+    <div className="space-y-3">
+      <div className="flex items-center justify-between">
+        <label className="text-sm font-medium tracking-tight text-(--lithos-text)">{label}</label>
+        <span className="text-xs font-mono text-(--lithos-text) opacity-[var(--lithos-muted,0.6)]">
           {numericValue}
           {unit}
         </span>
@@ -102,7 +108,7 @@ export const PropertyControl = ({ property, value, onChange }: PropertyControlPr
         value={numericValue}
         aria-label={`${label} slider`}
         onChange={(e) => onChange(key, `${e.target.value}${unit}`)}
-        className="w-full accent-(--lithos-accent) cursor-pointer h-1.5"
+        className="w-full accent-(--lithos-accent) h-1.5 bg-(--lithos-border) rounded-full appearance-none cursor-pointer outline-none focus:ring-2 focus:ring-(--lithos-accent) focus:ring-offset-2 focus:ring-offset-(--lithos-surface)"
       />
     </div>
   )

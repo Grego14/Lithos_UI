@@ -45,11 +45,6 @@ const LandingPageContent = () => {
 
   return (
     <div className={containerClasses}>
-      {/* Top Banner */}
-      <Alert title="Global Notice" intent="accent" size="sm" className="rounded-none border-t-0 border-x-0">
-        This is a demonstration of Lithos UI incorporating every single component.
-      </Alert>
-
       {/* Navbar Mock */}
       <header className="px-6 py-4 border-b border-(--lithos-border)/15 flex justify-between items-center bg-(--lithos-surface) sticky top-0 z-40 shadow-sm">
         <div className="flex items-center gap-4">
