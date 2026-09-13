@@ -17,7 +17,7 @@ export const PropertyControl = ({ property, value, onChange }: PropertyControlPr
         <label className="text-sm font-medium tracking-tight text-(--lithos-text)">{label}</label>
         <div className="flex items-center gap-2">
           {/* Neatly wrapped native color picker */}
-          <div className="h-8 w-8 rounded-[var(--lithos-radius)] overflow-hidden border border-(--lithos-border) bg-(--lithos-bg) p-0.5 shrink-0 flex items-center justify-center focus-within:ring-2 focus-within:ring-(--lithos-accent)">
+          <div className="h-8 w-8 rounded-(--lithos-radius) overflow-hidden border border-(--lithos-border) bg-(--lithos-bg) p-0.5 shrink-0 flex items-center justify-center focus-within:ring-2 focus-within:ring-(--lithos-accent)">
             <input
               type="color"
               value={value}
@@ -60,12 +60,12 @@ export const PropertyControl = ({ property, value, onChange }: PropertyControlPr
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium tracking-tight text-(--lithos-text)">{label}</label>
-          <span className="text-xs font-mono text-(--lithos-text) opacity-[var(--lithos-muted,0.6)]">
+          <span className="text-xs font-mono text-(--lithos-text) opacity-(--lithos-muted,0.6)">
             {Math.round(opacityValue * 100)}%
           </span>
         </div>
         <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-[var(--lithos-radius)] overflow-hidden border border-(--lithos-border) bg-(--lithos-bg) p-0.5 shrink-0 flex items-center justify-center focus-within:ring-2 focus-within:ring-(--lithos-accent)">
+          <div className="h-8 w-8 rounded-(--lithos-radius) overflow-hidden border border-(--lithos-border) bg-(--lithos-bg) p-0.5 shrink-0 flex items-center justify-center focus-within:ring-2 focus-within:ring-(--lithos-accent)">
             <input
               type="color"
               value={hexValue}
@@ -95,7 +95,7 @@ export const PropertyControl = ({ property, value, onChange }: PropertyControlPr
     <div className="space-y-3">
       <div className="flex items-center justify-between">
         <label className="text-sm font-medium tracking-tight text-(--lithos-text)">{label}</label>
-        <span className="text-xs font-mono text-(--lithos-text) opacity-[var(--lithos-muted,0.6)]">
+        <span className="text-xs font-mono text-(--lithos-text) opacity-(--lithos-muted,0.6)">
           {numericValue}
           {unit}
         </span>

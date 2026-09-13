@@ -85,6 +85,11 @@ const LandingPageContent = () => {
         className="py-24 md:py-32 border-b border-(--lithos-border)/15 rounded-none"
       >
         <div className="max-w-4xl mx-auto text-center px-6 space-y-8">
+          <div className="flex justify-center">
+            <Alert intent="info" size="md" title="Welcome to Lithos V2.0">
+              Discover the new set of components in our brutalist design system.
+            </Alert>
+          </div>
           <Badge intent="accent" size="md">
             V2.0 Released
           </Badge>
@@ -237,7 +242,7 @@ const LandingPageContent = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="px-6 py-24 bg-(--lithos-accent) text-(--lithos-accent-text) text-center border-t border-(--lithos-border)/15">
+      <section className="px-6 py-24 bg-(--lithos-accent) text-(--lithos-bg) text-center border-t border-(--lithos-border)/15">
         <div className="max-w-2xl mx-auto space-y-8">
           <h2 className="text-5xl font-black uppercase leading-tight">Ready to Start?</h2>
           <div className={`${PANEL} p-8 flex flex-col sm:flex-row gap-4 bg-(--lithos-surface) text-(--lithos-text)`}>
