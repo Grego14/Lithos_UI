@@ -151,7 +151,7 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
           </div>
 
           {/* PANEL 2: DESIGN TOKENS */}
-          <div className="flex flex-col min-w-0 h-full overflow-y-auto bg-(--lithos-bg)">
+          <div className="flex flex-col min-w-0 h-full overflow-hidden bg-(--lithos-bg)">
             <div className="px-6 py-4 border-b border-(--lithos-border) sticky top-0 bg-(--lithos-bg) z-10 flex items-center justify-between">
               <h2 className="text-sm font-bold tracking-tight">Design Tokens</h2>
               <span className="text-xs font-medium bg-(--lithos-surface) border border-(--lithos-border) px-2 py-1">
@@ -159,16 +159,16 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
               </span>
             </div>
 
-            <div className="p-6">
-              <div className="mb-8">
-                <p className="text-xs font-semibold uppercase tracking-wider text-(--lithos-text) opacity-70 mb-4">
+            <div className="p-4">
+              <div className="mb-4">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-(--lithos-text) opacity-70 mb-2">
                   Color Palette
                 </p>
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-1.5">
                   {colorProps.map((prop) => (
                     <div
                       key={prop.key}
-                      className="border border-(--lithos-border) p-3 bg-(--lithos-surface) rounded-none"
+                      className="border border-(--lithos-border) p-2 bg-(--lithos-surface) rounded-none"
                     >
                       <PropertyControl
                         property={prop}
@@ -181,14 +181,14 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
               </div>
 
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-(--lithos-text) opacity-70 mb-4">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-(--lithos-text) opacity-70 mb-2">
                   Geometry
                 </p>
-                <div className="flex flex-col gap-4 pb-6">
+                <div className="flex flex-col gap-1.5 pb-2">
                   {geometryProps.map((prop) => (
                     <div
                       key={prop.key}
-                      className="border border-(--lithos-border) p-3 bg-(--lithos-surface) rounded-none"
+                      className="border border-(--lithos-border) p-2 bg-(--lithos-surface) rounded-none"
                     >
                       <PropertyControl
                         property={prop}
