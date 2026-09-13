@@ -56,11 +56,11 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
       <Navbar isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
 
       <main className="h-screen pt-16 flex flex-col overflow-hidden bg-(--lithos-bg) text-(--lithos-text) font-sans antialiased">
-        {/* Strict monolithic grid with sharp 0px border divisions */}
-        <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[280px_340px_1fr] divide-y lg:divide-y-0 lg:divide-x divide-(--lithos-border)">
+        {/* Strict monolithic flex container for exact height sharing and sharp border intersections */}
+        <div className="flex-1 min-h-0 flex flex-col lg:flex-row w-full items-stretch">
           {/* PANEL 1: CONFIGURATION */}
-          <div className="flex flex-col min-w-0 h-full overflow-y-auto bg-(--lithos-surface)">
-            <div className="px-6 py-4 border-b border-(--lithos-border) sticky top-0 bg-(--lithos-surface) z-10 flex items-center justify-between">
+          <div className="flex flex-col min-w-0 w-full lg:w-[280px] h-full overflow-y-auto bg-(--lithos-surface) border-b lg:border-b-0 lg:border-r-2 border-(--lithos-border) shrink-0">
+            <div className="h-14 px-6 border-b-2 border-(--lithos-border) sticky top-0 bg-(--lithos-surface) z-10 flex items-center justify-between shrink-0">
               <h2 className="text-sm font-bold tracking-tight">Configuration</h2>
             </div>
 
@@ -151,8 +151,8 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
           </div>
 
           {/* PANEL 2: DESIGN TOKENS */}
-          <div className="flex flex-col min-w-0 h-full overflow-hidden bg-(--lithos-bg)">
-            <div className="px-6 py-4 border-b border-(--lithos-border) sticky top-0 bg-(--lithos-bg) z-10 flex items-center justify-between">
+          <div className="flex flex-col min-w-0 w-full lg:w-[340px] h-full overflow-hidden bg-(--lithos-bg) border-b lg:border-b-0 lg:border-r-2 border-(--lithos-border) shrink-0">
+            <div className="h-14 px-6 border-b-2 border-(--lithos-border) sticky top-0 bg-(--lithos-bg) z-10 flex items-center justify-between shrink-0">
               <h2 className="text-sm font-bold tracking-tight">Design Tokens</h2>
               <span className="text-xs font-medium bg-(--lithos-surface) border border-(--lithos-border) px-2 py-1">
                 {THEME_PROPERTIES.length} variables
@@ -203,16 +203,17 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
           </div>
 
           {/* PANEL 3: STAGE */}
-          <div className="flex flex-col min-w-0 h-full overflow-hidden bg-(--lithos-surface)">
-            <div className="px-8 pt-4 border-b border-(--lithos-border) shrink-0 bg-(--lithos-bg)">
-              <Tabs value={stageTab} onValueChange={(val) => setStageTab(val as StageTab)} variant="underline">
-                <TabsList className="gap-8 bg-transparent p-0 border-none">
+          <div className="flex flex-col min-w-0 flex-1 h-full overflow-hidden bg-(--lithos-surface)">
+            <div className="h-14 px-8 border-b-2 border-(--lithos-border) shrink-0 bg-(--lithos-bg) flex items-end">
+              <Tabs
+                value={stageTab}
+                onValueChange={(val) => setStageTab(val as StageTab)}
+                variant="underline"
+                className="w-full flex-row items-center"
+              >
+                <TabsList className="space-x-8 bg-transparent p-0 border-none">
                   {STAGE_TABS.map((tab) => (
-                    <TabsTrigger
-                      key={tab.id}
-                      value={tab.id}
-                      className="px-1 pb-4 text-sm font-semibold border-b-2 border-transparent data-[state=active]:border-(--lithos-text) data-[state=active]:text-(--lithos-text) text-(--lithos-text) opacity-60 data-[state=active]:opacity-100 rounded-none transition-none"
-                    >
+                    <TabsTrigger key={tab.id} value={tab.id}>
                       {tab.label}
                     </TabsTrigger>
                   ))}
