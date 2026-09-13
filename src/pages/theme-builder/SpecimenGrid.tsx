@@ -80,10 +80,7 @@ const LandingPageContent = () => {
       </header>
 
       {/* Hero Section */}
-      <KineticGrid
-        baseOpacity="opacity-20"
-        className="py-24 md:py-32 border-b border-(--lithos-border)/15 rounded-none"
-      >
+      <KineticGrid baseOpacity="opacity-20" className="py-24 md:py-32 border-b border-(--lithos-border)/15">
         <div className="max-w-4xl mx-auto text-center px-6 space-y-8">
           <div className="flex justify-center">
             <Alert intent="info" size="md" title="Welcome to Lithos V2.0">
@@ -95,7 +92,7 @@ const LandingPageContent = () => {
           </Badge>
           <h1 className="text-5xl md:text-7xl font-black tracking-tight uppercase leading-[0.9]">
             Build The Future <br />
-            <span className="text-(--lithos-accent) drop-shadow-[4px_4px_0_var(--lithos-shadow)]">Fast.</span>
+            <span className="text-[var(--lithos-accent)] drop-shadow-[4px_4px_0_var(--lithos-shadow)]">Fast.</span>
           </h1>
           <p className="text-lg md:text-xl opacity-70 font-medium max-w-2xl mx-auto font-body">
             Use the full suite of Lithos UI components to create brutalist, accessible, and stunning interfaces.

@@ -81,7 +81,7 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                 <p className="text-xs font-semibold uppercase tracking-wider text-(--lithos-text) opacity-70">
                   Presets
                 </p>
-                <div className="border border-(--lithos-border) rounded-none bg-(--lithos-bg)">
+                <div className="border-(--lithos-border) rounded-none bg-(--lithos-bg)">
                   <Select
                     placeholder="Select preset..."
                     onChange={(val) => handlePresetSelect(val as string)}
@@ -168,7 +168,7 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                   {colorProps.map((prop) => (
                     <div
                       key={prop.key}
-                      className="border border-(--lithos-border) p-2 bg-(--lithos-surface) rounded-none"
+                      className="rounded-(--lithos-radius) border border-(--lithos-border) p-2 bg-(--lithos-surface)"
                     >
                       <PropertyControl
                         property={prop}
@@ -225,6 +225,7 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
               {stageTab === 'preview' && (
                 <div
                   className={`h-full w-full rounded-none overflow-hidden border border-(--lithos-border) bg-(--lithos-bg) ${previewMode === 'dark' ? 'obsidian' : ''}`}
+                  style={previewStyle}
                 >
                   <SpecimenGrid style={previewStyle} />
                 </div>
