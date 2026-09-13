@@ -92,7 +92,7 @@ const LandingPageContent = () => {
           </Badge>
           <h1 className="text-5xl md:text-7xl font-black tracking-tight uppercase leading-[0.9]">
             Build The Future <br />
-            <span className="text-[var(--lithos-accent)] drop-shadow-[4px_4px_0_var(--lithos-shadow)]">Fast.</span>
+            <span className="text-(--lithos-accent) drop-shadow-[4px_4px_0_var(--lithos-shadow)]">Fast.</span>
           </h1>
           <p className="text-lg md:text-xl opacity-70 font-medium max-w-2xl mx-auto font-body">
             Use the full suite of Lithos UI components to create brutalist, accessible, and stunning interfaces.

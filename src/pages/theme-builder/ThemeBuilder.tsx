@@ -69,7 +69,7 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                 <p className="text-xs font-semibold uppercase tracking-wider text-(--lithos-text) opacity-70">
                   Workspace
                 </p>
-                <div className="flex items-center justify-between p-1 border border-(--lithos-border) bg-(--lithos-bg) rounded-none">
+                <div className="flex items-center justify-between p-1 border border-(--lithos-border) bg-(--lithos-bg) rounded-(--lithos-radius)">
                   <span className="text-sm font-medium pl-3">
                     {previewMode === 'dark' ? 'Obsidian Mode' : 'Light Mode'}
                   </span>
@@ -81,16 +81,14 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                 <p className="text-xs font-semibold uppercase tracking-wider text-(--lithos-text) opacity-70">
                   Presets
                 </p>
-                <div className="border-(--lithos-border) rounded-none bg-(--lithos-bg)">
-                  <Select
-                    placeholder="Select preset..."
-                    onChange={(val) => handlePresetSelect(val as string)}
-                    options={PRESET_THEMES.map((preset) => ({
-                      label: preset.name,
-                      value: preset.id,
-                    }))}
-                  />
-                </div>
+                <Select
+                  placeholder="Select preset..."
+                  onChange={(val) => handlePresetSelect(val as string)}
+                  options={PRESET_THEMES.map((preset) => ({
+                    label: preset.name,
+                    value: preset.id,
+                  }))}
+                />
               </div>
 
               <div className="space-y-3">
@@ -98,22 +96,10 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                   Timeline
                 </p>
                 <div className="flex gap-2">
-                  <Button
-                    variant="secondary"
-                    onClick={handleUndo}
-                    disabled={!canUndo}
-                    title="Undo (Ctrl+Z)"
-                    className="flex-1 rounded-none border border-(--lithos-border)"
-                  >
+                  <Button variant="secondary" onClick={handleUndo} disabled={!canUndo} title="Undo (Ctrl+Z)">
                     Undo
                   </Button>
-                  <Button
-                    variant="secondary"
-                    onClick={handleRedo}
-                    disabled={!canRedo}
-                    title="Redo (Ctrl+Shift+Z)"
-                    className="flex-1 rounded-none border border-(--lithos-border)"
-                  >
+                  <Button variant="secondary" onClick={handleRedo} disabled={!canRedo} title="Redo (Ctrl+Shift+Z)">
                     Redo
                   </Button>
                 </div>
@@ -123,19 +109,11 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                 <p className="text-xs font-semibold uppercase tracking-wider text-(--lithos-text) opacity-70">
                   Data Transfer
                 </p>
-                <div className="flex flex-col gap-2">
-                  <Button
-                    variant="secondary"
-                    onClick={handleExportJSON}
-                    className="w-full justify-start rounded-none border border-(--lithos-border)"
-                  >
+                <div className="flex flex-col space-y-3">
+                  <Button variant="secondary" onClick={handleExportJSON}>
                     Export configuration
                   </Button>
-                  <Button
-                    variant="secondary"
-                    onClick={() => fileInputRef.current?.click()}
-                    className="w-full justify-start rounded-none border border-(--lithos-border)"
-                  >
+                  <Button variant="secondary" onClick={() => fileInputRef.current?.click()}>
                     Import configuration
                   </Button>
                   <input type="file" ref={fileInputRef} onChange={handleImportJSON} accept=".json" className="hidden" />
@@ -143,7 +121,7 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
               </div>
 
               <div className="mt-4 pt-6 border-t border-(--lithos-border)">
-                <Button variant="primary" onClick={handleReset} className="w-full text-sm font-bold rounded-none">
+                <Button variant="primary" onClick={handleReset}>
                   Reset all values
                 </Button>
               </div>
@@ -154,41 +132,31 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
           <div className="flex flex-col min-w-0 w-full lg:w-[340px] h-full overflow-hidden bg-(--lithos-bg) border-b lg:border-b-0 lg:border-r-2 border-(--lithos-border) shrink-0">
             <div className="h-14 px-6 border-b-2 border-(--lithos-border) sticky top-0 bg-(--lithos-bg) z-10 flex items-center justify-between shrink-0">
               <h2 className="text-sm font-bold tracking-tight">Design Tokens</h2>
-              <span className="text-xs font-medium bg-(--lithos-surface) border border-(--lithos-border) px-2 py-1">
-                {THEME_PROPERTIES.length} variables
-              </span>
             </div>
 
-            <div className="p-4">
-              <div className="mb-4">
-                <p className="text-[11px] font-bold uppercase tracking-wider text-(--lithos-text) opacity-70 mb-2">
-                  Color Palette
-                </p>
-                <div className="flex flex-col gap-1.5">
-                  {colorProps.map((prop) => (
-                    <div
-                      key={prop.key}
-                      className="rounded-(--lithos-radius) border border-(--lithos-border) p-2 bg-(--lithos-surface)"
-                    >
-                      <PropertyControl
-                        property={prop}
-                        value={currentValues[prop.key] ?? defaults[prop.key] ?? ''}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  ))}
-                </div>
+            <div className="p-4 space-y-4">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-(--lithos-text) opacity-70 mb-2">
+                Color Palette
+              </p>
+              <div className="flex flex-col space-y-1.5">
+                {colorProps.map((prop) => (
+                  <PropertyControl
+                    property={prop}
+                    value={currentValues[prop.key] ?? defaults[prop.key] ?? ''}
+                    onChange={handleChange}
+                  />
+                ))}
               </div>
 
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-wider text-(--lithos-text) opacity-70 mb-2">
                   Geometry
                 </p>
-                <div className="flex flex-col gap-1.5 pb-2">
+                <div className="flex flex-col space-y-1.5 pb-2">
                   {geometryProps.map((prop) => (
                     <div
                       key={prop.key}
-                      className="border border-(--lithos-border) p-2 bg-(--lithos-surface) rounded-none"
+                      className="border border-(--lithos-border) p-2 bg-(--lithos-surface) rounded-(--lithos-radius)"
                     >
                       <PropertyControl
                         property={prop}
@@ -211,7 +179,7 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                 variant="underline"
                 className="w-full flex-row items-center"
               >
-                <TabsList className="space-x-8 bg-transparent p-0 border-none">
+                <TabsList className="space-x-8 p-0">
                   {STAGE_TABS.map((tab) => (
                     <TabsTrigger key={tab.id} value={tab.id}>
                       {tab.label}
@@ -233,44 +201,37 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
 
               {stageTab === 'code' && (
                 <div className="max-w-5xl h-full flex flex-col space-y-4">
-                  <div className="flex items-center justify-between border-b border-(--lithos-border) pb-4">
-                    <h3 className="text-lg font-bold tracking-tight">Generated CSS</h3>
-                  </div>
-                  <div className="flex-1 rounded-none overflow-hidden border border-(--lithos-border)">
-                    <CodeViewer code={generatedCSS} language="css" className="h-full" />
-                  </div>
+                  <h3 className="text-lg font-bold tracking-tight">Generated CSS</h3>
+                  <CodeViewer code={generatedCSS} language="css" />
                 </div>
               )}
 
               {stageTab === 'swatches' && (
-                <div className="max-w-6xl mx-auto w-full">
-                  <div className="mb-8 border-b border-(--lithos-border) pb-4">
-                    <h3 className="text-lg font-bold tracking-tight">Token Swatches</h3>
-                  </div>
-                  <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <div className="max-w-6xl mx-auto w-full space-y-10">
+                  <h3 className="text-lg font-bold tracking-tight">Token Swatches</h3>
+                  <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 space-x-4 space-y-4">
                     {THEME_PROPERTIES.map((prop) => {
                       const val = currentValues[prop.key] ?? defaults[prop.key] ?? ''
                       return (
                         <div
                           key={prop.key}
-                          className="border border-(--lithos-border) bg-(--lithos-bg) flex flex-col rounded-none"
+                          className="border border-(--lithos-border) bg-(--lithos-bg) flex flex-col rounded-(--lithos-radius) overflow-hidden shadow-sm transition-shadow hover:shadow-md"
                         >
                           <div
-                            className="h-24 flex items-center justify-center border-b border-(--lithos-border)"
+                            className="h-32 w-full flex items-center justify-center border-b border-(--lithos-border)"
                             style={{
                               backgroundColor:
                                 val.startsWith('rgba') || val.startsWith('#') ? val : 'var(--lithos-surface)',
                             }}
                           >
-                            <span className="text-xs font-mono font-bold bg-(--lithos-bg) text-(--lithos-text) px-2 py-1 border border-(--lithos-border)">
+                            <span className="text-xs font-mono font-medium bg-(--lithos-bg)/80 backdrop-blur-sm text-(--lithos-text) px-2.5 py-1 rounded-md border border-(--lithos-border) shadow-sm">
                               {val}
                             </span>
                           </div>
-                          <div className="p-4">
-                            <p className="text-sm font-bold tracking-tight">{prop.label}</p>
-                            <code className="text-[11px] font-mono text-(--lithos-text) opacity-70 mt-1 block">
-                              {prop.key}
-                            </code>
+
+                          <div className="p-3.5 flex flex-col gap-0.5">
+                            <p className="text-sm font-semibold tracking-tight text-(--lithos-text)">{prop.label}</p>
+                            <code className="text-[11px] font-mono text-(--lithos-text)/70 truncate">{prop.key}</code>
                           </div>
                         </div>
                       )
