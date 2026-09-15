@@ -115,6 +115,7 @@ export const TabsTrigger = ({ value, className, children, ...rest }: TabsTrigger
           'border-0 border-b-4 border-transparent px-2 py-2 active:translate-none',
           'shadow-none bg-transparent text-(--lithos-text)',
           'data-[state=active]:border-(--lithos-accent)',
+          'rounded-none',
         ],
 
         variant !== 'underline' && [
