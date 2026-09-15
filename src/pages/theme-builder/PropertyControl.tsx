@@ -67,18 +67,16 @@ export const PropertyControl = ({ property, value, onChange }: PropertyControlPr
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-(--lithos-radius) overflow-hidden border border-(--lithos-border) bg-(--lithos-bg) p-0.5 shrink-0 flex items-center justify-center focus-within:ring-2 focus-within:ring-(--lithos-accent)">
-            <input
-              type="color"
-              value={hexValue}
-              aria-label={`${label} base color`}
-              onChange={(e) => handleColorChange(e.target.value)}
-              className="w-8 h-8 shrink-0 cursor-pointer rounded-full border border-(--lithos-border) p-0 bg-transparent overflow-hidden appearance-none 
+          <input
+            type="color"
+            value={hexValue}
+            aria-label={`${label} base color`}
+            onChange={(e) => handleColorChange(e.target.value)}
+            className="w-8 h-8 shrink-0 cursor-pointer rounded-full border border-(--lithos-border) p-0 bg-transparent overflow-hidden appearance-none 
                [&::-webkit-color-swatch-wrapper]:p-0 
                [&::-webkit-color-swatch]:border-none 
                [&::-moz-color-swatch]:border-none"
-            />
-          </div>
+          />
           <input
             type="range"
             min={0}
