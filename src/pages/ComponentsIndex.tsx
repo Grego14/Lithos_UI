@@ -134,16 +134,6 @@ const TooltipPreview = () => (
 
 const componentsList = [
   {
-    name: 'Alert',
-    to: '/docs/alert',
-    preview: <AlertPreview />,
-  },
-  {
-    name: 'Avatar',
-    to: '/docs/avatar',
-    preview: <Avatar variant="solid" alt="Jane Doe" />,
-  },
-  {
     name: 'Accordion',
     to: '/docs/accordion',
     preview: (
@@ -154,6 +144,16 @@ const componentsList = [
         Yeah! This product is 100% free.
       </Accordion>
     ),
+  },
+  {
+    name: 'Alert',
+    to: '/docs/alert',
+    preview: <AlertPreview />,
+  },
+  {
+    name: 'Avatar',
+    to: '/docs/avatar',
+    preview: <Avatar variant="solid" alt="Jane Doe" />,
   },
   {
     name: 'Badge',
