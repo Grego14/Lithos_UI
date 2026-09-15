@@ -21,6 +21,8 @@ import { PropsTable } from '../../components/ui/PropsTable'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { PANEL } from './constants'
 import { useToast } from '../../core/hooks/useToast'
+import { AccentColorProvider } from '../../core/useAccentColor'
+import { getContrastText } from '../../utils/yiq'
 
 const LandingPageContent = () => {
   const [isFullscreen, setIsFullscreen] = useState(false)
@@ -83,7 +85,7 @@ const LandingPageContent = () => {
       <KineticGrid baseOpacity="opacity-20" className="py-24 md:py-32 border-b border-(--lithos-border)/15">
         <div className="max-w-4xl mx-auto text-center px-6 space-y-8">
           <div className="flex justify-center">
-            <Alert intent="info" size="md" title="Welcome to Lithos V2.0">
+            <Alert intent="accent" size="md" title="Welcome to Lithos V2.0">
               Discover the new set of components in our brutalist design system.
             </Alert>
           </div>
@@ -273,14 +275,31 @@ const LandingPageContent = () => {
   )
 }
 
-export const SpecimenGrid = ({ style }: { style: React.CSSProperties }) => {
+export const SpecimenGrid = ({ style, accentColor }: { style: React.CSSProperties; accentColor?: string }) => {
+  const currentAccent = accentColor || '#00FF00'
+  const accentText = getContrastText(currentAccent)
+
+  const cssOverrides = Object.entries(style)
+    .map(([key, value]) => `${key}: ${value} !important;`)
+    .join('\n        ')
+
   return (
     <div
+      id="specimen-grid-container"
       className="rounded-(--lithos-radius) overflow-hidden border border-(--lithos-border)/15 bg-(--lithos-bg) text-(--lithos-text) h-full"
       style={style}
     >
+      <style>{`
+        #specimen-grid-container, 
+        #specimen-grid-container * {
+          ${cssOverrides}
+          --lithos-accent-text: ${accentText} !important;
+        }
+      `}</style>
       <ToastProvider>
-        <LandingPageContent />
+        <AccentColorProvider color={currentAccent}>
+          <LandingPageContent />
+        </AccentColorProvider>
       </ToastProvider>
     </div>
   )

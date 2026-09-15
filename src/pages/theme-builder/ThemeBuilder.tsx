@@ -195,7 +195,10 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                   className={`h-full w-full rounded-none overflow-hidden border border-(--lithos-border) bg-(--lithos-bg) ${previewMode === 'dark' ? 'obsidian' : ''}`}
                   style={previewStyle}
                 >
-                  <SpecimenGrid style={previewStyle} />
+                  <SpecimenGrid
+                    style={previewStyle}
+                    accentColor={currentValues['--lithos-accent'] ?? defaults['--lithos-accent'] ?? '#00FF00'}
+                  />
                 </div>
               )}
 

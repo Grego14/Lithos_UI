@@ -1,9 +1,29 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect, createContext, useContext } from 'react'
 import { isHexColor, type HexColor } from './types'
 import { getYiqValue } from '../utils/yiq'
 import { getContrastText } from '../utils/yiq'
 
+// the AccentColorContextType added
+
+interface AccentColorContextType {
+  accentColor: HexColor
+  contrastedAccentColor: string
+}
+
+export const AccentColorContext = createContext<AccentColorContextType | null>(null)
+
+export const AccentColorProvider = ({ color, children }: { color: HexColor | string; children: React.ReactNode }) => {
+  const accentColor = (isHexColor(color) ? color : '#00FF00') as HexColor
+  const contrastedAccentColor = getContrastText(accentColor)
+
+  return (
+    <AccentColorContext.Provider value={{ accentColor, contrastedAccentColor }}>{children}</AccentColorContext.Provider>
+  )
+}
+
 export const useAccentColor = () => {
+  const context = useContext(AccentColorContext)
+
   const [accentColor, setAccentColor] = useState<HexColor>(() => {
     if (typeof window === 'undefined') return '#00FF00' as HexColor
     const stored = localStorage.getItem('lithos-theme-color')
@@ -43,6 +63,10 @@ export const useAccentColor = () => {
       window.removeEventListener('lithos-theme-mode-changed', handleSync)
     }
   }, [])
+
+  if (context) {
+    return context
+  }
 
   return { accentColor, contrastedAccentColor } as const
 }
