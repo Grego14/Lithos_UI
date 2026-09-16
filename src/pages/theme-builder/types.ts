@@ -3,7 +3,7 @@ export type PropertyType = 'color' | 'range' | 'opacity'
 export interface ThemeProperty {
   key: string
   label: string
-  section: 'colors' | 'geometry'
+  section: 'colors' | 'geometry' | 'shadow'
   type: PropertyType
   min?: number
   max?: number

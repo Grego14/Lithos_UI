@@ -18,7 +18,7 @@ export const PropertyControl = ({ property, value, onChange }: PropertyControlPr
             value={value}
             aria-label={`${label} color picker`}
             onChange={(e) => onChange(key, e.target.value)}
-            className="w-[18px] h-[18px] shrink-0 cursor-pointer rounded-full border border-(--lithos-border) p-0 bg-transparent overflow-hidden appearance-none 
+            className="w-[18px] h-[18px] shrink-0 cursor-pointer rounded-(--lithos-radius) border border-(--lithos-border) p-0 bg-transparent overflow-hidden appearance-none 
                  [&::-webkit-color-swatch-wrapper]:p-0 
                  [&::-webkit-color-swatch]:border-none 
                  [&::-moz-color-swatch]:border-none"
@@ -37,7 +37,7 @@ export const PropertyControl = ({ property, value, onChange }: PropertyControlPr
             value={value}
             aria-label={`${label} color picker`}
             onChange={(e) => onChange(key, e.target.value)}
-            className="w-[18px] h-[18px] shrink-0 cursor-pointer rounded-full border border-(--lithos-border) p-0 bg-transparent overflow-hidden appearance-none 
+            className="w-[18px] h-[18px] shrink-0 cursor-pointer rounded-(--lithos-radius) border border-(--lithos-border) p-0 bg-transparent overflow-hidden appearance-none 
                  [&::-webkit-color-swatch-wrapper]:p-0 
                  [&::-webkit-color-swatch]:border-none 
                  [&::-moz-color-swatch]:border-none"
@@ -49,6 +49,7 @@ export const PropertyControl = ({ property, value, onChange }: PropertyControlPr
 
   const numVal = parseInt(value.toString().replace(unit, '')) || 0
   const isRadius = label.toLowerCase().includes('radius')
+  const isOffset = label.toLowerCase().includes('offset')
 
   let displayValue = value
   if (isRadius && numVal === 0) displayValue = '0px (Sharp)'
@@ -61,7 +62,9 @@ export const PropertyControl = ({ property, value, onChange }: PropertyControlPr
           className={`px-2 py-1 text-[11px] font-mono font-bold rounded-(--lithos-radius) ${
             isRadius
               ? 'bg-(--lithos-accent) text-(--lithos-text) border-2 border-(--lithos-border) shadow-[2px_2px_0_0_var(--lithos-shadow)]'
-              : 'bg-(--lithos-text) text-(--lithos-surface)'
+              : isOffset
+                ? 'bg-(--lithos-text) text-(--lithos-accent)'
+                : 'bg-(--lithos-text) text-(--lithos-surface)'
           }`}
         >
           {displayValue}

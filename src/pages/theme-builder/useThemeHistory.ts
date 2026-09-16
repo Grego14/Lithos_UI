@@ -138,6 +138,12 @@ export const useThemeHistory = () => {
     for (const prop of THEME_PROPERTIES) {
       style[prop.key] = currentValues[prop.key] ?? defaults[prop.key] ?? ''
     }
+
+    // Auto-generate composite shadow variable for backwards compatibility
+    const shadowColor = currentValues['--lithos-shadow-color'] ?? defaults['--lithos-shadow-color'] ?? '#000000'
+    const shadowOpacity = currentValues['--lithos-shadow-opacity'] ?? defaults['--lithos-shadow-opacity'] ?? '100%'
+    style['--lithos-shadow'] = `color-mix(in srgb, ${shadowColor} ${shadowOpacity}, transparent)`
+
     return style as React.CSSProperties
   }, [currentValues, defaults])
 
@@ -148,12 +154,18 @@ export const useThemeHistory = () => {
       const val = currentValues[prop.key] ?? defaults[prop.key] ?? ''
       return `  ${prop.key}: ${val};`
     })
+
+    const shadowColor = currentValues['--lithos-shadow-color'] ?? defaults['--lithos-shadow-color'] ?? '#000000'
+    const shadowOpacity = currentValues['--lithos-shadow-opacity'] ?? defaults['--lithos-shadow-opacity'] ?? '100%'
+    lines.push(`  --lithos-shadow: color-mix(in srgb, ${shadowColor} ${shadowOpacity}, transparent);`)
+
     return `${selector} {\n${lines.join('\n')}\n}`
   }, [currentValues, defaults, previewMode])
 
   // Group properties by section
   const colorProps = THEME_PROPERTIES.filter((p) => p.section === 'colors')
   const geometryProps = THEME_PROPERTIES.filter((p) => p.section === 'geometry')
+  const shadowProps = THEME_PROPERTIES.filter((p) => p.section === 'shadow')
 
   return {
     // Mode & tabs
@@ -166,6 +178,7 @@ export const useThemeHistory = () => {
     currentValues,
     colorProps,
     geometryProps,
+    shadowProps,
 
     // History
     canUndo,

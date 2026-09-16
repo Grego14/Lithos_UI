@@ -40,6 +40,7 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
     currentValues,
     colorProps,
     geometryProps,
+    shadowProps,
     canUndo,
     canRedo,
     handleChange,
@@ -242,11 +243,11 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                 <h2 className="text-sm font-black tracking-widest uppercase mt-0.5">Design Tokens</h2>
               </div>
               <span className="text-xs font-mono font-bold text-(--lithos-muted) uppercase">
-                {colorProps.length + geometryProps.length} Vars
+                {colorProps.length + geometryProps.length + shadowProps.length} Vars
               </span>
             </div>
 
-            <div className="p-5 space-y-8 h-full">
+            <div className="p-5 space-y-8 h-full overflow-y-auto">
               {/* Color Palette */}
               <div>
                 <div className="flex justify-between items-baseline mb-3">
@@ -258,6 +259,23 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                 </div>
                 <div className="flex flex-col gap-2">
                   {colorProps.map((prop) => (
+                    <PropertyControl
+                      key={prop.key}
+                      property={prop}
+                      value={currentValues[prop.key] ?? defaults[prop.key] ?? ''}
+                      onChange={handleChange}
+                    />
+                  ))}
+                </div>
+              </div>
+              {/* Shadows */}
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-2.5 h-2.5 bg-(--lithos-accent) rounded-(--lithos-radius)"></div>
+                  <span className="text-[13px] font-black tracking-widest uppercase">Shadow Properties</span>
+                </div>
+                <div className="flex flex-col gap-5">
+                  {shadowProps.map((prop) => (
                     <PropertyControl
                       key={prop.key}
                       property={prop}
