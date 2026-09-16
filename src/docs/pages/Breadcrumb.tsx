@@ -65,9 +65,9 @@ export const CustomSeparatorBreadcrumb = () => {
   ]
 
   return (
-    <Breadcrumb 
-      items={items} 
-      separator={<span className="text-(--lithos-accent)">/</span>} 
+    <Breadcrumb
+      items={items}
+      separator={<span className="text-(--lithos-accent)">/</span>}
     />
   )
 }`,
