@@ -36,6 +36,8 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
     previewMode,
     stageTab,
     setStageTab,
+    viewport,
+    setViewport,
     defaults,
     currentValues,
     colorProps,
@@ -73,7 +75,7 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
               </div>
             </div>
 
-            <div className="p-5 flex flex-col gap-4">
+            <div className="p-5 flex flex-col gap-10">
               {/* Workspace */}
               <div>
                 <div className="flex justify-between items-baseline mb-3">
@@ -129,19 +131,6 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                   onChange={(val) => handlePresetSelect(val)}
                   className="w-full border-2 border-(--lithos-border) shadow-[4px_4px_0_0_var(--lithos-shadow)] hover:shadow-[4px_4px_0_0_var(--lithos-shadow)] active:shadow-[4px_4px_0_0_var(--lithos-shadow)] active:translate-x-0 active:translate-y-0 bg-(--lithos-surface) rounded-(--lithos-radius) flex justify-between items-center text-[13px] font-bold cursor-pointer hover:opacity-90 transition-colors px-3 py-2.5"
                 />
-
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {['Default', 'Cyber', 'Tokyo', 'Mono'].map((p) => (
-                    <Button
-                      key={p}
-                      variant={p === 'Default' ? 'primary' : 'secondary'}
-                      onClick={() => handlePresetSelect(p.toLowerCase())}
-                      className="px-2.5 py-1 text-xs"
-                    >
-                      #{p}
-                    </Button>
-                  ))}
-                </div>
               </div>
 
               {/* Timeline */}
@@ -316,24 +305,26 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                 </TabsList>
               </Tabs>
 
-              {/* Actions */}
               <div className="flex items-center gap-4 pb-2">
                 <ButtonGroup attached className="shadow-[2px_2px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)">
                   <Button
                     variant="secondary"
-                    className="px-2.5 py-1.5 shadow-none hover:shadow-none active:shadow-none active:translate-x-0 active:translate-y-0 text-(--lithos-text) rounded-r-none hover:bg-(--lithos-bg)"
+                    onClick={() => setViewport('desktop')}
+                    className={`px-2.5 py-1.5 shadow-none hover:shadow-none active:shadow-none active:translate-x-0 active:translate-y-0 rounded-r-none hover:bg-(--lithos-bg) ${viewport === 'desktop' ? 'text-(--lithos-text) bg-(--lithos-bg)' : 'text-(--lithos-muted)'}`}
                   >
                     <IconMonitor size={15} strokeWidth={2.5} />
                   </Button>
                   <Button
                     variant="secondary"
-                    className="px-2.5 py-1.5 shadow-none hover:shadow-none active:shadow-none active:translate-x-0 active:translate-y-0 text-(--lithos-muted) rounded-none hover:bg-(--lithos-bg)"
+                    onClick={() => setViewport('tablet')}
+                    className={`px-2.5 py-1.5 shadow-none hover:shadow-none active:shadow-none active:translate-x-0 active:translate-y-0 rounded-none hover:bg-(--lithos-bg) ${viewport === 'tablet' ? 'text-(--lithos-text) bg-(--lithos-bg)' : 'text-(--lithos-muted)'}`}
                   >
                     <IconTablet size={14} strokeWidth={2.5} />
                   </Button>
                   <Button
                     variant="secondary"
-                    className="px-2.5 py-1.5 shadow-none hover:shadow-none active:shadow-none active:translate-x-0 active:translate-y-0 text-(--lithos-muted) rounded-l-none hover:bg-(--lithos-bg)"
+                    onClick={() => setViewport('mobile')}
+                    className={`px-2.5 py-1.5 shadow-none hover:shadow-none active:shadow-none active:translate-x-0 active:translate-y-0 rounded-l-none hover:bg-(--lithos-bg) ${viewport === 'mobile' ? 'text-(--lithos-text) bg-(--lithos-bg)' : 'text-(--lithos-muted)'}`}
                   >
                     <IconSmartphone size={14} style={{ width: 12, height: 14 }} strokeWidth={2.5} />
                   </Button>
@@ -350,12 +341,15 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
               </div>
             </div>
 
-            {/* Stage Canvas (With dotted background) */}
-            <div className="flex-1 overflow-y-auto lg:p-10 relative bg-(--lithos-bg) bg-[radial-gradient(var(--lithos-muted)_1.5px,transparent_1.5px)] bg-size-[16px_16px]">
+            {/* Stage Body */}
+            <div className="flex-1 lg:p-10 relative overflow-auto flex justify-center bg-(--lithos-bg) bg-[radial-gradient(var(--lithos-muted)_1.5px,transparent_1.5px)] bg-size-[16px_16px]">
               {stageTab === 'preview' && (
                 <div
-                  className={`mx-auto h-full w-full rounded-none overflow-hidden border-4 border-(--lithos-border) bg-(--lithos-surface) ${previewMode === 'dark' ? 'obsidian' : ''}`}
-                  style={previewStyle}
+                  className={`h-full transition-all duration-300 rounded-none overflow-hidden border-4 border-(--lithos-border) bg-(--lithos-surface) ${previewMode === 'dark' ? 'obsidian' : ''}`}
+                  style={{
+                    ...previewStyle,
+                    width: viewport === 'desktop' ? '100%' : viewport === 'tablet' ? '600px' : '375px',
+                  }}
                 >
                   <SpecimenGrid
                     style={previewStyle}

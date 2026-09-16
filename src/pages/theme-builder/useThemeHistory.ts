@@ -1,9 +1,12 @@
 import { useState, useCallback, useMemo, useEffect, useRef, type ChangeEvent } from 'react'
 import { THEME_PROPERTIES, LIGHT_DEFAULTS, DARK_DEFAULTS, PRESET_THEMES } from './constants'
 
+export type ViewportSize = 'desktop' | 'tablet' | 'mobile'
+
 export const useThemeHistory = () => {
   const [previewMode, setPreviewMode] = useState<'light' | 'dark'>('light')
   const [stageTab, setStageTab] = useState<'preview' | 'code' | 'swatches'>('preview')
+  const [viewport, setViewport] = useState<ViewportSize>('desktop')
   const defaults = previewMode === 'dark' ? DARK_DEFAULTS : LIGHT_DEFAULTS
 
   const [history, setHistory] = useState<Record<string, string>[]>([{ ...LIGHT_DEFAULTS }])
@@ -163,6 +166,8 @@ export const useThemeHistory = () => {
     previewMode,
     stageTab,
     setStageTab,
+    viewport,
+    setViewport,
     defaults,
 
     // Values
