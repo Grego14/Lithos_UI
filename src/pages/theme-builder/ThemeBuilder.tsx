@@ -66,12 +66,10 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
         {/* Strict monolithic flex container for exact height sharing and sharp border intersections */}
         <div className="flex-1 min-h-0 flex flex-col lg:flex-row w-full items-stretch">
           {/* PANEL 1: CONFIGURATION */}
-          <div className="flex flex-col min-w-0 w-full lg:w-[280px] h-full overflow-y-auto bg-(--lithos-surface) border-b lg:border-b-0 lg:border-r-2 border-(--lithos-border) shrink-0 font-sans text-(--lithos-text)">
-            <div className="h-16 px-5 border-b-2 border-(--lithos-border) sticky top-0 bg-(--lithos-surface) z-10 flex items-center justify-between shrink-0">
-              <div className="flex items-center space-x-2">
-                <div className="w-3.5 h-3.5 bg-(--lithos-accent) border-2 border-(--lithos-border) rounded-(--lithos-radius)"></div>
-                <h2 className="text-sm font-black tracking-widest uppercase mt-0.5">Configuration</h2>
-              </div>
+          <div className="flex flex-col w-full lg:w-[280px] h-full bg-(--lithos-surface) lg:border-r-2 border-(--lithos-border) text-(--lithos-text)">
+            <div className="h-16 border-b-2 border-(--lithos-border) bg-(--lithos-surface) flex items-center space-x-2 justify-center">
+              <div className="w-3.5 h-3.5 bg-(--lithos-accent) border-2 border-(--lithos-border) rounded-(--lithos-radius)"></div>
+              <h2 className="text-sm font-black tracking-widest uppercase mt-0.5">Configuration</h2>
             </div>
 
             <div className="p-5 flex flex-col space-y-10">
@@ -220,7 +218,7 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
 
           {/* PANEL 2: DESIGN TOKENS */}
           <div className="flex flex-col w-full lg:w-[340px] h-full overflow-hidden bg-(--lithos-surface) border-b lg:border-b-0 lg:border-r-2 border-(--lithos-border) font-sans text-(--lithos-text)">
-            <div className="h-16 border-b-2 border-(--lithos-border) bg-(--lithos-surface) flex items-center justify-between shrink-0 px-5">
+            <div className="h-16 border-b-2 border-(--lithos-border) bg-(--lithos-surface) flex items-center justify-around shrink-0 px-5">
               <div className="flex items-center space-x-2">
                 <div className="w-3.5 h-3.5 bg-(--lithos-accent) border-2 border-(--lithos-border) rounded-(--lithos-radius)"></div>
                 <h2 className="text-sm font-black tracking-widest uppercase mt-0.5">Design Tokens</h2>
