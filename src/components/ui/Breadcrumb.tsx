@@ -33,7 +33,7 @@ export interface BreadcrumbProps extends Omit<ComponentPropsWithRef<'nav'>, 'cla
 }
 
 export const BreadcrumbSeparator = ({ children, className, ...rest }: ComponentPropsWithRef<'li'>) => {
-  const classes = cn('inline-flex items-center text-sm font-bold opacity-40 mx-2 select-none', className)
+  const classes = cn('inline-flex items-center text-xs font-bold opacity-40 mx-2 select-none', className)
 
   return (
     <span aria-hidden="true" data-testid="separator" className={classes} {...rest}>
@@ -47,7 +47,7 @@ export interface BreadcrumbItemProps extends Omit<ComponentPropsWithRef<'li'>, '
 }
 
 export const BreadcrumbItem = ({ className, children, ...rest }: BreadcrumbItemProps) => {
-  const classes = cn('inline-flex items-center text-sm font-bold', className)
+  const classes = cn('inline-flex items-center text-xs font-bold mt-2 w-max', className)
 
   return (
     <li className={classes} {...rest}>
@@ -209,7 +209,7 @@ export const Breadcrumb = ({
           if (entry.type === 'ellipsis') {
             return (
               <Fragment key={`ellipsis-${index}`}>
-                <BreadcrumbItem key={`ellipsis-${index}`} className="mt-2">
+                <BreadcrumbItem key={`ellipsis-${index}`}>
                   <BreadcrumbEllipsis
                     isExpanded={isExpanded}
                     onClick={() => setIsExpanded(!isExpanded)}
@@ -232,7 +232,7 @@ export const Breadcrumb = ({
 
           return (
             <Fragment key={`${item.label}-${originalIndex}`}>
-              <BreadcrumbItem className="mt-2">
+              <BreadcrumbItem>
                 <BreadcrumbType href={item.href} onClick={isActive ? undefined : item.onClick}>
                   {showDefaultHome && (
                     <IconHome data-testid="home-icon" className="mr-1.5 inline-block" strokeWidth="3" />
