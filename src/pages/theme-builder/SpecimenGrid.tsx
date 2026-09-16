@@ -49,7 +49,7 @@ const LandingPageContent = () => {
     <div className={containerClasses}>
       {/* Navbar Mock */}
       <header className="px-6 py-4 border-b border-(--lithos-border)/15 flex justify-between items-center bg-(--lithos-surface) sticky top-0 z-40 shadow-sm">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center space-x-4">
           <div className="font-black tracking-tight text-xl">LITHOS</div>
           <div className="hidden sm:block">
             <Breadcrumb
@@ -61,7 +61,7 @@ const LandingPageContent = () => {
             />
           </div>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center space-x-4">
           <Button variant="secondary" onClick={toggleFullscreen} className="text-xs px-3">
             {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
           </Button>
@@ -99,7 +99,7 @@ const LandingPageContent = () => {
           <p className="text-lg md:text-xl opacity-70 font-medium max-w-2xl mx-auto font-body">
             Use the full suite of Lithos UI components to create brutalist, accessible, and stunning interfaces.
           </p>
-          <div className="flex justify-center gap-4 pt-4">
+          <div className="flex justify-center space-x-4 pt-4">
             <Tooltip placement="top">
               <TooltipTrigger asChild>
                 <Button variant="accent" className="px-8 py-4 text-lg" onClick={() => setIsDialogOpen(true)}>
@@ -113,7 +113,7 @@ const LandingPageContent = () => {
       </KineticGrid>
 
       {/* Testimonials */}
-      <section className="px-6 py-12 bg-(--lithos-surface) border-b border-(--lithos-border)/15 flex flex-col md:flex-row justify-center items-center gap-6 text-center">
+      <section className="px-6 py-12 bg-(--lithos-surface) border-b border-(--lithos-border)/15 flex flex-col md:flex-row justify-center items-center space-y-6 text-center">
         <span className="text-sm font-bold opacity-50 uppercase tracking-widest">Trusted by builders at</span>
         <AvatarGroup
           size="md"
@@ -129,7 +129,7 @@ const LandingPageContent = () => {
       </section>
 
       {/* Interactive Features */}
-      <section className="px-6 py-24 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <section className="px-6 py-24 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 space-x-16">
         <div className="space-y-8">
           <h2 className="text-3xl font-black uppercase border-b-4 border-(--lithos-border) inline-block pb-2">
             Component Demo
@@ -244,7 +244,9 @@ const LandingPageContent = () => {
       <section className="px-6 py-24 bg-(--lithos-accent) text-(--lithos-bg) text-center border-t border-(--lithos-border)/15">
         <div className="max-w-2xl mx-auto space-y-8">
           <h2 className="text-5xl font-black uppercase leading-tight">Ready to Start?</h2>
-          <div className={`${PANEL} p-8 flex flex-col sm:flex-row gap-4 bg-(--lithos-surface) text-(--lithos-text)`}>
+          <div
+            className={`${PANEL} p-8 flex flex-col sm:flex-row space-y-4 bg-(--lithos-surface) text-(--lithos-text)`}
+          >
             <Input placeholder="Email Address" className="w-full sm:flex-1" />
             <Button variant="primary" onClick={handleSubscribe} className="px-8">
               Subscribe

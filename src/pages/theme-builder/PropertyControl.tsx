@@ -18,7 +18,7 @@ export const PropertyControl = ({ property, value, onChange, variant = 'default'
       <div
         className={`flex justify-between items-center ${variant === 'inline' ? 'w-full' : 'border-2 border-(--lithos-border) rounded-(--lithos-radius) bg-(--lithos-surface) p-1.5'}`}
       >
-        <div className="flex items-center gap-3 pl-1">
+        <div className="flex items-center space-x-3 pl-1">
           <input
             type="color"
             value={value}
@@ -31,7 +31,7 @@ export const PropertyControl = ({ property, value, onChange, variant = 'default'
           />
           <span className="text-[13px] font-bold uppercase">{label}</span>
         </div>
-        <div className="flex items-center gap-1.5 pr-1">
+        <div className="flex items-center space-x-1.5 pr-1">
           <Input
             type="text"
             value={value}
@@ -78,11 +78,11 @@ export const PropertyControl = ({ property, value, onChange, variant = 'default'
 
     return (
       <div
-        className={`flex flex-col gap-1 ${variant === 'inline' ? 'w-full' : 'border-2 border-(--lithos-border) rounded-(--lithos-radius) bg-(--lithos-surface) p-4'}`}
+        className={`flex flex-col space-y-1 ${variant === 'inline' ? 'w-full' : 'border-2 border-(--lithos-border) rounded-(--lithos-radius) bg-(--lithos-surface) p-4'}`}
       >
         <div className="flex justify-between items-center">
           <span className="text-[13px] font-bold uppercase">{label}</span>
-          <div className="flex items-center gap-3 pr-1">
+          <div className="flex items-center space-x-3 pr-1">
             <input
               type="color"
               value={hex}
@@ -126,7 +126,7 @@ export const PropertyControl = ({ property, value, onChange, variant = 'default'
 
   return (
     <div
-      className={`flex flex-col gap-1 ${variant === 'inline' ? 'w-full' : 'border-2 border-(--lithos-border) rounded-(--lithos-radius) bg-(--lithos-surface) p-4'}`}
+      className={`flex flex-col space-y-1 ${variant === 'inline' ? 'w-full' : 'border-2 border-(--lithos-border) rounded-(--lithos-radius) bg-(--lithos-surface) p-4'}`}
     >
       <div className="flex justify-between items-center">
         <span className="text-[13px] font-bold uppercase">{label}</span>

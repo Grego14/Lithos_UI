@@ -67,19 +67,17 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
         <div className="flex-1 min-h-0 flex flex-col lg:flex-row w-full items-stretch">
           {/* PANEL 1: CONFIGURATION */}
           <div className="flex flex-col min-w-0 w-full lg:w-[280px] h-full overflow-y-auto bg-(--lithos-surface) border-b lg:border-b-0 lg:border-r-2 border-(--lithos-border) shrink-0 font-sans text-(--lithos-text)">
-            {/* Header */}
-            <div className="h-14 px-5 border-b-2 border-(--lithos-border) sticky top-0 bg-(--lithos-surface) z-10 flex items-center justify-between shrink-0">
-              <div className="flex items-center gap-2">
+            <div className="h-16 px-5 border-b-2 border-(--lithos-border) sticky top-0 bg-(--lithos-surface) z-10 flex items-center justify-between shrink-0">
+              <div className="flex items-center space-x-2">
                 <div className="w-3.5 h-3.5 bg-(--lithos-accent) border-2 border-(--lithos-border) rounded-(--lithos-radius)"></div>
                 <h2 className="text-sm font-black tracking-widest uppercase mt-0.5">Configuration</h2>
               </div>
             </div>
 
-            <div className="p-5 flex flex-col gap-10">
-              {/* Workspace */}
+            <div className="p-5 flex flex-col space-y-10">
               <div>
                 <div className="flex justify-between items-baseline mb-3">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center space-x-2">
                     <div className="w-2.5 h-2.5 bg-(--lithos-text) rounded-(--lithos-radius)"></div>
                     <span className="text-[13px] font-black tracking-widest uppercase">Workspace</span>
                   </div>
@@ -113,10 +111,9 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                 </div>
               </div>
 
-              {/* Presets */}
               <div>
                 <div className="flex justify-between items-baseline mb-3">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center space-x-2">
                     <div className="w-2.5 h-2.5 bg-(--lithos-text) rounded-(--lithos-radius)"></div>
                     <span className="text-[13px] font-black tracking-widest uppercase">Presets</span>
                   </div>
@@ -133,16 +130,15 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                 />
               </div>
 
-              {/* Timeline */}
               <div>
                 <div className="flex justify-between items-baseline mb-3">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center space-x-2">
                     <div className="w-2.5 h-2.5 bg-(--lithos-text) rounded-(--lithos-radius)"></div>
                     <span className="text-[13px] font-black tracking-widest uppercase">Timeline</span>
                   </div>
                   <span className="text-xs font-mono font-bold text-(--lithos-muted)">HIST (12)</span>
                 </div>
-                <div className="flex gap-3">
+                <div className="flex space-x-3">
                   <Button
                     variant="secondary"
                     onClick={handleUndo}
@@ -174,9 +170,8 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                 </div>
               </div>
 
-              {/* Data Transfer */}
               <div>
-                <div className="flex items-center gap-2 mb-3">
+                <div className="flex items-center space-x-2 mb-3">
                   <div className="w-2.5 h-2.5 bg-(--lithos-text) rounded-(--lithos-radius)"></div>
                   <span className="text-[13px] font-black tracking-widest uppercase">Data Transfer</span>
                 </div>
@@ -187,7 +182,7 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                     onClick={handleExportJSON}
                     className="justify-between py-2.5 px-3 text-[13px] hover:bg-(--lithos-bg)"
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center space-x-3">
                       <IconUpload size={16} strokeWidth={2.5} />
                       Export config
                     </div>
@@ -199,7 +194,7 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                     onClick={() => fileInputRef.current?.click()}
                     className="justify-between py-2.5 px-3 text-[13px] hover:bg-(--lithos-bg)"
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center space-x-3">
                       <IconDownload size={16} strokeWidth={2.5} />
                       Import config
                     </div>
@@ -209,7 +204,6 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                 </div>
               </div>
 
-              {/* Reset */}
               <div className="mt-4 pt-8 border-t-2 border-(--lithos-border)">
                 <Button
                   variant="primary"
@@ -226,8 +220,8 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
 
           {/* PANEL 2: DESIGN TOKENS */}
           <div className="flex flex-col w-full lg:w-[340px] h-full overflow-hidden bg-(--lithos-surface) border-b lg:border-b-0 lg:border-r-2 border-(--lithos-border) font-sans text-(--lithos-text)">
-            <div className="h-14 border-b-2 border-(--lithos-border) bg-(--lithos-surface) flex items-center justify-between shrink-0 px-5">
-              <div className="flex items-center gap-2">
+            <div className="h-16 border-b-2 border-(--lithos-border) bg-(--lithos-surface) flex items-center justify-between shrink-0 px-5">
+              <div className="flex items-center space-x-2">
                 <div className="w-3.5 h-3.5 bg-(--lithos-accent) border-2 border-(--lithos-border) rounded-(--lithos-radius)"></div>
                 <h2 className="text-sm font-black tracking-widest uppercase mt-0.5">Design Tokens</h2>
               </div>
@@ -240,13 +234,13 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
               {/* Color Palette */}
               <div>
                 <div className="flex justify-between items-baseline mb-3">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center space-x-2">
                     <div className="w-2.5 h-2.5 bg-(--lithos-accent) rounded-(--lithos-radius)"></div>
                     <span className="text-[13px] font-black tracking-widest uppercase">Color Palette</span>
                   </div>
                   <span className="text-xs font-mono font-bold text-(--lithos-muted)">HEX/CSS</span>
                 </div>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col space-y-2">
                   {colorProps.map((prop) => (
                     <PropertyControl
                       key={prop.key}
@@ -259,7 +253,7 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
               </div>
               {/* Shadows */}
               <div>
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col space-y-5">
                   {shadowProps.map((prop) => (
                     <PropertyControl
                       key={prop.key}
@@ -273,11 +267,11 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
 
               {/* Geometry & Radius */}
               <div>
-                <div className="flex items-center gap-2 mb-4">
+                <div className="flex items-center space-x-2 mb-4">
                   <div className="w-2.5 h-2.5 bg-(--lithos-accent) rounded-(--lithos-radius)"></div>
                   <span className="text-[13px] font-black tracking-widest uppercase">Geometry & Radius</span>
                 </div>
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col space-y-5">
                   {geometryProps.map((prop) => (
                     <PropertyControl
                       key={prop.key}
@@ -294,9 +288,15 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
           {/* PANEL 3: STAGE */}
           <div className="flex flex-col min-w-0 flex-1 h-full overflow-hidden bg-(--lithos-surface) font-sans text-(--lithos-text)">
             {/* Stage Header */}
-            <div className="h-14 px-6 border-b-2 border-(--lithos-border) bg-(--lithos-surface) flex items-end justify-between">
-              <Tabs variant="underline" value={stageTab} onValueChange={(val) => setStageTab(val as StageTab)}>
-                <TabsList className="gap-2">
+            {/* Reset */}
+            <div className="h-16 px-6 border-b-2 border-(--lithos-border) bg-(--lithos-surface) flex items-end justify-between">
+              <Tabs
+                variant="underline"
+                value={stageTab}
+                onValueChange={(val) => setStageTab(val as StageTab)}
+                className="mb-2"
+              >
+                <TabsList className="space-x-2">
                   <TabsTrigger value="preview">Live Preview</TabsTrigger>
 
                   <TabsTrigger value="code">Generated CSS</TabsTrigger>
@@ -305,7 +305,7 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                 </TabsList>
               </Tabs>
 
-              <div className="flex items-center gap-4 pb-2">
+              <div className="flex items-center space-x-4 pb-2">
                 <ButtonGroup attached className="shadow-[2px_2px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)">
                   <Button
                     variant="secondary"
@@ -367,13 +367,13 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
               )}
 
               {stageTab === 'swatches' && (
-                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 space-x-6 space-y-6">
                   {THEME_PROPERTIES.map((prop) => {
                     const val = currentValues[prop.key] ?? defaults[prop.key] ?? ''
                     return (
                       <Card key={prop.key}>
                         <div
-                          className="h-28 w-full flex items-center justify-center border-b-2 border-(--lithos-border)"
+                          className="h-42 w-full flex items-center justify-center border-b-2 border-(--lithos-border)"
                           style={{
                             backgroundColor:
                               prop.type === 'color' && (val.startsWith('rgba') || val.startsWith('#'))
@@ -394,7 +394,7 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                           </span>
                         </div>
 
-                        <CardContent className="p-4 flex flex-col gap-1">
+                        <CardContent className="p-4 flex flex-col space-y-1">
                           <p className="text-[13px] font-black uppercase tracking-wider text-(--lithos-text)">
                             {prop.label}
                           </p>
