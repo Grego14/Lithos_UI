@@ -376,10 +376,20 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                           className="h-28 w-full flex items-center justify-center border-b-2 border-(--lithos-border)"
                           style={{
                             backgroundColor:
-                              val.startsWith('rgba') || val.startsWith('#') ? val : 'var(--lithos-surface)',
+                              prop.type === 'color' && (val.startsWith('rgba') || val.startsWith('#'))
+                                ? val
+                                : 'var(--lithos-surface)',
                           }}
                         >
-                          <span className="text-[11px] font-mono font-bold bg-(--lithos-surface) text-(--lithos-text) px-2 py-1 border-2 border-(--lithos-border) shadow-[2px_2px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)">
+                          <span
+                            className="text-[11px] font-mono font-bold bg-(--lithos-surface) text-(--lithos-text) px-2 py-1 border-2 border-(--lithos-border) rounded-(--lithos-radius)"
+                            style={{
+                              boxShadow:
+                                prop.type === 'shadow' ? `4px 4px 0 0 ${val}` : '2px 2px 0 0 var(--lithos-shadow)',
+                              borderRadius:
+                                prop.type === 'range' && prop.key === '--lithos-radius' ? val : 'var(--lithos-radius)',
+                            }}
+                          >
                             {val}
                           </span>
                         </div>
