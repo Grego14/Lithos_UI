@@ -182,7 +182,7 @@ describe('Breadcrumb', () => {
   it('renders BreadcrumbSeparator', () => {
     render(<BreadcrumbSeparator />)
 
-    const separator = screen.getByRole('presentation', { hidden: true })
+    const separator = screen.getByTestId('separator')
 
     expect(separator).toBeInTheDocument()
     expect(separator).toHaveAttribute('aria-hidden', 'true')

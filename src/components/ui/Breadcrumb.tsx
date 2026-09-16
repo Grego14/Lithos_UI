@@ -1,12 +1,10 @@
 /**
- * @fileoverview
- * Breadcrumb navigation primitive with support for:
+ * @fileoverview Lithos UI breadcrumb primitive, with support for:
  * - Default, collapsible, and icon variants
  * - Custom separators and home icons
  * - Expandable collapsed breadcrumb items
  * - Accessible breadcrumb semantics
  */
-
 import { Fragment, useState } from 'react'
 import type { ComponentPropsWithRef, MouseEventHandler, ReactNode } from 'react'
 import { IconHome } from './icons/IconHome'
@@ -22,8 +20,6 @@ export interface BreadcrumbItemData {
   onClick?: MouseEventHandler<HTMLAnchorElement> | undefined
 }
 
-// removed unused prop showIcons from BreadcrumbProps
-
 export interface BreadcrumbProps extends Omit<ComponentPropsWithRef<'nav'>, 'className'> {
   items?: BreadcrumbItemData[] | undefined
   mode?: 'collapsible'
@@ -37,12 +33,12 @@ export interface BreadcrumbProps extends Omit<ComponentPropsWithRef<'nav'>, 'cla
 }
 
 export const BreadcrumbSeparator = ({ children, className, ...rest }: ComponentPropsWithRef<'li'>) => {
-  const classes = cn('inline-flex items-center text-sm font-bold opacity-40 mx-2 select-none', className)
+  const classes = cn('inline-flex items-center text-xs font-bold opacity-40 mx-2 select-none', className)
 
   return (
-    <li role="presentation" aria-hidden="true" className={classes} {...rest}>
+    <span aria-hidden="true" data-testid="separator" className={classes} {...rest}>
       {children ?? <IconBreadcrumbSeparator />}
-    </li>
+    </span>
   )
 }
 
@@ -51,7 +47,7 @@ export interface BreadcrumbItemProps extends Omit<ComponentPropsWithRef<'li'>, '
 }
 
 export const BreadcrumbItem = ({ className, children, ...rest }: BreadcrumbItemProps) => {
-  const classes = cn('inline-flex items-center text-sm font-bold', className)
+  const classes = cn('inline-flex items-center text-xs font-bold mt-2 w-max', className)
 
   return (
     <li className={classes} {...rest}>
@@ -68,7 +64,7 @@ export interface BreadcrumbLinkProps extends Omit<ComponentPropsWithRef<'a'>, 'c
 
 export const BreadcrumbLink = ({ href, onClick, className, children, ...rest }: BreadcrumbLinkProps) => {
   const classes = cn(
-    'lithos-click py-1 border-2 border-transparent hover:border-(--lithos-border) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) duration-150 rounded-(--lithos-radius) font-bold',
+    'lithos-click py-1 border-transparent hover:border-(--lithos-border) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) rounded-(--lithos-radius) font-bold',
     className
   )
 
@@ -76,10 +72,8 @@ export const BreadcrumbLink = ({ href, onClick, className, children, ...rest }: 
     <a
       href={href ?? '#'}
       onClick={(event) => {
-        if (onClick) {
-          event.preventDefault()
-          onClick(event)
-        }
+        event.preventDefault()
+        onClick?.(event)
       }}
       className={classes}
       {...rest}
@@ -133,7 +127,7 @@ export interface BreadcrumbListProps extends Omit<ComponentPropsWithRef<'ol'>, '
 }
 
 export const BreadcrumbList = ({ className, children, ...rest }: BreadcrumbListProps) => {
-  const classes = cn('inline-flex flex-wrap items-center font-mono text-sm tracking-tight', className)
+  const classes = cn('inline-flex flex-wrap items-center font-mono text-sm tracking-tight -mt-2', className)
 
   return (
     <ol className={classes} {...rest}>
@@ -221,8 +215,9 @@ export const Breadcrumb = ({
                     onClick={() => setIsExpanded(!isExpanded)}
                     title={isExpanded ? 'Collapse breadcrumb steps' : `Show ${entry.count} hidden steps`}
                   />
+
+                  {!isLastEntry && <BreadcrumbSeparator>{separator}</BreadcrumbSeparator>}
                 </BreadcrumbItem>
-                {!isLastEntry && <BreadcrumbSeparator>{separator}</BreadcrumbSeparator>}
               </Fragment>
             )
           }
@@ -233,25 +228,21 @@ export const Breadcrumb = ({
           const isActive = item.active ?? isItemLast
           const showDefaultHome = showHomeIcon && originalIndex === 0 && !item.icon
 
+          const BreadcrumbType = isActive ? BreadcrumbPage : BreadcrumbLink
+
           return (
             <Fragment key={`${item.label}-${originalIndex}`}>
               <BreadcrumbItem>
-                {isActive ? (
-                  <BreadcrumbPage>
-                    {showDefaultHome && <IconHome data-testid="home-icon" className="w-4 h-4 mr-1.5 inline-block" />}
-                    {item.icon && <span className="mr-1.5 inline-flex items-center">{item.icon}</span>}
-                    {item.label}
-                  </BreadcrumbPage>
-                ) : (
-                  <BreadcrumbLink href={item.href} onClick={item.onClick}>
-                    {showDefaultHome && <IconHome data-testid="home-icon" className="w-4 h-4 mr-1.5 inline-block" />}
-                    {item.icon && <span className="mr-1.5 inline-flex items-center">{item.icon}</span>}
-                    {item.label}
-                  </BreadcrumbLink>
-                )}
-              </BreadcrumbItem>
+                <BreadcrumbType href={item.href} onClick={isActive ? undefined : item.onClick}>
+                  {showDefaultHome && (
+                    <IconHome data-testid="home-icon" className="mr-1.5 inline-block" strokeWidth="3" />
+                  )}
+                  {item.icon && <span className="mr-1.5 inline-flex items-center">{item.icon}</span>}
+                  {item.label}
+                </BreadcrumbType>
 
-              {!isLastEntry && <BreadcrumbSeparator>{separator}</BreadcrumbSeparator>}
+                {!isLastEntry && <BreadcrumbSeparator>{separator}</BreadcrumbSeparator>}
+              </BreadcrumbItem>
             </Fragment>
           )
         })}
