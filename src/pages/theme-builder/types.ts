@@ -1,4 +1,4 @@
-export type PropertyType = 'color' | 'range' | 'opacity'
+export type PropertyType = 'color' | 'range' | 'opacity' | 'shadow'
 
 export interface ThemeProperty {
   key: string

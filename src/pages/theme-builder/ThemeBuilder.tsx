@@ -270,10 +270,6 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
               </div>
               {/* Shadows */}
               <div>
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-2.5 h-2.5 bg-(--lithos-accent) rounded-(--lithos-radius)"></div>
-                  <span className="text-[13px] font-black tracking-widest uppercase">Shadow Properties</span>
-                </div>
                 <div className="flex flex-col gap-5">
                   {shadowProps.map((prop) => (
                     <PropertyControl
