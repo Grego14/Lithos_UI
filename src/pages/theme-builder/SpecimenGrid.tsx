@@ -286,7 +286,7 @@ export const SpecimenGrid = ({ style, accentColor }: { style: React.CSSPropertie
   return (
     <div
       id="specimen-grid-container"
-      className="rounded-(--lithos-radius) overflow-hidden border border-(--lithos-border)/15 bg-(--lithos-bg) text-(--lithos-text) h-full"
+      className="rounded-none overflow-hidden border border-(--lithos-border)/15 bg-(--lithos-bg) text-(--lithos-text) h-full"
       style={style}
     >
       <style>{`

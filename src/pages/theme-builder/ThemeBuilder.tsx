@@ -11,13 +11,14 @@ import { CodeViewer } from '../../components/ui/CodeViewer'
 import { THEME_PROPERTIES, PRESET_THEMES } from './constants'
 import { useThemeHistory } from './useThemeHistory'
 import { SpecimenGrid } from './SpecimenGrid'
+import { PropertyControl } from './PropertyControl'
 import type { ThemeBuilderProps } from './types'
 import { Footer } from '../../showroom/sections/Footer'
 import { Tabs, TabsList, TabsTrigger } from '../../components/ui/Tabs'
 import { Toggle } from '../../components/ui/Toggle'
 import { Select } from '../../components/ui/Select'
-import { Button } from '../../components/ui/Button'
-import { IconChevronDown } from '../../components/ui/icons/IconChevronDown'
+import { Button, ButtonGroup } from '../../components/ui/Button'
+import { Card, CardContent } from '../../components/ui/Card'
 import { IconUndo } from '../../components/ui/icons/IconUndo'
 import { IconRedo } from '../../components/ui/icons/IconRedo'
 import { IconUpload } from '../../components/ui/icons/IconUpload'
@@ -234,8 +235,8 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
           </div>
 
           {/* PANEL 2: DESIGN TOKENS */}
-          <div className="flex flex-col min-w-0 w-full lg:w-[340px] h-full overflow-hidden bg-(--lithos-surface) border-b lg:border-b-0 lg:border-r-2 border-(--lithos-border) shrink-0 font-sans text-(--lithos-text)">
-            <div className="h-14 px-5 border-b-2 border-(--lithos-border) sticky top-0 bg-(--lithos-surface) z-10 flex items-center justify-between shrink-0">
+          <div className="flex flex-col w-full lg:w-[340px] h-full overflow-hidden bg-(--lithos-surface) border-b lg:border-b-0 lg:border-r-2 border-(--lithos-border) font-sans text-(--lithos-text)">
+            <div className="h-14 border-b-2 border-(--lithos-border) bg-(--lithos-surface) flex items-center justify-between shrink-0 px-5">
               <div className="flex items-center gap-2">
                 <div className="w-3.5 h-3.5 bg-(--lithos-accent) border-2 border-(--lithos-border) rounded-(--lithos-radius)"></div>
                 <h2 className="text-sm font-black tracking-widest uppercase mt-0.5">Design Tokens</h2>
@@ -257,34 +258,12 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                 </div>
                 <div className="flex flex-col gap-2">
                   {colorProps.map((prop) => (
-                    <div
+                    <PropertyControl
                       key={prop.key}
-                      className="border-2 border-(--lithos-border) rounded-(--lithos-radius) bg-(--lithos-surface) flex justify-between items-center p-1.5"
-                    >
-                      <div className="flex items-center gap-3 pl-1">
-                        <div
-                          className="w-[18px] h-[18px] border-2 border-(--lithos-border) rounded-(--lithos-radius)"
-                          style={{
-                            backgroundColor: currentValues[prop.key] ?? defaults[prop.key] ?? 'var(--lithos-surface)',
-                          }}
-                        ></div>
-                        <span className="text-[13px] font-bold">{prop.label}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5 pr-1">
-                        <input
-                          type="text"
-                          value={currentValues[prop.key] ?? defaults[prop.key] ?? ''}
-                          onChange={(e) => handleChange(prop.key, e.target.value)}
-                          className="w-[84px] border-2 border-(--lithos-border) rounded-(--lithos-radius) px-1.5 py-1 text-[11px] font-mono font-bold text-center outline-none bg-(--lithos-bg) text-(--lithos-text) focus:brightness-95"
-                        />
-                        <div
-                          className="w-[18px] h-[18px] border-2 border-(--lithos-border) rounded-(--lithos-radius)"
-                          style={{
-                            backgroundColor: currentValues[prop.key] ?? defaults[prop.key] ?? 'var(--lithos-surface)',
-                          }}
-                        ></div>
-                      </div>
-                    </div>
+                      property={prop}
+                      value={currentValues[prop.key] ?? defaults[prop.key] ?? ''}
+                      onChange={handleChange}
+                    />
                   ))}
                 </div>
               </div>
@@ -296,52 +275,14 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                   <span className="text-[13px] font-black tracking-widest uppercase">Geometry & Radius</span>
                 </div>
                 <div className="flex flex-col gap-5">
-                  {geometryProps.map((prop) => {
-                    const val = currentValues[prop.key] ?? defaults[prop.key] ?? '0px'
-                    const numVal = parseInt(val.toString().replace('px', '')) || 0
-                    const isRadius = prop.label.toLowerCase().includes('radius')
-
-                    let displayValue = val
-                    if (isRadius && numVal === 0) displayValue = '0px (Sharp)'
-
-                    return (
-                      <div
-                        key={prop.key}
-                        className="border-2 border-(--lithos-border) rounded-(--lithos-radius) bg-(--lithos-surface) p-4 flex flex-col gap-4"
-                      >
-                        <div className="flex justify-between items-center">
-                          <span className="text-[13px] font-bold uppercase">{prop.label}</span>
-                          <span
-                            className={`px-2 py-1 text-[11px] font-mono font-bold rounded-(--lithos-radius) ${
-                              isRadius
-                                ? 'bg-(--lithos-accent) text-(--lithos-text) border-2 border-(--lithos-border) shadow-[2px_2px_0_0_var(--lithos-shadow)]'
-                                : 'bg-(--lithos-text) text-(--lithos-surface)'
-                            }`}
-                          >
-                            {displayValue}
-                          </span>
-                        </div>
-                        <div className="relative w-full h-6 flex flex-col justify-center mt-2">
-                          <div className="w-full h-1.5 border border-(--lithos-border) bg-(--lithos-bg) absolute top-1/2 -translate-y-1/2 z-0 pointer-events-none rounded-(--lithos-radius)"></div>
-                          <input
-                            type="range"
-                            min="0"
-                            max={isRadius ? '32' : '12'}
-                            value={numVal}
-                            onChange={(e) => handleChange(prop.key, e.target.value + 'px')}
-                            className="absolute z-10 w-full appearance-none bg-transparent cursor-pointer h-full
-                              [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-(--lithos-accent) [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-(--lithos-border) [&::-webkit-slider-thumb]:shadow-[2px_2px_0_0_var(--lithos-shadow)] [&::-webkit-slider-thumb]:rounded-(--lithos-radius)
-                              [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:bg-(--lithos-accent) [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-(--lithos-border) [&::-moz-range-thumb]:shadow-[2px_2px_0_0_var(--lithos-shadow)] [&::-moz-range-thumb]:rounded-(--lithos-radius)"
-                          />
-                        </div>
-                        <div className="flex justify-between text-[10px] font-mono text-(--lithos-muted) font-bold uppercase mt-1">
-                          <span>0px {isRadius ? '(Brutal)' : ''}</span>
-                          <span>{isRadius ? '16px' : '6px'}</span>
-                          <span>{isRadius ? '32px (Pill)' : '12px'}</span>
-                        </div>
-                      </div>
-                    )
-                  })}
+                  {geometryProps.map((prop) => (
+                    <PropertyControl
+                      key={prop.key}
+                      property={prop}
+                      value={currentValues[prop.key] ?? defaults[prop.key] ?? '0px'}
+                      onChange={handleChange}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
@@ -350,75 +291,56 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
           {/* PANEL 3: STAGE */}
           <div className="flex flex-col min-w-0 flex-1 h-full overflow-hidden bg-(--lithos-surface) font-sans text-(--lithos-text)">
             {/* Stage Header */}
-            <div className="h-14 px-6 border-b-2 border-(--lithos-border) shrink-0 bg-(--lithos-surface) flex items-end justify-between relative z-10">
-              <Tabs value={stageTab} onValueChange={(val) => setStageTab(val as StageTab)}>
-                <TabsList className="flex space-x-6 h-full items-end bg-transparent p-0 border-none shadow-none rounded-none">
-                  <TabsTrigger
-                    value="preview"
-                    className="flex items-center gap-2 pb-3 relative font-black uppercase tracking-widest text-[12px] transition-colors data-[state=active]:text-(--lithos-text) data-[state=inactive]:text-(--lithos-muted) hover:text-(--lithos-text)"
-                  >
-                    {stageTab === 'preview' && (
-                      <>
-                        <span className="w-2 h-2 rounded-full bg-(--lithos-accent)"></span>
-                        <span className="absolute bottom-[-2px] left-0 w-full h-[3px] bg-(--lithos-accent)"></span>
-                      </>
-                    )}
-                    Live Preview
-                  </TabsTrigger>
+            <div className="h-14 px-6 border-b-2 border-(--lithos-border) bg-(--lithos-surface) flex items-end justify-between">
+              <Tabs variant="underline" value={stageTab} onValueChange={(val) => setStageTab(val as StageTab)}>
+                <TabsList className="gap-2">
+                  <TabsTrigger value="preview">Live Preview</TabsTrigger>
 
-                  <TabsTrigger
-                    value="code"
-                    className="pb-3 relative font-black uppercase tracking-widest text-[12px] transition-colors data-[state=active]:text-(--lithos-text) data-[state=inactive]:text-(--lithos-muted) hover:text-(--lithos-text)"
-                  >
-                    {stageTab === 'code' && (
-                      <span className="absolute bottom-[-2px] left-0 w-full h-[3px] bg-(--lithos-accent)"></span>
-                    )}
-                    Generated CSS
-                  </TabsTrigger>
+                  <TabsTrigger value="code">Generated CSS</TabsTrigger>
 
-                  <TabsTrigger
-                    value="swatches"
-                    className="pb-3 relative font-black uppercase tracking-widest text-[12px] transition-colors data-[state=active]:text-(--lithos-text) data-[state=inactive]:text-(--lithos-muted) hover:text-(--lithos-text)"
-                  >
-                    {stageTab === 'swatches' && (
-                      <span className="absolute bottom-[-2px] left-0 w-full h-[3px] bg-(--lithos-accent)"></span>
-                    )}
-                    Token Swatches
-                  </TabsTrigger>
+                  <TabsTrigger value="swatches">Token Swatches</TabsTrigger>
                 </TabsList>
               </Tabs>
 
               {/* Actions */}
-              <div className="flex items-center gap-4 pb-2.5">
-                {/* Device Toggle Group */}
-                <div className="flex border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[2px_2px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)">
-                  <button className="px-2 py-1 border-r-2 border-(--lithos-border) hover:bg-(--lithos-bg) text-(--lithos-text) flex items-center justify-center rounded-l-(--lithos-radius)">
+              <div className="flex items-center gap-4 pb-2">
+                <ButtonGroup attached className="shadow-[2px_2px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)">
+                  <Button
+                    variant="secondary"
+                    className="px-2.5 py-1.5 shadow-none hover:shadow-none active:shadow-none active:translate-x-0 active:translate-y-0 text-(--lithos-text) rounded-r-none hover:bg-(--lithos-bg)"
+                  >
                     <IconMonitor size={15} strokeWidth={2.5} />
-                  </button>
-                  <button className="px-2 py-1 border-r-2 border-(--lithos-border) hover:bg-(--lithos-bg) text-(--lithos-muted) flex items-center justify-center">
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    className="px-2.5 py-1.5 shadow-none hover:shadow-none active:shadow-none active:translate-x-0 active:translate-y-0 text-(--lithos-muted) rounded-none hover:bg-(--lithos-bg)"
+                  >
                     <IconTablet size={14} strokeWidth={2.5} />
-                  </button>
-                  <button className="px-2 py-1 hover:bg-(--lithos-bg) text-(--lithos-muted) flex items-center justify-center rounded-r-(--lithos-radius)">
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    className="px-2.5 py-1.5 shadow-none hover:shadow-none active:shadow-none active:translate-x-0 active:translate-y-0 text-(--lithos-muted) rounded-l-none hover:bg-(--lithos-bg)"
+                  >
                     <IconSmartphone size={14} style={{ width: 12, height: 14 }} strokeWidth={2.5} />
-                  </button>
-                </div>
+                  </Button>
+                </ButtonGroup>
 
-                {/* Copy CSS Button */}
-                <button
+                <Button
+                  variant="primary"
                   onClick={() => navigator.clipboard.writeText(generatedCSS)}
-                  className="flex items-center gap-2 bg-(--lithos-accent) border-2 border-(--lithos-border) text-(--lithos-text) px-3 py-1.5 font-black uppercase tracking-wider text-[11px] shadow-[3px_3px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius) active:translate-y-[2px] active:translate-x-[2px] active:shadow-[1px_1px_0_0_var(--lithos-shadow)] transition-all cursor-pointer"
+                  iconLeft={<IconCopy size={14} strokeWidth={3} />}
+                  className="px-4 py-2 font-black uppercase tracking-wider text-[11px] whitespace-nowrap shadow-[3px_3px_0_0_var(--lithos-shadow)] hover:shadow-[3px_3px_0_0_var(--lithos-shadow)] active:translate-y-[2px] active:translate-x-[2px] active:shadow-[1px_1px_0_0_var(--lithos-shadow)]"
                 >
-                  <IconCopy size={14} strokeWidth={3} />
                   Copy CSS
-                </button>
+                </Button>
               </div>
             </div>
 
             {/* Stage Canvas (With dotted background) */}
-            <div className="flex-1 min-h-0 overflow-y-auto p-6 lg:p-10 relative bg-(--lithos-bg) bg-[radial-gradient(var(--lithos-muted)_1.5px,transparent_1.5px)] bg-size-[16px_16px]">
+            <div className="flex-1 overflow-y-auto lg:p-10 relative bg-(--lithos-bg) bg-[radial-gradient(var(--lithos-muted)_1.5px,transparent_1.5px)] bg-size-[16px_16px]">
               {stageTab === 'preview' && (
                 <div
-                  className={`mx-auto max-w-[1400px] h-full w-full rounded-(--lithos-radius) overflow-hidden border-4 border-(--lithos-border) bg-(--lithos-surface) shadow-[8px_8px_0_0_var(--lithos-shadow)] ${previewMode === 'dark' ? 'obsidian' : ''}`}
+                  className={`mx-auto h-full w-full rounded-none overflow-hidden border-4 border-(--lithos-border) bg-(--lithos-surface) ${previewMode === 'dark' ? 'obsidian' : ''}`}
                   style={previewStyle}
                 >
                   <SpecimenGrid
@@ -431,49 +353,40 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
               )}
 
               {stageTab === 'code' && (
-                <div className="max-w-5xl mx-auto h-full flex flex-col space-y-4 bg-(--lithos-surface) p-8 border-4 border-(--lithos-border) shadow-[8px_8px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)">
-                  <h3 className="text-xl font-black tracking-widest uppercase">Generated CSS</h3>
-                  <div className="border-2 border-(--lithos-border) flex-1 min-h-0 overflow-hidden shadow-[4px_4px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)">
-                    <CodeViewer code={generatedCSS} language="css" />
-                  </div>
+                <div>
+                  <CodeViewer code={generatedCSS} language="css" />
                 </div>
               )}
 
               {stageTab === 'swatches' && (
-                <div className="max-w-6xl mx-auto w-full space-y-8 bg-(--lithos-surface) p-8 border-4 border-(--lithos-border) shadow-[8px_8px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)">
-                  <h3 className="text-xl font-black tracking-widest uppercase">Token Swatches</h3>
-                  <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {THEME_PROPERTIES.map((prop) => {
-                      const val = currentValues[prop.key] ?? defaults[prop.key] ?? ''
-                      return (
+                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {THEME_PROPERTIES.map((prop) => {
+                    const val = currentValues[prop.key] ?? defaults[prop.key] ?? ''
+                    return (
+                      <Card key={prop.key}>
                         <div
-                          key={prop.key}
-                          className="border-2 border-(--lithos-border) bg-(--lithos-surface) flex flex-col rounded-(--lithos-radius) overflow-hidden shadow-[4px_4px_0_0_var(--lithos-shadow)] transition-transform hover:-translate-y-1 hover:shadow-[6px_6px_0_0_var(--lithos-shadow)]"
+                          className="h-28 w-full flex items-center justify-center border-b-2 border-(--lithos-border)"
+                          style={{
+                            backgroundColor:
+                              val.startsWith('rgba') || val.startsWith('#') ? val : 'var(--lithos-surface)',
+                          }}
                         >
-                          <div
-                            className="h-28 w-full flex items-center justify-center border-b-2 border-(--lithos-border)"
-                            style={{
-                              backgroundColor:
-                                val.startsWith('rgba') || val.startsWith('#') ? val : 'var(--lithos-surface)',
-                            }}
-                          >
-                            <span className="text-[11px] font-mono font-bold bg-(--lithos-surface) text-(--lithos-text) px-2 py-1 border-2 border-(--lithos-border) shadow-[2px_2px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)">
-                              {val}
-                            </span>
-                          </div>
-
-                          <div className="p-4 flex flex-col gap-1">
-                            <p className="text-[13px] font-black uppercase tracking-wider text-(--lithos-text)">
-                              {prop.label}
-                            </p>
-                            <code className="text-[11px] font-mono text-(--lithos-muted) font-bold truncate">
-                              {prop.key}
-                            </code>
-                          </div>
+                          <span className="text-[11px] font-mono font-bold bg-(--lithos-surface) text-(--lithos-text) px-2 py-1 border-2 border-(--lithos-border) shadow-[2px_2px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)">
+                            {val}
+                          </span>
                         </div>
-                      )
-                    })}
-                  </div>
+
+                        <CardContent className="p-4 flex flex-col gap-1">
+                          <p className="text-[13px] font-black uppercase tracking-wider text-(--lithos-text)">
+                            {prop.label}
+                          </p>
+                          <code className="text-[11px] font-mono text-(--lithos-muted) font-bold truncate">
+                            {prop.key}
+                          </code>
+                        </CardContent>
+                      </Card>
+                    )
+                  })}
                 </div>
               )}
             </div>
