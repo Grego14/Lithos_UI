@@ -97,7 +97,7 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                     label="Toggle dark mode"
                   />
                   <span
-                    className={`text-[13px] font-bold cursor-pointer transition-colors ${
+                    className={` ${
                       previewMode === 'dark'
                         ? 'text-(--lithos-text)'
                         : 'text-(--lithos-muted) hover:text-(--lithos-text)'
