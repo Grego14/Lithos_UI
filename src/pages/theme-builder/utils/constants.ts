@@ -6,6 +6,7 @@ export const THEME_PROPERTIES: ThemeProperty[] = [
   { key: '--lithos-border', label: 'Border', section: 'colors', type: 'color' },
   { key: '--lithos-accent', label: 'Accent', section: 'colors', type: 'color' },
   { key: '--lithos-surface', label: 'Surface', section: 'colors', type: 'color' },
+  { key: '--lithos-muted', label: 'Muted opacity', section: 'colors', type: 'opacity' },
   {
     key: '--lithos-shadow',
     label: 'Shadow',

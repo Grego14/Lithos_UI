@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo, useEffect, useRef, type ChangeEvent } from 'react'
-import { THEME_PROPERTIES, LIGHT_DEFAULTS, DARK_DEFAULTS, PRESET_THEMES } from './constants'
+import { THEME_PROPERTIES, LIGHT_DEFAULTS, DARK_DEFAULTS, PRESET_THEMES } from '../utils/constants'
 
 export type ViewportSize = 'desktop' | 'tablet' | 'mobile'
 

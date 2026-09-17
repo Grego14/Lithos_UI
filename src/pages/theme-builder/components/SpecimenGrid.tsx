@@ -19,7 +19,7 @@ import { Tooltip, TooltipTrigger, TooltipContent } from '../../components/ui/Too
 import { CodeViewer } from '../../components/ui/CodeViewer'
 import { PropsTable } from '../../components/ui/PropsTable'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
-import { PANEL } from './constants'
+import { PANEL } from '../utils/constants'
 import { useToast } from '../../core/hooks/useToast'
 import { AccentColorProvider } from '../../core/useAccentColor'
 import { getContrastText } from '../../utils/yiq'
