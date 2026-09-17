@@ -47,23 +47,13 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
   return (
     <div className={containerClasses}>
       {/* Navbar */}
-      <header className="px-4 sm:px-6 py-4 border-b border-(--lithos-border)/15 bg-(--lithos-surface) sticky top-0 z-40 shadow-sm w-full">
+      <header className="px-4 md:px-6 py-4 border-b border-(--lithos-border)/15 bg-(--lithos-surface) sticky top-0 z-40 shadow-sm w-full">
         <div className="flex flex-wrap items-center justify-between gap-y-4 gap-x-4">
+          {/* 1. Logo (Always left) */}
           <div className="font-black tracking-tight text-xl shrink-0 order-1">LITHOS</div>
 
-          <div className="order-3 sm:order-2 w-full sm:w-auto sm:flex-1 min-w-0 overflow-x-auto no-scrollbar">
-            <div className="flex items-center min-w-max py-1">
-              <Breadcrumb
-                items={[
-                  { label: 'Home', href: '#' },
-                  { label: 'Platform', href: '#' },
-                  { label: 'Features', active: true },
-                ]}
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 sm:gap-4 shrink-0 order-2 sm:order-3 ml-auto sm:ml-0">
+          {/* 2. Actions (Mobile: Top Right | Desktop: Far Right) */}
+          <div className="flex items-center gap-2 md:gap-4 shrink-0 order-2 md:order-3">
             <Button variant="secondary" onClick={toggleFullscreen} className="text-xs px-3 whitespace-nowrap">
               {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
             </Button>
@@ -87,6 +77,19 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
                 </ButtonGroup>
               </PopoverContent>
             </Popover>
+          </div>
+
+          {/* 3. Breadcrumb (Mobile: Bottom Row Full Width | Desktop: Middle Flexible) */}
+          <div className="order-3 md:order-2 basis-full md:basis-auto w-full md:w-auto md:flex-1 min-w-0 overflow-x-auto no-scrollbar mt-2 md:mt-0">
+            <div className="flex items-center min-w-max py-1">
+              <Breadcrumb
+                items={[
+                  { label: 'Home', href: '#' },
+                  { label: 'Platform', href: '#' },
+                  { label: 'Features', active: true },
+                ]}
+              />
+            </div>
           </div>
         </div>
       </header>
@@ -163,7 +166,7 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
       </section>
 
       {/* Interactive Features */}
-      <section className="w-full flex flex-col p-auto space-y-10">
+      <section className="px-4 sm:px-6 py-16 sm:py-24 w-full max-w-7xl mx-auto flex flex-wrap gap-12 lg:gap-16 min-w-0 justify-items-center">
         {/* Left Column: Component Demo */}
         <div className="flex flex-col gap-8 flex-1 min-w-[280px] w-full max-w-full">
           <h2 className="text-2xl sm:text-3xl font-black uppercase border-b-4 border-(--lithos-border) self-start pb-2">
@@ -416,13 +419,13 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
           </h2>
 
           <div
-            className={`${PANEL} p-6 sm:p-8 flex flex-col sm:flex-row gap-4 bg-(--lithos-surface) text-(--lithos-text) w-full rounded-(--lithos-radius) shadow-[6px_6px_0_0_var(--lithos-shadow)]`}
+            className={`${PANEL} p-6 sm:p-8 flex flex-col sm:flex-row flex-wrap gap-4 bg-(--lithos-surface) text-(--lithos-text) w-full rounded-(--lithos-radius) shadow-[6px_6px_0_0_var(--lithos-shadow)]`}
           >
             <Input placeholder="Email Address" className="w-full sm:flex-1 min-w-0 rounded-(--lithos-radius)" />
             <Button
               variant="primary"
               onClick={handleSubscribe}
-              className="w-full sm:w-auto shrink-0 px-8 py-3 rounded-(--lithos-radius)"
+              className="w-full md:w-auto shrink-0 px-8 py-3 rounded-(--lithos-radius)"
             >
               Subscribe
             </Button>
