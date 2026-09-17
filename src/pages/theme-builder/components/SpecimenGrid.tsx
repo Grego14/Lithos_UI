@@ -18,7 +18,7 @@ import { Tooltip, TooltipTrigger, TooltipContent } from '../../../components/ui/
 import { CodeViewer } from '../../../components/ui/CodeViewer'
 import { PropsTable } from '../../../components/ui/PropsTable'
 import { PANEL } from '../utils/constants'
-import { AccentColorProvider } from '../../../core/useAccentColor'
+import { AccentColorProvider } from '../../../core/AccentColorProvider'
 import { getContrastText } from '../../../utils/yiq'
 import { useToast } from '../../../core/hooks/useToast'
 
