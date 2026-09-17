@@ -1,7 +1,7 @@
-import { Input } from '../../components/ui/Input'
-import type { ThemeProperty } from './types'
-import { parseRgba, rgbToHex, hexToRgb } from './helpers'
-import { Badge } from '../../components/ui/Badge'
+import { Input } from '../../../components/ui/Input'
+import type { ThemeProperty } from '../utils/types'
+import { parseRgba, rgbToHex, hexToRgb } from '../utils/helpers'
+import { Badge } from '../../../components/ui/Badge'
 
 interface PropertyControlProps {
   property: ThemeProperty
@@ -35,14 +35,14 @@ export const PropertyControl = ({ property, value, onChange, variant = 'default'
           <Input
             type="text"
             value={value}
-            onChange={(e) => onChange(key, e.target.value)}
+            onChange={(e: any) => onChange(key, e.target.value)}
             className="w-[100px] h-[30px]"
           />
           <input
             type="color"
             value={value}
             aria-label={`${label} color picker`}
-            onChange={(e) => onChange(key, e.target.value)}
+            onChange={(e: any) => onChange(key, e.target.value)}
             className="w-[18px] h-[18px] shrink-0 cursor-pointer rounded-(--lithos-radius) border border-(--lithos-border) p-0 bg-transparent overflow-hidden appearance-none 
                  [&::-webkit-color-swatch-wrapper]:p-0 
                  [&::-webkit-color-swatch]:border-none 

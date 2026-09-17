@@ -1,28 +1,28 @@
 import React, { useState } from 'react'
-import { Button } from '../../components/ui/Button'
-import { Input } from '../../components/ui/Input'
-import { Card, CardContent, CardTitle, CardDescription } from '../../components/ui/Card'
-import { Badge } from '../../components/ui/Badge'
-import { Alert } from '../../components/ui/Alert'
-import { Accordion } from '../../components/ui/Accordion'
-import { AvatarGroup } from '../../components/ui/Avatar'
-import { Breadcrumb } from '../../components/ui/Breadcrumb'
-import { Checkbox } from '../../components/ui/Checkbox'
-import { Toggle } from '../../components/ui/Toggle'
-import { Dialog, DialogHeader, DialogTitle, DialogBody, DialogFooter } from '../../components/ui/Dialog'
-import { KineticGrid } from '../../components/ui/KineticGrid'
-import { Popover, PopoverTrigger, PopoverContent } from '../../components/ui/Popover'
-import { Select } from '../../components/ui/Select'
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../components/ui/Tabs'
-import { ToastProvider } from '../../components/ui/Toast'
-import { Tooltip, TooltipTrigger, TooltipContent } from '../../components/ui/Tooltip'
-import { CodeViewer } from '../../components/ui/CodeViewer'
-import { PropsTable } from '../../components/ui/PropsTable'
-import { PreviewBlock } from '../../components/ui/PreviewBlock'
+import { Button } from '../../../components/ui/Button'
+import { Input } from '../../../components/ui/Input'
+import { Card, CardContent, CardTitle, CardDescription } from '../../../components/ui/Card'
+import { Badge } from '../../../components/ui/Badge'
+import { Alert } from '../../../components/ui/Alert'
+import { Accordion } from '../../../components/ui/Accordion'
+import { AvatarGroup } from '../../../components/ui/Avatar'
+import { Breadcrumb } from '../../../components/ui/Breadcrumb'
+import { Checkbox } from '../../../components/ui/Checkbox'
+import { Toggle } from '../../../components/ui/Toggle'
+import { Dialog, DialogHeader, DialogTitle, DialogBody, DialogFooter } from '../../../components/ui/Dialog'
+import { KineticGrid } from '../../../components/ui/KineticGrid'
+import { Popover, PopoverTrigger, PopoverContent } from '../../../components/ui/Popover'
+import { Select } from '../../../components/ui/Select'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../../components/ui/Tabs'
+import { ToastProvider } from '../../../components/ui/Toast'
+import { Tooltip, TooltipTrigger, TooltipContent } from '../../../components/ui/Tooltip'
+import { CodeViewer } from '../../../components/ui/CodeViewer'
+import { PropsTable } from '../../../components/ui/PropsTable'
+import { PreviewBlock } from '../../../components/ui/PreviewBlock'
 import { PANEL } from '../utils/constants'
-import { useToast } from '../../core/hooks/useToast'
-import { AccentColorProvider } from '../../core/useAccentColor'
-import { getContrastText } from '../../utils/yiq'
+import { useToast } from '../../../core/hooks/useToast'
+import { AccentColorProvider } from '../../../core/useAccentColor'
+import { getContrastText } from '../../../utils/yiq'
 
 const LandingPageContent = () => {
   const [isFullscreen, setIsFullscreen] = useState(false)
@@ -186,7 +186,7 @@ const LandingPageContent = () => {
                 <div className="pt-2">
                   <Checkbox
                     checked={newsletter}
-                    onChange={(e) => setNewsletter(e.target.checked)}
+                    onChange={(e: any) => setNewsletter(e.target.checked)}
                     label="Subscribe to newsletter"
                     description="Get the latest updates from Lithos UI."
                   />
