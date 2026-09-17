@@ -61,7 +61,7 @@ const LandingPageContent = () => {
             />
           </div>
         </div>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center gap-4">
           <Button variant="secondary" onClick={toggleFullscreen} className="text-xs px-3">
             {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
           </Button>
@@ -70,10 +70,10 @@ const LandingPageContent = () => {
               <Button variant="primary">Actions</Button>
             </PopoverTrigger>
             <PopoverContent className="p-2 space-y-1">
-              <div className="lithos-click p-2 hover:bg-(--lithos-bg) rounded text-sm font-bold cursor-pointer">
+              <div className="lithos-click p-2 bg-(--lithos-bg) rounded-(--lithos-radius) text-sm font-bold cursor-pointer">
                 Settings
               </div>
-              <div className="lithos-click p-2 hover:bg-(--lithos-bg) rounded text-sm font-bold cursor-pointer">
+              <div className="lithos-click p-2 hover:bg-(--lithos-bg) rounded-(--lithos-radius) text-sm font-bold cursor-pointer">
                 Logout
               </div>
             </PopoverContent>

@@ -3,8 +3,6 @@ import { isHexColor, type HexColor } from './types'
 import { getYiqValue } from '../utils/yiq'
 import { getContrastText } from '../utils/yiq'
 
-// the AccentColorContextType added
-
 interface AccentColorContextType {
   accentColor: HexColor
   contrastedAccentColor: string
