@@ -365,13 +365,16 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
               )}
 
               {stageTab === 'swatches' && (
-                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 space-x-6 space-y-6">
+                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                   {THEME_PROPERTIES.map((prop) => {
                     const val = currentValues[prop.key] ?? defaults[prop.key] ?? ''
                     return (
-                      <Card key={prop.key}>
+                      <Card
+                        key={prop.key}
+                        className="flex flex-col h-full overflow-hidden hover:-translate-y-1 transition-transform duration-200"
+                      >
                         <div
-                          className="h-42 w-full flex items-center justify-center border-b-2 border-(--lithos-border)"
+                          className="h-28 sm:h-32 w-full flex items-center justify-center border-b-[3px] border-(--lithos-border) shrink-0"
                           style={{
                             backgroundColor:
                               prop.type === 'color' && (val.startsWith('rgba') || val.startsWith('#'))
@@ -380,10 +383,10 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                           }}
                         >
                           <span
-                            className="text-[11px] font-mono font-bold bg-(--lithos-surface) text-(--lithos-text) px-2 py-1 border-2 border-(--lithos-border) rounded-(--lithos-radius)"
+                            className="text-[10px] sm:text-xs font-mono font-bold bg-(--lithos-surface) text-(--lithos-text) px-3 py-1.5 border-[3px] border-(--lithos-border) rounded-(--lithos-radius)"
                             style={{
                               boxShadow:
-                                prop.type === 'shadow' ? `4px 4px 0 0 ${val}` : '2px 2px 0 0 var(--lithos-shadow)',
+                                prop.type === 'shadow' ? `4px 4px 0 0 ${val}` : '3px 3px 0 0 var(--lithos-shadow)',
                               borderRadius:
                                 prop.type === 'range' && prop.key === '--lithos-radius' ? val : 'var(--lithos-radius)',
                             }}
@@ -392,11 +395,11 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                           </span>
                         </div>
 
-                        <CardContent className="p-4 flex flex-col space-y-1">
-                          <p className="text-[13px] font-black uppercase tracking-wider text-(--lithos-text)">
+                        <CardContent className="p-4 sm:p-5 flex flex-col space-y-2 flex-1 justify-start bg-(--lithos-surface)">
+                          <p className="text-xs sm:text-sm font-black uppercase tracking-wider text-(--lithos-text)">
                             {prop.label}
                           </p>
-                          <code className="text-[11px] font-mono text-(--lithos-muted) font-bold truncate">
+                          <code className="text-[10px] sm:text-xs font-mono text-(--lithos-muted) font-bold truncate p-1.5 bg-(--lithos-bg) border-2 border-(--lithos-border)/20 rounded">
                             {prop.key}
                           </code>
                         </CardContent>
