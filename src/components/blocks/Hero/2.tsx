@@ -12,7 +12,7 @@ const Hero2 = () => (
           </Badge>
         </div>
 
-        <h1 className="text-5xl sm:text-6xl font-black uppercase tracking-tighter leading-none md:text-7xl text-(--lithos-text)">
+        <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tighter leading-none md:text-7xl text-(--lithos-text)">
           Ship Without <br className="hidden lg:block" /> Compromise
         </h1>
 
