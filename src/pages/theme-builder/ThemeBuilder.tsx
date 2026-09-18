@@ -66,16 +66,16 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
     <>
       <Navbar isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
 
-      <main className="h-screen pt-[82px] flex flex-col overflow-hidden bg-(--lithos-bg) text-(--lithos-text) antialiased">
+      <main className="min-h-screen lg:h-screen pt-[82px] flex flex-col overflow-y-auto lg:overflow-hidden bg-(--lithos-bg) text-(--lithos-text) antialiased">
         {/* Strict monolithic flex container for exact height sharing and sharp border intersections */}
         <div className="flex-1 min-h-0 flex flex-col lg:flex-row w-full items-stretch">
           {/* PANEL 1: CONFIGURATION */}
-          <div className="flex flex-col w-full lg:w-[280px] h-full overflow-hidden bg-(--lithos-surface) lg:border-r-2 border-(--lithos-border) text-(--lithos-text) shrink-0">
+          <div className="flex flex-col w-full lg:w-[280px] h-auto lg:h-full overflow-hidden bg-(--lithos-surface) lg:border-r-2 border-(--lithos-border) text-(--lithos-text) shrink-0">
             <div className="h-16 border-b-2 border-(--lithos-border) bg-(--lithos-surface) flex items-center justify-between shrink-0 px-5">
               <h2 className="text-sm tracking-widest uppercase mt-0.5 font-bold font-mono">Configuration</h2>
             </div>
 
-            <div className="p-5 flex flex-col space-y-10 flex-1 overflow-y-auto">
+            <div className="p-5 flex flex-col space-y-10 flex-1 overflow-visible lg:overflow-y-auto">
               <div>
                 <div className="flex justify-between items-baseline mb-3">
                   <span className="text-[13px] tracking-widest uppercase font-body">Workspace</span>
@@ -206,12 +206,12 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
           </div>
 
           {/* PANEL 2: DESIGN TOKENS */}
-          <div className="flex flex-col w-full lg:w-[340px] h-full overflow-hidden bg-(--lithos-surface) border-b lg:border-b-0 lg:border-r-2 border-(--lithos-border) text-(--lithos-text) shrink-0">
+          <div className="flex flex-col w-full lg:w-[340px] h-auto lg:h-full overflow-hidden bg-(--lithos-surface) border-b lg:border-b-0 lg:border-r-2 border-(--lithos-border) text-(--lithos-text) shrink-0">
             <div className="h-16 border-b-2 border-(--lithos-border) bg-(--lithos-surface) flex items-center justify-between shrink-0 px-5">
               <h2 className="text-sm tracking-widest uppercase mt-0.5 font-bold font-mono">Design Tokens</h2>
             </div>
 
-            <div className="p-5 flex flex-col space-y-2 h-full overflow-y-auto">
+            <div className="p-5 flex flex-col space-y-2 h-full overflow-visible lg:overflow-y-auto">
               <div className="flex justify-between items-baseline mb-1">
                 <span className="text-[13px] tracking-widest uppercase font-body">Color Palette</span>
               </div>
@@ -246,15 +246,15 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
           </div>
 
           {/* PANEL 3: STAGE */}
-          <div className="flex flex-col min-w-0 flex-1 h-full overflow-hidden bg-(--lithos-surface) font-sans text-(--lithos-text)">
+          <div className="flex flex-col min-w-0 flex-1 h-auto min-h-[600px] lg:min-h-0 lg:h-full overflow-hidden bg-(--lithos-surface) font-sans text-(--lithos-text)">
             {/* Stage Header */}
             {/* Reset */}
-            <div className="h-16 px-6 border-b-2 border-(--lithos-border) bg-(--lithos-surface) flex items-end justify-between">
+            <div className="min-h-[64px] px-4 md:px-6 pt-4 md:pt-0 border-b-2 border-(--lithos-border) bg-(--lithos-surface) flex flex-col md:flex-row items-center md:items-end justify-between space-y-4 md:space-y-0">
               <Tabs
                 variant="underline"
                 value={stageTab}
                 onValueChange={(val) => setStageTab(val as StageTab)}
-                className="mb-2"
+                className="mb-0 md:mb-2 w-full md:w-auto overflow-x-auto no-scrollbar"
               >
                 <TabsList className="space-x-2">
                   <TabsTrigger value="preview">Live Preview</TabsTrigger>
@@ -265,31 +265,36 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                 </TabsList>
               </Tabs>
 
-              <div className="flex items-center space-x-4 pb-2">
+              <div className="flex items-center justify-center w-full md:w-auto space-x-4 pb-4 md:pb-2">
                 {stageTab === 'preview' && (
-                  <ButtonGroup attached className="shadow-[2px_2px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)">
-                    <Button
-                      variant="secondary"
-                      onClick={() => setViewport('desktop')}
-                      className={`px-2.5 py-1.5 shadow-none hover:shadow-none active:shadow-none active:translate-x-0 active:translate-y-0 rounded-r-none hover:bg-(--lithos-bg) ${viewport === 'desktop' ? 'text-(--lithos-text) bg-(--lithos-bg)' : 'text-(--lithos-muted)'}`}
+                  <div className="hidden lg:block">
+                    <ButtonGroup
+                      attached
+                      className="shadow-[2px_2px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)"
                     >
-                      <IconMonitor size={15} strokeWidth={2.5} />
-                    </Button>
-                    <Button
-                      variant="secondary"
-                      onClick={() => setViewport('tablet')}
-                      className={`px-2.5 py-1.5 shadow-none hover:shadow-none active:shadow-none active:translate-x-0 active:translate-y-0 rounded-none hover:bg-(--lithos-bg) ${viewport === 'tablet' ? 'text-(--lithos-text) bg-(--lithos-bg)' : 'text-(--lithos-muted)'}`}
-                    >
-                      <IconTablet size={14} strokeWidth={2.5} />
-                    </Button>
-                    <Button
-                      variant="secondary"
-                      onClick={() => setViewport('mobile')}
-                      className={`px-2.5 py-1.5 shadow-none hover:shadow-none active:shadow-none active:translate-x-0 active:translate-y-0 rounded-l-none hover:bg-(--lithos-bg) ${viewport === 'mobile' ? 'text-(--lithos-text) bg-(--lithos-bg)' : 'text-(--lithos-muted)'}`}
-                    >
-                      <IconSmartphone size={14} style={{ width: 12, height: 14 }} strokeWidth={2.5} />
-                    </Button>
-                  </ButtonGroup>
+                      <Button
+                        variant="secondary"
+                        onClick={() => setViewport('desktop')}
+                        className={`px-2.5 py-1.5 shadow-none hover:shadow-none active:shadow-none active:translate-x-0 active:translate-y-0 rounded-r-none hover:bg-(--lithos-bg) ${viewport === 'desktop' ? 'text-(--lithos-text) bg-(--lithos-bg)' : 'text-(--lithos-muted)'}`}
+                      >
+                        <IconMonitor size={15} strokeWidth={2.5} />
+                      </Button>
+                      <Button
+                        variant="secondary"
+                        onClick={() => setViewport('tablet')}
+                        className={`px-2.5 py-1.5 shadow-none hover:shadow-none active:shadow-none active:translate-x-0 active:translate-y-0 rounded-none hover:bg-(--lithos-bg) ${viewport === 'tablet' ? 'text-(--lithos-text) bg-(--lithos-bg)' : 'text-(--lithos-muted)'}`}
+                      >
+                        <IconTablet size={14} strokeWidth={2.5} />
+                      </Button>
+                      <Button
+                        variant="secondary"
+                        onClick={() => setViewport('mobile')}
+                        className={`px-2.5 py-1.5 shadow-none hover:shadow-none active:shadow-none active:translate-x-0 active:translate-y-0 rounded-l-none hover:bg-(--lithos-bg) ${viewport === 'mobile' ? 'text-(--lithos-text) bg-(--lithos-bg)' : 'text-(--lithos-muted)'}`}
+                      >
+                        <IconSmartphone size={14} style={{ width: 12, height: 14 }} strokeWidth={2.5} />
+                      </Button>
+                    </ButtonGroup>
+                  </div>
                 )}
 
                 <Button
@@ -311,7 +316,7 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
             </div>
 
             {/* Stage Body */}
-            <div className="flex-1 lg:p-10 relative overflow-auto flex justify-center bg-(--lithos-bg) bg-[radial-gradient(var(--lithos-muted)_1.5px,transparent_1.5px)] bg-size-[16px_16px]">
+            <div className="flex-1 p-4 lg:p-10 relative overflow-auto flex justify-center bg-(--lithos-bg) bg-[radial-gradient(var(--lithos-muted)_1.5px,transparent_1.5px)] bg-size-[16px_16px]">
               {stageTab === 'preview' && (
                 <div
                   className={`h-full transition-all duration-300 rounded-none overflow-hidden border-4 border-(--lithos-border) bg-(--lithos-surface) ${previewMode === 'dark' ? 'obsidian' : ''}`}
