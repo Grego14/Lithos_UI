@@ -15,6 +15,7 @@ const mainLinks = [
   { label: 'Components', to: '/components' },
   { label: 'Blocks', to: '/blocks' },
   { label: 'Templates', to: '/templates' },
+  { label: 'Theme', to: '/theme' },
   { label: 'FAQ', to: '/faq' },
   { label: 'Docs', to: '/docs' },
 ]

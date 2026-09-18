@@ -6,7 +6,6 @@ import { useTooltipContext } from './useTooltip'
 export type TooltipVariant = 'default' | 'primary' | 'inverse'
 
 export interface TooltipContentProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
-  portaled?: boolean
   variant?: TooltipVariant
   className?: LithosClass
 }
@@ -32,7 +31,6 @@ const variantStyles: Record<TooltipVariant, { container: string; fill: string; s
 export const TooltipContent = ({
   style,
   className,
-  portaled = true,
   variant = 'default',
   ref: propRef,
   ...props
@@ -65,8 +63,6 @@ export const TooltipContent = ({
       />
     </div>
   )
-
-  if (!portaled) return content
 
   return <FloatingPortal>{content}</FloatingPortal>
 }
