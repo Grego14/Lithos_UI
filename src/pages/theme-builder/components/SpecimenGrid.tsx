@@ -6,7 +6,14 @@ import { Badge } from '../../../components/ui/Badge'
 import { Alert } from '../../../components/ui/Alert'
 import { Accordion } from '../../../components/ui/Accordion'
 import { AvatarGroup } from '../../../components/ui/Avatar'
-import { Breadcrumb } from '../../../components/ui/Breadcrumb'
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage,
+} from '../../../components/ui/Breadcrumb'
 import { Checkbox } from '../../../components/ui/Checkbox'
 import { Toggle } from '../../../components/ui/Toggle'
 import { Dialog, DialogHeader, DialogTitle, DialogBody, DialogFooter } from '../../../components/ui/Dialog'
@@ -21,6 +28,10 @@ import { PANEL } from '../utils/constants'
 import { AccentColorProvider } from '../../../core/AccentColorProvider'
 import { getContrastText } from '../../../utils/yiq'
 import { useToast } from '../../../core/hooks/useToast'
+import { IconHome } from '../../../components/ui/icons/IconHome'
+import { IconMaximize } from '../../../components/ui/icons/IconMaximize'
+import { IconMinimize } from '../../../components/ui/icons/IconMinimize'
+import { IconChevronDown } from '../../../components/ui/icons/IconChevronDown'
 
 const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
   const [isFullscreen, setIsFullscreen] = useState(false)
@@ -54,13 +65,15 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
 
           {/* 2. Actions (Mobile: Top Right | Desktop: Far Right) */}
           <div className="flex items-center gap-2 md:gap-4 shrink-0 order-2 md:order-3">
-            <Button variant="secondary" onClick={toggleFullscreen} className="text-xs px-3 whitespace-nowrap">
+            <Button variant="secondary" onClick={toggleFullscreen} className="text-xs px-3 whitespace-nowrap gap-2">
+              {isFullscreen ? <IconMinimize size={14} /> : <IconMaximize size={14} />}
               {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
             </Button>
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="primary" className="whitespace-nowrap shrink-0">
+                <Button variant="primary" className="whitespace-nowrap shrink-0 gap-2">
                   Actions
+                  <IconChevronDown size={16} />
                 </Button>
               </PopoverTrigger>
               <PopoverContent
@@ -80,15 +93,26 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
           </div>
 
           {/* 3. Breadcrumb (Mobile: Bottom Row Full Width | Desktop: Middle Flexible) */}
-          <div className="order-3 md:order-2 basis-full md:basis-auto w-full md:w-auto md:flex-1 min-w-0 overflow-x-auto no-scrollbar mt-2 md:mt-0">
-            <div className="flex items-center min-w-max py-1">
-              <Breadcrumb
-                items={[
-                  { label: 'Home', href: '#' },
-                  { label: 'Platform', href: '#' },
-                  { label: 'Features', active: true },
-                ]}
-              />
+          <div className="order-3 md:order-2 basis-full md:basis-auto w-full md:w-auto md:flex-1 min-w-0 overflow-x-auto no-scrollbar">
+            <div className="flex items-center min-w-max py-2">
+              <Breadcrumb>
+                <BreadcrumbList>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href="#">
+                      <IconHome className="mr-1.5 inline-block" strokeWidth="3" />
+                      Home
+                    </BreadcrumbLink>
+                    <BreadcrumbSeparator />
+                  </BreadcrumbItem>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href="#">Platform</BreadcrumbLink>
+                    <BreadcrumbSeparator />
+                  </BreadcrumbItem>
+                  <BreadcrumbItem>
+                    <BreadcrumbPage>Features</BreadcrumbPage>
+                  </BreadcrumbItem>
+                </BreadcrumbList>
+              </Breadcrumb>
             </div>
           </div>
         </div>
