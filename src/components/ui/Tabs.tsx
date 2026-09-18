@@ -57,7 +57,11 @@ export const Tabs = ({
   return (
     <TabsContext.Provider value={{ value, onValueChange: handleValueChange, variant }}>
       <div
-        className={cn('w-full', variant === 'vertical' && 'flex flex-col sm:flex-row gap-6', className)}
+        className={cn(
+          'w-full',
+          variant === 'vertical' && 'flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-6',
+          className
+        )}
         data-state={value}
         {...rest}
       >

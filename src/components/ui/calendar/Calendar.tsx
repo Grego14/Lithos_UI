@@ -3,7 +3,7 @@
  * - Dual-mode state architecture: displayed month and selection are independently
  *   controlled/uncontrolled (mirrors Accordion's `open !== undefined ? open : local` pattern),
  *   so jumping year/month via the header selects never touches the selected value.
- * - Zero-Gap grid: weekday headers + all 42 day cells share ONE `grid-cols-7`, never `gap-*`.
+ * - Zero-Gap grid: weekday headers + all 42 day cells share ONE `grid-cols-7`, never `g a p-*`.
  *   Border-ownership technique — the grid owns its outer top/left edge once, every cell owns
  *   only its own right+bottom border, so no shared edge between adjacent cells is ever drawn twice.
  * - `.lithos-click` exceptions (documented, not accidental):

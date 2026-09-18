@@ -1,5 +1,10 @@
+/**
+ * @fileoverview Custom hook for managing the undo/redo history stack of theme changes.
+ * Allows users to revert or re-apply token modifications during the theme building process.
+ */
 import { useState, useCallback, useMemo, useEffect, useRef, type ChangeEvent } from 'react'
 import { THEME_PROPERTIES, LIGHT_DEFAULTS, DARK_DEFAULTS, PRESET_THEMES } from '../utils/constants'
+import { useToast } from '../../../core/hooks/useToast'
 
 export type ViewportSize = 'desktop' | 'tablet' | 'mobile'
 
@@ -12,6 +17,7 @@ export const useThemeHistory = () => {
   const [history, setHistory] = useState<Record<string, string>[]>([{ ...LIGHT_DEFAULTS }])
   const [historyIndex, setHistoryIndex] = useState<number>(0)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const { addToast } = useToast()
 
   const currentValues = useMemo(() => history[historyIndex] ?? defaults, [history, historyIndex, defaults])
 
@@ -69,6 +75,44 @@ export const useThemeHistory = () => {
 
   // JSON Export / Import
   const handleExportJSON = useCallback(() => {
+    let filename = `lithos-theme-custom-${previewMode}.json`
+
+    // Check for exact preset match
+    for (const preset of PRESET_THEMES) {
+      if (preset.mode !== previewMode) continue
+
+      let matches = true
+      for (const prop of THEME_PROPERTIES) {
+        const currentVal = currentValues[prop.key] ?? defaults[prop.key] ?? ''
+        const presetVal = preset.values[prop.key] ?? defaults[prop.key] ?? ''
+        if (currentVal !== presetVal) {
+          matches = false
+          break
+        }
+      }
+
+      if (matches) {
+        filename = `lithos-theme-${preset.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.json`
+        break
+      }
+    }
+
+    // Check for default match if no preset matched
+    if (filename.includes('custom')) {
+      let matchesDefault = true
+      for (const prop of THEME_PROPERTIES) {
+        const currentVal = currentValues[prop.key] ?? defaults[prop.key] ?? ''
+        const defaultVal = defaults[prop.key] ?? ''
+        if (currentVal !== defaultVal) {
+          matchesDefault = false
+          break
+        }
+      }
+      if (matchesDefault) {
+        filename = `lithos-theme-default-${previewMode}.json`
+      }
+    }
+
     const data = {
       mode: previewMode,
       values: currentValues,
@@ -77,10 +121,16 @@ export const useThemeHistory = () => {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `lithos-theme-${previewMode}.json`
+    a.download = filename
     a.click()
     URL.revokeObjectURL(url)
-  }, [previewMode, currentValues])
+
+    addToast({
+      message: `Exported ${filename}`,
+      intent: 'accent',
+      duration: 3000,
+    })
+  }, [previewMode, currentValues, defaults, addToast])
 
   const handleImportJSON = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -102,15 +152,26 @@ export const useThemeHistory = () => {
               }
             }
             pushState({ ...defaults, ...validValues })
+
+            addToast({
+              message: 'Config imported successfully',
+              intent: 'accent',
+              duration: 2000,
+            })
           }
         } catch (err) {
           console.error('Failed to parse theme JSON:', err)
+          addToast({
+            message: 'Failed to import config. Invalid JSON.',
+            intent: 'error',
+            duration: 3000,
+          })
         }
       }
       reader.readAsText(file)
       e.target.value = ''
     },
-    [defaults, pushState]
+    [defaults, pushState, addToast]
   )
 
   // Global Keyboard Shortcuts (Ctrl+Z / Ctrl+Y / Cmd+Z / Cmd+Shift+Z)
@@ -161,6 +222,26 @@ export const useThemeHistory = () => {
   const geometryProps = THEME_PROPERTIES.filter((p) => p.section === 'geometry')
   const shadowProps = THEME_PROPERTIES.filter((p) => p.section === 'shadow')
 
+  // Determine active preset dynamically
+  const activePresetId = useMemo(() => {
+    for (const preset of PRESET_THEMES) {
+      if (preset.mode !== previewMode) continue
+
+      let matches = true
+      for (const prop of THEME_PROPERTIES) {
+        const currentVal = currentValues[prop.key] ?? defaults[prop.key] ?? ''
+        const presetVal = preset.values[prop.key] ?? defaults[prop.key] ?? ''
+        if (currentVal !== presetVal) {
+          matches = false
+          break
+        }
+      }
+
+      if (matches) return preset.id
+    }
+    return ''
+  }, [currentValues, previewMode, defaults])
+
   return {
     // Mode & tabs
     previewMode,
@@ -196,5 +277,6 @@ export const useThemeHistory = () => {
     // Computed
     previewStyle,
     generatedCSS,
+    activePresetId,
   }
 }

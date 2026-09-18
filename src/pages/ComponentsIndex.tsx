@@ -127,7 +127,7 @@ const TooltipPreview = () => (
       <TooltipTrigger asChild>
         <Button>Hover Me</Button>
       </TooltipTrigger>
-      <TooltipContent portaled={false}>Tooltips provide context</TooltipContent>
+      <TooltipContent>Tooltips provide context</TooltipContent>
     </Tooltip>
   </div>
 )

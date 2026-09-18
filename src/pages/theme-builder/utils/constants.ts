@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Core constants and configuration for the Theme Builder.
+ * Defines available design tokens, pre-built themes, and default values.
+ */
 import type { ThemeProperty, ThemePreset } from './types'
 
 export const THEME_PROPERTIES: ThemeProperty[] = [
@@ -15,7 +19,7 @@ export const THEME_PROPERTIES: ThemeProperty[] = [
   },
   {
     key: '--lithos-radius',
-    label: 'Corner radius',
+    label: 'Radius',
     section: 'geometry',
     type: 'range',
     min: 0,
@@ -31,7 +35,7 @@ export const LIGHT_DEFAULTS: Record<string, string> = {
   '--lithos-border': '#000000',
   '--lithos-accent': '#00ff00',
   '--lithos-surface': '#ffffff',
-  '--lithos-muted': 'rgba(0, 0, 0, 0.3)',
+  '--lithos-muted': 'rgba(0, 0, 0, 1)',
   '--lithos-shadow': 'rgba(0, 0, 0, 1)',
   '--lithos-radius': '0px',
 }
@@ -42,7 +46,7 @@ export const DARK_DEFAULTS: Record<string, string> = {
   '--lithos-border': '#ffffff',
   '--lithos-accent': '#00ff00',
   '--lithos-surface': '#000000',
-  '--lithos-muted': 'rgba(255, 255, 255, 0.3)',
+  '--lithos-muted': 'rgba(255, 255, 255, 1)',
   '--lithos-shadow': 'rgba(255, 255, 255, 1)',
   '--lithos-radius': '0px',
 }
@@ -70,7 +74,7 @@ export const PRESET_THEMES: ThemePreset[] = [
       '--lithos-border': '#ff007f',
       '--lithos-accent': '#ff007f',
       '--lithos-surface': '#121225',
-      '--lithos-muted': 'rgba(0, 255, 204, 0.3)',
+      '--lithos-muted': 'rgba(0, 255, 204, 1)',
       '--lithos-shadow': 'rgba(255, 0, 127, 1)',
       '--lithos-radius': '4px',
     },
@@ -85,7 +89,7 @@ export const PRESET_THEMES: ThemePreset[] = [
       '--lithos-border': '#f59e0b',
       '--lithos-accent': '#fbbf24',
       '--lithos-surface': '#262421',
-      '--lithos-muted': 'rgba(245, 158, 11, 0.3)',
+      '--lithos-muted': 'rgba(245, 158, 11, 1)',
       '--lithos-shadow': 'rgba(245, 158, 11, 1)',
       '--lithos-radius': '0px',
     },
@@ -100,7 +104,7 @@ export const PRESET_THEMES: ThemePreset[] = [
       '--lithos-border': '#268bd2',
       '--lithos-accent': '#b58900',
       '--lithos-surface': '#eee8d5',
-      '--lithos-muted': 'rgba(38, 139, 210, 0.3)',
+      '--lithos-muted': 'rgba(38, 139, 210, 1)',
       '--lithos-shadow': 'rgba(38, 139, 210, 1)',
       '--lithos-radius': '8px',
     },
@@ -115,7 +119,7 @@ export const PRESET_THEMES: ThemePreset[] = [
       '--lithos-border': '#10b981',
       '--lithos-accent': '#34d399',
       '--lithos-surface': '#0f2923',
-      '--lithos-muted': 'rgba(16, 185, 129, 0.3)',
+      '--lithos-muted': 'rgba(16, 185, 129, 1)',
       '--lithos-shadow': 'rgba(16, 185, 129, 1)',
       '--lithos-radius': '2px',
     },
