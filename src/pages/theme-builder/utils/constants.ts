@@ -15,7 +15,7 @@ export const THEME_PROPERTIES: ThemeProperty[] = [
   },
   {
     key: '--lithos-radius',
-    label: 'Corner radius',
+    label: 'Radius',
     section: 'geometry',
     type: 'range',
     min: 0,

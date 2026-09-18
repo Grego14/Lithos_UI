@@ -118,6 +118,54 @@ export const PropertyControl = ({ property, value, onChange, variant = 'default'
     )
   }
 
+  if (property.type === 'opacity') {
+    let opacity = 30
+    let r = 0,
+      g = 0,
+      b = 0
+
+    const parsed = parseRgba(value)
+    if (parsed) {
+      r = parsed.r
+      g = parsed.g
+      b = parsed.b
+      opacity = Math.round(parsed.a * 100)
+    }
+
+    const handleOpacityChange = (newOpacity: number) => {
+      onChange(key, `rgba(${r}, ${g}, ${b}, ${newOpacity / 100})`)
+    }
+
+    return (
+      <div
+        className={`flex flex-col space-y-1 ${variant === 'inline' ? 'w-full' : 'border-2 border-(--lithos-border) rounded-(--lithos-radius) bg-(--lithos-surface) p-4'}`}
+      >
+        <div className="flex justify-between items-center">
+          <span className="text-[13px] font-bold uppercase">{label}</span>
+          <Badge intent="accent">{opacity}%</Badge>
+        </div>
+        <div className="relative w-full h-6 flex flex-col justify-center mt-2">
+          <div className="w-full h-1.5 border border-(--lithos-border) bg-(--lithos-bg) absolute top-1/2 -translate-y-1/2 z-0 pointer-events-none rounded-(--lithos-radius)"></div>
+          <input
+            type="range"
+            min={0}
+            max={100}
+            value={opacity}
+            onChange={(e) => handleOpacityChange(parseInt(e.target.value))}
+            className="absolute z-10 w-full appearance-none bg-transparent cursor-pointer h-full
+              [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-(--lithos-accent) [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-(--lithos-border) [&::-webkit-slider-thumb]:shadow-[2px_2px_0_0_var(--lithos-shadow)] [&::-webkit-slider-thumb]:rounded-(--lithos-radius)
+              [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:bg-(--lithos-accent) [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-(--lithos-border) [&::-moz-range-thumb]:shadow-[2px_2px_0_0_var(--lithos-shadow)] [&::-moz-range-thumb]:rounded-(--lithos-radius)"
+          />
+        </div>
+        <div className="flex justify-between text-[10px] font-mono text-(--lithos-muted) font-bold uppercase mt-1">
+          <span>0%</span>
+          <span>50%</span>
+          <span>100%</span>
+        </div>
+      </div>
+    )
+  }
+
   const numVal = parseInt(value.toString().replace(unit, '')) || 0
   const isRadius = label.toLowerCase().includes('radius')
 

@@ -65,31 +65,37 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
 
           {/* 2. Actions (Mobile: Top Right | Desktop: Far Right) */}
           <div className="flex items-center space-x-2 md:space-x-4 shrink-0 order-2 md:order-3">
-            <Button variant="secondary" onClick={toggleFullscreen} className="text-xs px-3 whitespace-nowrap space-x-2">
-              {isFullscreen ? <IconMinimize size={14} /> : <IconMaximize size={14} />}
-              {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+            <Button
+              variant="secondary"
+              onClick={toggleFullscreen}
+              className="p-2"
+              aria-label={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+            >
+              {isFullscreen ? <IconMinimize size={16} /> : <IconMaximize size={16} />}
             </Button>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button variant="primary" className="whitespace-nowrap shrink-0 space-x-2">
-                  Actions
-                  <IconChevronDown size={16} />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent
-                portaled={false}
-                className="p-2 w-48 shadow-[4px_4px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius) theme-builder-floating"
-              >
-                <ButtonGroup mode="vertical" className="w-full">
-                  <Button variant="secondary" fullWidth className="hover:bg-(--lithos-accent) justify-start">
-                    Settings
+            <div>
+              <Popover modal={false}>
+                <PopoverTrigger asChild>
+                  <Button variant="primary" className="whitespace-nowrap shrink-0 space-x-2">
+                    Actions
+                    <IconChevronDown size={16} />
                   </Button>
-                  <Button variant="secondary" fullWidth className="hover:bg-(--lithos-accent) justify-start">
-                    Logout
-                  </Button>
-                </ButtonGroup>
-              </PopoverContent>
-            </Popover>
+                </PopoverTrigger>
+                <PopoverContent
+                  portaled={false}
+                  className="p-2 w-48 shadow-[4px_4px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius) theme-builder-floating"
+                >
+                  <ButtonGroup mode="vertical" className="w-full">
+                    <Button variant="secondary" fullWidth className="hover:bg-(--lithos-accent) justify-start">
+                      Settings
+                    </Button>
+                    <Button variant="secondary" fullWidth className="hover:bg-(--lithos-accent) justify-start">
+                      Logout
+                    </Button>
+                  </ButtonGroup>
+                </PopoverContent>
+              </Popover>
+            </div>
           </div>
 
           {/* 3. Breadcrumb (Mobile: Bottom Row Full Width | Desktop: Middle Flexible) */}
@@ -342,11 +348,13 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
               <div className="flex flex-col space-y-6 mt-6 w-full min-w-0">
                 <div className="flex flex-wrap items-center justify-between space-x-4 border-b border-(--lithos-border)/10 pb-4 w-full">
                   <span className="font-bold text-sm sm:text-base">Yearly Billing</span>
-                  <Toggle
-                    checked={yearlyBilling}
-                    onToggle={() => setYearlyBilling(!yearlyBilling)}
-                    label="Toggle yearly billing"
-                  />
+                  <div className="shrink-0">
+                    <Toggle
+                      checked={yearlyBilling}
+                      onToggle={() => setYearlyBilling(!yearlyBilling)}
+                      label="Toggle yearly billing"
+                    />
+                  </div>
                 </div>
 
                 <div className="flex flex-col space-y-3 border-b border-(--lithos-border)/10 pb-4 w-full min-w-0">
