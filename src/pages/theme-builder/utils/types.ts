@@ -1,3 +1,7 @@
+/**
+ * @fileoverview TypeScript definitions and interfaces used across the Theme Builder.
+ * Defines the shapes for theme tokens, history states, and property controls.
+ */
 export type PropertyType = 'color' | 'range' | 'opacity' | 'shadow'
 
 export interface ThemeProperty {

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Custom hook for managing the undo/redo history stack of theme changes.
+ * Allows users to revert or re-apply token modifications during the theme building process.
+ */
 import { useState, useCallback, useMemo, useEffect, useRef, type ChangeEvent } from 'react'
 import { THEME_PROPERTIES, LIGHT_DEFAULTS, DARK_DEFAULTS, PRESET_THEMES } from '../utils/constants'
 import { useToast } from '../../../core/hooks/useToast'

@@ -1,3 +1,8 @@
+/**
+ * @fileoverview The live preview sandbox for the Theme Builder.
+ * Renders various Lithos UI components (cards, inputs, badges) in a grid to demonstrate
+ * how the current theme tokens apply to real-world UI elements.
+ */
 import React, { useState } from 'react'
 import { Button, ButtonGroup } from '../../../components/ui/Button'
 import { Input } from '../../../components/ui/Input'

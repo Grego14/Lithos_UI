@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Core constants and configuration for the Theme Builder.
+ * Defines available design tokens, pre-built themes, and default values.
+ */
 import type { ThemeProperty, ThemePreset } from './types'
 
 export const THEME_PROPERTIES: ThemeProperty[] = [

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Utility functions for the Theme Builder.
+ * Includes helpers for color manipulation, CSS generation, and string formatting.
+ */
 export const parseRgba = (value: string): { r: number; g: number; b: number; a: number } | null => {
   const match = value.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+))?\s*\)/)
   if (!match) return null

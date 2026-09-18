@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Component for rendering individual theme property controls (color pickers, range sliders).
+ * Handles user input and visual feedback for customizing design tokens.
+ */
 import { Input } from '../../../components/ui/Input'
 import type { ThemeProperty } from '../utils/types'
 import { parseRgba, rgbToHex, hexToRgb } from '../utils/helpers'
