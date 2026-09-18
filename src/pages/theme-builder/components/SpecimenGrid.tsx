@@ -64,18 +64,18 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
 
   const containerClasses = isFullscreen
     ? 'fixed inset-0 z-[100] overflow-y-auto bg-(--lithos-bg) text-(--lithos-text)'
-    : 'relative w-full overflow-x-hidden'
+    : 'relative w-full overflow-x-hidden @container'
 
   return (
     <div className={containerClasses}>
       {/* Navbar */}
-      <header className="px-4 md:px-6 py-4 border-b border-(--lithos-border)/15 bg-(--lithos-surface) sticky top-0 z-40 shadow-sm w-full">
+      <header className="px-4 @md:px-6 py-4 border-b border-(--lithos-border)/15 bg-(--lithos-surface) sticky top-0 z-40 shadow-sm w-full">
         <div className="flex flex-wrap items-center justify-between space-y-4 space-x-4">
           {/* 1. Logo (Always left) */}
           <div className="font-black tracking-tight text-xl shrink-0 order-1">LITHOS</div>
 
           {/* 2. Actions (Mobile: Top Right | Desktop: Far Right) */}
-          <div className="flex items-center space-x-2 md:space-x-4 shrink-0 order-2 md:order-3">
+          <div className="flex items-center space-x-2 @md:space-x-4 shrink-0 order-2 @md:order-3">
             <Button
               variant="secondary"
               onClick={toggleFullscreen}
@@ -110,7 +110,7 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
           </div>
 
           {/* 3. Breadcrumb (Mobile: Bottom Row Full Width | Desktop: Middle Flexible) */}
-          <div className="order-3 md:order-2 basis-full md:basis-auto w-full md:w-auto md:flex-1 min-w-0 overflow-x-auto no-scrollbar">
+          <div className="order-3 @md:order-2 basis-full @md:basis-auto w-full @md:w-auto @md:flex-1 min-w-0 overflow-x-auto no-scrollbar">
             <div className="flex items-center min-w-max py-2">
               <Breadcrumb>
                 <BreadcrumbList>
