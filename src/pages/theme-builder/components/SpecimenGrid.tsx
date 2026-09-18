@@ -39,21 +39,27 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
   const [newsletter, setNewsletter] = useState(false)
   const [yearlyBilling, setYearlyBilling] = useState(true)
   const [role, setRole] = useState('Developer')
+  const [email, setEmail] = useState('')
+  const [unlimited, setUnlimited] = useState(true)
+  const [premium, setPremium] = useState(true)
+  const [support, setSupport] = useState(false)
   const { addToast } = useToast()
 
   const handleSubscribe = () => {
+    if (!email) return
     addToast({
       title: 'Subscribed',
       message: 'You have been added to the waitlist.',
       intent: 'accent',
     })
+    setEmail('')
   }
 
   const toggleFullscreen = () => setIsFullscreen(!isFullscreen)
 
   const containerClasses = isFullscreen
-    ? 'fixed inset-0 z-[100] overflow-y-auto no-scrollbar bg-(--lithos-bg) text-(--lithos-text)'
-    : 'relative overflow-y-auto w-full h-full no-scrollbar overflow-x-hidden'
+    ? 'fixed inset-0 z-[100] overflow-y-auto bg-(--lithos-bg) text-(--lithos-text)'
+    : 'relative w-full overflow-x-hidden'
 
   return (
     <div className={containerClasses}>
@@ -132,7 +138,9 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
         <div className="w-full max-w-5xl mx-auto text-center px-4 sm:px-6 flex flex-col items-center space-y-6 sm:space-y-8">
           <div className="flex justify-center w-full min-w-0 px-2">
             <Alert intent="accent" size="sm" title="Lithos V2.0" className="text-left w-full sm:w-auto max-w-lg">
-              Discover the new set of components in our brutalist design system.
+              <span className="text-(--lithos-muted)">
+                Discover the new set of components in our brutalist design system.
+              </span>
             </Alert>
           </div>
 
@@ -148,37 +156,41 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
             accessible, and stunning interfaces.
           </p>
 
-          <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center space-y-3 sm:space-x-4 sm:space-y-0 pt-4 w-full sm:w-auto px-2 sm:px-4">
-            <Tooltip placement="top">
-              <TooltipTrigger asChild>
-                <Button
-                  variant="accent"
-                  className="flex-1 px-4 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg font-bold shrink-0 whitespace-nowrap"
-                  onClick={() => setIsDialogOpen(true)}
-                >
-                  Explore Components
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent className="rounded-(--lithos-radius) theme-builder-floating">
-                Interactive Demo
-              </TooltipContent>
-            </Tooltip>
-            <Button
-              variant="secondary"
-              className="flex-1 px-4 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg font-bold shrink-0 whitespace-nowrap"
-            >
-              View Docs
-            </Button>
+          <div className="flex flex-wrap justify-center items-center -m-2 pt-4 w-full px-2 sm:px-4">
+            <div className="p-2 w-full sm:w-auto flex">
+              <Tooltip placement="top">
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="accent"
+                    className="flex-1 px-4 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg font-bold shrink-0 whitespace-nowrap"
+                    onClick={() => setIsDialogOpen(true)}
+                  >
+                    Explore Components
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent className="rounded-(--lithos-radius) theme-builder-floating">
+                  Interactive Demo
+                </TooltipContent>
+              </Tooltip>
+            </div>
+            <div className="p-2 w-full sm:w-auto flex">
+              <Button
+                variant="secondary"
+                className="flex-1 px-4 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg font-bold shrink-0 whitespace-nowrap"
+              >
+                View Docs
+              </Button>
+            </div>
           </div>
         </div>
       </KineticGrid>
 
       {/* Social Proof */}
       <section className="flex flex-col sm:flex-row flex-wrap justify-center items-center space-y-3 sm:space-x-4 sm:space-y-0 pt-4 w-full sm:w-auto px-2 sm:px-4">
-        <span className="text-xs sm:text-sm font-bold opacity-60 uppercase tracking-widest shrink-0">
+        <span className="text-xs sm:text-sm font-bold text-(--lithos-muted) uppercase tracking-widest shrink-0">
           Trusted by builders
         </span>
-        <div className="flex justify-end sm:justify-center items-center min-w-0 overflow-hidden mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)">
+        <div className="flex justify-end sm:justify-center items-center min-w-0 pr-2 pb-2 pt-2">
           <div className="flex shrink-0">
             <AvatarGroup
               size="md"
@@ -220,24 +232,24 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
                 interactive
                 className="w-full max-w-full sm:max-w-sm relative z-10 sm:rotate-1 sm:hover:rotate-0 transition-transform duration-300 shadow-[6px_6px_0_0_var(--lithos-shadow)] sm:shadow-[8px_8px_0_0_var(--lithos-shadow)] bg-(--lithos-surface) rounded-(--lithos-radius)"
               >
-                <CardContent spacing="lg" className="p-6 sm:p-8">
-                  <div className="flex flex-wrap justify-between items-start space-x-4 mb-6">
-                    <div className="space-y-3 min-w-0 flex-1">
+                <CardContent spacing="md" className="p-5">
+                  <div className="flex flex-col space-y-4 mb-6 w-full">
+                    <div className="flex justify-between items-center w-full">
                       <Badge
                         intent="accent"
                         className="font-black tracking-widest text-[10px] px-2 py-1 shadow-none border-[3px] border-(--lithos-border)"
                       >
-                        PRO PLAN
+                        OPEN SOURCE
                       </Badge>
-                      <CardTitle className="text-2xl sm:text-3xl font-black uppercase tracking-tight truncate">
-                        Lithos Pro
-                      </CardTitle>
-                    </div>
-                    <div className="text-left sm:text-right flex flex-col sm:items-end shrink-0">
-                      <h2 className="text-4xl sm:text-5xl font-black leading-none tracking-tighter">$29</h2>
-                      <span className="text-[10px] font-black text-(--lithos-muted) uppercase tracking-widest mt-2 block">
-                        Per Month
+                      <span className="text-[10px] font-black text-(--lithos-muted) uppercase tracking-widest block">
+                        Forever
                       </span>
+                    </div>
+                    <div className="flex justify-between items-end w-full">
+                      <CardTitle className="text-xl font-black uppercase tracking-tight truncate pr-2">
+                        Lithos UI
+                      </CardTitle>
+                      <h2 className="text-4xl font-black leading-none tracking-tighter shrink-0">FREE</h2>
                     </div>
                   </div>
 
@@ -247,22 +259,34 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
 
                   <div className="flex flex-col space-y-4 pt-6 border-t-[3px] border-(--lithos-border) border-dashed mt-6 w-full">
                     <Checkbox
-                      checked={true}
-                      onChange={() => {}}
+                      checked={unlimited}
+                      onChange={(e) => setUnlimited(e.target.checked)}
                       label={
-                        <span className="font-bold text-sm sm:text-base wrap-break-word">Unlimited Components</span>
+                        <span
+                          className={`font-bold text-sm sm:text-base wrap-break-word ${!unlimited && 'text-(--lithos-muted)'}`}
+                        >
+                          Unlimited Components
+                        </span>
                       }
                     />
                     <Checkbox
-                      checked={true}
-                      onChange={() => {}}
-                      label={<span className="font-bold text-sm sm:text-base wrap-break-word">Premium Themes</span>}
+                      checked={premium}
+                      onChange={(e) => setPremium(e.target.checked)}
+                      label={
+                        <span
+                          className={`font-bold text-sm sm:text-base wrap-break-word ${!premium && 'text-(--lithos-muted)'}`}
+                        >
+                          Premium Themes
+                        </span>
+                      }
                     />
                     <Checkbox
-                      checked={false}
-                      onChange={() => {}}
+                      checked={support}
+                      onChange={(e) => setSupport(e.target.checked)}
                       label={
-                        <span className="font-bold text-(--lithos-muted) text-sm sm:text-base wrap-break-word">
+                        <span
+                          className={`font-bold text-sm sm:text-base wrap-break-word ${!support && 'text-(--lithos-muted)'}`}
+                        >
                           Dedicated Support
                         </span>
                       }
@@ -276,7 +300,7 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
                       className="group relative overflow-hidden text-base sm:text-lg font-black py-4 sm:py-6 border-[3px] border-(--lithos-border) rounded-(--lithos-radius)"
                     >
                       <span className="relative z-10 transition-transform duration-300 group-hover:scale-105 inline-block tracking-widest uppercase">
-                        Upgrade Now
+                        Start Building
                       </span>
                       <div className="absolute inset-0 bg-black/10 translate-y-[101%] group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
                     </Button>
@@ -295,19 +319,19 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
                     language="tsx"
                     className="border-none shadow-none rounded-none w-full"
                     code={`<Card interactive className="w-full max-w-sm rotate-1 hover:rotate-0 transition-transform shadow-[8px_8px_0_0_var(--lithos-shadow)]">
-  <CardContent spacing="lg" className="p-8">
-    <div className="flex justify-between items-start mb-6">
-      <div className="space-y-3">
+  <CardContent spacing="md" className="p-5">
+    <div className="flex flex-col space-y-4 mb-6 w-full">
+      <div className="flex justify-between items-center w-full">
         <Badge intent="accent" className="font-black tracking-widest text-[10px] px-2 py-1 shadow-none border-[3px]">
-          PRO PLAN
+          OPEN SOURCE
         </Badge>
-        <CardTitle className="text-3xl font-black uppercase tracking-tight">Lithos Pro</CardTitle>
-      </div>
-      <div className="text-right flex flex-col items-end">
-        <h2 className="text-5xl font-black leading-none tracking-tighter">$29</h2>
-        <span className="text-[10px] font-black text-muted uppercase tracking-widest mt-2 block">
-          Per Month
+        <span className="text-[10px] font-black text-muted uppercase tracking-widest block">
+          Forever
         </span>
+      </div>
+      <div className="flex justify-between items-end w-full">
+        <CardTitle className="text-xl font-black uppercase tracking-tight pr-2">Lithos UI</CardTitle>
+        <h2 className="text-4xl font-black leading-none tracking-tighter shrink-0">FREE</h2>
       </div>
     </div>
     
@@ -323,7 +347,7 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
     
     <div className="pt-8">
       <Button variant="primary" fullWidth className="text-lg font-black py-6 border-[3px]">
-        UPGRADE NOW
+        START BUILDING
       </Button>
     </div>
   </CardContent>
@@ -359,16 +383,17 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
 
                 <div className="flex flex-col space-y-3 border-b border-(--lithos-border)/10 pb-4 w-full min-w-0">
                   <span className="font-bold text-sm sm:text-base block">Primary Role</span>
-                  <div className="flex flex-wrap space-x-2 w-full">
+                  <div className="flex flex-wrap -m-1 w-full">
                     {['Developer', 'Designer', 'Manager'].map((r) => (
-                      <Button
-                        key={r}
-                        variant={role === r ? 'primary' : 'secondary'}
-                        onClick={() => setRole(r)}
-                        className="flex-1 sm:flex-none text-xs sm:text-sm py-2 px-4 rounded-(--lithos-radius)"
-                      >
-                        {r}
-                      </Button>
+                      <div key={r} className="p-1 flex-1 sm:flex-none">
+                        <Button
+                          variant={role === r ? 'primary' : 'secondary'}
+                          onClick={() => setRole(r)}
+                          className="w-full text-xs sm:text-sm py-2 px-4 rounded-(--lithos-radius)"
+                        >
+                          {r}
+                        </Button>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -426,7 +451,7 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
       </section>
 
       {/* FAQ Accordion */}
-      <section className="px-4 sm:px-6 py-16 sm:py-24 w-full max-w-4xl mx-auto">
+      <section className="px-4 sm:px-6 py-8 sm:py-12 w-full max-w-4xl mx-auto">
         <h2 className="text-3xl sm:text-4xl font-black uppercase text-center mb-8 sm:mb-12">FAQ</h2>
         <div className="flex flex-col space-y-4 w-full min-w-0">
           <Accordion title="Is this free to use?">
@@ -451,16 +476,26 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
           </h2>
 
           <div
-            className={`${PANEL} p-6 sm:p-8 flex flex-col sm:flex-row flex-wrap space-y-4 sm:space-x-4 sm:space-y-0 bg-(--lithos-surface) text-(--lithos-text) w-full rounded-(--lithos-radius) shadow-[6px_6px_0_0_var(--lithos-shadow)]`}
+            className={`${PANEL} p-4 sm:p-6 flex flex-wrap -m-2 bg-(--lithos-surface) text-(--lithos-text) w-full rounded-(--lithos-radius) shadow-[6px_6px_0_0_var(--lithos-shadow)] justify-start`}
           >
-            <Input placeholder="Email Address" className="w-full sm:flex-1 min-w-0 rounded-(--lithos-radius)" />
-            <Button
-              variant="primary"
-              onClick={handleSubscribe}
-              className="w-full md:w-auto shrink-0 px-8 py-3 rounded-(--lithos-radius)"
-            >
-              Subscribe
-            </Button>
+            <div className="p-2 flex-auto min-w-[250px]">
+              <Input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email Address"
+                className="w-full min-w-0 rounded-(--lithos-radius)"
+              />
+            </div>
+            <div className="p-2 flex-auto min-w-[150px]">
+              <Button
+                variant="primary"
+                onClick={handleSubscribe}
+                fullWidth
+                className="px-8 py-3 font-bold rounded-(--lithos-radius)"
+              >
+                Subscribe
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -528,7 +563,7 @@ export const SpecimenGrid = ({ style, accentColor }: { style: React.CSSPropertie
           --lithos-accent-text: ${accentText} !important;
         }
       `}</style>
-      <ToastProvider className="theme-builder-floating">
+      <ToastProvider className="theme-builder-floating !z-[150]">
         <AccentColorProvider color={currentAccent}>
           <LandingPageContent style={{ ...style, '--lithos-accent-text': accentText } as React.CSSProperties} />
         </AccentColorProvider>

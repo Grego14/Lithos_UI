@@ -302,7 +302,7 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
                     })
                   }}
                   iconLeft={<IconCopy size={14} strokeWidth={3} />}
-                  className="px-4 py-2 font-black uppercase tracking-wider text-[11px] whitespace-nowrap shadow-[3px_3px_0_0_var(--lithos-shadow)] hover:shadow-[3px_3px_0_0_var(--lithos-shadow)] active:translate-y-[2px] active:translate-x-[2px] active:shadow-[1px_1px_0_0_var(--lithos-shadow)]"
+                  className="px-4 py-2 font-black uppercase tracking-wider text-[11px] whitespace-nowrap"
                 >
                   Copy CSS
                 </Button>
@@ -335,50 +335,54 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
               )}
 
               {stageTab === 'swatches' && (
-                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+                <div className="flex flex-wrap -m-2 sm:-m-3">
                   {THEME_PROPERTIES.map((prop) => {
                     const val = currentValues[prop.key] ?? defaults[prop.key] ?? ''
                     return (
-                      <Card key={prop.key} className="flex flex-col h-full overflow-hidden">
-                        <div
-                          className="h-28 sm:h-32 w-full flex items-center justify-center border-b-[3px] border-(--lithos-border) shrink-0"
-                          style={{
-                            backgroundColor:
-                              prop.type === 'color' && (val.startsWith('rgba') || val.startsWith('#'))
-                                ? val
-                                : 'var(--lithos-surface)',
-                          }}
-                        >
-                          <span
-                            className="text-[10px] sm:text-xs font-mono font-bold bg-(--lithos-surface) text-(--lithos-text) px-3 py-1.5 border-[3px] border-(--lithos-border) rounded-(--lithos-radius) cursor-pointer"
-                            onClick={() => {
-                              navigator.clipboard.writeText(val)
-                              addToast({
-                                message: `Copied ${val} to clipboard`,
-                                intent: 'accent',
-                                duration: 2000,
-                              })
-                            }}
+                      <div key={prop.key} className="w-1/2 lg:w-1/3 xl:w-1/4 p-2 sm:p-3 flex">
+                        <Card className="flex flex-col flex-1 w-full overflow-hidden">
+                          <div
+                            className="h-28 sm:h-32 w-full flex items-center justify-center border-b-[3px] border-(--lithos-border) shrink-0"
                             style={{
-                              boxShadow:
-                                prop.type === 'shadow' ? `4px 4px 0 0 ${val}` : '3px 3px 0 0 var(--lithos-shadow)',
-                              borderRadius:
-                                prop.type === 'range' && prop.key === '--lithos-radius' ? val : 'var(--lithos-radius)',
+                              backgroundColor:
+                                prop.type === 'color' && (val.startsWith('rgba') || val.startsWith('#'))
+                                  ? val
+                                  : 'var(--lithos-surface)',
                             }}
                           >
-                            {val}
-                          </span>
-                        </div>
+                            <span
+                              className="inline-block max-w-[85%] text-center break-words text-[10px] sm:text-xs font-mono font-bold bg-(--lithos-surface) text-(--lithos-text) px-3 py-1.5 border-[3px] border-(--lithos-border) rounded-(--lithos-radius) cursor-pointer"
+                              onClick={() => {
+                                navigator.clipboard.writeText(val)
+                                addToast({
+                                  message: `Copied ${val} to clipboard`,
+                                  intent: 'accent',
+                                  duration: 2000,
+                                })
+                              }}
+                              style={{
+                                boxShadow:
+                                  prop.type === 'shadow' ? `4px 4px 0 0 ${val}` : '3px 3px 0 0 var(--lithos-shadow)',
+                                borderRadius:
+                                  prop.type === 'range' && prop.key === '--lithos-radius'
+                                    ? val
+                                    : 'var(--lithos-radius)',
+                              }}
+                            >
+                              {val}
+                            </span>
+                          </div>
 
-                        <CardContent className="p-4 sm:p-5 flex flex-col space-y-2 flex-1 justify-start bg-(--lithos-surface) min-w-0">
-                          <p className="text-xs sm:text-sm font-black uppercase tracking-wider text-(--lithos-text) truncate">
-                            {prop.label}
-                          </p>
-                          <code className="text-[10px] sm:text-[11px] font-mono text-(--lithos-muted) font-bold p-1.5 bg-(--lithos-bg) border-2 border-(--lithos-border)/20 rounded break-all whitespace-normal">
-                            {prop.key}
-                          </code>
-                        </CardContent>
-                      </Card>
+                          <CardContent className="p-4 sm:p-5 flex flex-col space-y-2 flex-1 justify-start bg-(--lithos-surface) min-w-0">
+                            <p className="text-xs sm:text-sm font-black uppercase tracking-wider text-(--lithos-text) break-words">
+                              {prop.label}
+                            </p>
+                            <code className="text-[10px] sm:text-[11px] font-mono text-(--lithos-muted) font-bold p-1.5 bg-(--lithos-bg) border-2 border-(--lithos-border)/20 rounded break-words whitespace-normal w-full inline-block">
+                              {prop.key}
+                            </code>
+                          </CardContent>
+                        </Card>
+                      </div>
                     )
                   })}
                 </div>
