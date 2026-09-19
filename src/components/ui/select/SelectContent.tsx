@@ -15,7 +15,7 @@ import { SelectItem } from './SelectItem'
 import { useVirtualizer } from '../../../core/hooks/useVirtualizer'
 import type { SelectOption } from './select.types'
 
-export interface SelectContentProps extends Omit<ComponentPropsWithRef<'ul'>, 'className'> {
+export interface SelectContentProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   children?: ReactNode
   className?: LithosClass
   loop?: boolean
@@ -35,7 +35,7 @@ export const SelectContent = ({
 }: SelectContentProps) => {
   const { selectedValue, activeIndex, setActiveIndex, elementsRef, labelsRef, handleSelect, open, options, setOpen } =
     useSelect()
-  const { getFloatingProps, refs } = usePopoverContext()
+  const { refs } = usePopoverContext()
 
   const shouldVirtualize =
     Array.isArray(options) &&
@@ -155,7 +155,7 @@ export const SelectContent = ({
     return currentIndex
   }
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLUListElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Escape') {
       e.preventDefault()
       e.stopPropagation()
@@ -230,7 +230,7 @@ export const SelectContent = ({
     }
   }
 
-  const handleListClick = (e: MouseEvent<HTMLUListElement>) => {
+  const handleListClick = (e: MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement | null
     const item = target?.closest<HTMLLIElement>('[role="option"]')
     if (!item) return
@@ -256,22 +256,17 @@ export const SelectContent = ({
     <FloatingList elementsRef={elementsRef} labelsRef={labelsRef}>
       <PopoverContent
         ref={containerRef}
-        className={['p-1 flex flex-col space-y-1 max-h-60 overflow-y-auto outline-none', className]}
-        {...getFloatingProps({
-          onKeyDown: handleKeyDown,
-          onClick: handleListClick,
-          ...rest,
-          'aria-describedby': undefined,
-        })}
+        className={[
+          'p-1 max-h-60 overflow-y-auto [scrollbar-gutter:stable] [clip-path:inset(0_round_var(--lithos-radius))]',
+          className,
+        ]}
+        {...rest}
+        aria-describedby={undefined}
+        onKeyDown={handleKeyDown}
+        onClick={handleListClick}
       >
         {shouldVirtualize && options ? (
-          <ul
-            style={{
-              height: `${totalHeight}px`,
-              width: '100%',
-              position: 'relative',
-            }}
-          >
+          <ul className="relative w-full pr-2" style={{ height: `${totalHeight}px` }}>
             {virtualItems.map((virtualItem) => {
               const option = options[virtualItem.index]
               if (!option) return null
