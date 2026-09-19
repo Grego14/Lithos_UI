@@ -183,7 +183,9 @@ export const CalendarDoc = () => {
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={singleCode} githubUrl={githubUrl}>
-          <Calendar mode="single" />
+          <div className="scale-[0.85] sm:scale-100">
+            <Calendar mode="single" />
+          </div>
         </PreviewBlock>
       </div>
 
@@ -198,7 +200,9 @@ export const CalendarDoc = () => {
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={multipleCode} githubUrl={githubUrl}>
-          <Calendar mode="multiple" />
+          <div className="scale-[0.85] sm:scale-100">
+            <Calendar mode="multiple" />
+          </div>
         </PreviewBlock>
       </div>
 
@@ -214,13 +218,15 @@ export const CalendarDoc = () => {
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={multiColorCode} githubUrl={githubUrl}>
-          <Calendar
-            mode="multiple"
-            dateColors={[
-              { dates: [4, 5], color: '#ff6b6b' },
-              { dates: [17, 18, 19], color: '#4dabf7' },
-            ]}
-          />
+          <div className="scale-[0.85] sm:scale-100">
+            <Calendar
+              mode="multiple"
+              dateColors={[
+                { dates: [4, 5], color: '#ff6b6b' },
+                { dates: [17, 18, 19], color: '#4dabf7' },
+              ]}
+            />
+          </div>
         </PreviewBlock>
       </div>
 
@@ -235,7 +241,9 @@ export const CalendarDoc = () => {
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={rainbowCode} githubUrl={githubUrl}>
-          <Calendar mode="rainbow" />
+          <div className="scale-[0.85] sm:scale-100">
+            <Calendar mode="rainbow" />
+          </div>
         </PreviewBlock>
       </div>
 
@@ -250,7 +258,9 @@ export const CalendarDoc = () => {
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={rangeCode} githubUrl={githubUrl}>
-          <Calendar mode="range" />
+          <div className="scale-[0.85] sm:scale-100">
+            <Calendar mode="range" />
+          </div>
         </PreviewBlock>
       </div>
 
@@ -265,7 +275,9 @@ export const CalendarDoc = () => {
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={disabledDatesCode} githubUrl={githubUrl}>
-          <Calendar mode="single" disabledDates={[10, 11, 18]} minDate={new Date()} />
+          <div className="scale-[0.85] sm:scale-100">
+            <Calendar mode="single" disabledDates={[10, 11, 18]} minDate={new Date()} />
+          </div>
         </PreviewBlock>
       </div>
 
@@ -280,7 +292,9 @@ export const CalendarDoc = () => {
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={boundedYearsCode} githubUrl={githubUrl}>
-          <Calendar mode="single" yearRange={[1940, new Date().getFullYear()]} />
+          <div className="scale-[0.85] sm:scale-100">
+            <Calendar mode="single" yearRange={[1940, new Date().getFullYear()]} />
+          </div>
         </PreviewBlock>
       </div>
 
@@ -295,7 +309,9 @@ export const CalendarDoc = () => {
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={controlledCode} githubUrl={githubUrl}>
-          <ControlledCalendar />
+          <div className="scale-[0.85] sm:scale-100">
+            <ControlledCalendar />
+          </div>
         </PreviewBlock>
       </div>
 
