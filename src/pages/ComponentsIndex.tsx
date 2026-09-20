@@ -16,6 +16,15 @@ import { Breadcrumb } from '../components/ui/Breadcrumb'
 import { Calendar } from '../components/ui/Calendar'
 import { Carousel, CarouselSlide } from '../components/ui/Carousel'
 import { Checkbox } from '../components/ui/Checkbox'
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+} from '../components/ui/DropdownMenu'
 import { Popover, PopoverTrigger, PopoverContent } from '../components/ui/Popover'
 import { Select } from '../components/ui/Select'
 import { IconClose } from '../components/ui/icons/IconClose'
@@ -89,6 +98,51 @@ const DialogPreview = () => (
       <Button className="text-sm">Delete</Button>
     </div>
   </div>
+)
+
+const DropdownMenuPreview = () => (
+  <DropdownMenu placement="bottom-start">
+    <DropdownMenuTrigger asChild>
+      <Button variant="accent">My account</Button>
+    </DropdownMenuTrigger>
+
+    <DropdownMenuContent className="w-56">
+      <DropdownMenuGroup label="Settings">
+        <DropdownMenuItem onClick={() => console.log('Go to profile')}>Profile</DropdownMenuItem>
+
+        <DropdownMenuItem onClick={() => console.log('Go to plan')}>Plan</DropdownMenuItem>
+
+        <DropdownMenuItem disabled className="flex flex-col items-start space-y-2">
+          <span>Integrations</span>
+          <span className="opacity-60">(Coming soon)</span>
+        </DropdownMenuItem>
+      </DropdownMenuGroup>
+
+      <DropdownMenuSeparator />
+
+      <DropdownMenuSub
+        trigger={
+          <span className="flex items-center justify-between w-full">
+            Preferences <span>▶</span>
+          </span>
+        }
+      >
+        <DropdownMenuItem>Dark Mode</DropdownMenuItem>
+        <DropdownMenuItem>Language</DropdownMenuItem>
+      </DropdownMenuSub>
+
+      <DropdownMenuSeparator />
+
+      <DropdownMenuGroup>
+        <DropdownMenuItem
+          onClick={() => console.log('Log out')}
+          className="text-red-500 hover:bg-red-500/5 focus:bg-red-500/5"
+        >
+          Log out
+        </DropdownMenuItem>
+      </DropdownMenuGroup>
+    </DropdownMenuContent>
+  </DropdownMenu>
 )
 
 const PopoverPreview = () => (
@@ -223,6 +277,11 @@ const componentsList = [
     name: 'Dialog',
     to: '/docs/dialog',
     preview: <DialogPreview />,
+  },
+  {
+    name: 'DropdownMenu',
+    to: '/docs/dropdown',
+    preview: <DropdownMenuPreview />,
   },
   {
     name: 'Input',
