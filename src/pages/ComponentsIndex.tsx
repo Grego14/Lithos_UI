@@ -122,12 +122,12 @@ const TabsPreview = () => (
 )
 
 const TooltipPreview = () => (
-  <div className="w-full scale-[0.7] origin-center flex justify-center pointer-events-none mt-2">
+  <div className="w-full scale-[0.7] origin-center flex justify-center pointer-events-none mt-10">
     <Tooltip initialOpen={true} placement="top">
       <TooltipTrigger asChild>
         <Button>Hover Me</Button>
       </TooltipTrigger>
-      <TooltipContent>Tooltips provide context</TooltipContent>
+      <TooltipContent className="z-0">Tooltips provide context</TooltipContent>
     </Tooltip>
   </div>
 )
