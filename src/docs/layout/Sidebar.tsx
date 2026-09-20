@@ -1,5 +1,28 @@
 import { Link, useLocation } from 'react-router-dom'
 
+// The component name should match the route in App.tsx
+const components = [
+  'accordion',
+  'alert',
+  'avatar',
+  'badge',
+  'breadcrumb',
+  'button',
+  'calendar',
+  'card',
+  'carousel',
+  'checkbox',
+  'dialog',
+  'dropdown',
+  'input',
+  'popover',
+  'select',
+  'tabs',
+  'toast',
+  'toggle',
+  'tooltip',
+]
+
 export const Sidebar = () => {
   const location = useLocation()
 
@@ -32,60 +55,17 @@ export const Sidebar = () => {
       <div>
         <h3 className="text-xs font-black opacity-50 mb-3 px-4 uppercase">Components</h3>
         <nav className="flex flex-col items-start pl-4 space-y-1">
-          <Link to="/docs/accordion" className={getLinkClass('/docs/accordion')}>
-            Accordion
-          </Link>
-          <Link to="/docs/alert" className={getLinkClass('/docs/alert')}>
-            Alert
-          </Link>
-          <Link to="/docs/avatar" className={getLinkClass('/docs/avatar')}>
-            Avatar
-          </Link>
-          <Link to="/docs/badge" className={getLinkClass('/docs/badge')}>
-            Badge
-          </Link>
-          <Link to="/docs/breadcrumb" className={getLinkClass('/docs/breadcrumb')}>
-            Breadcrumb
-          </Link>
-          <Link to="/docs/button" className={getLinkClass('/docs/button')}>
-            Button
-          </Link>
-          <Link to="/docs/calendar" className={getLinkClass('/docs/calendar')}>
-            Calendar
-          </Link>
-          <Link to="/docs/card" className={getLinkClass('/docs/card')}>
-            Card
-          </Link>
-          <Link to="/docs/carousel" className={getLinkClass('/docs/carousel')}>
-            Carousel
-          </Link>
-          <Link to="/docs/checkbox" className={getLinkClass('/docs/checkbox')}>
-            Checkbox
-          </Link>
-          <Link to="/docs/dialog" className={getLinkClass('/docs/dialog')}>
-            Dialog
-          </Link>
-          <Link to="/docs/input" className={getLinkClass('/docs/input')}>
-            Input
-          </Link>
-          <Link to="/docs/popover" className={getLinkClass('/docs/popover')}>
-            Popover
-          </Link>
-          <Link to="/docs/select" className={getLinkClass('/docs/select')}>
-            Select
-          </Link>
-          <Link to="/docs/tabs" className={getLinkClass('/docs/tabs')}>
-            Tabs
-          </Link>
-          <Link to="/docs/toast" className={getLinkClass('/docs/toast')}>
-            Toast
-          </Link>
-          <Link to="/docs/toggle" className={getLinkClass('/docs/toggle')}>
-            Toggle
-          </Link>
-          <Link to="/docs/tooltip" className={getLinkClass('/docs/tooltip')}>
-            Tooltip
-          </Link>
+          {components.map((component) => {
+            const chars = component.split('')
+            const label = chars[0]?.toUpperCase() + chars.slice(1).join('')
+            const link = `/docs/${component}`
+
+            return (
+              <Link key={link} to={link} className={getLinkClass(link)}>
+                {label}
+              </Link>
+            )
+          })}
         </nav>
       </div>
     </aside>
