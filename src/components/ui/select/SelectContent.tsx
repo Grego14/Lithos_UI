@@ -14,6 +14,7 @@ import { FloatingList } from '@floating-ui/react'
 import { SelectItem } from './SelectItem'
 import { useVirtualizer } from '../../../core/hooks/useVirtualizer'
 import type { SelectOption } from './select.types'
+import { useListKeyNavigation } from '../../../core/hooks/useListKeyNavigation'
 
 export interface SelectContentProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   children?: ReactNode
@@ -40,6 +41,20 @@ export const SelectContent = ({
   const shouldVirtualize =
     Array.isArray(options) &&
     (typeof virtualizeThreshold === 'boolean' ? virtualizeThreshold : options.length >= virtualizeThreshold)
+
+  const isItemDisabled = useCallback(
+    (index: number) => {
+      if (shouldVirtualize) return !!options?.[index]?.disabled
+      return elementsRef.current[index]?.getAttribute('aria-disabled') === 'true'
+    },
+    [shouldVirtualize, options, elementsRef]
+  )
+
+  const { handleKeyDown: navigateList } = useListKeyNavigation({
+    getItemCount: () => (shouldVirtualize ? (options?.length ?? 0) : elementsRef.current.length),
+    isItemDisabled,
+    loop,
+  })
 
   const { containerRef, virtualItems, totalHeight, scrollToIndex } = useVirtualizer<HTMLDivElement>({
     count: shouldVirtualize ? options.length : 0,
@@ -110,124 +125,33 @@ export const SelectContent = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open])
 
-  const getNextNavigableIndex = (currentIndex: number | null, direction: 'down' | 'up') => {
-    const totalItems = shouldVirtualize ? (options?.length ?? 0) : elementsRef.current.length
-    if (totalItems === 0) return null
-
-    // resolve the initial index
-    if (currentIndex === null || currentIndex === undefined) {
-      const initialIndex = direction === 'down' ? 0 : totalItems - 1
-
-      const isInitialDisabled = shouldVirtualize
-        ? !!options?.[initialIndex]?.disabled
-        : elementsRef.current[initialIndex]?.getAttribute('aria-disabled') === 'true'
-
-      if (!isInitialDisabled) return initialIndex
-      currentIndex = initialIndex
-    }
-
-    let nextIndex = currentIndex
-
-    for (let i = 0; i < totalItems; i++) {
-      if (direction === 'down') {
-        // user tries to go down on the last option
-        if (nextIndex + 1 >= totalItems) {
-          nextIndex = loop ? 0 : totalItems - 1
-        } else {
-          nextIndex++
-        }
-      } else {
-        // user tries to go up on the initial option
-        if (nextIndex - 1 < 0) {
-          nextIndex = loop ? totalItems - 1 : 0
-        } else {
-          nextIndex -= 1
-        }
-      }
-
-      const isDisabled = shouldVirtualize
-        ? !!options?.[nextIndex]?.disabled
-        : elementsRef.current[nextIndex]?.getAttribute('aria-disabled') === 'true'
-
-      if (!isDisabled) return nextIndex
-    }
-
-    return currentIndex
-  }
-
   const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Escape') {
-      e.preventDefault()
-      e.stopPropagation()
-      setOpen(false)
-      return
-    }
-
-    if (e.key === 'Home' || e.key === 'End') {
-      e.preventDefault()
-      e.stopPropagation()
-
-      const startingIndex = e.key === 'Home' ? -1 : (options?.length ?? elementsRef.current.length)
-      const dir = e.key === 'Home' ? 'down' : 'up'
-      const nextIndex = getNextNavigableIndex(startingIndex, dir)
-
-      if (nextIndex !== null) {
-        const option = options?.[nextIndex]
-        const element = elementsRef.current[nextIndex]
-
-        const isDisabled = shouldVirtualize ? !!option?.disabled : element?.getAttribute('aria-disabled') === 'true'
-
-        if (isDisabled || !(option && element)) return
-
+    navigateList({
+      event: e,
+      activeIndex,
+      onClose: () => setOpen(false),
+      setActiveIndex: (nextIndex) => {
         setActiveIndex(nextIndex)
         scrollToOption(nextIndex)
-      }
+      },
+      onSelect: (index) => {
+        let value: string | null | undefined
 
-      return
-    }
+        if (shouldVirtualize) {
+          const option = options?.[index]
+          if (!option) return
 
-    const isValidKey = e.key === 'ArrowDown' || e.key === 'ArrowUp'
+          value = option.value !== undefined && option.value !== null ? option.value : null
+        } else {
+          const element = elementsRef.current[index]
+          if (!element) return
 
-    if (isValidKey) {
-      e.preventDefault()
-      e.stopPropagation()
+          value = element.getAttribute('data-value')
+        }
 
-      const dir = e.key === 'ArrowDown' ? 'down' : 'up'
-      const nextIndex = getNextNavigableIndex(activeIndex, dir)
-
-      if (nextIndex !== null) {
-        setActiveIndex(nextIndex)
-        scrollToOption(nextIndex)
-      }
-
-      return
-    }
-
-    if (e.key === 'Enter' || e.key === ' ') {
-      if (activeIndex === null) return
-
-      let value: string | null | undefined
-      let isDisabled
-
-      if (shouldVirtualize) {
-        const option = options?.[activeIndex]
-        if (!option) return
-
-        isDisabled = !!option.disabled
-        value = option.value !== undefined && option.value !== null ? option.value : null
-      } else {
-        const element = elementsRef.current[activeIndex]
-        if (!element) return
-
-        isDisabled = element.getAttribute('aria-disabled') === 'true'
-        value = element.getAttribute('data-value')
-      }
-
-      if (value !== null && value !== undefined && !isDisabled) {
-        e.preventDefault()
-        handleSelect(value, e)
-      }
-    }
+        if (value !== null && value !== undefined) handleSelect(value, e)
+      },
+    })
   }
 
   const handleListClick = (e: MouseEvent<HTMLDivElement>) => {
