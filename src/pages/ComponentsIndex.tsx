@@ -67,14 +67,16 @@ const AlertPreview = () => {
 }
 
 const CarouselPreview = () => {
-  const slideClass = 'h-[4rem] flex items-center justify-center font-black text-sm'
+  const slideClass = 'h-[3.5rem] flex items-center justify-center font-black text-sm'
 
   return (
-    <Carousel title="LITHOS UI!" hideControls hidePagination playInfinite playInterval={3000}>
-      <CarouselSlide className={slideClass}>Slide 1</CarouselSlide>
-      <CarouselSlide className={slideClass}>Slide 2</CarouselSlide>
-      <CarouselSlide className={slideClass}>Slide 3</CarouselSlide>
-    </Carousel>
+    <div className="w-full h-full scale-[0.9] pointer-events-none">
+      <Carousel title="LITHOS UI!" hidePagination loop playInfinite playInterval={3000}>
+        <CarouselSlide className={slideClass}>Slide 1</CarouselSlide>
+        <CarouselSlide className={slideClass}>Slide 2</CarouselSlide>
+        <CarouselSlide className={slideClass}>Slide 3</CarouselSlide>
+      </Carousel>
+    </div>
   )
 }
 
@@ -92,15 +94,12 @@ const DialogPreview = () => (
 )
 
 const PopoverPreview = () => (
-  <div className="w-full scale-[0.6] origin-center flex flex-col items-center pointer-events-none mt-2">
+  <div className="w-[70%] h-[70%] scale-[0.9] origin-center pointer-events-none m-auto ">
     <Popover open={true} modal={false}>
       <PopoverTrigger asChild>
         <Button className="mb-2">Open</Button>
       </PopoverTrigger>
-      <PopoverContent
-        portaled={false}
-        className="p-3 w-32 border-2 border-(--lithos-border) bg-(--lithos-surface) text-(--lithos-text) shadow-[4px_4px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius) z-0"
-      >
+      <PopoverContent portaled={false}>
         <p className="font-bold text-sm m-0 leading-tight">Settings</p>
         <p className="text-[10px] opacity-70 m-0 leading-tight mt-1">Preferences.</p>
       </PopoverContent>
