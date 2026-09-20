@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { axe } from 'jest-axe'
 import { describe, it, expect, vi } from 'vitest'
@@ -146,7 +146,10 @@ describe('DropdownMenu Component Suite', () => {
     const settingsItem = screen.getByRole('menuitem', { name: 'Settings' })
     const moreOptionsItem = screen.getByRole('menuitem', { name: 'More options' })
 
-    expect(profileItem).toHaveFocus()
+    // wait until the focus effect runs
+    await waitFor(() => {
+      expect(profileItem).toHaveFocus()
+    })
 
     await user.keyboard('{ArrowDown}')
     expect(settingsItem).toHaveFocus()
