@@ -28,6 +28,7 @@ import { CheckboxDoc } from './docs/pages/Checkbox'
 import { ComingSoon } from './showroom/sections/ComingSoon'
 import { ComponentsIndex } from './pages/ComponentsIndex'
 import { DialogDoc } from './docs/pages/Dialog'
+import { DropdownMenuDoc } from './docs/pages/DropdownMenu'
 import { DocsLayout } from './docs/DocsLayout'
 import { Faq } from './pages/Faq'
 import { InputDoc } from './docs/pages/Input'
@@ -80,6 +81,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
     { path: 'input', component: InputDoc },
     { path: 'checkbox', component: CheckboxDoc },
     { path: 'dialog', component: DialogDoc },
+    { path: 'dropdown', component: DropdownMenuDoc },
     { path: 'installation', component: Installation },
     { path: 'popover', component: PopoverPage },
     { path: 'select', component: SelectDoc },
@@ -113,7 +115,7 @@ const App = () => {
   const { isDarkMode, toggleObsidian, accentColor, updateAccentColor, radius, updateRadius } = useLithosTheme()
 
   return (
-    <div className={'min-h-screen bg-(--lithos-bg) text-(--lithos-text) ' + (isDarkMode ? 'dark obsidian' : '')}>
+    <div className="min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
       {/* Theme hook is mounted at the app root so accent persistence applies on every route. */}
       <BrowserRouter>
         <ScrollToTop />

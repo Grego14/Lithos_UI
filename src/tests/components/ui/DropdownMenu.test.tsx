@@ -1,0 +1,186 @@
+import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { axe } from 'jest-axe'
+import { describe, it, expect, vi } from 'vitest'
+
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuGroup,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  useDropdownNavigation,
+} from '../../../components/ui/DropdownMenu'
+
+const TestDropdownMenu = ({ onSelectProfile = vi.fn(), onSelectSettings = vi.fn(), disabledItem = false }) => (
+  <DropdownMenu>
+    <DropdownMenuTrigger>Options</DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuGroup label="User">
+        <DropdownMenuItem onClick={onSelectProfile}>Profile</DropdownMenuItem>
+        <DropdownMenuItem disabled={disabledItem} onClick={onSelectSettings}>
+          Settings
+        </DropdownMenuItem>
+      </DropdownMenuGroup>
+      <DropdownMenuSeparator />
+      <DropdownMenuSub trigger="More options">
+        <DropdownMenuItem onClick={vi.fn()}>Sub item 1</DropdownMenuItem>
+      </DropdownMenuSub>
+    </DropdownMenuContent>
+  </DropdownMenu>
+)
+
+describe('DropdownMenu Component Suite', () => {
+  it('should pass accessibility (a11y) checks when open', async () => {
+    const user = userEvent.setup()
+    const { container } = render(<TestDropdownMenu />)
+
+    const trigger = screen.getByRole('button', { name: 'Options' })
+    await user.click(trigger)
+
+    const results = await axe(container, {
+      rules: {
+        // ignore the invisible focus guards of Floating UI
+        'aria-command-name': { enabled: false },
+      },
+    })
+
+    expect(results).toHaveNoViolations()
+  })
+
+  it('opens content on trigger click and displays menu items', async () => {
+    const user = userEvent.setup()
+    render(<TestDropdownMenu />)
+
+    expect(screen.queryByRole('menuitem', { name: 'Profile' })).not.toBeInTheDocument()
+
+    const trigger = screen.getByRole('button', { name: 'Options' })
+    await user.click(trigger)
+
+    expect(screen.getByRole('menuitem', { name: 'Profile' })).toBeInTheDocument()
+    expect(screen.getByRole('group', { name: 'User' })).toBeInTheDocument()
+    expect(screen.getByRole('separator')).toBeInTheDocument()
+  })
+
+  it('executes onClick callback and closes menu when selecting a DropdownMenuItem', async () => {
+    const user = userEvent.setup()
+    const handleSelect = vi.fn()
+    render(<TestDropdownMenu onSelectProfile={handleSelect} />)
+
+    await user.click(screen.getByRole('button', { name: 'Options' }))
+
+    const profileItem = screen.getByRole('menuitem', { name: 'Profile' })
+    await user.click(profileItem)
+
+    expect(handleSelect).toHaveBeenCalledTimes(1)
+    expect(screen.queryByRole('menuitem', { name: 'Profile' })).not.toBeInTheDocument()
+  })
+
+  it('triggers DropdownMenuItem action when pressing Enter key', async () => {
+    const user = userEvent.setup()
+    const handleSelect = vi.fn()
+    render(<TestDropdownMenu onSelectProfile={handleSelect} />)
+
+    await user.click(screen.getByRole('button', { name: 'Options' }))
+
+    const profileItem = screen.getByRole('menuitem', { name: 'Profile' })
+    profileItem.focus()
+    await user.keyboard('{Enter}')
+
+    expect(handleSelect).toHaveBeenCalledTimes(1)
+  })
+
+  it('does not trigger callback nor close menu when clicking a disabled DropdownMenuItem', async () => {
+    const user = userEvent.setup()
+    const handleSelect = vi.fn()
+    render(<TestDropdownMenu disabledItem onSelectSettings={handleSelect} />)
+
+    await user.click(screen.getByRole('button', { name: 'Options' }))
+
+    const disabledItem = screen.getByRole('menuitem', { name: 'Settings' })
+    expect(disabledItem).toHaveAttribute('disabled')
+    expect(disabledItem).toHaveAttribute('tabIndex', '-1')
+
+    await user.click(disabledItem)
+
+    expect(handleSelect).not.toHaveBeenCalled()
+    expect(screen.getByRole('menuitem', { name: 'Settings' })).toBeInTheDocument()
+  })
+
+  it('opens submenu correctly when interacting with DropdownMenuSub', async () => {
+    const user = userEvent.setup()
+    render(<TestDropdownMenu />)
+
+    await user.click(screen.getByRole('button', { name: 'Options' }))
+
+    const subTrigger = screen.getByRole('menuitem', { name: 'More options' })
+    expect(subTrigger).toHaveAttribute('aria-haspopup', 'menu')
+
+    await user.click(subTrigger)
+
+    expect(await screen.findByRole('menuitem', { name: 'Sub item 1' })).toBeInTheDocument()
+  })
+
+  it('throws a descriptive error when useDropdownNavigation is used outside DropdownMenuContent', () => {
+    const TestComponent = () => {
+      useDropdownNavigation()
+      return null
+    }
+
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {})
+
+    expect(() => render(<TestComponent />)).toThrow('useDropdownNavigation must be used within <DropdownMenuContent>')
+
+    consoleError.mockRestore()
+  })
+
+  it('navigates focus across menu items using ArrowDown, ArrowUp, Home, and End keys', async () => {
+    const user = userEvent.setup()
+    render(<TestDropdownMenu />)
+
+    await user.click(screen.getByRole('button', { name: 'Options' }))
+
+    const profileItem = screen.getByRole('menuitem', { name: 'Profile' })
+    const settingsItem = screen.getByRole('menuitem', { name: 'Settings' })
+    const moreOptionsItem = screen.getByRole('menuitem', { name: 'More options' })
+
+    // wait until the focus effect runs
+    await waitFor(() => {
+      expect(profileItem).toHaveFocus()
+    })
+
+    await user.keyboard('{ArrowDown}')
+    expect(settingsItem).toHaveFocus()
+
+    await user.keyboard('{End}')
+    expect(moreOptionsItem).toHaveFocus()
+
+    await user.keyboard('{Home}')
+    expect(profileItem).toHaveFocus()
+  })
+
+  it('closes menu and shifts focus to the next element when pressing Tab key', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <div>
+        <TestDropdownMenu />
+        <button type="button">Next element</button>
+      </div>
+    )
+
+    const trigger = screen.getByRole('button', { name: 'Options' })
+    const nextButton = screen.getByRole('button', { name: 'Next element' })
+
+    await user.click(trigger)
+    expect(screen.getByRole('menuitem', { name: 'Profile' })).toBeInTheDocument()
+
+    await user.keyboard('{Tab}')
+    await user.tab()
+
+    expect(screen.queryByRole('menuitem', { name: 'Profile' })).not.toBeInTheDocument()
+    expect(nextButton).toHaveFocus()
+  })
+})

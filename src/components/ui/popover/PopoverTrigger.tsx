@@ -3,14 +3,7 @@
  * - Attaches reference refs and accessibility attributes (`data-state`) to open or close the popover.
  * - Supports `asChild` composition via React `cloneElement` to forward props to custom children.
  */
-import {
-  cloneElement,
-  isValidElement,
-  type ComponentPropsWithRef,
-  type Ref,
-  type ReactElement,
-  type HTMLProps,
-} from 'react'
+import { cloneElement, isValidElement, type ComponentPropsWithRef, type HTMLProps } from 'react'
 import { useMergeRefs } from '@floating-ui/react'
 import { usePopoverContext } from './usePopover'
 import { cn, type LithosClass } from '../../../utils/cn'
@@ -27,20 +20,21 @@ export const PopoverTrigger = ({
   className,
   ...props
 }: PopoverTriggerProps) => {
-  const context = usePopoverContext()
-  const childrenRef = (children as ReactElement & { ref?: Ref<unknown> }).ref
-  const ref = useMergeRefs([context.refs.setReference, propRef, childrenRef])
+  const { context, refs, getReferenceProps } = usePopoverContext()
+  const ref = useMergeRefs([refs.setReference, propRef])
 
   const normalizedClass = cn(className)
 
   if (asChild && isValidElement(children)) {
+    const childProps = children.props as Record<string, unknown>
+
     return cloneElement(
       children,
-      context.getReferenceProps({
+      getReferenceProps({
         ref,
         ...props,
-        className: normalizedClass,
-        ...(children.props as Record<string, unknown>),
+        ...childProps,
+        className: cn(normalizedClass, childProps['className'] as string),
         'data-state': context.open ? 'open' : 'closed',
       } as HTMLProps<HTMLButtonElement> & { 'data-state'?: string })
     )
@@ -52,7 +46,7 @@ export const PopoverTrigger = ({
       type="button"
       data-state={context.open ? 'open' : 'closed'}
       className={normalizedClass}
-      {...context.getReferenceProps(props)}
+      {...getReferenceProps(props)}
     >
       {children}
     </button>

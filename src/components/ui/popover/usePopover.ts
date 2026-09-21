@@ -12,11 +12,13 @@ import {
   shift,
   useClick,
   useDismiss,
+  useHover,
   useInteractions,
   size,
   type ElementProps,
   type Placement,
   type UseFloatingReturn,
+  type UseHoverProps,
 } from '@floating-ui/react'
 
 export interface PopoverOptions {
@@ -27,6 +29,7 @@ export interface PopoverOptions {
   onOpenChange?: (open: boolean) => void
   interactions?: ElementProps[]
   offset?: number
+  hover?: boolean | UseHoverProps
 }
 
 export type PopoverReturn = {
@@ -46,6 +49,7 @@ export const usePopover = ({
   onOpenChange: setControlledOpen,
   interactions: extraInteractions = [],
   offset: consumerOffset,
+  hover: hoverOptions = false,
 }: PopoverOptions = {}): PopoverReturn => {
   const [uncontrolledOpen, setUncontrolledOpen] = useState(initialOpen)
   const labelId = useId()
@@ -79,9 +83,14 @@ export const usePopover = ({
 
   const { context } = data
 
+  const hover = useHover(context, {
+    enabled: !!hoverOptions,
+    ...(typeof hoverOptions === 'object' ? hoverOptions : {}),
+  })
+
   const click = useClick(context)
   const dismiss = useDismiss(context)
-  const interactions = useInteractions([click, dismiss, ...extraInteractions])
+  const interactions = useInteractions([click, hover, dismiss, ...extraInteractions])
 
   return useMemo(
     () => ({
