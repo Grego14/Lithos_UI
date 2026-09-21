@@ -9,7 +9,15 @@ import { Popover, type PopoverProps } from '../Popover'
 import { DropdownContext } from './useDropdown'
 import { usePopoverContext } from '../popover/usePopover'
 
-const DropdownMenuRoot = ({ ...props }: PopoverProps) => <Popover {...props} />
+export type DropdownMenuPlacement = 'bottom-start' | 'bottom-end'
+
+interface DropdownMenuProps extends PopoverProps {
+  placement?: DropdownMenuPlacement
+}
+
+const DropdownMenuRoot = ({ placement = 'bottom-end', ...props }: DropdownMenuProps) => (
+  <Popover {...props} placement={placement} />
+)
 
 const DropdownMenuProvider = ({ children }: { children: ReactNode }) => {
   const { open, setOpen, refs } = usePopoverContext()
@@ -27,13 +35,11 @@ const DropdownMenuProvider = ({ children }: { children: ReactNode }) => {
   return <DropdownContext.Provider value={value}>{children}</DropdownContext.Provider>
 }
 
-export const DropdownMenu = ({ children, ...props }: PopoverProps) => {
-  return (
-    <DropdownMenuRoot {...props}>
-      <DropdownMenuProvider>{children}</DropdownMenuProvider>
-    </DropdownMenuRoot>
-  )
-}
+export const DropdownMenu = ({ children, ...props }: DropdownMenuProps) => (
+  <DropdownMenuRoot {...props}>
+    <DropdownMenuProvider>{children}</DropdownMenuProvider>
+  </DropdownMenuRoot>
+)
 
 export const menuItemClass =
   'w-full justify-start text-start select-none rounded-sm relative text-sm hover:bg-(--lithos-accent)/10 focus:bg-(--lithos-accent)/10 outline-none active:translate-none disabled:pointer-events-none disabled:opacity-50'
