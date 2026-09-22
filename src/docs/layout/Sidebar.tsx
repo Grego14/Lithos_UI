@@ -1,6 +1,8 @@
 import { Link, useLocation } from 'react-router-dom'
 
 // The component name should match the route in App.tsx
+// to create spaced component labels use a - between the words.
+// e.g: dropdown-menu name will use the label "Dropdown Menu"
 const components = [
   'accordion',
   'alert',
@@ -13,7 +15,7 @@ const components = [
   'carousel',
   'checkbox',
   'dialog',
-  'dropdown',
+  'dropdown-menu',
   'input',
   'popover',
   'select',
@@ -56,8 +58,35 @@ export const Sidebar = () => {
         <h3 className="text-xs font-black opacity-50 mb-3 px-4 uppercase">Components</h3>
         <nav className="flex flex-col items-start pl-4 space-y-1">
           {components.map((component) => {
-            const chars = component.split('')
-            const label = chars[0]?.toUpperCase() + chars.slice(1).join('')
+            const words = component.replaceAll('-', ' ').split(' ')
+
+            let label = ''
+
+            if (words.length === 1) {
+              const wordChars = words[0]?.split('')
+
+              // single component name. e.g: 'calendar'
+              if (wordChars?.[0]) {
+                label = wordChars[0].toUpperCase() + wordChars.slice(1).join('')
+              }
+            } else if (words.length > 1) {
+              // spaced component name. e.g: 'dropdown-menu'
+              // should return 'Dropdown Menu'
+
+              const wordsLength = words.length
+              for (let i = 0; i < wordsLength; i++) {
+                const wordChars = words[i]?.split('')
+
+                if (wordChars?.[0]) {
+                  label += wordChars[0].toUpperCase() + wordChars.slice(1).join('')
+
+                  if (i < wordsLength) {
+                    label += ' '
+                  }
+                }
+              }
+            }
+
             const link = `/docs/${component}`
 
             return (

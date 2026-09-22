@@ -131,7 +131,7 @@ export const DropdownMenuDoc = () => {
     <div className="max-w-5xl mx-auto px-6">
       <header className="mt-0">
         <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-none text-(--lithos-text) mb-8">
-          DropdownMenu
+          Dropdown Menu
         </h1>
         <p className="mt-2 text-lg md:text-xl font-display opacity-70 text-(--lithos-text)">
           Displays a menu to the user-such as a set of actions or functions-triggered by a button.
@@ -212,21 +212,19 @@ export const DropdownMenuDoc = () => {
         <CodeViewer
           language="tsx"
           code={`<DropdownMenu>
-  <DropdownMenuTrigger asChild>
-    <Button>...</Button>
-  </DropdownMenuTrigger>
+  <DropdownMenuTrigger></DropdownMenuTrigger>
 
   <DropdownMenuContent>
 
-    <DropdownMenuGroup label="...">
-      <DropdownMenuItem>...</DropdownMenuItem>
-      <DropdownMenuItem>...</DropdownMenuItem>
+    <DropdownMenuGroup>
+      <DropdownMenuItem></DropdownMenuItem>
+      <DropdownMenuItem></DropdownMenuItem>
     </DropdownMenuGroup>
 
     <DropdownMenuSeparator />
 
-    <DropdownMenuSub trigger={<span>...</span>}>
-      <DropdownMenuItem>...</DropdownMenuItem>
+    <DropdownMenuSub>
+      <DropdownMenuItem></DropdownMenuItem>
     </DropdownMenuSub>
 
   </DropdownMenuContent>

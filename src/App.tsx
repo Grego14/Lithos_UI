@@ -81,7 +81,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
     { path: 'input', component: InputDoc },
     { path: 'checkbox', component: CheckboxDoc },
     { path: 'dialog', component: DialogDoc },
-    { path: 'dropdown', component: DropdownMenuDoc },
+    { path: 'dropdown-menu', component: DropdownMenuDoc },
     { path: 'installation', component: Installation },
     { path: 'popover', component: PopoverPage },
     { path: 'select', component: SelectDoc },
