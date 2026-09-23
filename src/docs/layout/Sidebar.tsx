@@ -14,6 +14,7 @@ const components = [
   'card',
   'carousel',
   'checkbox',
+  'command',
   'dialog',
   'dropdown',
   'input',
