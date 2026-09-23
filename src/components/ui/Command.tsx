@@ -145,18 +145,13 @@ export const Command = ({
 
   const visibleItemsCount = visibleItems.length
 
-  // Set default active item on initial or change
-  useEffect(() => {
-    if (visibleItems.length === 0) {
-      setActiveId(null)
-      return
-    }
-
+  // Derive effective active item during render without cascading effects
+  const effectiveActiveId = useMemo(() => {
+    if (visibleItems.length === 0) return null
     const currentActive = visibleItems.find((item) => item.id === activeId)
-    if (!currentActive || currentActive.disabled) {
-      const firstEnabled = visibleItems.find((item) => !item.disabled)
-      setActiveId(firstEnabled ? firstEnabled.id : null)
-    }
+    if (currentActive && !currentActive.disabled) return currentActive.id
+    const firstEnabled = visibleItems.find((item) => !item.disabled)
+    return firstEnabled ? firstEnabled.id : null
   }, [visibleItems, activeId])
 
   const isGroupVisible = useCallback(
@@ -177,7 +172,7 @@ export const Command = ({
     () => ({
       search,
       setSearch,
-      activeId,
+      activeId: effectiveActiveId,
       setActiveId,
       registerItem,
       filterItem,
@@ -186,7 +181,7 @@ export const Command = ({
       visibleItemsCount,
       isGroupVisible,
     }),
-    [search, setSearch, activeId, registerItem, filterItem, listId, items, visibleItemsCount, isGroupVisible]
+    [search, setSearch, effectiveActiveId, registerItem, filterItem, listId, items, visibleItemsCount, isGroupVisible]
   )
 
   const handleKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>) => {
@@ -195,7 +190,7 @@ export const Command = ({
     const enabledItems = visibleItems.filter((i) => !i.disabled)
     if (enabledItems.length === 0) return
 
-    const currentIndex = enabledItems.findIndex((i) => i.id === activeId)
+    const currentIndex = enabledItems.findIndex((i) => i.id === effectiveActiveId)
 
     if (e.key === 'ArrowDown') {
       e.preventDefault()
@@ -218,7 +213,7 @@ export const Command = ({
     } else if (e.key === 'Enter') {
       const target = e.target as HTMLElement | null
       if (target?.getAttribute('data-slot') === 'command-input' || target === e.currentTarget) {
-        const active = enabledItems.find((i) => i.id === activeId)
+        const active = enabledItems.find((i) => i.id === effectiveActiveId)
         if (active?.onSelect) {
           e.preventDefault()
           active.onSelect()
