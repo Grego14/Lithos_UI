@@ -10,6 +10,7 @@ import {
   offset,
   flip,
   shift,
+  useRole,
   useClick,
   useDismiss,
   useHover,
@@ -19,6 +20,7 @@ import {
   type Placement,
   type UseFloatingReturn,
   type UseHoverProps,
+  type UseRoleProps,
 } from '@floating-ui/react'
 
 export interface PopoverOptions {
@@ -30,6 +32,7 @@ export interface PopoverOptions {
   interactions?: ElementProps[]
   offset?: number
   hover?: boolean | UseHoverProps
+  role?: UseRoleProps['role']
 }
 
 export type PopoverReturn = {
@@ -50,6 +53,7 @@ export const usePopover = ({
   interactions: extraInteractions = [],
   offset: consumerOffset,
   hover: hoverOptions = false,
+  role = 'dialog', // floating-ui default role
 }: PopoverOptions = {}): PopoverReturn => {
   const [uncontrolledOpen, setUncontrolledOpen] = useState(initialOpen)
   const labelId = useId()
@@ -90,7 +94,8 @@ export const usePopover = ({
 
   const click = useClick(context)
   const dismiss = useDismiss(context)
-  const interactions = useInteractions([click, hover, dismiss, ...extraInteractions])
+  const usedRole = useRole(context, { role })
+  const interactions = useInteractions([click, hover, dismiss, usedRole, ...extraInteractions])
 
   return useMemo(
     () => ({

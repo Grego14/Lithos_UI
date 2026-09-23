@@ -12,7 +12,7 @@ import { SelectTrigger } from './SelectTrigger'
 import { SelectContext } from './useSelect'
 import { SelectItem } from './SelectItem'
 import { SelectContent } from './SelectContent'
-import { useFloating, useListNavigation, useTypeahead, useRole } from '@floating-ui/react'
+import { useFloating, useListNavigation, useTypeahead } from '@floating-ui/react'
 import type { RegisterElementProps, SelectOption, SelectOnChangeEvent, SelectProps } from './select.types'
 
 const getOptionIndex = (options: SelectOption[] | undefined, val: string | number | undefined | null) => {
@@ -80,8 +80,6 @@ export const Select = ({
     selectedIndex,
     onMatch: open ? setActiveIndex : setSelectedIndex,
   })
-
-  const role = useRole(context, { role: 'select' })
 
   const handleSelect: SelectOnChangeEvent<string> = (optionValue, e) => {
     const strValue = optionValue
@@ -162,10 +160,10 @@ export const Select = ({
     }
   }
 
-  const interactions = useMemo(() => [listNav, typeahead, role], [listNav, typeahead, role])
+  const interactions = useMemo(() => [listNav, typeahead], [listNav, typeahead])
 
   return (
-    <Popover open={open} onOpenChange={handleOpenChange} interactions={interactions}>
+    <Popover open={open} onOpenChange={handleOpenChange} role="select" interactions={interactions}>
       <SelectContext.Provider
         value={{
           open,

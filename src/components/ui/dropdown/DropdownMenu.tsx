@@ -16,7 +16,7 @@ interface DropdownMenuProps extends PopoverProps {
 }
 
 const DropdownMenuRoot = ({ placement = 'bottom-end', ...props }: DropdownMenuProps) => (
-  <Popover {...props} placement={placement} />
+  <Popover {...props} placement={placement} role="menu" />
 )
 
 const DropdownMenuProvider = ({ children }: { children: ReactNode }) => {
