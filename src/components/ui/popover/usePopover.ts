@@ -53,7 +53,7 @@ export const usePopover = ({
   interactions: extraInteractions = [],
   offset: consumerOffset,
   hover: hoverOptions = false,
-  role = 'dialog', // floating-ui default role
+  role,
 }: PopoverOptions = {}): PopoverReturn => {
   const [uncontrolledOpen, setUncontrolledOpen] = useState(initialOpen)
   const labelId = useId()
@@ -94,7 +94,7 @@ export const usePopover = ({
 
   const click = useClick(context)
   const dismiss = useDismiss(context)
-  const usedRole = useRole(context, { role })
+  const usedRole = useRole(context, { enabled: !!role, role })
   const interactions = useInteractions([click, hover, dismiss, usedRole, ...extraInteractions])
 
   return useMemo(
