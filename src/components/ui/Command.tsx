@@ -31,10 +31,10 @@ import { Dialog, type DialogProps } from './Dialog'
 interface CommandItemMeta {
   id: string
   value: string
-  groupId?: string
-  disabled?: boolean
-  keywords?: string[]
-  onSelect?: () => void
+  groupId?: string | undefined
+  disabled?: boolean | undefined
+  keywords?: string[] | undefined
+  onSelect?: (() => void) | undefined
 }
 
 interface CommandContextValue {
