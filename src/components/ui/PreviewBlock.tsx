@@ -16,6 +16,7 @@ import { IconCode } from './icons/IconCode'
 import { IconDownload } from './icons/IconDownload'
 import { useInstallPreference } from '../../core/useInstallPreference'
 import { deriveUsageCode, type ManualPath } from '../../docs/utils/deriveUsageCode'
+import { getCliCommand } from '../../docs/utils/cliCommand'
 
 type AvailableTabs = 'preview' | 'code'
 type Breakpoint = 'mobile' | 'tablet' | 'desktop'
@@ -57,9 +58,10 @@ export const PreviewBlock = ({
   const [activeTab, setActiveTab] = useState<AvailableTabs>('preview')
   const [breakpoint, setBreakpoint] = useState<Breakpoint>('desktop')
   const [showInstall, setShowInstall] = useState(false)
-  const { installTab } = useInstallPreference()
+  const { installTab, packageManager } = useInstallPreference()
 
   const resolvedCode = typeof code === 'string' ? code : deriveUsageCode(code, installTab)
+  const cliCommand = slug ? getCliCommand(packageManager, slug) : undefined
 
   const getIframeWidth = () => {
     if (breakpoint === 'mobile') return '375px'
@@ -84,7 +86,7 @@ export const PreviewBlock = ({
             </Button>
           </div>
 
-          {slug && (
+          {slug && activeTab === 'preview' && (
             <div className="hidden md:flex items-center space-x-2 border-l-2 border-(--lithos-border) pl-4">
               <Button
                 aria-label="Mobile"
@@ -165,7 +167,7 @@ export const PreviewBlock = ({
           )
         ) : (
           <div className="h-full w-full overflow-y-auto">
-            <CodeViewer code={resolvedCode} language={language} embedded />
+            <CodeViewer code={resolvedCode} language={language} embedded cliCommand={cliCommand} />
           </div>
         )}
       </div>

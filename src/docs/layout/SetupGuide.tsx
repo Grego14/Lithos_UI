@@ -3,6 +3,7 @@ import { Button } from '../../components/ui/Button'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 
 import { deriveImportLines, type ManualPath } from '../utils/deriveUsageCode'
+import { getCliCommand } from '../utils/cliCommand'
 import { registry } from '../../cli/registry'
 
 const commands = {
@@ -33,9 +34,10 @@ export const SetupGuide = ({
 
   const commandImport = deriveImportLines({ componentNames, manualPath, mode: 'command' })
   const manualImport = deriveImportLines({ componentNames, manualPath, mode: 'manual' })
+  const cliCommand = getCliCommand(packageManager, slug || componentNames)
 
-  // If manualOnly is true, we force it to act like the manual tab is selected.
-  const isManual = manualOnly || installTab === 'manual'
+  // If manualOnly is true, we force it to act like the source tab is selected.
+  const isManual = manualOnly || installTab === 'source'
 
   const containerClasses = bordered
     ? 'border-2 border-(--lithos-border) bg-(--lithos-bg) p-4 md:p-6 overflow-hidden transform-[translateZ(0)] rounded-(--lithos-radius)'
@@ -46,16 +48,16 @@ export const SetupGuide = ({
       {!manualOnly && (
         <div className="flex space-x-4 mb-4">
           <Button
-            onClick={() => updateInstallTab('command')}
-            variant={installTab !== 'command' ? 'secondary' : 'primary'}
+            onClick={() => updateInstallTab('package')}
+            variant={installTab !== 'package' ? 'secondary' : 'primary'}
           >
-            Command
+            Package
           </Button>
           <Button
-            onClick={() => updateInstallTab('manual')}
-            variant={installTab !== 'manual' ? 'secondary' : 'primary'}
+            onClick={() => updateInstallTab('source')}
+            variant={installTab !== 'source' ? 'secondary' : 'primary'}
           >
-            Manual
+            Source
           </Button>
         </div>
       )}
@@ -82,8 +84,22 @@ export const SetupGuide = ({
           </>
         ) : (
           <>
+            <div className="mb-6 space-x-4">
+              {(Object.keys(commands) as PackageManager[]).map((command) => (
+                <Button
+                  key={`commands-${command}`}
+                  variant={command === packageManager ? 'primary' : 'text'}
+                  onClick={() => updatePackageManager(command)}
+                >
+                  {command}
+                </Button>
+              ))}
+            </div>
+            <p className="mb-4 text-sm font-body opacity-80 text-(--lithos-text)">Download via CLI:</p>
+            <CodeViewer code={cliCommand} language="bash" className="mb-8" />
+            <hr className="border-t-2 border-(--lithos-border) my-8" />
             <p className="mb-4 text-sm font-body opacity-80 text-(--lithos-text)">
-              Copy the source components and import:
+              Or manually copy the source components:
             </p>
             <CodeViewer code={manualImport} language="tsx" className="mb-6" />
             {(() => {

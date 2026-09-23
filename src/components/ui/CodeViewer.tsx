@@ -10,6 +10,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { cn, type LithosClass } from '../../utils/cn'
 import { Button } from './Button'
+import { IconCopy } from './icons/IconCopy'
 
 export interface CodeViewerProps {
   code: string
@@ -17,6 +18,7 @@ export interface CodeViewerProps {
   showLanguage?: boolean
   embedded?: boolean
   className?: LithosClass
+  cliCommand?: string
 }
 
 export const CodeViewer = ({
@@ -25,6 +27,7 @@ export const CodeViewer = ({
   showLanguage = false,
   embedded = false,
   className = '',
+  cliCommand,
 }: CodeViewerProps) => {
   const toast = useToast()
   const { accentColor } = useLithosTheme()
@@ -54,6 +57,32 @@ export const CodeViewer = ({
     }
   }
 
+  const handleCliCopy = async () => {
+    if (!cliCommand) return
+    const addToastExists = typeof toast?.addToast === 'function'
+
+    try {
+      await navigator.clipboard.writeText(cliCommand)
+
+      if (addToastExists) {
+        toast.addToast({
+          title: 'SUCCESS',
+          message: 'Command copied',
+          intent: 'success',
+          color: accentColor,
+        })
+      }
+    } catch {
+      if (addToastExists) {
+        toast.addToast({
+          title: 'ERROR',
+          message: 'Failed to copy command to clipboard',
+          intent: 'error',
+        })
+      }
+    }
+  }
+
   const classes = cn(
     embedded
       ? 'bg-transparent mb-0 relative overflow-hidden'
@@ -63,8 +92,8 @@ export const CodeViewer = ({
 
   return (
     <div className={classes}>
-      <div className="border-b-2 border-(--lithos-border) bg-(--lithos-surface) px-4 py-2 flex justify-between items-center">
-        <div className="flex items-center">
+      <div className="border-b-2 border-(--lithos-border) bg-(--lithos-surface) px-4 py-2 flex justify-between items-center relative">
+        <div className="flex items-center z-10">
           {showLanguage ? (
             <p className="text-xs font-black uppercase tracking-widest text-(--lithos-text) font-code">{language}</p>
           ) : (
@@ -80,10 +109,23 @@ export const CodeViewer = ({
           )}
         </div>
 
+        {cliCommand && (
+          <div className="absolute inset-0 flex justify-center items-center pointer-events-none hidden md:flex">
+            <button
+              onClick={handleCliCopy}
+              className="pointer-events-auto flex items-center bg-(--lithos-bg) border-2 border-(--lithos-border) rounded-full px-5 py-1.5 text-sm font-code font-bold hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) transition-colors lithos-click"
+              title="Copy CLI command"
+            >
+              <span className="opacity-90">{cliCommand}</span>
+              <IconCopy className="ml-2.5 w-4 h-4 opacity-90" />
+            </button>
+          </div>
+        )}
+
         <Button
           onClick={handleCopy}
           variant="secondary"
-          className="hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)"
+          className="hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) z-10"
           aria-label="Copy code"
           title="Copy code"
         >
