@@ -69,6 +69,16 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#accessibility', label: 'Accessibility', level: 1 },
     { id: '#api', label: 'API Reference', level: 1 },
   ],
+  '/docs/command': [
+    { id: '#installation', label: 'Installation', level: 1 },
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#basic', label: 'Basic', level: 2 },
+    { id: '#shortcuts', label: 'With Shortcuts and Icons', level: 2 },
+    { id: '#dialog', label: 'Command Dialog (⌘K Palette)', level: 2 },
+    { id: '#anatomy', label: 'Anatomy', level: 1 },
+    { id: '#accessibility', label: 'Accessibility', level: 1 },
+    { id: '#api', label: 'API Reference', level: 1 },
+  ],
   '/docs/dialog': [
     { id: '#installation', label: 'Installation', level: 1 },
     { id: '#examples', label: 'Examples', level: 1 },
