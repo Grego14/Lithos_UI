@@ -6,28 +6,18 @@ import { SkeletonAnimations } from '../examples/skeleton/Animations'
 import { SkeletonCardExample } from '../examples/skeleton/Card'
 import { SkeletonListExample } from '../examples/skeleton/List'
 import { SkeletonAvatarExample } from '../examples/skeleton/Avatar'
-import { SkeletonProfileForm } from '../examples/skeleton/ProfileForm'
-import { SkeletonCardBlock } from '../examples/skeleton/CardBlock'
-import { SkeletonMemberList } from '../examples/skeleton/MemberList'
 import animationSource from '../examples/skeleton/Animations.tsx?raw'
 import cardSource from '../examples/skeleton/Card.tsx?raw'
 import listSource from '../examples/skeleton/List.tsx?raw'
 import avatarSource from '../examples/skeleton/Avatar.tsx?raw'
-import profileSource from '../examples/skeleton/ProfileForm.tsx?raw'
-import cardBlockSource from '../examples/skeleton/CardBlock.tsx?raw'
-import memberListSource from '../examples/skeleton/MemberList.tsx?raw'
 
 // Use the rendered example's source for both package and manual installation modes.
 const sourceExample = (source: string, componentNames: string[]) => ({
   body: source.replace(/^import .*\r?\n/gm, '').trim(),
   componentNames,
   manualPath: {
-    react: ['useId', 'useState'],
     Card: '../../components/ui/Card',
     CardContent: '../../components/ui/Card',
-    Input: '../../components/ui/Input',
-    Select: '../../components/ui/Select',
-    Button: '../../components/ui/Button',
     Skeleton: '../../components/ui/Skeleton',
     SkeletonText: '../../components/ui/Skeleton',
   },
@@ -102,52 +92,6 @@ export const SkeletonDoc = () => (
       <p className={paragraph}>Use the circular variant at the same diameter as the loaded avatar.</p>
       <PreviewBlock code={sourceExample(avatarSource, ['Skeleton'])}>
         <SkeletonAvatarExample />
-      </PreviewBlock>
-    </section>
-
-    <section aria-labelledby="blocks" className="mb-12">
-      <h2 id="blocks" className={heading}>
-        Blocks
-      </h2>
-      <p className={paragraph}>
-        Compose placeholders into complete content sections while keeping known headings and labels visible.
-      </p>
-      <h3 id="block-profile" className={subheading}>
-        Profile
-      </h3>
-      <p className={paragraph}>
-        A profile form using Input, Select, and Button. Load the demo to edit its fields; no data is sent.
-      </p>
-      <PreviewBlock
-        code={sourceExample(profileSource, [
-          'useId',
-          'useState',
-          'Skeleton',
-          'Card',
-          'CardContent',
-          'Input',
-          'Select',
-          'Button',
-        ])}
-      >
-        <SkeletonProfileForm />
-      </PreviewBlock>
-      <h3 id="block-card" className={subheading}>
-        Card
-      </h3>
-      <p className={paragraph}>A responsive collection of article cards with media, author details, and excerpts.</p>
-      <PreviewBlock code={sourceExample(cardBlockSource, ['Skeleton', 'SkeletonText', 'Card', 'CardContent'])}>
-        <SkeletonCardBlock />
-      </PreviewBlock>
-      <h3 id="block-list" className={subheading}>
-        List
-      </h3>
-      <p className={paragraph}>
-        A complete team-members panel with a heading, avatar rows, and metadata. Secondary placeholders hide on narrow
-        screens.
-      </p>
-      <PreviewBlock code={sourceExample(memberListSource, ['Skeleton', 'SkeletonText'])}>
-        <SkeletonMemberList />
       </PreviewBlock>
     </section>
 
