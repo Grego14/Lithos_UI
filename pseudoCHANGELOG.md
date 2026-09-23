@@ -1,0 +1,70 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+
+## [0.1.2]
+
+### Added (0.1.2)
+
+- **Zero-Dependency CLI Installer:** Introduced `lithos-ui init` and `lithos-ui add <component>`.
+  - Scaffolds a lightweight `lithos.json` configuration file.
+  - Automatically fetches raw components, blocks, and all transitive dependencies (including local files and SVG icons) directly from GitHub.
+  - Implements an intelligent, regex-based import rewrite engine (via Node's native `path` module) that recalculates relative import paths on the fly to match the consumer's custom directory structure.
+  - Automatically injects neo-brutalist variables from `tokens.css` into the consumer's global CSS file, ensuring a seamless theming setup out-of-the-box.
+  - Evaluates NPM dependencies required by downloaded components and outputs terminal warnings for manual installation.
+  - Added `src/cli/registry.ts` to act as the single source of truth for component dependencies. The documentation's `SetupGuide.tsx` now dynamically pulls from this registry to prevent drift.
+- **Dropdown Menu:** Added the dropdown menu primitive ([#315](https://github.com/lithosui/Lithos_UI/pull/315)).
+
+### Changed (0.1.2)
+
+- Improved DX by allowing the `role` prop to be passed directly to the Popover component, simplifying `DropdownMenu` and `Select` implementations ([#318](https://github.com/lithosui/Lithos_UI/pull/318)).
+- Properly arranged the components and blocks ([#303](https://github.com/lithosui/Lithos_UI/pull/303)).
+- Improved the hero title responsiveness ([#305](https://github.com/lithosui/Lithos_UI/pull/305)).
+
+### Fixed (0.1.2)
+
+- Fixed select scrollbar overflow ([#309](https://github.com/lithosui/Lithos_UI/pull/309)).
+- Fixed breadcrumb primitive items wrap ([#304](https://github.com/lithosui/Lithos_UI/pull/304)).
+- Fixed clipping of border radius on underline tabs ([#302](https://github.com/lithosui/Lithos_UI/pull/302)).
+
+### Removed (0.1.2)
+
+## [0.1.1]
+
+### Added (0.1.1)
+
+- Tooltip component.
+
+### Changed (0.1.1)
+
+- Comprehensive manual audit and synchronization of component `propsData` documentation with source typings.
+
+### Fixed (0.1.1)
+
+- Fixes for v0.1.0 for the components were made.
+
+### Removed (0.1.1)
+
+## [0.0.0]
+
+### Added (0.0.0)
+
+- Initial pre-1.0 release of Lithos UI as a copy-paste React template repository.
+- Zero-Gap layout architecture across landing and docs surfaces using explicit margin/padding spacing.
+- YIQ-based automated contrast engine (`getContrastText`) for accent/foreground token selection.
+- Universal specificity override system via runtime style injection in `useTheme` (`!important` token rebinding for accent and selection).
+- Global physics token utility (`.lithos-click`) for shared brutalist interaction states.
+- Initial component set:
+  - Blocks: `Hero`, `FeatureGrid`, `Pricing`, `Testimonials`, `FAQ`, `ThemeEngine`.
+  - Layout: `Navbar`, `Footer`, `NotFound`, `ComingSoon`.
+  - UI primitives: `CodeViewer`, `PreviewBlock`, `ToastProvider`, `Toggle`, `KineticGrid`.
+- Documentation routes/pages for introduction, installation, and core primitives (`CodeViewer`, `PreviewBlock`, `Toast`, `Toggle`).
+- GitHub Actions CI workflow to lint and build on pushes and pull requests to `main`.
+
+### Changed (0.0.0)
+
+### Fixed (0.0.0)
+
+### Removed (0.0.0)
