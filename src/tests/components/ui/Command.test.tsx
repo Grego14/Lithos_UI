@@ -124,7 +124,7 @@ describe('Command Component', () => {
     expect(second).toHaveAttribute('data-selected', 'true')
 
     // Press Enter to activate Second
-    await user.type(second, '{enter}')
+    await user.keyboard('{Enter}')
     expect(handleSelect2).toHaveBeenCalledTimes(1)
     expect(handleSelect1).not.toHaveBeenCalled()
   })
