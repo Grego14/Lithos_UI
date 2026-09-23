@@ -4,7 +4,7 @@ import process from 'node:process'
 import { init } from './init.js'
 import { add } from './add.js'
 
-async function main() {
+const main = async () => {
   const args = process.argv.slice(2)
   const command = args[0]
 

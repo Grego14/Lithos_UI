@@ -22,13 +22,13 @@ const DEFAULT_CONFIG: LithosConfig = {
   css: './src/index.css',
 }
 
-export function getConfig(): LithosConfig {
+export const getConfig = (): LithosConfig => {
   const configPath = path.join(process.cwd(), 'lithos.json')
   if (fs.existsSync(configPath)) {
     try {
       const parsed = JSON.parse(fs.readFileSync(configPath, 'utf8'))
       return { ...DEFAULT_CONFIG, ...parsed, aliases: { ...DEFAULT_CONFIG.aliases, ...(parsed.aliases || {}) } }
-    } catch (e) {
+    } catch {
       console.warn('⚠️ Could not parse lithos.json. Using defaults.')
     }
   }
@@ -49,7 +49,7 @@ export function getConfig(): LithosConfig {
   return DEFAULT_CONFIG
 }
 
-export async function fetchFile(url: string): Promise<string> {
+export const fetchFile = async (url: string): Promise<string> => {
   const response = await fetch(url)
   if (!response.ok) {
     throw new Error(`Failed to fetch ${url}: ${response.statusText}`)
@@ -57,7 +57,7 @@ export async function fetchFile(url: string): Promise<string> {
   return response.text()
 }
 
-export function getLocalDestination(repoPath: string, config: LithosConfig): string {
+export const getLocalDestination = (repoPath: string, config: LithosConfig): string => {
   // repoPath is like "components/ui/Button.tsx" or "utils/cn.ts"
   if (repoPath.startsWith('components/ui/')) {
     return path.join(process.cwd(), config.aliases.components, repoPath.replace('components/ui/', ''))
@@ -74,16 +74,14 @@ export function getLocalDestination(repoPath: string, config: LithosConfig): str
   return path.join(process.cwd(), repoPath)
 }
 
-function stripExt(p: string) {
-  return p.replace(/\.tsx?$/, '')
-}
+const stripExt = (p: string) => p.replace(/\.tsx?$/, '')
 
-export function rewriteImports(
+export const rewriteImports = (
   content: string,
   sourceRepoPath: string,
   requires: string[],
   config: LithosConfig
-): string {
+): string => {
   let rewritten = content
   const sourceLocalDest = getLocalDestination(sourceRepoPath, config)
   const sourceLocalDir = path.dirname(sourceLocalDest)
@@ -122,7 +120,7 @@ export function rewriteImports(
   return rewritten
 }
 
-export function ensureDir(filePath: string) {
+export const ensureDir = (filePath: string) => {
   const dir = path.dirname(filePath)
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true })

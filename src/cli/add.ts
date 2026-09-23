@@ -4,11 +4,11 @@ import process from 'node:process'
 import { registry, type RegistryItem } from './registry.js'
 import { getConfig, fetchFile, getLocalDestination, rewriteImports, ensureDir } from './utils.js'
 
-function getAllRequires(item: RegistryItem): string[] {
+const getAllRequires = (item: RegistryItem): string[] => {
   const visited = new Set<string>()
   const deps = new Set<string>()
 
-  function traverse(currentItem: RegistryItem) {
+  const traverse = (currentItem: RegistryItem) => {
     if (visited.has(currentItem.slug)) return
     visited.add(currentItem.slug)
 
@@ -27,7 +27,7 @@ function getAllRequires(item: RegistryItem): string[] {
   return Array.from(deps)
 }
 
-export async function add(components: string[]) {
+export const add = async (components: string[]) => {
   if (!components || components.length === 0) {
     console.error('✖ Please specify a component to add.')
     process.exit(1)
@@ -83,8 +83,8 @@ export async function add(components: string[]) {
         ensureDir(dest)
         fs.writeFileSync(dest, rewritten)
         console.log(`✓ Created ${path.relative(process.cwd(), dest)}`)
-      } catch (e: any) {
-        console.error(`✖ Error processing ${file.repoPath}:`, e.message)
+      } catch (e: unknown) {
+        console.error(`✖ Error processing ${file.repoPath}:`, (e as Error).message)
       }
     }
   }

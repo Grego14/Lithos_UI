@@ -3,7 +3,7 @@ import path from 'node:path'
 import process from 'node:process'
 import { getConfig, fetchFile, ensureDir } from './utils.js'
 
-export async function init() {
+export const init = async () => {
   const configPath = path.join(process.cwd(), 'lithos.json')
 
   if (!fs.existsSync(configPath)) {
