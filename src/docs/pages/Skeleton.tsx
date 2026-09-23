@@ -43,30 +43,27 @@ export const SkeletonDoc = () => (
     <SetupGuide
       componentNames={['Skeleton', 'SkeletonText']}
       manualPath="../../components/ui/Skeleton"
-      requires={['utils/cn.ts', 'tokens.css (Skeleton styles and keyframes)']}
+      requires={['utils/cn.ts']}
     />
     <p className={paragraph}>
-      Import <code>lithos-ui/tokens.css</code> after your Tailwind stylesheet. For manual installation, copy the
-      Skeleton rules and keyframes from <code>src/tokens.css</code> too.
+      Import <code>lithos-ui/tokens.css</code> after your Tailwind stylesheet for the shared theme tokens. Skeleton uses
+      Tailwind's built-in pulse animation.
     </p>
 
-    <section aria-labelledby="animations">
-      <h2 id="animations" className={heading}>
-        Animations
+    <section aria-labelledby="examples" className="mb-12">
+      <h2 id="examples" className={heading}>
+        Examples
       </h2>
+      <h3 id="animations" className={subheading}>
+        Animations
+      </h3>
       <p className={paragraph}>
-        Choose pulse, shimmer, or no animation. Only the fill animates; borders remain steady. Reduced motion and forced
-        colors automatically disable both effects.
+        Choose pulse or no animation. Only the fill animates; borders remain steady. Reduced motion and forced colors
+        automatically disable the animation.
       </p>
       <PreviewBlock code={sourceExample(animationSource, ['Skeleton'])}>
         <SkeletonAnimations />
       </PreviewBlock>
-    </section>
-
-    <section aria-labelledby="components" className="mb-12">
-      <h2 id="components" className={heading}>
-        Components
-      </h2>
       <p className={paragraph}>
         Small placeholders for individual UI elements. Match their dimensions to the content they replace.
       </p>

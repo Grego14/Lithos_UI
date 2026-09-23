@@ -17,8 +17,8 @@ import type { TOCItem } from './types.ts'
 const tocRegistry: Record<string, TOCItem[]> = {
   '/docs/skeleton': [
     { id: '#installation', label: 'Installation', level: 1 },
-    { id: '#animations', label: 'Animations', level: 1 },
-    { id: '#components', label: 'Components', level: 1 },
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#animations', label: 'Animations', level: 2 },
     { id: '#component-card', label: 'Card', level: 2 },
     { id: '#component-list', label: 'List', level: 2 },
     { id: '#component-avatar', label: 'Avatar', level: 2 },

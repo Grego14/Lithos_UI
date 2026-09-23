@@ -1,9 +1,21 @@
 import type { ComponentPropsWithRef, CSSProperties } from 'react'
 import { cn, type LithosClass } from '../../utils/cn'
 
-export type SkeletonAnimation = 'pulse' | 'shimmer' | false
+export type SkeletonAnimation = 'pulse' | false
 export type SkeletonVariant = 'text' | 'rectangular' | 'rounded' | 'circular'
 export type SkeletonTone = 'neutral' | 'accent'
+
+const variants: Record<SkeletonVariant, string> = {
+  text: 'w-full h-[1em] rounded-(--lithos-radius)',
+  rectangular: 'w-full h-32 rounded-none',
+  rounded: 'w-full h-32 rounded-[max(var(--lithos-radius),0.5rem)]',
+  circular: 'w-12 h-auto aspect-square shrink-0 rounded-full',
+}
+
+const tones: Record<SkeletonTone, string> = {
+  neutral: 'bg-[color-mix(in_srgb,var(--lithos-text)_12%,var(--lithos-surface))]',
+  accent: 'bg-[color-mix(in_srgb,var(--lithos-accent)_28%,var(--lithos-surface))]',
+}
 
 export interface SkeletonProps extends Omit<
   ComponentPropsWithRef<'span'>,
@@ -18,10 +30,9 @@ export interface SkeletonProps extends Omit<
   height?: CSSProperties['height']
 }
 
-/** Decorative placeholder. Announce loading once on the surrounding content region. */
 export const Skeleton = ({
   variant = 'text',
-  animation = 'shimmer',
+  animation = 'pulse',
   tone = 'neutral',
   width,
   height,
@@ -31,7 +42,17 @@ export const Skeleton = ({
 }: SkeletonProps) => (
   <span
     {...props}
-    className={cn('lithos-skeleton', className)}
+    className={cn(
+      'relative isolate block overflow-hidden box-border min-w-0 max-w-full border-2 border-(--lithos-border) shadow-[2px_2px_0_var(--lithos-shadow)] pointer-events-none select-none',
+      "after:content-[''] after:absolute after:inset-0",
+      variants[variant],
+      tones[tone],
+      animation
+        ? 'after:bg-[color-mix(in_srgb,var(--lithos-text)_48%,transparent)] after:animate-pulse after:[animation-duration:1.2s]'
+        : 'after:hidden',
+      'motion-reduce:after:animate-none motion-reduce:after:hidden forced-colors:border-[CanvasText] forced-colors:bg-[Canvas] forced-colors:shadow-none forced-colors:after:animate-none forced-colors:after:hidden',
+      className
+    )}
     style={{ width, height, ...style }}
     data-variant={variant}
     data-animation={animation || 'none'}
@@ -47,7 +68,6 @@ export interface SkeletonTextProps extends Omit<
 > {
   className?: LithosClass
   children?: never
-  /** Whole lines, clamped to 0–100. Non-finite values use the default of three. */
   lines?: number
   lastLineWidth?: CSSProperties['width']
   animation?: SkeletonAnimation
@@ -57,7 +77,7 @@ export interface SkeletonTextProps extends Omit<
 export const SkeletonText = ({
   lines = 3,
   lastLineWidth = '65%',
-  animation = 'shimmer',
+  animation = 'pulse',
   tone = 'neutral',
   className,
   ...props
@@ -65,7 +85,7 @@ export const SkeletonText = ({
   const count = Number.isFinite(lines) ? Math.min(100, Math.max(0, Math.floor(lines))) : 3
 
   return (
-    <div {...props} className={cn('lithos-skeleton-text', className)} aria-hidden="true" inert>
+    <div {...props} className={cn('min-w-0 w-full space-y-[0.625em]', className)} aria-hidden="true" inert>
       {Array.from({ length: count }, (_, index) => (
         <Skeleton
           key={index}

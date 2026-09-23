@@ -3,8 +3,8 @@ import type { PropItem } from '../../components/ui/PropsTable'
 const sharedProps: PropItem[] = [
   {
     name: 'animation',
-    type: '"shimmer" | "pulse" | false',
-    defaultValue: '"shimmer"',
+    type: '"pulse" | false',
+    defaultValue: '"pulse"',
     description: 'Fill animation. Automatically disabled for reduced motion and forced colors.',
   },
   {
@@ -16,7 +16,7 @@ const sharedProps: PropItem[] = [
   {
     name: 'className',
     type: 'LithosClass',
-    description: 'Additional classes. Utilities override component-layer defaults.',
+    description: 'Additional classes. Utilities override the default component classes.',
   },
   { name: 'style', type: 'CSSProperties', description: 'Inline styles applied to the root.' },
 ]
