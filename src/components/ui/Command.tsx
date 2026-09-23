@@ -34,6 +34,7 @@ interface CommandItemMeta {
   groupId?: string
   disabled?: boolean
   keywords?: string[]
+  onSelect?: () => void
 }
 
 interface CommandContextValue {
@@ -41,11 +42,11 @@ interface CommandContextValue {
   setSearch: (search: string) => void
   activeId: string | null
   setActiveId: (id: string | null) => void
-  registerItem: (item: CommandItemMeta) => () => void
-  registerGroup: (groupId: string) => () => void
+  registerItem: (meta: CommandItemMeta) => () => void
   filterItem: (itemValue: string, keywords?: string[]) => boolean
-  onItemSelect: (value: string) => void
-  visibleItemIds: string[]
+  listId: string
+  items: Map<string, CommandItemMeta>
+  visibleItemsCount: number
   isGroupVisible: (groupId: string) => boolean
 }
 
@@ -83,6 +84,7 @@ export const Command = ({
 }: CommandProps) => {
   const [uncontrolledSearch, setUncontrolledSearch] = useState('')
   const search = controlledValue !== undefined ? controlledValue : uncontrolledSearch
+  const listId = useId()
 
   const setSearch = useCallback(
     (newSearch: string) => {
@@ -95,7 +97,6 @@ export const Command = ({
   )
 
   const [items, setItems] = useState<Map<string, CommandItemMeta>>(new Map())
-  const [, setGroups] = useState<Set<string>>(new Set())
   const [activeId, setActiveId] = useState<string | null>(null)
 
   const registerItem = useCallback((meta: CommandItemMeta) => {
@@ -108,21 +109,6 @@ export const Command = ({
       setItems((prev) => {
         const next = new Map(prev)
         next.delete(meta.id)
-        return next
-      })
-    }
-  }, [])
-
-  const registerGroup = useCallback((groupId: string) => {
-    setGroups((prev) => {
-      const next = new Set(prev)
-      next.add(groupId)
-      return next
-    })
-    return () => {
-      setGroups((prev) => {
-        const next = new Set(prev)
-        next.delete(groupId)
         return next
       })
     }
@@ -146,7 +132,7 @@ export const Command = ({
     [filter, search, defaultFilter]
   )
 
-  // Determine all visible item IDs
+  // Visible items calculation
   const visibleItems = useMemo(() => {
     const list: CommandItemMeta[] = []
     items.forEach((item) => {
@@ -157,19 +143,17 @@ export const Command = ({
     return list
   }, [items, filterItem])
 
-  const visibleItemIds = useMemo(() => visibleItems.map((item) => item.id), [visibleItems])
+  const visibleItemsCount = visibleItems.length
 
-  // Sync active item when visible items change
+  // Set default active item on initial or change
   useEffect(() => {
     if (visibleItems.length === 0) {
       setActiveId(null)
       return
     }
 
-    // If current active is still visible and not disabled, keep it
-    const activeItem = visibleItems.find((item) => item.id === activeId)
-    if (!activeItem || activeItem.disabled) {
-      // Find the first non-disabled visible item
+    const currentActive = visibleItems.find((item) => item.id === activeId)
+    if (!currentActive || currentActive.disabled) {
       const firstEnabled = visibleItems.find((item) => !item.disabled)
       setActiveId(firstEnabled ? firstEnabled.id : null)
     }
@@ -177,6 +161,7 @@ export const Command = ({
 
   const isGroupVisible = useCallback(
     (groupId: string) => {
+      if (!search.trim()) return true
       let hasVisible = false
       items.forEach((item) => {
         if (item.groupId === groupId && filterItem(item.value, item.keywords)) {
@@ -185,12 +170,8 @@ export const Command = ({
       })
       return hasVisible
     },
-    [items, filterItem]
+    [items, filterItem, search]
   )
-
-  const onItemSelect = useCallback((_itemValue: string) => {
-    // Individual CommandItem handles selection
-  }, [])
 
   const contextValue = useMemo<CommandContextValue>(
     () => ({
@@ -199,13 +180,13 @@ export const Command = ({
       activeId,
       setActiveId,
       registerItem,
-      registerGroup,
       filterItem,
-      onItemSelect,
-      visibleItemIds,
+      listId,
+      items,
+      visibleItemsCount,
       isGroupVisible,
     }),
-    [search, setSearch, activeId, registerItem, registerGroup, filterItem, onItemSelect, visibleItemIds, isGroupVisible]
+    [search, setSearch, activeId, registerItem, filterItem, listId, items, visibleItemsCount, isGroupVisible]
   )
 
   const handleKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>) => {
@@ -234,6 +215,12 @@ export const Command = ({
       e.preventDefault()
       const last = enabledItems[enabledItems.length - 1]
       if (last) setActiveId(last.id)
+    } else if (e.key === 'Enter') {
+      const active = enabledItems.find((i) => i.id === activeId)
+      if (active?.onSelect) {
+        e.preventDefault()
+        active.onSelect()
+      }
     }
   }
 
@@ -244,7 +231,7 @@ export const Command = ({
 
   return (
     <CommandContext.Provider value={contextValue}>
-      <div role="application" tabIndex={-1} onKeyDown={handleKeyDown} className={classes} {...rest}>
+      <div data-slot="command" role="application" tabIndex={-1} onKeyDown={handleKeyDown} className={classes} {...rest}>
         {children}
       </div>
     </CommandContext.Provider>
@@ -268,9 +255,10 @@ export const CommandInput = ({
   onValueChange,
   icon,
   className,
+  'aria-label': ariaLabel,
   ...rest
 }: CommandInputProps) => {
-  const { search, setSearch } = useCommand()
+  const { search, setSearch, listId } = useCommand()
   const inputValue = value !== undefined ? value : search
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -280,15 +268,21 @@ export const CommandInput = ({
   }
 
   return (
-    <div className="relative flex items-center border-b-2 border-(--lithos-border) px-3 py-2 bg-(--lithos-surface)">
+    <div
+      data-slot="command-input-wrapper"
+      className="relative flex items-center border-b-2 border-(--lithos-border) px-3 py-2 bg-(--lithos-surface)"
+    >
       <span className="inline-flex shrink-0 mr-2 opacity-60 text-(--lithos-text)" aria-hidden="true">
         {icon || <IconSearch size={18} />}
       </span>
       <input
+        data-slot="command-input"
         type="text"
         role="combobox"
-        aria-autocomplete="list"
+        aria-label={ariaLabel || placeholder}
+        aria-controls={listId}
         aria-expanded="true"
+        aria-autocomplete="list"
         value={inputValue}
         onChange={handleChange}
         placeholder={placeholder}
@@ -312,10 +306,11 @@ export interface CommandListProps extends Omit<ComponentPropsWithRef<'div'>, 'cl
 }
 
 export const CommandList = ({ className, children, ...rest }: CommandListProps) => {
+  const { listId } = useCommand()
   const classes = cn('max-h-72 overflow-x-hidden overflow-y-auto p-1.5 focus:outline-none', className)
 
   return (
-    <div role="listbox" className={classes} tabIndex={-1} {...rest}>
+    <div data-slot="command-list" id={listId} className={classes} tabIndex={-1} {...rest}>
       {children}
     </div>
   )
@@ -331,13 +326,16 @@ export interface CommandEmptyProps extends Omit<ComponentPropsWithRef<'div'>, 'c
 }
 
 export const CommandEmpty = ({ className, children = 'No results found.', ...rest }: CommandEmptyProps) => {
-  const { visibleItemIds } = useCommand()
+  const { search, visibleItemsCount } = useCommand()
 
-  if (visibleItemIds.length > 0) return null
+  // Only display empty message if search is actively typed and no items match
+  if (!search.trim() || visibleItemsCount > 0) return null
 
   return (
     <div
-      role="presentation"
+      data-slot="command-empty"
+      role="status"
+      aria-live="polite"
       className={cn('py-8 text-center text-sm font-medium opacity-60 text-(--lithos-text)', className)}
       {...rest}
     >
@@ -358,11 +356,7 @@ export interface CommandGroupProps extends Omit<ComponentPropsWithRef<'div'>, 'c
 
 export const CommandGroup = ({ heading, className, children, ...rest }: CommandGroupProps) => {
   const groupId = useId()
-  const { registerGroup, isGroupVisible } = useCommand()
-
-  useEffect(() => {
-    return registerGroup(groupId)
-  }, [registerGroup, groupId])
+  const { isGroupVisible } = useCommand()
 
   const visible = isGroupVisible(groupId)
 
@@ -370,7 +364,7 @@ export const CommandGroup = ({ heading, className, children, ...rest }: CommandG
 
   return (
     <GroupContext.Provider value={{ groupId }}>
-      <div role="group" className={cn('overflow-hidden py-1', className)} {...rest}>
+      <div data-slot="command-group" role="group" className={cn('overflow-hidden py-1', className)} {...rest}>
         {heading && (
           <div className="px-2 py-1 text-xs font-black tracking-wider uppercase opacity-50 select-none text-(--lithos-text)">
             {heading}
@@ -408,7 +402,6 @@ export const CommandItem = ({
   const groupContext = useContext(GroupContext)
   const itemRef = useRef<HTMLDivElement | null>(null)
 
-  // Derive string representation for filtering if value is not explicitly provided
   const derivedValue = useMemo(() => {
     if (value !== undefined) return value
     if (typeof children === 'string') return children
@@ -417,6 +410,11 @@ export const CommandItem = ({
 
   const { activeId, setActiveId, registerItem, filterItem } = useCommand()
 
+  const handleSelect = useCallback(() => {
+    if (disabled) return
+    onSelect?.(derivedValue)
+  }, [disabled, onSelect, derivedValue])
+
   useEffect(() => {
     return registerItem({
       id,
@@ -424,13 +422,13 @@ export const CommandItem = ({
       groupId: groupContext?.groupId,
       disabled,
       keywords,
+      onSelect: handleSelect,
     })
-  }, [id, derivedValue, groupContext?.groupId, disabled, keywords, registerItem])
+  }, [id, derivedValue, groupContext?.groupId, disabled, keywords, handleSelect, registerItem])
 
   const isVisible = filterItem(derivedValue, keywords)
   const isSelected = activeId === id
 
-  // Scroll active item into view
   useEffect(() => {
     if (isSelected && itemRef.current) {
       itemRef.current.scrollIntoView({ block: 'nearest' })
@@ -439,9 +437,8 @@ export const CommandItem = ({
 
   if (!isVisible) return null
 
-  const handleSelect = () => {
-    if (disabled) return
-    onSelect?.(derivedValue)
+  const handleClick = () => {
+    handleSelect()
   }
 
   const handleKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>) => {
@@ -469,12 +466,13 @@ export const CommandItem = ({
   return (
     <div
       ref={itemRef}
+      data-slot="command-item"
       role="option"
       aria-selected={isSelected}
       aria-disabled={disabled}
       data-selected={isSelected ? 'true' : undefined}
       data-disabled={disabled ? 'true' : undefined}
-      onClick={handleSelect}
+      onClick={handleClick}
       onKeyDown={handleKeyDown}
       onMouseEnter={handleMouseEnter}
       tabIndex={isSelected ? 0 : -1}
@@ -498,6 +496,7 @@ export interface CommandShortcutProps extends Omit<ComponentPropsWithRef<'span'>
 export const CommandShortcut = ({ className, children, ...rest }: CommandShortcutProps) => {
   return (
     <span
+      data-slot="command-shortcut"
       className={cn(
         'ml-auto inline-flex items-center text-xs font-mono font-bold tracking-widest px-1.5 py-0.5 border border-(--lithos-border) bg-(--lithos-surface) text-(--lithos-text) rounded-(--lithos-radius)',
         className
@@ -519,7 +518,12 @@ export interface CommandSeparatorProps extends Omit<ComponentPropsWithRef<'div'>
 
 export const CommandSeparator = ({ className, ...rest }: CommandSeparatorProps) => {
   return (
-    <div role="separator" className={cn('my-1 -mx-1.5 border-b-2 border-(--lithos-border)', className)} {...rest} />
+    <div
+      data-slot="command-separator"
+      role="separator"
+      className={cn('my-1 -mx-1.5 border-b-2 border-(--lithos-border)', className)}
+      {...rest}
+    />
   )
 }
 
