@@ -76,14 +76,16 @@ const AlertPreview = () => {
 }
 
 const CarouselPreview = () => {
-  const slideClass = 'h-[4rem] flex items-center justify-center font-black text-sm'
+  const slideClass = 'h-[3.5rem] flex items-center justify-center font-black text-sm'
 
   return (
-    <Carousel title="LITHOS UI!" hideControls hidePagination playInfinite playInterval={3000}>
-      <CarouselSlide className={slideClass}>Slide 1</CarouselSlide>
-      <CarouselSlide className={slideClass}>Slide 2</CarouselSlide>
-      <CarouselSlide className={slideClass}>Slide 3</CarouselSlide>
-    </Carousel>
+    <div className="w-full h-full scale-[0.9] pointer-events-none">
+      <Carousel title="LITHOS UI!" hidePagination loop playInfinite playInterval={3000}>
+        <CarouselSlide className={slideClass}>Slide 1</CarouselSlide>
+        <CarouselSlide className={slideClass}>Slide 2</CarouselSlide>
+        <CarouselSlide className={slideClass}>Slide 3</CarouselSlide>
+      </Carousel>
+    </div>
   )
 }
 
