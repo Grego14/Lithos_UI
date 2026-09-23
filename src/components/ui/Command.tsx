@@ -455,6 +455,7 @@ export const CommandItem = ({
   const handleKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
+      e.stopPropagation()
       handleSelect()
     }
   }
