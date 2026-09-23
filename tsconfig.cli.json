@@ -9,5 +9,6 @@
     "target": "ES2022",
     "noEmit": false
   },
-  "include": ["src/cli/**/*"]
+  "include": ["src/cli/**/*"],
+  "exclude": ["node_modules"]
 }

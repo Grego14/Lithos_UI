@@ -36,14 +36,14 @@ export const registry: Record<string, RegistryItem> = {
     name: 'Avatar',
     type: 'ui',
     githubUrl: `${GITHUB_BASE}/components/ui/Avatar.tsx`,
-    requires: ['utils/cn.ts', 'utils/yiq.ts', 'core/useAccentColor.ts'],
+    requires: ['utils/cn.ts', 'utils/yiq.ts', 'core/useAccentColor.tsx'],
   },
   badge: {
     slug: 'badge',
     name: 'Badge',
     type: 'ui',
     githubUrl: `${GITHUB_BASE}/components/ui/Badge.tsx`,
-    requires: ['utils/cn.ts', 'core/useAccentColor.ts', 'utils/yiq.ts', 'utils/colors.ts', 'core/types.ts'],
+    requires: ['utils/cn.ts', 'core/useAccentColor.tsx', 'utils/yiq.ts', 'utils/colors.ts', 'core/types.ts'],
   },
   breadcrumb: {
     slug: 'breadcrumb',
