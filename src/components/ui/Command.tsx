@@ -216,10 +216,13 @@ export const Command = ({
       const last = enabledItems[enabledItems.length - 1]
       if (last) setActiveId(last.id)
     } else if (e.key === 'Enter') {
-      const active = enabledItems.find((i) => i.id === activeId)
-      if (active?.onSelect) {
-        e.preventDefault()
-        active.onSelect()
+      const target = e.target as HTMLElement | null
+      if (target?.getAttribute('data-slot') === 'command-input' || target === e.currentTarget) {
+        const active = enabledItems.find((i) => i.id === activeId)
+        if (active?.onSelect) {
+          e.preventDefault()
+          active.onSelect()
+        }
       }
     }
   }
@@ -310,7 +313,15 @@ export const CommandList = ({ className, children, ...rest }: CommandListProps) 
   const classes = cn('max-h-72 overflow-x-hidden overflow-y-auto p-1.5 focus:outline-none', className)
 
   return (
-    <div data-slot="command-list" id={listId} className={classes} tabIndex={-1} {...rest}>
+    <div
+      data-slot="command-list"
+      id={listId}
+      role="listbox"
+      aria-label="Commands"
+      className={classes}
+      tabIndex={-1}
+      {...rest}
+    >
       {children}
     </div>
   )
