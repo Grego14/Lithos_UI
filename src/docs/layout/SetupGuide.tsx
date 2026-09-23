@@ -3,6 +3,7 @@ import { Button } from '../../components/ui/Button'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 
 import { deriveImportLines, type ManualPath } from '../utils/deriveUsageCode'
+import { registry } from '../../cli/registry'
 
 const commands = {
   pnpm: 'pnpm add lithos-ui',
@@ -15,6 +16,7 @@ interface SetupGuideProps {
   componentNames: string[]
   manualPath: ManualPath
   requires?: string[]
+  slug?: string
   manualOnly?: boolean
   bordered?: boolean
 }
@@ -23,6 +25,7 @@ export const SetupGuide = ({
   componentNames,
   manualPath,
   requires,
+  slug,
   manualOnly = false,
   bordered = true,
 }: SetupGuideProps) => {
@@ -83,17 +86,20 @@ export const SetupGuide = ({
               Copy the source components and import:
             </p>
             <CodeViewer code={manualImport} language="tsx" className="mb-6" />
-            {Array.isArray(requires) && (
-              <p className="mt-6 text-sm font-body opacity-80 text-(--lithos-text) wrap-break-word">
-                <strong>Requires:</strong>{' '}
-                {requires.map((res, i) => (
-                  <span key={res}>
-                    {res}
-                    {i !== requires.length - 1 ? ', ' : ''}
-                  </span>
-                ))}
-              </p>
-            )}
+            {(() => {
+              const activeRequires = slug && registry[slug] ? registry[slug].requires : requires
+              return Array.isArray(activeRequires) && activeRequires.length > 0 ? (
+                <p className="mt-6 text-sm font-body opacity-80 text-(--lithos-text) wrap-break-word">
+                  <strong>Requires:</strong>{' '}
+                  {activeRequires.map((res, i) => (
+                    <span key={res}>
+                      {res}
+                      {i !== activeRequires.length - 1 ? ', ' : ''}
+                    </span>
+                  ))}
+                </p>
+              ) : null
+            })()}
           </>
         )}
       </div>
