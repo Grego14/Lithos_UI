@@ -505,7 +505,7 @@ export const CommandShortcut = ({ className, children, ...rest }: CommandShortcu
     <span
       data-slot="command-shortcut"
       className={cn(
-        'ml-auto inline-flex items-center text-xs font-mono font-bold tracking-widest px-1.5 py-0.5 border border-(--lithos-border) bg-(--lithos-surface) text-(--lithos-text) rounded-(--lithos-radius)',
+        'ml-auto inline-flex items-center justify-center text-center leading-none text-xs font-mono font-bold px-1.5 py-1 min-w-[1.25rem] border border-(--lithos-border) bg-(--lithos-surface) text-(--lithos-text) rounded-(--lithos-radius)',
         className
       )}
       {...rest}
