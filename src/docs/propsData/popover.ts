@@ -84,6 +84,13 @@ export const popoverContentPropsData = [
     description: 'Whether to render the content in a React Portal.',
   },
   {
+    name: 'transitionDuration',
+    type: 'number',
+    defaultValue: '0',
+    required: false,
+    description: 'Duration in milliseconds for the enter and exit transition before unmounting.',
+  },
+  {
     name: 'className',
     type: 'LithosClass',
     description: 'Additional CSS classes to apply to the content container.',
