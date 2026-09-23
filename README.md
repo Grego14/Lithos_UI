@@ -41,6 +41,7 @@ To prevent Tailwind class bloat ("DRY" architecture), Lithos UI packages its mec
 | Input                 | Stable | [Link](/src/docs/pages/Input.tsx)        |
 | Carousel              | Stable | [Link](/src/docs/pages/Carousel.tsx)     |
 | Checkbox              | Stable | [Link](/src/docs/pages/Checkbox.tsx)     |
+| Command               | Stable | [Link](/src/docs/pages/Command.tsx)      |
 | CodeViewer            | Stable | [Link](/src/docs/pages/CodeViewer.tsx)   |
 | Dialog                | Stable | [Link](/src/docs/pages/Dialog.tsx)       |
 | Kbd                   | Stable | [Link](/src/docs/pages/Kbd.tsx)          |
