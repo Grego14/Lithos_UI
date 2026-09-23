@@ -15,6 +15,20 @@ import type { ReactNode } from 'react'
 import type { TOCItem } from './types.ts'
 
 const tocRegistry: Record<string, TOCItem[]> = {
+  '/docs/skeleton': [
+    { id: '#installation', label: 'Installation', level: 1 },
+    { id: '#animations', label: 'Animations', level: 1 },
+    { id: '#components', label: 'Components', level: 1 },
+    { id: '#component-card', label: 'Card', level: 2 },
+    { id: '#component-list', label: 'List', level: 2 },
+    { id: '#component-avatar', label: 'Avatar', level: 2 },
+    { id: '#blocks', label: 'Blocks', level: 1 },
+    { id: '#block-profile', label: 'Profile', level: 2 },
+    { id: '#block-card', label: 'Card', level: 2 },
+    { id: '#block-list', label: 'List', level: 2 },
+    { id: '#accessibility', label: 'Accessibility', level: 1 },
+    { id: '#api', label: 'API Reference', level: 1 },
+  ],
   '/docs': [{ id: '#welcome-video', label: 'Intro To Lithos UI', level: 1 }],
   '/docs/installation': [
     { id: '#npm', label: 'NPM', level: 1 },

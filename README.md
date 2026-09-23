@@ -28,25 +28,26 @@ To prevent Tailwind class bloat ("DRY" architecture), Lithos UI packages its mec
 
 ## Components
 
-| Component             | Status | Docs                                     |
-| --------------------- | ------ | ---------------------------------------- |
-| Accordion             | Stable | [Link](/src/docs/pages/Accordion.tsx)    |
-| Alert                 | Stable | [Link](/src/docs/pages/Alert.tsx)        |
-| Avatar                | Stable | [Link](/src/docs/pages/Avatar.tsx)       |
-| Badge                 | Stable | [Link](/src/docs/pages/Badge.tsx)        |
-| Breadcrumb            | Stable | [Link](/src/docs/pages/Breadcrumb.tsx)   |
-| Button                | Stable | [Link](/src/docs/pages/Button.tsx)       |
-| Calendar              | Stable | [Link](/src/docs/pages/Calendar.tsx)     |
-| Card                  | Stable | [Link](/src/docs/pages/Card.tsx)         |
-| Input                 | Stable | [Link](/src/docs/pages/Input.tsx)        |
-| Carousel              | Stable | [Link](/src/docs/pages/Carousel.tsx)     |
-| Checkbox              | Stable | [Link](/src/docs/pages/Checkbox.tsx)     |
-| CodeViewer            | Stable | [Link](/src/docs/pages/CodeViewer.tsx)   |
-| Dialog                | Stable | [Link](/src/docs/pages/Dialog.tsx)       |
-| Popover               | Stable | [Link](/src/docs/pages/Popover.tsx)      |
-| PreviewBlock          | Stable | [Link](/src/docs/pages/PreviewBlock.tsx) |
-| Toast (ToastProvider) | Stable | [Link](/src/docs/pages/Toast.tsx)        |
-| Toggle                | Stable | [Link](/src/docs/pages/Toggle.tsx)       |
+| Component             | Status            | Docs                                     |
+| --------------------- | ----------------- | ---------------------------------------- |
+| Accordion             | Stable            | [Link](/src/docs/pages/Accordion.tsx)    |
+| Alert                 | Stable            | [Link](/src/docs/pages/Alert.tsx)        |
+| Avatar                | Stable            | [Link](/src/docs/pages/Avatar.tsx)       |
+| Badge                 | Stable            | [Link](/src/docs/pages/Badge.tsx)        |
+| Breadcrumb            | Stable            | [Link](/src/docs/pages/Breadcrumb.tsx)   |
+| Button                | Stable            | [Link](/src/docs/pages/Button.tsx)       |
+| Calendar              | Stable            | [Link](/src/docs/pages/Calendar.tsx)     |
+| Card                  | Stable            | [Link](/src/docs/pages/Card.tsx)         |
+| Input                 | Stable            | [Link](/src/docs/pages/Input.tsx)        |
+| Carousel              | Stable            | [Link](/src/docs/pages/Carousel.tsx)     |
+| Checkbox              | Stable            | [Link](/src/docs/pages/Checkbox.tsx)     |
+| CodeViewer            | Stable            | [Link](/src/docs/pages/CodeViewer.tsx)   |
+| Dialog                | Stable            | [Link](/src/docs/pages/Dialog.tsx)       |
+| Popover               | Stable            | [Link](/src/docs/pages/Popover.tsx)      |
+| PreviewBlock          | Stable            | [Link](/src/docs/pages/PreviewBlock.tsx) |
+| Skeleton              | Local development | [Link](/src/docs/pages/Skeleton.tsx)     |
+| Toast (ToastProvider) | Stable            | [Link](/src/docs/pages/Toast.tsx)        |
+| Toggle                | Stable            | [Link](/src/docs/pages/Toggle.tsx)       |
 
 ### Blocks
 

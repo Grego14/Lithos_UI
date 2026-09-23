@@ -43,6 +43,108 @@ body.obsidian {
 */
 
 @layer components {
+  /* Static edges preserve Lithos' geometry; only the inner fill moves. */
+  .lithos-skeleton {
+    display: block;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+    height: 1em;
+    border: 2px solid var(--lithos-border);
+    border-radius: var(--lithos-radius);
+    background: color-mix(in srgb, var(--lithos-text) 12%, var(--lithos-surface));
+    box-shadow: 2px 2px 0 var(--lithos-shadow);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .lithos-skeleton[data-variant='rectangular'],
+  .lithos-skeleton[data-variant='rounded'] {
+    height: 8rem;
+  }
+
+  .lithos-skeleton[data-variant='rectangular'] {
+    border-radius: 0;
+  }
+
+  .lithos-skeleton[data-variant='rounded'] {
+    border-radius: max(var(--lithos-radius), 0.5rem);
+  }
+
+  .lithos-skeleton[data-variant='circular'] {
+    width: 3rem;
+    height: auto;
+    aspect-ratio: 1;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+
+  .lithos-skeleton[data-tone='accent'] {
+    background: color-mix(in srgb, var(--lithos-accent) 28%, var(--lithos-surface));
+  }
+
+  .lithos-skeleton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, var(--lithos-text) 12%, transparent);
+    opacity: 0;
+  }
+
+  .lithos-skeleton[data-animation='shimmer']::after {
+    opacity: 1;
+    background: linear-gradient(
+      110deg,
+      transparent 25%,
+      color-mix(in srgb, var(--lithos-surface) 75%, transparent) 45%,
+      color-mix(in srgb, var(--lithos-surface) 75%, transparent) 55%,
+      transparent 75%
+    );
+    transform: translateX(-100%);
+    animation: lithos-skeleton-shimmer 1.8s ease-in-out infinite;
+  }
+
+  .lithos-skeleton[data-animation='shimmer']:dir(rtl)::after {
+    animation-direction: reverse;
+  }
+
+  .lithos-skeleton[data-animation='pulse']::after {
+    animation: lithos-skeleton-pulse 1.8s ease-in-out infinite;
+  }
+
+  .lithos-skeleton-text {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .lithos-skeleton-text > .lithos-skeleton + .lithos-skeleton {
+    margin-block-start: 0.625em;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lithos-skeleton::after {
+      animation: none !important;
+      opacity: 0 !important;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .lithos-skeleton {
+      border-color: CanvasText;
+      background: Canvas;
+      box-shadow: none;
+    }
+
+    .lithos-skeleton::after {
+      animation: none !important;
+      opacity: 0 !important;
+    }
+  }
+
   .lithos-click {
     @apply inline-flex items-center justify-center font-black tracking-tighter leading-none border-2 border-(--lithos-border) cursor-pointer duration-75 shadow-[2px_2px_0px_0px_var(--lithos-shadow)] hover:shadow-[4px_4px_0px_0px_var(--lithos-shadow)] active:shadow-[0px_0px_0px_0px_var(--lithos-shadow)] active:translate-x-0.5 active:translate-y-0.5 p-2;
     transition-property: transform, box-shadow, background-color;
@@ -66,5 +168,21 @@ body.obsidian {
     /* IE & Edge */
     scrollbar-width: none;
     /* Firefox */
+  }
+}
+
+@keyframes lithos-skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes lithos-skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
   }
 }

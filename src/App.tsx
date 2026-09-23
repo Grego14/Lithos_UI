@@ -37,6 +37,7 @@ import { Introduction } from './docs/pages/Introduction'
 import { PopoverPage } from './docs/pages/Popover'
 import { NotFound } from './showroom/sections/NotFound'
 import { SelectDoc } from './docs/pages/Select'
+import { SkeletonDoc } from './docs/pages/Skeleton'
 import { Showroom } from './showroom/Index'
 import { ToastDoc } from './docs/pages/Toast'
 import { ToggleDoc } from './docs/pages/Toggle'
@@ -85,6 +86,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
     { path: 'installation', component: Installation },
     { path: 'popover', component: PopoverPage },
     { path: 'select', component: SelectDoc },
+    { path: 'skeleton', component: SkeletonDoc },
     { path: 'toast', component: ToastDoc },
     { path: 'toggle', component: ToggleDoc },
     { path: 'tabs', component: TabsDoc },

@@ -19,6 +19,7 @@ const components = [
   'input',
   'popover',
   'select',
+  'skeleton',
   'tabs',
   'toast',
   'toggle',
