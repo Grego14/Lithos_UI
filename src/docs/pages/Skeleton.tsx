@@ -65,8 +65,8 @@ export const SkeletonDoc = () => (
         Animations
       </h2>
       <p className={paragraph}>
-        Choose pulse, shimmer, or no animation. Only the fill animates; borders remain steady. Shimmer follows document
-        direction. Reduced motion and forced colors automatically disable both effects.
+        Choose pulse, shimmer, or no animation. Only the fill animates; borders remain steady. Reduced motion and forced
+        colors automatically disable both effects.
       </p>
       <PreviewBlock code={sourceExample(animationSource, ['Skeleton'])}>
         <SkeletonAnimations />
