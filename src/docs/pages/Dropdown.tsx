@@ -4,126 +4,126 @@ import { PropsAccordion } from '../../components/ui/PropsTable'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 import { Button } from '../../components/ui/Button'
 import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuSub,
-} from '../../components/ui/DropdownMenu'
+  Dropdown,
+  DropdownTrigger,
+  DropdownContent,
+  DropdownGroup,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownSub,
+} from '../../components/ui/Dropdown'
 
 import {
-  dropdownMenuPropsData,
-  dropdownMenuTriggerPropsData,
-  dropdownMenuContentPropsData,
-  dropdownMenuItemPropsData,
-  dropdownMenuSubPropsData,
-  dropdownMenuGroupPropsData,
-  dropdownMenuSeparatorPropsData,
+  dropdownPropsData,
+  dropdownTriggerPropsData,
+  dropdownContentPropsData,
+  dropdownItemPropsData,
+  dropdownSubPropsData,
+  dropdownGroupPropsData,
+  dropdownSeparatorPropsData,
   useDropdownPropsData,
 } from '../propsData/dropdown'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/DropdownMenu.tsx'
+const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Dropdown.tsx'
 
 const ProfileDropdownDemo = () => {
   return (
     <div className="flex items-center justify-center p-12">
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+      <Dropdown>
+        <DropdownTrigger asChild>
           <Button variant="accent">My account</Button>
-        </DropdownMenuTrigger>
+        </DropdownTrigger>
 
-        <DropdownMenuContent className="w-56">
-          <DropdownMenuGroup label="Settings">
-            <DropdownMenuItem onClick={() => console.log('Go to profile')}>Profile</DropdownMenuItem>
+        <DropdownContent className="w-56">
+          <DropdownGroup label="Settings">
+            <DropdownItem onClick={() => console.log('Go to profile')}>Profile</DropdownItem>
 
-            <DropdownMenuItem onClick={() => console.log('Go to plan')}>Plan</DropdownMenuItem>
+            <DropdownItem onClick={() => console.log('Go to plan')}>Plan</DropdownItem>
 
-            <DropdownMenuItem disabled className="flex flex-col items-start space-y-2">
+            <DropdownItem disabled className="flex flex-col items-start space-y-2">
               <span>Integrations</span>
               <span className="opacity-60">(Coming soon)</span>
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
+            </DropdownItem>
+          </DropdownGroup>
 
-          <DropdownMenuSeparator />
+          <DropdownSeparator />
 
-          <DropdownMenuSub
+          <DropdownSub
             trigger={
               <span className="flex items-center justify-between w-full">
                 Preferences <span>▶</span>
               </span>
             }
           >
-            <DropdownMenuItem>Toggle Theme</DropdownMenuItem>
-            <DropdownMenuItem>Language</DropdownMenuItem>
-          </DropdownMenuSub>
+            <DropdownItem>Toggle Theme</DropdownItem>
+            <DropdownItem>Language</DropdownItem>
+          </DropdownSub>
 
-          <DropdownMenuSeparator />
+          <DropdownSeparator />
 
-          <DropdownMenuGroup>
-            <DropdownMenuItem
+          <DropdownGroup>
+            <DropdownItem
               onClick={() => console.log('Log out')}
               className="text-red-500 hover:bg-red-500/5 focus:bg-red-500/5"
             >
               Log out
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
+            </DropdownItem>
+          </DropdownGroup>
+        </DropdownContent>
+      </Dropdown>
     </div>
   )
 }
 
-export const DropdownMenuDoc = () => {
+export const DropdownDoc = () => {
   const usageCode = {
     body: `export const ProfileDropdown = () => {
   return (
-    <DropdownMenu placement='bottom-start'>
-      <DropdownMenuTrigger asChild>
+    <Dropdown placement='bottom-start'>
+      <DropdownTrigger asChild>
         <Button variant='accent'>My account</Button>
-      </DropdownMenuTrigger>
+      </DropdownTrigger>
 
-      <DropdownMenuContent className='w-56 p-1'>
-        <DropdownMenuGroup label='Settings'>
-          <DropdownMenuItem onClick={() => console.log('Profile')}>
+      <DropdownContent className='w-56 p-1'>
+        <DropdownGroup label='Settings'>
+          <DropdownItem onClick={() => console.log('Profile')}>
             Profile
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => console.log('Plan')}>
+          </DropdownItem>
+          <DropdownItem onClick={() => console.log('Plan')}>
             Plan
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
+          </DropdownItem>
+        </DropdownGroup>
 
-        <DropdownMenuSeparator />
+        <DropdownSeparator />
 
-        <DropdownMenuSub trigger={<span className='flex items-center justify-between w-full'>Preferences <span>▶</span></span>}>
-          <DropdownMenuItem>Toggle Theme</DropdownMenuItem>
-          <DropdownMenuItem>Language</DropdownMenuItem>
-        </DropdownMenuSub>
+        <DropdownSub trigger={<span className='flex items-center justify-between w-full'>Preferences <span>▶</span></span>}>
+          <DropdownItem>Toggle Theme</DropdownItem>
+          <DropdownItem>Language</DropdownItem>
+        </DropdownSub>
 
-        <DropdownMenuSeparator />
+        <DropdownSeparator />
 
-        <DropdownMenuItem onClick={() => console.log('Log out')} className='text-red-500 hover:bg-red-500/5 focus:bg-red-500/5'>
+        <DropdownItem onClick={() => console.log('Log out')} className='text-red-500 hover:bg-red-500/5 focus:bg-red-500/5'>
           Log out
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+        </DropdownItem>
+      </DropdownContent>
+    </Dropdown>
   )
 }`,
     componentNames: [
-      'DropdownMenu',
-      'DropdownMenuTrigger',
-      'DropdownMenuContent',
-      'DropdownMenuGroup',
-      'DropdownMenuItem',
-      'DropdownMenuSeparator',
-      'DropdownMenuSub',
-      'DropdownMenuClose',
+      'Dropdown',
+      'DropdownTrigger',
+      'DropdownContent',
+      'DropdownGroup',
+      'DropdownItem',
+      'DropdownSeparator',
+      'DropdownSub',
+      'DropdownClose',
       'Button',
     ],
     manualPath: {
       Button: '../../components/ui/Button',
-      others: '../../components/ui/DropdownMenu',
+      others: '../../components/ui/Dropdown',
     },
   }
 
@@ -131,7 +131,7 @@ export const DropdownMenuDoc = () => {
     <div className="max-w-5xl mx-auto px-6">
       <header className="mt-0">
         <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-none text-(--lithos-text) mb-8">
-          Dropdown Menu
+          Dropdown
         </h1>
         <p className="mt-2 text-lg md:text-xl font-display opacity-70 text-(--lithos-text)">
           Displays a menu to the user-such as a set of actions or functions-triggered by a button.
@@ -141,7 +141,7 @@ export const DropdownMenuDoc = () => {
 
       <section className="mb-12">
         <p className="mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          The DropdownMenu component allows you to present a list of contextual actions, groups, and submenus without
+          The Dropdown component allows you to present a list of contextual actions, groups, and submenus without
           altering the state or label of the trigger element. Built on top of Floating UI, it provides robust
           positioning, focus management, and accessibility features.
         </p>
@@ -159,28 +159,28 @@ export const DropdownMenuDoc = () => {
 
       <SetupGuide
         componentNames={[
-          'DropdownMenu',
-          'DropdownMenuContent',
-          'DropdownMenuItem',
-          'DropdownMenuGroup',
-          'DropdownMenuSeparator',
-          'DropdownMenuTrigger',
-          'DropdownMenuClose',
+          'Dropdown',
+          'DropdownContent',
+          'DropdownItem',
+          'DropdownGroup',
+          'DropdownSeparator',
+          'DropdownTrigger',
+          'DropdownClose',
           'useDropdown',
         ]}
         manualPath={{
-          others: '../../components/ui/DropdownMenu',
+          others: '../../components/ui/Dropdown',
         }}
         requires={[
           'utils/cn.ts',
           'components/ui/Button.tsx',
-          'components/ui/dropdown/DropdownMenu',
-          'components/ui/dropdown/DropdownMenuContent',
-          'components/ui/dropdown/DropdownMenuItem',
-          'components/ui/dropdown/DropdownMenuGroup',
-          'components/ui/dropdown/DropdownMenuSeparator',
-          'components/ui/dropdown/DropdownMenuTrigger',
-          'components/ui/dropdown/DropdownMenuClose',
+          'components/ui/dropdown/Dropdown',
+          'components/ui/dropdown/DropdownContent',
+          'components/ui/dropdown/DropdownItem',
+          'components/ui/dropdown/DropdownGroup',
+          'components/ui/dropdown/DropdownSeparator',
+          'components/ui/dropdown/DropdownTrigger',
+          'components/ui/dropdown/DropdownClose',
           'components/ui/dropdown/useDropdown',
         ]}
       />
@@ -193,7 +193,7 @@ export const DropdownMenuDoc = () => {
         Action Menu
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-        Use a DropdownMenu when you need to group related actions (like account settings, navigation options, or
+        Use a Dropdown when you need to group related actions (like account settings, navigation options, or
         administrative triggers) into a compact popover overlay. Items automatically close the dropdown upon selection
         unless explicitly configured otherwise.
       </p>
@@ -207,28 +207,28 @@ export const DropdownMenuDoc = () => {
       </h2>
       <div className="mb-12">
         <p className="mb-4 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          Assemble the menu by composing subcomponents inside the root <code>DropdownMenu</code> provider:
+          Assemble the menu by composing subcomponents inside the root <code>Dropdown</code> provider:
         </p>
         <CodeViewer
           language="tsx"
-          code={`<DropdownMenu>
-  <DropdownMenuTrigger></DropdownMenuTrigger>
+          code={`<Dropdown>
+  <DropdownTrigger></DropdownTrigger>
 
-  <DropdownMenuContent>
+  <DropdownContent>
 
-    <DropdownMenuGroup>
-      <DropdownMenuItem></DropdownMenuItem>
-      <DropdownMenuItem></DropdownMenuItem>
-    </DropdownMenuGroup>
+    <DropdownGroup>
+      <DropdownItem></DropdownItem>
+      <DropdownItem></DropdownItem>
+    </DropdownGroup>
 
-    <DropdownMenuSeparator />
+    <DropdownSeparator />
 
-    <DropdownMenuSub>
-      <DropdownMenuItem></DropdownMenuItem>
-    </DropdownMenuSub>
+    <DropdownSub>
+      <DropdownItem></DropdownItem>
+    </DropdownSub>
 
-  </DropdownMenuContent>
-</DropdownMenu>`}
+  </DropdownContent>
+</Dropdown>`}
         />
       </div>
 
@@ -264,13 +264,13 @@ export const DropdownMenuDoc = () => {
           <strong>Note:</strong> Border radius is configurable globally via the <code>--lithos-radius</code> CSS token,
           or per-instance via <code>className</code> (e.g. <code>rounded-full</code>). No custom prop is required.
         </div>
-        <PropsAccordion title="DropdownMenu Props" data={dropdownMenuPropsData} />
-        <PropsAccordion title="DropdownMenuTrigger Props" data={dropdownMenuTriggerPropsData} />
-        <PropsAccordion title="DropdownMenuContent Props" data={dropdownMenuContentPropsData} />
-        <PropsAccordion title="DropdownMenuItem Props" data={dropdownMenuItemPropsData} />
-        <PropsAccordion title="DropdownMenuSub Props" data={dropdownMenuSubPropsData} />
-        <PropsAccordion title="DropdownMenuGroup Props" data={dropdownMenuGroupPropsData} />
-        <PropsAccordion title="DropdownMenuSeparator Props" data={dropdownMenuSeparatorPropsData} />
+        <PropsAccordion title="Dropdown Props" data={dropdownPropsData} />
+        <PropsAccordion title="DropdownTrigger Props" data={dropdownTriggerPropsData} />
+        <PropsAccordion title="DropdownContent Props" data={dropdownContentPropsData} />
+        <PropsAccordion title="DropdownItem Props" data={dropdownItemPropsData} />
+        <PropsAccordion title="DropdownSub Props" data={dropdownSubPropsData} />
+        <PropsAccordion title="DropdownGroup Props" data={dropdownGroupPropsData} />
+        <PropsAccordion title="DropdownSeparator Props" data={dropdownSeparatorPropsData} />
         <PropsAccordion title="useDropdown Return" data={useDropdownPropsData} isHook />
       </section>
     </div>

@@ -1,5 +1,5 @@
 /**
- * @fileoverview Lithos UI DropdownMenu context and hook utilities.
+ * @fileoverview Lithos UI Dropdown context and hook utilities.
  * - Provides strict context boundaries and consumer hooks for accessing dropdown state.
  */
 import { createContext, useContext, type RefObject } from 'react'
@@ -17,7 +17,7 @@ export const DropdownContext = createContext<DropdownContext | null>(null)
 export const useDropdown = () => {
   const context = useContext(DropdownContext)
 
-  if (!context) throw new Error('DropdownMenu subcomponents must be used within <DropdownMenu>')
+  if (!context) throw new Error('Dropdown subcomponents must be used within <Dropdown>')
 
   return context
 }

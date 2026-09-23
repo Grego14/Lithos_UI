@@ -1,5 +1,5 @@
 /**
- * @fileoverview Lithos UI DropdownMenuItem primitive.
+ * @fileoverview Lithos UI DropdownItem primitive.
  * - Interactive action item rendered as a text variant `Button` with `role="menuitem"`.
  * - Automatically dismisses the parent dropdown menu (`setOpen(false)`) upon click or key activation (`Enter`/`Space`).
  * - Skips interaction handlers and prevents pointer events when `disabled`.
@@ -9,20 +9,13 @@ import { Button } from '../Button'
 import { usePopoverContext } from '../popover/usePopover'
 import { cn, type LithosClass } from '../../../utils/cn'
 import { useListItem } from '@floating-ui/react'
-import { menuItemClass } from './DropdownMenu'
+import { menuItemClass } from './Dropdown'
 
-export interface DropdownMenuItemProps extends Omit<ComponentPropsWithRef<'button'>, 'className'> {
+export interface DropdownItemProps extends Omit<ComponentPropsWithRef<'button'>, 'className'> {
   disabled?: boolean
   className?: LithosClass
 }
-export const DropdownMenuItem = ({
-  children,
-  disabled,
-  onClick,
-  onKeyDown,
-  className,
-  ...props
-}: DropdownMenuItemProps) => {
+export const DropdownItem = ({ children, disabled, onClick, onKeyDown, className, ...props }: DropdownItemProps) => {
   const { ref, index } = useListItem()
   const { setOpen } = usePopoverContext()
 

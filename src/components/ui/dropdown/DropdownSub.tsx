@@ -1,5 +1,5 @@
 /**
- * @fileoverview Lithos UI DropdownMenuSub primitive for nested menus.
+ * @fileoverview Lithos UI DropdownSub primitive for nested menus.
  * - Instantiates a nested `Popover` configured with `right-start` placement by default.
  * - Leverages `useHover` with `safePolygon` to keep submenus open during diagonal cursor movements.
  * - Uses a custom trigger item that opens the nested surface on hover or focus without closing the root menu.
@@ -16,22 +16,16 @@ import {
   FloatingPortal,
   safePolygon,
 } from '@floating-ui/react'
-import { DropdownMenuContent } from './DropdownMenuContent'
+import { DropdownContent } from './DropdownContent'
 
-import { menuItemClass } from './DropdownMenu'
+import { menuItemClass } from './Dropdown'
 
-export interface DropdownMenuSubProps extends PopoverProps {
+export interface DropdownSubProps extends PopoverProps {
   trigger: ReactNode
   disabled?: boolean
 }
 
-export const DropdownMenuSub = ({
-  children,
-  trigger,
-  placement = 'right-start',
-  disabled,
-  ...props
-}: DropdownMenuSubProps) => {
+export const DropdownSub = ({ children, trigger, placement = 'right-start', disabled, ...props }: DropdownSubProps) => {
   const [open, setOpen] = useState(false)
   const { ref: listItemRef, index } = useListItem()
   const triggerRef = useRef<HTMLButtonElement | null>(null)
@@ -83,7 +77,7 @@ export const DropdownMenuSub = ({
 
         {open && (
           <FloatingPortal>
-            <DropdownMenuContent onCloseSubmenu={handleCloseSubmenu}>{children}</DropdownMenuContent>
+            <DropdownContent onCloseSubmenu={handleCloseSubmenu}>{children}</DropdownContent>
           </FloatingPortal>
         )}
       </Popover>

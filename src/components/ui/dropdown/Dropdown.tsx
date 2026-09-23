@@ -1,5 +1,5 @@
 /**
- * @fileoverview Lithos UI DropdownMenu root primitive.
+ * @fileoverview Lithos UI Dropdown root primitive.
  * - Wraps the low-level `Popover` provider to manage open state and floating context.
  * - Serves as the top-level container for all dropdown subcomponents.
  * - Exports `menuItemClass` to enforce consistent interactive styles across items and sub menu triggers.
@@ -9,17 +9,17 @@ import { Popover, type PopoverProps } from '../Popover'
 import { DropdownContext } from './useDropdown'
 import { usePopoverContext } from '../popover/usePopover'
 
-export type DropdownMenuPlacement = 'bottom-start' | 'bottom-end'
+export type DropdownPlacement = 'bottom-start' | 'bottom-end'
 
-interface DropdownMenuProps extends PopoverProps {
-  placement?: DropdownMenuPlacement
+interface DropdownProps extends PopoverProps {
+  placement?: DropdownPlacement
 }
 
-const DropdownMenuRoot = ({ placement = 'bottom-end', ...props }: DropdownMenuProps) => (
+const DropdownRoot = ({ placement = 'bottom-end', ...props }: DropdownProps) => (
   <Popover {...props} placement={placement} role="menu" />
 )
 
-const DropdownMenuProvider = ({ children }: { children: ReactNode }) => {
+const DropdownProvider = ({ children }: { children: ReactNode }) => {
   const { open, setOpen, refs } = usePopoverContext()
 
   const value = useMemo(
@@ -35,10 +35,10 @@ const DropdownMenuProvider = ({ children }: { children: ReactNode }) => {
   return <DropdownContext.Provider value={value}>{children}</DropdownContext.Provider>
 }
 
-export const DropdownMenu = ({ children, ...props }: DropdownMenuProps) => (
-  <DropdownMenuRoot {...props}>
-    <DropdownMenuProvider>{children}</DropdownMenuProvider>
-  </DropdownMenuRoot>
+export const Dropdown = ({ children, ...props }: DropdownProps) => (
+  <DropdownRoot {...props}>
+    <DropdownProvider>{children}</DropdownProvider>
+  </DropdownRoot>
 )
 
 export const menuItemClass =

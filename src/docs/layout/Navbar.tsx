@@ -42,7 +42,7 @@ const groupedLinks = [
       { label: 'Carousel', href: '/docs/carousel' },
       { label: 'Checkbox', href: '/docs/checkbox' },
       { label: 'Dialog', href: '/docs/dialog' },
-      { label: 'Dropdown Menu', href: '/docs/dropdown' },
+      { label: 'Dropdown', href: '/docs/dropdown' },
       { label: 'Input', href: '/docs/input' },
       { label: 'Popover', href: '/docs/popover' },
       { label: 'Select', href: '/docs/select' },

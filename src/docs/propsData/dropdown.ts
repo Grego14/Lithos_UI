@@ -1,6 +1,6 @@
 import type { PropItem } from '../../components/ui/PropsTable'
 
-export const dropdownMenuPropsData: PropItem[] = [
+export const dropdownPropsData: PropItem[] = [
   {
     name: '...props',
     type: 'PopoverProps',
@@ -9,7 +9,7 @@ export const dropdownMenuPropsData: PropItem[] = [
   },
 ]
 
-export const dropdownMenuTriggerPropsData: PropItem[] = [
+export const dropdownTriggerPropsData: PropItem[] = [
   {
     name: '...props',
     type: 'PopoverTriggerProps',
@@ -18,7 +18,7 @@ export const dropdownMenuTriggerPropsData: PropItem[] = [
   },
 ]
 
-export const dropdownMenuContentPropsData: PropItem[] = [
+export const dropdownContentPropsData: PropItem[] = [
   {
     name: 'loop',
     type: 'boolean',
@@ -41,7 +41,7 @@ export const dropdownMenuContentPropsData: PropItem[] = [
   },
 ]
 
-export const dropdownMenuItemPropsData: PropItem[] = [
+export const dropdownItemPropsData: PropItem[] = [
   {
     name: 'disabled',
     type: 'boolean',
@@ -57,7 +57,7 @@ export const dropdownMenuItemPropsData: PropItem[] = [
   },
 ]
 
-export const dropdownMenuSubPropsData: PropItem[] = [
+export const dropdownSubPropsData: PropItem[] = [
   {
     name: 'trigger',
     type: 'ReactNode',
@@ -79,7 +79,7 @@ export const dropdownMenuSubPropsData: PropItem[] = [
   },
 ]
 
-export const dropdownMenuGroupPropsData: PropItem[] = [
+export const dropdownGroupPropsData: PropItem[] = [
   {
     name: 'label',
     type: 'string',
@@ -94,7 +94,7 @@ export const dropdownMenuGroupPropsData: PropItem[] = [
   },
 ]
 
-export const dropdownMenuSeparatorPropsData: PropItem[] = [
+export const dropdownSeparatorPropsData: PropItem[] = [
   {
     name: '...props',
     type: 'ComponentPropsWithRef<"div">',
