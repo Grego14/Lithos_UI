@@ -22,10 +22,10 @@ export interface KbdProps extends Omit<ComponentPropsWithRef<'kbd'>, 'className'
 }
 
 const sizeStyles: Record<KbdSize, string> = {
-  xs: 'text-[0.65rem] min-w-5 h-5 px-1',
-  sm: 'text-xs min-w-6 h-6 px-1.5',
-  md: 'text-xs min-w-7 h-7 px-2',
-  lg: 'text-sm min-w-8 h-8 px-2.5',
+  xs: 'text-[0.65rem] min-w-5 h-5 px-1 pt-0.5 pb-0',
+  sm: 'text-xs min-w-6 h-6 px-1.5 pt-0.5 pb-0',
+  md: 'text-xs min-w-7 h-7 px-2 pt-0.5 pb-0',
+  lg: 'text-sm min-w-8 h-8 px-2.5 pt-0.5 pb-0',
 }
 
 const variantStyles: Record<KbdVariant, string> = {
@@ -54,7 +54,7 @@ export const Kbd = ({ children, size = 'md', variant = 'default', color, classNa
     : undefined
 
   const classes = cn(
-    'inline-flex items-center justify-center font-(--font-mono) font-bold text-center leading-none select-none rounded-(--lithos-radius)',
+    'inline-flex items-center justify-center font-(--font-mono) font-bold text-center leading-none select-none rounded-(--lithos-radius) box-border',
     sizeStyles[size],
     variantStyles[variant],
     className
