@@ -250,6 +250,18 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#accessibility', label: 'Accessibility', level: 1 },
     { id: '#api', label: 'API Reference', level: 1 },
   ],
+  '/docs/kbd': [
+    { id: '#installation', label: 'Installation', level: 1 },
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#default', label: 'Default', level: 2 },
+    { id: '#shortcuts', label: 'Shortcuts & Groups', level: 2 },
+    { id: '#variants', label: 'Variants', level: 2 },
+    { id: '#sizes', label: 'Sizes', level: 2 },
+    { id: '#custom-color', label: 'Custom color', level: 2 },
+    { id: '#in-context', label: 'In context', level: 2 },
+    { id: '#accessibility', label: 'Accessibility', level: 1 },
+    { id: '#api', label: 'API Reference', level: 1 },
+  ],
 }
 
 interface DocsLayoutProps {

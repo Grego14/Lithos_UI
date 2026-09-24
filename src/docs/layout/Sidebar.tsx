@@ -17,6 +17,7 @@ const components = [
   'dialog',
   'dropdown-menu',
   'input',
+  'kbd',
   'popover',
   'select',
   'tabs',
