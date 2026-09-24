@@ -11,6 +11,14 @@
   --lithos-shadow: rgba(0, 0, 0, 1);
   --lithos-radius: 0px;
 
+  --lithos-z-dropdown: 10;
+  --lithos-z-sticky: 20;
+  --lithos-z-popover: 30;
+  --lithos-z-overlay: 40;
+  --lithos-z-modal: 50;
+  --lithos-z-drawer: 50;
+  --lithos-z-tooltip: 60;
+
   background-color: var(--lithos-bg);
   color: var(--lithos-text);
   color-scheme: light;

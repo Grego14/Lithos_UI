@@ -9,6 +9,7 @@ import { FloatingList } from '@floating-ui/react'
 import { useListKeyNavigation } from '../../../core/hooks/useListKeyNavigation'
 import { DropdownNavigationContext } from './DropdownNavigationContext'
 import { useDropdown } from './useDropdown'
+import { zIndex } from '../../../utils/classMaps'
 
 export interface DropdownContentProps extends PopoverContentProps {
   loop?: boolean
@@ -83,7 +84,7 @@ export const DropdownContent = ({
       }}
     >
       <FloatingList elementsRef={elementsRef}>
-        <PopoverContent className={['p-1', className]} onKeyDown={handleKeyDown} {...props}>
+        <PopoverContent className={['p-1', zIndex.dropdown, className]} onKeyDown={handleKeyDown} {...props}>
           {children}
         </PopoverContent>
       </FloatingList>

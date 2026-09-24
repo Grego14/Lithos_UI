@@ -7,6 +7,7 @@ import type { ComponentPropsWithRef } from 'react'
 import { useTransitionStatus, useMergeRefs, FloatingFocusManager, FloatingPortal } from '@floating-ui/react'
 import { cn, type LithosClass } from '../../../utils/cn'
 import { usePopoverContext } from './usePopover'
+import { zIndex } from '../../../utils/classMaps'
 
 export interface PopoverContentProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   portaled?: boolean
@@ -47,7 +48,8 @@ export const PopoverContent = ({
         aria-labelledby={labelId}
         aria-describedby={descriptionId}
         className={cn(
-          'z-50 min-w-40 border-2 border-(--lithos-border) bg-(--lithos-surface) p-4 shadow-[4px_4px_0_0_var(--lithos-shadow)] text-(--lithos-text) outline-none rounded-(--lithos-radius)',
+          zIndex.popover,
+          'min-w-40 border-2 border-(--lithos-border) bg-(--lithos-surface) p-4 shadow-[4px_4px_0_0_var(--lithos-shadow)] text-(--lithos-text) outline-none rounded-(--lithos-radius)',
           className
         )}
         {...getFloatingProps(props)}
