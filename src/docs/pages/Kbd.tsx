@@ -1,6 +1,6 @@
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { Kbd, KbdGroup } from '../../components/ui/Kbd'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { colors } from '../../utils/colors'
 import { isHexColor } from '../../core/types'
 import { Button } from '../../components/ui/Button'
@@ -16,6 +16,19 @@ export const KbdDoc = () => {
   const [customColor, setCustomColor] = useState('#A855F7')
   const [error, setError] = useState('')
   const inputRef = useRef<null | HTMLInputElement>(null)
+  const searchInputRef = useRef<null | HTMLInputElement>(null)
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault()
+        searchInputRef.current?.focus()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
   const defaultCode = {
     body: `export const DefaultKbd = () => {
@@ -107,17 +120,32 @@ export const KbdDoc = () => {
 
   const inContextCode = {
     body: `export const InContextKbd = () => {
+  const inputRef = useRef<HTMLInputElement | null>(null)
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault()
+        inputRef.current?.focus()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
+
   return (
     <InputGroup
       className="w-full max-w-sm"
       endAdornment={
         <KbdGroup>
-          <Kbd size="sm">⌘</Kbd>
+          <Kbd size="sm">Ctrl</Kbd>
+          <span className="text-xs font-mono font-bold opacity-60 text-(--lithos-text)">+</span>
           <Kbd size="sm">K</Kbd>
         </KbdGroup>
       }
     >
-      <InputGroupInput placeholder="Quick Search..." />
+      <InputGroupInput ref={inputRef} placeholder="Quick Search... (Ctrl + K)" />
     </InputGroup>
   )
 }`,
@@ -319,22 +347,24 @@ export const KbdDoc = () => {
         In Context
       </h3>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        Seamlessly integrates alongside search fields, buttons, dialogs, and navigation palettes.
+        Seamlessly integrates alongside search fields, buttons, dialogs, and navigation palettes. Pressing{' '}
+        <Kbd size="xs">Ctrl</Kbd> + <Kbd size="xs">K</Kbd> directly focuses the input below.
       </p>
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={inContextCode} githubUrl={githubUrl}>
           <InputGroup
-            className="w-full max-w-sm"
+            className="w-full max-w-sm cursor-text"
+            onClick={() => searchInputRef.current?.focus()}
             endAdornment={
               <KbdGroup>
-                <Kbd size="sm">⌘</Kbd>
+                <Kbd size="sm">Ctrl</Kbd>
                 <span className="text-xs font-mono font-bold opacity-60 text-(--lithos-text)">+</span>
                 <Kbd size="sm">K</Kbd>
               </KbdGroup>
             }
           >
-            <InputGroupInput placeholder="Quick Search..." />
+            <InputGroupInput ref={searchInputRef} placeholder="Quick Search... (Ctrl + K)" />
           </InputGroup>
         </PreviewBlock>
       </div>
