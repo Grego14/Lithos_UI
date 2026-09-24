@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import { colors } from '../../utils/colors'
 import { isHexColor } from '../../core/types'
 import { Button } from '../../components/ui/Button'
+import { InputGroup, InputGroupInput } from '../../components/ui/Input'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { kbdPropsData, kbdGroupPropsData } from '../propsData/kbd'
 import { SetupGuide } from '../layout/SetupGuide'
@@ -103,16 +104,20 @@ export const KbdDoc = () => {
   const inContextCode = {
     body: `export const InContextKbd = () => {
   return (
-    <div className="w-full max-w-sm border-2 border-(--lithos-border) bg-(--lithos-surface) p-3 shadow-[4px_4px_0_0_var(--lithos-shadow)] flex items-center justify-between">
-      <span className="text-sm font-semibold opacity-70">Quick Search...</span>
-      <KbdGroup>
-        <Kbd size="sm">⌘</Kbd>
-        <Kbd size="sm">K</Kbd>
-      </KbdGroup>
-    </div>
+    <InputGroup
+      className="w-full max-w-sm"
+      endAdornment={
+        <KbdGroup>
+          <Kbd size="sm">⌘</Kbd>
+          <Kbd size="sm">K</Kbd>
+        </KbdGroup>
+      }
+    >
+      <InputGroupInput placeholder="Quick Search..." />
+    </InputGroup>
   )
 }`,
-    componentNames: ['Kbd', 'KbdGroup'],
+    componentNames: ['Kbd', 'KbdGroup', 'InputGroup', 'InputGroupInput'],
     manualPath: KBD_PATH,
   }
 
@@ -301,13 +306,17 @@ export const KbdDoc = () => {
 
       <div className="mt-8 mb-16">
         <PreviewBlock code={inContextCode} githubUrl={githubUrl}>
-          <div className="w-full max-w-sm border-2 border-(--lithos-border) bg-(--lithos-surface) p-3 shadow-[4px_4px_0_0_var(--lithos-shadow)] flex items-center justify-between">
-            <span className="text-sm font-semibold opacity-70">Quick Search...</span>
-            <KbdGroup>
-              <Kbd size="sm">⌘</Kbd>
-              <Kbd size="sm">K</Kbd>
-            </KbdGroup>
-          </div>
+          <InputGroup
+            className="w-full max-w-sm"
+            endAdornment={
+              <KbdGroup>
+                <Kbd size="sm">⌘</Kbd>
+                <Kbd size="sm">K</Kbd>
+              </KbdGroup>
+            }
+          >
+            <InputGroupInput placeholder="Quick Search..." />
+          </InputGroup>
         </PreviewBlock>
       </div>
 
