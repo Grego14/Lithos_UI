@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - **Dropdown Menu:** Added the dropdown menu primitive ([#315](https://github.com/lithosui/Lithos_UI/pull/315)).
 - Added `matchTriggerWidth` prop to the **Popover** primitive ([#327](https://github.com/lithosui/Lithos_UI/pull/327)).
 - Added `transitionDuration` prop to the **PopoverContent** component ([#327](https://github.com/lithosui/Lithos_UI/pull/327)).
-- **Kbd & KbdGroup:** Introduced keyboard keycap and shortcut group UI primitives.
+- **Kbd & KbdGroup:** Introduced keyboard keycap and shortcut group UI primitives ([#328](https://github.com/lithosui/Lithos_UI/pull/328)).
   - Semantic `<kbd>` component with tactical keycap proportions, calibrated vertical/horizontal centering, and 0px-blur brutalist hard-drop shadows.
   - Multiple size steps (`xs`, `sm`, `md`, `lg`) and visual style variants (`default`, `accent`, `outline`, `solid`, `subtle`, `inverse`).
   - Dynamic YIQ biological contrast engine integration for custom HEX background colors.
@@ -28,7 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed (0.1.2)
 
-- Scoped the generic `kbd` selector in `src/tokens.css` to `kbd:not([data-slot="kbd"])` to avoid polluting the `Kbd` component styling.
+- Scoped the generic `kbd` selector in `src/tokens.css` to `kbd:not([data-slot="kbd"])` to avoid polluting the `Kbd` component styling ([#328](https://github.com/lithosui/Lithos_UI/pull/328)).
 - Improved DX by allowing the `role` prop to be passed directly to the Popover component, simplifying `DropdownMenu` and `Select` implementations ([#318](https://github.com/lithosui/Lithos_UI/pull/318)).
 - Properly arranged the components and blocks ([#303](https://github.com/lithosui/Lithos_UI/pull/303)).
 - Improved the hero title responsiveness ([#305](https://github.com/lithosui/Lithos_UI/pull/305)).
