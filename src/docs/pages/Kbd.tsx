@@ -13,7 +13,7 @@ const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/component
 const KBD_PATH = '../../components/ui/Kbd'
 
 export const KbdDoc = () => {
-  const [customColor, setCustomColor] = useState('#00FF00')
+  const [customColor, setCustomColor] = useState('#A855F7')
   const [error, setError] = useState('')
   const inputRef = useRef<null | HTMLInputElement>(null)
 
@@ -92,9 +92,13 @@ export const KbdDoc = () => {
   const customColorCode = {
     body: `export const CustomColorKbd = () => {
   return (
-    <Kbd color="#00FF00" size="lg">
-      Custom Color
-    </Kbd>
+    <div className="flex flex-wrap items-center justify-center space-x-3">
+      <Kbd color="#00FF00" size="lg">Ctrl</Kbd>
+      <Kbd color="#00FFFF" size="lg">Alt</Kbd>
+      <Kbd color="#FFFF00" size="lg">Shift</Kbd>
+      <Kbd color="#FF0055" size="lg">⌘</Kbd>
+      <Kbd color="#A855F7" size="lg">Custom</Kbd>
+    </div>
   )
 }`,
     componentNames: ['Kbd'],
@@ -269,11 +273,25 @@ export const KbdDoc = () => {
       <div className="mt-8 mb-16">
         <PreviewBlock code={customColorCode} githubUrl={githubUrl}>
           <div className="flex flex-col items-center text-center">
-            <Kbd color={customColor} size="lg">
-              Custom Color
-            </Kbd>
+            <div className="flex flex-wrap items-center justify-center space-x-3">
+              <Kbd color="#00FF00" size="lg">
+                Ctrl
+              </Kbd>
+              <Kbd color="#00FFFF" size="lg">
+                Alt
+              </Kbd>
+              <Kbd color="#FFFF00" size="lg">
+                Shift
+              </Kbd>
+              <Kbd color="#FF0055" size="lg">
+                ⌘
+              </Kbd>
+              <Kbd color={customColor} size="lg">
+                Custom
+              </Kbd>
+            </div>
 
-            <div className="mt-4 text-center flex items-center">
+            <div className="mt-6 text-center flex items-center">
               <input
                 ref={inputRef}
                 type="text"
