@@ -16,6 +16,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - Evaluates NPM dependencies required by downloaded components and outputs terminal warnings for manual installation.
   - Added `src/cli/registry.ts` to act as the single source of truth for component dependencies. The documentation's `SetupGuide.tsx` now dynamically pulls from this registry to prevent drift.
 - **Dropdown Menu:** Added the dropdown menu primitive ([#315](https://github.com/lithosui/Lithos_UI/pull/315)).
+- Added `matchTriggerWidth` prop to the **Popover** primitive ([#327](https://github.com/lithosui/Lithos_UI/pull/327)).
+- Added `transitionDuration` prop to the **PopoverContent** component ([#327](https://github.com/lithosui/Lithos_UI/pull/327)).
 
 ### Changed (0.1.2)
 
@@ -35,7 +37,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added (0.1.1)
 
-- Tooltip component.
+- Tooltip component ([#277](https://github.com/lithosui/Lithos_UI/pull/277)).
 
 ### Changed (0.1.1)
 
@@ -44,6 +46,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Fixed (0.1.1)
 
 - Fixes for v0.1.0 for the components were made.
+- Make the icon inside the checkbox move along with the box ([#276](https://github.com/lithosui/Lithos_UI/pull/276)).
 
 ### Removed (0.1.1)
 

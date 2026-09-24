@@ -40,6 +40,25 @@ export const popoverPropsData = [
     required: false,
     description: 'Distance in pixels between the popover and the trigger element.',
   },
+  {
+    name: 'hover',
+    type: 'boolean | UseHoverProps',
+    defaultValue: 'false',
+    description:
+      'Enables hover interaction to the popover trigger. Accepts a boolean or Floating UI hover configuration options.',
+  },
+  {
+    name: 'role',
+    type: "UseRoleProps['role']",
+    defaultValue: '"dialog"',
+    description: 'The ARIA role applied to the popover element (e.g., "dialog", "menu", "tooltip").',
+  },
+  {
+    name: 'matchTriggerWidth',
+    type: 'boolean',
+    defaultValue: 'false',
+    description: 'Forces the popover content width to match the width of the trigger element.',
+  },
 ]
 
 export const popoverTriggerPropsData = [
@@ -63,6 +82,13 @@ export const popoverContentPropsData = [
     defaultValue: 'true',
     required: false,
     description: 'Whether to render the content in a React Portal.',
+  },
+  {
+    name: 'transitionDuration',
+    type: 'number',
+    defaultValue: '0',
+    required: false,
+    description: 'Duration in milliseconds for the enter and exit transition before unmounting.',
   },
   {
     name: 'className',
