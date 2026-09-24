@@ -5,7 +5,7 @@ const sharedProps: PropItem[] = [
     name: 'animation',
     type: '"pulse" | false',
     defaultValue: '"pulse"',
-    description: 'Fill animation. Automatically disabled for reduced motion and forced colors.',
+    description: 'Whole-placeholder animation. Automatically disabled for reduced motion and forced colors.',
   },
   {
     name: 'tone',

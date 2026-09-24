@@ -7,14 +7,14 @@ import { describe, it, expect, vi } from 'vitest'
 import { Skeleton, SkeletonText } from '../../../components/ui/Skeleton'
 
 describe('Skeleton', () => {
-  it('renders a neutral text placeholder with pulse on the fill only', () => {
+  it('renders a neutral text placeholder with pulse on the entire element', () => {
     render(<Skeleton data-testid="placeholder" />)
     const element = screen.getByTestId('placeholder')
     expect(element).toHaveAttribute('data-variant', 'text')
     expect(element).toHaveAttribute('data-tone', 'neutral')
     expect(element).toHaveAttribute('data-animation', 'pulse')
-    expect(element).toHaveClass('after:animate-pulse', 'after:[animation-duration:1.2s]')
-    expect(element).not.toHaveClass('animate-pulse', 'after:hidden')
+    expect(element).toHaveClass('animate-pulse', '[animation-duration:1s]')
+    expect(element).not.toHaveClass('after:animate-pulse', 'animate-none')
   })
 
   it.each(['text', 'rectangular', 'rounded', 'circular'] as const)(
@@ -67,21 +67,19 @@ describe('Skeleton', () => {
     rerender(<Skeleton data-testid="placeholder" animation={false} />)
     expect(screen.getByTestId('placeholder')).toBe(element)
     expect(element).toHaveAttribute('data-animation', 'none')
-    expect(element).toHaveClass('after:hidden')
-    expect(element).not.toHaveClass('after:animate-pulse', 'after:[animation-duration:1.2s]')
+    expect(element).toHaveClass('animate-none')
+    expect(element).not.toHaveClass('animate-pulse', '[animation-duration:1s]')
     rerender(<Skeleton data-testid="placeholder" animation="pulse" />)
     expect(screen.getByTestId('placeholder')).toBe(element)
-    expect(element).toHaveClass('after:animate-pulse')
-    expect(element).not.toHaveClass('after:hidden')
+    expect(element).toHaveClass('animate-pulse')
+    expect(element).not.toHaveClass('animate-none')
   })
 
   it('includes reduced-motion and forced-colors safeguards', () => {
     render(<Skeleton data-testid="placeholder" />)
     expect(screen.getByTestId('placeholder')).toHaveClass(
-      'motion-reduce:after:animate-none',
-      'motion-reduce:after:hidden',
-      'forced-colors:after:animate-none',
-      'forced-colors:after:hidden',
+      'motion-reduce:animate-none',
+      'forced-colors:animate-none',
       'forced-colors:border-[CanvasText]',
       'forced-colors:bg-[Canvas]',
       'forced-colors:shadow-none'
@@ -89,10 +87,10 @@ describe('Skeleton', () => {
   })
 
   it('lets consumers override the pulse speed', () => {
-    render(<Skeleton data-testid="placeholder" className="after:[animation-duration:3s]" />)
+    render(<Skeleton data-testid="placeholder" className="[animation-duration:3s]" />)
     const element = screen.getByTestId('placeholder')
-    expect(element).toHaveClass('after:animate-pulse', 'after:[animation-duration:3s]')
-    expect(element).not.toHaveClass('after:[animation-duration:1.2s]')
+    expect(element).toHaveClass('animate-pulse', '[animation-duration:3s]')
+    expect(element).not.toHaveClass('[animation-duration:1s]')
   })
 
   it('supports replacing loading placeholders with accessible content', async () => {
@@ -125,7 +123,7 @@ describe('SkeletonText', () => {
     for (const line of element.children) {
       expect(line).toHaveAttribute('aria-hidden', 'true')
       expect(line).toHaveAttribute('inert')
-      expect(line).toHaveClass('after:animate-pulse')
+      expect(line).toHaveClass('animate-pulse')
     }
     expect(element.children[2]).toHaveStyle({ width: '65%' })
   })
@@ -163,8 +161,8 @@ describe('SkeletonText', () => {
     for (const line of ref.current!.children) {
       expect(line).toHaveAttribute('data-tone', 'accent')
       expect(line).toHaveAttribute('data-animation', 'none')
-      expect(line).toHaveClass('after:hidden')
-      expect(line).not.toHaveClass('after:animate-pulse')
+      expect(line).toHaveClass('animate-none')
+      expect(line).not.toHaveClass('animate-pulse')
     }
   })
 

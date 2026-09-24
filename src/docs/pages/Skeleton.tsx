@@ -58,8 +58,8 @@ export const SkeletonDoc = () => (
         Animations
       </h3>
       <p className={paragraph}>
-        Choose pulse or no animation. Only the fill animates; borders remain steady. Reduced motion and forced colors
-        automatically disable the animation.
+        Choose pulse or no animation. The entire placeholder pulses, including its fill, border, and shadow. Reduced
+        motion and forced colors automatically disable the animation.
       </p>
       <PreviewBlock code={sourceExample(animationSource, ['Skeleton'])}>
         <SkeletonAnimations />

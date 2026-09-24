@@ -43,14 +43,11 @@ export const Skeleton = ({
   <span
     {...props}
     className={cn(
-      'relative isolate block overflow-hidden box-border min-w-0 max-w-full border-2 border-(--lithos-border) shadow-[2px_2px_0_var(--lithos-shadow)] pointer-events-none select-none',
-      "after:content-[''] after:absolute after:inset-0",
+      'block overflow-hidden box-border min-w-0 max-w-full border-2 border-(--lithos-border) shadow-[2px_2px_0_var(--lithos-shadow)] pointer-events-none select-none',
       variants[variant],
       tones[tone],
-      animation
-        ? 'after:bg-[color-mix(in_srgb,var(--lithos-text)_48%,transparent)] after:animate-pulse after:[animation-duration:1.2s]'
-        : 'after:hidden',
-      'motion-reduce:after:animate-none motion-reduce:after:hidden forced-colors:border-[CanvasText] forced-colors:bg-[Canvas] forced-colors:shadow-none forced-colors:after:animate-none forced-colors:after:hidden',
+      animation ? 'animate-pulse [animation-duration:1s]' : 'animate-none',
+      'motion-reduce:animate-none forced-colors:border-[CanvasText] forced-colors:bg-[Canvas] forced-colors:shadow-none forced-colors:animate-none',
       className
     )}
     style={{ width, height, ...style }}
