@@ -329,7 +329,7 @@ export const KbdDoc = () => {
             endAdornment={
               <KbdGroup>
                 <Kbd size="sm">⌘</Kbd>
-                <span>+</span>
+                <span className="text-xs font-mono font-bold opacity-60 text-(--lithos-text)">+</span>
                 <Kbd size="sm">K</Kbd>
               </KbdGroup>
             }
