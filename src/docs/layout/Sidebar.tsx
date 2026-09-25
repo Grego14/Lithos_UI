@@ -16,6 +16,7 @@ const components = [
   'checkbox',
   'dialog',
   'dropdown',
+  'drawer',
   'input',
   'kbd',
   'popover',

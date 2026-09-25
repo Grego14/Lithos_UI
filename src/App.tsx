@@ -29,6 +29,7 @@ import { ComingSoon } from './showroom/sections/ComingSoon'
 import { ComponentsIndex } from './pages/ComponentsIndex'
 import { DialogDoc } from './docs/pages/Dialog'
 import { DropdownDoc } from './docs/pages/Dropdown'
+import { DrawerDoc } from './docs/pages/Drawer'
 import { DocsLayout } from './docs/DocsLayout'
 import { Faq } from './pages/Faq'
 import { InputDoc } from './docs/pages/Input'
@@ -83,6 +84,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
     { path: 'checkbox', component: CheckboxDoc },
     { path: 'dialog', component: DialogDoc },
     { path: 'dropdown', component: DropdownDoc },
+    { path: 'drawer', component: DrawerDoc },
     { path: 'installation', component: Installation },
     { path: 'kbd', component: KbdDoc },
     { path: 'popover', component: PopoverPage },
