@@ -20,6 +20,7 @@ const components = [
   'kbd',
   'popover',
   'select',
+  'skeleton',
   'tabs',
   'toast',
   'toggle',
