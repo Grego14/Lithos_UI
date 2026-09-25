@@ -538,6 +538,10 @@ export interface CommandSeparatorProps extends Omit<ComponentPropsWithRef<'div'>
 }
 
 export const CommandSeparator = ({ className, ...rest }: CommandSeparatorProps) => {
+  const { visibleItemsCount } = useCommand()
+
+  if (visibleItemsCount === 0) return null
+
   return (
     <div
       data-slot="command-separator"
