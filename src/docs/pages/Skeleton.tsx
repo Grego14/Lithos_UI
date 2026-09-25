@@ -1,4 +1,4 @@
-﻿import { PreviewBlock } from '../../components/ui/PreviewBlock'
+import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 import { SetupGuide } from '../layout/SetupGuide'
@@ -33,8 +33,7 @@ export const SkeletonDoc = () => (
     <header>
       <h1 className="mb-6 text-4xl md:text-5xl font-black tracking-tight leading-none">Skeleton</h1>
       <p className="max-w-2xl text-lg md:text-xl font-display opacity-70">
-        Show the outline of your content while it loads. Both shimmer and pulse animate the entire placeholder,
-        including its fill, border, and shadow.
+        Display skeleton placeholders for text, images, and avatars while content loads.
       </p>
       <hr className="border-t-2 border-(--lithos-border) my-8" />
     </header>
@@ -69,40 +68,31 @@ export const SkeletonDoc = () => (
         Animations
       </h3>
       <p className={paragraph}>
-        Shimmer and pulse both animate the entire placeholder, including its fill, border, and shadow. The default
-        shimmer sweeps across the whole component; pulse fades the whole component in and out. Set{' '}
-        <code>{'animation={false}'}</code> to always disable animation. Reduced motion is respected by default; use{' '}
-        <code>{'respectReducedMotion={false}'}</code> only for controlled previews, as shown below, to animate
-        regardless of the OS/browser preference. Forced colors automatically disable both animations.
+        Animation is enabled by default. Set <code>{'animation="pulse"'}</code> for pulse or{' '}
+        <code>{'animation={false}'}</code> to disable it. Set <code>{'respectReducedMotion={true}'}</code> to follow the
+        OS/browser reduced-motion preference. Forced colors disable both animations.
       </p>
       <PreviewBlock code={sourceExample(animationSource, ['Skeleton'])}>
         <SkeletonAnimations />
       </PreviewBlock>
-      <p className={paragraph}>
-        Small placeholders for individual UI elements. Match their dimensions to the content they replace.
-      </p>
       <h3 id="component-card" className={subheading}>
         Card
       </h3>
-      <p className={paragraph}>
-        Use pulse animation for an image, title, and description inside the existing Card component.
-      </p>
+      <p className={paragraph}>Use rectangular and text skeletons for a card's image, title, and description.</p>
       <PreviewBlock code={sourceExample(cardSource, ['Skeleton', 'SkeletonText', 'Card', 'CardContent'])}>
         <SkeletonCardExample />
       </PreviewBlock>
       <h3 id="component-list" className={subheading}>
         List
       </h3>
-      <p className={paragraph}>
-        Repeat a compact row for a simple list. Text uses the available space without shrinking the leading placeholder.
-      </p>
+      <p className={paragraph}>Combine image and text skeletons into repeating list rows.</p>
       <PreviewBlock code={sourceExample(listSource, ['Skeleton', 'SkeletonText'])}>
         <SkeletonListExample />
       </PreviewBlock>
       <h3 id="component-avatar" className={subheading}>
         Avatar
       </h3>
-      <p className={paragraph}>Use the circular variant at the same diameter as the loaded avatar.</p>
+      <p className={paragraph}>Use circular skeletons to reserve space for avatars in different sizes.</p>
       <PreviewBlock code={sourceExample(avatarSource, ['Skeleton'])}>
         <SkeletonAvatarExample />
       </PreviewBlock>
@@ -133,10 +123,8 @@ export const SkeletonDoc = () => (
       API Reference
     </h2>
     <p className={paragraph}>
-      The <code>variant</code> prop controls text, rectangular, rounded, and circular placeholders. Text height follows
-      the inherited font size. <code>SkeletonText</code> adds deterministic lines with a shorter final line. Utility
-      classes override base styles; inline <code>style</code> overrides width and height props. Native attributes and
-      React 19 refs reach the root element.
+      Use <code>Skeleton</code> for individual placeholders and <code>SkeletonText</code> for multiple lines of text.
+      See the props below for sizing, shapes, and animation options.
     </p>
     <PropsAccordion title="Skeleton Props" data={skeletonPropsData} />
     <PropsAccordion title="SkeletonText Props" data={skeletonTextPropsData} />

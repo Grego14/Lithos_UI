@@ -13,13 +13,7 @@ describe('Skeleton', () => {
     const shimmer = 'animate-[lithos-shimmer_1.5s_linear_infinite]'
     const mask = '[mask-image:linear-gradient(to_right,#0006_35%,#000_50%,#0006_65%)]'
     expect(element).toHaveAttribute('data-animation', 'shimmer')
-    expect(element).toHaveClass(
-      shimmer,
-      mask,
-      '[mask-clip:no-clip]',
-      'motion-reduce:[mask-image:none]',
-      'forced-colors:[mask-image:none]'
-    )
+    expect(element).toHaveClass(shimmer, mask, '[mask-clip:no-clip]', 'forced-colors:[mask-image:none]')
     expect(element).toBeEmptyDOMElement()
     rerender(<Skeleton data-testid="placeholder" animation="pulse" />)
     expect(element).toHaveClass('animate-pulse')
@@ -97,8 +91,8 @@ describe('Skeleton', () => {
     expect(element).not.toHaveClass('animate-none')
   })
 
-  it('respects reduced motion and forced-colors safeguards by default', () => {
-    render(<Skeleton data-testid="placeholder" />)
+  it('respects reduced motion when enabled and preserves forced-colors safeguards', () => {
+    render(<Skeleton data-testid="placeholder" respectReducedMotion />)
     expect(screen.getByTestId('placeholder')).toHaveClass(
       'motion-reduce:animate-none',
       'forced-colors:animate-none',
@@ -115,16 +109,14 @@ describe('Skeleton', () => {
     expect(element).not.toHaveClass('[animation-duration:1s]')
   })
 
-  it.each(['shimmer', 'pulse'] as const)('allows %s previews to opt out while preserving safeguards', (animation) => {
-    const { rerender } = render(
-      <Skeleton data-testid="placeholder" animation={animation} respectReducedMotion={false} />
-    )
+  it.each([true, 'shimmer', 'pulse'] as const)('animates %s and supports reduced-motion opt-in', (animation) => {
+    const { rerender } = render(<Skeleton data-testid="placeholder" animation={animation} />)
     const element = screen.getByTestId('placeholder')
     expect(element).not.toHaveClass('motion-reduce:animate-none')
     expect(element).not.toHaveClass('motion-reduce:[mask-image:none]')
     expect(element).not.toHaveAttribute('respectReducedMotion')
     expect(element).toHaveClass('forced-colors:animate-none')
-    if (animation === 'shimmer') {
+    if (animation === true || animation === 'shimmer') {
       expect(element).toHaveClass(
         '[mask-image:linear-gradient(to_right,#0006_35%,#000_50%,#0006_65%)]',
         'forced-colors:[mask-image:none]'
@@ -136,7 +128,7 @@ describe('Skeleton', () => {
     expect(element).not.toHaveClass('animate-[lithos-shimmer_1.5s_linear_infinite]')
     rerender(<Skeleton data-testid="placeholder" animation={animation} respectReducedMotion />)
     expect(element).toHaveClass('motion-reduce:animate-none')
-    if (animation === 'shimmer') expect(element).toHaveClass('motion-reduce:[mask-image:none]')
+    if (animation === true || animation === 'shimmer') expect(element).toHaveClass('motion-reduce:[mask-image:none]')
   })
 
   it('supports replacing loading placeholders with accessible content', async () => {
@@ -170,7 +162,7 @@ describe('SkeletonText', () => {
       expect(line).toHaveAttribute('aria-hidden', 'true')
       expect(line).toHaveAttribute('inert')
       expect(line).toHaveAttribute('data-animation', 'shimmer')
-      expect(line).toHaveClass('motion-reduce:animate-none')
+      expect(line).not.toHaveClass('motion-reduce:animate-none')
     }
     expect(element.children[2]).toHaveStyle({ width: '65%' })
   })

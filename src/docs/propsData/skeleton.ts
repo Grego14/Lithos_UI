@@ -3,17 +3,17 @@ import type { PropItem } from '../../components/ui/PropsTable'
 const sharedProps: PropItem[] = [
   {
     name: 'animation',
-    type: '"shimmer" | "pulse" | false',
-    defaultValue: '"shimmer"',
+    type: 'boolean | "pulse" | "shimmer"',
+    defaultValue: 'true',
     description:
-      'Whole-placeholder shimmer or pulse, including fill, border, and shadow, or no animation. Respects reduced motion by default; always disabled in forced colors.',
+      'Use true for the default animation, "pulse" for pulse, or false to disable animation. "shimmer" is also accepted. Forced colors disable animation.',
   },
   {
     name: 'respectReducedMotion',
     type: 'boolean',
-    defaultValue: 'true',
+    defaultValue: 'false',
     description:
-      'Disable animation when the OS/browser requests reduced motion. Set false only for controlled previews. animation={false} and forced colors still disable animation.',
+      'Set true to disable animation when the OS/browser requests reduced motion. animation={false} and forced colors always disable animation.',
   },
   {
     name: 'tone',
