@@ -10,9 +10,11 @@ import {
   CommandLoading,
   CommandGroup,
   CommandItem,
+  CommandItemDescription,
   CommandShortcut,
   CommandBadge,
   CommandSeparator,
+  CommandFooter,
   CommandDialog,
 } from '../../../components/ui/Command'
 
@@ -291,5 +293,46 @@ describe('Command Component', () => {
 
     expect(screen.getByRole('status')).toHaveTextContent('Searching resources...')
     expect(screen.getByText('New')).toBeInTheDocument()
+  })
+
+  it('renders CommandFooter with navigation hints and visible item counter', async () => {
+    const user = userEvent.setup()
+    render(
+      <Command>
+        <CommandInput placeholder="Search..." />
+        <CommandList>
+          <CommandItem value="apple">Apple</CommandItem>
+          <CommandItem value="apricot">Apricot</CommandItem>
+          <CommandItem value="banana">Banana</CommandItem>
+        </CommandList>
+        <CommandFooter />
+      </Command>
+    )
+
+    expect(screen.getByText('Navigate')).toBeInTheDocument()
+    expect(screen.getByText('Select')).toBeInTheDocument()
+    expect(screen.getByText('Close')).toBeInTheDocument()
+    expect(screen.getByText('3 items')).toBeInTheDocument()
+
+    const input = screen.getByRole('combobox')
+    await user.type(input, 'ban')
+    expect(screen.getByText('1 item')).toBeInTheDocument()
+  })
+
+  it('renders CommandItemDescription inside CommandItem', () => {
+    render(
+      <Command>
+        <CommandList>
+          <CommandItem value="docs">
+            <div>
+              <span>Docs</span>
+              <CommandItemDescription>View documentation</CommandItemDescription>
+            </div>
+          </CommandItem>
+        </CommandList>
+      </Command>
+    )
+
+    expect(screen.getByText('View documentation')).toBeInTheDocument()
   })
 })

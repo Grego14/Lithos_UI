@@ -548,6 +548,88 @@ export const CommandSeparator = ({ className, ...rest }: CommandSeparatorProps) 
   )
 }
 
+export interface CommandItemDescriptionProps extends Omit<ComponentPropsWithRef<'span'>, 'className'> {
+  className?: LithosClass
+  children?: ReactNode
+}
+
+export const CommandItemDescription = ({ className, children, ...rest }: CommandItemDescriptionProps) => {
+  return (
+    <span
+      data-slot="command-item-description"
+      className={cn('block text-xs font-normal opacity-60 text-(--lithos-text)', className)}
+      {...rest}
+    >
+      {children}
+    </span>
+  )
+}
+
+export interface CommandFooterProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
+  showNavigationHints?: boolean
+  showItemCount?: boolean
+  className?: LithosClass
+  children?: ReactNode
+}
+
+export const CommandFooter = ({
+  showNavigationHints = true,
+  showItemCount = true,
+  className,
+  children,
+  ...rest
+}: CommandFooterProps) => {
+  const { visibleItemsCount } = useCommand()
+
+  return (
+    <div
+      data-slot="command-footer"
+      className={cn(
+        'flex items-center justify-between border-t-2 border-(--lithos-border) px-3 py-1.5 bg-(--lithos-surface) text-xs font-mono select-none text-(--lithos-text)',
+        className
+      )}
+      {...rest}
+    >
+      {children ? (
+        children
+      ) : (
+        <>
+          {showNavigationHints && (
+            <div className="flex items-center space-x-2.5">
+              <span className="inline-flex items-center space-x-1">
+                <Kbd size="xs" variant="subtle">
+                  ↑
+                </Kbd>
+                <Kbd size="xs" variant="subtle">
+                  ↓
+                </Kbd>
+                <span className="text-[11px] opacity-70">Navigate</span>
+              </span>
+              <span className="inline-flex items-center space-x-1">
+                <Kbd size="xs" variant="subtle">
+                  ↵
+                </Kbd>
+                <span className="text-[11px] opacity-70">Select</span>
+              </span>
+              <span className="inline-flex items-center space-x-1">
+                <Kbd size="xs" variant="subtle">
+                  Esc
+                </Kbd>
+                <span className="text-[11px] opacity-70">Close</span>
+              </span>
+            </div>
+          )}
+          {showItemCount && (
+            <div className="ml-auto inline-flex items-center text-[10px] font-bold uppercase tracking-wider opacity-50">
+              {visibleItemsCount} {visibleItemsCount === 1 ? 'item' : 'items'}
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  )
+}
+
 export interface CommandDialogProps extends Omit<DialogProps, 'size' | 'variant'> {
   children?: ReactNode
 }

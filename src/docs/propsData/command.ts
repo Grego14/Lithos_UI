@@ -161,3 +161,32 @@ export const commandDialogPropsData: PropItem[] = [
     description: 'Typically a Command root composed with input and list.',
   },
 ]
+
+export const commandFooterPropsData: PropItem[] = [
+  {
+    name: 'showNavigationHints',
+    type: 'boolean',
+    defaultValue: 'true',
+    required: false,
+    description: 'Renders mechanical keyboard navigation hints (↑↓ Navigate, ↵ Select, Esc Close).',
+  },
+  {
+    name: 'showItemCount',
+    type: 'boolean',
+    defaultValue: 'true',
+    required: false,
+    description: 'Displays the live count of currently visible/filtered command items.',
+  },
+  {
+    name: 'className',
+    type: 'LithosClass',
+    required: false,
+    description: 'Additional CSS classes for the footer bar.',
+  },
+  {
+    name: 'children',
+    type: 'ReactNode',
+    required: false,
+    description: 'Custom footer content to replace or supplement default hints.',
+  },
+]

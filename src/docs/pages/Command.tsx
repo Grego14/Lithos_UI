@@ -9,9 +9,11 @@ import {
   CommandEmpty,
   CommandGroup,
   CommandItem,
+  CommandItemDescription,
   CommandShortcut,
   CommandBadge,
   CommandSeparator,
+  CommandFooter,
   CommandDialog,
 } from '../../components/ui/Command'
 import { PropsAccordion } from '../../components/ui/PropsTable'
@@ -77,6 +79,7 @@ export const CommandDoc = () => {
           </CommandItem>
         </CommandGroup>
       </CommandList>
+      <CommandFooter />
     </Command>
   )
 }`,
@@ -88,6 +91,7 @@ export const CommandDoc = () => {
       'CommandGroup',
       'CommandItem',
       'CommandSeparator',
+      'CommandFooter',
     ],
     manualPath: { Command: '../../components/ui/Command' },
   }
@@ -226,9 +230,11 @@ export const CommandDoc = () => {
           'CommandLoading',
           'CommandGroup',
           'CommandItem',
+          'CommandItemDescription',
           'CommandShortcut',
           'CommandBadge',
           'CommandSeparator',
+          'CommandFooter',
           'CommandDialog',
         ]}
         manualPath="../../components/ui/Command"
@@ -274,6 +280,7 @@ export const CommandDoc = () => {
                   <CommandItem onSelect={(val) => setSelectedAction(`Selected: ${val}`)}>Settings</CommandItem>
                 </CommandGroup>
               </CommandList>
+              <CommandFooter />
             </Command>
             {selectedAction && (
               <p className="mt-3 text-center text-xs font-mono font-bold opacity-75">{selectedAction}</p>
@@ -312,7 +319,10 @@ export const CommandDoc = () => {
                     <span className="inline-flex mr-2 shrink-0">
                       <IconFolder size={16} />
                     </span>
-                    <span>Open Folder</span>
+                    <div className="flex flex-col">
+                      <span>Open Folder</span>
+                      <CommandItemDescription>Browse local directory</CommandItemDescription>
+                    </div>
                     <CommandShortcut>⌘O</CommandShortcut>
                   </CommandItem>
                 </CommandGroup>
