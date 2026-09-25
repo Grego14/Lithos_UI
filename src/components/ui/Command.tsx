@@ -236,12 +236,12 @@ export const Command = ({
       if (last) setActiveId(last.id)
     } else if (e.key === 'Enter') {
       const target = e.target as HTMLElement | null
-      if (target?.getAttribute('data-slot') === 'command-input' || target === e.currentTarget) {
-        const active = enabledItems.find((i) => i.id === effectiveActiveId)
-        if (active?.onSelect) {
-          e.preventDefault()
-          active.onSelect()
-        }
+      if (target?.closest('button')) return
+
+      const active = enabledItems.find((i) => i.id === effectiveActiveId)
+      if (active?.onSelect) {
+        e.preventDefault()
+        active.onSelect()
       }
     }
   }
