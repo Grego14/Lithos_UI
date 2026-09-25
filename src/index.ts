@@ -47,7 +47,6 @@ export * from './utils/colors'
 export * from './utils/yiq'
 export * from './utils/date'
 export * from './utils/scrollTo'
-export * from './utils/classMaps'
 
 // Icons
 export * from './components/ui/icons/IconAlertTriangle'
