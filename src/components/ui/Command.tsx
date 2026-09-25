@@ -23,6 +23,7 @@ import {
 import { cn, type LithosClass } from '../../utils/cn'
 import { IconSearch } from './icons/IconSearch'
 import { IconClose } from './icons/IconClose'
+import { IconChevronDown } from './icons/IconChevronDown'
 import { Dialog, type DialogProps } from './Dialog'
 import { Kbd, type KbdProps, type KbdSize, type KbdVariant } from './Kbd'
 import { Badge, type BadgeProps } from './Badge'
@@ -47,6 +48,9 @@ interface CommandContextValue {
   items: Map<string, CommandItemMeta>
   visibleItemsCount: number
   isGroupVisible: (groupId: string) => boolean
+  requireSearch?: boolean
+  showAll: boolean
+  setShowAll: (showAll: boolean) => void
 }
 
 const CommandContext = createContext<CommandContextValue | null>(null)
@@ -65,6 +69,7 @@ export interface CommandProps extends Omit<ComponentPropsWithRef<'div'>, 'classN
   value?: string
   onValueChange?: (value: string) => void
   filter?: (value: string, search: string, keywords?: string[]) => boolean
+  requireSearch?: boolean
   className?: LithosClass
   children?: ReactNode
 }
@@ -73,6 +78,7 @@ export const Command = ({
   value: controlledValue,
   onValueChange,
   filter,
+  requireSearch = false,
   className,
   children,
   ...rest
@@ -80,6 +86,7 @@ export const Command = ({
   const [uncontrolledSearch, setUncontrolledSearch] = useState('')
   const search = controlledValue !== undefined ? controlledValue : uncontrolledSearch
   const listId = useId()
+  const [showAll, setShowAll] = useState(false)
 
   const setSearch = useCallback(
     (newSearch: string) => {
@@ -87,6 +94,7 @@ export const Command = ({
         setUncontrolledSearch(newSearch)
       }
       onValueChange?.(newSearch)
+      setShowAll(false)
     },
     [controlledValue, onValueChange]
   )
@@ -109,13 +117,19 @@ export const Command = ({
     }
   }, [])
 
-  const defaultFilter = useCallback((itemValue: string, query: string, keywords?: string[]) => {
-    if (!query.trim()) return true
-    const q = query.toLowerCase().trim()
-    if (itemValue.toLowerCase().includes(q)) return true
-    if (keywords && keywords.some((k) => k.toLowerCase().includes(q))) return true
-    return false
-  }, [])
+  const defaultFilter = useCallback(
+    (itemValue: string, query: string, keywords?: string[]) => {
+      if (!query.trim()) {
+        if (requireSearch) return showAll
+        return true
+      }
+      const q = query.toLowerCase().trim()
+      if (itemValue.toLowerCase().includes(q)) return true
+      if (keywords && keywords.some((k) => k.toLowerCase().includes(q))) return true
+      return false
+    },
+    [requireSearch, showAll]
+  )
 
   const filterItem = useCallback(
     (itemValue: string, keywords?: string[]) => {
@@ -173,8 +187,23 @@ export const Command = ({
       items,
       visibleItemsCount,
       isGroupVisible,
+      requireSearch,
+      showAll,
+      setShowAll,
     }),
-    [search, setSearch, effectiveActiveId, registerItem, filterItem, listId, items, visibleItemsCount, isGroupVisible]
+    [
+      search,
+      setSearch,
+      effectiveActiveId,
+      registerItem,
+      filterItem,
+      listId,
+      items,
+      visibleItemsCount,
+      isGroupVisible,
+      requireSearch,
+      showAll,
+    ]
   )
 
   const handleKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>) => {
@@ -234,6 +263,7 @@ export interface CommandInputProps extends Omit<ComponentPropsWithRef<'input'>, 
   onValueChange?: (value: string) => void
   icon?: ReactNode
   clearable?: boolean
+  showRevealButton?: boolean
   className?: LithosClass
 }
 
@@ -243,12 +273,14 @@ export const CommandInput = ({
   onValueChange,
   icon,
   clearable = true,
+  showRevealButton,
   className,
   'aria-label': ariaLabel,
   ...rest
 }: CommandInputProps) => {
-  const { search, setSearch, listId } = useCommand()
+  const { search, setSearch, listId, requireSearch, showAll, setShowAll } = useCommand()
   const inputValue = value !== undefined ? value : search
+  const shouldShowReveal = showRevealButton !== undefined ? showRevealButton : requireSearch
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const next = e.target.value
@@ -295,6 +327,20 @@ export const CommandInput = ({
           className="inline-flex shrink-0 items-center justify-center p-0.5 ml-1 text-(--lithos-text) opacity-50 hover:opacity-100 transition-opacity cursor-pointer focus:outline-none"
         >
           <IconClose size={16} />
+        </button>
+      )}
+      {shouldShowReveal && !inputValue && (
+        <button
+          type="button"
+          data-slot="command-input-reveal"
+          aria-label={showAll ? 'Hide options' : 'Show all options'}
+          onClick={() => setShowAll(!showAll)}
+          className={cn(
+            'inline-flex shrink-0 items-center justify-center p-0.5 ml-1 text-(--lithos-text) opacity-50 hover:opacity-100 transition-all cursor-pointer focus:outline-none',
+            showAll && 'rotate-180'
+          )}
+        >
+          <IconChevronDown size={16} />
         </button>
       )}
     </div>
