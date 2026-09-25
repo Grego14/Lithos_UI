@@ -55,27 +55,43 @@ export const CommandDoc = () => {
       <CommandInput placeholder="Type a command or search..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
-        <CommandGroup heading="Suggestions">
-          <CommandItem onSelect={() => alert('Calendar chosen')}>
-            Calendar
+        <CommandGroup heading="Quick Actions">
+          <CommandItem onSelect={() => alert('Create Document')}>
+            <IconFileText className="mr-2 shrink-0" />
+            <div className="flex flex-col">
+              <span>Create Document</span>
+              <CommandItemDescription>Start a new markdown draft</CommandItemDescription>
+            </div>
+            <CommandBadge intent="accent" size="sm" className="ml-2">New</CommandBadge>
+            <CommandShortcut>⌘N</CommandShortcut>
           </CommandItem>
-          <CommandItem onSelect={() => alert('Search Emoji chosen')}>
-            Search Emoji
-          </CommandItem>
-          <CommandItem onSelect={() => alert('Calculator chosen')}>
-            Calculator
+          <CommandItem onSelect={() => alert('Open Folder')}>
+            <IconFolder className="mr-2 shrink-0" />
+            <div className="flex flex-col">
+              <span>Open Folder</span>
+              <CommandItemDescription>Browse workspace directories</CommandItemDescription>
+            </div>
+            <CommandShortcut>⌘O</CommandShortcut>
           </CommandItem>
         </CommandGroup>
         <CommandSeparator />
-        <CommandGroup heading="Settings">
-          <CommandItem onSelect={() => alert('Profile chosen')}>
-            Profile
+        <CommandGroup heading="Preferences & Tools">
+          <CommandItem onSelect={() => alert('Search Project')}>
+            <IconSearch className="mr-2 shrink-0" />
+            <div className="flex flex-col">
+              <span>Search Project</span>
+              <CommandItemDescription>Full-text symbol and file search</CommandItemDescription>
+            </div>
+            <CommandShortcut>⌘F</CommandShortcut>
           </CommandItem>
-          <CommandItem onSelect={() => alert('Billing chosen')}>
-            Billing
-          </CommandItem>
-          <CommandItem onSelect={() => alert('Settings chosen')}>
-            Settings
+          <CommandItem onSelect={() => alert('Settings')}>
+            <IconSettings className="mr-2 shrink-0" />
+            <div className="flex flex-col">
+              <span>Settings</span>
+              <CommandItemDescription>Manage theme and editor options</CommandItemDescription>
+            </div>
+            <CommandBadge size="sm" className="ml-2">Config</CommandBadge>
+            <CommandShortcut>⌘,</CommandShortcut>
           </CommandItem>
         </CommandGroup>
       </CommandList>
@@ -90,6 +106,9 @@ export const CommandDoc = () => {
       'CommandEmpty',
       'CommandGroup',
       'CommandItem',
+      'CommandItemDescription',
+      'CommandBadge',
+      'CommandShortcut',
       'CommandSeparator',
       'CommandFooter',
     ],
@@ -268,16 +287,72 @@ export const CommandDoc = () => {
               <CommandInput placeholder="Type a command or search..." />
               <CommandList>
                 <CommandEmpty>No results found.</CommandEmpty>
-                <CommandGroup heading="Suggestions">
-                  <CommandItem onSelect={(val) => setSelectedAction(`Selected: ${val}`)}>Calendar</CommandItem>
-                  <CommandItem onSelect={(val) => setSelectedAction(`Selected: ${val}`)}>Search Emoji</CommandItem>
-                  <CommandItem onSelect={(val) => setSelectedAction(`Selected: ${val}`)}>Calculator</CommandItem>
+                <CommandGroup heading="Quick Actions">
+                  <CommandItem
+                    value="Create Document"
+                    keywords={['new', 'draft', 'markdown']}
+                    onSelect={(val) => setSelectedAction(`Executed: ${val}`)}
+                  >
+                    <span className="inline-flex mr-2 shrink-0">
+                      <IconFileText size={16} />
+                    </span>
+                    <div className="flex flex-col">
+                      <span>Create Document</span>
+                      <CommandItemDescription>Start a new markdown draft</CommandItemDescription>
+                    </div>
+                    <CommandBadge intent="accent" size="sm" className="ml-2">
+                      New
+                    </CommandBadge>
+                    <CommandShortcut>⌘N</CommandShortcut>
+                  </CommandItem>
+                  <CommandItem
+                    value="Open Folder"
+                    keywords={['directory', 'workspace', 'browse']}
+                    onSelect={(val) => setSelectedAction(`Executed: ${val}`)}
+                  >
+                    <span className="inline-flex mr-2 shrink-0">
+                      <IconFolder size={16} />
+                    </span>
+                    <div className="flex flex-col">
+                      <span>Open Folder</span>
+                      <CommandItemDescription>Browse workspace directories</CommandItemDescription>
+                    </div>
+                    <CommandShortcut>⌘O</CommandShortcut>
+                  </CommandItem>
                 </CommandGroup>
                 <CommandSeparator />
-                <CommandGroup heading="Settings">
-                  <CommandItem onSelect={(val) => setSelectedAction(`Selected: ${val}`)}>Profile</CommandItem>
-                  <CommandItem onSelect={(val) => setSelectedAction(`Selected: ${val}`)}>Billing</CommandItem>
-                  <CommandItem onSelect={(val) => setSelectedAction(`Selected: ${val}`)}>Settings</CommandItem>
+                <CommandGroup heading="Preferences & Tools">
+                  <CommandItem
+                    value="Search Project"
+                    keywords={['find', 'grep', 'files']}
+                    onSelect={(val) => setSelectedAction(`Executed: ${val}`)}
+                  >
+                    <span className="inline-flex mr-2 shrink-0">
+                      <IconSearch size={16} />
+                    </span>
+                    <div className="flex flex-col">
+                      <span>Search Project</span>
+                      <CommandItemDescription>Full-text symbol and file search</CommandItemDescription>
+                    </div>
+                    <CommandShortcut>⌘F</CommandShortcut>
+                  </CommandItem>
+                  <CommandItem
+                    value="Settings"
+                    keywords={['preferences', 'theme', 'config']}
+                    onSelect={(val) => setSelectedAction(`Executed: ${val}`)}
+                  >
+                    <span className="inline-flex mr-2 shrink-0">
+                      <IconSettings size={16} />
+                    </span>
+                    <div className="flex flex-col">
+                      <span>Settings</span>
+                      <CommandItemDescription>Manage theme and editor options</CommandItemDescription>
+                    </div>
+                    <CommandBadge size="sm" className="ml-2">
+                      Config
+                    </CommandBadge>
+                    <CommandShortcut>⌘,</CommandShortcut>
+                  </CommandItem>
                 </CommandGroup>
               </CommandList>
               <CommandFooter />
