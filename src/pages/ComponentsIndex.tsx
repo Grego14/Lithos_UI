@@ -304,8 +304,8 @@ const componentsList = [
     to: '/docs/skeleton',
     preview: (
       <div className="w-full max-w-48 p-2">
-        <Skeleton variant="rectangular" height={44} tone="accent" className="mb-4" />
-        <SkeletonText lines={2} className="text-xs" />
+        <Skeleton variant="rectangular" height={44} tone="accent" respectReducedMotion={false} className="mb-4" />
+        <SkeletonText lines={2} respectReducedMotion={false} className="text-xs" />
       </div>
     ),
   },

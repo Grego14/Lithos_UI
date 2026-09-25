@@ -6,7 +6,14 @@ const sharedProps: PropItem[] = [
     type: '"shimmer" | "pulse" | false',
     defaultValue: '"shimmer"',
     description:
-      'Whole-placeholder shimmer or pulse, including fill, border, and shadow, or no animation. Disabled for reduced motion and forced colors.',
+      'Whole-placeholder shimmer or pulse, including fill, border, and shadow, or no animation. Respects reduced motion by default; always disabled in forced colors.',
+  },
+  {
+    name: 'respectReducedMotion',
+    type: 'boolean',
+    defaultValue: 'true',
+    description:
+      'Disable animation when the OS/browser requests reduced motion. Set false only for controlled previews. animation={false} and forced colors still disable animation.',
   },
   {
     name: 'tone',

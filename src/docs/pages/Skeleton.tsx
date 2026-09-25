@@ -71,8 +71,9 @@ export const SkeletonDoc = () => (
       <p className={paragraph}>
         Shimmer and pulse both animate the entire placeholder, including its fill, border, and shadow. The default
         shimmer sweeps across the whole component; pulse fades the whole component in and out. Set{' '}
-        <code>{'animation={false}'}</code> to disable animation. Reduced motion and forced colors automatically disable
-        both.
+        <code>{'animation={false}'}</code> to always disable animation. Reduced motion is respected by default; use{' '}
+        <code>{'respectReducedMotion={false}'}</code> only for controlled previews, as shown below, to animate
+        regardless of the OS/browser preference. Forced colors automatically disable both animations.
       </p>
       <PreviewBlock code={sourceExample(animationSource, ['Skeleton'])}>
         <SkeletonAnimations />

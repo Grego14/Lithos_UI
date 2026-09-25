@@ -20,7 +20,7 @@ const tones: Record<SkeletonTone, string> = {
 const animations: Record<Exclude<SkeletonAnimation, false>, string> = {
   pulse: 'animate-pulse [animation-duration:1s]',
   shimmer:
-    'animate-[lithos-shimmer_1.5s_linear_infinite] [mask-image:linear-gradient(to_right,#0006_35%,#000_50%,#0006_65%)] [mask-size:300%_100%] [mask-clip:no-clip] [mask-repeat:repeat] motion-reduce:[mask-image:none] forced-colors:[mask-image:none]',
+    'animate-[lithos-shimmer_1.5s_linear_infinite] [mask-image:linear-gradient(to_right,#0006_35%,#000_50%,#0006_65%)] [mask-size:300%_100%] [mask-clip:no-clip] [mask-repeat:repeat] forced-colors:[mask-image:none]',
 }
 
 export interface SkeletonProps extends Omit<
@@ -31,6 +31,7 @@ export interface SkeletonProps extends Omit<
   children?: never
   variant?: SkeletonVariant
   animation?: SkeletonAnimation
+  respectReducedMotion?: boolean
   tone?: SkeletonTone
   width?: CSSProperties['width']
   height?: CSSProperties['height']
@@ -39,6 +40,7 @@ export interface SkeletonProps extends Omit<
 export const Skeleton = ({
   variant = 'text',
   animation = 'shimmer',
+  respectReducedMotion = true,
   tone = 'neutral',
   width,
   height,
@@ -53,7 +55,9 @@ export const Skeleton = ({
       variants[variant],
       tones[tone],
       animation ? animations[animation] : 'animate-none',
-      'motion-reduce:animate-none forced-colors:border-[CanvasText] forced-colors:bg-[Canvas] forced-colors:shadow-none forced-colors:animate-none',
+      respectReducedMotion && 'motion-reduce:animate-none',
+      respectReducedMotion && animation === 'shimmer' && 'motion-reduce:[mask-image:none]',
+      'forced-colors:border-[CanvasText] forced-colors:bg-[Canvas] forced-colors:shadow-none forced-colors:animate-none',
       className
     )}
     style={{ width, height, ...style }}
@@ -74,6 +78,7 @@ export interface SkeletonTextProps extends Omit<
   lines?: number
   lastLineWidth?: CSSProperties['width']
   animation?: SkeletonAnimation
+  respectReducedMotion?: boolean
   tone?: SkeletonTone
 }
 
@@ -81,6 +86,7 @@ export const SkeletonText = ({
   lines = 3,
   lastLineWidth = '65%',
   animation = 'shimmer',
+  respectReducedMotion = true,
   tone = 'neutral',
   className,
   ...props
@@ -93,6 +99,7 @@ export const SkeletonText = ({
         <Skeleton
           key={index}
           animation={animation}
+          respectReducedMotion={respectReducedMotion}
           tone={tone}
           width={count > 1 && index === count - 1 ? lastLineWidth : undefined}
         />
