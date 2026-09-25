@@ -1,10 +1,12 @@
+import type { InstallTab } from '../../core/useInstallPreference'
+
 export type ManualPath = string | Record<string, string | string[]>
 
 interface DeriveImportOptions {
   componentNames: string[]
   types?: string[]
   manualPath: ManualPath
-  mode: 'command' | 'manual'
+  mode: InstallTab
 }
 
 export const deriveImportLines = ({ componentNames, types = [], manualPath, mode }: DeriveImportOptions): string => {
@@ -28,7 +30,7 @@ export const deriveImportLines = ({ componentNames, types = [], manualPath, mode
     // e.g: manualPath = { react: ['useState'] }
     if (customPathMap.has(name)) {
       path = customPathMap.get(name)
-    } else if (mode === 'command') {
+    } else if (mode === 'package') {
       path = 'lithos-ui'
     } else if (typeof manualPath === 'string') {
       path = manualPath
@@ -72,7 +74,7 @@ export interface UsageCodeConfig {
   manualPath: ManualPath
 }
 
-export const deriveUsageCode = (config: UsageCodeConfig, mode: 'command' | 'manual'): string => {
+export const deriveUsageCode = (config: UsageCodeConfig, mode: InstallTab): string => {
   const { componentNames, types = [], manualPath, body } = config
 
   const importLines = deriveImportLines({

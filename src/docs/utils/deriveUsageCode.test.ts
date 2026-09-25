@@ -7,7 +7,7 @@ describe('deriveImportLines', () => {
       componentNames: ['Select', 'useSelect', 'SelectOption'],
       types: ['SelectOption'],
       manualPath: '../../components/ui/Select',
-      mode: 'command',
+      mode: 'package',
     })
 
     expect(result).toBe("import { Select, useSelect, type SelectOption } from 'lithos-ui'")
@@ -18,7 +18,7 @@ describe('deriveImportLines', () => {
       componentNames: ['Select', 'useSelect', 'SelectOption'],
       types: ['SelectOption'],
       manualPath: '../../components/ui/Select',
-      mode: 'manual',
+      mode: 'source',
     })
 
     expect(result).toBe("import { Select, useSelect, type SelectOption } from '../../components/ui/Select'")
@@ -32,7 +32,7 @@ describe('deriveImportLines', () => {
         react: ['useState'],
         others: '../../components/ui/Select',
       },
-      mode: 'manual',
+      mode: 'source',
     })
 
     // useState us next to 'Select' so it appears on the next line
@@ -50,7 +50,7 @@ describe('deriveImportLines', () => {
         SelectOption: '../../components/ui/Select',
         Button: '../../components/ui/Button',
       },
-      mode: 'manual',
+      mode: 'source',
     })
 
     expect(result).toBe(
@@ -68,7 +68,7 @@ describe('deriveUsageCode', () => {
         componentNames: ['Select'],
         manualPath: '../../components/ui/Select',
       },
-      'manual'
+      'source'
     )
 
     expect(result).toBe(

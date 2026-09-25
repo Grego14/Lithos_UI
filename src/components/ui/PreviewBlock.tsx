@@ -167,7 +167,7 @@ export const PreviewBlock = ({
           )
         ) : (
           <div className="h-full w-full overflow-y-auto">
-            <CodeViewer code={resolvedCode} language={language} embedded cliCommand={cliCommand} />
+            <CodeViewer code={resolvedCode} language={language} embedded cliCommand={cliCommand ?? ''} />
           </div>
         )}
       </div>
