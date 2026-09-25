@@ -17,6 +17,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - Added `src/cli/registry.ts` to act as the single source of truth for component dependencies. The documentation's `SetupGuide.tsx` now dynamically pulls from this registry to prevent drift.
 - **Dropdown:** Added the dropdown primitive ([#315](https://github.com/lithosui/Lithos_UI/pull/315)).
 - **useListKeyNavigation:** Added hook to manage keyboard events easily and allowing 2D navigation. Currently being used by the `Dropdown` and `Select` primitives. ([#315](https://github.com/lithosui/Lithos_UI/pull/315))
+- **Command:** Introduced neo-brutalist Command palette and ⌘K menu primitive suite ([#331](https://github.com/lithosui/Lithos_UI/pull/331)).
+  - Zero-dependency, accessible keyboard-driven command menu (`Command`, `CommandInput`, `CommandList`, `CommandEmpty`, `CommandLoading`, `CommandGroup`, `CommandItem`, `CommandItemDescription`, `CommandBadge`, `CommandShortcut`, `CommandSeparator`, `CommandFooter`, `CommandDialog`).
+  - Real-time client-side substring and keyword fuzzy searching with auto-hiding empty groups.
+  - Full keyboard navigation (`ArrowUp`, `ArrowDown`, `Home`, `End`, `Enter`, `Escape`) with disabled item skipping and auto-scroll into view.
+  - Integrated with Lithos UI primitives: mechanical keycaps via `Kbd`, intent tags via `Badge`, clearable search via `IconClose`, and modal overlays via `Dialog`.
+  - Added desktop-grade `CommandFooter` status bar with interactive keycap hints and dynamic match counter.
+  - Zero-Gap Rule compliance across all subcomponents using explicit margin/padding calculations and no CSS `gap`.
+  - Comprehensive documentation page with live interactive examples (Basic, Shortcuts & Badges, and Dialog modal) and full `propsData` tables.
+  - Vitest test suite with 14 unit tests achieving 100% pass rate and `jest-axe` automated accessibility compliance.
 
 ### Changed (0.1.2)
 
