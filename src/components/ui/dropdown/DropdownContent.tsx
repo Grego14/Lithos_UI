@@ -1,5 +1,5 @@
 /**
- * @fileoverview Lithos UI DropdownMenuContent primitive.
+ * @fileoverview Lithos UI DropdownContent primitive.
  * - Wraps `PopoverContent` with default tight padding (`p-1`) for menu layouts.
  * - Renders the floating panel containing menu items, separators, and nested groups.
  */
@@ -10,19 +10,19 @@ import { useListKeyNavigation } from '../../../core/hooks/useListKeyNavigation'
 import { DropdownNavigationContext } from './DropdownNavigationContext'
 import { useDropdown } from './useDropdown'
 
-export interface DropdownMenuContentProps extends PopoverContentProps {
+export interface DropdownContentProps extends PopoverContentProps {
   loop?: boolean
   onCloseSubmenu?: () => void
 }
 
-export const DropdownMenuContent = ({
+export const DropdownContent = ({
   children,
   className,
   loop = true,
   onCloseSubmenu = () => {},
   onKeyDown,
   ...props
-}: DropdownMenuContentProps) => {
+}: DropdownContentProps) => {
   const { close } = useDropdown()
   const elementsRef = useRef<(HTMLElement | null)[]>([])
   const [activeIndex, setActiveIndex] = useState<number | null>(0)

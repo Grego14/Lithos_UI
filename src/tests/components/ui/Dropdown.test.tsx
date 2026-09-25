@@ -4,38 +4,38 @@ import { axe } from 'jest-axe'
 import { describe, it, expect, vi } from 'vitest'
 
 import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuGroup,
-  DropdownMenuSeparator,
-  DropdownMenuSub,
+  Dropdown,
+  DropdownTrigger,
+  DropdownContent,
+  DropdownItem,
+  DropdownGroup,
+  DropdownSeparator,
+  DropdownSub,
   useDropdownNavigation,
-} from '../../../components/ui/DropdownMenu'
+} from '../../../components/ui/Dropdown'
 
-const TestDropdownMenu = ({ onSelectProfile = vi.fn(), onSelectSettings = vi.fn(), disabledItem = false }) => (
-  <DropdownMenu>
-    <DropdownMenuTrigger>Options</DropdownMenuTrigger>
-    <DropdownMenuContent>
-      <DropdownMenuGroup label="User">
-        <DropdownMenuItem onClick={onSelectProfile}>Profile</DropdownMenuItem>
-        <DropdownMenuItem disabled={disabledItem} onClick={onSelectSettings}>
+const TestDropdown = ({ onSelectProfile = vi.fn(), onSelectSettings = vi.fn(), disabledItem = false }) => (
+  <Dropdown>
+    <DropdownTrigger>Options</DropdownTrigger>
+    <DropdownContent>
+      <DropdownGroup label="User">
+        <DropdownItem onClick={onSelectProfile}>Profile</DropdownItem>
+        <DropdownItem disabled={disabledItem} onClick={onSelectSettings}>
           Settings
-        </DropdownMenuItem>
-      </DropdownMenuGroup>
-      <DropdownMenuSeparator />
-      <DropdownMenuSub trigger="More options">
-        <DropdownMenuItem onClick={vi.fn()}>Sub item 1</DropdownMenuItem>
-      </DropdownMenuSub>
-    </DropdownMenuContent>
-  </DropdownMenu>
+        </DropdownItem>
+      </DropdownGroup>
+      <DropdownSeparator />
+      <DropdownSub trigger="More options">
+        <DropdownItem onClick={vi.fn()}>Sub item 1</DropdownItem>
+      </DropdownSub>
+    </DropdownContent>
+  </Dropdown>
 )
 
-describe('DropdownMenu Component Suite', () => {
+describe('Dropdown Component Suite', () => {
   it('should pass accessibility (a11y) checks when open', async () => {
     const user = userEvent.setup()
-    const { container } = render(<TestDropdownMenu />)
+    const { container } = render(<TestDropdown />)
 
     const trigger = screen.getByRole('button', { name: 'Options' })
     await user.click(trigger)
@@ -52,7 +52,7 @@ describe('DropdownMenu Component Suite', () => {
 
   it('opens content on trigger click and displays menu items', async () => {
     const user = userEvent.setup()
-    render(<TestDropdownMenu />)
+    render(<TestDropdown />)
 
     expect(screen.queryByRole('menuitem', { name: 'Profile' })).not.toBeInTheDocument()
 
@@ -64,10 +64,10 @@ describe('DropdownMenu Component Suite', () => {
     expect(screen.getByRole('separator')).toBeInTheDocument()
   })
 
-  it('executes onClick callback and closes menu when selecting a DropdownMenuItem', async () => {
+  it('executes onClick callback and closes menu when selecting a DropdownItem', async () => {
     const user = userEvent.setup()
     const handleSelect = vi.fn()
-    render(<TestDropdownMenu onSelectProfile={handleSelect} />)
+    render(<TestDropdown onSelectProfile={handleSelect} />)
 
     await user.click(screen.getByRole('button', { name: 'Options' }))
 
@@ -78,10 +78,10 @@ describe('DropdownMenu Component Suite', () => {
     expect(screen.queryByRole('menuitem', { name: 'Profile' })).not.toBeInTheDocument()
   })
 
-  it('triggers DropdownMenuItem action when pressing Enter key', async () => {
+  it('triggers DropdownItem action when pressing Enter key', async () => {
     const user = userEvent.setup()
     const handleSelect = vi.fn()
-    render(<TestDropdownMenu onSelectProfile={handleSelect} />)
+    render(<TestDropdown onSelectProfile={handleSelect} />)
 
     await user.click(screen.getByRole('button', { name: 'Options' }))
 
@@ -92,10 +92,10 @@ describe('DropdownMenu Component Suite', () => {
     expect(handleSelect).toHaveBeenCalledTimes(1)
   })
 
-  it('does not trigger callback nor close menu when clicking a disabled DropdownMenuItem', async () => {
+  it('does not trigger callback nor close menu when clicking a disabled DropdownItem', async () => {
     const user = userEvent.setup()
     const handleSelect = vi.fn()
-    render(<TestDropdownMenu disabledItem onSelectSettings={handleSelect} />)
+    render(<TestDropdown disabledItem onSelectSettings={handleSelect} />)
 
     await user.click(screen.getByRole('button', { name: 'Options' }))
 
@@ -109,9 +109,9 @@ describe('DropdownMenu Component Suite', () => {
     expect(screen.getByRole('menuitem', { name: 'Settings' })).toBeInTheDocument()
   })
 
-  it('opens submenu correctly when interacting with DropdownMenuSub', async () => {
+  it('opens submenu correctly when interacting with DropdownSub', async () => {
     const user = userEvent.setup()
-    render(<TestDropdownMenu />)
+    render(<TestDropdown />)
 
     await user.click(screen.getByRole('button', { name: 'Options' }))
 
@@ -123,7 +123,7 @@ describe('DropdownMenu Component Suite', () => {
     expect(await screen.findByRole('menuitem', { name: 'Sub item 1' })).toBeInTheDocument()
   })
 
-  it('throws a descriptive error when useDropdownNavigation is used outside DropdownMenuContent', () => {
+  it('throws a descriptive error when useDropdownNavigation is used outside DropdownContent', () => {
     const TestComponent = () => {
       useDropdownNavigation()
       return null
@@ -131,14 +131,14 @@ describe('DropdownMenu Component Suite', () => {
 
     const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {})
 
-    expect(() => render(<TestComponent />)).toThrow('useDropdownNavigation must be used within <DropdownMenuContent>')
+    expect(() => render(<TestComponent />)).toThrow('useDropdownNavigation must be used within <DropdownContent>')
 
     consoleError.mockRestore()
   })
 
   it('navigates focus across menu items using ArrowDown, ArrowUp, Home, and End keys', async () => {
     const user = userEvent.setup()
-    render(<TestDropdownMenu />)
+    render(<TestDropdown />)
 
     await user.click(screen.getByRole('button', { name: 'Options' }))
 
@@ -166,7 +166,7 @@ describe('DropdownMenu Component Suite', () => {
 
     render(
       <div>
-        <TestDropdownMenu />
+        <TestDropdown />
         <button type="button">Next element</button>
       </div>
     )

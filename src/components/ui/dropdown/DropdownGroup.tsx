@@ -1,17 +1,17 @@
 /**
- * @fileoverview Lithos UI DropdownMenuGroup primitive.
+ * @fileoverview Lithos UI DropdownGroup primitive.
  * - Wraps a set of related menu items under a shared container with `role="group"`.
  * - Renders an optional non-interactive section header text via `label` for semantic categorization.
  */
 import type { ComponentPropsWithRef } from 'react'
 import { cn, type LithosClass } from '../../../utils/cn'
 
-export interface DropdownMenuGroupProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
+export interface DropdownGroupProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   label?: string
   className?: LithosClass
 }
 
-export const DropdownMenuGroup = ({ children, label, className, ...props }: DropdownMenuGroupProps) => {
+export const DropdownGroup = ({ children, label, className, ...props }: DropdownGroupProps) => {
   return (
     <div role="group" aria-label={label} className={cn('px-1 py-1', className)} {...props}>
       {label && (

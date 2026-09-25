@@ -1,5 +1,5 @@
 /**
- * @fileoverview Lithos UI DropdownMenu navigation context and hook utilities.
+ * @fileoverview Lithos UI Dropdown navigation context and hook utilities.
  * - Provides internal focus, active index, and submenu navigation state.
  * - Ensures consumer components remain strictly bound within a DropdownMenuContent tree.
  */
@@ -17,7 +17,7 @@ export const DropdownNavigationContext = createContext<DropdownNavigation | null
 export const useDropdownNavigation = () => {
   const context = useContext(DropdownNavigationContext)
 
-  if (!context) throw new Error('useDropdownNavigation must be used within <DropdownMenuContent>')
+  if (!context) throw new Error('useDropdownNavigation must be used within <DropdownContent>')
 
   return context
 }

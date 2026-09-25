@@ -15,7 +15,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - Automatically injects neo-brutalist variables from `tokens.css` into the consumer's global CSS file, ensuring a seamless theming setup out-of-the-box.
   - Evaluates NPM dependencies required by downloaded components and outputs terminal warnings for manual installation.
   - Added `src/cli/registry.ts` to act as the single source of truth for component dependencies. The documentation's `SetupGuide.tsx` now dynamically pulls from this registry to prevent drift.
-- **Dropdown Menu:** Added the dropdown menu primitive ([#315](https://github.com/lithosui/Lithos_UI/pull/315)).
+- **Dropdown:** Added the dropdown primitive ([#315](https://github.com/lithosui/Lithos_UI/pull/315)).
+- **useListKeyNavigation:** Added hook to manage keyboard events easily and allowing 2D navigation. Currently being used by the `Dropdown` and `Select` primitives. ([#315](https://github.com/lithosui/Lithos_UI/pull/315))
+
+### Changed (0.1.2)
+
+- Improved DX by allowing the `role` prop to be passed directly to the Popover component, simplifying `Dropdown` and `Select` implementations ([#318](https://github.com/lithosui/Lithos_UI/pull/318)).
 - Added `matchTriggerWidth` prop to the **Popover** primitive ([#327](https://github.com/lithosui/Lithos_UI/pull/327)).
 - Added `transitionDuration` prop to the **PopoverContent** component ([#327](https://github.com/lithosui/Lithos_UI/pull/327)).
 - **Kbd & KbdGroup:** Introduced keyboard keycap and shortcut group UI primitives ([#328](https://github.com/lithosui/Lithos_UI/pull/328)).
@@ -25,11 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - `KbdGroup` compound component adhering to the Zero-Gap Rule with explicit margin spacing and an `attached` mode for fused multi-key strips.
   - Comprehensive documentation page with interactive shortcut examples, 5-color custom palette row, and live `Ctrl + K` input focus integration.
   - Unit tests with 100% pass rate and `jest-axe` accessibility compliance.
-
-### Changed (0.1.2)
-
-- Scoped the generic `kbd` selector in `src/tokens.css` to `kbd:not([data-slot="kbd"])` to avoid polluting the `Kbd` component styling ([#328](https://github.com/lithosui/Lithos_UI/pull/328)).
-- Improved DX by allowing the `role` prop to be passed directly to the Popover component, simplifying `DropdownMenu` and `Select` implementations ([#318](https://github.com/lithosui/Lithos_UI/pull/318)).
+  - Scoped the generic `kbd` selector in `src/tokens.css` to `kbd:not([data-slot="kbd"])` to avoid polluting the `Kbd` component styling ([#328](https://github.com/lithosui/Lithos_UI/pull/328)).
 - Properly arranged the components and blocks ([#303](https://github.com/lithosui/Lithos_UI/pull/303)).
 - Improved the hero title responsiveness ([#305](https://github.com/lithosui/Lithos_UI/pull/305)).
 

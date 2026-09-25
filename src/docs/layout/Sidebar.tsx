@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 // The component name should match the route in App.tsx
 // to create spaced component labels use a - between the words.
-// e.g: dropdown-menu name will use the label "Dropdown Menu"
+// e.g: navigation-menu name will use the label "Navigation Menu"
 const components = [
   'accordion',
   'alert',
@@ -15,7 +15,7 @@ const components = [
   'carousel',
   'checkbox',
   'dialog',
-  'dropdown-menu',
+  'dropdown',
   'input',
   'kbd',
   'popover',

@@ -17,14 +17,14 @@ import { Calendar } from '../components/ui/Calendar'
 import { Carousel, CarouselSlide } from '../components/ui/Carousel'
 import { Checkbox } from '../components/ui/Checkbox'
 import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuSub,
-} from '../components/ui/DropdownMenu'
+  Dropdown,
+  DropdownTrigger,
+  DropdownContent,
+  DropdownGroup,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownSub,
+} from '../components/ui/Dropdown'
 import { Popover, PopoverTrigger, PopoverContent } from '../components/ui/Popover'
 import { Select } from '../components/ui/Select'
 import { IconClose } from '../components/ui/icons/IconClose'
@@ -103,49 +103,49 @@ const DialogPreview = () => (
   </div>
 )
 
-const DropdownMenuPreview = () => (
-  <DropdownMenu placement="bottom-start">
-    <DropdownMenuTrigger asChild>
+const DropdownPreview = () => (
+  <Dropdown placement="bottom-start">
+    <DropdownTrigger asChild>
       <Button variant="accent">My account</Button>
-    </DropdownMenuTrigger>
+    </DropdownTrigger>
 
-    <DropdownMenuContent className="w-56">
-      <DropdownMenuGroup label="Settings">
-        <DropdownMenuItem onClick={() => console.log('Go to profile')}>Profile</DropdownMenuItem>
+    <DropdownContent className="w-56">
+      <DropdownGroup label="Settings">
+        <DropdownItem onClick={() => console.log('Go to profile')}>Profile</DropdownItem>
 
-        <DropdownMenuItem onClick={() => console.log('Go to plan')}>Plan</DropdownMenuItem>
+        <DropdownItem onClick={() => console.log('Go to plan')}>Plan</DropdownItem>
 
-        <DropdownMenuItem disabled className="flex flex-col items-start space-y-2">
+        <DropdownItem disabled className="flex flex-col items-start space-y-2">
           <span>Integrations</span>
           <span className="opacity-60">(Coming soon)</span>
-        </DropdownMenuItem>
-      </DropdownMenuGroup>
+        </DropdownItem>
+      </DropdownGroup>
 
-      <DropdownMenuSeparator />
+      <DropdownSeparator />
 
-      <DropdownMenuSub
+      <DropdownSub
         trigger={
           <span className="flex items-center justify-between w-full">
             Preferences <span>▶</span>
           </span>
         }
       >
-        <DropdownMenuItem>Dark Mode</DropdownMenuItem>
-        <DropdownMenuItem>Language</DropdownMenuItem>
-      </DropdownMenuSub>
+        <DropdownItem>Dark Mode</DropdownItem>
+        <DropdownItem>Language</DropdownItem>
+      </DropdownSub>
 
-      <DropdownMenuSeparator />
+      <DropdownSeparator />
 
-      <DropdownMenuGroup>
-        <DropdownMenuItem
+      <DropdownGroup>
+        <DropdownItem
           onClick={() => console.log('Log out')}
           className="text-red-500 hover:bg-red-500/5 focus:bg-red-500/5"
         >
           Log out
-        </DropdownMenuItem>
-      </DropdownMenuGroup>
-    </DropdownMenuContent>
-  </DropdownMenu>
+        </DropdownItem>
+      </DropdownGroup>
+    </DropdownContent>
+  </Dropdown>
 )
 
 const PopoverPreview = () => (
@@ -282,9 +282,9 @@ const componentsList = [
     preview: <DialogPreview />,
   },
   {
-    name: 'DropdownMenu',
+    name: 'Dropdown',
     to: '/docs/dropdown',
-    preview: <DropdownMenuPreview />,
+    preview: <DropdownPreview />,
   },
   {
     name: 'Input',
