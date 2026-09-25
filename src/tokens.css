@@ -15,9 +15,9 @@
   --lithos-z-sticky: 20;
   --lithos-z-popover: 30;
   --lithos-z-overlay: 40;
-  --lithos-z-modal: 50;
   --lithos-z-drawer: 50;
-  --lithos-z-tooltip: 60;
+  --lithos-z-modal: 60;
+  --lithos-z-tooltip: 70;
 
   background-color: var(--lithos-bg);
   color: var(--lithos-text);

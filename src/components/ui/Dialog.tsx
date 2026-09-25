@@ -24,7 +24,6 @@ import type { ButtonVariant } from '../../core/types'
 import { IconClose } from './icons/IconClose'
 import { cn, type LithosClass } from '../../utils/cn'
 import { colors } from '../../utils/colors'
-import { zIndex } from '../../utils/classMaps'
 
 export type DialogVariant = 'default' | 'simple' | 'bare'
 export type DialogIntent = 'default' | 'success' | 'error' | 'warning' | 'info'
@@ -141,7 +140,7 @@ export const Dialog = ({
 
   return createPortal(
     <DialogContext.Provider value={{ onClose, titleId, scrollable }}>
-      <div className={cn(zIndex.modal, 'fixed inset-0 flex items-center justify-center p-4 sm:p-6')}>
+      <div className={cn('fixed inset-0 flex items-center justify-center p-4 sm:p-6 z-(--lithos-z-modal)')}>
         <div
           className="absolute inset-0 bg-black/60 animate-[fade-in_0.15s_ease-out]"
           onClick={onClose}
