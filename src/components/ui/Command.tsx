@@ -27,10 +27,6 @@ import { Dialog, type DialogProps } from './Dialog'
 import { Kbd, type KbdProps, type KbdSize, type KbdVariant } from './Kbd'
 import { Badge, type BadgeProps } from './Badge'
 
-/* -------------------------------------------------------------------------------------------------
- * Context & Types
- * -----------------------------------------------------------------------------------------------*/
-
 interface CommandItemMeta {
   id: string
   value: string
@@ -64,10 +60,6 @@ const useCommand = () => {
 }
 
 const GroupContext = createContext<{ groupId: string } | null>(null)
-
-/* -------------------------------------------------------------------------------------------------
- * Root: Command
- * -----------------------------------------------------------------------------------------------*/
 
 export interface CommandProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   value?: string
@@ -135,7 +127,6 @@ export const Command = ({
     [filter, search, defaultFilter]
   )
 
-  // Visible items calculation
   const visibleItems = useMemo(() => {
     const list: CommandItemMeta[] = []
     items.forEach((item) => {
@@ -148,7 +139,6 @@ export const Command = ({
 
   const visibleItemsCount = visibleItems.length
 
-  // Derive effective active item during render without cascading effects
   const effectiveActiveId = useMemo(() => {
     if (visibleItems.length === 0) return null
     const currentActive = visibleItems.find((item) => item.id === activeId)
@@ -239,10 +229,6 @@ export const Command = ({
   )
 }
 
-/* -------------------------------------------------------------------------------------------------
- * Input: CommandInput
- * -----------------------------------------------------------------------------------------------*/
-
 export interface CommandInputProps extends Omit<ComponentPropsWithRef<'input'>, 'className' | 'value' | 'onChange'> {
   value?: string
   onValueChange?: (value: string) => void
@@ -315,10 +301,6 @@ export const CommandInput = ({
   )
 }
 
-/* -------------------------------------------------------------------------------------------------
- * List: CommandList
- * -----------------------------------------------------------------------------------------------*/
-
 export interface CommandListProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   className?: LithosClass
   children?: ReactNode
@@ -343,10 +325,6 @@ export const CommandList = ({ className, children, ...rest }: CommandListProps) 
   )
 }
 
-/* -------------------------------------------------------------------------------------------------
- * Empty: CommandEmpty
- * -----------------------------------------------------------------------------------------------*/
-
 export interface CommandEmptyProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   className?: LithosClass
   children?: ReactNode
@@ -355,7 +333,6 @@ export interface CommandEmptyProps extends Omit<ComponentPropsWithRef<'div'>, 'c
 export const CommandEmpty = ({ className, children = 'No results found.', ...rest }: CommandEmptyProps) => {
   const { search, visibleItemsCount } = useCommand()
 
-  // Only display empty message if search is actively typed and no items match
   if (!search.trim() || visibleItemsCount > 0) return null
 
   return (
@@ -370,10 +347,6 @@ export const CommandEmpty = ({ className, children = 'No results found.', ...res
     </div>
   )
 }
-
-/* -------------------------------------------------------------------------------------------------
- * Loading: CommandLoading
- * -----------------------------------------------------------------------------------------------*/
 
 export interface CommandLoadingProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   className?: LithosClass
@@ -397,10 +370,6 @@ export const CommandLoading = ({ className, children = 'Searching...', ...rest }
     </div>
   )
 }
-
-/* -------------------------------------------------------------------------------------------------
- * Group: CommandGroup
- * -----------------------------------------------------------------------------------------------*/
 
 export interface CommandGroupProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   heading?: ReactNode
@@ -429,10 +398,6 @@ export const CommandGroup = ({ heading, className, children, ...rest }: CommandG
     </GroupContext.Provider>
   )
 }
-
-/* -------------------------------------------------------------------------------------------------
- * Item: CommandItem
- * -----------------------------------------------------------------------------------------------*/
 
 export interface CommandItemProps extends Omit<ComponentPropsWithRef<'div'>, 'className' | 'onSelect'> {
   value?: string
@@ -539,10 +504,6 @@ export const CommandItem = ({
   )
 }
 
-/* -------------------------------------------------------------------------------------------------
- * Shortcut: CommandShortcut
- * -----------------------------------------------------------------------------------------------*/
-
 export interface CommandShortcutProps extends Omit<KbdProps, 'size'> {
   size?: KbdSize
   variant?: KbdVariant
@@ -566,19 +527,11 @@ export const CommandShortcut = ({
   )
 }
 
-/* -------------------------------------------------------------------------------------------------
- * Badge: CommandBadge
- * -----------------------------------------------------------------------------------------------*/
-
 export type CommandBadgeProps = BadgeProps
 
 export const CommandBadge = ({ className, size = 'sm', ...rest }: CommandBadgeProps) => {
   return <Badge size={size} className={cn('ml-auto select-none', className)} {...rest} />
 }
-
-/* -------------------------------------------------------------------------------------------------
- * Separator: CommandSeparator
- * -----------------------------------------------------------------------------------------------*/
 
 export interface CommandSeparatorProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   className?: LithosClass
@@ -594,10 +547,6 @@ export const CommandSeparator = ({ className, ...rest }: CommandSeparatorProps) 
     />
   )
 }
-
-/* -------------------------------------------------------------------------------------------------
- * Dialog: CommandDialog
- * -----------------------------------------------------------------------------------------------*/
 
 export interface CommandDialogProps extends Omit<DialogProps, 'size' | 'variant'> {
   children?: ReactNode
