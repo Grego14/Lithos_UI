@@ -60,6 +60,13 @@ export const commandInputPropsData: PropItem[] = [
     description: 'Custom search prefix icon, defaults to IconSearch.',
   },
   {
+    name: 'clearable',
+    type: 'boolean',
+    defaultValue: 'true',
+    required: false,
+    description: 'Displays a quick clear button (IconClose) when query text is typed.',
+  },
+  {
     name: 'className',
     type: 'LithosClass',
     required: false,

@@ -7,9 +7,11 @@ import {
   CommandInput,
   CommandList,
   CommandEmpty,
+  CommandLoading,
   CommandGroup,
   CommandItem,
   CommandShortcut,
+  CommandBadge,
   CommandSeparator,
   CommandDialog,
 } from '../../../components/ui/Command'
@@ -232,5 +234,62 @@ describe('Command Component', () => {
     // Run axe check
     const results = await axe(container)
     expect(results).toHaveNoViolations()
+  })
+
+  it('renders CommandShortcut utilizing the Kbd primitive with mechanical keycap styling', () => {
+    render(
+      <Command>
+        <CommandList>
+          <CommandItem value="item">
+            <span>Item</span>
+            <CommandShortcut size="xs" variant="accent">
+              ⌘K
+            </CommandShortcut>
+          </CommandItem>
+        </CommandList>
+      </Command>
+    )
+
+    const kbd = screen.getByText('⌘K')
+    expect(kbd).toBeInTheDocument()
+    expect(kbd.tagName.toLowerCase()).toBe('kbd')
+    expect(kbd).toHaveAttribute('data-slot', 'kbd')
+  })
+
+  it('clears search input when clear button is clicked', async () => {
+    const user = userEvent.setup()
+    render(
+      <Command>
+        <CommandInput placeholder="Search..." />
+      </Command>
+    )
+
+    const input = screen.getByRole('combobox') as HTMLInputElement
+    await user.type(input, 'hello')
+    expect(input.value).toBe('hello')
+
+    const clearButton = screen.getByRole('button', { name: /clear search/i })
+    expect(clearButton).toBeInTheDocument()
+
+    await user.click(clearButton)
+    expect(input.value).toBe('')
+    expect(screen.queryByRole('button', { name: /clear search/i })).not.toBeInTheDocument()
+  })
+
+  it('renders CommandBadge and CommandLoading correctly', () => {
+    render(
+      <Command>
+        <CommandLoading>Searching resources...</CommandLoading>
+        <CommandList>
+          <CommandItem value="1">
+            <span>Option</span>
+            <CommandBadge intent="accent">New</CommandBadge>
+          </CommandItem>
+        </CommandList>
+      </Command>
+    )
+
+    expect(screen.getByRole('status')).toHaveTextContent('Searching resources...')
+    expect(screen.getByText('New')).toBeInTheDocument()
   })
 })

@@ -22,7 +22,10 @@ import {
 } from 'react'
 import { cn, type LithosClass } from '../../utils/cn'
 import { IconSearch } from './icons/IconSearch'
+import { IconClose } from './icons/IconClose'
 import { Dialog, type DialogProps } from './Dialog'
+import { Kbd, type KbdProps, type KbdSize, type KbdVariant } from './Kbd'
+import { Badge, type BadgeProps } from './Badge'
 
 /* -------------------------------------------------------------------------------------------------
  * Context & Types
@@ -244,6 +247,7 @@ export interface CommandInputProps extends Omit<ComponentPropsWithRef<'input'>, 
   value?: string
   onValueChange?: (value: string) => void
   icon?: ReactNode
+  clearable?: boolean
   className?: LithosClass
 }
 
@@ -252,6 +256,7 @@ export const CommandInput = ({
   value,
   onValueChange,
   icon,
+  clearable = true,
   className,
   'aria-label': ariaLabel,
   ...rest
@@ -263,6 +268,11 @@ export const CommandInput = ({
     const next = e.target.value
     setSearch(next)
     onValueChange?.(next)
+  }
+
+  const handleClear = () => {
+    setSearch('')
+    onValueChange?.('')
   }
 
   return (
@@ -290,6 +300,17 @@ export const CommandInput = ({
         )}
         {...rest}
       />
+      {clearable && Boolean(inputValue) && (
+        <button
+          type="button"
+          data-slot="command-input-clear"
+          aria-label="Clear search"
+          onClick={handleClear}
+          className="inline-flex shrink-0 items-center justify-center p-0.5 ml-1 text-(--lithos-text) opacity-50 hover:opacity-100 transition-opacity cursor-pointer focus:outline-none"
+        >
+          <IconClose size={16} />
+        </button>
+      )}
     </div>
   )
 }
@@ -346,6 +367,33 @@ export const CommandEmpty = ({ className, children = 'No results found.', ...res
       {...rest}
     >
       {children}
+    </div>
+  )
+}
+
+/* -------------------------------------------------------------------------------------------------
+ * Loading: CommandLoading
+ * -----------------------------------------------------------------------------------------------*/
+
+export interface CommandLoadingProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
+  className?: LithosClass
+  children?: ReactNode
+}
+
+export const CommandLoading = ({ className, children = 'Searching...', ...rest }: CommandLoadingProps) => {
+  return (
+    <div
+      data-slot="command-loading"
+      role="status"
+      aria-live="polite"
+      className={cn(
+        'flex items-center justify-center py-6 text-sm font-medium opacity-60 text-(--lithos-text)',
+        className
+      )}
+      {...rest}
+    >
+      <span className="inline-block w-2 h-2 mr-2 bg-(--lithos-text) rounded-full animate-ping" />
+      <span>{children}</span>
     </div>
   )
 }
@@ -495,24 +543,37 @@ export const CommandItem = ({
  * Shortcut: CommandShortcut
  * -----------------------------------------------------------------------------------------------*/
 
-export interface CommandShortcutProps extends Omit<ComponentPropsWithRef<'span'>, 'className'> {
+export interface CommandShortcutProps extends Omit<KbdProps, 'size'> {
+  size?: KbdSize
+  variant?: KbdVariant
   className?: LithosClass
   children?: ReactNode
 }
 
-export const CommandShortcut = ({ className, children, ...rest }: CommandShortcutProps) => {
+export const CommandShortcut = ({
+  size = 'xs',
+  variant = 'default',
+  className,
+  children,
+  ...rest
+}: CommandShortcutProps) => {
   return (
-    <span
-      data-slot="command-shortcut"
-      className={cn(
-        'ml-auto inline-flex items-center justify-center text-center leading-none text-xs font-mono font-bold px-1.5 py-1 min-w-[1.25rem] border border-(--lithos-border) bg-(--lithos-surface) text-(--lithos-text) rounded-(--lithos-radius)',
-        className
-      )}
-      {...rest}
-    >
-      {children}
+    <span data-slot="command-shortcut" className="ml-auto inline-flex items-center pl-2">
+      <Kbd size={size} variant={variant} className={cn('tracking-normal font-mono', className)} {...rest}>
+        {children}
+      </Kbd>
     </span>
   )
+}
+
+/* -------------------------------------------------------------------------------------------------
+ * Badge: CommandBadge
+ * -----------------------------------------------------------------------------------------------*/
+
+export type CommandBadgeProps = BadgeProps
+
+export const CommandBadge = ({ className, size = 'sm', ...rest }: CommandBadgeProps) => {
+  return <Badge size={size} className={cn('ml-auto select-none', className)} {...rest} />
 }
 
 /* -------------------------------------------------------------------------------------------------
@@ -548,8 +609,11 @@ export const CommandDialog = ({ open, onClose, className, children, ...rest }: C
       open={open}
       onClose={onClose}
       size="md"
-      variant="bare"
-      className={cn('p-0 overflow-hidden shadow-[6px_6px_0_0_var(--lithos-shadow)]', className)}
+      variant="default"
+      className={cn(
+        'p-0 overflow-hidden **:data-[slot=command]:border-0 **:data-[slot=command]:shadow-none **:data-[slot=command]:rounded-none',
+        className
+      )}
       {...rest}
     >
       {children}

@@ -10,6 +10,7 @@ import {
   CommandGroup,
   CommandItem,
   CommandShortcut,
+  CommandBadge,
   CommandSeparator,
   CommandDialog,
 } from '../../components/ui/Command'
@@ -102,6 +103,7 @@ export const CommandDoc = () => {
           <CommandItem onSelect={() => alert('New File')}>
             <IconFileText className="mr-2" />
             <span>New Document</span>
+            <CommandBadge intent="accent" size="sm" className="ml-2">Pro</CommandBadge>
             <CommandShortcut>⌘N</CommandShortcut>
           </CommandItem>
           <CommandItem onSelect={() => alert('Open Folder')}>
@@ -135,6 +137,7 @@ export const CommandDoc = () => {
       'CommandGroup',
       'CommandItem',
       'CommandShortcut',
+      'CommandBadge',
       'CommandSeparator',
     ],
     manualPath: { Command: '../../components/ui/Command' },
@@ -220,14 +223,23 @@ export const CommandDoc = () => {
           'CommandInput',
           'CommandList',
           'CommandEmpty',
+          'CommandLoading',
           'CommandGroup',
           'CommandItem',
           'CommandShortcut',
+          'CommandBadge',
           'CommandSeparator',
           'CommandDialog',
         ]}
         manualPath="../../components/ui/Command"
-        requires={['utils/cn.ts', 'components/ui/Dialog.tsx', 'components/ui/icons/IconSearch.tsx']}
+        requires={[
+          'utils/cn.ts',
+          'components/ui/Dialog.tsx',
+          'components/ui/Kbd.tsx',
+          'components/ui/Badge.tsx',
+          'components/ui/icons/IconSearch.tsx',
+          'components/ui/icons/IconClose.tsx',
+        ]}
       />
 
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
@@ -291,6 +303,9 @@ export const CommandDoc = () => {
                       <IconFileText size={16} />
                     </span>
                     <span>New Document</span>
+                    <CommandBadge intent="accent" size="sm" className="ml-2">
+                      Pro
+                    </CommandBadge>
                     <CommandShortcut>⌘N</CommandShortcut>
                   </CommandItem>
                   <CommandItem onSelect={(val) => setSelectedAction(`Executed: ${val}`)}>
