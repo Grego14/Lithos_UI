@@ -55,8 +55,8 @@ export const SkeletonDoc = () => (
     <CodeViewer
       language="css"
       code={`@keyframes lithos-shimmer {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(100%); }
+  from { mask-position: 100% 0; }
+  to { mask-position: 0% 0; }
 }`}
     />
 
@@ -68,9 +68,9 @@ export const SkeletonDoc = () => (
         Animations
       </h3>
       <p className={paragraph}>
-        Shimmer is the default: a highlight sweeps across the fill. Choose pulse to animate the entire placeholder,
-        including its border and shadow, or disable animation. Reduced motion and forced colors automatically disable
-        both animations.
+        Both animations cover the entire placeholder, including its fill, border, and shadow. Shimmer is the default: a
+        wave sweeps across the component. Pulse fades the whole component in and out. Set animation to false to disable
+        it. Reduced motion and forced colors automatically disable both animations.
       </p>
       <PreviewBlock code={sourceExample(animationSource, ['Skeleton'])}>
         <SkeletonAnimations />

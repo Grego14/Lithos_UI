@@ -7,18 +7,26 @@ import { describe, it, expect, vi } from 'vitest'
 import { Skeleton, SkeletonText } from '../../../components/ui/Skeleton'
 
 describe('Skeleton', () => {
-  it('defaults to shimmer and removes its overlay when switching animations', () => {
+  it('shimmers the entire placeholder and removes its mask when switching animations', () => {
     const { rerender } = render(<Skeleton data-testid="placeholder" />)
     const element = screen.getByTestId('placeholder')
-    const shimmer = 'after:animate-[lithos-shimmer_1.5s_linear_infinite]'
+    const shimmer = 'animate-[lithos-shimmer_1.5s_linear_infinite]'
+    const mask = '[mask-image:linear-gradient(to_right,#0006_35%,#000_50%,#0006_65%)]'
     expect(element).toHaveAttribute('data-animation', 'shimmer')
-    expect(element).toHaveClass(shimmer, 'motion-reduce:after:hidden', 'forced-colors:after:hidden')
+    expect(element).toHaveClass(
+      shimmer,
+      mask,
+      '[mask-clip:no-clip]',
+      'motion-reduce:[mask-image:none]',
+      'forced-colors:[mask-image:none]'
+    )
+    expect(element).toBeEmptyDOMElement()
     rerender(<Skeleton data-testid="placeholder" animation="pulse" />)
     expect(element).toHaveClass('animate-pulse')
-    expect(element).not.toHaveClass(shimmer, "after:content-['']")
+    expect(element).not.toHaveClass(shimmer, mask)
     rerender(<Skeleton data-testid="placeholder" animation={false} />)
     expect(element).toHaveClass('animate-none')
-    expect(element).not.toHaveClass(shimmer, 'animate-pulse')
+    expect(element).not.toHaveClass(shimmer, mask, 'animate-pulse')
   })
 
   it('renders a neutral text placeholder with pulse on the entire element', () => {

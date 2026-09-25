@@ -20,7 +20,7 @@ const tones: Record<SkeletonTone, string> = {
 const animations: Record<Exclude<SkeletonAnimation, false>, string> = {
   pulse: 'animate-pulse [animation-duration:1s]',
   shimmer:
-    "relative after:content-[''] after:absolute after:inset-0 after:bg-linear-to-r after:from-transparent after:via-white/60 after:to-transparent after:animate-[lithos-shimmer_1.5s_linear_infinite] motion-reduce:after:animate-none motion-reduce:after:hidden forced-colors:after:animate-none forced-colors:after:hidden",
+    'animate-[lithos-shimmer_1.5s_linear_infinite] [mask-image:linear-gradient(to_right,#0006_35%,#000_50%,#0006_65%)] [mask-size:300%_100%] [mask-clip:no-clip] [mask-repeat:repeat] motion-reduce:[mask-image:none] forced-colors:[mask-image:none]',
 }
 
 export interface SkeletonProps extends Omit<

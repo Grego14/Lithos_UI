@@ -68,11 +68,11 @@ body {
 
 @keyframes lithos-shimmer {
   from {
-    transform: translateX(-100%);
+    mask-position: 100% 0;
   }
 
   to {
-    transform: translateX(100%);
+    mask-position: 0% 0;
   }
 }
 

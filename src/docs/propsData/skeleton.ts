@@ -6,7 +6,7 @@ const sharedProps: PropItem[] = [
     type: '"shimmer" | "pulse" | false',
     defaultValue: '"shimmer"',
     description:
-      'Shimmer sweep, whole-placeholder pulse, or no animation. Disabled for reduced motion and forced colors.',
+      'Whole-placeholder shimmer or pulse, including fill, border, and shadow, or no animation. Disabled for reduced motion and forced colors.',
   },
   {
     name: 'tone',
