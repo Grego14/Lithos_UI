@@ -4,16 +4,24 @@
  * - Automatically links to reference element dimensions and attaches ARIA attributes.
  */
 import type { ComponentPropsWithRef } from 'react'
-import { useMergeRefs, FloatingFocusManager, FloatingPortal } from '@floating-ui/react'
+import { useTransitionStatus, useMergeRefs, FloatingFocusManager, FloatingPortal } from '@floating-ui/react'
 import { cn, type LithosClass } from '../../../utils/cn'
 import { usePopoverContext } from './usePopover'
 
 export interface PopoverContentProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   portaled?: boolean
   className?: LithosClass
+  transitionDuration?: number
 }
 
-export const PopoverContent = ({ style, className, portaled = true, ref: propRef, ...props }: PopoverContentProps) => {
+export const PopoverContent = ({
+  style,
+  className,
+  portaled = true,
+  ref: propRef,
+  transitionDuration = 0,
+  ...props
+}: PopoverContentProps) => {
   const {
     context: floatingContext,
     floatingStyles,
@@ -25,7 +33,11 @@ export const PopoverContent = ({ style, className, portaled = true, ref: propRef
   } = usePopoverContext()
   const ref = useMergeRefs([refs.setFloating, propRef])
 
-  if (!floatingContext.open) return null
+  const { isMounted } = useTransitionStatus(floatingContext, {
+    duration: transitionDuration,
+  })
+
+  if (!isMounted) return null
 
   const content = (
     <FloatingFocusManager context={floatingContext} modal={modal}>

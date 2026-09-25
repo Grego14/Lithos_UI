@@ -34,6 +34,7 @@ import { Faq } from './pages/Faq'
 import { InputDoc } from './docs/pages/Input'
 import { Installation } from './docs/pages/Installation'
 import { Introduction } from './docs/pages/Introduction'
+import { KbdDoc } from './docs/pages/Kbd'
 import { PopoverPage } from './docs/pages/Popover'
 import { NotFound } from './showroom/sections/NotFound'
 import { SelectDoc } from './docs/pages/Select'
@@ -83,6 +84,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
     { path: 'dialog', component: DialogDoc },
     { path: 'dropdown', component: DropdownDoc },
     { path: 'installation', component: Installation },
+    { path: 'kbd', component: KbdDoc },
     { path: 'popover', component: PopoverPage },
     { path: 'select', component: SelectDoc },
     { path: 'toast', component: ToastDoc },

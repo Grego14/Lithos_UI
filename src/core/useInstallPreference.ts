@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 
 export type PackageManager = 'pnpm' | 'npm' | 'yarn' | 'bun'
-export type InstallTab = 'command' | 'manual'
+export type InstallTab = 'package' | 'source'
 
 export const useInstallPreference = () => {
   const [installTab, setInstallTab] = useState<InstallTab>(() => {
-    return (localStorage.getItem('lithos-install-tab') as InstallTab) || 'command'
+    return (localStorage.getItem('lithos-install-tab') as InstallTab) || 'package'
   })
 
   const [packageManager, setPackageManager] = useState<PackageManager>(() => {
@@ -14,7 +14,7 @@ export const useInstallPreference = () => {
 
   useEffect(() => {
     const handlePrefChange = () => {
-      setInstallTab((localStorage.getItem('lithos-install-tab') as InstallTab) || 'command')
+      setInstallTab((localStorage.getItem('lithos-install-tab') as InstallTab) || 'package')
       setPackageManager((localStorage.getItem('lithos-package-manager') as PackageManager) || 'pnpm')
     }
 

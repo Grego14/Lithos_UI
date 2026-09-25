@@ -29,6 +29,7 @@ import { Popover, PopoverTrigger, PopoverContent } from '../components/ui/Popove
 import { Select } from '../components/ui/Select'
 import { IconClose } from '../components/ui/icons/IconClose'
 import { Input } from '../components/ui/Input'
+import { Kbd, KbdGroup } from '../components/ui/Kbd'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs'
 import { Tooltip } from '../components/ui/tooltip/Tooltip'
 import { TooltipTrigger } from '../components/ui/tooltip/TooltipTrigger'
@@ -289,6 +290,16 @@ const componentsList = [
     name: 'Input',
     to: '/docs/input',
     preview: <Input placeholder="Input" className="w-24 pointer-events-none" />,
+  },
+  {
+    name: 'Kbd',
+    to: '/docs/kbd',
+    preview: (
+      <KbdGroup>
+        <Kbd size="sm">⌘</Kbd>
+        <Kbd size="sm">K</Kbd>
+      </KbdGroup>
+    ),
   },
   {
     name: 'Popover',

@@ -21,6 +21,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Changed (0.1.2)
 
 - Improved DX by allowing the `role` prop to be passed directly to the Popover component, simplifying `Dropdown` and `Select` implementations ([#318](https://github.com/lithosui/Lithos_UI/pull/318)).
+- Added `matchTriggerWidth` prop to the **Popover** primitive ([#327](https://github.com/lithosui/Lithos_UI/pull/327)).
+- Added `transitionDuration` prop to the **PopoverContent** component ([#327](https://github.com/lithosui/Lithos_UI/pull/327)).
+- **Kbd & KbdGroup:** Introduced keyboard keycap and shortcut group UI primitives ([#328](https://github.com/lithosui/Lithos_UI/pull/328)).
+  - Semantic `<kbd>` component with tactical keycap proportions, calibrated vertical/horizontal centering, and 0px-blur brutalist hard-drop shadows.
+  - Multiple size steps (`xs`, `sm`, `md`, `lg`) and visual style variants (`default`, `accent`, `outline`, `solid`, `subtle`, `inverse`).
+  - Dynamic YIQ biological contrast engine integration for custom HEX background colors.
+  - `KbdGroup` compound component adhering to the Zero-Gap Rule with explicit margin spacing and an `attached` mode for fused multi-key strips.
+  - Comprehensive documentation page with interactive shortcut examples, 5-color custom palette row, and live `Ctrl + K` input focus integration.
+  - Unit tests with 100% pass rate and `jest-axe` accessibility compliance.
+  - Scoped the generic `kbd` selector in `src/tokens.css` to `kbd:not([data-slot="kbd"])` to avoid polluting the `Kbd` component styling ([#328](https://github.com/lithosui/Lithos_UI/pull/328)).
 - Properly arranged the components and blocks ([#303](https://github.com/lithosui/Lithos_UI/pull/303)).
 - Improved the hero title responsiveness ([#305](https://github.com/lithosui/Lithos_UI/pull/305)).
 
@@ -36,7 +46,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added (0.1.1)
 
-- Tooltip component.
+- Tooltip component ([#277](https://github.com/lithosui/Lithos_UI/pull/277)).
 
 ### Changed (0.1.1)
 
@@ -45,6 +55,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Fixed (0.1.1)
 
 - Fixes for v0.1.0 for the components were made.
+- Make the icon inside the checkbox move along with the box ([#276](https://github.com/lithosui/Lithos_UI/pull/276)).
 
 ### Removed (0.1.1)
 

@@ -52,7 +52,7 @@ body.obsidian {
     @apply bg-(--lithos-surface) px-1 py-0.5;
   }
 
-  kbd {
+  kbd:not([data-slot='kbd']) {
     @apply px-1.5 py-0.5 text-xs font-mono rounded bg-(--lithos-accent)/15 border border-(--lithos-accent)/30;
   }
 

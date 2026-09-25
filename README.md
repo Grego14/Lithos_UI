@@ -43,6 +43,7 @@ To prevent Tailwind class bloat ("DRY" architecture), Lithos UI packages its mec
 | Checkbox              | Stable | [Link](/src/docs/pages/Checkbox.tsx)     |
 | CodeViewer            | Stable | [Link](/src/docs/pages/CodeViewer.tsx)   |
 | Dialog                | Stable | [Link](/src/docs/pages/Dialog.tsx)       |
+| Kbd                   | Stable | [Link](/src/docs/pages/Kbd.tsx)          |
 | Popover               | Stable | [Link](/src/docs/pages/Popover.tsx)      |
 | PreviewBlock          | Stable | [Link](/src/docs/pages/PreviewBlock.tsx) |
 | Toast (ToastProvider) | Stable | [Link](/src/docs/pages/Toast.tsx)        |

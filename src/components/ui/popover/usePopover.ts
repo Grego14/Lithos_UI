@@ -33,6 +33,7 @@ export interface PopoverOptions {
   offset?: number
   hover?: boolean | UseHoverProps
   role?: UseRoleProps['role']
+  matchTriggerWidth?: boolean
 }
 
 export type PopoverReturn = {
@@ -54,6 +55,7 @@ export const usePopover = ({
   offset: consumerOffset,
   hover: hoverOptions = false,
   role,
+  matchTriggerWidth = true,
 }: PopoverOptions = {}): PopoverReturn => {
   const [uncontrolledOpen, setUncontrolledOpen] = useState(initialOpen)
   const labelId = useId()
@@ -73,16 +75,17 @@ export const usePopover = ({
         fallbackAxisSideDirection: 'end',
       }),
       shift({ padding: 8 }),
-      size({
-        apply: ({ rects, elements }) => {
-          const width = `${rects.reference.width}px`
+      matchTriggerWidth &&
+        size({
+          apply: ({ rects, elements }) => {
+            const width = `${rects.reference.width}px`
 
-          if (elements.floating.style.width !== width) {
-            elements.floating.style.width = width
-          }
-        },
-      }),
-    ],
+            if (elements.floating.style.width !== width) {
+              elements.floating.style.width = width
+            }
+          },
+        }),
+    ].filter(Boolean),
   })
 
   const { context } = data
