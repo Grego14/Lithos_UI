@@ -1,5 +1,6 @@
 ﻿import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { PropsAccordion } from '../../components/ui/PropsTable'
+import { CodeViewer } from '../../components/ui/CodeViewer'
 import { SetupGuide } from '../layout/SetupGuide'
 import { skeletonPropsData, skeletonTextPropsData } from '../propsData/skeleton'
 import { SkeletonAnimations } from '../examples/skeleton/Animations'
@@ -46,9 +47,18 @@ export const SkeletonDoc = () => (
       requires={['utils/cn.ts']}
     />
     <p className={paragraph}>
-      Import <code>lithos-ui/tokens.css</code> after your Tailwind stylesheet for the shared theme tokens. Skeleton uses
-      Tailwind's built-in pulse animation.
+      Import <code>lithos-ui/tokens.css</code> after your Tailwind stylesheet for the shared theme tokens. For shimmer,
+      add these keyframes to your app's global CSS for either package or manual installation. The docs site defines them
+      in <code>src/index.css</code>; they are not included in the package stylesheet. Pulse uses Tailwind's built-in
+      animation.
     </p>
+    <CodeViewer
+      language="css"
+      code={`@keyframes lithos-shimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}`}
+    />
 
     <section aria-labelledby="examples" className="mb-12">
       <h2 id="examples" className={heading}>
@@ -58,8 +68,9 @@ export const SkeletonDoc = () => (
         Animations
       </h3>
       <p className={paragraph}>
-        Choose pulse or no animation. The entire placeholder pulses, including its fill, border, and shadow. Reduced
-        motion and forced colors automatically disable the animation.
+        Shimmer is the default: a highlight sweeps across the fill. Choose pulse to animate the entire placeholder,
+        including its border and shadow, or disable animation. Reduced motion and forced colors automatically disable
+        both animations.
       </p>
       <PreviewBlock code={sourceExample(animationSource, ['Skeleton'])}>
         <SkeletonAnimations />
@@ -70,7 +81,9 @@ export const SkeletonDoc = () => (
       <h3 id="component-card" className={subheading}>
         Card
       </h3>
-      <p className={paragraph}>Reserve an image, title, and description inside the existing Card component.</p>
+      <p className={paragraph}>
+        Use pulse animation for an image, title, and description inside the existing Card component.
+      </p>
       <PreviewBlock code={sourceExample(cardSource, ['Skeleton', 'SkeletonText', 'Card', 'CardContent'])}>
         <SkeletonCardExample />
       </PreviewBlock>

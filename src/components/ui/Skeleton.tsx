@@ -1,7 +1,7 @@
 import type { ComponentPropsWithRef, CSSProperties } from 'react'
 import { cn, type LithosClass } from '../../utils/cn'
 
-export type SkeletonAnimation = 'pulse' | false
+export type SkeletonAnimation = 'shimmer' | 'pulse' | false
 export type SkeletonVariant = 'text' | 'rectangular' | 'rounded' | 'circular'
 export type SkeletonTone = 'neutral' | 'accent'
 
@@ -15,6 +15,12 @@ const variants: Record<SkeletonVariant, string> = {
 const tones: Record<SkeletonTone, string> = {
   neutral: 'bg-[color-mix(in_srgb,var(--lithos-text)_12%,var(--lithos-surface))]',
   accent: 'bg-[color-mix(in_srgb,var(--lithos-accent)_28%,var(--lithos-surface))]',
+}
+
+const animations: Record<Exclude<SkeletonAnimation, false>, string> = {
+  pulse: 'animate-pulse [animation-duration:1s]',
+  shimmer:
+    "relative after:content-[''] after:absolute after:inset-0 after:bg-linear-to-r after:from-transparent after:via-white/60 after:to-transparent after:animate-[lithos-shimmer_1.5s_linear_infinite] motion-reduce:after:animate-none motion-reduce:after:hidden forced-colors:after:animate-none forced-colors:after:hidden",
 }
 
 export interface SkeletonProps extends Omit<
@@ -32,7 +38,7 @@ export interface SkeletonProps extends Omit<
 
 export const Skeleton = ({
   variant = 'text',
-  animation = 'pulse',
+  animation = 'shimmer',
   tone = 'neutral',
   width,
   height,
@@ -46,7 +52,7 @@ export const Skeleton = ({
       'block overflow-hidden box-border min-w-0 max-w-full border-2 border-(--lithos-border) shadow-[2px_2px_0_var(--lithos-shadow)] pointer-events-none select-none',
       variants[variant],
       tones[tone],
-      animation ? 'animate-pulse [animation-duration:1s]' : 'animate-none',
+      animation ? animations[animation] : 'animate-none',
       'motion-reduce:animate-none forced-colors:border-[CanvasText] forced-colors:bg-[Canvas] forced-colors:shadow-none forced-colors:animate-none',
       className
     )}
@@ -74,7 +80,7 @@ export interface SkeletonTextProps extends Omit<
 export const SkeletonText = ({
   lines = 3,
   lastLineWidth = '65%',
-  animation = 'pulse',
+  animation = 'shimmer',
   tone = 'neutral',
   className,
   ...props

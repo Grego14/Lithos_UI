@@ -66,6 +66,16 @@ body {
   }
 }
 
+@keyframes lithos-shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
 @keyframes fade-in {
   0% {
     opacity: 0;

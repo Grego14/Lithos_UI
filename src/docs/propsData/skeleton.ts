@@ -3,9 +3,10 @@ import type { PropItem } from '../../components/ui/PropsTable'
 const sharedProps: PropItem[] = [
   {
     name: 'animation',
-    type: '"pulse" | false',
-    defaultValue: '"pulse"',
-    description: 'Whole-placeholder animation. Automatically disabled for reduced motion and forced colors.',
+    type: '"shimmer" | "pulse" | false',
+    defaultValue: '"shimmer"',
+    description:
+      'Shimmer sweep, whole-placeholder pulse, or no animation. Disabled for reduced motion and forced colors.',
   },
   {
     name: 'tone',

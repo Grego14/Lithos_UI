@@ -7,8 +7,22 @@ import { describe, it, expect, vi } from 'vitest'
 import { Skeleton, SkeletonText } from '../../../components/ui/Skeleton'
 
 describe('Skeleton', () => {
+  it('defaults to shimmer and removes its overlay when switching animations', () => {
+    const { rerender } = render(<Skeleton data-testid="placeholder" />)
+    const element = screen.getByTestId('placeholder')
+    const shimmer = 'after:animate-[lithos-shimmer_1.5s_linear_infinite]'
+    expect(element).toHaveAttribute('data-animation', 'shimmer')
+    expect(element).toHaveClass(shimmer, 'motion-reduce:after:hidden', 'forced-colors:after:hidden')
+    rerender(<Skeleton data-testid="placeholder" animation="pulse" />)
+    expect(element).toHaveClass('animate-pulse')
+    expect(element).not.toHaveClass(shimmer, "after:content-['']")
+    rerender(<Skeleton data-testid="placeholder" animation={false} />)
+    expect(element).toHaveClass('animate-none')
+    expect(element).not.toHaveClass(shimmer, 'animate-pulse')
+  })
+
   it('renders a neutral text placeholder with pulse on the entire element', () => {
-    render(<Skeleton data-testid="placeholder" />)
+    render(<Skeleton data-testid="placeholder" animation="pulse" />)
     const element = screen.getByTestId('placeholder')
     expect(element).toHaveAttribute('data-variant', 'text')
     expect(element).toHaveAttribute('data-tone', 'neutral')
@@ -87,7 +101,7 @@ describe('Skeleton', () => {
   })
 
   it('lets consumers override the pulse speed', () => {
-    render(<Skeleton data-testid="placeholder" className="[animation-duration:3s]" />)
+    render(<Skeleton data-testid="placeholder" animation="pulse" className="[animation-duration:3s]" />)
     const element = screen.getByTestId('placeholder')
     expect(element).toHaveClass('animate-pulse', '[animation-duration:3s]')
     expect(element).not.toHaveClass('[animation-duration:1s]')
@@ -114,7 +128,7 @@ describe('Skeleton', () => {
 })
 
 describe('SkeletonText', () => {
-  it('defaults to three decorative pulsing lines with a shorter final line', () => {
+  it('defaults to three decorative shimmering lines with a shorter final line', () => {
     render(<SkeletonText data-testid="text" aria-hidden={false} />)
     const element = screen.getByTestId('text')
     expect(element).toHaveAttribute('aria-hidden', 'true')
@@ -123,7 +137,7 @@ describe('SkeletonText', () => {
     for (const line of element.children) {
       expect(line).toHaveAttribute('aria-hidden', 'true')
       expect(line).toHaveAttribute('inert')
-      expect(line).toHaveClass('animate-pulse')
+      expect(line).toHaveAttribute('data-animation', 'shimmer')
     }
     expect(element.children[2]).toHaveStyle({ width: '65%' })
   })
