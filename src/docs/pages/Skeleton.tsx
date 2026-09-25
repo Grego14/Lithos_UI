@@ -33,7 +33,8 @@ export const SkeletonDoc = () => (
     <header>
       <h1 className="mb-6 text-4xl md:text-5xl font-black tracking-tight leading-none">Skeleton</h1>
       <p className="max-w-2xl text-lg md:text-xl font-display opacity-70">
-        Show the outline of your content while it loads, with crisp borders and theme-aware fills.
+        Show the outline of your content while it loads. Both shimmer and pulse animate the entire placeholder,
+        including its fill, border, and shadow.
       </p>
       <hr className="border-t-2 border-(--lithos-border) my-8" />
     </header>
@@ -68,9 +69,10 @@ export const SkeletonDoc = () => (
         Animations
       </h3>
       <p className={paragraph}>
-        Both animations cover the entire placeholder, including its fill, border, and shadow. Shimmer is the default: a
-        wave sweeps across the component. Pulse fades the whole component in and out. Set animation to false to disable
-        it. Reduced motion and forced colors automatically disable both animations.
+        Shimmer and pulse both animate the entire placeholder, including its fill, border, and shadow. The default
+        shimmer sweeps across the whole component; pulse fades the whole component in and out. Set{' '}
+        <code>{'animation={false}'}</code> to disable animation. Reduced motion and forced colors automatically disable
+        both.
       </p>
       <PreviewBlock code={sourceExample(animationSource, ['Skeleton'])}>
         <SkeletonAnimations />
