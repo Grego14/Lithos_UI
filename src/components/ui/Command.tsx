@@ -7,6 +7,8 @@
  * - Zero-Gap Rule: margin/padding based layout without CSS gap.
  */
 import {
+  Children,
+  isValidElement,
   createContext,
   useCallback,
   useContext,
@@ -467,11 +469,25 @@ export const CommandItem = ({
   const groupContext = useContext(GroupContext)
   const itemRef = useRef<HTMLDivElement | null>(null)
 
+  const getTextFromChildren = useCallback((node: ReactNode): string => {
+    let text = ''
+    Children.forEach(node, (child) => {
+      if (typeof child === 'string' || typeof child === 'number') {
+        text += String(child)
+      } else if (isValidElement(child) && child.props && 'children' in (child.props as any)) {
+        text += getTextFromChildren((child.props as any).children)
+      }
+    })
+    return text
+  }, [])
+
   const derivedValue = useMemo(() => {
     if (value !== undefined) return value
     if (typeof children === 'string') return children
+    const textContent = getTextFromChildren(children).trim()
+    if (textContent) return textContent
     return id
-  }, [value, children, id])
+  }, [value, children, id, getTextFromChildren])
 
   const { activeId, setActiveId, registerItem, filterItem } = useCommand()
 
