@@ -39,6 +39,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Fixed select scrollbar overflow ([#309](https://github.com/lithosui/Lithos_UI/pull/309)).
 - Fixed breadcrumb primitive items wrap ([#304](https://github.com/lithosui/Lithos_UI/pull/304)).
 - Fixed clipping of border radius on underline tabs ([#302](https://github.com/lithosui/Lithos_UI/pull/302)).
+- Fixed invalid type usage on the `PreviewBlock` and the `deriveUsageCode` doc. utility ([#330](https://github.com/lithosui/Lithos_UI/pull/330)).
 
 ### Removed (0.1.2)
 
