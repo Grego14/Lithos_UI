@@ -140,7 +140,7 @@ export const Dialog = ({
 
   return createPortal(
     <DialogContext.Provider value={{ onClose, titleId, scrollable }}>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+      <div className={cn('fixed inset-0 flex items-center justify-center p-4 sm:p-6 z-(--lithos-z-modal)')}>
         <div
           className="absolute inset-0 bg-black/60 animate-[fade-in_0.15s_ease-out]"
           onClick={onClose}

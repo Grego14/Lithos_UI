@@ -47,7 +47,7 @@ export const PopoverContent = ({
         aria-labelledby={labelId}
         aria-describedby={descriptionId}
         className={cn(
-          'z-50 min-w-40 border-2 border-(--lithos-border) bg-(--lithos-surface) p-4 shadow-[4px_4px_0_0_var(--lithos-shadow)] text-(--lithos-text) outline-none rounded-(--lithos-radius)',
+          'z-(--lithos-z-popover) min-w-40 border-2 border-(--lithos-border) bg-(--lithos-surface) p-4 shadow-[4px_4px_0_0_var(--lithos-shadow)] text-(--lithos-text) outline-none rounded-(--lithos-radius)',
           className
         )}
         {...getFloatingProps(props)}
