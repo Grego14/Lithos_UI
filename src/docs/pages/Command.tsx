@@ -411,14 +411,18 @@ export const CommandDoc = () => {
           code={`<Command>
   <CommandInput />
   <CommandList>
+    <CommandLoading />
     <CommandEmpty />
     <CommandGroup>
       <CommandItem>
+        <CommandItemDescription />
+        <CommandBadge />
         <CommandShortcut />
       </CommandItem>
     </CommandGroup>
     <CommandSeparator />
   </CommandList>
+  <CommandFooter />
 </Command>`}
         />
       </div>
