@@ -25,7 +25,6 @@ import {
 import { cn, type LithosClass } from '../../utils/cn'
 import { IconSearch } from './icons/IconSearch'
 import { IconClose } from './icons/IconClose'
-import { IconChevronDown } from './icons/IconChevronDown'
 import { Dialog, type DialogProps } from './Dialog'
 import { Kbd, type KbdProps, type KbdSize, type KbdVariant } from './Kbd'
 import { Badge, type BadgeProps } from './Badge'
@@ -51,8 +50,8 @@ interface CommandContextValue {
   visibleItemsCount: number
   isGroupVisible: (groupId: string) => boolean
   requireSearch?: boolean
-  showAll: boolean
-  setShowAll: (showAll: boolean) => void
+  isOpen: boolean
+  setIsOpen: (isOpen: boolean) => void
 }
 
 const CommandContext = createContext<CommandContextValue | null>(null)
@@ -88,7 +87,7 @@ export const Command = ({
   const [uncontrolledSearch, setUncontrolledSearch] = useState('')
   const search = controlledValue !== undefined ? controlledValue : uncontrolledSearch
   const listId = useId()
-  const [showAll, setShowAll] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   const setSearch = useCallback(
     (newSearch: string) => {
@@ -96,7 +95,6 @@ export const Command = ({
         setUncontrolledSearch(newSearch)
       }
       onValueChange?.(newSearch)
-      setShowAll(false)
     },
     [controlledValue, onValueChange]
   )
@@ -119,19 +117,15 @@ export const Command = ({
     }
   }, [])
 
-  const defaultFilter = useCallback(
-    (itemValue: string, query: string, keywords?: string[]) => {
-      if (!query.trim()) {
-        if (requireSearch) return showAll
-        return true
-      }
-      const q = query.toLowerCase().trim()
-      if (itemValue.toLowerCase().includes(q)) return true
-      if (keywords && keywords.some((k) => k.toLowerCase().includes(q))) return true
-      return false
-    },
-    [requireSearch, showAll]
-  )
+  const defaultFilter = useCallback((itemValue: string, query: string, keywords?: string[]) => {
+    if (!query.trim()) {
+      return true
+    }
+    const q = query.toLowerCase().trim()
+    if (itemValue.toLowerCase().includes(q)) return true
+    if (keywords && keywords.some((k) => k.toLowerCase().includes(q))) return true
+    return false
+  }, [])
 
   const filterItem = useCallback(
     (itemValue: string, keywords?: string[]) => {
@@ -190,8 +184,8 @@ export const Command = ({
       visibleItemsCount,
       isGroupVisible,
       requireSearch,
-      showAll,
-      setShowAll,
+      isOpen,
+      setIsOpen,
     }),
     [
       search,
@@ -204,7 +198,7 @@ export const Command = ({
       visibleItemsCount,
       isGroupVisible,
       requireSearch,
-      showAll,
+      isOpen,
     ]
   )
 
@@ -251,9 +245,29 @@ export const Command = ({
     className
   )
 
+  const commandRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (commandRef.current && !commandRef.current.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
   return (
     <CommandContext.Provider value={contextValue}>
-      <div data-slot="command" role="application" tabIndex={-1} onKeyDown={handleKeyDown} className={classes} {...rest}>
+      <div
+        ref={commandRef}
+        data-slot="command"
+        role="application"
+        tabIndex={-1}
+        onKeyDown={handleKeyDown}
+        className={classes}
+        {...rest}
+      >
         {children}
       </div>
     </CommandContext.Provider>
@@ -265,7 +279,6 @@ export interface CommandInputProps extends Omit<ComponentPropsWithRef<'input'>, 
   onValueChange?: (value: string) => void
   icon?: ReactNode
   clearable?: boolean
-  showRevealButton?: boolean
   className?: LithosClass
 }
 
@@ -275,19 +288,18 @@ export const CommandInput = ({
   onValueChange,
   icon,
   clearable = true,
-  showRevealButton,
   className,
   'aria-label': ariaLabel,
   ...rest
 }: CommandInputProps) => {
-  const { search, setSearch, listId, requireSearch, showAll, setShowAll } = useCommand()
+  const { search, setSearch, listId, setIsOpen } = useCommand()
   const inputValue = value !== undefined ? value : search
-  const shouldShowReveal = showRevealButton !== undefined ? showRevealButton : requireSearch
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const next = e.target.value
     setSearch(next)
     onValueChange?.(next)
+    setIsOpen(true)
   }
 
   const handleClear = () => {
@@ -313,6 +325,8 @@ export const CommandInput = ({
         aria-autocomplete="list"
         value={inputValue}
         onChange={handleChange}
+        onFocus={() => setIsOpen(true)}
+        onClick={() => setIsOpen(true)}
         placeholder={placeholder}
         className={cn(
           'w-full bg-transparent font-sans text-sm font-medium text-(--lithos-text) placeholder:text-(--lithos-text)/50 outline-none border-none p-0 focus:ring-0',
@@ -331,20 +345,6 @@ export const CommandInput = ({
           <IconClose size={16} />
         </button>
       )}
-      {shouldShowReveal && !inputValue && (
-        <button
-          type="button"
-          data-slot="command-input-reveal"
-          aria-label={showAll ? 'Hide options' : 'Show all options'}
-          onClick={() => setShowAll(!showAll)}
-          className={cn(
-            'inline-flex shrink-0 items-center justify-center p-0.5 ml-1 text-(--lithos-text) opacity-50 hover:opacity-100 transition-all cursor-pointer focus:outline-none',
-            showAll && 'rotate-180'
-          )}
-        >
-          <IconChevronDown size={16} />
-        </button>
-      )}
     </div>
   )
 }
@@ -355,8 +355,12 @@ export interface CommandListProps extends Omit<ComponentPropsWithRef<'div'>, 'cl
 }
 
 export const CommandList = ({ className, children, ...rest }: CommandListProps) => {
-  const { listId } = useCommand()
-  const classes = cn('max-h-72 overflow-x-hidden overflow-y-auto p-1.5 focus:outline-none', className)
+  const { listId, isOpen } = useCommand()
+  const classes = cn(
+    'max-h-72 overflow-x-hidden overflow-y-auto p-1.5 focus:outline-none',
+    !isOpen && 'hidden',
+    className
+  )
 
   return (
     <div
@@ -379,9 +383,9 @@ export interface CommandEmptyProps extends Omit<ComponentPropsWithRef<'div'>, 'c
 }
 
 export const CommandEmpty = ({ className, children = 'No results found.', ...rest }: CommandEmptyProps) => {
-  const { search, visibleItemsCount } = useCommand()
+  const { search, visibleItemsCount, isOpen } = useCommand()
 
-  if (!search.trim() || visibleItemsCount > 0) return null
+  if (!isOpen || !search.trim() || visibleItemsCount > 0) return null
 
   return (
     <div
@@ -402,6 +406,10 @@ export interface CommandLoadingProps extends Omit<ComponentPropsWithRef<'div'>, 
 }
 
 export const CommandLoading = ({ className, children = 'Searching...', ...rest }: CommandLoadingProps) => {
+  const { isOpen } = useCommand()
+
+  if (!isOpen) return null
+
   return (
     <div
       data-slot="command-loading"
@@ -489,12 +497,13 @@ export const CommandItem = ({
     return id
   }, [value, children, id, getTextFromChildren])
 
-  const { activeId, setActiveId, registerItem, filterItem } = useCommand()
+  const { activeId, setActiveId, registerItem, filterItem, setIsOpen } = useCommand()
 
   const handleSelect = useCallback(() => {
     if (disabled) return
     onSelect?.(derivedValue)
-  }, [disabled, onSelect, derivedValue])
+    setIsOpen(false)
+  }, [disabled, onSelect, derivedValue, setIsOpen])
 
   useEffect(() => {
     return registerItem({
@@ -645,13 +654,14 @@ export const CommandFooter = ({
   children,
   ...rest
 }: CommandFooterProps) => {
-  const { visibleItemsCount } = useCommand()
+  const { visibleItemsCount, isOpen } = useCommand()
 
   return (
     <div
       data-slot="command-footer"
       className={cn(
         'flex items-center justify-between border-t-2 border-(--lithos-border) px-3 py-1.5 bg-(--lithos-surface) text-xs font-mono select-none text-(--lithos-text)',
+        !isOpen && 'hidden',
         className
       )}
       {...rest}
