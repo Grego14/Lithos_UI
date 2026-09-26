@@ -57,13 +57,16 @@ export const SpinnerDoc = () => {
   const iconsCode = {
     body: `export const SpinnerIcons = () => {
   return (
-    <div className="flex items-center gap-8">
+    <div className="flex items-center gap-8 flex-wrap">
       {/* Default FiLoader */}
       <Spinner size={32} />
       <Spinner size={32} icon="FiRefreshCw" />
-      <Spinner size={32} icon="FiRefreshCcw" />
-      <Spinner size={32} icon="FiSettings" />
-      <Spinner size={32} icon="VscLoading" />
+      <Spinner size={32} icon="LuLoaderCircle" />
+      <Spinner size={32} icon="TbLoader2" />
+      <Spinner size={32} icon="PiSpinnerGap" />
+      <Spinner size={32} icon="RiLoader4Line" />
+      <Spinner size={32} icon="MdAutorenew" />
+      {/* ... and many more */}
     </div>
   )
 }`,
@@ -199,27 +202,31 @@ export const SpinnerDoc = () => {
           githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Spinner.tsx"
         >
           <div className="flex flex-col items-center p-8">
-            <div className="flex items-end justify-center gap-8">
-              <div className="flex flex-col items-center gap-2">
-                <Spinner size={32} />
-                <span className="text-xs font-mono opacity-70">FiLoader</span>
-              </div>
-              <div className="flex flex-col items-center gap-2">
-                <Spinner size={32} icon="FiRefreshCw" />
-                <span className="text-xs font-mono opacity-70">FiRefreshCw</span>
-              </div>
-              <div className="flex flex-col items-center gap-2">
-                <Spinner size={32} icon="FiRefreshCcw" />
-                <span className="text-xs font-mono opacity-70">FiRefreshCcw</span>
-              </div>
-              <div className="flex flex-col items-center gap-2">
-                <Spinner size={32} icon="FiSettings" />
-                <span className="text-xs font-mono opacity-70">FiSettings</span>
-              </div>
-              <div className="flex flex-col items-center gap-2">
-                <Spinner size={32} icon="VscLoading" />
-                <span className="text-xs font-mono opacity-70">VscLoading</span>
-              </div>
+            <div className="flex flex-wrap items-end justify-center gap-8">
+              {[
+                'FiLoader',
+                'FiRefreshCw',
+                'FiRefreshCcw',
+                'FiSettings',
+                'VscLoading',
+                'LuLoaderCircle',
+                'LuLoader',
+                'TbLoader2',
+                'TbLoader3',
+                'PiSpinnerGap',
+                'PiCircleNotch',
+                'RiLoader2Line',
+                'RiLoader3Line',
+                'RiLoader4Line',
+                'MdAutorenew',
+                'MdSync',
+                'MdCached',
+              ].map((iconName) => (
+                <div key={iconName} className="flex flex-col items-center gap-2">
+                  <Spinner size={32} icon={iconName as any} />
+                  <span className="text-[10px] font-mono opacity-70">{iconName}</span>
+                </div>
+              ))}
             </div>
           </div>
         </PreviewBlock>

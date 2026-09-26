@@ -23,10 +23,10 @@ export const spinnerProps: PropItem[] = [
   },
   {
     name: 'icon',
-    type: 'ElementType',
-    defaultValue: 'FiLoader',
+    type: 'SpinnerIconType',
+    defaultValue: '"FiLoader"',
     required: false,
-    description: 'Custom React icon component to use as the spinner.',
+    description: 'A predefined string selecting the spinner icon.',
   },
   {
     name: 'className',
