@@ -8,7 +8,13 @@ export const SpinnerDoc = () => {
   const usageCode = {
     body: `export const SpinnerExample = () => {
   return (
-    <Spinner size={32} variant="accent" />
+    <div className="flex items-center gap-8">
+      <Spinner size={32} variant="default" />
+      <Spinner size={32} variant="accent" />
+      <div className="bg-(--lithos-text) p-2 rounded-(--lithos-radius)">
+        <Spinner size={32} variant="inverse" />
+      </div>
+    </div>
   )
 }`,
     componentNames: ['Spinner'],
@@ -63,8 +69,12 @@ export const SpinnerDoc = () => {
         code={usageCode}
         githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Spinner.tsx"
       >
-        <div className="flex items-center justify-center p-8">
+        <div className="flex items-center justify-center gap-8 p-8">
+          <Spinner size={32} variant="default" />
           <Spinner size={32} variant="accent" />
+          <div className="bg-(--lithos-text) rounded-(--lithos-radius)">
+            <Spinner size={32} variant="inverse" />
+          </div>
         </div>
       </PreviewBlock>
 
