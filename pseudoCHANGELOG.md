@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added (0.1.2)
 
+- **Skeleton & SkeletonText:** Added loading placeholder components ([#320](https://github.com/lithosui/Lithos_UI/pull/320)).
+  - Text, rectangular, rounded, and circular variants with customizable dimensions and neutral or accent tones.
+  - Shimmer animation enabled by default, with pulse and disabled animation options, opt-in reduced-motion support, and forced-colors support.
+  - Multi-line text placeholders with configurable line count and last-line width, hidden from assistive technology and marked inert.
+  - Documentation with installation instructions, props tables, and animation, card, list, and avatar examples, plus component tests.
 - **Zero-Dependency CLI Installer:** Introduced `lithos-ui init` and `lithos-ui add <component>`.
   - Scaffolds a lightweight `lithos.json` configuration file.
   - Automatically fetches raw components, blocks, and all transitive dependencies (including local files and SVG icons) directly from GitHub.
