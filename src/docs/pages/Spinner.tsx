@@ -31,10 +31,22 @@ export const SpinnerDoc = () => {
     <div className="flex items-center gap-8">
       <Spinner size={32} variant="default" />
       <Spinner size={32} variant="accent" />
-      <div className="bg-(--lithos-text) p-2 rounded-(--lithos-radius)">
-        <Spinner size={32} variant="inverse" />
-      </div>
       <Spinner size={32} color="${customColor}" />
+    </div>
+  )
+}`,
+    componentNames: ['Spinner'],
+    manualPath: { Spinner: '../../components/ui/Spinner' },
+  }
+
+  const sizesCode = {
+    body: `export const SpinnerSizes = () => {
+  return (
+    <div className="flex items-center gap-8">
+      <Spinner size={16} />
+      <Spinner size={24} />
+      <Spinner size={32} />
+      <Spinner size={48} />
     </div>
   )
 }`,
@@ -94,9 +106,6 @@ export const SpinnerDoc = () => {
           <div className="flex items-center justify-center gap-8">
             <Spinner size={32} variant="default" />
             <Spinner size={32} variant="accent" />
-            <div className="bg-(--lithos-text) rounded-(--lithos-radius)">
-              <Spinner size={32} variant="inverse" />
-            </div>
             <Spinner size={32} color={customColor} />
           </div>
 
@@ -122,6 +131,42 @@ export const SpinnerDoc = () => {
           )}
         </div>
       </PreviewBlock>
+
+      <h3 id="sizes" className="mt-12 mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
+        Sizes
+      </h3>
+      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
+        Scale the spinner to any proportion using the <code>size</code> prop, which accepts a number (in pixels) or a
+        string.
+      </p>
+
+      <div className="mb-12">
+        <PreviewBlock
+          code={sizesCode}
+          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Spinner.tsx"
+        >
+          <div className="flex flex-col items-center p-8">
+            <div className="flex items-end justify-center gap-8">
+              <div className="flex flex-col items-center gap-2">
+                <Spinner size={16} />
+                <span className="text-xs font-mono opacity-70">16px</span>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <Spinner size={24} />
+                <span className="text-xs font-mono opacity-70">24px</span>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <Spinner size={32} />
+                <span className="text-xs font-mono opacity-70">32px</span>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <Spinner size={48} />
+                <span className="text-xs font-mono opacity-70">48px</span>
+              </div>
+            </div>
+          </div>
+        </PreviewBlock>
+      </div>
 
       <section className="mb-12">
         <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
