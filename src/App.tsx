@@ -25,6 +25,7 @@ import { CalendarDoc } from './docs/pages/Calendar'
 import { CardDoc } from './docs/pages/Card'
 import { CarouselDoc } from './docs/pages/Carousel'
 import { CheckboxDoc } from './docs/pages/Checkbox'
+import { CommandDoc } from './docs/pages/Command'
 import { ComingSoon } from './showroom/sections/ComingSoon'
 import { ComponentsIndex } from './pages/ComponentsIndex'
 import { DialogDoc } from './docs/pages/Dialog'
@@ -82,6 +83,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
     { path: 'carousel', component: CarouselDoc },
     { path: 'input', component: InputDoc },
     { path: 'checkbox', component: CheckboxDoc },
+    { path: 'command', component: CommandDoc },
     { path: 'dialog', component: DialogDoc },
     { path: 'dropdown', component: DropdownDoc },
     { path: 'installation', component: Installation },
