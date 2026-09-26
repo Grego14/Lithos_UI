@@ -482,8 +482,8 @@ export const CommandItem = ({
     Children.forEach(node, (child) => {
       if (typeof child === 'string' || typeof child === 'number') {
         text += String(child)
-      } else if (isValidElement(child) && child.props && 'children' in (child.props as any)) {
-        text += getTextFromChildren((child.props as any).children)
+      } else if (isValidElement<{ children?: ReactNode }>(child) && child.props && 'children' in child.props) {
+        text += getTextFromChildren(child.props.children)
       }
     })
     return text
