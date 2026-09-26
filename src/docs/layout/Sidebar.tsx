@@ -22,6 +22,7 @@ const components = [
   'popover',
   'select',
   'skeleton',
+  'spinner',
   'tabs',
   'toast',
   'toggle',
