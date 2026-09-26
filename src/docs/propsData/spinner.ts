@@ -22,6 +22,13 @@ export const spinnerProps: PropItem[] = [
     description: 'Dynamic color variant. Default uses primary text color.',
   },
   {
+    name: 'icon',
+    type: 'ElementType',
+    defaultValue: 'FiLoader',
+    required: false,
+    description: 'Custom React icon component to use as the spinner.',
+  },
+  {
     name: 'className',
     type: 'LithosClass',
     required: false,

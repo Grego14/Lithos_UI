@@ -3,7 +3,7 @@
  * - Neobrutalism inspired loading indicator.
  * - Uses FiLoader for the spinning icon.
  */
-import type { ComponentPropsWithRef } from 'react'
+import type { ComponentPropsWithRef, ElementType } from 'react'
 import { FiLoader } from 'react-icons/fi'
 import { cn, type LithosClass } from '../../utils/cn'
 
@@ -13,6 +13,7 @@ export interface SpinnerProps extends Omit<ComponentPropsWithRef<'div'>, 'classN
   size?: number | string
   color?: string
   variant?: SpinnerVariant
+  icon?: ElementType
   className?: LithosClass
 }
 
@@ -22,7 +23,14 @@ const variantClass: Record<SpinnerVariant, string> = {
   inverse: 'text-(--lithos-bg)',
 }
 
-export const Spinner = ({ size = 24, color, variant = 'default', className, ...rest }: SpinnerProps) => {
+export const Spinner = ({
+  size = 24,
+  color,
+  variant = 'default',
+  icon: Icon = FiLoader,
+  className,
+  ...rest
+}: SpinnerProps) => {
   return (
     <div
       role="status"
@@ -31,7 +39,7 @@ export const Spinner = ({ size = 24, color, variant = 'default', className, ...r
       style={{ color }}
       {...rest}
     >
-      <FiLoader size={size} strokeWidth={3} />
+      <Icon size={size} strokeWidth={3} />
       <span className="sr-only">Loading...</span>
     </div>
   )
