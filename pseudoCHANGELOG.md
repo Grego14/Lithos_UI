@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added (0.1.2)
 
+- **Skeleton & SkeletonText:** Added loading placeholder components ([#320](https://github.com/lithosui/Lithos_UI/pull/320)).
+  - Text, rectangular, rounded, and circular variants with customizable dimensions and neutral or accent tones.
+  - Shimmer animation enabled by default, with pulse and disabled animation options, opt-in reduced-motion support, and forced-colors support.
+  - Multi-line text placeholders with configurable line count and last-line width, hidden from assistive technology and marked inert.
+  - Documentation with installation instructions, props tables, and animation, card, list, and avatar examples, plus component tests.
 - **Zero-Dependency CLI Installer:** Introduced `lithos-ui init` and `lithos-ui add <component>`.
   - Scaffolds a lightweight `lithos.json` configuration file.
   - Automatically fetches raw components, blocks, and all transitive dependencies (including local files and SVG icons) directly from GitHub.
@@ -19,6 +24,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - **useListKeyNavigation:** Added hook to manage keyboard events easily and allowing 2D navigation. Currently being used by the `Dropdown` and `Select` primitives. ([#315](https://github.com/lithosui/Lithos_UI/pull/315))
 - Added lithos-ui CSS **z-index variables** ([#329](https://github.com/lithosui/Lithos_UI/pull/329)).
 - **Drawer:** Added the drawer primitive ([#332](https://github.com/lithosui/Lithos_UI/pull/332)).
+- **Command:** Introduced neo-brutalist Command palette and ⌘K menu primitive suite ([#331](https://github.com/lithosui/Lithos_UI/pull/331)).
+  - Zero-dependency, accessible keyboard-driven command menu (`Command`, `CommandInput`, `CommandList`, `CommandEmpty`, `CommandLoading`, `CommandGroup`, `CommandItem`, `CommandItemDescription`, `CommandBadge`, `CommandShortcut`, `CommandSeparator`, `CommandFooter`, `CommandDialog`).
+  - Real-time client-side substring and keyword fuzzy searching with auto-hiding empty groups.
+  - Full keyboard navigation (`ArrowUp`, `ArrowDown`, `Home`, `End`, `Enter`, `Escape`) with disabled item skipping and auto-scroll into view.
+  - Integrated with Lithos UI primitives: mechanical keycaps via `Kbd`, intent tags via `Badge`, clearable search via `IconClose`, and modal overlays via `Dialog`.
+  - Added desktop-grade `CommandFooter` status bar with interactive keycap hints and dynamic match counter.
+  - Zero-Gap Rule compliance across all subcomponents using explicit margin/padding calculations and no CSS `gap`.
+  - Comprehensive documentation page with live interactive examples (Basic, Shortcuts & Badges, and Dialog modal) and full `propsData` tables.
+  - Vitest test suite with 14 unit tests achieving 100% pass rate and `jest-axe` automated accessibility compliance.
 
 ### Changed (0.1.2)
 
@@ -42,6 +56,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Fixed select scrollbar overflow ([#309](https://github.com/lithosui/Lithos_UI/pull/309)).
 - Fixed breadcrumb primitive items wrap ([#304](https://github.com/lithosui/Lithos_UI/pull/304)).
 - Fixed clipping of border radius on underline tabs ([#302](https://github.com/lithosui/Lithos_UI/pull/302)).
+- Fixed invalid type usage on the `PreviewBlock` and the `deriveUsageCode` doc. utility ([#330](https://github.com/lithosui/Lithos_UI/pull/330)).
 
 ### Removed (0.1.2)
 

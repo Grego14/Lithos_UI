@@ -25,6 +25,7 @@ import { CalendarDoc } from './docs/pages/Calendar'
 import { CardDoc } from './docs/pages/Card'
 import { CarouselDoc } from './docs/pages/Carousel'
 import { CheckboxDoc } from './docs/pages/Checkbox'
+import { CommandDoc } from './docs/pages/Command'
 import { ComingSoon } from './showroom/sections/ComingSoon'
 import { ComponentsIndex } from './pages/ComponentsIndex'
 import { DialogDoc } from './docs/pages/Dialog'
@@ -39,6 +40,7 @@ import { KbdDoc } from './docs/pages/Kbd'
 import { PopoverPage } from './docs/pages/Popover'
 import { NotFound } from './showroom/sections/NotFound'
 import { SelectDoc } from './docs/pages/Select'
+import { SkeletonDoc } from './docs/pages/Skeleton'
 import { Showroom } from './showroom/Index'
 import { ToastDoc } from './docs/pages/Toast'
 import { ToggleDoc } from './docs/pages/Toggle'
@@ -82,6 +84,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
     { path: 'carousel', component: CarouselDoc },
     { path: 'input', component: InputDoc },
     { path: 'checkbox', component: CheckboxDoc },
+    { path: 'command', component: CommandDoc },
     { path: 'dialog', component: DialogDoc },
     { path: 'dropdown', component: DropdownDoc },
     { path: 'drawer', component: DrawerDoc },
@@ -89,6 +92,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
     { path: 'kbd', component: KbdDoc },
     { path: 'popover', component: PopoverPage },
     { path: 'select', component: SelectDoc },
+    { path: 'skeleton', component: SkeletonDoc },
     { path: 'toast', component: ToastDoc },
     { path: 'toggle', component: ToggleDoc },
     { path: 'tabs', component: TabsDoc },

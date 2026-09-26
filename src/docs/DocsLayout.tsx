@@ -15,6 +15,16 @@ import type { ReactNode } from 'react'
 import type { TOCItem } from './types.ts'
 
 const tocRegistry: Record<string, TOCItem[]> = {
+  '/docs/skeleton': [
+    { id: '#installation', label: 'Installation', level: 1 },
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#animations', label: 'Animations', level: 2 },
+    { id: '#component-card', label: 'Card', level: 2 },
+    { id: '#component-list', label: 'List', level: 2 },
+    { id: '#component-avatar', label: 'Avatar', level: 2 },
+    { id: '#accessibility', label: 'Accessibility', level: 1 },
+    { id: '#api', label: 'API Reference', level: 1 },
+  ],
   '/docs': [{ id: '#welcome-video', label: 'Intro To Lithos UI', level: 1 }],
   '/docs/installation': [
     { id: '#npm', label: 'NPM', level: 1 },
@@ -65,6 +75,16 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#disabled', label: 'Disabled', level: 2 },
     { id: '#group', label: 'Checkbox group', level: 2 },
     { id: '#group-horizontal', label: 'Horizontal group', level: 2 },
+    { id: '#anatomy', label: 'Anatomy', level: 1 },
+    { id: '#accessibility', label: 'Accessibility', level: 1 },
+    { id: '#api', label: 'API Reference', level: 1 },
+  ],
+  '/docs/command': [
+    { id: '#installation', label: 'Installation', level: 1 },
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#basic', label: 'Basic', level: 2 },
+    { id: '#shortcuts', label: 'With Shortcuts and Icons', level: 2 },
+    { id: '#dialog', label: 'Command Dialog (⌘K Palette)', level: 2 },
     { id: '#anatomy', label: 'Anatomy', level: 1 },
     { id: '#accessibility', label: 'Accessibility', level: 1 },
     { id: '#api', label: 'API Reference', level: 1 },

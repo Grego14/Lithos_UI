@@ -27,6 +27,7 @@ import {
 } from '../components/ui/Dropdown'
 import { Popover, PopoverTrigger, PopoverContent } from '../components/ui/Popover'
 import { Select } from '../components/ui/Select'
+import { Skeleton, SkeletonText } from '../components/ui/Skeleton'
 import { IconClose } from '../components/ui/icons/IconClose'
 import { Input } from '../components/ui/Input'
 import { Kbd, KbdGroup } from '../components/ui/Kbd'
@@ -310,6 +311,16 @@ const componentsList = [
     name: 'Select',
     to: '/docs/select',
     preview: <Select options={FRAMEWORK_OPTIONS} placeholder="Select a framework..." />,
+  },
+  {
+    name: 'Skeleton',
+    to: '/docs/skeleton',
+    preview: (
+      <div className="w-full max-w-48 p-2">
+        <Skeleton variant="rectangular" height={44} tone="accent" className="mb-4" />
+        <SkeletonText lines={2} className="text-xs" />
+      </div>
+    ),
   },
   {
     name: 'Tabs',
