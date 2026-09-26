@@ -3,8 +3,28 @@ import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { spinnerProps } from '../propsData/spinner'
 import { SetupGuide } from '../layout/SetupGuide'
+import { Button } from '../../components/ui/Button'
+import { useRef, useState } from 'react'
+import { colors } from '../../utils/colors'
+import { isHexColor } from '../../core/types'
 
 export const SpinnerDoc = () => {
+  const [customColor, setCustomColor] = useState('#f59e0b')
+  const [error, setError] = useState('')
+  const inputRef = useRef<null | HTMLInputElement>(null)
+
+  const handleFocus = () => setError('')
+
+  const handleCustomColor = () => {
+    if (!inputRef.current) return
+    const value = inputRef.current.value
+    if (!isHexColor(value)) {
+      setError('Please specify a valid HEX color. (Example: #00FF00)')
+      return
+    }
+    setCustomColor(value)
+  }
+
   const usageCode = {
     body: `export const SpinnerExample = () => {
   return (
@@ -14,6 +34,7 @@ export const SpinnerDoc = () => {
       <div className="bg-(--lithos-text) p-2 rounded-(--lithos-radius)">
         <Spinner size={32} variant="inverse" />
       </div>
+      <Spinner size={32} color="${customColor}" />
     </div>
   )
 }`,
@@ -58,7 +79,7 @@ export const SpinnerDoc = () => {
       </h2>
 
       <h3 id="default" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Default
+        Custom Color
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
         Renders a simple rotating loader. It inherits text color by default, making it easy to drop into buttons, cards,
@@ -69,12 +90,36 @@ export const SpinnerDoc = () => {
         code={usageCode}
         githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Spinner.tsx"
       >
-        <div className="flex items-center justify-center gap-8 p-8">
-          <Spinner size={32} variant="default" />
-          <Spinner size={32} variant="accent" />
-          <div className="bg-(--lithos-text) rounded-(--lithos-radius)">
-            <Spinner size={32} variant="inverse" />
+        <div className="flex flex-col items-center p-8">
+          <div className="flex items-center justify-center gap-8">
+            <Spinner size={32} variant="default" />
+            <Spinner size={32} variant="accent" />
+            <div className="bg-(--lithos-text) rounded-(--lithos-radius)">
+              <Spinner size={32} variant="inverse" />
+            </div>
+            <Spinner size={32} color={customColor} />
           </div>
+
+          <div className="mt-6 text-center flex items-center">
+            <input
+              ref={inputRef}
+              type="text"
+              onFocus={handleFocus}
+              defaultValue={customColor}
+              maxLength={7}
+              minLength={4}
+              className="p-1.5 text-sm outline-none border-2 border-(--lithos-border) shadow-[2px_2px_0_0_var(--lithos-shadow)] focus:shadow-[4px_4px_0_0_var(--lithos-shadow)] hover:shadow-[4px_4px_0_0_var(--lithos-shadow)] max-w-30"
+            />
+            <Button variant="primary" className="ml-6 text-sm" onClick={handleCustomColor}>
+              Use color
+            </Button>
+          </div>
+
+          {error && (
+            <span className="mt-2 text-xs" style={{ color: colors.error }}>
+              {error}
+            </span>
+          )}
         </div>
       </PreviewBlock>
 
