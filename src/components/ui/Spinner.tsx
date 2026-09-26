@@ -7,18 +7,27 @@ import type { ComponentPropsWithRef } from 'react'
 import { FiLoader } from 'react-icons/fi'
 import { cn, type LithosClass } from '../../utils/cn'
 
+export type SpinnerVariant = 'default' | 'accent' | 'inverse'
+
 export interface SpinnerProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   size?: number | string
   color?: string
+  variant?: SpinnerVariant
   className?: LithosClass
 }
 
-export const Spinner = ({ size = 24, color, className, ...rest }: SpinnerProps) => {
+const variantClass: Record<SpinnerVariant, string> = {
+  default: 'text-(--lithos-text)',
+  accent: 'text-(--lithos-accent)',
+  inverse: 'text-(--lithos-bg)',
+}
+
+export const Spinner = ({ size = 24, color, variant = 'default', className, ...rest }: SpinnerProps) => {
   return (
     <div
       role="status"
       aria-label="Loading"
-      className={cn('inline-flex items-center justify-center animate-spin', className)}
+      className={cn('inline-flex items-center justify-center animate-spin', !color && variantClass[variant], className)}
       style={{ color }}
       {...rest}
     >

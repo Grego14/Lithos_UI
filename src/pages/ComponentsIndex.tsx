@@ -328,7 +328,7 @@ const componentsList = [
     to: '/docs/spinner',
     preview: (
       <div className="w-full flex justify-center p-2">
-        <Spinner size={32} className="text-(--lithos-accent)" />
+        <Spinner size={32} variant="accent" />
       </div>
     ),
   },

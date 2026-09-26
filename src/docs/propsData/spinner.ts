@@ -12,7 +12,14 @@ export const spinnerProps: PropItem[] = [
     name: 'color',
     type: 'string',
     required: false,
-    description: 'Custom color for the spinner icon.',
+    description: 'Custom color for the spinner icon. Overrides the variant color if provided.',
+  },
+  {
+    name: 'variant',
+    type: '"default" | "accent" | "inverse"',
+    defaultValue: '"default"',
+    required: false,
+    description: 'Dynamic color variant. Default uses primary text color.',
   },
   {
     name: 'className',

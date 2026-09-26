@@ -8,7 +8,7 @@ export const SpinnerDoc = () => {
   const usageCode = {
     body: `export const SpinnerExample = () => {
   return (
-    <Spinner size={32} className="text-(--lithos-accent)" />
+    <Spinner size={32} variant="accent" />
   )
 }`,
     componentNames: ['Spinner'],
@@ -64,7 +64,7 @@ export const SpinnerDoc = () => {
         githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Spinner.tsx"
       >
         <div className="flex items-center justify-center p-8">
-          <Spinner size={32} className="text-(--lithos-accent)" />
+          <Spinner size={32} variant="accent" />
         </div>
       </PreviewBlock>
 
