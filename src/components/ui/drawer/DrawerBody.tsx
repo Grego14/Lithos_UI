@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Lithos UI DrawerBody component.
+ * - Serves as the main scrollable content container for the Drawer primitive.
+ * - Dynamically renders a DialogBody on desktop when responsive mode is enabled.
+ */
 import type { ComponentPropsWithRef } from 'react'
 import { DialogBody } from '../Dialog'
 import { cn, type LithosClass } from '../../../utils/cn'

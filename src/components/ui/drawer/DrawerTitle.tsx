@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Lithos UI DrawerTitle component.
+ * - Provides accessible header typography linked to dialog ARIA attributes.
+ * - Renders as DialogTitle when responsive desktop mode is active.
+ */
 import type { ComponentPropsWithRef } from 'react'
 import { DialogTitle } from '../Dialog'
 import { cn, type LithosClass } from '../../../utils/cn'

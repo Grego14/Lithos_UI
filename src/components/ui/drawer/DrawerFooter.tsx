@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Lithos UI DrawerFooter component.
+ * - Renders the bottom action bar container for the Drawer primitive.
+ * - Adaptively renders DialogFooter when operating in responsive desktop view.
+ */
 import type { ComponentPropsWithRef } from 'react'
 import { DialogFooter } from '../Dialog'
 import { cn, type LithosClass } from '../../../utils/cn'

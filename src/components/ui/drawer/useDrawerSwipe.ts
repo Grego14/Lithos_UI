@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Lithos UI useDrawerSwipe hook.
+ * - Manages drag offsets, pointer captures, and swipe-to-close gestures.
+ * - Computes dynamic transformation styles for directional drawer dismissals.
+ */
 import { useState, useRef, useCallback, useMemo, type PointerEvent, type DragEvent, type CSSProperties } from 'react'
 import type { UseDrawerSwipeOptions, DrawerPlacement } from './drawer.types'
 

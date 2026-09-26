@@ -1,6 +1,6 @@
 /**
  * @fileoverview Lithos UI Drawer primitive.
- * - Renders temporary overlay drawers as well as permanent and mini layout sidebars.
+ * - Renders temporary overlay drawer containers.
  * - Integrates accessibility features, popovers, portals, and gesture swipe interactions.
  */
 import { useEffect, useRef, useMemo, useId, lazy, Suspense, isValidElement, cloneElement, type MouseEvent } from 'react'

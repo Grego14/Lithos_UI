@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Lithos UI DrawerHeader component.
+ * - Encloses top title and navigation elements within the Drawer primitive.
+ * - Switches to DialogHeader when responsive desktop view is activated.
+ */
 import type { ComponentPropsWithRef } from 'react'
 import { DialogHeader } from '../Dialog'
 import { cn, type LithosClass } from '../../../utils/cn'
