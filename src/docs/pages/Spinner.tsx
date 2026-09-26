@@ -7,8 +7,6 @@ import { Button } from '../../components/ui/Button'
 import { useRef, useState } from 'react'
 import { colors } from '../../utils/colors'
 import { isHexColor } from '../../core/types'
-import { FiRefreshCw, FiRefreshCcw, FiSettings } from 'react-icons/fi'
-import { VscLoading } from 'react-icons/vsc'
 
 export const SpinnerDoc = () => {
   const [customColor, setCustomColor] = useState('#f59e0b')
@@ -57,18 +55,15 @@ export const SpinnerDoc = () => {
   }
 
   const iconsCode = {
-    body: `import { FiRefreshCw, FiRefreshCcw, FiSettings } from 'react-icons/fi'
-import { VscLoading } from 'react-icons/vsc'
-
-export const SpinnerIcons = () => {
+    body: `export const SpinnerIcons = () => {
   return (
     <div className="flex items-center gap-8">
       {/* Default FiLoader */}
       <Spinner size={32} />
-      <Spinner size={32} icon={FiRefreshCw} />
-      <Spinner size={32} icon={FiRefreshCcw} />
-      <Spinner size={32} icon={FiSettings} />
-      <Spinner size={32} icon={VscLoading} />
+      <Spinner size={32} icon="FiRefreshCw" />
+      <Spinner size={32} icon="FiRefreshCcw" />
+      <Spinner size={32} icon="FiSettings" />
+      <Spinner size={32} icon="VscLoading" />
     </div>
   )
 }`,
@@ -194,8 +189,8 @@ export const SpinnerIcons = () => {
         Choosing the Spinner
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-        You can pass any React component to the <code>icon</code> prop. The Spinner will wrap it and automatically pass
-        down the <code>size</code> while spinning indefinitely.
+        You can pass a predefined string to the <code>icon</code> prop. The Spinner will render the corresponding icon
+        and automatically pass down the <code>size</code> while spinning indefinitely.
       </p>
 
       <div className="mb-12">
@@ -210,19 +205,19 @@ export const SpinnerIcons = () => {
                 <span className="text-xs font-mono opacity-70">FiLoader</span>
               </div>
               <div className="flex flex-col items-center gap-2">
-                <Spinner size={32} icon={FiRefreshCw} />
+                <Spinner size={32} icon="FiRefreshCw" />
                 <span className="text-xs font-mono opacity-70">FiRefreshCw</span>
               </div>
               <div className="flex flex-col items-center gap-2">
-                <Spinner size={32} icon={FiRefreshCcw} />
+                <Spinner size={32} icon="FiRefreshCcw" />
                 <span className="text-xs font-mono opacity-70">FiRefreshCcw</span>
               </div>
               <div className="flex flex-col items-center gap-2">
-                <Spinner size={32} icon={FiSettings} />
+                <Spinner size={32} icon="FiSettings" />
                 <span className="text-xs font-mono opacity-70">FiSettings</span>
               </div>
               <div className="flex flex-col items-center gap-2">
-                <Spinner size={32} icon={VscLoading} />
+                <Spinner size={32} icon="VscLoading" />
                 <span className="text-xs font-mono opacity-70">VscLoading</span>
               </div>
             </div>
