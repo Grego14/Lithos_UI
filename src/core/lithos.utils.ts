@@ -5,4 +5,4 @@ export const LITHOS_UI_LINKS = [
   { to: '/theme', label: 'Theme' },
   { to: '/faq', label: 'FAQ' },
   { to: '/docs', label: 'Docs' },
-]
+] as const
