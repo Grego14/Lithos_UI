@@ -4,13 +4,12 @@
  * - Uses FiLoader for the spinning icon.
  */
 import type { ComponentPropsWithRef } from 'react'
-import { FiLoader, FiRefreshCw, FiRefreshCcw, FiSettings } from 'react-icons/fi'
+import { FiLoader, FiRefreshCw, FiRefreshCcw, FiSettings, FiSlack } from 'react-icons/fi'
 import { VscLoading } from 'react-icons/vsc'
 import { LuLoaderCircle, LuLoader } from 'react-icons/lu'
 import { TbLoader2, TbLoader3 } from 'react-icons/tb'
 import { PiSpinnerGap, PiCircleNotch } from 'react-icons/pi'
 import { RiLoader2Line, RiLoader3Line, RiLoader4Line } from 'react-icons/ri'
-import { MdAutorenew, MdSync, MdCached } from 'react-icons/md'
 import { cn, type LithosClass } from '../../utils/cn'
 
 export type SpinnerVariant = 'default' | 'accent' | 'inverse'
@@ -19,6 +18,7 @@ export type SpinnerIconType =
   | 'FiRefreshCw'
   | 'FiRefreshCcw'
   | 'FiSettings'
+  | 'FiSlack'
   | 'VscLoading'
   | 'LuLoaderCircle'
   | 'LuLoader'
@@ -29,9 +29,6 @@ export type SpinnerIconType =
   | 'RiLoader2Line'
   | 'RiLoader3Line'
   | 'RiLoader4Line'
-  | 'MdAutorenew'
-  | 'MdSync'
-  | 'MdCached'
 
 export interface SpinnerProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
   size?: number | string
@@ -46,6 +43,7 @@ const iconMap: Record<SpinnerIconType, React.ElementType> = {
   FiRefreshCw,
   FiRefreshCcw,
   FiSettings,
+  FiSlack,
   VscLoading,
   LuLoaderCircle,
   LuLoader,
@@ -56,9 +54,6 @@ const iconMap: Record<SpinnerIconType, React.ElementType> = {
   RiLoader2Line,
   RiLoader3Line,
   RiLoader4Line,
-  MdAutorenew,
-  MdSync,
-  MdCached,
 }
 
 const variantClass: Record<SpinnerVariant, string> = {

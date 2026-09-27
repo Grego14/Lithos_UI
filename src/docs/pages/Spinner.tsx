@@ -218,9 +218,7 @@ export const SpinnerDoc = () => {
                 'RiLoader2Line',
                 'RiLoader3Line',
                 'RiLoader4Line',
-                'MdAutorenew',
-                'MdSync',
-                'MdCached',
+                'FiSlack',
               ].map((iconName) => (
                 <div key={iconName} className="flex flex-col items-center gap-2">
                   <Spinner size={32} icon={iconName as any} />
