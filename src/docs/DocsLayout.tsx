@@ -304,19 +304,13 @@ const tocRegistry: Record<string, TOCItem[]> = {
   ],
 }
 
-interface DocsLayoutProps {
-  children: ReactNode
-  isDarkMode: boolean
-  toggleObsidian: () => void
-}
-
-export const DocsLayout = ({ children, isDarkMode, toggleObsidian }: DocsLayoutProps) => {
+export const DocsLayout = ({ children }: { children: ReactNode }) => {
   const location = useLocation()
   const currentTOC = tocRegistry[location.pathname] ?? []
 
   return (
     <div className="min-h-screen flex flex-col bg-(--lithos-bg) text-(--lithos-text)">
-      <Navbar isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
+      <Navbar />
 
       <div className="flex-1 w-full max-w-screen-2xl mx-auto grid grid-cols-12 pt-24 items-start">
         <div className="hidden lg:block lg:col-span-2 sticky top-32">
