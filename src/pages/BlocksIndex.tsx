@@ -5,15 +5,10 @@ import { blockCategories } from '../components/blocks/registry'
 import { Link } from 'react-router-dom'
 import { Card, CardContent } from '../components/ui/Card'
 
-interface BlocksIndexProps {
-  isDarkMode: boolean
-  toggleObsidian: () => void
-}
-
-export const BlocksIndex = ({ isDarkMode, toggleObsidian }: BlocksIndexProps) => {
+export const BlocksIndex = () => {
   return (
     <>
-      <Navbar isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
+      <Navbar />
       <main className="pt-24 min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
         {/* Hero Section */}
         <section className="border-b-2 border-(--lithos-border) bg-(--lithos-bg)">

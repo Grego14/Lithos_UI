@@ -9,13 +9,10 @@ import { KineticGrid } from '../../components/ui/KineticGrid'
 import { Button } from '../../components/ui/Button'
 import { getContrastText } from '../../utils/yiq'
 import type { HexColor } from '../../core/types'
+import { useTheme } from '../../core/hooks/useTheme'
 
-interface HeroProps {
-  accentColor: string
-  updateAccentColor: (color: HexColor) => void
-}
-
-const Hero = ({ accentColor, updateAccentColor }: HeroProps) => {
+const Hero = () => {
+  const { accentColor, updateAccentColor } = useTheme()
   const fgColor = getContrastText(accentColor)
   const navigate = useNavigate()
 

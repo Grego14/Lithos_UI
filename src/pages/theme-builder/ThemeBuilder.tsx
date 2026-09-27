@@ -14,7 +14,6 @@ import { useThemeHistory } from './hooks/useThemeHistory'
 import { SpecimenGrid } from './components/SpecimenGrid'
 import { PropertyControl } from './components/PropertyControl'
 import { useToast } from '../../core/hooks/useToast'
-import type { ThemeBuilderProps } from './utils/types'
 import { Footer } from '../../showroom/sections/Footer'
 import { Tabs, TabsList, TabsTrigger } from '../../components/ui/Tabs'
 import { Toggle } from '../../components/ui/Toggle'
@@ -33,7 +32,7 @@ import { IconCopy } from '../../components/ui/icons/IconCopy'
 
 type StageTab = 'preview' | 'code' | 'swatches'
 
-export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) => {
+export const ThemeBuilder = () => {
   const {
     previewMode,
     stageTab,
@@ -64,7 +63,7 @@ export const ThemeBuilder = ({ isDarkMode, toggleObsidian }: ThemeBuilderProps) 
 
   return (
     <>
-      <Navbar isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
+      <Navbar />
 
       <main className="min-h-screen lg:h-screen pt-[82px] flex flex-col overflow-y-auto lg:overflow-hidden bg-(--lithos-bg) text-(--lithos-text) antialiased">
         {/* Strict monolithic flex container for exact height sharing and sharp border intersections */}

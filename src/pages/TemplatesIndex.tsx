@@ -5,15 +5,10 @@ import { templateCategories } from '../components/templates/registry'
 import { Link } from 'react-router-dom'
 import { Card, CardContent } from '../components/ui/Card'
 
-interface TemplatesIndexProps {
-  isDarkMode: boolean
-  toggleObsidian: () => void
-}
-
-export const TemplatesIndex = ({ isDarkMode, toggleObsidian }: TemplatesIndexProps) => {
+export const TemplatesIndex = () => {
   return (
     <>
-      <Navbar isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
+      <Navbar />
       <main className="pt-24 min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
         {/* Hero Section */}
         <section className="border-b-2 border-(--lithos-border) bg-(--lithos-bg)">

@@ -2,11 +2,11 @@
  * @fileoverview Lithos UI - Root Application Shell
  *
  * Minimal architectural shell responsible for:
- * - Theme state management via useLithosTheme hook
  * - Dynamic theming class application
  * - Routing configuration via React Router
  * - Component composition (Showroom, NotFound routes)
  */
+import { ThemeProvider } from './core/ThemeProvider'
 
 import { AlertDoc } from './docs/pages/Alert'
 import { AvatarDoc } from './docs/pages/Avatar'
@@ -49,7 +49,6 @@ import { TabsDoc } from './docs/pages/Tabs'
 import { ThemeBuilder } from './pages/ThemeBuilder'
 import { TooltipDoc } from './docs/pages/Tooltip'
 import { useEffect } from 'react'
-import { useLithosTheme } from './core/useLithosTheme'
 
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation()
@@ -71,7 +70,7 @@ const ScrollToTop = () => {
   return null
 }
 
-const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
+const renderDocRoutes = () => {
   const docPages = [
     { path: '', component: Introduction },
     { path: 'alert', component: AlertDoc },
@@ -106,7 +105,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
       key={path || 'index'}
       path={`/docs${path ? `/${path}` : ''}`}
       element={
-        <DocsLayout isDarkMode={isDarkMode} toggleObsidian={toggleObsidian}>
+        <DocsLayout>
           <Component />
         </DocsLayout>
       }
@@ -122,71 +121,47 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
  * - "*" → NotFound (catch-all for undefined routes)
  */
 const App = () => {
-  const { isDarkMode, toggleObsidian, accentColor, updateAccentColor, radius, updateRadius } = useLithosTheme()
-
   return (
-    <div className="min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
-      {/* Theme hook is mounted at the app root so accent persistence applies on every route. */}
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Showroom
-                isDarkMode={isDarkMode}
-                toggleObsidian={toggleObsidian}
-                accentColor={accentColor}
-                updateAccentColor={updateAccentColor}
-                radius={radius}
-                updateRadius={updateRadius}
-              />
-            }
-          />
+    <ThemeProvider>
+      <div className="min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
+        {/* Theme hook is mounted at the app root so accent persistence applies on every route. */}
+        <BrowserRouter>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<Showroom />} />
 
-          <Route path="/blocks" element={<BlocksIndex isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />} />
-          <Route path="/blocks/preview/:slug" element={<BlockPreviewPage />} />
-          <Route
-            path="/blocks/:categorySlug"
-            element={<BlockCategoryPage isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />}
-          />
-          <Route
-            path="/coming-soon"
-            element={
-              <ComingSoon
-                eyebrow="ACTIVE ENGINEERING ZONE"
-                title="Work In Progress"
-                description="Lithos UI is an open-source architecture, and developers are actively encouraged to contribute code to engineer this structural block."
-                primaryAction={{ label: 'Go to Docs', to: '/docs' }}
-                secondaryAction={{ label: 'Contribute Code', href: 'https://github.com/lithosui/Lithos_UI/issues' }}
-              />
-            }
-          />
-          <Route
-            path="/components"
-            element={<ComponentsIndex isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />}
-          />
+            <Route path="/blocks" element={<BlocksIndex />} />
+            <Route path="/blocks/preview/:slug" element={<BlockPreviewPage />} />
+            <Route path="/blocks/:categorySlug" element={<BlockCategoryPage />} />
+            <Route
+              path="/coming-soon"
+              element={
+                <ComingSoon
+                  eyebrow="ACTIVE ENGINEERING ZONE"
+                  title="Work In Progress"
+                  description="Lithos UI is an open-source architecture, and developers are actively encouraged to contribute code to engineer this structural block."
+                  primaryAction={{ label: 'Go to Docs', to: '/docs' }}
+                  secondaryAction={{ label: 'Contribute Code', href: 'https://github.com/lithosui/Lithos_UI/issues' }}
+                />
+              }
+            />
+            <Route path="/components" element={<ComponentsIndex />} />
 
-          {/* Completed Documentation Shells */}
-          {renderDocRoutes(isDarkMode, toggleObsidian)}
+            {/* Completed Documentation Shells */}
+            {renderDocRoutes()}
 
-          <Route path="/faq" element={<Faq isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />} />
-          <Route path="/theme" element={<ThemeBuilder isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />} />
-          <Route
-            path="/templates"
-            element={<TemplatesIndex isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />}
-          />
-          <Route path="/templates/preview/:slug" element={<TemplatePreviewPage />} />
-          <Route
-            path="/templates/:categorySlug"
-            element={<TemplateCategoryPage isDarkMode={isDarkMode} toggleObsidian={toggleObsidian} />}
-          />
+            <Route path="/faq" element={<Faq />} />
+            <Route path="/theme" element={<ThemeBuilder />} />
+            <Route path="/templates" element={<TemplatesIndex />} />
+            <Route path="/templates/preview/:slug" element={<TemplatePreviewPage />} />
+            <Route path="/templates/:categorySlug" element={<TemplateCategoryPage />} />
 
-          {/* Structural Failure Catch-all */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+            {/* Structural Failure Catch-all */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </ThemeProvider>
   )
 }
 

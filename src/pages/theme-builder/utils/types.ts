@@ -21,8 +21,3 @@ export interface ThemePreset {
   mode: 'light' | 'dark'
   values: Record<string, string>
 }
-
-export interface ThemeBuilderProps {
-  isDarkMode: boolean
-  toggleObsidian: () => void
-}

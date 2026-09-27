@@ -12,22 +12,11 @@ import { Button } from '../../components/ui/Button'
 import { Toggle } from '../../components/ui/Toggle'
 import { IconMenu } from '../../components/ui/icons/IconMenu'
 import { IconClose } from '../../components/ui/icons/IconClose'
+import { useTheme } from '../../core/hooks/useTheme'
+import { LITHOS_UI_LINKS } from '../../core/lithos.utils'
 
-interface NavbarProps {
-  isDarkMode?: boolean
-  onToggleObsidian?: () => void
-}
-
-const links = [
-  { label: 'Components', to: '/components' },
-  { label: 'Blocks', to: '/blocks' },
-  { label: 'Templates', to: '/templates' },
-  { label: 'Theme', to: '/theme' },
-  { label: 'FAQ', to: '/faq' },
-  { label: 'Docs', to: '/docs' },
-]
-
-const Navbar = ({ isDarkMode = false, onToggleObsidian }: NavbarProps) => {
+export const Navbar = () => {
+  const { isDarkMode, toggleObsidian } = useTheme()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { addToast } = useToast()
   const navigate = useNavigate()
@@ -35,7 +24,7 @@ const Navbar = ({ isDarkMode = false, onToggleObsidian }: NavbarProps) => {
   const handleToggleObsidian = () => {
     const nextMode = !isDarkMode
 
-    onToggleObsidian?.()
+    toggleObsidian()
 
     addToast({
       title: 'THEME CHANGED',
@@ -65,7 +54,7 @@ const Navbar = ({ isDarkMode = false, onToggleObsidian }: NavbarProps) => {
 
           {/* - Center lane is reserved for wayfinding and sized exactly to its content. */}
           <nav className="hidden items-center justify-center lg:flex lg:flex-none">
-            {links.map((link) => (
+            {LITHOS_UI_LINKS.map((link) => (
               <Link
                 key={link.label}
                 to={link.to}
@@ -103,7 +92,7 @@ const Navbar = ({ isDarkMode = false, onToggleObsidian }: NavbarProps) => {
       {/* - Full-Screen Mobile Overlay */}
       {isMenuOpen && (
         <nav className="fixed inset-0 z-40 pt-32 pb-6 px-6 bg-(--lithos-surface) overflow-y-auto flex flex-col justify-start lg:hidden">
-          {links.map((link) => (
+          {LITHOS_UI_LINKS.map((link) => (
             <Link
               key={link.label}
               to={link.to}
@@ -135,5 +124,3 @@ const Navbar = ({ isDarkMode = false, onToggleObsidian }: NavbarProps) => {
     </>
   )
 }
-
-export { Navbar }

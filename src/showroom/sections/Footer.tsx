@@ -8,15 +8,7 @@
 import { Link } from 'react-router-dom'
 import { IconHeart } from '../../components/ui/icons/IconHeart'
 import { Button } from '../../components/ui/Button'
-
-const links = [
-  { to: '/components', label: 'Components' },
-  { to: '/blocks', label: 'Blocks' },
-  { to: '/templates', label: 'Templates' },
-  { to: '/theme', label: 'Theme' },
-  { to: '/faq', label: 'FAQ' },
-  { to: '/docs', label: 'Docs' },
-]
+import { LITHOS_UI_LINKS } from '../../core/lithos.utils'
 
 export const Footer = () => {
   return (
@@ -42,7 +34,7 @@ export const Footer = () => {
 
         {/* - Navigation stays vertical so the exit path reads as a stack, not a menu bar. */}
         <div className="mt-12 flex w-full flex-col lg:mt-0 lg:w-1/4 space-y-4">
-          {links.map((link) => (
+          {LITHOS_UI_LINKS.map((link) => (
             <Link
               key={link.to}
               to={link.to}
