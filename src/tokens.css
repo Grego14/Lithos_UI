@@ -27,6 +27,20 @@
   --lithos-z-modal: 60;
   --lithos-z-tooltip: 70;
 
+  --lithos-h1-size: clamp(2.5rem, 6vw, 5rem);
+  --lithos-h2-size: clamp(2rem, 4vw, 3.5rem);
+  --lithos-h3-size: clamp(1.5rem, 3vw, 2.5rem);
+  --lithos-h4-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  --lithos-h5-size: clamp(1.125rem, 2vw, 1.5rem);
+  --lithos-h6-size: clamp(1rem, 1.5vw, 1.25rem);
+  --lithos-body-size: clamp(1rem, 1.5vw, 1.125rem);
+  --lithos-blockquote-size: clamp(1.125rem, 2vw, 1.35rem);
+  --lithos-caption-size: clamp(0.75rem, 1vw, 0.875rem);
+  --lithos-small-size: clamp(0.75rem, 1vw, 0.875rem);
+  --lithos-label-size: clamp(0.875rem, 1.2vw, 1rem);
+  --lithos-code-size: 0.9em;
+  --lithos-mark-size: 1em;
+
   background-color: var(--lithos-bg);
   color: var(--lithos-text);
   color-scheme: light;
