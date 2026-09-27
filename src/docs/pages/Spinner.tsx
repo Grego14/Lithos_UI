@@ -74,6 +74,19 @@ export const SpinnerDoc = () => {
     manualPath: { Spinner: '../../components/ui/Spinner' },
   }
 
+  const rotationCode = {
+    body: `export const SpinnerRotation = () => {
+  return (
+    <div className="flex items-center gap-8">
+      <Spinner size={32} />
+      <Spinner size={32} icon="FiRefreshCw" anticlockwise />
+    </div>
+  )
+}`,
+    componentNames: ['Spinner'],
+    manualPath: { Spinner: '../../components/ui/Spinner' },
+  }
+
   return (
     <div className="max-w-5xl mx-auto px-6">
       <header className="mt-0">
@@ -188,6 +201,34 @@ export const SpinnerDoc = () => {
         </PreviewBlock>
       </div>
 
+      <h3 id="rotation" className="mt-12 mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
+        Rotation
+      </h3>
+      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
+        You can control the direction of the spinner's rotation using the <code>anticlockwise</code> prop. The default
+        rotation is clockwise.
+      </p>
+
+      <div className="mb-12">
+        <PreviewBlock
+          code={rotationCode}
+          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Spinner.tsx"
+        >
+          <div className="flex flex-col items-center p-8">
+            <div className="flex items-end justify-center gap-12">
+              <div className="flex flex-col items-center gap-2">
+                <Spinner size={32} icon="FiRefreshCw" />
+                <span className="text-xs font-mono opacity-70">clockwise</span>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <Spinner size={32} icon="FiRefreshCcw" anticlockwise />
+                <span className="text-xs font-mono opacity-70">anticlockwise</span>
+              </div>
+            </div>
+          </div>
+        </PreviewBlock>
+      </div>
+
       <h3 id="icons" className="mt-12 mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
         Choosing the Spinner
       </h3>
@@ -218,7 +259,6 @@ export const SpinnerDoc = () => {
                 'RiLoader2Line',
                 'RiLoader3Line',
                 'RiLoader4Line',
-                'FiSlack',
               ].map((iconName) => (
                 <div key={iconName} className="flex flex-col items-center gap-2">
                   <Spinner size={32} icon={iconName as any} />

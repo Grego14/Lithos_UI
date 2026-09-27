@@ -4,7 +4,7 @@
  * - Uses FiLoader for the spinning icon.
  */
 import type { ComponentPropsWithRef } from 'react'
-import { FiLoader, FiRefreshCw, FiRefreshCcw, FiSettings, FiSlack } from 'react-icons/fi'
+import { FiLoader, FiRefreshCw, FiRefreshCcw, FiSettings } from 'react-icons/fi'
 import { VscLoading } from 'react-icons/vsc'
 import { LuLoaderCircle, LuLoader } from 'react-icons/lu'
 import { TbLoader2, TbLoader3 } from 'react-icons/tb'
@@ -18,7 +18,6 @@ export type SpinnerIconType =
   | 'FiRefreshCw'
   | 'FiRefreshCcw'
   | 'FiSettings'
-  | 'FiSlack'
   | 'VscLoading'
   | 'LuLoaderCircle'
   | 'LuLoader'
@@ -36,6 +35,7 @@ export interface SpinnerProps extends Omit<ComponentPropsWithRef<'div'>, 'classN
   variant?: SpinnerVariant
   icon?: SpinnerIconType
   className?: LithosClass
+  anticlockwise?: boolean
 }
 
 const iconMap: Record<SpinnerIconType, React.ElementType> = {
@@ -43,7 +43,6 @@ const iconMap: Record<SpinnerIconType, React.ElementType> = {
   FiRefreshCw,
   FiRefreshCcw,
   FiSettings,
-  FiSlack,
   VscLoading,
   LuLoaderCircle,
   LuLoader,
@@ -67,6 +66,7 @@ export const Spinner = ({
   color,
   variant = 'default',
   icon = 'FiLoader',
+  anticlockwise = false,
   className,
   ...rest
 }: SpinnerProps) => {
@@ -76,7 +76,12 @@ export const Spinner = ({
     <div
       role="status"
       aria-label="Loading"
-      className={cn('inline-flex items-center justify-center animate-spin', !color && variantClass[variant], className)}
+      className={cn(
+        'inline-flex items-center justify-center animate-spin',
+        anticlockwise && '[animation-direction:reverse]',
+        !color && variantClass[variant],
+        className
+      )}
       style={{ color }}
       {...rest}
     >

@@ -34,4 +34,11 @@ export const spinnerProps: PropItem[] = [
     required: false,
     description: 'Custom CSS classes passed to the container.',
   },
+  {
+    name: 'anticlockwise',
+    type: 'boolean',
+    defaultValue: 'false',
+    required: false,
+    description: 'Reverses the direction of the spinner rotation (spins anticlockwise).',
+  },
 ]
