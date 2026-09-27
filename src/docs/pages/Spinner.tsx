@@ -78,8 +78,8 @@ export const SpinnerDoc = () => {
     body: `export const SpinnerRotation = () => {
   return (
     <div className="flex items-center gap-8">
-      <Spinner size={32} />
-      <Spinner size={32} icon="FiRefreshCw" anticlockwise />
+      <Spinner size={32} icon="FiRefreshCw" />
+      <Spinner size={32} icon="FiRefreshCcw" anticlockwise />
     </div>
   )
 }`,
