@@ -1,4 +1,4 @@
-import { Spinner } from '../../components/ui/Spinner'
+import { Spinner, type SpinnerIconType } from '../../components/ui/Spinner'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { spinnerProps } from '../propsData/spinner'
@@ -261,7 +261,7 @@ export const SpinnerDoc = () => {
                 'RiLoader4Line',
               ].map((iconName) => (
                 <div key={iconName} className="flex flex-col items-center gap-2">
-                  <Spinner size={32} icon={iconName as any} />
+                  <Spinner size={32} icon={iconName as SpinnerIconType} />
                   <span className="text-[10px] font-mono opacity-70">{iconName}</span>
                 </div>
               ))}
