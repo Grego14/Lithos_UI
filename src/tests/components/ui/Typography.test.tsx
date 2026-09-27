@@ -91,7 +91,7 @@ describe('Typography', () => {
     const { container } = render(
       <main>
         <Typography variant="h1">Accessible Title</Typography>
-        <Typography variant="body">Accessible Paragraph</Typography>
+        <Typography>Accessible Paragraph</Typography>
       </main>
     )
 
