@@ -28,7 +28,7 @@ export const SpinnerDoc = () => {
   const usageCode = {
     body: `export const SpinnerExample = () => {
   return (
-    <div className="flex items-center gap-8">
+    <div className="flex items-center space-x-8">
       <Spinner size={32} variant="default" />
       <Spinner size={32} variant="accent" />
       <Spinner size={32} color="${customColor}" />
@@ -42,7 +42,7 @@ export const SpinnerDoc = () => {
   const sizesCode = {
     body: `export const SpinnerSizes = () => {
   return (
-    <div className="flex items-center gap-8">
+    <div className="flex items-center space-x-8">
       <Spinner size={16} />
       <Spinner size={24} />
       <Spinner size={32} />
@@ -57,7 +57,7 @@ export const SpinnerDoc = () => {
   const iconsCode = {
     body: `export const SpinnerIcons = () => {
   return (
-    <div className="flex items-center gap-8 flex-wrap">
+    <div className="flex items-center space-x-8 flex-wrap">
       {/* Default FiLoader */}
       <Spinner size={32} />
       <Spinner size={32} icon="FiRefreshCw" />
@@ -77,7 +77,7 @@ export const SpinnerDoc = () => {
   const rotationCode = {
     body: `export const SpinnerRotation = () => {
   return (
-    <div className="flex items-center gap-8">
+    <div className="flex items-center space-x-8">
       <Spinner size={32} icon="FiRefreshCw" />
       <Spinner size={32} icon="FiRefreshCcw" anticlockwise />
     </div>
@@ -136,7 +136,7 @@ export const SpinnerDoc = () => {
         githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Spinner.tsx"
       >
         <div className="flex flex-col items-center p-8">
-          <div className="flex items-center justify-center gap-8">
+          <div className="flex items-center justify-center space-x-8">
             <Spinner size={32} variant="default" />
             <Spinner size={32} variant="accent" />
             <Spinner size={32} color={customColor} />
@@ -179,20 +179,20 @@ export const SpinnerDoc = () => {
           githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Spinner.tsx"
         >
           <div className="flex flex-col items-center p-8">
-            <div className="flex items-end justify-center gap-8">
-              <div className="flex flex-col items-center gap-2">
+            <div className="flex items-end justify-center space-x-8">
+              <div className="flex flex-col items-center space-y-2">
                 <Spinner size={16} />
                 <span className="text-xs font-mono opacity-70">16px</span>
               </div>
-              <div className="flex flex-col items-center gap-2">
+              <div className="flex flex-col items-center space-y-2">
                 <Spinner size={24} />
                 <span className="text-xs font-mono opacity-70">24px</span>
               </div>
-              <div className="flex flex-col items-center gap-2">
+              <div className="flex flex-col items-center space-y-2">
                 <Spinner size={32} />
                 <span className="text-xs font-mono opacity-70">32px</span>
               </div>
-              <div className="flex flex-col items-center gap-2">
+              <div className="flex flex-col items-center space-y-2">
                 <Spinner size={48} />
                 <span className="text-xs font-mono opacity-70">48px</span>
               </div>
@@ -215,12 +215,12 @@ export const SpinnerDoc = () => {
           githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Spinner.tsx"
         >
           <div className="flex flex-col items-center p-8">
-            <div className="flex items-end justify-center gap-12">
-              <div className="flex flex-col items-center gap-2">
+            <div className="flex items-end justify-center space-x-12">
+              <div className="flex flex-col items-center space-y-2">
                 <Spinner size={32} icon="FiRefreshCw" />
                 <span className="text-xs font-mono opacity-70">clockwise</span>
               </div>
-              <div className="flex flex-col items-center gap-2">
+              <div className="flex flex-col items-center space-y-2">
                 <Spinner size={32} icon="FiRefreshCcw" anticlockwise />
                 <span className="text-xs font-mono opacity-70">anticlockwise</span>
               </div>
@@ -243,7 +243,7 @@ export const SpinnerDoc = () => {
           githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Spinner.tsx"
         >
           <div className="flex flex-col items-center p-8">
-            <div className="flex flex-wrap items-end justify-center gap-8">
+            <div className="flex flex-wrap items-end justify-center space-x-8 space-y-8">
               {[
                 'FiLoader',
                 'FiRefreshCw',
@@ -260,7 +260,7 @@ export const SpinnerDoc = () => {
                 'RiLoader3Line',
                 'RiLoader4Line',
               ].map((iconName) => (
-                <div key={iconName} className="flex flex-col items-center gap-2">
+                <div key={iconName} className="flex flex-col items-center space-y-2">
                   <Spinner size={32} icon={iconName as SpinnerIconType} />
                   <span className="text-[10px] font-mono opacity-70">{iconName}</span>
                 </div>
