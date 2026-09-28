@@ -56,7 +56,7 @@ const iconMap: Record<SpinnerIconType, React.ElementType> = {
 }
 
 const variantClass: Record<SpinnerVariant, string> = {
-  default: 'text-(--lithos-text)',
+  default: 'text-current',
   accent: 'text-(--lithos-accent)',
   inverse: 'text-(--lithos-bg)',
 }

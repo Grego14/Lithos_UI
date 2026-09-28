@@ -4,6 +4,9 @@ import { PropsAccordion } from '../../components/ui/PropsTable'
 import { spinnerProps } from '../propsData/spinner'
 import { SetupGuide } from '../layout/SetupGuide'
 import { Button } from '../../components/ui/Button'
+import { InputGroup, InputGroupInput } from '../../components/ui/Input'
+import { Badge } from '../../components/ui/Badge'
+import { Alert } from '../../components/ui/Alert'
 import { useRef, useState } from 'react'
 import { colors } from '../../utils/colors'
 import { isHexColor } from '../../core/types'
@@ -85,6 +88,62 @@ export const SpinnerDoc = () => {
 }`,
     componentNames: ['Spinner'],
     manualPath: { Spinner: '../../components/ui/Spinner' },
+  }
+
+  const integrationCode = {
+    body: `export const SpinnerIntegration = () => {
+  return (
+    <div className="flex flex-col items-center w-full space-y-10">
+      {/* Button Examples */}
+      <div className="flex flex-wrap justify-center gap-6">
+        <Button disabled variant="primary" iconLeft={<Spinner size={16} icon="FiSettings" />}>
+          Applying Configuration
+        </Button>
+        <Button disabled variant="inverse" iconLeft={<Spinner size={16} icon="PiSpinnerGap" />}>
+          Authenticating
+        </Button>
+      </div>
+
+      {/* Input Example */}
+      <div className="w-full max-w-sm">
+        <InputGroup startAdornment={<Spinner size={16} icon="LuLoader" />}>
+          <InputGroupInput placeholder="Searching database..." disabled />
+        </InputGroup>
+      </div>
+
+      {/* Badge Examples */}
+      <div className="flex flex-wrap justify-center gap-6">
+        <Badge intent="warning" className="flex items-center gap-2 px-3 py-1.5">
+          <Spinner size={12} icon="FiRefreshCw" />
+          <span>SYNCING CLOUD</span>
+        </Badge>
+        <Badge intent="success" className="flex items-center gap-2 px-3 py-1.5">
+          <Spinner size={12} icon="FiRefreshCcw" anticlockwise />
+          <span>RESTORING BACKUP</span>
+        </Badge>
+      </div>
+
+      {/* Alert Example */}
+      <div className="w-full max-w-lg">
+        <Alert intent="info" variant="outlined" size="md" title="Migration in progress">
+          <span className="flex items-center gap-3">
+            <Spinner size={20} icon="VscLoading" />
+            <span>Moving 2.4 million records to the new cluster...</span>
+          </span>
+        </Alert>
+      </div>
+    </div>
+  )
+}`,
+    componentNames: ['Spinner', 'Button', 'InputGroup', 'InputGroupInput', 'Badge', 'Alert'],
+    manualPath: {
+      Spinner: '../../components/ui/Spinner',
+      Button: '../../components/ui/Button',
+      InputGroup: '../../components/ui/Input',
+      InputGroupInput: '../../components/ui/Input',
+      Badge: '../../components/ui/Badge',
+      Alert: '../../components/ui/Alert',
+    },
   }
 
   return (
@@ -243,7 +302,7 @@ export const SpinnerDoc = () => {
           githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Spinner.tsx"
         >
           <div className="flex flex-col items-center p-8">
-            <div className="flex flex-wrap items-end justify-center space-x-8 space-y-8">
+            <div className="flex flex-wrap items-end justify-center -m-4">
               {[
                 'FiLoader',
                 'FiRefreshCw',
@@ -260,11 +319,64 @@ export const SpinnerDoc = () => {
                 'RiLoader3Line',
                 'RiLoader4Line',
               ].map((iconName) => (
-                <div key={iconName} className="flex flex-col items-center space-y-2">
+                <div key={iconName} className="flex flex-col items-center space-y-2 m-4">
                   <Spinner size={32} icon={iconName as SpinnerIconType} />
                   <span className="text-[10px] font-mono opacity-70">{iconName}</span>
                 </div>
               ))}
+            </div>
+          </div>
+        </PreviewBlock>
+      </div>
+
+      <h3 id="integration" className="mt-12 mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
+        Integration
+      </h3>
+      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
+        Spinners compose effortlessly with other UI components. Drop them into buttons, inputs, or badges to indicate
+        processing states.
+      </p>
+
+      <div className="mb-12">
+        <PreviewBlock code={integrationCode}>
+          <div className="flex flex-col items-center w-full p-8 space-y-10">
+            {/* Button Examples */}
+            <div className="flex flex-wrap justify-center gap-6">
+              <Button disabled variant="primary" iconLeft={<Spinner size={16} icon="FiSettings" />}>
+                Applying Configuration
+              </Button>
+              <Button disabled variant="inverse" iconLeft={<Spinner size={16} icon="PiSpinnerGap" />}>
+                Authenticating
+              </Button>
+            </div>
+
+            {/* Input Example */}
+            <div className="w-full max-w-sm">
+              <InputGroup startAdornment={<Spinner size={16} icon="LuLoader" />}>
+                <InputGroupInput placeholder="Searching database..." disabled />
+              </InputGroup>
+            </div>
+
+            {/* Badge Examples */}
+            <div className="flex flex-wrap justify-center gap-6">
+              <Badge intent="warning" className="flex items-center gap-2 px-3 py-1.5">
+                <Spinner size={12} icon="FiRefreshCw" />
+                <span>SYNCING CLOUD</span>
+              </Badge>
+              <Badge intent="success" className="flex items-center gap-2 px-3 py-1.5">
+                <Spinner size={12} icon="FiRefreshCcw" anticlockwise />
+                <span>RESTORING BACKUP</span>
+              </Badge>
+            </div>
+
+            {/* Alert Example */}
+            <div className="w-full max-w-lg">
+              <Alert intent="info" variant="outlined" size="md" title="Migration in progress">
+                <span className="flex items-center gap-3">
+                  <Spinner size={20} icon="VscLoading" />
+                  <span>Moving 2.4 million records to the new cluster...</span>
+                </span>
+              </Alert>
             </div>
           </div>
         </PreviewBlock>
