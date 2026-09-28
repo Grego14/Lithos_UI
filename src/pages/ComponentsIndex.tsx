@@ -28,6 +28,7 @@ import {
 import { Popover, PopoverTrigger, PopoverContent } from '../components/ui/Popover'
 import { Select } from '../components/ui/Select'
 import { Skeleton, SkeletonText } from '../components/ui/Skeleton'
+import { Spinner } from '../components/ui/Spinner'
 import { IconClose } from '../components/ui/icons/IconClose'
 import { Input } from '../components/ui/Input'
 import { Kbd, KbdGroup } from '../components/ui/Kbd'
@@ -319,6 +320,15 @@ const componentsList = [
       <div className="w-full max-w-48 p-2">
         <Skeleton variant="rectangular" height={44} tone="accent" className="mb-4" />
         <SkeletonText lines={2} className="text-xs" />
+      </div>
+    ),
+  },
+  {
+    name: 'Spinner',
+    to: '/docs/spinner',
+    preview: (
+      <div className="w-full flex justify-center p-2">
+        <Spinner size={32} variant="accent" />
       </div>
     ),
   },

@@ -292,6 +292,16 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#accessibility', label: 'Accessibility', level: 1 },
     { id: '#api', label: 'API Reference', level: 1 },
   ],
+  '/docs/spinner': [
+    { id: '#installation', label: 'Installation', level: 1 },
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#default', label: 'Custom Color', level: 2 },
+    { id: '#sizes', label: 'Sizes', level: 2 },
+    { id: '#rotation', label: 'Rotation', level: 2 },
+    { id: '#icons', label: 'Choosing the Spinner', level: 2 },
+    { id: '#accessibility', label: 'Accessibility', level: 1 },
+    { id: '#api', label: 'API Reference', level: 1 },
+  ],
 }
 
 interface DocsLayoutProps {

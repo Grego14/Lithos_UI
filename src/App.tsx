@@ -41,6 +41,7 @@ import { PopoverPage } from './docs/pages/Popover'
 import { NotFound } from './showroom/sections/NotFound'
 import { SelectDoc } from './docs/pages/Select'
 import { SkeletonDoc } from './docs/pages/Skeleton'
+import { SpinnerDoc } from './docs/pages/Spinner'
 import { Showroom } from './showroom/Index'
 import { ToastDoc } from './docs/pages/Toast'
 import { ToggleDoc } from './docs/pages/Toggle'
@@ -93,6 +94,7 @@ const renderDocRoutes = (isDarkMode: boolean, toggleObsidian: () => void) => {
     { path: 'popover', component: PopoverPage },
     { path: 'select', component: SelectDoc },
     { path: 'skeleton', component: SkeletonDoc },
+    { path: 'spinner', component: SpinnerDoc },
     { path: 'toast', component: ToastDoc },
     { path: 'toggle', component: ToggleDoc },
     { path: 'tabs', component: TabsDoc },
