@@ -11,7 +11,7 @@ export const typographyPropsData: PropItem[] = [
   {
     name: 'variant',
     type: 'TypographyVariants',
-    defaultValue: "'body'",
+    defaultValue: "'p'",
     required: false,
     description:
       'Applies predefined neobrutalist typography styles and determines default HTML element if "as" is not specified.',
