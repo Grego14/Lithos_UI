@@ -24,28 +24,30 @@ const articleSnippetCode = {
   manualPath,
 }
 
-const allVariantsUsageCode = {
-  body: `export const AllVariants = () => {
+const usageCode = {
+  body: `export const UsageCode = () => {
   return (
     <div className="flex flex-col space-y-6">
-      <Typography variant="h1">Display Title H1</Typography>
-      <Typography variant="h2">Section Header H2</Typography>
-      <Typography variant="h3">Sub section Header H3</Typography>
-      <Typography variant="h4">Card Title H4</Typography>
-      <Typography variant="h5">Small Header H5</Typography>
-      <Typography variant="h6">Micro Header H6</Typography>
-      <Typography variant="body">
-        Body text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Seamless fluid typography built for high-contrast interfaces.
+      <Typography variant="h1">H1 - Display Title</Typography>
+      <Typography variant="h2">H2 - Section Header</Typography>
+      <Typography variant="h3">H3 - Sub section Header</Typography>
+      <Typography variant="h4">H4 - Card Title</Typography>
+      <Typography variant="h5">H5 - Small Header</Typography>
+      <Typography variant="h6">H6 - Micro Header</Typography>
+      <Typography>
+        Body - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Seamless fluid typography built for
+        high-contrast interfaces.
       </Typography>
       <Typography variant="blockquote">
-        "Neobrutalism is not about ugly UI, it is about raw layout clarity and structural personality."
+        Blockquote - "Neobrutalism is not about ugly UI, it is about raw layout clarity and structural personality."
       </Typography>
-      <Typography variant="label">Field Label Example</Typography>
+      <Typography variant="label">Label - Label Example</Typography>
       <div>
-        <Typography variant="caption">CAPTION TEXT</Typography>
+        <Typography variant="caption">Caption - CAPTION TEXT</Typography>
       </div>
       <div>
-        Text with <Typography variant="mark">highlighted mark</Typography> and inline <Typography variant="code">const code = true</Typography> snippets.
+        Text with <Typography variant="mark">highlighted mark</Typography> and inline{' '}
+        <Typography variant="code">const code = true</Typography> snippets.
       </div>
     </div>
   )
@@ -75,25 +77,25 @@ const ArticleSnippet = () => {
   )
 }
 
-const AllVariants = () => {
+const UsagePreview = () => {
   return (
     <div className="flex flex-col space-y-6">
-      <Typography variant="h1">Display Title H1</Typography>
-      <Typography variant="h2">Section Header H2</Typography>
-      <Typography variant="h3">Sub section Header H3</Typography>
-      <Typography variant="h4">Card Title H4</Typography>
-      <Typography variant="h5">Small Header H5</Typography>
-      <Typography variant="h6">Micro Header H6</Typography>
+      <Typography variant="h1">H1 - Display Title</Typography>
+      <Typography variant="h2">H2 - Section Header</Typography>
+      <Typography variant="h3">H3 - Sub section Header</Typography>
+      <Typography variant="h4">H4 - Card Title</Typography>
+      <Typography variant="h5">H5 - Small Header</Typography>
+      <Typography variant="h6">H6 - Micro Header</Typography>
       <Typography>
-        Body text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Seamless fluid typography built for
+        Body - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Seamless fluid typography built for
         high-contrast interfaces.
       </Typography>
       <Typography variant="blockquote">
-        "Neobrutalism is not about ugly UI, it is about raw layout clarity and structural personality."
+        Blockquote - "Neobrutalism is not about ugly UI, it is about raw layout clarity and structural personality."
       </Typography>
-      <Typography variant="label">Field Label Example</Typography>
+      <Typography variant="label">Label - Label Example</Typography>
       <div>
-        <Typography variant="caption">CAPTION TEXT</Typography>
+        <Typography variant="caption">Caption - CAPTION TEXT</Typography>
       </div>
       <div>
         Text with <Typography variant="mark">highlighted mark</Typography> and inline{' '}
@@ -155,8 +157,8 @@ export const TypographyDoc = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="all-variants" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        All Variants
+      <h3 id="usage" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
+        Usage
       </h3>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
         Overview of all available typography scale variants from display headings down to micro captions, code blocks,
@@ -164,8 +166,8 @@ export const TypographyDoc = () => {
       </p>
 
       <div className="mt-8 mb-16">
-        <PreviewBlock code={allVariantsUsageCode} githubUrl={githubUrl}>
-          <AllVariants />
+        <PreviewBlock code={usageCode} githubUrl={githubUrl}>
+          <UsagePreview />
         </PreviewBlock>
       </div>
 
