@@ -6,6 +6,7 @@ export interface LithosConfig {
   aliases: {
     components: string // e.g. "./src/components/ui"
     blocks: string // e.g. "./src/components/blocks"
+    templates: string // e.g. "./src/components/templates"
     utils: string // e.g. "./src/utils"
     core: string // e.g. "./src/core"
   }
@@ -16,6 +17,7 @@ const DEFAULT_CONFIG: LithosConfig = {
   aliases: {
     components: './src/components/ui',
     blocks: './src/components/blocks',
+    templates: './src/components/templates',
     utils: './src/utils',
     core: './src/core',
   },
@@ -39,6 +41,7 @@ export const getConfig = (): LithosConfig => {
       aliases: {
         components: './components/ui',
         blocks: './components/blocks',
+        templates: './components/templates',
         utils: './utils',
         core: './core',
       },
@@ -64,6 +67,13 @@ export const getLocalDestination = (repoPath: string, config: LithosConfig): str
   }
   if (repoPath.startsWith('components/blocks/')) {
     return path.join(process.cwd(), config.aliases.blocks, repoPath.replace('components/blocks/', ''))
+  }
+  if (repoPath.startsWith('components/templates/')) {
+    return path.join(
+      process.cwd(),
+      config.aliases.templates || './src/components/templates',
+      repoPath.replace('components/templates/', '')
+    )
   }
   if (repoPath.startsWith('utils/')) {
     return path.join(process.cwd(), config.aliases.utils, repoPath.replace('utils/', ''))

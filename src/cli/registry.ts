@@ -1,7 +1,7 @@
 export interface RegistryItem {
   slug: string
   name: string
-  type: 'ui' | 'block'
+  type: 'ui' | 'block' | 'template'
   githubUrl: string
   requires: string[]
 }
@@ -143,21 +143,38 @@ export const registry: Record<string, RegistryItem> = {
       'utils/cn.ts',
     ],
   },
-  'dropdown-menu': {
-    slug: 'dropdown-menu',
-    name: 'Dropdown Menu',
+  command: {
+    slug: 'command',
+    name: 'Command',
     type: 'ui',
-    githubUrl: `${GITHUB_BASE}/components/ui/dropdown/DropdownMenu.tsx`,
+    githubUrl: `${GITHUB_BASE}/components/ui/Command.tsx`,
+    requires: [
+      'utils/cn.ts',
+      'components/ui/Dialog.tsx',
+      'components/ui/Kbd.tsx',
+      'components/ui/Badge.tsx',
+      'components/ui/icons/IconSearch.tsx',
+      'components/ui/icons/IconClose.tsx',
+    ],
+  },
+  dropdown: {
+    slug: 'dropdown',
+    name: 'Dropdown',
+    type: 'ui',
+    githubUrl: `${GITHUB_BASE}/components/ui/Dropdown.ts`,
     requires: [
       'utils/cn.ts',
       'components/ui/Button.tsx',
-      'components/ui/dropdown/DropdownMenuContent.tsx',
-      'components/ui/dropdown/DropdownMenuItem.tsx',
-      'components/ui/dropdown/DropdownMenuGroup.tsx',
-      'components/ui/dropdown/DropdownMenuSeparator.tsx',
-      'components/ui/dropdown/DropdownMenuTrigger.tsx',
-      'components/ui/dropdown/DropdownMenuClose.tsx',
+      'components/ui/Popover.ts',
+      'components/ui/dropdown/DropdownContent.tsx',
+      'components/ui/dropdown/DropdownItem.tsx',
+      'components/ui/dropdown/DropdownGroup.tsx',
+      'components/ui/dropdown/DropdownSeparator.tsx',
+      'components/ui/dropdown/DropdownTrigger.tsx',
+      'components/ui/dropdown/DropdownSub.tsx',
       'components/ui/dropdown/useDropdown.ts',
+      'components/ui/dropdown/DropdownNavigationContext.ts',
+      'core/hooks/useListKeyNavigation.ts',
     ],
   },
   input: {
@@ -172,24 +189,40 @@ export const registry: Record<string, RegistryItem> = {
       'components/ui/icons/IconSettings.tsx',
     ],
   },
+  kbd: {
+    slug: 'kbd',
+    name: 'Kbd',
+    type: 'ui',
+    githubUrl: `${GITHUB_BASE}/components/ui/Kbd.tsx`,
+    requires: ['utils/cn.ts', 'utils/yiq.ts', 'core/types.ts'],
+  },
   popover: {
     slug: 'popover',
     name: 'Popover',
     type: 'ui',
-    githubUrl: `${GITHUB_BASE}/components/ui/Popover.tsx`,
-    requires: ['@floating-ui/react', 'utils/cn.ts', 'components/ui/Button.tsx'],
+    githubUrl: `${GITHUB_BASE}/components/ui/Popover.ts`,
+    requires: [
+      '@floating-ui/react',
+      'utils/cn.ts',
+      'components/ui/Button.tsx',
+      'components/ui/popover/Popover.tsx',
+      'components/ui/popover/PopoverContent.tsx',
+      'components/ui/popover/PopoverTrigger.tsx',
+      'components/ui/popover/PopoverClose.tsx',
+      'components/ui/popover/usePopover.ts',
+    ],
   },
   select: {
     slug: 'select',
     name: 'Select',
     type: 'ui',
-    githubUrl: `${GITHUB_BASE}/components/ui/select/Select.tsx`,
+    githubUrl: `${GITHUB_BASE}/components/ui/Select.ts`,
     requires: [
       'utils/cn.ts',
       'utils/yiq.ts',
       'core/useAccentColor.ts',
       'components/ui/Button.tsx',
-      'components/ui/Popover.tsx',
+      'components/ui/Popover.ts',
       'components/ui/popover/PopoverContent.tsx',
       'components/ui/popover/PopoverTrigger.tsx',
       'components/ui/popover/usePopover.ts',
@@ -201,7 +234,15 @@ export const registry: Record<string, RegistryItem> = {
       'components/ui/select/select.types.ts',
       '@floating-ui/react',
       'core/hooks/useVirtualizer.ts',
+      'core/hooks/useListKeyNavigation.ts',
     ],
+  },
+  skeleton: {
+    slug: 'skeleton',
+    name: 'Skeleton',
+    type: 'ui',
+    githubUrl: `${GITHUB_BASE}/components/ui/Skeleton.tsx`,
+    requires: ['utils/cn.ts'],
   },
   tabs: {
     slug: 'tabs',
@@ -303,5 +344,22 @@ export const registry: Record<string, RegistryItem> = {
     type: 'block',
     githubUrl: `${GITHUB_BASE}/components/blocks/Testimonials/1.tsx`,
     requires: ['components/ui/Card.tsx', 'components/ui/Avatar.tsx'],
+  },
+
+  // Templates
+  'landing-1': {
+    slug: 'landing-1',
+    name: 'SaaS Standard Landing Page',
+    type: 'template',
+    githubUrl: `${GITHUB_BASE}/components/templates/Landing/1.tsx`,
+    requires: [
+      'components/blocks/Navbar/1.tsx',
+      'components/blocks/Hero/1.tsx',
+      'components/blocks/FeatureGrid/1.tsx',
+      'components/blocks/Pricing/1.tsx',
+      'components/blocks/Testimonials/1.tsx',
+      'components/blocks/FAQ/1.tsx',
+      'components/blocks/Footer/1.tsx',
+    ],
   },
 }
