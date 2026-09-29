@@ -3,6 +3,7 @@ import path from 'node:path'
 import process from 'node:process'
 import { registry, type RegistryItem } from './registry.js'
 import { getConfig, fetchFile, getLocalDestination, rewriteImports, ensureDir } from './utils.js'
+import { init } from './init.js'
 
 const getAllRequires = (item: RegistryItem): string[] => {
   const visited = new Set<string>()
@@ -14,6 +15,16 @@ const getAllRequires = (item: RegistryItem): string[] => {
 
     for (const req of currentItem.requires) {
       deps.add(req)
+
+      // Auto-inject IconBase for any icon dependency
+      if (req.includes('components/ui/icons/') && req !== 'components/ui/icons/IconBase.tsx') {
+        deps.add('components/ui/icons/IconBase.tsx')
+      }
+
+      // Auto-inject AccentColorContext if useAccentColor is required
+      if (req === 'core/useAccentColor.tsx' || req === 'core/useAccentColor.ts') {
+        deps.add('core/AccentColorContext.ts')
+      }
 
       // If this required file is itself a registered component, fetch its requires too
       const matchedComp = Object.values(registry).find((comp) => comp.githubUrl.endsWith('/' + req))
@@ -31,6 +42,12 @@ export const add = async (components: string[]) => {
   if (!components || components.length === 0) {
     console.error('✖ Please specify a component to add.')
     process.exit(1)
+  }
+
+  const configPath = path.join(process.cwd(), 'lithos.json')
+  if (!fs.existsSync(configPath)) {
+    console.log('\ni lithos.json not found. Initializing automatically...')
+    await init()
   }
 
   const config = getConfig()

@@ -158,6 +158,7 @@ export const DropdownDoc = () => {
       </h2>
 
       <SetupGuide
+        slug="dropdown"
         componentNames={[
           'Dropdown',
           'DropdownContent',
@@ -165,7 +166,7 @@ export const DropdownDoc = () => {
           'DropdownGroup',
           'DropdownSeparator',
           'DropdownTrigger',
-          'DropdownClose',
+          'DropdownSub',
           'useDropdown',
         ]}
         manualPath={{
@@ -174,14 +175,15 @@ export const DropdownDoc = () => {
         requires={[
           'utils/cn.ts',
           'components/ui/Button.tsx',
-          'components/ui/dropdown/Dropdown',
-          'components/ui/dropdown/DropdownContent',
-          'components/ui/dropdown/DropdownItem',
-          'components/ui/dropdown/DropdownGroup',
-          'components/ui/dropdown/DropdownSeparator',
-          'components/ui/dropdown/DropdownTrigger',
-          'components/ui/dropdown/DropdownClose',
-          'components/ui/dropdown/useDropdown',
+          'components/ui/dropdown/Dropdown.tsx',
+          'components/ui/dropdown/DropdownContent.tsx',
+          'components/ui/dropdown/DropdownItem.tsx',
+          'components/ui/dropdown/DropdownGroup.tsx',
+          'components/ui/dropdown/DropdownSeparator.tsx',
+          'components/ui/dropdown/DropdownTrigger.tsx',
+          'components/ui/dropdown/DropdownSub.tsx',
+          'components/ui/dropdown/useDropdown.ts',
+          'components/ui/dropdown/DropdownNavigationContext.ts',
         ]}
       />
 
