@@ -1,5 +1,13 @@
 @reference "tailwindcss";
 
+/* - Tailwind v4 Theme Extension: Maps semantic Lithos UI typography classes to the consumer's system fonts */
+/* - This prevents overriding the user's global sans/mono fonts or forcing Google Fonts to download. */
+@theme {
+  --font-body: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-code: var(--font-mono);
+}
+
 :root {
   /* - Default Light Theme: High contrast, heavy white/black balance. */
   --lithos-bg: #ffffff;
@@ -38,6 +46,48 @@ body.obsidian {
   --lithos-muted: rgba(255, 255, 255, 0.3);
   --lithos-shadow: rgba(255, 255, 255, 1);
   color-scheme: dark;
+}
+
+/* - Z-axis lift: Objects scale up to simulate physical mass moving closer to the user. */
+@keyframes brutalist-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* - Y-axis lift: Objects slide up into the grid to imply solid construction. */
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lithos-shimmer {
+  from {
+    mask-position: 100% 0;
+  }
+  to {
+    mask-position: 0% 0;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 /* *
