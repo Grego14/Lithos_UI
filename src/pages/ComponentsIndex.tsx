@@ -33,6 +33,7 @@ import { IconClose } from '../components/ui/icons/IconClose'
 import { Input } from '../components/ui/Input'
 import { Kbd, KbdGroup } from '../components/ui/Kbd'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/ui/Table'
 import { Tooltip } from '../components/ui/tooltip/Tooltip'
 import { TooltipTrigger } from '../components/ui/tooltip/TooltipTrigger'
 import { TooltipContent } from '../components/ui/tooltip/TooltipContent'
@@ -329,6 +330,34 @@ const componentsList = [
     preview: (
       <div className="w-full flex justify-center p-2">
         <Spinner size={32} variant="accent" />
+      </div>
+    ),
+  },
+  {
+    name: 'Table',
+    to: '/docs/table',
+    preview: (
+      <div className="w-full p-3">
+        <Table size="sm" aria-label="Example invoices">
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Invoice</TableHead>
+              <TableHead scope="col" className="text-end">
+                Amount
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableHead scope="row">INV-001</TableHead>
+              <TableCell className="text-end">$250</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableHead scope="row">INV-002</TableHead>
+              <TableCell className="text-end">$150</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </div>
     ),
   },

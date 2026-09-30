@@ -48,6 +48,7 @@ const groupedLinks = [
       { label: 'Popover', href: '/docs/popover' },
       { label: 'Select', href: '/docs/select' },
       { label: 'Skeleton', href: '/docs/skeleton' },
+      { label: 'Table', href: '/docs/table' },
       { label: 'Tabs', href: '/docs/tabs' },
       { label: 'Toast', href: '/docs/toast' },
       { label: 'Toggle', href: '/docs/toggle' },
