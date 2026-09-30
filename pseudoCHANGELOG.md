@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added (0.1.2)
 
+- **Responsive Table example:** Optional columns move into accessible expandable row details as the container narrows, with persistent record keys and container-resize observation.
+
+- **Table review refinements:** Split bulk, individual, and dropdown actions into independent, copyable previews. Copy appends duplicate rows with new IDs; View shows additional invoice details; Edit updates values; action alerts identify affected IDs. Added portaled row menus and reused Lithos Select for the preview-state control.
+
 - **Table:** Added native table primitives with accessible captions, a keyboard-focusable scroll container, density options, stripes, hover and selection styles, and opt-in sticky headers.
   - Basic invoice and intermediate inventory examples, including Badge availability, a single state-driven ready/loading/empty/error table, centered Spinner feedback, and Add/Retry recovery actions.
   - Advanced client-side examples with sorting, filtering, custom pagination, persistent ID selection, column visibility, bulk actions in the selection-table caption, and a separate icon-action table for viewing, editing, deleting, and copying rows.
