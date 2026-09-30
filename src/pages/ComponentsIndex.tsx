@@ -25,6 +25,8 @@ import {
   DropdownSeparator,
   DropdownSub,
 } from '../components/ui/Dropdown'
+import { Drawer, DrawerBody, DrawerHeader, DrawerTitle } from '../components/ui/Drawer'
+import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from '../components/ui/Command'
 import { Popover, PopoverTrigger, PopoverContent } from '../components/ui/Popover'
 import { Select } from '../components/ui/Select'
 import { Skeleton, SkeletonText } from '../components/ui/Skeleton'
@@ -167,6 +169,32 @@ const PopoverPreview = () => (
   </div>
 )
 
+const DrawerPreview = () => (
+  <div className="w-full scale-[0.5] origin-center flex justify-center pointer-events-none">
+    <Drawer open={true} trigger={<Button>Drawer</Button>} placement="bottom" backdropClass="bg-transparent">
+      <DrawerHeader>
+        <DrawerTitle>Title</DrawerTitle>
+      </DrawerHeader>
+      <DrawerBody>Content</DrawerBody>
+    </Drawer>
+  </div>
+)
+
+const CommandPreview = () => (
+  <div className="w-[120%] scale-[0.5] origin-center pointer-events-none">
+    <Command className="h-48 border-2 border-(--lithos-border) shadow-[4px_4px_0_0_var(--lithos-shadow)]">
+      <CommandInput placeholder="Search..." />
+      <CommandList>
+        <CommandEmpty>No results found.</CommandEmpty>
+        <CommandGroup heading="Suggestions">
+          <CommandItem>Calendar</CommandItem>
+          <CommandItem>Search Emoji</CommandItem>
+        </CommandGroup>
+      </CommandList>
+    </Command>
+  </div>
+)
+
 const TabsPreview = () => (
   <div className="w-[120%] scale-[0.55] origin-center pointer-events-none mt-2">
     <Tabs defaultValue="1">
@@ -279,9 +307,19 @@ const componentsList = [
     ),
   },
   {
+    name: 'Command',
+    to: '/docs/command',
+    preview: <CommandPreview />,
+  },
+  {
     name: 'Dialog',
     to: '/docs/dialog',
     preview: <DialogPreview />,
+  },
+  {
+    name: 'Drawer',
+    to: '/docs/drawer',
+    preview: <DrawerPreview />,
   },
   {
     name: 'Dropdown',
