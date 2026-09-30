@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added (0.1.2)
 
+- **Table:** Added native table primitives with accessible captions, a keyboard-focusable scroll container, density options, stripes, hover and selection styles, and opt-in sticky headers.
+  - Basic invoice and intermediate inventory examples, including Badge availability, a single state-driven ready/loading/empty/error table, centered Spinner feedback, and Add/Retry recovery actions.
+  - Advanced client-side examples with sorting, filtering, custom pagination, persistent ID selection, column visibility, bulk actions in the selection-table caption, and a separate icon-action table for viewing, editing, deleting, and copying rows.
+  - Added nested documentation TOC entries, installation guidance, navigation, component showcase, package and CLI registry exports, and regression/accessibility tests; documented server-data and large-dataset boundaries.
+
 - **Skeleton & SkeletonText:** Added loading placeholder components ([#320](https://github.com/lithosui/Lithos_UI/pull/320)).
   - Text, rectangular, rounded, and circular variants with customizable dimensions and neutral or accent tones.
   - Shimmer animation enabled by default, with pulse and disabled animation options, opt-in reduced-motion support, and forced-colors support.
