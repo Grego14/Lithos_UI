@@ -1,8 +1,8 @@
 import { createRef } from 'react'
-import { render, screen, within } from '@testing-library/react'
+import { act, render, screen, within, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { axe } from 'jest-axe'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi, afterEach } from 'vitest'
 import {
   Table,
   TableBody,
@@ -17,8 +17,51 @@ import {
 import { BasicTable } from '../../../docs/examples/table/Basic'
 import { IntermediateTable } from '../../../docs/examples/table/Intermediate'
 import { AdvancedTable } from '../../../docs/examples/table/Advanced'
+import { IndividualActionsTable } from '../../../docs/examples/table/IndividualActions'
+import { DropdownActionsTable } from '../../../docs/examples/table/DropdownActions'
+import { ResponsiveTable } from '../../../docs/examples/table/Responsive'
+afterEach(() => vi.unstubAllGlobals())
+afterEach(() => vi.restoreAllMocks())
 
 describe('Table primitives', () => {
+  it('moves overflow columns into accessible details and restores them when space returns', async () => {
+    const user = userEvent.setup()
+    let onResize: ResizeObserverCallback | undefined
+    vi.stubGlobal(
+      'ResizeObserver',
+      class {
+        constructor(callback: ResizeObserverCallback) {
+          onResize = callback
+        }
+        observe() {}
+        unobserve() {}
+        disconnect() {}
+      }
+    )
+    const resize = (width: number) =>
+      act(() => onResize?.([{ contentRect: { width } } as ResizeObserverEntry], {} as ResizeObserver))
+    const { container } = render(<ResponsiveTable />)
+    resize(300)
+    expect(screen.getAllByRole('columnheader')).toHaveLength(3)
+    const toggle = screen.getByRole('button', { name: 'Show details for INV-001' })
+    await user.click(toggle)
+    expect(toggle).toHaveAttribute('aria-expanded', 'true')
+    const detailsTable = screen.getByRole('table', { name: 'Details for INV-001' })
+    const paymentMethodLabel = within(detailsTable).getByRole('rowheader', { name: 'Payment method' })
+    expect(paymentMethodLabel.closest('tr')?.nextElementSibling).toHaveTextContent('Credit card')
+    expect(document.getElementById(toggle.getAttribute('aria-controls')!)).toHaveAttribute('id')
+    resize(500)
+    expect(screen.getAllByRole('columnheader')).toHaveLength(4)
+    expect(
+      within(screen.getByRole('table', { name: 'Details for INV-001' })).queryByRole('rowheader', { name: 'Amount' })
+    ).toBeNull()
+    resize(800)
+    expect(screen.getAllByRole('columnheader')).toHaveLength(5)
+    expect(screen.queryByRole('button', { name: /details for/ })).toBeNull()
+    resize(300)
+    expect(screen.getByRole('button', { name: 'Hide details for INV-001' })).toHaveAttribute('aria-expanded', 'true')
+    expect(await axe(container)).toHaveNoViolations()
+  })
   it('preserves table semantics, header associations, spans, native props and refs', () => {
     const tableRef = createRef<HTMLTableElement>()
     const containerRef = createRef<HTMLDivElement>()
@@ -123,21 +166,25 @@ describe('Intermediate table states', () => {
   it('updates one table for loading, empty, and error states', async () => {
     const user = userEvent.setup()
     render(<IntermediateTable />)
+    expect(screen.getByText('Preview state')).toHaveClass('mr-2')
     const inventoryTable = screen.getByRole('table', {
       name: 'Inventory preview with a sticky header and compact rows.',
     })
     expect(inventoryTable.querySelector('caption')).toHaveClass('caption-top')
-    await user.selectOptions(screen.getByLabelText('Preview state'), 'loading')
+    await user.click(screen.getByLabelText('Preview state'))
+    await user.click(screen.getByRole('option', { name: 'Loading' }))
     expect(screen.getByRole('status', { name: 'Loading inventory' })).toBeInTheDocument()
     expect(inventoryTable).toHaveAttribute('aria-busy', 'true')
     expect(screen.getAllByRole('table')).toHaveLength(1)
     expect(within(inventoryTable).getAllByRole('row')).toHaveLength(2)
-    await user.selectOptions(screen.getByLabelText('Preview state'), 'empty')
+    await user.click(screen.getByLabelText('Preview state'))
+    await user.click(screen.getByRole('option', { name: 'Empty' }))
     expect(within(inventoryTable).getByRole('cell')).toHaveTextContent('No products yet')
     expect(within(inventoryTable).getByRole('cell')).toHaveAttribute('colspan', '3')
     await user.click(screen.getByRole('button', { name: 'Add product' }))
     expect(within(inventoryTable).getAllByRole('row')).toHaveLength(13)
-    await user.selectOptions(screen.getByLabelText('Preview state'), 'error')
+    await user.click(screen.getByLabelText('Preview state'))
+    await user.click(screen.getByRole('option', { name: 'Error' }))
     expect(within(inventoryTable).getByRole('alert')).toHaveTextContent('Inventory could not be loaded')
     await user.click(screen.getByRole('button', { name: 'Retry' }))
     expect(within(inventoryTable).getAllByRole('row')).toHaveLength(13)
@@ -166,17 +213,14 @@ describe('Advanced table recipe', () => {
     const user = userEvent.setup()
     const { container } = render(<AdvancedTable />)
     const bulkTable = screen.getByRole('table', { name: /Bulk selection table/ })
-    const individualTable = screen.getByRole('table', { name: /Individual actions table/ })
     await user.click(screen.getByRole('button', { name: 'Next' }))
     await user.type(screen.getByLabelText('Filter invoices'), 'Alex')
     expect(screen.getByText('Page 1 of 1')).toBeInTheDocument()
     expect(within(bulkTable).getByRole('rowheader', { name: 'INV-001' })).toBeInTheDocument()
     await user.type(screen.getByLabelText('Filter invoices'), 'not-found')
     expect(within(bulkTable).getByRole('cell')).toHaveAttribute('colspan', '5')
-    expect(within(individualTable).getByRole('cell')).toHaveAttribute('colspan', '5')
     await user.click(screen.getByLabelText('Show status'))
     expect(within(bulkTable).getByRole('cell')).toHaveAttribute('colspan', '4')
-    expect(within(individualTable).getByRole('cell')).toHaveAttribute('colspan', '4')
     expect(screen.getByLabelText('Select all rows on this page')).toBeDisabled()
     expect(screen.getByRole('button', { name: 'Next' })).toBeDisabled()
     expect(await axe(container)).toHaveNoViolations()
@@ -219,7 +263,7 @@ describe('Advanced table recipe', () => {
     expect(screen.getByText(/0 selected across all pages/)).toBeInTheDocument()
   })
 
-  it('supports page-size changes and row actions without submitting a surrounding form', async () => {
+  it('supports page-size changes without submitting a surrounding form', async () => {
     const user = userEvent.setup()
     render(
       <form>
@@ -228,40 +272,153 @@ describe('Advanced table recipe', () => {
     )
     await user.click(screen.getByRole('button', { name: 'Next' }))
     await user.selectOptions(screen.getByLabelText('Rows per page'), '20')
-    expect(screen.getAllByRole('row')).toHaveLength(26)
+    expect(screen.getAllByRole('row')).toHaveLength(13)
     expect(screen.getByText('Page 1 of 1')).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Edit INV-001' })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Delete INV-001' })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Copy INV-001' })).toBeInTheDocument()
-    const action = screen.getByRole('button', { name: 'View INV-001' })
-    expect(action).toHaveAttribute('type', 'button')
-    await user.click(action)
-    expect(screen.getByText('INV-001: Alex Morgan, paid, $250.00.')).toBeInTheDocument()
-    const bulkTable = screen.getByRole('table', { name: /Bulk selection table/ })
-    const header = within(bulkTable).getAllByRole('row')[0]!
-    expect(within(header).getAllByRole('columnheader')).toHaveLength(5)
-    expect(bulkTable.querySelector('caption')).toHaveClass('caption-top')
-    expect(screen.getByRole('table', { name: /Individual actions table/ }).querySelector('caption')).toHaveClass(
-      'caption-top'
-    )
+    expect(screen.getByRole('button', { name: 'Copy selected' })).toHaveAttribute('type', 'button')
   })
 
-  it('edits, copies, and deletes selected records with bulk actions', async () => {
+  it('edits locally, rejects blank names, copies, and deletes selected records', async () => {
     const user = userEvent.setup()
     render(<AdvancedTable />)
-    const bulkTable = screen.getByRole('table', { name: /Bulk selection table/ })
-    const individualTable = screen.getByRole('table', { name: /Individual actions table/ })
     await user.click(screen.getByLabelText('Select INV-001'))
     await user.click(screen.getByRole('button', { name: 'Edit selected' }))
-    await user.clear(screen.getByRole('textbox', { name: 'Edit customer INV-001' }))
-    await user.type(screen.getByRole('textbox', { name: 'Edit customer INV-001' }), 'Alex Cooper')
-    await user.click(screen.getByRole('button', { name: 'Save INV-001' }))
-    expect(within(individualTable).getByText('Alex Cooper')).toBeInTheDocument()
+    const input = screen.getByRole('textbox', { name: 'Customer for INV-001' })
+    expect(input).toHaveFocus()
+    await user.clear(input)
+    expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled()
+    expect(screen.getByRole('alert')).toHaveTextContent('required')
+    await user.type(input, 'Alex Cooper')
+    await user.click(screen.getByRole('button', { name: 'Save' }))
+    expect(screen.getByText('Alex Cooper')).toBeInTheDocument()
+    expect(screen.getByRole('alert')).toHaveTextContent('Updated INV-001.')
+    await user.click(screen.getByLabelText('Select INV-002'))
     await user.click(screen.getByRole('button', { name: 'Copy selected' }))
-    expect(screen.getByText(/invoice IDs: INV-001/)).toBeInTheDocument()
+    expect(screen.getByRole('rowheader', { name: 'INV-013' })).toBeInTheDocument()
+    expect(screen.getByRole('rowheader', { name: 'INV-014' })).toBeInTheDocument()
+    expect(await screen.findByRole('button', { name: 'Copied selected' })).toBeInTheDocument()
+    expect(screen.getByRole('alert')).toHaveTextContent('Added invoice copies: INV-001 as INV-013, INV-002 as INV-014.')
     await user.click(screen.getByRole('button', { name: 'Delete selected' }))
-    expect(within(bulkTable).queryByRole('rowheader', { name: 'INV-001' })).not.toBeInTheDocument()
-    expect(within(individualTable).queryByRole('rowheader', { name: 'INV-001' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('rowheader', { name: 'INV-001' })).not.toBeInTheDocument()
+    expect(screen.getByRole('alert')).toHaveTextContent('Deleted invoices: INV-001, INV-002.')
     expect(screen.getByText(/0 selected across all pages/)).toBeInTheDocument()
+  })
+
+  it('clamps the last page after deletion and disables bulk edit for multiple selections', async () => {
+    const user = userEvent.setup()
+    render(<AdvancedTable />)
+    await user.click(screen.getByRole('button', { name: 'Next' }))
+    await user.click(screen.getByLabelText('Select all rows on this page'))
+    expect(screen.getByRole('button', { name: 'Edit selected' })).toBeDisabled()
+    await user.click(screen.getByRole('button', { name: 'Delete selected' }))
+    expect(screen.getByText('Page 1 of 1')).toBeInTheDocument()
+    expect(screen.getAllByRole('row')).toHaveLength(11)
+  })
+})
+
+describe('Independent action previews', () => {
+  it('opens a detail dialog, restores focus, and leaves other previews unchanged after deletion', async () => {
+    const user = userEvent.setup()
+    render(
+      <>
+        <AdvancedTable />
+        <IndividualActionsTable />
+        <DropdownActionsTable />
+      </>
+    )
+    const trigger = screen.getByRole('button', { name: 'View INV-001' })
+    await user.click(trigger)
+    const dialog = screen.getByRole('dialog', { name: 'Invoice INV-001' })
+    const detailsTable = within(dialog).getByRole('table', { name: 'Details for invoice INV-001' })
+    expect(within(detailsTable).getByRole('rowheader', { name: 'Customer' })).toBeInTheDocument()
+    expect(within(detailsTable).getByText('Alex Morgan')).toBeInTheDocument()
+    expect(within(detailsTable).getByRole('rowheader', { name: 'Payment method' })).toBeInTheDocument()
+    expect(within(detailsTable).getByText('Credit card')).toBeInTheDocument()
+    expect(await axe(dialog)).toHaveNoViolations()
+    await user.keyboard('{Escape}')
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    expect(trigger).toHaveFocus()
+    await user.click(screen.getByRole('button', { name: 'Delete INV-001' }))
+    expect(within(screen.getByRole('region', { name: 'Individual invoice actions' })).queryByText('INV-001')).toBeNull()
+    expect(
+      within(screen.getByRole('region', { name: 'Bulk invoice selection' })).getByText('INV-001')
+    ).toBeInTheDocument()
+    expect(
+      within(screen.getByRole('region', { name: 'Dropdown invoice actions' })).getByText('INV-001')
+    ).toBeInTheDocument()
+  })
+
+  it('copies an invoice into a new row and resets the copied indicator', async () => {
+    const user = userEvent.setup()
+    render(<IndividualActionsTable />)
+    await user.click(screen.getByRole('button', { name: 'Copy INV-001' }))
+    expect(screen.getByRole('rowheader', { name: 'INV-004' })).toBeInTheDocument()
+    expect(screen.getByRole('row', { name: /INV-004 Alex Morgan Paid \$250\.00/ })).toBeInTheDocument()
+    expect(
+      within(screen.getByRole('region', { name: 'Individual invoice actions' }))
+        .getAllByRole('rowheader')
+        .at(-1)
+    ).toHaveTextContent('INV-004')
+    expect(
+      within(screen.getByRole('region', { name: 'Individual invoice actions' }))
+        .getAllByRole('rowheader')
+        .map((header) => header.textContent)
+    ).toEqual(['INV-001', 'INV-002', 'INV-003', 'INV-004'])
+    expect(await screen.findByRole('button', { name: 'Copied INV-001' })).toBeInTheDocument()
+    expect(await screen.findByRole('alert')).toHaveTextContent('Added copy of INV-001 as INV-004.')
+    expect(screen.getByRole('button', { name: 'Copy INV-002' })).toBeInTheDocument()
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Copy INV-001' })).toBeInTheDocument(), {
+      timeout: 3000,
+    })
+  })
+
+  it('cancels edits without changing data and saves to the stable record ID', async () => {
+    const user = userEvent.setup()
+    render(<IndividualActionsTable />)
+    await user.click(screen.getByRole('button', { name: 'Edit INV-002' }))
+    await user.clear(screen.getByRole('textbox'))
+    await user.type(screen.getByRole('textbox'), 'Changed')
+    await user.click(screen.getByRole('button', { name: 'Cancel' }))
+    expect(screen.getByText('Sam Rivera')).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Edit INV-002' }))
+    await user.clear(screen.getByRole('textbox'))
+    await user.type(screen.getByRole('textbox'), 'Changed')
+    await user.click(screen.getByRole('button', { name: 'Save' }))
+    expect(screen.getByRole('rowheader', { name: 'INV-002' }).closest('tr')).toHaveTextContent('Changed')
+  })
+
+  it('portals dropdown menus, supports keyboard actions, and restores focus after View', async () => {
+    const user = userEvent.setup()
+    render(<DropdownActionsTable />)
+    const trigger = screen.getByRole('button', { name: 'Actions for INV-001' })
+    await user.click(trigger)
+    const menu = await screen.findByRole('menu')
+    expect(menu.closest('table')).toBeNull()
+    const view = within(menu).getByRole('menuitem', { name: 'View' })
+    await waitFor(() => expect(view).toHaveFocus())
+    await user.keyboard('{Enter}')
+    expect(await screen.findByRole('dialog', { name: 'Invoice INV-001' })).toBeInTheDocument()
+    await user.keyboard('{Escape}')
+    await waitFor(() => expect(trigger).toHaveFocus())
+    await user.click(trigger)
+    await user.click(await screen.findByRole('menuitem', { name: 'Copy' }))
+    expect(screen.getByRole('rowheader', { name: 'INV-004' })).toBeInTheDocument()
+    expect(await screen.findByRole('alert')).toHaveTextContent('Added copy of INV-001 as INV-004.')
+    await user.click(trigger)
+    expect(await screen.findByRole('menuitem', { name: 'Copied' })).toBeInTheDocument()
+    await user.click(screen.getByRole('menuitem', { name: 'Edit' }))
+    expect(await screen.findByRole('textbox', { name: 'Customer for INV-001' })).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Cancel' }))
+    await user.click(trigger)
+    await user.click(await screen.findByRole('menuitem', { name: 'Delete' }))
+    expect(screen.queryByRole('rowheader', { name: 'INV-001' })).toBeNull()
+    expect(await screen.findByRole('alert')).toHaveTextContent('Deleted invoice INV-001.')
+  })
+
+  it('adds a row and announces the action with an alert', async () => {
+    const user = userEvent.setup()
+    render(<IndividualActionsTable />)
+    await user.click(screen.getByRole('button', { name: 'New row' }))
+    expect(screen.getByRole('rowheader', { name: 'INV-004' })).toBeInTheDocument()
+    expect(screen.getByRole('alert')).toHaveTextContent('Added INV-004.')
   })
 })

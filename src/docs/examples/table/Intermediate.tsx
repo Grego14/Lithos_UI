@@ -1,7 +1,10 @@
 import { useId, useState } from 'react'
+import { Alert } from '../../../components/ui/Alert'
 import { Badge } from '../../../components/ui/Badge'
 import { Button } from '../../../components/ui/Button'
 import { Spinner } from '../../../components/ui/Spinner'
+import { Select, SelectTrigger, SelectContent, SelectItem } from '../../../components/ui/Select'
+import { IconChevronDown } from '../../../components/ui/icons/IconChevronDown'
 import {
   Table,
   TableBody,
@@ -19,20 +22,24 @@ export const IntermediateTable = () => {
 
   return (
     <div className="w-full min-w-0">
-      <label id="preview-state" htmlFor={id} className="mr-3 font-bold">
-        Preview state
-      </label>
-      <select
-        id={id}
-        value={state}
-        onChange={(event) => setState(event.target.value)}
-        className="mb-4 border-2 border-(--lithos-border) bg-(--lithos-surface) p-2"
-      >
-        <option value="ready">Ready</option>
-        <option value="loading">Loading</option>
-        <option value="empty">Empty</option>
-        <option value="error">Error</option>
-      </select>
+      <div className="mb-4 flex items-center">
+        <span id={id} className="mr-2 font-bold">
+          Preview state
+        </span>
+        <Select value={state} onChange={setState}>
+          <SelectTrigger aria-labelledby={id} className="px-3 py-2">
+            <span>{state.charAt(0).toUpperCase() + state.slice(1)}</span>
+            <IconChevronDown className="ml-2 size-4 shrink-0" aria-hidden="true" />
+          </SelectTrigger>
+          <SelectContent>
+            {['ready', 'loading', 'empty', 'error'].map((value, index) => (
+              <SelectItem key={value} value={value} index={index}>
+                {value.charAt(0).toUpperCase() + value.slice(1)}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
       <TableContainer aria-label="Inventory preview" className="max-h-72">
         <Table size="sm" striped hoverable stickyHeader aria-busy={state === 'loading'}>
           <TableCaption className="caption-top">Inventory preview with a sticky header and compact rows.</TableCaption>
@@ -85,8 +92,10 @@ export const IntermediateTable = () => {
             ) : (
               <TableRow>
                 <TableCell colSpan={3} className="h-40 text-center">
-                  <div role="alert" className="flex flex-col items-center">
-                    <span>Inventory could not be loaded.</span>
+                  <div className="flex flex-col items-center">
+                    <Alert intent="error" size="sm" title="Load failed" className="max-w-none text-start">
+                      Inventory could not be loaded.
+                    </Alert>
                     <Button className="mt-3" onClick={() => setState('ready')}>
                       Retry
                     </Button>

@@ -1,7 +1,8 @@
 import { useEffect, useId, useState } from 'react'
-import { FiCopy, FiEdit2, FiEye, FiSave, FiTrash2, FiX } from 'react-icons/fi'
+import { FiCheck, FiCopy, FiEdit2, FiTrash2, FiX } from 'react-icons/fi'
 import { Badge } from '../../../components/ui/Badge'
 import { Button } from '../../../components/ui/Button'
+import { Alert } from '../../../components/ui/Alert'
 import { Checkbox } from '../../../components/ui/Checkbox'
 import { Input } from '../../../components/ui/Input'
 import {
@@ -15,45 +16,20 @@ import {
   TableRow,
 } from '../../../components/ui/Table'
 
-interface Invoice {
-  id: string
-  customer: string
-  status: 'Paid' | 'Pending'
-  amount: number
-}
-
-const invoices: Invoice[] = [
-  { id: 'INV-001', customer: 'Alex Morgan', status: 'Paid', amount: 250 },
-  { id: 'INV-002', customer: 'Sam Rivera', status: 'Pending', amount: 90 },
-  { id: 'INV-003', customer: 'Jordan Lee', status: 'Paid', amount: 1200 },
-  { id: 'INV-004', customer: 'Taylor Chen', status: 'Pending', amount: 150 },
-  { id: 'INV-005', customer: 'Casey Patel', status: 'Paid', amount: 450 },
-  { id: 'INV-006', customer: 'Robin Singh', status: 'Paid', amount: 75 },
-  { id: 'INV-007', customer: 'Drew Garcia', status: 'Pending', amount: 320 },
-  { id: 'INV-008', customer: 'Jamie Park', status: 'Paid', amount: 600 },
-  { id: 'INV-009', customer: 'Morgan Blake', status: 'Pending', amount: 180 },
-  { id: 'INV-010', customer: 'Avery Brooks', status: 'Paid', amount: 980 },
-  { id: 'INV-011', customer: 'Quinn Foster', status: 'Pending', amount: 410 },
-  { id: 'INV-012', customer: 'Riley James', status: 'Paid', amount: 135 },
-]
-const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
+import { demoInvoices, currency, useInvoiceActions, type Invoice } from './useInvoiceActions'
+import { InvoiceEditor } from './InvoiceActions'
 
 /** Client-side recipe. Pass a complete dataset with unique, persistent IDs. */
-export const AdvancedTable = ({ data = invoices }: { data?: Invoice[] }) => {
+export const AdvancedTable = ({ data = demoInvoices }: { data?: Invoice[] }) => {
   const id = useId()
-  const [rows, setRows] = useState(data)
+  const actions = useInvoiceActions(data)
+  const { rows, startEdit, deleteRows, copyRows, copied, notice } = actions
   const [query, setQuery] = useState('')
   const [sort, setSort] = useState<{ key: 'customer' | 'amount'; descending: boolean } | null>(null)
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(10)
   const [selected, setSelected] = useState<Set<string>>(new Set())
   const [showStatus, setShowStatus] = useState(true)
-  const [notice, setNotice] = useState('')
-  const [editingId, setEditingId] = useState<string | null>(null)
-  const [editedCustomer, setEditedCustomer] = useState('')
-
-  useEffect(() => setRows(data), [data])
-
   const filtered = rows.filter((row) =>
     `${row.id} ${row.customer} ${row.status}`.toLowerCase().includes(query.trim().toLowerCase())
   )
@@ -106,35 +82,6 @@ export const AdvancedTable = ({ data = invoices }: { data?: Invoice[] }) => {
     setSort((previous) => ({ key, descending: previous?.key === key ? !previous.descending : false }))
     setPage(0)
   }
-  const startEdit = (row: Invoice) => {
-    setEditingId(row.id)
-    setEditedCustomer(row.customer)
-  }
-  const saveEdit = () => {
-    const customer = editedCustomer.trim()
-    if (!editingId || !customer) return
-    setRows((previous) => previous.map((row) => (row.id === editingId ? { ...row, customer } : row)))
-    setNotice(`Updated ${editingId}.`)
-    setEditingId(null)
-  }
-  const deleteRows = (rowIds: Set<string>) => {
-    setRows((previous) => previous.filter((row) => !rowIds.has(row.id)))
-    setSelected((previous) => new Set([...previous].filter((rowId) => !rowIds.has(rowId))))
-    if (editingId && rowIds.has(editingId)) setEditingId(null)
-    setNotice(`Deleted ${rowIds.size} invoice${rowIds.size === 1 ? '' : 's'}.`)
-  }
-  const copyRows = async (targetRows: Invoice[]) => {
-    const invoiceIds = targetRows.map((row) => row.id).join(', ')
-    if (!invoiceIds) return
-    try {
-      if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable')
-      await navigator.clipboard.writeText(invoiceIds)
-      setNotice(`Copied invoice IDs: ${invoiceIds}`)
-    } catch {
-      setNotice(`Clipboard unavailable. Invoice IDs: ${invoiceIds}`)
-    }
-  }
-
   return (
     <div className="w-full min-w-0">
       <div className="mb-4 flex flex-wrap items-end">
@@ -161,7 +108,7 @@ export const AdvancedTable = ({ data = invoices }: { data?: Invoice[] }) => {
       </div>
       <TableContainer aria-label="Bulk invoice selection">
         <Table hoverable>
-          <TableCaption id="bulk-actions" className="caption-top">
+          <TableCaption className="caption-top">
             <span className="sr-only">Bulk selection table</span>
             <div className="flex flex-wrap items-center">
               <div role="group" aria-label="Bulk actions" className="mr-4 flex items-center">
@@ -188,12 +135,19 @@ export const AdvancedTable = ({ data = invoices }: { data?: Invoice[] }) => {
                 <Button
                   variant="text"
                   className="mr-1 p-2"
-                  aria-label="Copy selected"
-                  title="Copy selected invoice IDs"
+                  aria-label={copied.has('bulk') ? 'Copied selected' : 'Copy selected'}
+                  title="Copy selected invoice rows"
                   disabled={validSelection.size === 0}
-                  onClick={() => void copyRows(selectedRows)}
+                  onClick={() => {
+                    void copyRows(selectedRows, 'bulk')
+                    setPage(Math.max(0, Math.ceil((rows.length + selectedRows.length) / pageSize) - 1))
+                  }}
                 >
-                  <FiCopy aria-hidden="true" size={16} />
+                  {copied.has('bulk') ? (
+                    <FiCheck aria-hidden="true" size={16} />
+                  ) : (
+                    <FiCopy aria-hidden="true" size={16} />
+                  )}
                 </Button>
                 <Button
                   variant="text"
@@ -284,127 +238,7 @@ export const AdvancedTable = ({ data = invoices }: { data?: Invoice[] }) => {
           </TableBody>
         </Table>
       </TableContainer>
-      <TableContainer aria-label="Individual invoice actions" className="mt-6">
-        <Table hoverable>
-          <TableCaption id="individual-actions" className="caption-top">
-            Individual actions table. Each row has its own view, edit, delete, and copy controls.
-          </TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead scope="col">Invoice</TableHead>
-              <TableHead scope="col">Customer</TableHead>
-              {showStatus && <TableHead scope="col">Status</TableHead>}
-              <TableHead scope="col" className="text-end">
-                Amount
-              </TableHead>
-              <TableHead scope="col">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {visible.length ? (
-              visible.map((row) => (
-                <TableRow key={row.id}>
-                  <TableHead scope="row" className="whitespace-nowrap">
-                    {row.id}
-                  </TableHead>
-                  <TableCell className="min-w-40">
-                    {editingId === row.id ? (
-                      <Input
-                        aria-label={`Edit customer ${row.id}`}
-                        value={editedCustomer}
-                        onChange={(event) => setEditedCustomer(event.target.value)}
-                      />
-                    ) : (
-                      row.customer
-                    )}
-                  </TableCell>
-                  {showStatus && (
-                    <TableCell>
-                      <Badge intent={row.status === 'Paid' ? 'success' : 'warning'}>{row.status}</Badge>
-                    </TableCell>
-                  )}
-                  <TableCell className="text-end tabular-nums whitespace-nowrap">
-                    {currency.format(row.amount)}
-                  </TableCell>
-                  <TableCell>
-                    {editingId === row.id ? (
-                      <div className="flex items-center">
-                        <Button
-                          variant="text"
-                          className="mr-1 p-2"
-                          aria-label={`Save ${row.id}`}
-                          title="Save changes"
-                          onClick={saveEdit}
-                        >
-                          <FiSave aria-hidden="true" size={16} />
-                        </Button>
-                        <Button
-                          variant="text"
-                          className="p-2"
-                          aria-label={`Cancel edit ${row.id}`}
-                          title="Cancel edit"
-                          onClick={() => setEditingId(null)}
-                        >
-                          <FiX aria-hidden="true" size={16} />
-                        </Button>
-                      </div>
-                    ) : (
-                      <div className="flex items-center whitespace-nowrap">
-                        <Button
-                          variant="text"
-                          className="mr-1 p-2"
-                          aria-label={`View ${row.id}`}
-                          title="View invoice"
-                          onClick={() =>
-                            setNotice(
-                              `${row.id}: ${row.customer}, ${row.status.toLowerCase()}, ${currency.format(row.amount)}.`
-                            )
-                          }
-                        >
-                          <FiEye aria-hidden="true" size={16} />
-                        </Button>
-                        <Button
-                          variant="text"
-                          className="mr-1 p-2"
-                          aria-label={`Edit ${row.id}`}
-                          title="Edit invoice"
-                          onClick={() => startEdit(row)}
-                        >
-                          <FiEdit2 aria-hidden="true" size={16} />
-                        </Button>
-                        <Button
-                          variant="text"
-                          className="mr-1 p-2"
-                          aria-label={`Delete ${row.id}`}
-                          title="Delete invoice"
-                          onClick={() => deleteRows(new Set([row.id]))}
-                        >
-                          <FiTrash2 aria-hidden="true" size={16} />
-                        </Button>
-                        <Button
-                          variant="text"
-                          className="p-2"
-                          aria-label={`Copy ${row.id}`}
-                          title="Copy invoice ID"
-                          onClick={() => void copyRows([row])}
-                        >
-                          <FiCopy aria-hidden="true" size={16} />
-                        </Button>
-                      </div>
-                    )}
-                  </TableCell>
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={showStatus ? 5 : 4} className="h-28 text-center">
-                  No invoices found. Try a different filter.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <InvoiceEditor actions={actions} />
       <div className="mt-5 flex flex-wrap items-center justify-between">
         <div className="mb-3 mr-4">
           <label htmlFor={`${id}-size`} className="mr-2 text-sm font-bold">
@@ -436,9 +270,11 @@ export const AdvancedTable = ({ data = invoices }: { data?: Invoice[] }) => {
           </Button>
         </nav>
       </div>
-      <p role="status" className="mt-2 text-sm">
-        {notice}
-      </p>
+      {notice && (
+        <Alert intent={notice.intent} size="sm" variant="outlined" className="mt-3 max-w-none">
+          {notice.message}
+        </Alert>
+      )}
     </div>
   )
 }
