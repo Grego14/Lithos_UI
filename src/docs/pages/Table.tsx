@@ -88,7 +88,7 @@ export const TableDoc = () => (
     />
     <p className={paragraph}>
       Import <code>lithos-ui/tokens.css</code> alongside your Tailwind stylesheet and configure the Lithos theme as
-      described in Installation. Basic Table uses the non-sticky default; Table States demonstrates a sticky header with
+      described in Installation. Basic uses the non-sticky default; States demonstrates a sticky header with
       state-driven feedback. The examples also compose Badge, Button, Checkbox, Input, Spinner, Dialog, Dropdown,
       Select, and the shared Lithos icon components.
     </p>
@@ -97,7 +97,7 @@ export const TableDoc = () => (
         Examples
       </h2>
       <h3 id="basic" className={subheading}>
-        Basic Table
+        Basic
       </h3>
       <p className={paragraph}>
         Display invoices with a caption, row labels, and a totals footer. Text wraps naturally, and the container
@@ -107,7 +107,7 @@ export const TableDoc = () => (
         <BasicTable />
       </PreviewBlock>
       <h3 id="table-states" className={subheading}>
-        Table States
+        States
       </h3>
       <p className={paragraph}>
         Use Preview state to switch between inventory, loading, empty, and error views. This demo combines compact,
@@ -117,7 +117,7 @@ export const TableDoc = () => (
         <TableStates />
       </PreviewBlock>
       <h3 id="sortable-table" className={subheading}>
-        Sortable Table
+        Sorting
       </h3>
       <p className={paragraph}>
         Activate the Amount header to sort invoices from lowest to highest or highest to lowest. Amounts are sorted
@@ -137,7 +137,7 @@ export const TableDoc = () => (
         <GroupedHeadersTable />
       </PreviewBlock>
       <h3 id="responsive" className={subheading}>
-        Responsive Table
+        Responsive
       </h3>
       <p className={paragraph}>
         Adjust the width slider to move lower-priority columns into expandable row details. Use each row's chevron to
