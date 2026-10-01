@@ -34,11 +34,14 @@ export * from './components/ui/Toast'
 export * from './components/ui/Toggle'
 export * from './components/ui/Tooltip'
 
+export * from './core/ThemeProvider'
+export * from './core/ThemeProviderContext'
+
 // Hooks
 export * from './core/hooks/useFocusTrap'
 export * from './core/hooks/useToast'
 export * from './core/hooks/useVirtualizer'
-export * from './core/useLithosTheme'
+export * from './core/hooks/useTheme'
 export * from './core/useAccentColor'
 export * from './core/hooks/useListKeyNavigation'
 export * from './core/hooks/useMediaQuery'

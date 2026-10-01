@@ -100,19 +100,20 @@ export const Installation = () => {
       </h2>
       <p className="mb-4 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
         Lithos UI relies entirely on native CSS custom properties for theming. To configure your aesthetic and enable
-        dark mode, use the <code>useLithosTheme</code> hook. This hook automatically calculates YIQ contrast for
-        legibility and injects live overrides into the DOM without forcing React to re-render the entire component tree.
+        dark mode, use the <code>ThemeProvider</code> component. This provider automatically calculates YIQ contrast for
+        legibility and injects live overrides into the DOM.
       </p>
 
       <CodeViewer
         code={`// App.tsx
-import { Button, useLithosTheme } from 'lithos-ui'
+import { ThemeProvider } from 'lithos-ui'
 
 export function App() {
-  // Destructure toggleObsidian to correctly toggle dark mode
-  const { toggleObsidian } = useLithosTheme({ accentColor: '#123456', radius: 8 })
-
-  return <Button onClick={toggleObsidian}>Toggle Theme</Button>
+  return (
+    <ThemeProvider config={{ accentColor: '#123456', radius: 8 }}>
+      ...
+    </ThemeProvider>
+  )
 }`}
         language="tsx"
       />

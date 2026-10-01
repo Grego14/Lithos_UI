@@ -1,11 +1,6 @@
 import { Navbar } from '../showroom/sections/Navbar'
 import { Footer } from '../showroom/sections/Footer'
 
-interface FaqProps {
-  isDarkMode: boolean
-  toggleObsidian: () => void
-}
-
 const faqs = [
   {
     question: 'Is Lithos UI really free forever?',
@@ -34,9 +29,9 @@ const faqs = [
   },
 ]
 
-export const Faq = ({ isDarkMode, toggleObsidian }: FaqProps) => (
+export const Faq = () => (
   <>
-    <Navbar isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
+    <Navbar />
     <main className="pt-24 min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
       <section className="py-24">
         <div className="mx-auto max-w-4xl px-6">

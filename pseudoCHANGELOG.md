@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Added (0.1.3)
 
 - **Typography:** Added the `Typography` primitive ([#335](https://github.com/lithosui/Lithos_UI/pull/335))
+- Added a **ThemeProvider** to synchronize the calls to the new `useTheme` hook _(before useLithosTheme)_ ([#337](https://github.com/lithosui/Lithos_UI/pull/337))
 
 ### Changed (0.1.3)
 

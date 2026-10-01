@@ -10,6 +10,7 @@ import { IconRadiusNone } from '../../components/ui/icons/IconRadiusNone'
 import { IconRadiusSm } from '../../components/ui/icons/IconRadiusSm'
 import { IconRadiusMd } from '../../components/ui/icons/IconRadiusMd'
 import { IconRadiusLg } from '../../components/ui/icons/IconRadiusLg'
+import { useTheme } from '../../core/hooks/useTheme'
 
 interface ThemeColor {
   name: string
@@ -24,13 +25,6 @@ const themes: ThemeColor[] = [
   { name: 'Pink', hex: '#FFC0CB' },
 ]
 
-interface ThemeEngineProps {
-  accentColor: string
-  updateAccentColor: (color: HexColor) => void
-  radius: number
-  updateRadius: (radius: number) => void
-}
-
 const radii = [
   { label: 'None', value: 0, Icon: IconRadiusNone },
   { label: 'Sm', value: 4, Icon: IconRadiusSm },
@@ -38,7 +32,9 @@ const radii = [
   { label: 'Lg', value: 16, Icon: IconRadiusLg },
 ]
 
-const ThemeEngine = ({ accentColor, updateAccentColor, radius, updateRadius }: ThemeEngineProps) => {
+const ThemeEngine = () => {
+  const { accentColor, updateAccentColor, radius, updateRadius } = useTheme()
+
   const handleThemeChange = (hex: string) => {
     updateAccentColor(hex as HexColor)
   }

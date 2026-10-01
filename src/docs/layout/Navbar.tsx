@@ -5,20 +5,8 @@ import { Button } from '../../components/ui/Button'
 import { Toggle } from '../../components/ui/Toggle'
 import { IconMenu } from '../../components/ui/icons/IconMenu'
 import { IconClose } from '../../components/ui/icons/IconClose'
-
-interface DocsNavbarProps {
-  isDarkMode?: boolean
-  onToggleObsidian?: () => void
-}
-
-const mainLinks = [
-  { label: 'Components', to: '/components' },
-  { label: 'Blocks', to: '/blocks' },
-  { label: 'Templates', to: '/templates' },
-  { label: 'Theme', to: '/theme' },
-  { label: 'FAQ', to: '/faq' },
-  { label: 'Docs', to: '/docs' },
-]
+import { LITHOS_UI_LINKS } from '../../core/lithos.utils'
+import { useTheme } from '../../core/hooks/useTheme'
 
 const groupedLinks = [
   {
@@ -60,7 +48,8 @@ const groupedLinks = [
   },
 ]
 
-export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarProps) => {
+export const DocsNavbar = () => {
+  const { isDarkMode, toggleObsidian } = useTheme()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [expandedCategory, setExpandedCategory] = useState<string | null>('Getting Started')
   const { addToast } = useToast()
@@ -69,7 +58,7 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
   const handleToggleObsidian = () => {
     const nextMode = !isDarkMode
 
-    onToggleObsidian?.()
+    toggleObsidian()
 
     addToast({
       title: 'THEME CHANGED',
@@ -95,7 +84,7 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
 
         {/* - Center lane for main wayfinding */}
         <nav className="hidden items-center justify-center lg:flex lg:w-1/3">
-          {mainLinks.map((link) => (
+          {LITHOS_UI_LINKS.map((link) => (
             <Link
               key={link.label}
               to={link.to}
@@ -133,7 +122,7 @@ export const DocsNavbar = ({ isDarkMode = false, onToggleObsidian }: DocsNavbarP
         <nav className="fixed inset-0 z-[-1] pt-32 pb-12 px-6 bg-(--lithos-surface) overflow-y-auto flex flex-col justify-start lg:hidden">
           {/* Main Top-level Links */}
           <div className="mb-8 border-b-2 border-(--lithos-border) pb-4">
-            {mainLinks.map((link) => (
+            {LITHOS_UI_LINKS.map((link) => (
               <Link
                 key={link.label}
                 to={link.to}

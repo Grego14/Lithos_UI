@@ -10,25 +10,8 @@ import { Footer } from './sections/Footer'
  * Isolates the landing page structure (Navbar, sections, Footer) from root App logic.
  * Accepts theme state and toggle function as props for downstream consumption.
  */
-import type { HexColor } from '../core/types'
 
-interface ShowroomProps {
-  isDarkMode: boolean
-  toggleObsidian: () => void
-  accentColor: HexColor
-  updateAccentColor: (color: HexColor) => void
-  radius: number
-  updateRadius: (radius: number) => void
-}
-
-export const Showroom = ({
-  isDarkMode,
-  toggleObsidian,
-  accentColor,
-  updateAccentColor,
-  radius,
-  updateRadius,
-}: ShowroomProps) => {
+export const Showroom = () => {
   /**
    * ZERO-GAP SPACING MATH:
    * - pt-24 (main): padding-top: 6rem = 96px
@@ -41,18 +24,13 @@ export const Showroom = ({
    */
   return (
     <>
-      <Navbar isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
+      <Navbar />
 
       <main className="pt-24">
-        <Hero accentColor={accentColor} updateAccentColor={updateAccentColor} />
+        <Hero />
         {/* All sections: mt-24 = 96px margin for zero-gap layout */}
         <div className="mt-24">
-          <ThemeEngine
-            accentColor={accentColor}
-            updateAccentColor={updateAccentColor}
-            radius={radius}
-            updateRadius={updateRadius}
-          />
+          <ThemeEngine />
         </div>
         <div className="mt-24">
           <FeatureGrid />

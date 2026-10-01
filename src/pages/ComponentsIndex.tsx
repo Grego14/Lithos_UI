@@ -7,7 +7,7 @@ import { KineticGrid } from '../components/ui/KineticGrid'
 import { ToastItem } from '../components/ui/Toast'
 import { Button } from '../components/ui/Button'
 import { Card, CardImage, CardContent } from '../components/ui/Card'
-import { useLithosTheme } from '../core/useLithosTheme'
+import { useTheme } from '../core/hooks/useTheme'
 import { Badge } from '../components/ui/Badge'
 import { Avatar } from '../components/ui/Avatar'
 import { Alert } from '../components/ui/Alert'
@@ -41,11 +41,6 @@ import { TooltipTrigger } from '../components/ui/tooltip/TooltipTrigger'
 import { TooltipContent } from '../components/ui/tooltip/TooltipContent'
 import card1 from '../docs/assets/images/card1.webp'
 
-interface ComponentsIndexProps {
-  isDarkMode: boolean
-  toggleObsidian: () => void
-}
-
 const FRAMEWORK_OPTIONS = [
   { label: 'React', value: 'react' },
   { label: 'Preact', value: 'preact' },
@@ -59,7 +54,7 @@ const TogglePreview = () => {
 }
 
 const ToastPreview = () => {
-  const { accentColor } = useLithosTheme()
+  const { accentColor } = useTheme()
   return (
     <div className="w-[120%] scale-[0.7] origin-center pointer-events-none mt-6">
       <ToastItem
@@ -71,7 +66,7 @@ const ToastPreview = () => {
 }
 
 const AlertPreview = () => {
-  const { accentColor } = useLithosTheme()
+  const { accentColor } = useTheme()
   return (
     <div className="w-[140%] scale-[0.55] origin-center pointer-events-none">
       <Alert color={accentColor} title="Notice">
@@ -401,9 +396,9 @@ const componentsList = [
   },
 ]
 
-export const ComponentsIndex = ({ isDarkMode, toggleObsidian }: ComponentsIndexProps) => (
+export const ComponentsIndex = () => (
   <>
-    <Navbar isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
+    <Navbar />
     <main className="pt-24 min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
       <section className="border-b-2 border-(--lithos-border) bg-(--lithos-bg)">
         <KineticGrid baseOpacity="opacity-10" className="py-12 md:py-24 w-full">

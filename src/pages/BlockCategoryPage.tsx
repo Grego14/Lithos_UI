@@ -36,12 +36,7 @@ const rewriteBlockImports = (code: string): string => {
   return `${combinedImport}\n\n${cleanCode.trimStart()}`
 }
 
-interface BlockCategoryPageProps {
-  isDarkMode: boolean
-  toggleObsidian: () => void
-}
-
-export const BlockCategoryPage = ({ isDarkMode, toggleObsidian }: BlockCategoryPageProps) => {
+export const BlockCategoryPage = () => {
   const { categorySlug } = useParams<{ categorySlug: string }>()
 
   const category = blockCategories.find((c) => c.slug === categorySlug)
@@ -59,7 +54,7 @@ export const BlockCategoryPage = ({ isDarkMode, toggleObsidian }: BlockCategoryP
 
   return (
     <>
-      <Navbar isDarkMode={isDarkMode} onToggleObsidian={toggleObsidian} />
+      <Navbar />
       <main className="pt-24 min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
         <section className="border-b-2 border-(--lithos-border) bg-(--lithos-bg)">
           <div className="mx-auto max-w-7xl px-6 py-12 md:py-24">
