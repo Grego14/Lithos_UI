@@ -54,7 +54,7 @@ export const SelectItem = ({ value, disabled, children, className, index, style,
         disabled,
       })}
       className={cn(
-        'w-full cursor-pointer select-none px-3 py-1.5 text-start text-sm outline-none',
+        'cursor-pointer select-none px-3 py-1.5 text-sm outline-none',
         isSelected && 'font-bold',
         isSelected
           ? isActive

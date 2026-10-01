@@ -45,7 +45,9 @@ export const TableStates = () => {
       </div>
       <TableContainer aria-label="Inventory preview" className="max-h-72">
         <Table size="sm" striped hoverable stickyHeader aria-busy={state === 'loading'}>
-          <TableCaption className="caption-top">Inventory preview with a sticky header and compact rows.</TableCaption>
+          <TableCaption className="caption-top">
+            Inventory preview with a sticky header and compact entries.
+          </TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead scope="col">Product</TableHead>

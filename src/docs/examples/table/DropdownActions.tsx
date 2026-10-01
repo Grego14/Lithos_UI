@@ -35,7 +35,7 @@ export const DropdownActionsTable = ({ data = dropdownInvoices }: { data?: Invoi
     <div className="w-full min-w-0">
       <TableContainer ref={actions.tableRef} aria-label="Dropdown invoice actions">
         <Table>
-          <TableCaption className="caption-top">Open a row menu for invoice actions.</TableCaption>
+          <TableCaption className="caption-top">Open an invoice menu for actions.</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead scope="col">Invoice</TableHead>

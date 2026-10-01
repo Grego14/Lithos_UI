@@ -180,7 +180,7 @@ describe('Loading, empty, and error states', () => {
     render(<TableStates />)
     expect(screen.getByText('Preview state')).toHaveClass('mr-2')
     const inventoryTable = screen.getByRole('table', {
-      name: 'Inventory preview with a sticky header and compact rows.',
+      name: 'Inventory preview with a sticky header and compact entries.',
     })
     expect(inventoryTable.querySelector('caption')).toHaveClass('caption-top')
     await user.click(screen.getByLabelText('Preview state'))
@@ -237,7 +237,7 @@ describe('Bulk actions', () => {
     expect(within(bulkTable).getByRole('cell')).toHaveAttribute('colspan', '5')
     await user.click(screen.getByLabelText('Show status'))
     expect(within(bulkTable).getByRole('cell')).toHaveAttribute('colspan', '4')
-    expect(screen.getByLabelText('Select all rows on this page')).toBeDisabled()
+    expect(screen.getByLabelText('Select all on this page')).toBeDisabled()
     expect(screen.getByRole('button', { name: 'Next' })).toBeDisabled()
     expect(await axe(container)).toHaveNoViolations()
   })
@@ -248,16 +248,16 @@ describe('Bulk actions', () => {
     const bulkTable = screen.getByRole('table', { name: /Bulk selection table/ })
     expect(within(bulkTable).getAllByRole('row')).toHaveLength(11)
     await user.click(screen.getByLabelText('Select INV-001'))
-    expect(screen.getByLabelText('Select all rows on this page')).toBePartiallyChecked()
-    await user.click(screen.getByLabelText('Select all rows on this page'))
-    expect(screen.getByText(/10 selected across all pages/)).toBeInTheDocument()
+    expect(screen.getByLabelText('Select all on this page')).toBePartiallyChecked()
+    await user.click(screen.getByLabelText('Select all on this page'))
+    expect(screen.getByText(/10 selected across pages/)).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: 'Next' }))
-    expect(screen.getByLabelText('Select all rows on this page')).not.toBeChecked()
+    expect(screen.getByLabelText('Select all on this page')).not.toBeChecked()
     expect(screen.getByLabelText('Select INV-011')).not.toBeChecked()
     await user.type(screen.getByLabelText('Filter invoices'), 'Robin')
-    expect(screen.getByText(/10 selected across all pages/)).toBeInTheDocument()
+    expect(screen.getByText(/10 selected across pages/)).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: 'Clear selection' }))
-    expect(screen.getByText(/0 selected across all pages/)).toBeInTheDocument()
+    expect(screen.getByText(/0 selected across pages/)).toBeInTheDocument()
   })
 
   it('clamps pages and prunes selection when records disappear', async () => {
@@ -273,10 +273,10 @@ describe('Bulk actions', () => {
     await user.click(screen.getByLabelText('Select row-11'))
     rerender(<BulkActionsTable data={data.slice(0, 2)} />)
     expect(screen.getByText('Page 1 of 1')).toBeInTheDocument()
-    expect(screen.getByText(/0 selected across all pages/)).toBeInTheDocument()
+    expect(screen.getByText(/0 selected across pages/)).toBeInTheDocument()
     rerender(<BulkActionsTable data={data} />)
     expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
-    expect(screen.getByText(/0 selected across all pages/)).toBeInTheDocument()
+    expect(screen.getByText(/0 selected across pages/)).toBeInTheDocument()
   })
 
   it('supports page-size changes without submitting a surrounding form', async () => {
@@ -287,7 +287,7 @@ describe('Bulk actions', () => {
       </form>
     )
     await user.click(screen.getByRole('button', { name: 'Next' }))
-    await user.click(screen.getByLabelText('Rows per page'))
+    await user.click(screen.getByLabelText('Items per page'))
     await user.click(screen.getByRole('option', { name: '20' }))
     expect(screen.getAllByRole('row')).toHaveLength(13)
     expect(screen.getByText('Page 1 of 1')).toBeInTheDocument()
@@ -319,14 +319,14 @@ describe('Bulk actions', () => {
     await user.click(screen.getByRole('button', { name: 'Delete selected' }))
     expect(screen.queryByRole('rowheader', { name: 'INV-001' })).not.toBeInTheDocument()
     expect(screen.getByRole('alert')).toHaveTextContent('Deleted invoices: INV-001, INV-002.')
-    expect(screen.getByText(/0 selected across all pages/)).toBeInTheDocument()
+    expect(screen.getByText(/0 selected across pages/)).toBeInTheDocument()
   })
 
   it('clamps the last page after deletion and disables bulk edit for multiple selections', async () => {
     const user = userEvent.setup()
     render(<BulkActionsTable />)
     await user.click(screen.getByRole('button', { name: 'Next' }))
-    await user.click(screen.getByLabelText('Select all rows on this page'))
+    await user.click(screen.getByLabelText('Select all on this page'))
     expect(screen.getByRole('button', { name: 'Edit selected' })).toBeDisabled()
     await user.click(screen.getByRole('button', { name: 'Delete selected' }))
     expect(screen.getByText('Page 1 of 1')).toBeInTheDocument()
@@ -395,7 +395,7 @@ describe('Independent action previews', () => {
     ).toBeInTheDocument()
   })
 
-  it('duplicates an invoice into a new row and resets the duplicated indicator', async () => {
+  it('duplicates an invoice and resets the duplicated indicator', async () => {
     const user = userEvent.setup()
     render(<RowActionsTable />)
     await user.click(screen.getByRole('button', { name: 'Duplicate INV-001' }))
@@ -468,7 +468,7 @@ describe('Independent action previews', () => {
   it('adds a row and announces the action with an alert', async () => {
     const user = userEvent.setup()
     render(<RowActionsTable />)
-    await user.click(screen.getByRole('button', { name: 'New row' }))
+    await user.click(screen.getByRole('button', { name: 'New invoice' }))
     expect(screen.getByRole('rowheader', { name: 'INV-004' })).toBeInTheDocument()
     expect(screen.getByRole('alert')).toHaveTextContent('Added INV-004.')
   })

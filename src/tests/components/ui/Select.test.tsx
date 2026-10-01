@@ -39,9 +39,7 @@ describe('Select Component', () => {
     await user.click(trigger)
 
     expect(screen.getByRole('listbox')).toBeInTheDocument()
-    const options = screen.getAllByRole('option')
-    expect(options).toHaveLength(3)
-    options.forEach((option) => expect(option).toHaveClass('w-full'))
+    expect(screen.getAllByRole('option')).toHaveLength(3)
   })
 
   it('should select option on click and close menu in uncontrolled mode', async () => {

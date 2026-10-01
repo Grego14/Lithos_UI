@@ -13,6 +13,7 @@ import { Checkbox } from '../../../components/ui/Checkbox'
 import { Input } from '../../../components/ui/Input'
 import { Select, SelectTrigger, SelectContent, SelectItem } from '../../../components/ui/Select'
 import { IconChevronDown } from '../../../components/ui/icons/IconChevronDown'
+import { Tooltip, TooltipContent, TooltipTrigger } from '../../../components/ui/Tooltip'
 import {
   Table,
   TableBody,
@@ -122,49 +123,67 @@ export const BulkActionsTable = ({ data = demoInvoices }: { data?: Invoice[] }) 
             <span className="sr-only">Bulk selection table</span>
             <div className="flex flex-wrap items-center">
               <div role="group" aria-label="Bulk actions" className="mr-4 flex items-center">
-                <Button
-                  variant="text"
-                  className="mr-1 p-2"
-                  aria-label="Edit selected"
-                  title="Edit one selected invoice"
-                  disabled={selectedRows.length !== 1}
-                  onClick={(event) => startEdit(selectedRows[0]!, event.currentTarget)}
-                >
-                  <IconEdit aria-hidden="true" />
-                </Button>
-                <Button
-                  variant="text"
-                  className="mr-1 p-2"
-                  aria-label="Delete selected"
-                  title="Delete selected invoices"
-                  disabled={validSelection.size === 0}
-                  onClick={() => deleteRows(new Set(validSelection))}
-                >
-                  <IconTrash aria-hidden="true" />
-                </Button>
-                <Button
-                  variant="text"
-                  className="mr-1 p-2"
-                  aria-label={duplicated.has('bulk') ? 'Duplicated selected' : 'Duplicate selected'}
-                  title="Duplicate selected invoice rows"
-                  disabled={validSelection.size === 0}
-                  onClick={() => duplicateRows(selectedRows, 'bulk')}
-                >
-                  {duplicated.has('bulk') ? <IconCheck aria-hidden="true" /> : <IconCopy aria-hidden="true" />}
-                </Button>
-                <Button
-                  variant="text"
-                  className="p-2"
-                  aria-label="Clear selection"
-                  title="Clear selection"
-                  disabled={validSelection.size === 0}
-                  onClick={() => setSelected(new Set())}
-                >
-                  <IconClose aria-hidden="true" />
-                </Button>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="text"
+                      className="mr-1 p-2"
+                      aria-label="Edit selected"
+                      disabled={selectedRows.length !== 1}
+                      onClick={(event) => startEdit(selectedRows[0]!, event.currentTarget)}
+                    >
+                      <IconEdit aria-hidden="true" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Edit selected invoice</TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="text"
+                      className="mr-1 p-2"
+                      aria-label="Delete selected"
+                      disabled={validSelection.size === 0}
+                      onClick={() => deleteRows(new Set(validSelection))}
+                    >
+                      <IconTrash aria-hidden="true" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Delete selected invoices</TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="text"
+                      className="mr-1 p-2"
+                      aria-label={duplicated.has('bulk') ? 'Duplicated selected' : 'Duplicate selected'}
+                      disabled={validSelection.size === 0}
+                      onClick={() => duplicateRows(selectedRows, 'bulk')}
+                    >
+                      {duplicated.has('bulk') ? <IconCheck aria-hidden="true" /> : <IconCopy aria-hidden="true" />}
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    {duplicated.has('bulk') ? 'Duplicated invoices' : 'Duplicate selected invoices'}
+                  </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="text"
+                      className="p-2"
+                      aria-label="Clear selection"
+                      disabled={validSelection.size === 0}
+                      onClick={() => setSelected(new Set())}
+                    >
+                      <IconClose aria-hidden="true" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Clear selection</TooltipContent>
+                </Tooltip>
               </div>
               <span role="status" className="text-sm">
-                {filtered.length} results · {validSelection.size} selected across all pages
+                {filtered.length} results · {validSelection.size} selected across pages
               </span>
             </div>
           </TableCaption>
@@ -172,7 +191,7 @@ export const BulkActionsTable = ({ data = demoInvoices }: { data?: Invoice[] }) 
             <TableRow>
               <TableHead scope="col">
                 <Checkbox
-                  aria-label="Select all rows on this page"
+                  aria-label="Select all on this page"
                   checked={allPageSelected}
                   indeterminate={somePageSelected && !allPageSelected}
                   disabled={visible.length === 0}
@@ -261,7 +280,7 @@ export const BulkActionsTable = ({ data = demoInvoices }: { data?: Invoice[] }) 
       <div className="mt-5 flex flex-wrap items-center justify-between">
         <div className="mb-3 mr-4 flex items-center">
           <span id={`${id}-size-label`} className="mr-2 text-sm font-bold">
-            Rows per page
+            Items per page
           </span>
           <Select
             value={String(pageSize)}

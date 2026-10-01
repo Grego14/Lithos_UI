@@ -74,7 +74,7 @@ export const ResponsiveTable = () => {
         onChange={(event) => setPreviewWidth(Number(event.target.value))}
         className="mb-3 w-full max-w-80"
       />
-      <p className="mb-3 text-sm">Adjust the width. Columns that no longer fit move into each row's details.</p>
+      <p className="mb-3 text-sm">Adjust the width. Columns that no longer fit move into each invoice's details.</p>
       <TableContainer ref={containerRef} aria-label="Responsive invoices" style={{ maxWidth: previewWidth }}>
         <Table size="sm" className="table-fixed">
           <TableCaption className="caption-top">Invoice details adapt to the available container width.</TableCaption>
