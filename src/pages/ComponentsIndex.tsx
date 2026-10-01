@@ -170,13 +170,12 @@ const PopoverPreview = () => (
 )
 
 const DrawerPreview = () => (
-  <div className="w-full scale-[0.5] origin-center flex justify-center pointer-events-none">
-    <Drawer open={true} trigger={<Button>Drawer</Button>} placement="bottom" backdropClass="bg-transparent">
-      <DrawerHeader>
-        <DrawerTitle>Title</DrawerTitle>
-      </DrawerHeader>
-      <DrawerBody>Content</DrawerBody>
-    </Drawer>
+  <div className="w-full h-full scale-[0.7] origin-center flex items-end justify-center pointer-events-none pb-4">
+    <div className="w-[80%] h-24 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0_0_var(--lithos-shadow)] rounded-t-(--lithos-radius) flex flex-col items-center pt-2 px-4 relative">
+      <div className="w-8 h-1 bg-(--lithos-border) rounded-full mb-2 opacity-50" />
+      <div className="w-full h-4 bg-(--lithos-border)/10 rounded-sm mb-2" />
+      <div className="w-3/4 h-4 bg-(--lithos-border)/10 rounded-sm" />
+    </div>
   </div>
 )
 

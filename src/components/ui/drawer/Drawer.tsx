@@ -88,13 +88,21 @@ export const Drawer = ({
     if (shouldRenderDialog) return
 
     const originalStyle = window.getComputedStyle(document.body).overflow
+    const originalPaddingRight = window.getComputedStyle(document.body).paddingRight
 
     if (open) {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = `calc(${originalPaddingRight} + ${scrollbarWidth}px)`
+        document.body.style.setProperty('--removed-scrollbar-width', `${scrollbarWidth}px`)
+      }
       document.body.style.overflow = 'hidden'
     }
 
     return () => {
       document.body.style.overflow = originalStyle
+      document.body.style.paddingRight = originalPaddingRight
+      document.body.style.removeProperty('--removed-scrollbar-width')
     }
   }, [open, shouldRenderDialog])
 
@@ -153,7 +161,7 @@ export const Drawer = ({
       <DrawerContext.Provider value={contextValue}>
         <FloatingPortal>
           <div
-            aria-hidden={!open}
+            inert={!open ? '' : undefined}
             className={cn('fixed inset-0 z-(--lithos-z-drawer)', open ? 'pointer-events-auto' : 'pointer-events-none')}
           >
             <div
@@ -191,7 +199,7 @@ export const Drawer = ({
                 />
               )}
 
-              <div data-scrollable className="flex flex-col h-full w-full overflow-y-scroll overflow-x-hidden">
+              <div data-scrollable className="flex flex-col h-full w-full overflow-y-auto overflow-x-hidden">
                 {children}
               </div>
             </PopoverContent>

@@ -138,23 +138,24 @@ const PlacementsDrawerPreview = () => {
 
   return (
     <>
-      <div className="flex space-x-3">
+      <div className="flex flex-wrap -m-1.5">
         {positions.map((pos) => (
-          <Button
-            key={pos}
-            onClick={() => {
-              setPlacement(pos)
-              setOpen(true)
-            }}
-            className="capitalize"
-          >
-            {pos}
-          </Button>
+          <div key={pos} className="w-1/2 p-1.5 sm:w-auto">
+            <Button
+              onClick={() => {
+                setPlacement(pos)
+                setOpen(true)
+              }}
+              className="w-full sm:w-auto capitalize"
+            >
+              {pos}
+            </Button>
+          </div>
         ))}
       </div>
 
       <Drawer open={open} placement={placement} onOpenChange={setOpen} aria-label="Placement example drawer">
-        <div className={`flex p-6 ${isVertical ? 'w-full flex-col' : 'h-full w-80 flex-col'}`}>
+        <div className="flex h-full w-full flex-col p-6">
           <div className="flex items-center justify-between border-b pb-4">
             <h2 className="text-lg font-semibold capitalize">{placement} Drawer</h2>
             <Button variant="text" onClick={() => setOpen(false)} aria-label="Close drawer">
@@ -166,7 +167,7 @@ const PlacementsDrawerPreview = () => {
             This drawer is aligned to the {placement} edge of the screen.
           </p>
 
-          <div className="border-t pt-4">
+          <div className="pt-4">
             <Button className="w-full" onClick={() => setOpen(false)}>
               Close
             </Button>
