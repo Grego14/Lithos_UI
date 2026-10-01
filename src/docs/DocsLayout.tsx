@@ -19,6 +19,7 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#installation', label: 'Installation', level: 1 },
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#basic', label: 'Basic', level: 2 },
+    { id: '#accent', label: 'Accent', level: 2 },
     { id: '#table-states', label: 'States', level: 2 },
     { id: '#sortable-table', label: 'Sorting', level: 2 },
     { id: '#grouped-headers', label: 'Grouped Headers', level: 2 },

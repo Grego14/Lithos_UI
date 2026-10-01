@@ -4,6 +4,8 @@ import { CodeViewer } from '../../components/ui/CodeViewer'
 import { SetupGuide } from '../layout/SetupGuide'
 import { tableContainerPropsData, tablePartsPropsData, tablePropsData } from '../propsData/table'
 import { BasicTable } from '../examples/table/BasicTable'
+import { AccentTable } from '../examples/table/AccentTable'
+import accentSource from '../examples/table/AccentTable.tsx?raw'
 import { TableStates } from '../examples/table/TableStates'
 import { BulkActionsTable } from '../examples/table/BulkActions'
 import { RowActionsTable } from '../examples/table/RowActions'
@@ -107,6 +109,16 @@ export const TableDoc = () => (
       </p>
       <PreviewBlock code={tableExampleCode(basicSource)}>
         <BasicTable />
+      </PreviewBlock>
+      <h3 id="accent" className={subheading}>
+        Accent
+      </h3>
+      <p className={paragraph}>
+        Set <code>variant="accent"</code> on TableHeader to use the selected theme accent. Header text adapts through
+        Lithos's contrast engine. Change the theme accent to see the header update in light and Obsidian modes.
+      </p>
+      <PreviewBlock code={tableExampleCode(accentSource)}>
+        <AccentTable />
       </PreviewBlock>
       <h3 id="table-states" className={subheading}>
         States
