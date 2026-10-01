@@ -180,10 +180,7 @@ export const SelectContent = ({
     <FloatingList elementsRef={elementsRef} labelsRef={labelsRef}>
       <PopoverContent
         ref={containerRef}
-        className={[
-          'p-1 max-h-60 overflow-y-auto [scrollbar-gutter:stable] [clip-path:inset(0_round_var(--lithos-radius))]',
-          className,
-        ]}
+        className={['p-1 max-h-60 overflow-y-auto [clip-path:inset(0_round_var(--lithos-radius))]', className]}
         {...rest}
         aria-describedby={undefined}
         onKeyDown={handleKeyDown}
