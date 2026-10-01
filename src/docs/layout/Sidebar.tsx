@@ -24,6 +24,7 @@ const components = [
   'select',
   'skeleton',
   'spinner',
+  'table',
   'tabs',
   'typography',
   'toast',

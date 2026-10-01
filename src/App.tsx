@@ -46,6 +46,7 @@ import { Showroom } from './showroom/Index'
 import { ToastDoc } from './docs/pages/Toast'
 import { ToggleDoc } from './docs/pages/Toggle'
 import { TabsDoc } from './docs/pages/Tabs'
+import { TableDoc } from './docs/pages/Table'
 import { TypographyDoc } from './docs/pages/Typography'
 import { ThemeBuilder } from './pages/ThemeBuilder'
 import { TooltipDoc } from './docs/pages/Tooltip'
@@ -98,6 +99,7 @@ const renderDocRoutes = () => {
     { path: 'toast', component: ToastDoc },
     { path: 'toggle', component: ToggleDoc },
     { path: 'tabs', component: TabsDoc },
+    { path: 'table', component: TableDoc },
     { path: 'typography', component: TypographyDoc },
     { path: 'tooltip', component: TooltipDoc },
   ]

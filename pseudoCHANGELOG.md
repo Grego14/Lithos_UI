@@ -21,6 +21,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added (0.1.2)
 
+- **Responsive Table example:** Optional columns move into accessible expandable row details as the container narrows, with persistent record keys, a preview-width slider, and resize updates only when column visibility changes. Detail labels and values share a row.
+
+- **Table review refinements:** Split bulk, individual, and dropdown actions into independent, copyable previews. Duplicate appends rows with new IDs allocated in one batch and preserves pagination, filtering, and sorting; View shows additional invoice details; Edit restores focus on completion; Toast notifications identify affected IDs. Added focused sorting and grouped sticky-header examples, portaled row menus, and a loading announcement outside the busy table. Reused Lithos Select for the preview-state control.
+
+- **Table:** Added native table primitives with accessible captions, a keyboard-focusable scroll container, density options, stripes, hover and selection styles, and opt-in sticky headers.
+  - Contrasting column-header colors follow the light and Obsidian themes. Table examples use shared Lithos icon wrappers for consistent sizing and stroke weight, including sorting arrows and row actions.
+  - Added an accent header variant with YIQ-derived text contrast, used in the components index. Bulk action icons appear only while records are selected, with focus restored when the selection is cleared. Table load failures and action results use Toast; anatomy shows only the component structure.
+  - Basic Table and Table States examples, including Badge availability, a single state-driven ready/loading/empty/error table, centered Spinner feedback, and Add/Retry recovery actions.
+  - Bulk Actions, Row Actions, and Dropdown Actions examples with sorting, filtering, custom pagination, persistent ID selection, column visibility, bulk actions in the selection-table caption, and a separate icon-action table for viewing, editing, deleting, and duplicating rows.
+  - Added nested documentation TOC entries, installation guidance, navigation, component showcase, package and CLI registry exports, and regression/accessibility tests; documented server-data and large-dataset boundaries.
+
 - **Skeleton & SkeletonText:** Added loading placeholder components ([#320](https://github.com/lithosui/Lithos_UI/pull/320)).
   - Text, rectangular, rounded, and circular variants with customizable dimensions and neutral or accent tones.
   - Shimmer animation enabled by default, with pulse and disabled animation options, opt-in reduced-motion support, and forced-colors support.

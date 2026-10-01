@@ -296,6 +296,13 @@ export const registry: Record<string, RegistryItem> = {
     githubUrl: `${GITHUB_BASE}/components/ui/Spinner.tsx`,
     requires: ['utils/cn.ts', 'core/useAccentColor.tsx', 'utils/yiq.ts'],
   },
+  table: {
+    slug: 'table',
+    name: 'Table',
+    type: 'ui',
+    githubUrl: `${GITHUB_BASE}/components/ui/Table.tsx`,
+    requires: ['utils/cn.ts'],
+  },
   tabs: {
     slug: 'tabs',
     name: 'Tabs',
