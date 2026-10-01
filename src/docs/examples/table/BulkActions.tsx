@@ -1,10 +1,18 @@
 import { useEffect, useId, useState } from 'react'
-import { FiCheck, FiCopy, FiEdit2, FiTrash2, FiX } from 'react-icons/fi'
+import { IconCheck } from '../../../components/ui/icons/IconCheck'
+import { IconCopy } from '../../../components/ui/icons/IconCopy'
+import { IconEdit } from '../../../components/ui/icons/IconEdit'
+import { IconTrash } from '../../../components/ui/icons/IconTrash'
+import { IconClose } from '../../../components/ui/icons/IconClose'
+import { IconArrowUp } from '../../../components/ui/icons/IconArrowUp'
+import { IconArrowDown } from '../../../components/ui/icons/IconArrowDown'
 import { Badge } from '../../../components/ui/Badge'
 import { Button } from '../../../components/ui/Button'
 import { Alert } from '../../../components/ui/Alert'
 import { Checkbox } from '../../../components/ui/Checkbox'
 import { Input } from '../../../components/ui/Input'
+import { Select, SelectTrigger, SelectContent, SelectItem } from '../../../components/ui/Select'
+import { IconChevronDown } from '../../../components/ui/icons/IconChevronDown'
 import {
   Table,
   TableBody,
@@ -20,25 +28,27 @@ import { demoInvoices, currency, useInvoiceActions, type Invoice } from './useIn
 import { InvoiceEditor } from './InvoiceActions'
 
 /** Client-side recipe. Pass a complete dataset with unique, persistent IDs. */
-export const AdvancedTable = ({ data = demoInvoices }: { data?: Invoice[] }) => {
+export const BulkActionsTable = ({ data = demoInvoices }: { data?: Invoice[] }) => {
   const id = useId()
   const actions = useInvoiceActions(data)
-  const { rows, startEdit, deleteRows, copyRows, copied, notice } = actions
+  const { rows, startEdit, deleteRows, duplicateRows, duplicated, notice } = actions
   const [query, setQuery] = useState('')
   const [sort, setSort] = useState<{ key: 'customer' | 'amount'; descending: boolean } | null>(null)
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(10)
   const [selected, setSelected] = useState<Set<string>>(new Set())
   const [showStatus, setShowStatus] = useState(true)
-  const filtered = rows.filter((row) =>
-    `${row.id} ${row.customer} ${row.status}`.toLowerCase().includes(query.trim().toLowerCase())
-  )
-  const sorted = [...filtered].sort((a, b) => {
-    if (!sort) return 0
-    const comparison =
-      sort.key === 'amount' ? a.amount - b.amount : a.customer.localeCompare(b.customer, 'en', { numeric: true })
-    return (sort.descending ? -comparison : comparison) || a.id.localeCompare(b.id)
-  })
+  const normalizedQuery = query.trim().toLowerCase()
+  const filtered = normalizedQuery
+    ? rows.filter((row) => `${row.id} ${row.customer} ${row.status}`.toLowerCase().includes(normalizedQuery))
+    : rows
+  const sorted = sort
+    ? [...filtered].sort((a, b) => {
+        const comparison =
+          sort.key === 'amount' ? a.amount - b.amount : a.customer.localeCompare(b.customer, 'en', { numeric: true })
+        return (sort.descending ? -comparison : comparison) || a.id.localeCompare(b.id)
+      })
+    : filtered
   const pageCount = Math.max(1, Math.ceil(sorted.length / pageSize))
   const currentPage = Math.min(page, pageCount - 1)
   const visible = sorted.slice(currentPage * pageSize, (currentPage + 1) * pageSize)
@@ -106,7 +116,7 @@ export const AdvancedTable = ({ data = demoInvoices }: { data?: Invoice[] }) => 
           onChange={(event) => setShowStatus(event.target.checked)}
         />
       </div>
-      <TableContainer aria-label="Bulk invoice selection">
+      <TableContainer ref={actions.tableRef} aria-label="Bulk invoice selection">
         <Table hoverable>
           <TableCaption className="caption-top">
             <span className="sr-only">Bulk selection table</span>
@@ -118,9 +128,9 @@ export const AdvancedTable = ({ data = demoInvoices }: { data?: Invoice[] }) => 
                   aria-label="Edit selected"
                   title="Edit one selected invoice"
                   disabled={selectedRows.length !== 1}
-                  onClick={() => startEdit(selectedRows[0]!)}
+                  onClick={(event) => startEdit(selectedRows[0]!, event.currentTarget)}
                 >
-                  <FiEdit2 aria-hidden="true" size={16} />
+                  <IconEdit aria-hidden="true" />
                 </Button>
                 <Button
                   variant="text"
@@ -130,24 +140,17 @@ export const AdvancedTable = ({ data = demoInvoices }: { data?: Invoice[] }) => 
                   disabled={validSelection.size === 0}
                   onClick={() => deleteRows(new Set(validSelection))}
                 >
-                  <FiTrash2 aria-hidden="true" size={16} />
+                  <IconTrash aria-hidden="true" />
                 </Button>
                 <Button
                   variant="text"
                   className="mr-1 p-2"
-                  aria-label={copied.has('bulk') ? 'Copied selected' : 'Copy selected'}
-                  title="Copy selected invoice rows"
+                  aria-label={duplicated.has('bulk') ? 'Duplicated selected' : 'Duplicate selected'}
+                  title="Duplicate selected invoice rows"
                   disabled={validSelection.size === 0}
-                  onClick={() => {
-                    void copyRows(selectedRows, 'bulk')
-                    setPage(Math.max(0, Math.ceil((rows.length + selectedRows.length) / pageSize) - 1))
-                  }}
+                  onClick={() => duplicateRows(selectedRows, 'bulk')}
                 >
-                  {copied.has('bulk') ? (
-                    <FiCheck aria-hidden="true" size={16} />
-                  ) : (
-                    <FiCopy aria-hidden="true" size={16} />
-                  )}
+                  {duplicated.has('bulk') ? <IconCheck aria-hidden="true" /> : <IconCopy aria-hidden="true" />}
                 </Button>
                 <Button
                   variant="text"
@@ -157,7 +160,7 @@ export const AdvancedTable = ({ data = demoInvoices }: { data?: Invoice[] }) => 
                   disabled={validSelection.size === 0}
                   onClick={() => setSelected(new Set())}
                 >
-                  <FiX aria-hidden="true" size={16} />
+                  <IconClose aria-hidden="true" />
                 </Button>
               </div>
               <span role="status" className="text-sm">
@@ -181,11 +184,19 @@ export const AdvancedTable = ({ data = demoInvoices }: { data?: Invoice[] }) => 
                 scope="col"
                 aria-sort={sort?.key === 'customer' ? (sort.descending ? 'descending' : 'ascending') : undefined}
               >
-                <Button variant="text" onClick={() => changeSort('customer')}>
+                <Button
+                  variant="text"
+                  className="text-inherit"
+                  iconRight={
+                    sort?.key === 'customer' && !sort.descending ? (
+                      <IconArrowUp />
+                    ) : (
+                      <IconArrowDown className={sort?.key === 'customer' ? '' : 'opacity-50'} />
+                    )
+                  }
+                  onClick={() => changeSort('customer')}
+                >
                   Customer
-                  <span aria-hidden="true" className="ms-2">
-                    {sort?.key === 'customer' ? (sort.descending ? '↓' : '↑') : '↕'}
-                  </span>
                 </Button>
               </TableHead>
               {showStatus && <TableHead scope="col">Status</TableHead>}
@@ -194,11 +205,19 @@ export const AdvancedTable = ({ data = demoInvoices }: { data?: Invoice[] }) => 
                 className="text-end"
                 aria-sort={sort?.key === 'amount' ? (sort.descending ? 'descending' : 'ascending') : undefined}
               >
-                <Button variant="text" onClick={() => changeSort('amount')}>
+                <Button
+                  variant="text"
+                  className="text-inherit"
+                  iconRight={
+                    sort?.key === 'amount' && !sort.descending ? (
+                      <IconArrowUp />
+                    ) : (
+                      <IconArrowDown className={sort?.key === 'amount' ? '' : 'opacity-50'} />
+                    )
+                  }
+                  onClick={() => changeSort('amount')}
+                >
                   Amount
-                  <span aria-hidden="true" className="ms-2">
-                    {sort?.key === 'amount' ? (sort.descending ? '↓' : '↑') : '↕'}
-                  </span>
                 </Button>
               </TableHead>
             </TableRow>
@@ -240,23 +259,29 @@ export const AdvancedTable = ({ data = demoInvoices }: { data?: Invoice[] }) => 
       </TableContainer>
       <InvoiceEditor actions={actions} />
       <div className="mt-5 flex flex-wrap items-center justify-between">
-        <div className="mb-3 mr-4">
-          <label htmlFor={`${id}-size`} className="mr-2 text-sm font-bold">
+        <div className="mb-3 mr-4 flex items-center">
+          <span id={`${id}-size-label`} className="mr-2 text-sm font-bold">
             Rows per page
-          </label>
-          <select
-            id={`${id}-size`}
-            value={pageSize}
-            onChange={(event) => {
-              setPageSize(Number(event.target.value))
+          </span>
+          <Select
+            value={String(pageSize)}
+            onChange={(value) => {
+              setPageSize(Number(value))
               setPage(0)
             }}
-            className="border-2 border-(--lithos-border) bg-(--lithos-surface) p-2"
           >
-            <option value={10}>10</option>
-            <option value={20}>20</option>
-            <option value={50}>50</option>
-          </select>
+            <SelectTrigger aria-labelledby={`${id}-size-label`}>
+              {pageSize}
+              <IconChevronDown className="ml-2 shrink-0" aria-hidden="true" />
+            </SelectTrigger>
+            <SelectContent>
+              {[10, 20, 50].map((size, index) => (
+                <SelectItem key={size} value={String(size)} index={index}>
+                  {size}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
         <nav aria-label="Invoice pages" className="mb-3 flex items-center">
           <Button variant="secondary" disabled={currentPage === 0} onClick={() => setPage(currentPage - 1)}>

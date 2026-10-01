@@ -1,5 +1,10 @@
 import { useRef } from 'react'
-import { FiCheck, FiCopy, FiEdit2, FiEye, FiMoreHorizontal, FiTrash2 } from 'react-icons/fi'
+import { IconCheck } from '../../../components/ui/icons/IconCheck'
+import { IconCopy } from '../../../components/ui/icons/IconCopy'
+import { IconEdit } from '../../../components/ui/icons/IconEdit'
+import { IconEye } from '../../../components/ui/icons/IconEye'
+import { IconMoreHorizontal } from '../../../components/ui/icons/IconMoreHorizontal'
+import { IconTrash } from '../../../components/ui/icons/IconTrash'
 import { Button } from '../../../components/ui/Button'
 import { Alert } from '../../../components/ui/Alert'
 import {
@@ -28,7 +33,7 @@ export const DropdownActionsTable = ({ data = dropdownInvoices }: { data?: Invoi
   const triggers = useRef(new Map<string, HTMLButtonElement>())
   return (
     <div className="w-full min-w-0">
-      <TableContainer aria-label="Dropdown invoice actions">
+      <TableContainer ref={actions.tableRef} aria-label="Dropdown invoice actions">
         <Table>
           <TableCaption className="caption-top">Open a row menu for invoice actions.</TableCaption>
           <TableHeader>
@@ -60,10 +65,10 @@ export const DropdownActionsTable = ({ data = dropdownInvoices }: { data?: Invoi
                         }}
                       >
                         <Button variant="secondary" aria-label={`Actions for ${row.id}`}>
-                          {actions.copied.has(row.id) ? (
-                            <FiCheck aria-hidden="true" />
+                          {actions.duplicated.has(row.id) ? (
+                            <IconCheck aria-hidden="true" />
                           ) : (
-                            <FiMoreHorizontal aria-hidden="true" />
+                            <IconMoreHorizontal aria-hidden="true" />
                           )}
                         </Button>
                       </DropdownTrigger>
@@ -75,24 +80,29 @@ export const DropdownActionsTable = ({ data = dropdownInvoices }: { data?: Invoi
                             actions.view(row.id)
                           }}
                         >
-                          <FiEye className="mr-2" aria-hidden="true" />
+                          <IconEye className="mr-2" aria-hidden="true" />
                           View
                         </DropdownItem>
-                        <DropdownItem onClick={() => actions.startEdit(row)}>
-                          <FiEdit2 className="mr-2" aria-hidden="true" />
+                        <DropdownItem
+                          onClick={() => {
+                            const trigger = triggers.current.get(row.id)
+                            if (trigger) actions.startEdit(row, trigger)
+                          }}
+                        >
+                          <IconEdit className="mr-2" aria-hidden="true" />
                           Edit
                         </DropdownItem>
-                        <DropdownItem onClick={() => void actions.copyRows([row], row.id)}>
-                          {actions.copied.has(row.id) ? (
-                            <FiCheck className="mr-2" aria-hidden="true" />
+                        <DropdownItem onClick={() => void actions.duplicateRows([row], row.id)}>
+                          {actions.duplicated.has(row.id) ? (
+                            <IconCheck className="mr-2" aria-hidden="true" />
                           ) : (
-                            <FiCopy className="mr-2" aria-hidden="true" />
+                            <IconCopy className="mr-2" aria-hidden="true" />
                           )}
-                          {actions.copied.has(row.id) ? 'Copied' : 'Copy'}
+                          {actions.duplicated.has(row.id) ? 'Duplicated' : 'Duplicate'}
                         </DropdownItem>
                         <DropdownSeparator />
                         <DropdownItem onClick={() => actions.deleteRows(new Set([row.id]))}>
-                          <FiTrash2 className="mr-2" aria-hidden="true" />
+                          <IconTrash className="mr-2" aria-hidden="true" />
                           Delete
                         </DropdownItem>
                       </DropdownContent>

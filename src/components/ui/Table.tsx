@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Lithos UI native table primitives.
+ * - React 19 refs are ordinary props, typed by ComponentPropsWithRef and passed through to native elements.
+ * - Theme tokens provide colors, YIQ-derived accent text, radius, and hard shadows; cn() preserves class overrides.
+ * - Cell padding controls density without CSS gap; interactive behavior is composed with shared controls.
+ */
 import type { ComponentPropsWithRef } from 'react'
 import { cn, type LithosClass } from '../../utils/cn'
 
@@ -58,7 +64,7 @@ export const Table = ({
 
 export type TableHeaderProps = TableElementProps<'thead'>
 export const TableHeader = ({ className, ...props }: TableHeaderProps) => (
-  <thead data-slot="table-header" className={cn('bg-(--lithos-surface)', className)} {...props} />
+  <thead data-slot="table-header" className={cn('bg-(--lithos-text) text-(--lithos-bg)', className)} {...props} />
 )
 
 export type TableBodyProps = TableElementProps<'tbody'>

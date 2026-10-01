@@ -3,21 +3,25 @@ import { PropsAccordion } from '../../components/ui/PropsTable'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 import { SetupGuide } from '../layout/SetupGuide'
 import { tableContainerPropsData, tablePartsPropsData, tablePropsData } from '../propsData/table'
-import { BasicTable } from '../examples/table/Basic'
-import { IntermediateTable } from '../examples/table/Intermediate'
-import { AdvancedTable } from '../examples/table/Advanced'
-import { IndividualActionsTable } from '../examples/table/IndividualActions'
+import { BasicTable } from '../examples/table/BasicTable'
+import { TableStates } from '../examples/table/TableStates'
+import { BulkActionsTable } from '../examples/table/BulkActions'
+import { RowActionsTable } from '../examples/table/RowActions'
 import { DropdownActionsTable } from '../examples/table/DropdownActions'
 import hookSource from '../examples/table/useInvoiceActions.ts?raw'
 import actionsSource from '../examples/table/InvoiceActions.tsx?raw'
-import individualSource from '../examples/table/IndividualActions.tsx?raw'
+import rowActionsSource from '../examples/table/RowActions.tsx?raw'
 import dropdownSource from '../examples/table/DropdownActions.tsx?raw'
 import type { UsageCodeConfig } from '../utils/deriveUsageCode'
-import { ResponsiveTable } from '../examples/table/Responsive'
-import responsiveSource from '../examples/table/Responsive.tsx?raw'
-import basicSource from '../examples/table/Basic.tsx?raw'
-import intermediateSource from '../examples/table/Intermediate.tsx?raw'
-import advancedSource from '../examples/table/Advanced.tsx?raw'
+import { ResponsiveTable } from '../examples/table/ResponsiveTable'
+import responsiveSource from '../examples/table/ResponsiveTable.tsx?raw'
+import basicSource from '../examples/table/BasicTable.tsx?raw'
+import statesSource from '../examples/table/TableStates.tsx?raw'
+import bulkActionsSource from '../examples/table/BulkActions.tsx?raw'
+import { SortableTable } from '../examples/table/SortableTable'
+import sortableSource from '../examples/table/SortableTable.tsx?raw'
+import { GroupedHeadersTable } from '../examples/table/GroupedHeaders'
+import groupedHeadersSource from '../examples/table/GroupedHeaders.tsx?raw'
 
 /** Bundle local example helpers so each PreviewBlock is independently copyable. */
 const tableExampleCode = (...sources: string[]): UsageCodeConfig => {
@@ -69,7 +73,7 @@ export const TableDoc = () => (
     <header className="mt-0">
       <h1 className="mb-8 text-4xl md:text-5xl font-black tracking-tight leading-none text-(--lithos-text)">Table</h1>
       <p className="mt-2 max-w-2xl text-lg md:text-xl font-display opacity-70 text-(--lithos-text)">
-        Clear structure. Bold borders. From a simple invoice list to an interactive data table.
+        Display structured data with contrasting headers, responsive layouts, sorting, and row actions.
       </p>
       <hr className="border-t-2 border-(--lithos-border) my-8" />
     </header>
@@ -84,79 +88,96 @@ export const TableDoc = () => (
     />
     <p className={paragraph}>
       Import <code>lithos-ui/tokens.css</code> alongside your Tailwind stylesheet and configure the Lithos theme as
-      described in Installation. The Basic example uses the non-sticky default; the Intermediate example demonstrates a
-      sticky header and a separate state-driven preview table. The Advanced example uses Badge, Button, Checkbox, Input,
-      Spinner, Dialog, Dropdown, Select, and icons from <code>react-icons/fi</code>.
+      described in Installation. Basic Table uses the non-sticky default; Table States demonstrates a sticky header with
+      state-driven feedback. The examples also compose Badge, Button, Checkbox, Input, Spinner, Dialog, Dropdown,
+      Select, and the shared Lithos icon components.
     </p>
     <section aria-labelledby="examples" className="mb-12">
       <h2 id="examples" className={heading}>
         Examples
       </h2>
       <h3 id="basic" className={subheading}>
-        Basic
+        Basic Table
       </h3>
       <p className={paragraph}>
-        A non-sticky semantic table with a caption and totals footer. The container scrolls horizontally when content
-        needs more space; normal text can wrap.
+        Display invoices with a caption, row labels, and a totals footer. Text wraps naturally, and the container
+        scrolls horizontally when the content needs more space.
       </p>
       <PreviewBlock code={tableExampleCode(basicSource)}>
         <BasicTable />
       </PreviewBlock>
-      <h3 id="intermediate" className={subheading}>
-        Intermediate
+      <h3 id="table-states" className={subheading}>
+        Table States
       </h3>
       <p className={paragraph}>
-        Compact rows, stripes, hover feedback, and a sticky header. The Preview state control changes this table between
-        ready, loading, empty, and error. Loading uses a centered Spinner with its label below; Add product and Retry
-        return the table to ready.
+        Use Preview state to switch between inventory, loading, empty, and error views. This demo combines compact,
+        striped rows with a sticky header and loading feedback. Add product and Retry restore the sample inventory.
       </p>
-      <PreviewBlock code={tableExampleCode(intermediateSource)}>
-        <IntermediateTable />
+      <PreviewBlock code={tableExampleCode(statesSource)}>
+        <TableStates />
+      </PreviewBlock>
+      <h3 id="sortable-table" className={subheading}>
+        Sortable Table
+      </h3>
+      <p className={paragraph}>
+        Activate the Amount header to sort invoices from lowest to highest or highest to lowest. Amounts are sorted
+        numerically, and the direction is shown by an arrow and announced to assistive technology.
+      </p>
+      <PreviewBlock code={tableExampleCode(sortableSource)}>
+        <SortableTable />
+      </PreviewBlock>
+      <h3 id="grouped-headers" className={subheading}>
+        Grouped Headers
+      </h3>
+      <p className={paragraph}>
+        Group Online and Retail under Units sold while Product spans both header rows. Scroll the table to see both
+        header rows stay visible together.
+      </p>
+      <PreviewBlock code={tableExampleCode(groupedHeadersSource)}>
+        <GroupedHeadersTable />
       </PreviewBlock>
       <h3 id="responsive" className={subheading}>
-        Responsive
+        Responsive Table
       </h3>
       <p className={paragraph}>
-        When space runs out, lower-priority columns move into expandable row details. Use the chevron to reveal them.
-        This responds to the table container, including narrow panels on a desktop.
+        Adjust the width slider to move lower-priority columns into expandable row details. Use each row's chevron to
+        reveal the hidden values. The layout responds to its container, including narrow panels on a desktop.
       </p>
       <PreviewBlock code={tableExampleCode(responsiveSource)}>
         <ResponsiveTable />
       </PreviewBlock>
-      <h3 id="advanced" className={subheading}>
-        Advanced
+      <h3 id="bulk-actions" className={subheading}>
+        Bulk Actions
       </h3>
       <p className={paragraph}>
-        Explore bulk selection, individual icon actions, and dropdown actions in independent previews. All changes stay
-        in the local demo. Copy actions add duplicate rows, and action results appear as alerts. Records use persistent
-        IDs for keys and action targets.
+        Select invoices across pages, then duplicate or delete the selection. The header checkbox selects only the
+        current page; selections remain when sorting or filtering. Edit is available when exactly one invoice is
+        selected.
       </p>
-      <h4 id="bulk-actions" className={subheading}>
-        Bulk Actions
-      </h4>
       <p className={paragraph}>
-        Sort, filter, paginate, and select invoices. Edit is enabled for exactly one selected record. Copy shows a check
-        after success; Delete removes the selected records across all pages.
+        Changes stay in this demo. Duplicate preserves the current page, filter, and sort, so new rows may appear on
+        another page or be hidden by the filter. Action messages identify the affected invoices, including selections
+        outside the current view.
       </p>
-      <PreviewBlock code={tableExampleCode(hookSource, actionsSource, advancedSource)}>
-        <AdvancedTable />
+      <PreviewBlock code={tableExampleCode(hookSource, actionsSource, bulkActionsSource)}>
+        <BulkActionsTable />
       </PreviewBlock>
-      <h4 id="individual-actions" className={subheading}>
-        Individual Actions
-      </h4>
+      <h3 id="row-actions" className={subheading}>
+        Row Actions
+      </h3>
       <p className={paragraph}>
-        Add a new invoice row, view invoice details in a table, or edit and delete an invoice. Copy adds a duplicate row
-        with a new invoice ID and changes to a check for two seconds.
+        Add an invoice or use a row's icon buttons to view details, edit the customer name, duplicate, or delete it.
+        View opens a dialog; Duplicate appends a row with a new ID and briefly shows a check. Changes stay in this demo.
       </p>
-      <PreviewBlock code={tableExampleCode(hookSource, actionsSource, individualSource)}>
-        <IndividualActionsTable />
+      <PreviewBlock code={tableExampleCode(hookSource, actionsSource, rowActionsSource)}>
+        <RowActionsTable />
       </PreviewBlock>
-      <h4 id="dropdown-actions" className={subheading}>
+      <h3 id="dropdown-actions" className={subheading}>
         Dropdown Actions
-      </h4>
+      </h3>
       <p className={paragraph}>
-        The same row actions inside a portaled Lithos Dropdown. The trigger briefly shows a check after copying, and the
-        menu shows the corresponding Copied state. Copy adds a duplicate invoice row with a new ID.
+        Open a row's menu to view details, edit the customer name, duplicate, or delete that invoice. The menu opens
+        outside the scroll container to avoid clipping and supports keyboard navigation. Changes stay in this demo.
       </p>
       <PreviewBlock code={tableExampleCode(hookSource, actionsSource, dropdownSource)}>
         <DropdownActionsTable />
@@ -182,17 +203,29 @@ export const TableDoc = () => (
 </TableContainer>`}
       />
       <p className={paragraph}>
-        TableContainer owns the frame and scroll behavior; Table forwards its props and ref directly to the native
-        table. TableHead is a header cell, while TableHeader groups header rows. Use native colgroup, col, colSpan, and
-        rowSpan for column sizing and grouped headers.
+        TableContainer owns the frame and scroll behavior; Table forwards its props and ref directly to the native table
+        using React 19's ref-as-prop convention. TableHead is a header cell, while TableHeader groups header rows. Use
+        native colgroup, col, colSpan, and rowSpan for column sizing and grouped headers.
       </p>
       <p className={paragraph}>
-        The advanced example expects a complete dataset with unique, persistent IDs; it is not a server-data adapter.
-        For server pagination, send sorting, filtering, and page parameters to your API together, and use the server's
-        total count. Do not sort or filter only one downloaded page. Cancel superseded requests with AbortController or
-        ignore stale responses, and define whether selection covers loaded rows or all matching records. For larger
-        datasets, compose these primitives with a headless table library such as TanStack Table; virtualization,
-        editable cells, and column resizing are application-level concerns.
+        TableHeader uses inverse theme colors to distinguish column headings from data in both light and Obsidian
+        themes. Override its background and text colors together with className. Text buttons inside a header use{' '}
+        <code>text-inherit</code> so their labels and icons follow the header color. Row headers inside TableBody keep
+        the body's colors, including selection styling.
+      </p>
+      <p className={paragraph}>
+        Sorting and action examples use the same Icon components as other Lithos controls, with shared size and stroke
+        defaults. Import them from <code>lithos-ui</code>, or copy the matching files from{' '}
+        <code>components/ui/icons</code> together with <code>IconBase.tsx</code> for manual installation. These wrappers
+        use <code>react-icons</code>; the Table primitives themselves do not require icons.
+      </p>
+      <p className={paragraph}>
+        Bulk Actions expects a complete dataset with unique, persistent IDs; it is not a server-data adapter. For server
+        pagination, send sorting, filtering, and page parameters to your API together, and use the server's total count.
+        Do not sort or filter only one downloaded page. Cancel superseded requests with AbortController or ignore stale
+        responses, and define whether selection covers loaded rows or all matching records. For larger datasets, compose
+        these primitives with a headless table library such as TanStack Table; virtualization, editable cells, and
+        column resizing are application-level concerns.
       </p>
     </div>
     <h2 id="accessibility" className={heading}>

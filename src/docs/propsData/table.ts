@@ -59,6 +59,12 @@ export const tableContainerPropsData: PropItem[] = [
 ]
 export const tablePartsPropsData: PropItem[] = [
   {
+    name: 'TableHeader.className',
+    type: 'LithosClass',
+    description:
+      'Inverse theme colors distinguish column headers by default, including sticky headers. Override background and text colors together. Use text-inherit on text buttons inside the header.',
+  },
+  {
     name: 'TableRow.selected',
     type: 'boolean',
     defaultValue: 'false',

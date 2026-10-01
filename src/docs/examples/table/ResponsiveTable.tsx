@@ -28,21 +28,27 @@ const optionalColumns = [
 export const ResponsiveTable = () => {
   const id = useId()
   const containerRef = useRef<HTMLDivElement>(null)
-  const [width, setWidth] = useState(0)
+  const [visibleCount, setVisibleCount] = useState(0)
+  const [previewWidth, setPreviewWidth] = useState(800)
   const [expanded, setExpanded] = useState<Set<string>>(new Set())
   useEffect(() => {
     const container = containerRef.current
     if (!container) return
     const observer = new ResizeObserver(([entry]) => {
-      if (entry) setWidth(entry.contentRect.width)
+      if (!entry) return
+      let budget = 290
+      const count = optionalColumns.filter((column) => {
+        budget += column.width
+        return budget <= entry.contentRect.width
+      }).length
+      // Ignore pixel changes that do not change which columns fit.
+      setVisibleCount((previous) => (previous === count ? previous : count))
     })
     observer.observe(container)
     return () => observer.disconnect()
   }, [])
-  const visibleColumns = optionalColumns.filter(
-    (_, index) => 290 + optionalColumns.slice(0, index + 1).reduce((total, column) => total + column.width, 0) <= width
-  )
-  const hiddenColumns = optionalColumns.filter((column) => !visibleColumns.includes(column))
+  const visibleColumns = optionalColumns.slice(0, visibleCount)
+  const hiddenColumns = optionalColumns.slice(visibleCount)
   const hasDetails = hiddenColumns.length > 0
   const toggle = (rowId: string) =>
     setExpanded((previous) => {
@@ -54,8 +60,22 @@ export const ResponsiveTable = () => {
 
   return (
     <div className="w-full min-w-0">
-      <p className="mb-3 text-sm">Resize the preview. Columns that no longer fit move into each row's details.</p>
-      <TableContainer ref={containerRef} aria-label="Responsive invoices">
+      <label htmlFor={`${id}-width`} className="mb-2 block text-sm font-bold">
+        Preview width (maximum): {previewWidth}px
+      </label>
+      {/* Native range exception to button physics: preserve browser drag and arrow-key behavior for resizing. */}
+      <input
+        id={`${id}-width`}
+        type="range"
+        min={280}
+        max={800}
+        step={10}
+        value={previewWidth}
+        onChange={(event) => setPreviewWidth(Number(event.target.value))}
+        className="mb-3 w-full max-w-80"
+      />
+      <p className="mb-3 text-sm">Adjust the width. Columns that no longer fit move into each row's details.</p>
+      <TableContainer ref={containerRef} aria-label="Responsive invoices" style={{ maxWidth: previewWidth }}>
         <Table size="sm" className="table-fixed">
           <TableCaption className="caption-top">Invoice details adapt to the available container width.</TableCaption>
           <TableHeader>
@@ -118,16 +138,10 @@ export const ResponsiveTable = () => {
                       <Table size="sm" aria-label={`Details for ${row.id}`}>
                         <TableBody>
                           {hiddenColumns.map((column) => (
-                            <Fragment key={column.key}>
-                              <TableRow>
-                                <TableHead colSpan={2} scope="row">
-                                  {column.label}
-                                </TableHead>
-                              </TableRow>
-                              <TableRow>
-                                <TableCell colSpan={2}>{row[column.key]}</TableCell>
-                              </TableRow>
-                            </Fragment>
+                            <TableRow key={column.key}>
+                              <TableHead scope="row">{column.label}</TableHead>
+                              <TableCell>{row[column.key]}</TableCell>
+                            </TableRow>
                           ))}
                         </TableBody>
                       </Table>

@@ -29,18 +29,13 @@ export const demoInvoices: Invoice[] = [
 ]
 export const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
-const nextInvoiceId = (rows: Invoice[]) => {
+const createInvoiceIdAllocator = (rows: Invoice[]) => {
   const highestNumber = rows.reduce((highest, row) => {
     const suffix = Number(row.id.match(/(\d+)$/)?.[1])
     return Number.isNaN(suffix) ? highest : Math.max(highest, suffix)
   }, 0)
   let nextNumber = highestNumber + 1
-  let nextId = `INV-${String(nextNumber).padStart(3, '0')}`
-  while (rows.some((row) => row.id === nextId)) {
-    nextNumber += 1
-    nextId = `INV-${String(nextNumber).padStart(3, '0')}`
-  }
-  return nextId
+  return () => `INV-${String(nextNumber++).padStart(3, '0')}`
 }
 
 // Each mounted example has its own records, editor, and action feedback.
@@ -50,15 +45,17 @@ export const useInvoiceActions = (data: Invoice[]) => {
   const [editedCustomer, setEditedCustomer] = useState('')
   const [viewingId, setViewingId] = useState<string | null>(null)
   const [notice, setNotice] = useState<InvoiceNotice | null>(null)
-  const [copied, setCopied] = useState<Set<string>>(new Set())
+  const [duplicated, setDuplicated] = useState<Set<string>>(new Set())
   const timers = useRef(new Map<string, ReturnType<typeof setTimeout>>())
+  const tableRef = useRef<HTMLDivElement>(null)
+  const editTrigger = useRef<HTMLElement | null>(null)
   const [previousData, setPreviousData] = useState(data)
   if (previousData !== data) {
     setPreviousData(data)
     setRows(data)
     setEditingId(null)
     setViewingId(null)
-    setCopied(new Set())
+    setDuplicated(new Set())
     setNotice(null)
   }
   useEffect(() => {
@@ -69,7 +66,17 @@ export const useInvoiceActions = (data: Invoice[]) => {
     }
   }, [data])
 
-  const startEdit = (row: Invoice) => {
+  // Restore focus after React has removed the editor and updated the visible rows.
+  useEffect(() => {
+    if (editingId || !editTrigger.current) return
+    const trigger = editTrigger.current
+    const target = trigger.isConnected && !trigger.matches(':disabled') ? trigger : tableRef.current
+    target?.focus()
+    editTrigger.current = null
+  }, [editingId])
+
+  const startEdit = (row: Invoice, trigger: HTMLElement) => {
+    editTrigger.current = trigger
     setEditingId(row.id)
     setEditedCustomer(row.customer)
   }
@@ -93,7 +100,7 @@ export const useInvoiceActions = (data: Invoice[]) => {
   }
   const addRow = () => {
     const row: Invoice = {
-      id: nextInvoiceId(rows),
+      id: createInvoiceIdAllocator(rows)(),
       customer: 'New customer',
       status: 'Pending',
       amount: 0,
@@ -102,31 +109,23 @@ export const useInvoiceActions = (data: Invoice[]) => {
     setRows((previous) => [row, ...previous])
     setNotice({ message: `Added ${row.id}.`, intent: 'success' })
   }
-  const copyRows = (targetRows: Invoice[], key: string) => {
+  const duplicateRows = (targetRows: Invoice[], key: string) => {
     if (!targetRows.length) return
     clearTimeout(timers.current.get(key))
-    setCopied((previous) => {
-      const next = new Set(previous)
-      next.delete(key)
-      return next
-    })
-    let currentRows = rows
-    const copies = targetRows.map((row) => {
-      const copy = { ...row, id: nextInvoiceId(currentRows) }
-      currentRows = [copy, ...currentRows]
-      return copy
-    })
+    // Scan existing IDs once for the entire batch, rather than once per duplicate.
+    const nextId = createInvoiceIdAllocator(rows)
+    const copies = targetRows.map((row) => ({ ...row, id: nextId() }))
     setRows((previous) => [...previous, ...copies])
-    setCopied((previous) => new Set(previous).add(key))
+    setDuplicated((previous) => new Set(previous).add(key))
     const copyIds = copies.map((copy, index) => `${targetRows[index]!.id} as ${copy.id}`).join(', ')
     setNotice({
-      message: copies.length === 1 ? `Added copy of ${copyIds}.` : `Added invoice copies: ${copyIds}.`,
+      message: copies.length === 1 ? `Duplicated invoice ${copyIds}.` : `Duplicated invoices: ${copyIds}.`,
       intent: 'success',
     })
     timers.current.set(
       key,
       setTimeout(() => {
-        setCopied((previous) => {
+        setDuplicated((previous) => {
           const next = new Set(previous)
           next.delete(key)
           return next
@@ -136,6 +135,7 @@ export const useInvoiceActions = (data: Invoice[]) => {
     )
   }
   return {
+    tableRef,
     rows,
     editingId,
     editedCustomer,
@@ -145,8 +145,8 @@ export const useInvoiceActions = (data: Invoice[]) => {
     cancelEdit: () => setEditingId(null),
     deleteRows,
     addRow,
-    copyRows,
-    copied,
+    duplicateRows,
+    duplicated,
     notice,
     viewing: rows.find((row) => row.id === viewingId),
     view: setViewingId,

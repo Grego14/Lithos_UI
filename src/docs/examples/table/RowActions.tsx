@@ -1,4 +1,8 @@
-import { FiCheck, FiCopy, FiEdit2, FiEye, FiTrash2 } from 'react-icons/fi'
+import { IconCheck } from '../../../components/ui/icons/IconCheck'
+import { IconCopy } from '../../../components/ui/icons/IconCopy'
+import { IconEdit } from '../../../components/ui/icons/IconEdit'
+import { IconEye } from '../../../components/ui/icons/IconEye'
+import { IconTrash } from '../../../components/ui/icons/IconTrash'
 import { Button } from '../../../components/ui/Button'
 import { Alert } from '../../../components/ui/Alert'
 import { Badge } from '../../../components/ui/Badge'
@@ -15,17 +19,17 @@ import {
 import { demoInvoices, currency, useInvoiceActions, type Invoice } from './useInvoiceActions'
 import { InvoiceEditor, InvoiceDetails } from './InvoiceActions'
 
-const individualInvoices = demoInvoices.slice(0, 3)
-export const IndividualActionsTable = ({ data = individualInvoices }: { data?: Invoice[] }) => {
+const rowActionInvoices = demoInvoices.slice(0, 3)
+export const RowActionsTable = ({ data = rowActionInvoices }: { data?: Invoice[] }) => {
   const actions = useInvoiceActions(data)
   return (
     <div className="w-full min-w-0">
       <Button className="mb-3" onClick={actions.addRow}>
         New row
       </Button>
-      <TableContainer aria-label="Individual invoice actions">
+      <TableContainer ref={actions.tableRef} aria-label="Row invoice actions">
         <Table>
-          <TableCaption className="caption-top">View, edit, delete, or copy an individual invoice.</TableCaption>
+          <TableCaption className="caption-top">View, edit, delete, or duplicate an individual invoice.</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead scope="col">Invoice</TableHead>
@@ -58,16 +62,16 @@ export const IndividualActionsTable = ({ data = individualInvoices }: { data?: I
                         title="View invoice"
                         onClick={() => actions.view(row.id)}
                       >
-                        <FiEye aria-hidden="true" />
+                        <IconEye aria-hidden="true" />
                       </Button>
                       <Button
                         variant="text"
                         className="mr-1 p-2"
                         aria-label={`Edit ${row.id}`}
                         title="Edit invoice"
-                        onClick={() => actions.startEdit(row)}
+                        onClick={(event) => actions.startEdit(row, event.currentTarget)}
                       >
-                        <FiEdit2 aria-hidden="true" />
+                        <IconEdit aria-hidden="true" />
                       </Button>
                       <Button
                         variant="text"
@@ -76,16 +80,20 @@ export const IndividualActionsTable = ({ data = individualInvoices }: { data?: I
                         title="Delete invoice"
                         onClick={() => actions.deleteRows(new Set([row.id]))}
                       >
-                        <FiTrash2 aria-hidden="true" />
+                        <IconTrash aria-hidden="true" />
                       </Button>
                       <Button
                         variant="text"
                         className="p-2"
-                        aria-label={`${actions.copied.has(row.id) ? 'Copied' : 'Copy'} ${row.id}`}
-                        title={actions.copied.has(row.id) ? 'Copied' : 'Copy invoice row'}
-                        onClick={() => void actions.copyRows([row], row.id)}
+                        aria-label={`${actions.duplicated.has(row.id) ? 'Duplicated' : 'Duplicate'} ${row.id}`}
+                        title={actions.duplicated.has(row.id) ? 'Duplicated' : 'Duplicate invoice row'}
+                        onClick={() => void actions.duplicateRows([row], row.id)}
                       >
-                        {actions.copied.has(row.id) ? <FiCheck aria-hidden="true" /> : <FiCopy aria-hidden="true" />}
+                        {actions.duplicated.has(row.id) ? (
+                          <IconCheck aria-hidden="true" />
+                        ) : (
+                          <IconCopy aria-hidden="true" />
+                        )}
                       </Button>
                     </div>
                   </TableCell>

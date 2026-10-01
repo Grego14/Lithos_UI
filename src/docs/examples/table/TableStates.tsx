@@ -16,7 +16,7 @@ import {
   TableRow,
 } from '../../../components/ui/Table'
 
-export const IntermediateTable = () => {
+export const TableStates = () => {
   const id = useId()
   const [state, setState] = useState('ready')
 
@@ -39,6 +39,9 @@ export const IntermediateTable = () => {
             ))}
           </SelectContent>
         </Select>
+      </div>
+      <div role="status" className="sr-only">
+        {state === 'loading' ? 'Loading inventory' : state === 'ready' ? 'Inventory ready' : ''}
       </div>
       <TableContainer aria-label="Inventory preview" className="max-h-72">
         <Table size="sm" striped hoverable stickyHeader aria-busy={state === 'loading'}>
@@ -73,7 +76,7 @@ export const IntermediateTable = () => {
               <TableRow>
                 <TableCell colSpan={3} className="h-40 text-center">
                   <div className="flex flex-col items-center justify-center">
-                    <Spinner size={32} aria-label="Loading inventory" className="text-(--lithos-accent)" />
+                    <Spinner size={32} aria-hidden="true" className="text-(--lithos-accent)" />
                     <span className="mt-3">Loading inventory</span>
                   </div>
                 </TableCell>
