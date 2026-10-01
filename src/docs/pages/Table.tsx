@@ -104,8 +104,7 @@ export const TableDoc = () => (
       </h3>
       <p className={paragraph}>
         Display invoices with a caption, row labels, and a totals footer. Text wraps naturally, and the container
-        scrolls horizontally when the content needs more space. Use <code>{'<TableHeader variant="accent">'}</code> for
-        an accent-colored header with theme-aware text contrast.
+        scrolls horizontally when the content needs more space.
       </p>
       <PreviewBlock code={tableExampleCode(basicSource)}>
         <BasicTable />
