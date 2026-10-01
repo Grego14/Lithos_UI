@@ -410,6 +410,7 @@ export const DrawerDoc = () => {
       </h2>
 
       <SetupGuide
+        slug="drawer"
         componentNames={['Drawer', 'useDrawer']}
         manualPath="../../components/ui/Drawer"
         requires={[

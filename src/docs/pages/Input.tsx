@@ -176,6 +176,7 @@ export const InputDoc = () => {
       </h2>
 
       <SetupGuide
+        slug="input"
         componentNames={['Input', 'InputGroup', 'InputGroupInput', 'InputGroupAddon']}
         manualPath={INPUT_PATH}
         requires={[

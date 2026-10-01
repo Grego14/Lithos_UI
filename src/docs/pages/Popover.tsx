@@ -91,6 +91,7 @@ export const PopoverPage = () => {
         Installation
       </h2>
       <SetupGuide
+        slug="popover"
         componentNames={componentNames}
         manualPath={manualPath}
         requires={['@floating-ui/react', 'utils/cn.ts', 'components/ui/Button.tsx']}

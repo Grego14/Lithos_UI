@@ -122,6 +122,7 @@ export const FourteenUserGroup = () => {
       </h2>
 
       <SetupGuide
+        slug="avatar"
         componentNames={['Avatar', 'AvatarGroup', 'AvatarGroupCount']}
         manualPath="../../components/ui/Avatar"
         requires={['utils/cn.ts', 'utils/yiq.ts', 'core/useAccentColor.ts']}

@@ -96,6 +96,7 @@ export const TooltipDoc = () => {
       </h2>
 
       <SetupGuide
+        slug="tooltip"
         componentNames={['Tooltip', 'TooltipTrigger', 'TooltipContent', 'useTooltip']}
         manualPath="../../components/ui/Tooltip"
         requires={['utils/cn.ts', '@floating-ui/react']}

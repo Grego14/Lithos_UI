@@ -257,6 +257,7 @@ export const CheckboxDoc = () => {
       </h2>
 
       <SetupGuide
+        slug="checkbox"
         componentNames={componentNames}
         manualPath={manualPath}
         requires={['utils/cn.ts', 'utils/yiq.ts', 'core/types.ts']}
