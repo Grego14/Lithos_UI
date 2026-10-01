@@ -187,7 +187,6 @@ export const TableDoc = () => (
       Anatomy
     </h2>
     <div className="mb-12">
-      <p className={paragraph}>Compose the table with native header, body, footer, row, and cell primitives:</p>
       <CodeViewer
         language="tsx"
         code={`<TableContainer aria-label="Orders">
@@ -199,34 +198,12 @@ export const TableDoc = () => (
     <TableBody>
       <TableRow><TableCell>ORD-001</TableCell></TableRow>
     </TableBody>
+    <TableFooter>
+      <TableRow><TableCell>Total</TableCell></TableRow>
+    </TableFooter>
   </Table>
 </TableContainer>`}
       />
-      <p className={paragraph}>
-        TableContainer owns the frame and scroll behavior; Table forwards its props and ref directly to the native table
-        using React 19's ref-as-prop convention. TableHead is a header cell, while TableHeader groups header rows. Use
-        native colgroup, col, colSpan, and rowSpan for column sizing and grouped headers.
-      </p>
-      <p className={paragraph}>
-        TableHeader uses inverse theme colors to distinguish column headings from data in both light and Obsidian
-        themes. Override its background and text colors together with className. Text buttons inside a header use{' '}
-        <code>text-inherit</code> so their labels and icons follow the header color. Row headers inside TableBody keep
-        the body's colors, including selection styling.
-      </p>
-      <p className={paragraph}>
-        Sorting and action examples use the same Icon components as other Lithos controls, with shared size and stroke
-        defaults. Import them from <code>lithos-ui</code>, or copy the matching files from{' '}
-        <code>components/ui/icons</code> together with <code>IconBase.tsx</code> for manual installation. These wrappers
-        use <code>react-icons</code>; the Table primitives themselves do not require icons.
-      </p>
-      <p className={paragraph}>
-        Bulk Actions expects a complete dataset with unique, persistent IDs; it is not a server-data adapter. For server
-        pagination, send sorting, filtering, and page parameters to your API together, and use the server's total count.
-        Do not sort or filter only one downloaded page. Cancel superseded requests with AbortController or ignore stale
-        responses, and define whether selection covers loaded rows or all matching records. For larger datasets, compose
-        these primitives with a headless table library such as TanStack Table; virtualization, editable cells, and
-        column resizing are application-level concerns.
-      </p>
     </div>
     <h2 id="accessibility" className={heading}>
       Accessibility
