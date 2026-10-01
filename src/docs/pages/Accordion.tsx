@@ -92,6 +92,7 @@ export const AccordionDoc = () => {
       </h2>
 
       <SetupGuide
+        slug="accordion"
         componentNames={['Accordion', 'AccordionGroup']}
         manualPath={manualPath}
         requires={['utils/cn.ts', 'components/ui/Button.tsx', 'components/ui/icons/IconChevronUp.tsx']}

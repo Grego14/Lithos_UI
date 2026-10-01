@@ -99,6 +99,7 @@ export const TabsDoc = () => {
       </h2>
 
       <SetupGuide
+        slug="tabs"
         componentNames={['Tabs', 'TabsList', 'TabsTrigger', 'TabsContent']}
         manualPath="../../components/ui/Tabs"
         requires={['utils/cn.ts']}

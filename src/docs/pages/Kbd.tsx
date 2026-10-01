@@ -197,6 +197,7 @@ export const KbdDoc = () => {
       </h2>
 
       <SetupGuide
+        slug="kbd"
         componentNames={['Kbd', 'KbdGroup']}
         manualPath={KBD_PATH}
         requires={['utils/cn.ts', 'utils/yiq.ts', 'core/types.ts']}

@@ -110,6 +110,7 @@ export const CustomSeparatorBreadcrumb = () => {
       </h2>
 
       <SetupGuide
+        slug="breadcrumb"
         componentNames={['Breadcrumb']}
         manualPath={manualPath}
         requires={[

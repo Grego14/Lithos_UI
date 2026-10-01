@@ -241,6 +241,7 @@ export const CommandDoc = () => {
       </h2>
 
       <SetupGuide
+        slug="command"
         componentNames={[
           'Command',
           'CommandInput',

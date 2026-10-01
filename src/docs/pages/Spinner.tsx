@@ -95,13 +95,17 @@ export const SpinnerDoc = () => {
   return (
     <div className="flex flex-col items-center w-full space-y-10">
       {/* Button Examples */}
-      <div className="flex flex-wrap justify-center gap-6">
-        <Button disabled variant="primary" iconLeft={<Spinner size={16} icon="FiSettings" />}>
-          Applying Configuration
-        </Button>
-        <Button disabled variant="inverse" iconLeft={<Spinner size={16} icon="PiSpinnerGap" />}>
-          Authenticating
-        </Button>
+      <div className="flex flex-wrap justify-center -m-3">
+        <div className="p-3">
+          <Button disabled variant="primary" iconLeft={<Spinner size={16} icon="FiSettings" />}>
+            Applying Configuration
+          </Button>
+        </div>
+        <div className="p-3">
+          <Button disabled variant="inverse" iconLeft={<Spinner size={16} icon="PiSpinnerGap" />}>
+            Authenticating
+          </Button>
+        </div>
       </div>
 
       {/* Input Example */}
@@ -112,21 +116,25 @@ export const SpinnerDoc = () => {
       </div>
 
       {/* Badge Examples */}
-      <div className="flex flex-wrap justify-center gap-6">
-        <Badge intent="warning" className="flex items-center gap-2 px-3 py-1.5">
-          <Spinner size={12} icon="FiRefreshCw" />
-          <span>SYNCING CLOUD</span>
-        </Badge>
-        <Badge intent="success" className="flex items-center gap-2 px-3 py-1.5">
-          <Spinner size={12} icon="FiRefreshCcw" anticlockwise />
-          <span>RESTORING BACKUP</span>
-        </Badge>
+      <div className="flex flex-wrap justify-center -m-3">
+        <div className="p-3">
+          <Badge intent="warning" className="flex items-center space-x-2 px-3 py-1.5">
+            <Spinner size={12} icon="FiRefreshCw" />
+            <span>SYNCING CLOUD</span>
+          </Badge>
+        </div>
+        <div className="p-3">
+          <Badge intent="success" className="flex items-center space-x-2 px-3 py-1.5">
+            <Spinner size={12} icon="FiRefreshCcw" anticlockwise />
+            <span>RESTORING BACKUP</span>
+          </Badge>
+        </div>
       </div>
 
       {/* Alert Example */}
       <div className="w-full max-w-lg">
         <Alert intent="info" variant="outlined" size="md" title="Migration in progress">
-          <span className="flex items-center gap-3">
+          <span className="flex items-center space-x-3">
             <Spinner size={20} icon="VscLoading" />
             <span>Moving 2.4 million records to the new cluster...</span>
           </span>
@@ -302,7 +310,7 @@ export const SpinnerDoc = () => {
           githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Spinner.tsx"
         >
           <div className="flex flex-col items-center p-8">
-            <div className="flex flex-wrap items-end justify-center -m-4">
+            <div className="flex flex-wrap items-end justify-center -m-2 sm:-m-4">
               {[
                 'FiLoader',
                 'FiRefreshCw',
@@ -319,9 +327,11 @@ export const SpinnerDoc = () => {
                 'RiLoader3Line',
                 'RiLoader4Line',
               ].map((iconName) => (
-                <div key={iconName} className="flex flex-col items-center space-y-2 m-4">
-                  <Spinner size={32} icon={iconName as SpinnerIconType} />
-                  <span className="text-[10px] font-mono opacity-70">{iconName}</span>
+                <div key={iconName} className="w-1/2 p-2 sm:w-auto sm:p-4">
+                  <div className="flex flex-col items-center space-y-2">
+                    <Spinner size={32} icon={iconName as SpinnerIconType} />
+                    <span className="text-[10px] font-mono opacity-70">{iconName}</span>
+                  </div>
                 </div>
               ))}
             </div>
@@ -341,13 +351,17 @@ export const SpinnerDoc = () => {
         <PreviewBlock code={integrationCode}>
           <div className="flex flex-col items-center w-full p-8 space-y-10">
             {/* Button Examples */}
-            <div className="flex flex-wrap justify-center gap-6">
-              <Button disabled variant="primary" iconLeft={<Spinner size={16} icon="FiSettings" />}>
-                Applying Configuration
-              </Button>
-              <Button disabled variant="inverse" iconLeft={<Spinner size={16} icon="PiSpinnerGap" />}>
-                Authenticating
-              </Button>
+            <div className="flex flex-wrap justify-center -m-3">
+              <div className="p-3">
+                <Button disabled variant="primary" iconLeft={<Spinner size={16} icon="FiSettings" />}>
+                  Applying Configuration
+                </Button>
+              </div>
+              <div className="p-3">
+                <Button disabled variant="inverse" iconLeft={<Spinner size={16} icon="PiSpinnerGap" />}>
+                  Authenticating
+                </Button>
+              </div>
             </div>
 
             {/* Input Example */}
@@ -358,21 +372,25 @@ export const SpinnerDoc = () => {
             </div>
 
             {/* Badge Examples */}
-            <div className="flex flex-wrap justify-center gap-6">
-              <Badge intent="warning" className="flex items-center gap-2 px-3 py-1.5">
-                <Spinner size={12} icon="FiRefreshCw" />
-                <span>SYNCING CLOUD</span>
-              </Badge>
-              <Badge intent="success" className="flex items-center gap-2 px-3 py-1.5">
-                <Spinner size={12} icon="FiRefreshCcw" anticlockwise />
-                <span>RESTORING BACKUP</span>
-              </Badge>
+            <div className="flex flex-wrap justify-center -m-3">
+              <div className="p-3">
+                <Badge intent="warning" className="flex items-center space-x-2 px-3 py-1.5">
+                  <Spinner size={12} icon="FiRefreshCw" />
+                  <span>SYNCING CLOUD</span>
+                </Badge>
+              </div>
+              <div className="p-3">
+                <Badge intent="success" className="flex items-center space-x-2 px-3 py-1.5">
+                  <Spinner size={12} icon="FiRefreshCcw" anticlockwise />
+                  <span>RESTORING BACKUP</span>
+                </Badge>
+              </div>
             </div>
 
             {/* Alert Example */}
             <div className="w-full max-w-lg">
               <Alert intent="info" variant="outlined" size="md" title="Migration in progress">
-                <span className="flex items-center gap-3">
+                <span className="flex items-center space-x-3">
                   <Spinner size={20} icon="VscLoading" />
                   <span>Moving 2.4 million records to the new cluster...</span>
                 </span>
