@@ -26,10 +26,11 @@ const components = [
   'spinner',
   'table',
   'tabs',
+  'typography',
   'toast',
   'toggle',
   'tooltip',
-]
+].sort((a, b) => (b > a ? 0 : 1))
 
 export const Sidebar = () => {
   const location = useLocation()
