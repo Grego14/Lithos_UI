@@ -69,7 +69,7 @@ export const TableOfContents = ({ links = [] }: { links: TOCItem[] }) => {
             key={link.id}
             href={link.id}
             className={`block py-1.5 px-4 text-xs font-bold transition-colors duration-150 ease-out hover:text-(--lithos-accent) ${
-              link.level === 2 ? 'ml-4' : link.level >= 3 ? 'ml-8' : ''
+              link.level === 2 ? 'ml-4' : ''
             } ${activeId === link.id ? 'text-(--lithos-accent)' : 'opacity-70 hover:opacity-100'}`}
           >
             {link.label}
