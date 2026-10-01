@@ -1,22 +1,20 @@
-# Lithos UI
-
 ![Lithos UI logo](src/assets/lithos-logo.webp)
 
 **Build frontends that refuse to break.**
 
-Lithos UI is a free, neo-brutalist React component library engineered with absolute structural integrity. It ditches fragile CSS gaps and soft shadows in favor of hard math, rigid grids, and high-contrast accessibility.
+Lithos UI is a free, neo-brutalist React component library engineered with absolute structural integrity. It ditches fragile CSS gaps and soft shadows in favor of rigid grids, and high-contrast accessibility.
 
 ## Core Architecture
 
-### 1. The Zero-Gap Policy
-
-Modern web layouts often rely on the CSS `gap` property, which can cause unpredictable overflow and sub-pixel rendering issues on complex nested grids.
-Lithos UI strictly enforces a **Zero-Gap Architecture**. All structural spacing is handled via a combination of explicit parent negative margins (e.g., `-m-4`) and direct child margins (`m-4`), guaranteeing that layouts snap cleanly across breakpoints without viewport bleed.
-
-### 2. YIQ Biological Contrast Engine
+### 1. YIQ Biological Contrast Engine
 
 For accent colors, the dynamic theme engine does not rely on hardcoded contrast scales. Instead, it uses the **YIQ Luminance formula**—a mathematical calculation based on human optical sensitivity (heavily weighting the green spectrum).
 When you inject a custom HEX code, the engine calculates the perceived biological brightness and automatically forces all nested typography and active UI elements to absolute `#000000` or `#FFFFFF` to ensure maximum WCAG compliance.
+
+### 2. The Zero-Gap Policy
+
+Modern web layouts often rely on the CSS `gap` property, which can cause unpredictable overflow and sub-pixel rendering issues on complex nested grids.
+Lithos UI strictly enforces a **Zero-Gap Architecture**. All structural spacing is handled via a combination of explicit parent negative margins (e.g., `-m-4`) and direct child margins (`m-4`), guaranteeing that layouts snap cleanly across breakpoints without viewport bleed.
 
 ### 3. Universal Specificity Overrides
 
@@ -28,39 +26,7 @@ To prevent Tailwind class bloat ("DRY" architecture), Lithos UI packages its mec
 
 ## Components
 
-| Component             | Status | Docs                                     |
-| --------------------- | ------ | ---------------------------------------- |
-| Accordion             | Stable | [Link](/src/docs/pages/Accordion.tsx)    |
-| Alert                 | Stable | [Link](/src/docs/pages/Alert.tsx)        |
-| Avatar                | Stable | [Link](/src/docs/pages/Avatar.tsx)       |
-| Badge                 | Stable | [Link](/src/docs/pages/Badge.tsx)        |
-| Breadcrumb            | Stable | [Link](/src/docs/pages/Breadcrumb.tsx)   |
-| Button                | Stable | [Link](/src/docs/pages/Button.tsx)       |
-| Calendar              | Stable | [Link](/src/docs/pages/Calendar.tsx)     |
-| Card                  | Stable | [Link](/src/docs/pages/Card.tsx)         |
-| Input                 | Stable | [Link](/src/docs/pages/Input.tsx)        |
-| Carousel              | Stable | [Link](/src/docs/pages/Carousel.tsx)     |
-| Checkbox              | Stable | [Link](/src/docs/pages/Checkbox.tsx)     |
-| Command               | Stable | [Link](/src/docs/pages/Command.tsx)      |
-| CodeViewer            | Stable | [Link](/src/docs/pages/CodeViewer.tsx)   |
-| Dialog                | Stable | [Link](/src/docs/pages/Dialog.tsx)       |
-| Kbd                   | Stable | [Link](/src/docs/pages/Kbd.tsx)          |
-| Popover               | Stable | [Link](/src/docs/pages/Popover.tsx)      |
-| PreviewBlock          | Stable | [Link](/src/docs/pages/PreviewBlock.tsx) |
-| Toast (ToastProvider) | Stable | [Link](/src/docs/pages/Toast.tsx)        |
-| Toggle                | Stable | [Link](/src/docs/pages/Toggle.tsx)       |
-
-### Blocks
-
-| Block Category | Status | Variants | Docs                                        |
-| -------------- | ------ | -------- | ------------------------------------------- |
-| FAQ            | Stable | 1        | [Link](/src/components/blocks/FAQ)          |
-| Feature Grids  | Stable | 1        | [Link](/src/components/blocks/FeatureGrid)  |
-| Footers        | Stable | 2        | [Link](/src/components/blocks/Footer)       |
-| Hero Sections  | Stable | 2        | [Link](/src/components/blocks/Hero)         |
-| Navbars        | Stable | 1        | [Link](/src/components/blocks/Navbar)       |
-| Pricing Tables | Stable | 1        | [Link](/src/components/blocks/Pricing)      |
-| Testimonials   | Stable | 1        | [Link](/src/components/blocks/Testimonials) |
+[See the component tracker issue for all existing and planned components.](https://github.com/lithosui/Lithos_UI/issues/311)
 
 ---
 
@@ -76,15 +42,20 @@ pnpm add lithos-ui
 npm install lithos-ui
 # or
 yarn add lithos-ui
+# or
+bun add lithos-ui
 ```
 
 ### Setup
 
 1. Ensure your project is running **React** and **Tailwind CSS v4+**.
-2. Import the global CSS tokens into your main application file (e.g., `main.tsx` or `App.tsx`):
+2. Import Tailwind and the global CSS tokens into your main CSS file (e.g., `index.css`):
 
-```tsx
-import 'lithos-ui/tokens.css'
+```css
+/* index.css */
+@import 'tailwindcss';
+@source "../node_modules/lithos-ui";
+@import 'lithos-ui/tokens.css'; /* Must be imported second */
 ```
 
 3. Start using the components:
@@ -124,7 +95,7 @@ The entire visual weight of the library is controlled by these 7 variables. Modi
 }
 ```
 
-_(Note: Interactive physics and structural weight are handled via the `@layer utilities` block in `index.css`, primarily through the `.lithos-click` token.)_
+_(Note: Interactive physics and structural weight are handled via the `@layer components` block in `tokens.css`, primarily through the `.lithos-click` token.)_
 
 ## Obsidian Mode (Dark Theme)
 
@@ -132,4 +103,4 @@ Lithos UI includes a native Dark Mode trigger. Simply apply the `.obsidian` clas
 
 ### License
 
-Lithos UI is free for unlimited commercial and personal projects. See LICENSE.md for full details.
+Lithos UI is free for unlimited commercial and personal projects. See [LICENSE.md](./LICENSE.md) for full details.
