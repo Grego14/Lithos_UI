@@ -331,6 +331,7 @@ export const SizeDialogDemo = () => {
       </h2>
 
       <SetupGuide
+        slug="dialog"
         componentNames={componentNames}
         manualPath={manualPath}
         requires={[

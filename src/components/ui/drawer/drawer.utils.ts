@@ -16,10 +16,10 @@ const slideOffscreenClasses: Record<DrawerPlacement, string> = {
 }
 
 const placementBorder: Record<DrawerPlacement, string> = {
-  right: 'border-l-4',
-  left: 'border-r-4',
-  top: 'border-b-4',
-  bottom: 'border-t-4',
+  right: 'border-2 border-(--lithos-border)',
+  left: 'border-2 border-(--lithos-border)',
+  top: 'border-2 border-(--lithos-border)',
+  bottom: 'border-2 border-(--lithos-border)',
 }
 
 const placementRadiusClasses: Record<DrawerPlacement, string> = {

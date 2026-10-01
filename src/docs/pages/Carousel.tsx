@@ -236,6 +236,7 @@ export const CustomLayoutCarousel = () => {
       </h2>
 
       <SetupGuide
+        slug="carousel"
         componentNames={['Carousel']}
         manualPath={CAROUSEL_PATH}
         requires={[

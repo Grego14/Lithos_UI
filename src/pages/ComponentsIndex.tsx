@@ -25,6 +25,8 @@ import {
   DropdownSeparator,
   DropdownSub,
 } from '../components/ui/Dropdown'
+
+import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from '../components/ui/Command'
 import { Popover, PopoverTrigger, PopoverContent } from '../components/ui/Popover'
 import { Select } from '../components/ui/Select'
 import { Skeleton, SkeletonText } from '../components/ui/Skeleton'
@@ -167,6 +169,31 @@ const PopoverPreview = () => (
   </div>
 )
 
+const DrawerPreview = () => (
+  <div className="w-full h-full scale-[0.7] origin-center flex items-end justify-center pointer-events-none pb-4">
+    <div className="w-[80%] h-24 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0_0_var(--lithos-shadow)] rounded-t-(--lithos-radius) flex flex-col items-center pt-2 px-4 relative">
+      <div className="w-8 h-1 bg-(--lithos-border) rounded-full mb-2 opacity-50" />
+      <div className="w-full h-4 bg-(--lithos-border)/10 rounded-sm mb-2" />
+      <div className="w-3/4 h-4 bg-(--lithos-border)/10 rounded-sm" />
+    </div>
+  </div>
+)
+
+const CommandPreview = () => (
+  <div className="w-[120%] scale-[0.5] origin-center pointer-events-none">
+    <Command className="h-48 border-2 border-(--lithos-border) shadow-[4px_4px_0_0_var(--lithos-shadow)]">
+      <CommandInput placeholder="Search..." />
+      <CommandList>
+        <CommandEmpty>No results found.</CommandEmpty>
+        <CommandGroup heading="Suggestions">
+          <CommandItem>Calendar</CommandItem>
+          <CommandItem>Search Emoji</CommandItem>
+        </CommandGroup>
+      </CommandList>
+    </Command>
+  </div>
+)
+
 const TabsPreview = () => (
   <div className="w-[120%] scale-[0.55] origin-center pointer-events-none mt-2">
     <Tabs defaultValue="1">
@@ -279,9 +306,19 @@ const componentsList = [
     ),
   },
   {
+    name: 'Command',
+    to: '/docs/command',
+    preview: <CommandPreview />,
+  },
+  {
     name: 'Dialog',
     to: '/docs/dialog',
     preview: <DialogPreview />,
+  },
+  {
+    name: 'Drawer',
+    to: '/docs/drawer',
+    preview: <DrawerPreview />,
   },
   {
     name: 'Dropdown',

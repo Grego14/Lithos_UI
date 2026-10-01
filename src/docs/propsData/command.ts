@@ -20,6 +20,13 @@ export const commandPropsData: PropItem[] = [
     description: 'Custom filtering predicate to override standard substring matching.',
   },
   {
+    name: 'requireSearch',
+    type: 'boolean',
+    defaultValue: 'false',
+    required: false,
+    description: 'If true, items are completely hidden until a search query is entered.',
+  },
+  {
     name: 'className',
     type: 'LithosClass',
     required: false,

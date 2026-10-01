@@ -2,6 +2,13 @@ import type { PropItem } from '../../components/ui/PropsTable'
 
 export const dropdownPropsData: PropItem[] = [
   {
+    name: 'placement',
+    type: '"bottom-start" | "bottom-end"',
+    defaultValue: '"bottom-end"',
+    required: false,
+    description: 'Placement edge where the dropdown is anchored.',
+  },
+  {
     name: '...props',
     type: 'PopoverProps',
     required: false,

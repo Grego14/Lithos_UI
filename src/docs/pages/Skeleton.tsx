@@ -42,6 +42,7 @@ export const SkeletonDoc = () => (
       Installation
     </h2>
     <SetupGuide
+      slug="skeleton"
       componentNames={['Skeleton', 'SkeletonText']}
       manualPath="../../components/ui/Skeleton"
       requires={['utils/cn.ts']}

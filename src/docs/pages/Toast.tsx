@@ -204,6 +204,7 @@ export const App = () => {
       </h2>
 
       <SetupGuide
+        slug="toast"
         componentNames={['ToastProvider', 'useToast', 'Button']}
         manualPath={{
           ToastProvider: '../../components/ui/Toast',
