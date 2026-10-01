@@ -35,6 +35,7 @@ import { IconClose } from '../components/ui/icons/IconClose'
 import { Input } from '../components/ui/Input'
 import { Kbd, KbdGroup } from '../components/ui/Kbd'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs'
+import { Typography } from '../components/ui/Typography'
 import { Tooltip } from '../components/ui/tooltip/Tooltip'
 import { TooltipTrigger } from '../components/ui/tooltip/TooltipTrigger'
 import { TooltipContent } from '../components/ui/tooltip/TooltipContent'
@@ -383,6 +384,15 @@ const componentsList = [
     name: 'Tooltip',
     to: '/docs/tooltip',
     preview: <TooltipPreview />,
+  },
+  {
+    name: 'Typography',
+    to: '/docs/typography',
+    preview: (
+      <Typography variant="mark" className="-rotate-3">
+        14 Typography Variants!
+      </Typography>
+    ),
   },
 ]
 
