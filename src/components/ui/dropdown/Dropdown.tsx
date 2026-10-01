@@ -42,4 +42,4 @@ export const Dropdown = ({ children, ...props }: DropdownProps) => (
 )
 
 export const menuItemClass =
-  'w-full justify-start text-start select-none rounded-sm relative text-sm hover:bg-(--lithos-accent)/10 focus:bg-(--lithos-accent)/10 outline-none active:translate-none disabled:pointer-events-none disabled:opacity-50'
+  'w-full justify-start text-start select-none rounded-(--lithos-radius) relative text-sm hover:bg-(--lithos-accent)/10 focus:bg-(--lithos-accent)/10 outline-none active:translate-none disabled:pointer-events-none disabled:opacity-50'

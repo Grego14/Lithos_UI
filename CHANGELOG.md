@@ -21,12 +21,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - **Popover:** Added `role` and `matchTriggerWidth` props, simplifying `Dropdown` and `Select` implementations ([#318](https://github.com/lithosui/Lithos_UI/pull/318), [#327](https://github.com/lithosui/Lithos_UI/pull/327)).
 - **PopoverContent:** Added `transitionDuration` prop and `data-status` attribute ([#327](https://github.com/lithosui/Lithos_UI/pull/327), [#322](https://github.com/lithosui/Lithos_UI/pull/332)).
+- **Select / Dropdown:** Standardized the inner option item border radius to use the global `--lithos-radius` token.
 - **Kbd:** Introduced keyboard keycap and shortcut group UI primitives ([#328](https://github.com/lithosui/Lithos_UI/pull/328)).
 - Properly arranged the components and blocks ([#303](https://github.com/lithosui/Lithos_UI/pull/303)).
 - Improved the hero title responsiveness ([#305](https://github.com/lithosui/Lithos_UI/pull/305)).
 
 ### Fixed (0.1.2)
 
+- **Select:** Fixed empty scrollbar gap rendering issue by removing forced `scrollbar-gutter: stable`.
 - Fixed select scrollbar overflow ([#309](https://github.com/lithosui/Lithos_UI/pull/309)).
 - Fixed breadcrumb primitive items wrap ([#304](https://github.com/lithosui/Lithos_UI/pull/304)).
 - Fixed clipping of border radius on underline tabs ([#302](https://github.com/lithosui/Lithos_UI/pull/302)).
