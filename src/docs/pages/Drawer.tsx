@@ -59,7 +59,7 @@ export const DefaultDrawerPreview = () => {
       trigger={<Button onClick={() => setOpen(true)}>Open</Button>}
       aria-label="Navigation drawer"
     >
-      <div className="flex h-full w-80 flex-col bg-(--lithos-surface) p-6">
+      <div className="flex h-full w-full flex-col bg-(--lithos-surface) p-6">
         <div className="flex items-center justify-between border-b border-(--lithos-border) pb-4 shrink-0">
           <h2 className="text-lg font-semibold">Menu</h2>
           <Button variant="text" onClick={() => setOpen(false)} aria-label="Close menu">
