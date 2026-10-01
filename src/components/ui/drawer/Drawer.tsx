@@ -161,7 +161,7 @@ export const Drawer = ({
       <DrawerContext.Provider value={contextValue}>
         <FloatingPortal>
           <div
-            inert={!open ? '' : undefined}
+            inert={!open ? true : undefined}
             className={cn('fixed inset-0 z-(--lithos-z-drawer)', open ? 'pointer-events-auto' : 'pointer-events-none')}
           >
             <div

@@ -134,7 +134,6 @@ const PlacementsDrawerPreview = () => {
   const [placement, setPlacement] = useState<DrawerPlacement>('right')
 
   const positions: DrawerPlacement[] = ['left', 'right', 'top', 'bottom']
-  const isVertical = placement === 'top' || placement === 'bottom'
 
   return (
     <>
