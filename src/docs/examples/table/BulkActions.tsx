@@ -8,7 +8,6 @@ import { IconArrowUp } from '../../../components/ui/icons/IconArrowUp'
 import { IconArrowDown } from '../../../components/ui/icons/IconArrowDown'
 import { Badge } from '../../../components/ui/Badge'
 import { Button } from '../../../components/ui/Button'
-import { Alert } from '../../../components/ui/Alert'
 import { Checkbox } from '../../../components/ui/Checkbox'
 import { Input } from '../../../components/ui/Input'
 import { Select, SelectTrigger, SelectContent, SelectItem } from '../../../components/ui/Select'
@@ -32,7 +31,7 @@ import { InvoiceEditor } from './InvoiceActions'
 export const BulkActionsTable = ({ data = demoInvoices }: { data?: Invoice[] }) => {
   const id = useId()
   const actions = useInvoiceActions(data)
-  const { rows, startEdit, deleteRows, duplicateRows, duplicated, notice } = actions
+  const { rows, startEdit, deleteRows, duplicateRows, duplicated } = actions
   const [query, setQuery] = useState('')
   const [sort, setSort] = useState<{ key: 'customer' | 'amount'; descending: boolean } | null>(null)
   const [page, setPage] = useState(0)
@@ -122,66 +121,74 @@ export const BulkActionsTable = ({ data = demoInvoices }: { data?: Invoice[] }) 
           <TableCaption className="caption-top">
             <span className="sr-only">Bulk selection table</span>
             <div className="flex flex-wrap items-center">
-              <div role="group" aria-label="Bulk actions" className="mr-4 flex items-center">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="text"
-                      className="mr-1 p-2"
-                      aria-label="Edit selected"
-                      disabled={selectedRows.length !== 1}
-                      onClick={(event) => startEdit(selectedRows[0]!, event.currentTarget)}
-                    >
-                      <IconEdit aria-hidden="true" />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Edit selected invoice</TooltipContent>
-                </Tooltip>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="text"
-                      className="mr-1 p-2"
-                      aria-label="Delete selected"
-                      disabled={validSelection.size === 0}
-                      onClick={() => deleteRows(new Set(validSelection))}
-                    >
-                      <IconTrash aria-hidden="true" />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Delete selected invoices</TooltipContent>
-                </Tooltip>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="text"
-                      className="mr-1 p-2"
-                      aria-label={duplicated.has('bulk') ? 'Duplicated selected' : 'Duplicate selected'}
-                      disabled={validSelection.size === 0}
-                      onClick={() => duplicateRows(selectedRows, 'bulk')}
-                    >
-                      {duplicated.has('bulk') ? <IconCheck aria-hidden="true" /> : <IconCopy aria-hidden="true" />}
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    {duplicated.has('bulk') ? 'Duplicated invoices' : 'Duplicate selected invoices'}
-                  </TooltipContent>
-                </Tooltip>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="text"
-                      className="p-2"
-                      aria-label="Clear selection"
-                      disabled={validSelection.size === 0}
-                      onClick={() => setSelected(new Set())}
-                    >
-                      <IconClose aria-hidden="true" />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Clear selection</TooltipContent>
-                </Tooltip>
-              </div>
+              {validSelection.size > 0 && (
+                <div role="group" aria-label="Bulk actions" className="mr-4 flex items-center">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="text"
+                        className="mr-1 p-2"
+                        aria-label="Edit selected"
+                        disabled={selectedRows.length !== 1}
+                        onClick={(event) => startEdit(selectedRows[0]!, event.currentTarget)}
+                      >
+                        <IconEdit aria-hidden="true" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>Edit selected invoice</TooltipContent>
+                  </Tooltip>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="text"
+                        className="mr-1 p-2"
+                        aria-label="Delete selected"
+                        disabled={validSelection.size === 0}
+                        onClick={() => {
+                          deleteRows(new Set(validSelection))
+                          actions.tableRef.current?.focus()
+                        }}
+                      >
+                        <IconTrash aria-hidden="true" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>Delete selected invoices</TooltipContent>
+                  </Tooltip>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="text"
+                        className="mr-1 p-2"
+                        aria-label={duplicated.has('bulk') ? 'Duplicated selected' : 'Duplicate selected'}
+                        disabled={validSelection.size === 0}
+                        onClick={() => duplicateRows(selectedRows, 'bulk')}
+                      >
+                        {duplicated.has('bulk') ? <IconCheck aria-hidden="true" /> : <IconCopy aria-hidden="true" />}
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      {duplicated.has('bulk') ? 'Duplicated invoices' : 'Duplicate selected invoices'}
+                    </TooltipContent>
+                  </Tooltip>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="text"
+                        className="p-2"
+                        aria-label="Clear selection"
+                        disabled={validSelection.size === 0}
+                        onClick={() => {
+                          setSelected(new Set())
+                          actions.tableRef.current?.focus()
+                        }}
+                      >
+                        <IconClose aria-hidden="true" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>Clear selection</TooltipContent>
+                  </Tooltip>
+                </div>
+              )}
               <span role="status" className="text-sm">
                 {filtered.length} results · {validSelection.size} selected across pages
               </span>
@@ -314,11 +321,6 @@ export const BulkActionsTable = ({ data = demoInvoices }: { data?: Invoice[] }) 
           </Button>
         </nav>
       </div>
-      {notice && (
-        <Alert intent={notice.intent} size="sm" variant="outlined" className="mt-3 max-w-none">
-          {notice.message}
-        </Alert>
-      )}
     </div>
   )
 }

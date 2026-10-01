@@ -6,7 +6,6 @@ import { IconEye } from '../../../components/ui/icons/IconEye'
 import { IconMoreHorizontal } from '../../../components/ui/icons/IconMoreHorizontal'
 import { IconTrash } from '../../../components/ui/icons/IconTrash'
 import { Button } from '../../../components/ui/Button'
-import { Alert } from '../../../components/ui/Alert'
 import {
   Dropdown,
   DropdownTrigger,
@@ -119,11 +118,6 @@ export const DropdownActionsTable = ({ data = dropdownInvoices }: { data?: Invoi
         </Table>
       </TableContainer>
       <InvoiceEditor actions={actions} />
-      {actions.notice && (
-        <Alert intent={actions.notice.intent} size="sm" variant="outlined" className="mt-3 max-w-none">
-          {actions.notice.message}
-        </Alert>
-      )}
       <InvoiceDetails actions={actions} />
     </div>
   )

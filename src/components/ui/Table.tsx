@@ -62,9 +62,20 @@ export const Table = ({
   />
 )
 
-export type TableHeaderProps = TableElementProps<'thead'>
-export const TableHeader = ({ className, ...props }: TableHeaderProps) => (
-  <thead data-slot="table-header" className={cn('bg-(--lithos-text) text-(--lithos-bg)', className)} {...props} />
+export interface TableHeaderProps extends TableElementProps<'thead'> {
+  variant?: 'default' | 'accent'
+}
+export const TableHeader = ({ variant = 'default', className, ...props }: TableHeaderProps) => (
+  <thead
+    data-slot="table-header"
+    className={cn(
+      variant === 'accent'
+        ? 'bg-(--lithos-accent) text-(--lithos-accent-text)'
+        : 'bg-(--lithos-text) text-(--lithos-bg)',
+      className
+    )}
+    {...props}
+  />
 )
 
 export type TableBodyProps = TableElementProps<'tbody'>

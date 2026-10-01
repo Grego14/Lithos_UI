@@ -1,5 +1,5 @@
 import { useId, useState } from 'react'
-import { Alert } from '../../../components/ui/Alert'
+import { useToast } from '../../../core/hooks/useToast'
 import { Badge } from '../../../components/ui/Badge'
 import { Button } from '../../../components/ui/Button'
 import { Spinner } from '../../../components/ui/Spinner'
@@ -17,6 +17,7 @@ import {
 } from '../../../components/ui/Table'
 
 export const TableStates = () => {
+  const { addToast } = useToast()
   const id = useId()
   const [state, setState] = useState('ready')
 
@@ -26,7 +27,14 @@ export const TableStates = () => {
         <span id={id} className="mr-2 font-bold">
           Preview state
         </span>
-        <Select value={state} onChange={setState}>
+        <Select
+          value={state}
+          onChange={(value) => {
+            setState(value)
+            if (value === 'error')
+              addToast({ title: 'Load failed', message: 'Inventory could not be loaded.', intent: 'error' })
+          }}
+        >
           <SelectTrigger aria-labelledby={id} className="px-3 py-2">
             <span>{state.charAt(0).toUpperCase() + state.slice(1)}</span>
             <IconChevronDown className="ml-2 size-4 shrink-0" aria-hidden="true" />
@@ -98,9 +106,7 @@ export const TableStates = () => {
               <TableRow>
                 <TableCell colSpan={3} className="h-40 text-center">
                   <div className="flex flex-col items-center">
-                    <Alert intent="error" size="sm" title="Load failed" className="max-w-none text-start">
-                      Inventory could not be loaded.
-                    </Alert>
+                    <p>Inventory could not be loaded. Try again.</p>
                     <Button className="mt-3" onClick={() => setState('ready')}>
                       Retry
                     </Button>

@@ -59,6 +59,13 @@ export const tableContainerPropsData: PropItem[] = [
 ]
 export const tablePartsPropsData: PropItem[] = [
   {
+    name: 'TableHeader.variant',
+    type: "'default' | 'accent'",
+    defaultValue: "'default'",
+    description:
+      'Default uses inverse theme colors. Accent uses the current accent color and its YIQ-derived text color.',
+  },
+  {
     name: 'TableHeader.className',
     type: 'LithosClass',
     description:

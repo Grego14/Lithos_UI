@@ -1,12 +1,12 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useId, useRef } from 'react'
 import { Button } from '../../../components/ui/Button'
-import { Alert } from '../../../components/ui/Alert'
 import { Input } from '../../../components/ui/Input'
 import { Dialog, DialogHeader, DialogTitle, DialogBody } from '../../../components/ui/Dialog'
 import { Table, TableBody, TableCell, TableHead, TableRow } from '../../../components/ui/Table'
 import { currency, type useInvoiceActions } from './useInvoiceActions'
 
 export const InvoiceEditor = ({ actions }: { actions: ReturnType<typeof useInvoiceActions> }) => {
+  const errorId = useId()
   const inputRef = useRef<HTMLInputElement>(null)
   useEffect(() => {
     if (actions.editingId) inputRef.current?.focus()
@@ -21,13 +21,14 @@ export const InvoiceEditor = ({ actions }: { actions: ReturnType<typeof useInvoi
           className="mt-2"
           value={actions.editedCustomer}
           aria-invalid={!actions.editedCustomer.trim()}
+          aria-describedby={!actions.editedCustomer.trim() ? errorId : undefined}
           onChange={(event) => actions.setEditedCustomer(event.target.value)}
         />
       </label>
       {!actions.editedCustomer.trim() && (
-        <Alert intent="error" size="sm" variant="outlined" className="mt-2 max-w-none">
+        <p id={errorId} className="mt-2 text-sm font-bold">
           Customer name is required for {actions.editingId}.
-        </Alert>
+        </p>
       )}
       <div className="mt-3 flex">
         <Button className="mr-3" disabled={!actions.editedCustomer.trim()} onClick={actions.saveEdit}>

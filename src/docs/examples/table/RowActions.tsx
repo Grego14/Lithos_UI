@@ -4,7 +4,6 @@ import { IconEdit } from '../../../components/ui/icons/IconEdit'
 import { IconEye } from '../../../components/ui/icons/IconEye'
 import { IconTrash } from '../../../components/ui/icons/IconTrash'
 import { Button } from '../../../components/ui/Button'
-import { Alert } from '../../../components/ui/Alert'
 import { Badge } from '../../../components/ui/Badge'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../../../components/ui/Tooltip'
 import {
@@ -127,11 +126,6 @@ export const RowActionsTable = ({ data = rowActionInvoices }: { data?: Invoice[]
         </Table>
       </TableContainer>
       <InvoiceEditor actions={actions} />
-      {actions.notice && (
-        <Alert intent={actions.notice.intent} size="sm" variant="outlined" className="mt-3 max-w-none">
-          {actions.notice.message}
-        </Alert>
-      )}
       <InvoiceDetails actions={actions} />
     </div>
   )

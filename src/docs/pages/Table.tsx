@@ -38,7 +38,7 @@ const tableExampleCode = (...sources: string[]): UsageCodeConfig => {
             .map((name) => name.trim())
             .filter(Boolean)
           names.forEach((name) => componentNames.add(name))
-          if (path.startsWith('../../../components/')) {
+          if (path.startsWith('../../../')) {
             names.forEach((name) => {
               manualPath[name] = path.replace('../../../', '../../')
             })
@@ -90,7 +90,8 @@ export const TableDoc = () => (
       Import <code>lithos-ui/tokens.css</code> alongside your Tailwind stylesheet and configure the Lithos theme as
       described in Installation. Basic uses the non-sticky default; States demonstrates a sticky header with
       state-driven feedback. The examples also compose Badge, Button, Checkbox, Input, Spinner, Dialog, Dropdown,
-      Select, and the shared Lithos icon components.
+      Select, Toast, and the shared Lithos icon components. Wrap your application in <code>ToastProvider</code> to use
+      the States and action examples; load failures and action results use Toast notifications.
     </p>
     <section aria-labelledby="examples" className="mb-12">
       <h2 id="examples" className={heading}>
@@ -101,7 +102,8 @@ export const TableDoc = () => (
       </h3>
       <p className={paragraph}>
         Display invoices with a caption, row labels, and a totals footer. Text wraps naturally, and the container
-        scrolls horizontally when the content needs more space.
+        scrolls horizontally when the content needs more space. Use <code>{'<TableHeader variant="accent">'}</code> for
+        an accent-colored header with theme-aware text contrast.
       </p>
       <PreviewBlock code={tableExampleCode(basicSource)}>
         <BasicTable />
@@ -152,12 +154,12 @@ export const TableDoc = () => (
       <p className={paragraph}>
         Select invoices across pages, then duplicate or delete the selection. The header checkbox selects only the
         current page; selections remain when sorting or filtering. Edit is available when exactly one invoice is
-        selected.
+        selected. Action icons appear only while at least one invoice is selected.
       </p>
       <p className={paragraph}>
         Changes stay in this demo. Duplicate preserves the current page, filter, and sort, so new rows may appear on
-        another page or be hidden by the filter. Action messages identify the affected invoices, including selections
-        outside the current view.
+        another page or be hidden by the filter. Toast notifications identify the affected invoices, including
+        selections outside the current view.
       </p>
       <PreviewBlock code={tableExampleCode(hookSource, actionsSource, bulkActionsSource)}>
         <BulkActionsTable />
@@ -189,17 +191,23 @@ export const TableDoc = () => (
     <div className="mb-12">
       <CodeViewer
         language="tsx"
-        code={`<TableContainer aria-label="Orders">
+        code={`<TableContainer>
   <Table>
-    <TableCaption>Recent orders</TableCaption>
+    <TableCaption />
     <TableHeader>
-      <TableRow><TableHead scope="col">Order</TableHead></TableRow>
+      <TableRow>
+        <TableHead />
+      </TableRow>
     </TableHeader>
     <TableBody>
-      <TableRow><TableCell>ORD-001</TableCell></TableRow>
+      <TableRow>
+        <TableCell />
+      </TableRow>
     </TableBody>
     <TableFooter>
-      <TableRow><TableCell>Total</TableCell></TableRow>
+      <TableRow>
+        <TableCell />
+      </TableRow>
     </TableFooter>
   </Table>
 </TableContainer>`}

@@ -339,7 +339,7 @@ const componentsList = [
     preview: (
       <div className="w-full p-3">
         <Table size="sm" aria-label="Example invoices">
-          <TableHeader>
+          <TableHeader variant="accent">
             <TableRow>
               <TableHead scope="col">Invoice</TableHead>
               <TableHead scope="col" className="text-end">

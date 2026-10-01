@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
+import { useToast } from '../../../core/hooks/useToast'
+import { colors } from '../../../utils/colors'
 
 export interface Invoice {
   id: string
@@ -6,11 +8,6 @@ export interface Invoice {
   status: 'Paid' | 'Pending'
   amount: number
   method?: string
-}
-
-export interface InvoiceNotice {
-  message: string
-  intent: 'success' | 'error'
 }
 
 export const demoInvoices: Invoice[] = [
@@ -40,11 +37,11 @@ const createInvoiceIdAllocator = (rows: Invoice[]) => {
 
 // Each mounted example has its own records, editor, and action feedback.
 export const useInvoiceActions = (data: Invoice[]) => {
+  const { addToast } = useToast()
   const [rows, setRows] = useState(data)
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editedCustomer, setEditedCustomer] = useState('')
   const [viewingId, setViewingId] = useState<string | null>(null)
-  const [notice, setNotice] = useState<InvoiceNotice | null>(null)
   const [duplicated, setDuplicated] = useState<Set<string>>(new Set())
   const timers = useRef(new Map<string, ReturnType<typeof setTimeout>>())
   const tableRef = useRef<HTMLDivElement>(null)
@@ -56,7 +53,6 @@ export const useInvoiceActions = (data: Invoice[]) => {
     setEditingId(null)
     setViewingId(null)
     setDuplicated(new Set())
-    setNotice(null)
   }
   useEffect(() => {
     const activeTimers = timers.current
@@ -84,7 +80,7 @@ export const useInvoiceActions = (data: Invoice[]) => {
     const customer = editedCustomer.trim()
     if (!editingId || !customer) return
     setRows((previous) => previous.map((row) => (row.id === editingId ? { ...row, customer } : row)))
-    setNotice({ message: `Updated ${editingId}.`, intent: 'success' })
+    addToast({ message: `Updated ${editingId}.`, intent: 'success' })
     setEditingId(null)
   }
   const deleteRows = (ids: Set<string>) => {
@@ -93,9 +89,10 @@ export const useInvoiceActions = (data: Invoice[]) => {
     if (editingId && ids.has(editingId)) setEditingId(null)
     if (viewingId && ids.has(viewingId)) setViewingId(null)
     const deletedIds = [...ids].join(', ')
-    setNotice({
+    addToast({
       message: ids.size === 1 ? `Deleted invoice ${deletedIds}.` : `Deleted invoices: ${deletedIds}.`,
-      intent: 'error',
+      intent: 'success',
+      color: colors.error,
     })
   }
   const addRow = () => {
@@ -107,7 +104,7 @@ export const useInvoiceActions = (data: Invoice[]) => {
       method: 'Credit card',
     }
     setRows((previous) => [row, ...previous])
-    setNotice({ message: `Added ${row.id}.`, intent: 'success' })
+    addToast({ message: `Added ${row.id}.`, intent: 'success' })
   }
   const duplicateRows = (targetRows: Invoice[], key: string) => {
     if (!targetRows.length) return
@@ -118,7 +115,7 @@ export const useInvoiceActions = (data: Invoice[]) => {
     setRows((previous) => [...previous, ...copies])
     setDuplicated((previous) => new Set(previous).add(key))
     const copyIds = copies.map((copy, index) => `${targetRows[index]!.id} as ${copy.id}`).join(', ')
-    setNotice({
+    addToast({
       message: copies.length === 1 ? `Duplicated invoice ${copyIds}.` : `Duplicated invoices: ${copyIds}.`,
       intent: 'success',
     })
@@ -147,7 +144,6 @@ export const useInvoiceActions = (data: Invoice[]) => {
     addRow,
     duplicateRows,
     duplicated,
-    notice,
     viewing: rows.find((row) => row.id === viewingId),
     view: setViewingId,
     closeView: () => setViewingId(null),

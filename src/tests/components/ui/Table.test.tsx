@@ -1,5 +1,5 @@
-import { createRef } from 'react'
-import { act, render, screen, within, waitFor } from '@testing-library/react'
+import { createRef, type ReactElement } from 'react'
+import { act, render as renderWithProvider, screen, within, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { axe } from 'jest-axe'
 import { describe, expect, it, vi, afterEach } from 'vitest'
@@ -14,6 +14,7 @@ import {
   TableHeader,
   TableRow,
 } from '../../../components/ui/Table'
+import { ToastProvider } from '../../../components/ui/Toast'
 import { BasicTable } from '../../../docs/examples/table/BasicTable'
 import { TableStates } from '../../../docs/examples/table/TableStates'
 import { BulkActionsTable } from '../../../docs/examples/table/BulkActions'
@@ -22,10 +23,37 @@ import { DropdownActionsTable } from '../../../docs/examples/table/DropdownActio
 import { ResponsiveTable } from '../../../docs/examples/table/ResponsiveTable'
 import { SortableTable } from '../../../docs/examples/table/SortableTable'
 import { GroupedHeadersTable } from '../../../docs/examples/table/GroupedHeaders'
+const render = (ui: ReactElement) => renderWithProvider(ui, { wrapper: ToastProvider })
+
 afterEach(() => vi.unstubAllGlobals())
 afterEach(() => vi.restoreAllMocks())
 
 describe('Table primitives', () => {
+  it('supports accent header contrast, native refs, and consumer color overrides', () => {
+    const ref = createRef<HTMLTableSectionElement>()
+    const { rerender } = render(
+      <Table>
+        <TableHeader ref={ref} variant="accent">
+          <TableRow>
+            <TableHead>Invoice</TableHead>
+          </TableRow>
+        </TableHeader>
+      </Table>
+    )
+    expect(ref.current).toHaveClass('bg-(--lithos-accent)', 'text-(--lithos-accent-text)')
+    expect(ref.current).not.toHaveAttribute('variant')
+    rerender(
+      <Table>
+        <TableHeader ref={ref} variant="accent" className="bg-red-500 text-white">
+          <TableRow>
+            <TableHead>Invoice</TableHead>
+          </TableRow>
+        </TableHeader>
+      </Table>
+    )
+    expect(ref.current).toHaveClass('bg-red-500', 'text-white')
+    expect(ref.current).not.toHaveClass('bg-(--lithos-accent)', 'text-(--lithos-accent-text)')
+  })
   it('moves overflow columns into accessible details and restores them when space returns', async () => {
     const user = userEvent.setup()
     let onResize: ResizeObserverCallback | undefined
@@ -199,7 +227,8 @@ describe('Loading, empty, and error states', () => {
     expect(within(inventoryTable).getAllByRole('row')).toHaveLength(13)
     await user.click(screen.getByLabelText('Preview state'))
     await user.click(screen.getByRole('option', { name: 'Error' }))
-    expect(within(inventoryTable).getByRole('alert')).toHaveTextContent('Inventory could not be loaded')
+    expect(screen.getByRole('alert')).toHaveTextContent('Inventory could not be loaded')
+    expect(within(inventoryTable).getByText('Inventory could not be loaded. Try again.')).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: 'Retry' }))
     expect(screen.getByRole('status')).toBe(status)
     expect(status).toHaveTextContent('Inventory ready')
@@ -209,6 +238,24 @@ describe('Loading, empty, and error states', () => {
 })
 
 describe('Bulk actions', () => {
+  it('shows actions only for a selection and restores focus when clearing it', async () => {
+    const user = userEvent.setup()
+    render(<BulkActionsTable />)
+    expect(screen.queryByRole('group', { name: 'Bulk actions' })).toBeNull()
+    await user.click(screen.getByLabelText('Select INV-001'))
+    expect(screen.getByRole('group', { name: 'Bulk actions' })).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Clear selection' }))
+    expect(screen.queryByRole('group', { name: 'Bulk actions' })).toBeNull()
+    expect(screen.getByRole('region', { name: 'Bulk invoice selection' })).toHaveFocus()
+    await user.click(screen.getByLabelText('Select INV-001'))
+    await user.click(screen.getByRole('button', { name: 'Delete selected' }))
+    expect(screen.queryByRole('group', { name: 'Bulk actions' })).toBeNull()
+    expect(screen.getByRole('region', { name: 'Bulk invoice selection' })).toHaveFocus()
+    const toast = screen.getByText('Deleted invoice INV-001.').closest('[role="status"]')!
+    expect(toast).toBeInTheDocument()
+    await user.click(within(toast as HTMLElement).getByRole('button', { name: 'Close notification' }))
+    expect(toast).not.toBeInTheDocument()
+  })
   it('sorts amounts numerically and keeps selection attached to the record', async () => {
     const user = userEvent.setup()
     render(<BulkActionsTable />)
@@ -291,6 +338,7 @@ describe('Bulk actions', () => {
     await user.click(screen.getByRole('option', { name: '20' }))
     expect(screen.getAllByRole('row')).toHaveLength(13)
     expect(screen.getByText('Page 1 of 1')).toBeInTheDocument()
+    await user.click(screen.getByLabelText('Select INV-001'))
     expect(screen.getByRole('button', { name: 'Duplicate selected' })).toHaveAttribute('type', 'button')
   })
 
@@ -303,11 +351,11 @@ describe('Bulk actions', () => {
     expect(input).toHaveFocus()
     await user.clear(input)
     expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled()
-    expect(screen.getByRole('alert')).toHaveTextContent('required')
+    expect(input).toHaveAccessibleDescription('Customer name is required for INV-001.')
     await user.type(input, 'Alex Cooper')
     await user.click(screen.getByRole('button', { name: 'Save' }))
     expect(screen.getByText('Alex Cooper')).toBeInTheDocument()
-    expect(screen.getByRole('alert')).toHaveTextContent('Updated INV-001.')
+    expect(screen.getByText('Updated INV-001.').closest('[role="status"]')).toBeInTheDocument()
     await user.click(screen.getByLabelText('Select INV-002'))
     await user.click(screen.getByRole('button', { name: 'Duplicate selected' }))
     expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
@@ -315,10 +363,12 @@ describe('Bulk actions', () => {
     expect(screen.getByRole('rowheader', { name: 'INV-013' })).toBeInTheDocument()
     expect(screen.getByRole('rowheader', { name: 'INV-014' })).toBeInTheDocument()
     expect(await screen.findByRole('button', { name: 'Duplicated selected' })).toBeInTheDocument()
-    expect(screen.getByRole('alert')).toHaveTextContent('Duplicated invoices: INV-001 as INV-013, INV-002 as INV-014.')
+    expect(
+      screen.getByText('Duplicated invoices: INV-001 as INV-013, INV-002 as INV-014.').closest('[role="status"]')
+    ).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: 'Delete selected' }))
     expect(screen.queryByRole('rowheader', { name: 'INV-001' })).not.toBeInTheDocument()
-    expect(screen.getByRole('alert')).toHaveTextContent('Deleted invoices: INV-001, INV-002.')
+    expect(screen.getByText('Deleted invoices: INV-001, INV-002.').closest('[role="status"]')).toBeInTheDocument()
     expect(screen.getByText(/0 selected across pages/)).toBeInTheDocument()
   })
 
@@ -347,7 +397,7 @@ describe('Bulk actions', () => {
     expect(screen.getByText('Page 1 of 1')).toBeInTheDocument()
     expect(screen.getByLabelText('Filter invoices')).toHaveValue('INV-006')
     expect(screen.queryByRole('rowheader', { name: 'INV-014' })).toBeNull()
-    expect(screen.getByRole('alert')).toHaveTextContent('INV-006 as INV-014')
+    expect(screen.getByText('Duplicated invoice INV-006 as INV-014.').closest('[role="status"]')).toBeInTheDocument()
     await user.clear(screen.getByLabelText('Filter invoices'))
     expect(screen.getByRole('rowheader', { name: 'INV-014' })).toBeInTheDocument()
   })
@@ -412,7 +462,7 @@ describe('Independent action previews', () => {
         .map((header) => header.textContent)
     ).toEqual(['INV-001', 'INV-002', 'INV-003', 'INV-004'])
     expect(await screen.findByRole('button', { name: 'Duplicated INV-001' })).toBeInTheDocument()
-    expect(await screen.findByRole('alert')).toHaveTextContent('Duplicated invoice INV-001 as INV-004.')
+    expect(screen.getByText('Duplicated invoice INV-001 as INV-004.').closest('[role="status"]')).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Duplicate INV-002' })).toBeInTheDocument()
     await waitFor(() => expect(screen.getByRole('button', { name: 'Duplicate INV-001' })).toBeInTheDocument(), {
       timeout: 3000,
@@ -452,7 +502,7 @@ describe('Independent action previews', () => {
     await user.click(trigger)
     await user.click(await screen.findByRole('menuitem', { name: 'Duplicate' }))
     expect(screen.getByRole('rowheader', { name: 'INV-004' })).toBeInTheDocument()
-    expect(await screen.findByRole('alert')).toHaveTextContent('Duplicated invoice INV-001 as INV-004.')
+    expect(screen.getByText('Duplicated invoice INV-001 as INV-004.').closest('[role="status"]')).toBeInTheDocument()
     await user.click(trigger)
     expect(await screen.findByRole('menuitem', { name: 'Duplicated' })).toBeInTheDocument()
     await user.click(screen.getByRole('menuitem', { name: 'Edit' }))
@@ -462,15 +512,15 @@ describe('Independent action previews', () => {
     await user.click(trigger)
     await user.click(await screen.findByRole('menuitem', { name: 'Delete' }))
     expect(screen.queryByRole('rowheader', { name: 'INV-001' })).toBeNull()
-    expect(await screen.findByRole('alert')).toHaveTextContent('Deleted invoice INV-001.')
+    expect(screen.getByText('Deleted invoice INV-001.').closest('[role="status"]')).toBeInTheDocument()
   })
 
-  it('adds a row and announces the action with an alert', async () => {
+  it('adds a row and announces the action with a toast', async () => {
     const user = userEvent.setup()
     render(<RowActionsTable />)
     await user.click(screen.getByRole('button', { name: 'New invoice' }))
     expect(screen.getByRole('rowheader', { name: 'INV-004' })).toBeInTheDocument()
-    expect(screen.getByRole('alert')).toHaveTextContent('Added INV-004.')
+    expect(screen.getByText('Added INV-004.').closest('[role="status"]')).toBeInTheDocument()
   })
 
   it('returns focus to the table if the edited record disappears', async () => {
