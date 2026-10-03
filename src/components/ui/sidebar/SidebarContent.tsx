@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Lithos UI SidebarContent structural primitive.
+ * - Dynamic semantic landmark container: maps `role` prop to accessible HTML elements (`nav`, `section`, `div`, `aside`).
+ * - Smooth width transitions (`duration-150 ease-out`) adjusting between `expandedWidth` and `collapsedWidth` based on layout mode.
+ */
 import type { ElementType } from 'react'
 import type { SidebarContentProps } from './sidebar.types'
 import { useSidebar } from './useSidebar'

@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Lithos UI Sidebar root primitive.
+ * - Provides layout context (`mode`, `open`, `role`, `setOpen`) across subcomponents using React Context API.
+ * - Enforces stable reference memoization via `useMemo` to prevent unnecessary sub-tree re-renders.
+ */
 import { useMemo } from 'react'
 import type { SidebarProps } from './sidebar.types'
 import { cn } from '../../../utils/cn'

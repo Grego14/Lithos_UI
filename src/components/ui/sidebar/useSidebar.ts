@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Lithos UI Sidebar context hook and state primitive.
+ * - Encapsulates `SidebarContext` consumption with strict boundary validation (`throws` error outside `<Sidebar>`).
+ * - Exposes reactive state (`open`, `mode`, `role`) and dispatchers (`setOpen`) to nested sidebar primitives.
+ */
 import { createContext, useContext } from 'react'
 import type { SidebarMode, SidebarRole, SidebarSetOpen } from './sidebar.types'
 
