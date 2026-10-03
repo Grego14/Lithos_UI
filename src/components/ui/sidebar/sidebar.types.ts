@@ -1,6 +1,12 @@
+/**
+ * @fileoverview Type definitions for Lithos UI Sidebar primitive suite.
+ * - Discriminated union types supporting both button and polymorphic `asChild` child delegation (`SidebarItemProps`).
+ * - Accessible landmark role mappings, layout modes, and strict type safety for compound sidebar subcomponents.
+ */
 import type { ReactNode, ComponentPropsWithRef, ElementType } from 'react'
 import type { LithosClass } from '../../../utils/cn'
 import type { ButtonProps } from '../Button'
+import type { AsChildProps } from '../../../core/types'
 
 /**
  * Defines the behavior mode of the sidebar.
@@ -61,24 +67,29 @@ export type SidebarContentProps<T extends ElementType = 'aside'> = {
   className?: LithosClass
 } & Omit<ComponentPropsWithRef<T>, 'className'>
 
-/**
- * Props for the trigger button that toggles sidebar state.
- */
-export interface SidebarTriggerProps extends Omit<ComponentPropsWithRef<'button'>, 'className'> {
+/** Base properties shared across all SidebarTrigger variants. */
+export type BaseSidebarTriggerProps = {
   /** Custom icon or content for the toggle button. */
   children?: ReactNode
 
   /** Additional CSS classes for the button. */
   className?: LithosClass
 
-  /** Accessible label added to the trigger button.*/
+  /** Accessible label added to the trigger button. */
   label?: string
+
+  /** Pixel dimension for default render icons. Default: `18`. */
+  iconSize?: number
 }
 
 /**
- * Props for individual interactive navigation items inside the sidebar.
+ * Component props for SidebarTrigger, supporting both standard button rendering
+ * and child component delegation via `asChild`.
  */
-export interface SidebarItemProps extends ButtonProps {
+export type SidebarTriggerProps<T extends ElementType = 'button'> = AsChildProps<BaseSidebarTriggerProps, 'button', T>
+
+/** Base properties shared across all SidebarItem variants. */
+export type BaseSidebarItemProps = {
   /** Icon displayed on the left or centered when collapsed. */
   icon?: ReactNode
 
@@ -88,3 +99,13 @@ export interface SidebarItemProps extends ButtonProps {
   /** Additional CSS classes. */
   className?: LithosClass
 }
+
+/**
+ * Component props for SidebarItem, supporting both standard button rendering
+ * and child component delegation via `asChild`.
+ */
+export type SidebarItemProps<T extends ElementType = 'button'> = AsChildProps<
+  BaseSidebarItemProps & Omit<ButtonProps, 'className'>,
+  'button',
+  T
+>
