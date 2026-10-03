@@ -1,9 +1,15 @@
-import { useState } from 'react'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 import { SetupGuide } from '../layout/SetupGuide'
-import { Sidebar, SidebarContent, SidebarTrigger, SidebarItem } from '../../components/ui/Sidebar'
 import { PropsAccordion } from '../../components/ui/PropsTable'
+
+import { removeImports } from '../examples/removeImports'
+import { ExamplePermanent } from '../examples/sidebar/permanent'
+import { ExampleMini } from '../examples/sidebar/mini'
+
+import examplePermanentSource from '../examples/sidebar/permanent.tsx?raw'
+import exampleMiniSource from '../examples/sidebar/mini.tsx?raw'
+
 import {
   useSidebarReturnPropsData,
   sidebarItemPropsData,
@@ -15,190 +21,8 @@ import {
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/sidebar/Sidebar.tsx'
 const manualPath = '../../components/ui/Sidebar'
 
-export const ExamplePermanent = () => {
-  const [active, setActive] = useState('item-0')
-
-  const items = [
-    { icon: '🏠', label: 'Dashboard', id: 'item-0' },
-    { icon: '📦', label: 'Projects', id: 'item-1' },
-    { icon: '⚙️', label: 'Settings', id: 'item-2' },
-  ]
-
-  return (
-    <div className="flex h-screen w-full bg-(--lithos-surface)">
-      <Sidebar role="navigation">
-        <SidebarContent className="border-r-2 border-(--lithos-border) p-2 space-y-2">
-          <div className="p-3 font-bold border-b-2 border-(--lithos-border) -mx-2 -mt-2 mb-2 uppercase">Lithos</div>
-
-          {items.map((item) => (
-            <SidebarItem key={item.id} icon={item.icon} active={active === item.id} onClick={() => setActive(item.id)}>
-              {item.label}
-            </SidebarItem>
-          ))}
-        </SidebarContent>
-      </Sidebar>
-
-      <main className="flex-1 flex flex-col min-w-[320px] overflow-y-auto p-6 space-y-6">
-        <header className="border-b-2 border-(--lithos-border) pb-4">
-          <h1 className="text-2xl font-black uppercase">Main Dashboard</h1>
-          <p className="text-sm opacity-80">Overview of the layout integration with Permanent Sidebar.</p>
-        </header>
-
-        <section className="flex flex-wrap -m-2">
-          <div className="w-full md:w-1/3 p-2">
-            <div className="p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]">
-              <h3 className="font-bold mb-1 truncate">Total Users</h3>
-              <p className="text-2xl font-black">1,240</p>
-            </div>
-          </div>
-          <div className="w-full md:w-1/3 p-2">
-            <div className="p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]">
-              <h3 className="font-bold mb-1 truncate">Conversion Rate</h3>
-              <p className="text-2xl font-black">85%</p>
-            </div>
-          </div>
-          <div className="w-full md:w-1/3 p-2">
-            <div className="p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]">
-              <h3 className="font-bold mb-1 truncate">Server Latency</h3>
-              <p className="text-2xl font-black">12 ms</p>
-            </div>
-          </div>
-        </section>
-
-        <section className="p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-border)] flex-1 min-h-[200px]">
-          <h2 className="font-bold mb-2">Active View: {active}</h2>
-          <p className="text-sm">Content related to the selected item goes here.</p>
-        </section>
-      </main>
-    </div>
-  )
-}
-
-export const ExampleMini = () => {
-  const [open, setOpen] = useState(true)
-  const [active, setActive] = useState('item-0')
-
-  const items = [
-    { icon: '🏠', label: 'Dashboard', id: 'item-0' },
-    { icon: '📦', label: 'Projects', id: 'item-1' },
-    { icon: '⚙️', label: 'Settings', id: 'item-2' },
-  ]
-
-  return (
-    <div className="flex h-screen w-full bg-(--lithos-surface) overflow-hidden">
-      <Sidebar open={open} setOpen={setOpen} mode="mini" role="navigation">
-        <SidebarContent className="p-2 space-y-2">
-          <div
-            className={`flex items-center py-1.5 ${open ? 'px-2 justify-between' : 'justify-center'} border-b-2 border-(--lithos-border)`}
-          >
-            {open && <span className="font-bold tracking-wider uppercase text-lg">Lithos</span>}
-            <SidebarTrigger />
-          </div>
-
-          {items.map((item) => (
-            <SidebarItem key={item.id} icon={item.icon} active={active === item.id} onClick={() => setActive(item.id)}>
-              {item.label}
-            </SidebarItem>
-          ))}
-        </SidebarContent>
-      </Sidebar>
-
-      <main className="flex-1 flex flex-col min-w-0 overflow-y-auto p-6 space-y-6">
-        <header className="border-b-2 border-(--lithos-border) pb-4">
-          <h1 className="text-2xl font-black uppercase">Main Dashboard</h1>
-          <p className="text-sm opacity-80">Overview of the layout integration with Sidebar.</p>
-        </header>
-
-        <section className="grid grid-cols-1 md:grid-cols-3 spacex-4">
-          <div className="p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]">
-            <h3 className="font-bold mb-1">Total Users</h3>
-            <p className="text-2xl font-black">1,240</p>
-          </div>
-          <div className="p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]">
-            <h3 className="font-bold mb-1">Conversion Rate</h3>
-            <p className="text-2xl font-black">85%</p>
-          </div>
-          <div className="p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]">
-            <h3 className="font-bold mb-1">Server Latency</h3>
-            <p className="text-2xl font-black">12 ms</p>
-          </div>
-        </section>
-
-        <section className="p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-border)] flex-1 min-h-[200px]">
-          <h2 className="font-bold mb-2">Active View: {active}</h2>
-          <p className="text-sm">Content related to the selected item goes here.</p>
-        </section>
-      </main>
-    </div>
-  )
-}
-
 const usagePermanent = {
-  body: `export const ExamplePermanent = () => {
-  const [active, setActive] = useState('item-0')
-
-  const items = [
-    { icon: '🏠', label: 'Dashboard', id: 'item-0' },
-    { icon: '📦', label: 'Projects', id: 'item-1' },
-    { icon: '⚙️', label: 'Settings', id: 'item-2' },
-  ]
-
-  return (
-    <div className='flex h-screen w-full bg-(--lithos-surface)'>
-      <Sidebar role='navigation'>
-        <SidebarContent className='border-r-2 border-(--lithos-border) p-2 space-y-2'>
-          <div className='p-3 font-bold border-b-2 border-(--lithos-border) -mx-2 -mt-2 mb-2 uppercase'>
-            Lithos
-          </div>
-
-          {items.map(item => (
-            <SidebarItem
-              key={item.id}
-              icon={item.icon}
-              active={active === item.id}
-              onClick={() => setActive(item.id)}
-            >
-              {item.label}
-            </SidebarItem>
-          ))}
-        </SidebarContent>
-      </Sidebar>
-
-      <main className='flex-1 flex flex-col min-w-[320px] overflow-y-auto p-6 space-y-6'>
-        <header className='border-b-2 border-(--lithos-border) pb-4'>
-          <h1 className='text-2xl font-black uppercase'>Main Dashboard</h1>
-          <p className='text-sm opacity-80'>Overview of the layout integration with Permanent Sidebar.</p>
-        </header>
-
-        <section className='flex flex-wrap -m-2'>
-          <div className='w-full md:w-1/3 p-2'>
-            <div className='p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]'>
-              <h3 className='font-bold mb-1 truncate'>Total Users</h3>
-              <p className='text-2xl font-black'>1,240</p>
-            </div>
-          </div>
-          <div className='w-full md:w-1/3 p-2'>
-            <div className='p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]'>
-              <h3 className='font-bold mb-1 truncate'>Conversion Rate</h3>
-              <p className='text-2xl font-black'>85%</p>
-            </div>
-          </div>
-          <div className='w-full md:w-1/3 p-2'>
-            <div className='p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]'>
-              <h3 className='font-bold mb-1 truncate'>Server Latency</h3>
-              <p className='text-2xl font-black'>12 ms</p>
-            </div>
-          </div>
-        </section>
-
-        <section className='p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-border)] flex-1 min-h-[200px]'>
-          <h2 className='font-bold mb-2'>Active View: {active}</h2>
-          <p className='text-sm'>Content related to the selected item goes here.</p>
-        </section>
-      </main>
-    </div>
-  )
-}`,
+  body: removeImports(examplePermanentSource),
   componentNames: ['Sidebar', 'SidebarContent', 'SidebarItem', 'useState'],
   manualPath: {
     react: ['useState'],
@@ -207,67 +31,7 @@ const usagePermanent = {
 }
 
 const usageMini = {
-  body: `export const ExampleMini = () => {
-  const [open, setOpen] = useState(true)
-  const [active, setActive] = useState('item-0')
-
-  const items = [
-    { icon: '🏠', label: 'Dashboard', id: 'item-0' },
-    { icon: '📦', label: 'Projects', id: 'item-1' },
-    { icon: '⚙️', label: 'Settings', id: 'item-2' },
-  ]
-
-  return (
-    <div className='flex h-screen w-full bg-(--lithos-surface) overflow-hidden'>
-      <Sidebar open={open} setOpen={setOpen} mode='mini' role='navigation'>
-        <SidebarContent className='p-2 space-y-2'>
-          <div className={\`flex items-center py-1.5 \${open ? 'px-2 justify-between' : 'justify-center'} border-b-2 border-(--lithos-border)\`}>
-            {open && <span className='font-bold tracking-wider uppercase text-lg'>Lithos</span>}
-            <SidebarTrigger />
-          </div>
-
-          {items.map(item => (
-            <SidebarItem
-              key={item.id}
-              icon={item.icon}
-              active={active === item.id}
-              onClick={() => setActive(item.id)}
-            >
-              {item.label}
-            </SidebarItem>
-          ))}
-        </SidebarContent>
-      </Sidebar>
-
-      <main className='flex-1 flex flex-col min-w-0 overflow-y-auto p-6 space-y-6'>
-        <header className='border-b-2 border-(--lithos-border) pb-4'>
-          <h1 className='text-2xl font-black uppercase'>Main Dashboard</h1>
-          <p className='text-sm opacity-80'>Overview of the layout integration with Sidebar.</p>
-        </header>
-
-        <section className='grid grid-cols-1 md:grid-cols-3 spacex-4'>
-          <div className='p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]'>
-            <h3 className='font-bold mb-1'>Total Users</h3>
-            <p className='text-2xl font-black'>1,240</p>
-          </div>
-          <div className='p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]'>
-            <h3 className='font-bold mb-1'>Conversion Rate</h3>
-            <p className='text-2xl font-black'>85%</p>
-          </div>
-          <div className='p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]'>
-            <h3 className='font-bold mb-1'>Server Latency</h3>
-            <p className='text-2xl font-black'>12 ms</p>
-          </div>
-        </section>
-
-        <section className='p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-border)] flex-1 min-h-[200px]'>
-          <h2 className='font-bold mb-2'>Active View: {active}</h2>
-          <p className='text-sm'>Content related to the selected item goes here.</p>
-        </section>
-      </main>
-    </div>
-  )
-}`,
+  body: removeImports(exampleMiniSource),
   componentNames: ['Sidebar', 'SidebarContent', 'SidebarTrigger', 'SidebarItem', 'useState'],
   manualPath: {
     react: ['useState'],
