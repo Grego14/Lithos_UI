@@ -15,6 +15,7 @@
   --lithos-border: #000000;
   --lithos-accent: #00ff00;
   --lithos-surface: #ffffff;
+  --lithos-surface-hover: color-mix(in srgb, var(--lithos-surface), #000 6%);
   --lithos-muted: rgba(0, 0, 0, 0.3);
   --lithos-shadow: rgba(0, 0, 0, 1);
   --lithos-radius: 0px;
@@ -57,6 +58,7 @@ body.obsidian {
   --lithos-text: #ffffff;
   --lithos-border: #ffffff;
   --lithos-surface: #000000;
+  --lithos-surface-hover: color-mix(in srgb, var(--lithos-surface), #fff 12%);
   --lithos-muted: rgba(255, 255, 255, 0.3);
   --lithos-shadow: rgba(255, 255, 255, 1);
   color-scheme: dark;
@@ -178,19 +180,23 @@ body.obsidian {
 
 @theme {
   --animate-lithos-shimmer: lithos-shimmer 1.5s linear infinite;
+
   @keyframes lithos-shimmer {
     0% {
       mask-position: 100% 50%;
     }
+
     100% {
       mask-position: -100% 50%;
     }
   }
+
   @keyframes slide-up {
     from {
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
