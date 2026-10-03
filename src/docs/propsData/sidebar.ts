@@ -52,12 +52,14 @@ export const sidebarContentPropsData: PropItem[] = [
     name: 'collapsedWidth',
     type: 'string',
     required: false,
+    defaultValue: "'w-16'",
     description: "Tailwind width class for collapsed state (e.g. 'w-16').",
   },
   {
     name: 'expandedWidth',
     type: 'string',
     required: false,
+    defaultValue: "'w-56'",
     description: "Tailwind width class for expanded state (e.g. 'w-56').",
   },
   {
@@ -82,6 +84,14 @@ export const sidebarContentPropsData: PropItem[] = [
 
 export const sidebarTriggerPropsData: PropItem[] = [
   {
+    name: 'asChild',
+    type: 'boolean',
+    defaultValue: 'false',
+    required: false,
+    description:
+      'Delegates rendering to its direct child element, merging styles, accessibility attributes, and event handlers.',
+  },
+  {
     name: 'children',
     type: 'ReactNode',
     required: false,
@@ -91,19 +101,27 @@ export const sidebarTriggerPropsData: PropItem[] = [
     name: 'className',
     type: 'LithosClass',
     required: false,
-    description: 'Additional CSS classes for the button.',
+    description: 'Additional CSS classes for the trigger element.',
+  },
+  {
+    name: 'iconSize',
+    type: 'number',
+    defaultValue: '18',
+    required: false,
+    description: 'Pixel dimensions for the default toggle icons (IconChevronLeft / IconSidebar).',
   },
   {
     name: 'label',
     type: 'string',
     required: false,
-    description: 'Accessible label added to the trigger button.',
+    description: 'Accessible aria-label override for the trigger button.',
   },
   {
     name: '...props',
-    type: "ComponentPropsWithRef<'button'>",
+    type: 'ButtonProps | ComponentPropsWithRef<T>',
     required: false,
-    description: 'Native HTML attributes forwarded to the button element.',
+    description:
+      'Native HTML and Lithos Button attributes forwarded by default, or target element props forwarded to the child when asChild is true.',
   },
 ]
 
@@ -117,8 +135,17 @@ export const sidebarItemPropsData: PropItem[] = [
   {
     name: 'active',
     type: 'boolean',
+    defaultValue: 'false',
     required: false,
     description: 'Active navigation state.',
+  },
+  {
+    name: 'asChild',
+    type: 'boolean',
+    defaultValue: 'false',
+    required: false,
+    description:
+      'When true, delegates rendering to its direct child element (e.g. <a />, Link), merging styles, classNames, and event handlers.',
   },
   {
     name: 'className',
@@ -128,9 +155,10 @@ export const sidebarItemPropsData: PropItem[] = [
   },
   {
     name: '...props',
-    type: 'ButtonProps',
+    type: 'ButtonProps | ComponentPropsWithRef<T>',
     required: false,
-    description: 'Native HTML attributes and ButtonProps forwarded to the underlying button.',
+    description:
+      'Native HTML attributes forwarded to the button by default, or target element props (e.g. href, to, target) forwarded to the child when asChild is true.',
   },
 ]
 
@@ -139,18 +167,21 @@ export const useSidebarReturnPropsData: PropItem[] = [
     name: 'mode',
     type: "'permanent' | 'mini'",
     required: true,
+    defaultValue: "'permanent'",
     description: 'Current layout mode of the sidebar.',
   },
   {
     name: 'role',
     type: "'complementary' | 'region' | 'navigation'",
     required: true,
+    defaultValue: "'complementary'",
     description: 'Active ARIA landmark role.',
   },
   {
     name: 'open',
     type: 'boolean',
     required: true,
+    defaultValue: 'false',
     description: 'Current expanded/collapsed state.',
   },
   {
