@@ -1,4 +1,6 @@
-export const popoverPropsData = [
+import type { PropItem } from '../../components/ui/PropsTable'
+
+export const popoverPropsData: PropItem[] = [
   {
     name: 'initialOpen',
     type: 'boolean',
@@ -61,7 +63,7 @@ export const popoverPropsData = [
   },
 ]
 
-export const popoverTriggerPropsData = [
+export const popoverTriggerPropsData: PropItem[] = [
   {
     name: 'asChild',
     type: 'boolean',
@@ -75,7 +77,7 @@ export const popoverTriggerPropsData = [
   },
 ]
 
-export const popoverContentPropsData = [
+export const popoverContentPropsData: PropItem[] = [
   {
     name: 'portaled',
     type: 'boolean',
@@ -97,7 +99,7 @@ export const popoverContentPropsData = [
   },
 ]
 
-export const popoverClosePropsData = [
+export const popoverClosePropsData: PropItem[] = [
   {
     name: 'asChild',
     type: 'boolean',
