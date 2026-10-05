@@ -16,6 +16,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed (0.1.3)
 
+- The `Tooltip` arrow appeared detached from the floating element when using a non-sharp radius.
+
 ### Removed (0.1.3)
 
 ## [0.1.2]
