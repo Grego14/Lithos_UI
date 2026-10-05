@@ -1,11 +1,14 @@
 import { Sidebar, SidebarContent, SidebarItem, SidebarTrigger } from '../../../components/ui/Sidebar'
 import { Typography } from '../../../components/ui/Typography'
 import { useState } from 'react'
+import { IconHome } from '../../../components/ui/icons/IconHome'
+import { IconFolder } from '../../../components/ui/icons/IconFolder'
+import { IconSettings } from '../../../components/ui/icons/IconSettings'
 
 const items = [
-  { icon: '🏠', label: 'Dashboard', id: 'item-0' },
-  { icon: '📦', label: 'Projects', id: 'item-1' },
-  { icon: '⚙️', label: 'Settings', id: 'item-2' },
+  { icon: <IconHome strokeWidth={3} />, label: 'Dashboard', id: 'item-0' },
+  { icon: <IconFolder strokeWidth={3} />, label: 'Projects', id: 'item-1' },
+  { icon: <IconSettings strokeWidth={3} />, label: 'Settings', id: 'item-2' },
 ]
 
 const cards = [

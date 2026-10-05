@@ -19,24 +19,35 @@ import {
 } from '../propsData/sidebar'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/sidebar/Sidebar.tsx'
-const manualPath = '../../components/ui/Sidebar'
+const sidebarPath = '../../components/ui/Sidebar'
+
+const manualPath = {
+  react: ['useState'],
+  IconHome: '../../components/ui/icons/IconHome',
+  IconFolder: '../../components/ui/icons/IconFolder',
+  IconSettings: '../../components/ui/icons/IconSettings',
+  others: sidebarPath,
+}
 
 const usagePermanent = {
   body: removeImports(examplePermanentSource),
-  componentNames: ['Sidebar', 'SidebarContent', 'SidebarItem', 'useState'],
-  manualPath: {
-    react: ['useState'],
-    others: manualPath,
-  },
+  componentNames: ['Sidebar', 'SidebarContent', 'SidebarItem', 'useState', 'IconFolder', 'IconHome', 'IconSettings'],
+  manualPath,
 }
 
 const usageMini = {
   body: removeImports(exampleMiniSource),
-  componentNames: ['Sidebar', 'SidebarContent', 'SidebarTrigger', 'SidebarItem', 'useState'],
-  manualPath: {
-    react: ['useState'],
-    others: manualPath,
-  },
+  componentNames: [
+    'Sidebar',
+    'SidebarContent',
+    'SidebarTrigger',
+    'SidebarItem',
+    'useState',
+    'IconFolder',
+    'IconHome',
+    'IconSettings',
+  ],
+  manualPath,
 }
 
 export const SidebarDoc = () => {
@@ -64,7 +75,7 @@ export const SidebarDoc = () => {
       </h2>
 
       <SetupGuide
-        componentNames={['Sidebar', 'SidebarContent', 'SidebarItem', 'SidebarTrigger']}
+        componentNames={['Sidebar']}
         manualPath={manualPath}
         requires={[
           'utils/cn.ts',
