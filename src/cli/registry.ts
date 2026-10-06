@@ -240,6 +240,13 @@ export const registry: Record<string, RegistryItem> = {
     githubUrl: `${GITHUB_BASE}/components/ui/Kbd.tsx`,
     requires: ['utils/cn.ts', 'utils/yiq.ts', 'core/types.ts'],
   },
+  pagination: {
+    slug: 'pagination',
+    name: 'Pagination',
+    type: 'ui',
+    githubUrl: `${GITHUB_BASE}/components/ui/Pagination.tsx`,
+    requires: ['utils/cn.ts', 'components/ui/Button.tsx', 'components/ui/icons/IconChevronLeft.tsx', 'react-icons'],
+  },
   popover: {
     slug: 'popover',
     name: 'Popover',

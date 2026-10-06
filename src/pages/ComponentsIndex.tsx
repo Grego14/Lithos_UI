@@ -27,6 +27,7 @@ import {
 } from '../components/ui/Dropdown'
 
 import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from '../components/ui/Command'
+import { Pagination } from '../components/ui/Pagination'
 import { Popover, PopoverTrigger, PopoverContent } from '../components/ui/Popover'
 import { Select } from '../components/ui/Select'
 import { Skeleton, SkeletonText } from '../components/ui/Skeleton'
@@ -335,6 +336,15 @@ const componentsList = [
         <Kbd size="sm">⌘</Kbd>
         <Kbd size="sm">K</Kbd>
       </KbdGroup>
+    ),
+  },
+  {
+    name: 'Pagination',
+    to: '/docs/pagination',
+    preview: (
+      <div inert aria-hidden="true">
+        <Pagination count={3} defaultPage={2} size="sm" aria-label="Pagination preview" />
+      </div>
     ),
   },
   {

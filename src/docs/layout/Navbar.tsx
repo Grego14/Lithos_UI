@@ -35,6 +35,7 @@ const groupedLinks = [
       { label: 'Dropdown', href: '/docs/dropdown' },
       { label: 'Input', href: '/docs/input' },
       { label: 'Kbd', href: '/docs/kbd' },
+      { label: 'Pagination', href: '/docs/pagination' },
       { label: 'Popover', href: '/docs/popover' },
       { label: 'Select', href: '/docs/select' },
       { label: 'Skeleton', href: '/docs/skeleton' },
