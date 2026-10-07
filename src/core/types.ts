@@ -1,3 +1,4 @@
+import type { ElementType, ReactNode, ComponentPropsWithRef } from 'react'
 import 'react'
 
 declare module 'react' {
@@ -26,3 +27,26 @@ export interface ToastProps {
   color?: HexColor | string | undefined
   duration?: number | undefined
 }
+
+/**
+ * Creates a discriminated union supporting standard rendering or child delegation via `asChild`.
+ *
+ * @template BaseProps - Custom props required by the component.
+ * @template DefaultElement - Default HTML element tag when `asChild` is false.
+ * @template TargetElement - Dynamic element tag when `asChild` is true.
+ */
+export type AsChildProps<
+  BaseProps,
+  DefaultElement extends ElementType,
+  TargetElement extends ElementType = DefaultElement,
+> =
+  | (BaseProps &
+      Omit<ComponentPropsWithRef<DefaultElement>, keyof BaseProps> & {
+        asChild?: false
+      })
+  | (BaseProps &
+      Omit<ComponentPropsWithRef<TargetElement>, keyof BaseProps> & {
+        /** Delegates rendering to its direct child element merging props and event handlers. */
+        asChild: true
+        children: ReactNode
+      })
