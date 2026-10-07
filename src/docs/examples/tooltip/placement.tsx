@@ -5,7 +5,7 @@ const placements = ['left', 'top', 'bottom', 'right'] as const
 
 export const PlacementExample = () => {
   return (
-    <div className="flex flex-wrap items-center justify-center space-x-4">
+    <div className="flex flex-wrap items-center justify-center [&>button:not(last-child)]:mr-4 w-full">
       {placements.map((placement) => (
         <Tooltip placement={placement} key={placement}>
           <TooltipTrigger asChild>
