@@ -46,6 +46,7 @@ const groupedLinks = [
       { label: 'Toast', href: '/docs/toast' },
       { label: 'Toggle', href: '/docs/toggle' },
       { label: 'Tooltip', href: '/docs/tooltip' },
+      { label: 'Sidebar', href: '/docs/sidebar' },
     ].sort((a, b) => (b.label > a.label ? 0 : 1)),
   },
 ]

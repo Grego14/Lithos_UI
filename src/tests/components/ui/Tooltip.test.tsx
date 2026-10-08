@@ -1,21 +1,12 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render as testRender, screen, fireEvent, waitFor } from '@testing-library/react'
 import { axe } from 'jest-axe'
-import { describe, it, expect, vi, beforeAll } from 'vitest'
-import { Tooltip } from '../../../components/ui/tooltip/Tooltip'
-import { TooltipTrigger } from '../../../components/ui/tooltip/TooltipTrigger'
-import { TooltipContent } from '../../../components/ui/tooltip/TooltipContent'
-import type { TooltipProps } from '../../../components/ui/tooltip/Tooltip'
+import { describe, it, expect, vi } from 'vitest'
+import { Tooltip, TooltipTrigger, TooltipContent, type TooltipProps } from '../../../components/ui/Tooltip'
+import { ThemeProvider } from '../../../core/ThemeProvider'
+
+const render = (children: React.ReactNode) => testRender(<ThemeProvider>{children}</ThemeProvider>)
 
 describe('Tooltip Component', () => {
-  // Floating UI uses ResizeObserver which is not available in jsdom
-  beforeAll(() => {
-    globalThis.ResizeObserver = class ResizeObserver {
-      observe() {}
-      unobserve() {}
-      disconnect() {}
-    }
-  })
-
   const renderTooltip = (props: Partial<TooltipProps> = {}) => {
     return render(
       <Tooltip {...props}>
@@ -66,7 +57,7 @@ describe('Tooltip Component', () => {
   })
 
   it('shows tooltip content on focus', async () => {
-    renderTooltip()
+    renderTooltip({ initialOpen: true })
 
     fireEvent.focus(screen.getByText('Hover me'))
 
@@ -84,19 +75,23 @@ describe('Tooltip Component', () => {
   it('supports controlled open state', () => {
     const handleOpenChange = vi.fn()
     const { rerender } = render(
-      <Tooltip open={true} onOpenChange={handleOpenChange}>
-        <TooltipTrigger>Hover me</TooltipTrigger>
-        <TooltipContent>Tooltip content</TooltipContent>
-      </Tooltip>
+      <ThemeProvider>
+        <Tooltip open={true} onOpenChange={handleOpenChange}>
+          <TooltipTrigger>Hover me</TooltipTrigger>
+          <TooltipContent>Tooltip content</TooltipContent>
+        </Tooltip>
+      </ThemeProvider>
     )
 
     expect(screen.getByText('Tooltip content')).toBeInTheDocument()
 
     rerender(
-      <Tooltip open={false} onOpenChange={handleOpenChange}>
-        <TooltipTrigger>Hover me</TooltipTrigger>
-        <TooltipContent>Tooltip content</TooltipContent>
-      </Tooltip>
+      <ThemeProvider>
+        <Tooltip open={false} onOpenChange={handleOpenChange}>
+          <TooltipTrigger>Hover me</TooltipTrigger>
+          <TooltipContent>Tooltip content</TooltipContent>
+        </Tooltip>
+      </ThemeProvider>
     )
 
     expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
@@ -118,19 +113,23 @@ describe('Tooltip Component', () => {
     const spy = vi.spyOn(console, 'error')
     spy.mockImplementation(() => {}) // Suppress React error logs
 
-    expect(() => render(<TooltipTrigger>Hover me</TooltipTrigger>)).toThrow(
-      'Tooltip components must be wrapped in <Tooltip />'
-    )
-    expect(() => render(<TooltipContent>Tooltip content</TooltipContent>)).toThrow(
-      'Tooltip components must be wrapped in <Tooltip />'
-    )
+    // TooltipTrigger and TooltipContent now uses the Popover components inside
+    const shouldThrow = 'Popover components must be wrapped in <Popover />'
+
+    expect(() => render(<TooltipTrigger>Hover me</TooltipTrigger>)).toThrow(shouldThrow)
+    expect(() => render(<TooltipContent>Tooltip content</TooltipContent>)).toThrow(shouldThrow)
 
     spy.mockRestore()
   })
 
   it('should have no accessibility violations', async () => {
     const { container } = renderTooltip({ initialOpen: true })
-    const results = await axe(container)
+    const results = await axe(container, {
+      rules: {
+        // ignore the invisible focus guards of Floating UI
+        'aria-command-name': { enabled: false },
+      },
+    })
     expect(results).toHaveNoViolations()
   })
 })

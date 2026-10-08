@@ -1,68 +1,55 @@
-export const tooltipPropsData = [
+import type { PropItem } from '../../components/ui/PropsTable'
+
+export const tooltipPropsData: PropItem[] = [
   {
-    name: 'initialOpen',
-    type: 'boolean',
-    default: 'false',
-    description: 'The initial open state of the tooltip in uncontrolled mode.',
-  },
-  {
-    name: 'placement',
-    type: 'Placement',
-    default: '"top"',
+    name: '...props',
+    type: "Omit<PopoverOptions, 'modal'>",
     description:
-      'The preferred placement of the tooltip relative to the trigger. (e.g., top, bottom, left-end, right-start)',
-  },
-  {
-    name: 'open',
-    type: 'boolean',
-    default: 'undefined',
-    description: 'The controlled open state of the tooltip. Must be used with onOpenChange.',
-  },
-  {
-    name: 'onOpenChange',
-    type: '(open: boolean) => void',
-    default: 'undefined',
-    description: 'Event handler called when the open state changes.',
-  },
-  {
-    name: 'offset',
-    type: 'number',
-    default: '4',
-    description: 'The distance in pixels between the tooltip and the trigger.',
+      'Accepts all Popover configuration options (e.g., placement, offset, open, onOpenChange, hover, delay, etc.), excluding modal mode.',
   },
 ]
 
-export const tooltipTriggerPropsData = [
+export const tooltipTriggerPropsData: PropItem[] = [
   {
-    name: 'asChild',
-    type: 'boolean',
-    default: 'false',
-    description: 'If true, merges its props and refs onto its child element instead of rendering a wrapper <button>.',
-  },
-  {
-    name: 'className',
-    type: 'LithosClass',
-    description: 'Additional CSS classes to apply to the trigger.',
+    name: '...props',
+    type: 'PopoverTriggerProps',
+    description:
+      'Accepts all PopoverTrigger props (including asChild, className, and all HTML attributes/event handlers).',
   },
 ]
 
-export const tooltipContentPropsData = [
+export const tooltipContentPropsData: PropItem[] = [
   {
     name: 'variant',
     type: '"default" | "primary" | "inverse"',
-    default: '"default"',
-    description: 'The visual style variant of the tooltip.',
+    defaultValue: '"default"',
+    description: 'The visual style variant of the tooltip surface.',
   },
   {
-    name: 'portaled',
+    name: '...props',
+    type: 'PopoverContentProps',
+    description:
+      'Accepts all remaining PopoverContent props (such as portaled, className, transitionDuration, and HTML attributes).',
+  },
+]
+
+export const useTooltipPropsData: PropItem[] = [
+  {
+    name: 'open',
     type: 'boolean',
-    default: 'true',
-    description: 'Whether to render the tooltip content in a React portal.',
+    defaultValue: 'false',
+    description: 'Indicates whether the tooltip overlay is currently open.',
   },
   {
-    name: 'className',
-    type: 'string',
-    default: 'undefined',
-    description: 'Additional CSS classes to apply to the content container.',
+    name: 'setOpen',
+    type: '(open: boolean) => void',
+    defaultValue: '(open) => void',
+    description: 'State dispatch handler passed directly from Popover context to toggle visibility.',
+  },
+  {
+    name: 'arrowRef',
+    type: 'RefObject<SVGSVGElement | null>',
+    defaultValue: '{ current: null }',
+    description: 'Mutable ref object bound to the FloatingArrow element rendered inside TooltipContent.',
   },
 ]

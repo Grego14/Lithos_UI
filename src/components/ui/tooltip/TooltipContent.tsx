@@ -1,14 +1,15 @@
-import { type ComponentPropsWithRef } from 'react'
-import { useMergeRefs, FloatingPortal, FloatingArrow } from '@floating-ui/react'
-import { cn, type LithosClass } from '../../../utils/cn'
-import { useTooltipContext } from './useTooltip'
-
-export type TooltipVariant = 'default' | 'primary' | 'inverse'
-
-export interface TooltipContentProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
-  variant?: TooltipVariant
-  className?: LithosClass
-}
+/**
+ * @fileoverview Lithos UI tooltip content overlay.
+ * - Wraps PopoverContent to inherit entry/exit animations and positioning logic.
+ * - Applies size, typography, and color token variants (`default`, `primary`, `inverse`).
+ * - Renders FloatingArrow connected to `arrowRef` and dynamically offsets it on rounded borders.
+ */
+import { FloatingArrow } from '@floating-ui/react'
+import { cn } from '../../../utils/cn'
+import { useTooltip } from './useTooltip'
+import { PopoverContent, usePopoverContext } from '../Popover'
+import type { TooltipVariant, TooltipContentProps } from './tooltip.types'
+import { useTheme } from '../../../core/hooks/useTheme'
 
 const variantStyles: Record<TooltipVariant, { container: string; fill: string; stroke: string }> = {
   default: {
@@ -28,43 +29,36 @@ const variantStyles: Record<TooltipVariant, { container: string; fill: string; s
   },
 }
 
-export const TooltipContent = ({
-  style,
-  className,
-  variant = 'default',
-  ref: propRef,
-  ...props
-}: TooltipContentProps) => {
-  const { context: floatingContext, floatingStyles, refs, getFloatingProps, arrowRef } = useTooltipContext()
-  const ref = useMergeRefs([refs.setFloating, propRef])
-
-  if (!floatingContext.open) return null
+export const TooltipContent = ({ className, variant = 'default', children, ...rest }: TooltipContentProps) => {
+  const { context, placement } = usePopoverContext()
+  const { arrowRef } = useTooltip()
+  const { radius } = useTheme()
 
   const currentVariant = variantStyles[variant]
 
-  const content = (
-    <div
-      ref={ref}
-      style={{ ...floatingStyles, ...style }}
-      className={cn(
-        'z-50 border-2 px-3 py-1.5 text-sm font-bold shadow-[4px_4px_0_0_var(--lithos-shadow)] rounded-(--lithos-radius)',
-        currentVariant.container,
-        className
-      )}
-      {...getFloatingProps(props)}
+  const isHorizontal = placement === 'left' || placement === 'right'
+  const noSharpRadius = radius >= 4
+
+  return (
+    <PopoverContent
+      className={cn('min-w-[unset] px-3 py-1.5 text-sm font-bold', currentVariant.container, className)}
+      {...rest}
     >
-      {props.children}
+      {children}
       <FloatingArrow
         ref={arrowRef}
-        context={floatingContext}
+        context={context}
         fill={currentVariant.fill}
         stroke={currentVariant.stroke}
         strokeWidth={2}
+        style={
+          isHorizontal && noSharpRadius
+            ? {
+                [placement]: `calc(100% - 4px)`,
+              }
+            : undefined
+        }
       />
-    </div>
+    </PopoverContent>
   )
-
-  return <FloatingPortal>{content}</FloatingPortal>
 }
-
-TooltipContent.displayName = 'TooltipContent'
