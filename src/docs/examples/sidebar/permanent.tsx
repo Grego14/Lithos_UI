@@ -23,7 +23,7 @@ export const ExamplePermanent = () => {
   return (
     <div className="flex h-screen w-full bg-(--lithos-surface)">
       <Sidebar role="navigation">
-        <SidebarContent className="border-r-2 border-(--lithos-border) p-2 space-y-2">
+        <SidebarContent className="space-y-2">
           <SidebarHeader>
             <SidebarTitle>Lithos UI</SidebarTitle>
           </SidebarHeader>
@@ -44,17 +44,18 @@ export const ExamplePermanent = () => {
           <Typography className="opacity-80">Overview of the layout integration with Permanent Sidebar.</Typography>
         </header>
 
-        <section className="flex flex-wrap -m-2">
+        <section className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
           {cards.map((card) => (
-            <div className="w-full md:w-1/3 p-2" key={card.title}>
-              <div className="p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]">
-                <Typography variant="h6" className="font-bold mb-1 truncate">
-                  {card.title}
-                </Typography>
-                <Typography variant="h3" as="p" className="font-bold mb-1 truncate">
-                  {card.text}
-                </Typography>
-              </div>
+            <div
+              className="flex-1 p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]"
+              key={card.title}
+            >
+              <Typography variant="h6" className="font-bold mb-1">
+                {card.title}
+              </Typography>
+              <Typography variant="h3" as="p" className="font-black">
+                {card.text}
+              </Typography>
             </div>
           ))}
         </section>
