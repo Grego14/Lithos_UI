@@ -37,11 +37,13 @@ export const calculateGestureDelta = ({
   }
 
   let offset = 0
-
   if (mode === 'bidirectional') {
     // Width mode: supports both expanding (+delta) and shrinking (-delta)
-    if (placement === 'left') offset = -deltaX
-    else if (placement === 'right') offset = deltaX
+    if (placement === 'left') {
+      offset = deltaX
+    } else if (placement === 'right') {
+      offset = -deltaX
+    }
   } else {
     // Transform mode: strictly unidirectional swipe-to-dismiss towards edge
     if (placement === 'left' && deltaX < 0) offset = absX

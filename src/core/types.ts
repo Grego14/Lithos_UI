@@ -92,6 +92,9 @@ export interface UseResizerOptions {
   /** Whether gesture interaction is allowed on the surface body. @default true */
   allowGestureOnContent?: boolean
 
+  /** Callback fired continuously during active pointer drag gestures */
+  onDrag?: (currentWidth: number) => void
+
   /** Callback executed when the pointer releases and aligns with a snap point. */
   onSnap?: (width: number) => void
 

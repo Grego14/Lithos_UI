@@ -13,6 +13,7 @@ export const useResizer = ({
   maxWidthPx,
   snapPoints = [],
   allowGestureOnContent = true,
+  onDrag,
   onSnap,
   onDismiss,
 }: UseResizerOptions): UseResizerReturn => {
@@ -23,7 +24,7 @@ export const useResizer = ({
   // Derive absolute maximum boundary prioritizing explicit props or the highest snap breakpoint
   const resolvedMaxWidth = useMemo(() => {
     if (maxWidthPx !== undefined) return maxWidthPx
-    if (snapPoints.length > 0) return snapPoints[snapPoints.length - 1]
+    if (snapPoints.length > 0) return snapPoints[snapPoints.length - 1] ?? 400
 
     return 400
   }, [maxWidthPx, snapPoints])
@@ -76,14 +77,18 @@ export const useResizer = ({
         e.currentTarget.setPointerCapture(e.pointerId)
       }
 
+      const rawWidth = baseWidthPx + offset
+      const nextWidth = Math.min(resolvedMaxWidth, Math.max(minWidthPx, rawWidth))
+
       setDragOffset(offset)
+      onDrag?.(nextWidth)
     },
-    [placement]
+    [placement, baseWidthPx, minWidthPx, onDrag, resolvedMaxWidth]
   )
 
   // Compute live current width clamped within min/max boundaries
   const computedWidth = useMemo(() => {
-    const rawWidth = baseWidthPx - dragOffset
+    const rawWidth = baseWidthPx + dragOffset
     const maxBound = resolvedMaxWidth ?? minWidthPx
 
     return Math.min(maxBound, Math.max(minWidthPx, rawWidth))
