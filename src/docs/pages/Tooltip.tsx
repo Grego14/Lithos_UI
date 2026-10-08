@@ -1,77 +1,44 @@
-import { Tooltip, TooltipTrigger, TooltipContent } from '../../components/ui/Tooltip'
-import { Button } from '../../components/ui/Button'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 import { SetupGuide } from '../layout/SetupGuide'
 import { PropsAccordion } from '../../components/ui/PropsTable'
-import { tooltipPropsData, tooltipTriggerPropsData, tooltipContentPropsData } from '../propsData/tooltip'
+import {
+  tooltipPropsData,
+  tooltipTriggerPropsData,
+  tooltipContentPropsData,
+  useTooltipPropsData,
+} from '../propsData/tooltip'
+
+import { removeImports } from '../examples/removeImports'
+
+import { DefaultExample } from '../examples/tooltip/default'
+import DefaultExampleSource from '../examples/tooltip/default?raw'
+import { PlacementExample } from '../examples/tooltip/placement'
+import PlacementExampleSource from '../examples/tooltip/placement?raw'
+import { PrimaryExample } from '../examples/tooltip/primary'
+import PrimaryExampleSource from '../examples/tooltip/primary?raw'
+
+import { InverseExample } from '../examples/tooltip/inverse'
+import InverseExampleSource from '../examples/tooltip/inverse?raw'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/tooltip/Tooltip.tsx'
+const manualPath = '../../components/ui/Tooltip'
+const componentNames = ['Tooltip', 'TooltipTrigger', 'TooltipContent', 'Button']
+
+const codeDefaults = {
+  componentNames,
+  manualPath: {
+    Button: '../../components/ui/Button',
+    others: manualPath,
+  },
+}
+
+const defaultCode = { body: removeImports(DefaultExampleSource), ...codeDefaults }
+const placementCode = { body: removeImports(PlacementExampleSource), ...codeDefaults }
+const primaryCode = { body: removeImports(PrimaryExampleSource), ...codeDefaults }
+const inverseCode = { body: removeImports(InverseExampleSource), ...codeDefaults }
 
 export const TooltipDoc = () => {
-  const defaultCode = {
-    body: `export const DefaultTooltip = () => {
-  return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button variant="secondary">Hover Me</Button>
-      </TooltipTrigger>
-      <TooltipContent>
-        <p>This is a neo-brutalist tooltip.</p>
-      </TooltipContent>
-    </Tooltip>
-  )
-}`,
-    componentNames: ['Tooltip', 'TooltipTrigger', 'TooltipContent', 'Button'],
-    manualPath: { Tooltip: '../../components/ui/Tooltip' },
-  }
-
-  const sideCode = {
-    body: `export const TooltipPlacements = () => {
-  return (
-    <div className="flex flex-wrap items-center justify-center space-x-4 p-8">
-      <Tooltip placement="left">
-        <TooltipTrigger asChild>
-          <Button variant="secondary">Left</Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Left placement</p>
-        </TooltipContent>
-      </Tooltip>
-
-      <Tooltip placement="top">
-        <TooltipTrigger asChild>
-          <Button variant="secondary">Top</Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Top placement</p>
-        </TooltipContent>
-      </Tooltip>
-
-      <Tooltip placement="bottom">
-        <TooltipTrigger asChild>
-          <Button variant="secondary">Bottom</Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Bottom placement</p>
-        </TooltipContent>
-      </Tooltip>
-
-      <Tooltip placement="right">
-        <TooltipTrigger asChild>
-          <Button variant="secondary">Right</Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Right placement</p>
-        </TooltipContent>
-      </Tooltip>
-    </div>
-  )
-}`,
-    componentNames: ['Tooltip', 'TooltipTrigger', 'TooltipContent', 'Button'],
-    manualPath: { Tooltip: '../../components/ui/Tooltip' },
-  }
-
   return (
     <div className="max-w-5xl mx-auto px-6">
       <header className="mt-0">
@@ -98,8 +65,8 @@ export const TooltipDoc = () => {
       <SetupGuide
         slug="tooltip"
         componentNames={['Tooltip', 'TooltipTrigger', 'TooltipContent', 'useTooltip']}
-        manualPath="../../components/ui/Tooltip"
-        requires={['utils/cn.ts', '@floating-ui/react']}
+        manualPath={manualPath}
+        requires={['utils/cn.ts', 'components/ui/Popover']}
       />
 
       <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
@@ -116,64 +83,21 @@ export const TooltipDoc = () => {
       <div className="mt-8 mb-16">
         <PreviewBlock code={defaultCode} githubUrl={githubUrl}>
           <div className="flex items-center justify-center p-12">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="secondary">Hover Me</Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>This is a neo-brutalist tooltip.</p>
-              </TooltipContent>
-            </Tooltip>
+            <DefaultExample />
           </div>
         </PreviewBlock>
       </div>
 
-      <h3 id="side" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Side
+      <h3 id="placement" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
+        Placement
       </h3>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
         Use the <code>placement</code> prop to change the position of the tooltip.
       </p>
 
       <div className="mt-8 mb-16">
-        <PreviewBlock code={sideCode} githubUrl={githubUrl}>
-          <div className="flex flex-wrap items-center justify-center space-x-4 p-12">
-            <Tooltip placement="left">
-              <TooltipTrigger asChild>
-                <Button variant="secondary">Left</Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Left placement</p>
-              </TooltipContent>
-            </Tooltip>
-
-            <Tooltip placement="top">
-              <TooltipTrigger asChild>
-                <Button variant="secondary">Top</Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Top placement</p>
-              </TooltipContent>
-            </Tooltip>
-
-            <Tooltip placement="bottom">
-              <TooltipTrigger asChild>
-                <Button variant="secondary">Bottom</Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Bottom placement</p>
-              </TooltipContent>
-            </Tooltip>
-
-            <Tooltip placement="right">
-              <TooltipTrigger asChild>
-                <Button variant="secondary">Right</Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Right placement</p>
-              </TooltipContent>
-            </Tooltip>
-          </div>
+        <PreviewBlock code={placementCode} githubUrl={githubUrl}>
+          <PlacementExample />
         </PreviewBlock>
       </div>
 
@@ -185,72 +109,24 @@ export const TooltipDoc = () => {
         variants are <code>default</code>, <code>primary</code>, and <code>inverse</code>.
       </p>
 
-      <h3 id="variant-primary" className="mt-8 mb-4 text-lg font-black tracking-tight text-(--lithos-text)">
-        1. Primary Variant
+      <h3 id="primary-variant" className="mt-8 mb-4 text-lg font-black tracking-tight text-(--lithos-text)">
+        Primary
       </h3>
       <div className="mt-4 mb-8">
-        <PreviewBlock
-          code={{
-            body: `export const PrimaryVariant = () => {
-  return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button variant="primary">Primary</Button>
-      </TooltipTrigger>
-      <TooltipContent variant="primary">
-        <p>Primary variant</p>
-      </TooltipContent>
-    </Tooltip>
-  )
-}`,
-            componentNames: ['Tooltip', 'TooltipTrigger', 'TooltipContent', 'Button'],
-            manualPath: { Tooltip: '../../components/ui/Tooltip' },
-          }}
-        >
+        <PreviewBlock code={primaryCode}>
           <div className="flex items-center justify-center p-12">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="primary">Primary</Button>
-              </TooltipTrigger>
-              <TooltipContent variant="primary">
-                <p>Primary variant</p>
-              </TooltipContent>
-            </Tooltip>
+            <PrimaryExample />
           </div>
         </PreviewBlock>
       </div>
 
-      <h3 id="variant-inverse" className="mt-8 mb-4 text-lg font-black tracking-tight text-(--lithos-text)">
-        2. Inverse Variant
+      <h3 id="inverse-variant" className="mt-8 mb-4 text-lg font-black tracking-tight text-(--lithos-text)">
+        Inverse
       </h3>
       <div className="mt-4 mb-16">
-        <PreviewBlock
-          code={{
-            body: `export const InverseVariant = () => {
-  return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button variant="inverse">Inverse</Button>
-      </TooltipTrigger>
-      <TooltipContent variant="inverse">
-        <p>Inverse variant</p>
-      </TooltipContent>
-    </Tooltip>
-  )
-}`,
-            componentNames: ['Tooltip', 'TooltipTrigger', 'TooltipContent', 'Button'],
-            manualPath: { Tooltip: '../../components/ui/Tooltip' },
-          }}
-        >
+        <PreviewBlock code={inverseCode}>
           <div className="flex items-center justify-center p-12">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="inverse">Inverse</Button>
-              </TooltipTrigger>
-              <TooltipContent variant="inverse">
-                <p>Inverse variant</p>
-              </TooltipContent>
-            </Tooltip>
+            <InverseExample />
           </div>
         </PreviewBlock>
       </div>
@@ -266,10 +142,8 @@ export const TooltipDoc = () => {
         <CodeViewer
           language="tsx"
           code={`<Tooltip>
-  <TooltipTrigger>
-  </TooltipTrigger>
-  <TooltipContent>
-  </TooltipContent>
+  <TooltipTrigger></TooltipTrigger>
+  <TooltipContent></TooltipContent>
 </Tooltip>`}
         />
       </div>
@@ -278,9 +152,13 @@ export const TooltipDoc = () => {
         <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
           Accessibility
         </h2>
-        <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
-          <li>Uses `@floating-ui/react` to handle focus trapping and ARIA attributes natively.</li>
-          <li>The trigger element receives keyboard focus.</li>
+        <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text) space-y-2">
+          <li>Inherits robust accessibility and ARIA management directly from Popover.</li>
+          <li>
+            Automatically sets <code>role="tooltip"</code> and configures appropriate ARIA references between the
+            trigger and content.
+          </li>
+          <li>Supports seamless hover and keyboard focus interactions out of the box.</li>
         </ul>
       </section>
 
@@ -295,6 +173,9 @@ export const TooltipDoc = () => {
           </div>
           <div className="mt-8">
             <PropsAccordion title="TooltipContent Props" data={tooltipContentPropsData} />
+          </div>
+          <div className="mt-8">
+            <PropsAccordion title="useTooltip Return" data={useTooltipPropsData} isHook />
           </div>
         </div>
       </section>
