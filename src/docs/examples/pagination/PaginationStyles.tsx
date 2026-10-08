@@ -52,15 +52,13 @@ export const PaginationStyles = () => (
           code={{
             componentNames: ['Pagination'],
             manualPath: '../../components/ui/Pagination',
-            body: `export const ${title}Pagination = () => (
-  <Pagination
-    count={5}
-    defaultPage={${page}}
-    variant="${variant}"
-    position="center"
-    aria-label="${title} pages"
-  />
-)`,
+            body: `<Pagination
+  count={5}
+  defaultPage={${page}}
+  variant="${variant}"
+  position="center"
+  aria-label="${title} pages"
+/>`,
           }}
         >
           <Pagination count={5} defaultPage={page} variant={variant} position="center" aria-label={`${title} pages`} />

@@ -1,6 +1,5 @@
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { PropsAccordion } from '../../components/ui/PropsTable'
-import { CodeViewer } from '../../components/ui/CodeViewer'
 import { SetupGuide } from '../layout/SetupGuide'
 import { paginationPropsData } from '../propsData/pagination'
 import type { UsageCodeConfig } from '../utils/deriveUsageCode'
@@ -92,22 +91,6 @@ export const PaginationDoc = () => (
         <PaginationSizes />
       </PreviewBlock>
     </section>
-    <h2 id="anatomy" className={heading}>
-      Anatomy
-    </h2>
-    <div className="mb-12">
-      <CodeViewer
-        language="tsx"
-        code={`<Pagination
-  count={6}
-  page={page}
-  onPageChange={setPage}
-  variant="classic"
-  shape="pill"
-  position="center"
-/>`}
-      />
-    </div>
     <h2 id="accessibility" className={heading}>
       Accessibility
     </h2>

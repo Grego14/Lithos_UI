@@ -14,7 +14,7 @@ export const BasicPagination = () => {
     <div className="w-full">
       <ul
         id="pagination-projects"
-        className="mb-6 border-2 border-(--lithos-border) rounded-(--lithos-radius) divide-y-2 divide-(--lithos-border)"
+        className="mb-6 overflow-hidden border-2 border-(--lithos-border) rounded-(--lithos-radius) divide-y-2 divide-(--lithos-border)"
       >
         {entries.slice((page - 1) * pageSize, page * pageSize).map((entry) => (
           <li key={entry.id} className="flex items-center justify-between bg-(--lithos-surface) p-4 font-bold">
