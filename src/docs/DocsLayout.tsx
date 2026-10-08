@@ -15,6 +15,17 @@ import type { ReactNode } from 'react'
 import type { TOCItem } from './types.ts'
 
 const tocRegistry: Record<string, TOCItem[]> = {
+  '/docs/pagination': [
+    { id: '#installation', label: 'Installation', level: 1 },
+    { id: '#examples', label: 'Examples', level: 1 },
+    { id: '#basic', label: 'Basic', level: 2 },
+    { id: '#styles', label: 'Styles', level: 2 },
+    { id: '#shapes', label: 'Shapes', level: 2 },
+    { id: '#position', label: 'Position', level: 2 },
+    { id: '#sizes', label: 'Sizes', level: 2 },
+    { id: '#accessibility', label: 'Accessibility', level: 1 },
+    { id: '#api', label: 'API Reference', level: 1 },
+  ],
   '/docs/table': [
     { id: '#installation', label: 'Installation', level: 1 },
     { id: '#examples', label: 'Examples', level: 1 },
