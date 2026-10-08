@@ -8,6 +8,7 @@ import {
   cloneElement,
   isValidElement,
   useEffect,
+  useCallback,
   Fragment,
   type ReactElement,
   type ElementType,
@@ -36,10 +37,22 @@ export const SidebarTrigger = <T extends ElementType = 'button'>({
   shortcutKey = 'ctrl+b',
   ...rest
 }: SidebarTriggerProps<T>) => {
-  const { mode, open, setOpen, placement } = useSidebar()
+  const { mode, open, setOpen, placement, setActiveWidth, breakpoints } = useSidebar()
   const isRight = placement === 'right'
 
   const computedTooltipPlacement = tooltipPlacement ?? (isRight ? 'left' : 'right')
+
+  const toggleSidebar = useCallback(() => {
+    setOpen((prevOpen) => {
+      const nextOpen = !prevOpen
+
+      const newWidth = nextOpen ? (breakpoints.at(-1) ?? 224) : (breakpoints[0] ?? 64)
+
+      setActiveWidth(newWidth)
+
+      return nextOpen
+    })
+  }, [breakpoints, setActiveWidth, setOpen])
 
   useEffect(() => {
     if (!shortcutKey || mode === 'permanent') return
@@ -56,13 +69,14 @@ export const SidebarTrigger = <T extends ElementType = 'button'>({
 
       if (isShortcutPressed(event, shortcutKey)) {
         event.preventDefault()
-        setOpen((prev) => !prev)
+
+        toggleSidebar()
       }
     }
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [shortcutKey, mode, setOpen])
+  }, [shortcutKey, mode, toggleSidebar])
 
   if (mode === 'permanent') return null
 
@@ -107,7 +121,7 @@ export const SidebarTrigger = <T extends ElementType = 'button'>({
     const handleCombinedClick = (e: MouseEvent<HTMLElement>) => {
       childOnClick?.(e)
       parentOnClick?.(e)
-      setOpen(!open)
+      toggleSidebar()
     }
 
     triggerElement = cloneElement(child, {
@@ -121,7 +135,7 @@ export const SidebarTrigger = <T extends ElementType = 'button'>({
         variant="text"
         onClick={(e) => {
           ;(onClick as MouseEventHandler<HTMLButtonElement>)?.(e)
-          setOpen(!open)
+          toggleSidebar()
         }}
         className={className}
         aria-label={ariaLabel}
