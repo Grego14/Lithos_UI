@@ -42,6 +42,16 @@ import { TooltipTrigger } from '../components/ui/tooltip/TooltipTrigger'
 import { TooltipContent } from '../components/ui/tooltip/TooltipContent'
 import card1 from '../docs/assets/images/card1.webp'
 
+import { IconHome } from '../components/ui/icons/IconHome'
+import { IconFolder } from '../components/ui/icons/IconFolder'
+import { IconSettings } from '../components/ui/icons/IconSettings'
+
+const SIDEBAR_ITEMS = [
+  { id: 'home', label: 'Home', icon: IconHome },
+  { id: 'projects', label: 'Projects', icon: IconFolder },
+  { id: 'settings', label: 'Settings', icon: IconSettings },
+]
+
 const FRAMEWORK_OPTIONS = [
   { label: 'React', value: 'react' },
   { label: 'Preact', value: 'preact' },
@@ -215,6 +225,47 @@ const TooltipPreview = () => (
   </div>
 )
 
+const SidebarPreview = () => {
+  const [active, setActive] = useState('home')
+
+  return (
+    <div className="flex w-full flex-col justify-between my-auto">
+      <div className="flex w-full overflow-hidden rounded-md border border-black bg-white">
+        <aside className="flex w-28 flex-col space-y-1 border-r border-black p-1.5">
+          <Typography variant="h6" as="h4" className="pl-1 border-b-2 border-(--lithos-border)">
+            Lithos UI
+          </Typography>
+
+          {SIDEBAR_ITEMS.map((item) => {
+            const isActive = active === item.id
+
+            return (
+              <Button
+                variant={isActive ? 'primary' : 'text'}
+                key={item.id}
+                onClick={() => setActive(item.id)}
+                className={'justify-start space-x-2 py-0.5 px-1'}
+              >
+                <item.icon strokeWidth="3" size={14} />
+                <Typography variant="small" className="truncate" title={item.label}>
+                  {item.label}
+                </Typography>
+              </Button>
+            )
+          })}
+        </aside>
+
+        <div className="flex-1 p-2">
+          <Typography variant="small">
+            Viewing active item
+            <Typography variant="mark">{SIDEBAR_ITEMS.find((item) => item.id === active)?.label}</Typography>
+          </Typography>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const componentsList = [
   {
     name: 'Accordion',
@@ -346,6 +397,11 @@ const componentsList = [
     name: 'Select',
     to: '/docs/select',
     preview: <Select options={FRAMEWORK_OPTIONS} placeholder="Select a framework..." />,
+  },
+  {
+    name: 'Sidebar',
+    to: '/docs/sidebar',
+    preview: <SidebarPreview />,
   },
   {
     name: 'Skeleton',
