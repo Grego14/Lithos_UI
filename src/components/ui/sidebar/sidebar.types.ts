@@ -86,12 +86,6 @@ export interface SidebarProps extends Omit<ComponentPropsWithRef<'div'>, 'classN
  * Props for the main structural container of the sidebar.
  */
 export type SidebarContentProps<T extends ElementType = 'aside'> = {
-  /** Tailwind width class for collapsed state (e.g. `'w-16'`). */
-  collapsedWidth?: string
-
-  /** Tailwind width class for expanded state (e.g. `'w-56'`). */
-  expandedWidth?: string
-
   /**
    * Whether swipe/drag gesture is allowed directly on the sidebar content.
    * If `false`, interactive elements won't capture pointer drag events.
@@ -119,6 +113,14 @@ export type SidebarContentProps<T extends ElementType = 'aside'> = {
    * Custom element or render function for the resizer handle.
    */
   resizer?: ReactNode
+
+  /**
+   * Additional pixel threshold beyond the collapsed width required
+   * to toggle the `open` state to `true` during active dragging.
+   * Helps prevent flickering caused by accidental micro-gestures.
+   * @default 8
+   */
+  openThresholdOffset?: number
 
   /** Additional CSS classes. */
   className?: LithosClass

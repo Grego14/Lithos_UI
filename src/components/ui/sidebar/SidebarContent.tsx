@@ -17,8 +17,6 @@ const containersMap = {
 } as const
 
 export const SidebarContent = <T extends ElementType = 'aside'>({
-  collapsedWidth = 'w-16',
-  expandedWidth = 'w-56',
   allowSwipeOnContent = true,
   resizerAriaLabel = 'Resize sidebar',
   resizerClass,
@@ -27,6 +25,7 @@ export const SidebarContent = <T extends ElementType = 'aside'>({
   className,
   children,
   style,
+  openThresholdOffset = 8,
   ...rest
 }: SidebarContentProps<T>) => {
   const { role, mode, open, setOpen, placement, breakpoints, activeWidth, setActiveWidth, setIsDragging } = useSidebar()
@@ -35,13 +34,10 @@ export const SidebarContent = <T extends ElementType = 'aside'>({
   const minWidthPx = breakpoints[0] ?? 64
   const maxWidthPx = breakpoints[breakpoints.length - 1] ?? 224
 
-  // Keep activeWidth in sync when controlled `open` state changes externally
-  useEffect(() => {
-    setActiveWidth(open ? maxWidthPx : minWidthPx)
-  }, [open, maxWidthPx, minWidthPx, setActiveWidth])
-
   const isPermanent = mode === 'permanent'
   const isResizable = !isPermanent
+
+  const currentBaseWidth = open ? activeWidth : minWidthPx
 
   const {
     handlers,
@@ -49,22 +45,27 @@ export const SidebarContent = <T extends ElementType = 'aside'>({
     isDragging,
   } = useResizer({
     placement,
-    baseWidthPx: activeWidth,
+    baseWidthPx: currentBaseWidth,
     minWidthPx,
     maxWidthPx,
     snapPoints: breakpoints,
     allowGestureOnContent: allowSwipeOnContent,
+    onDrag: (currentWidth) => {
+      const closedBoundary = minWidthPx
+
+      // soft hysteresis, requires passing threshold to open, but closes
+      // immediately upon returning to or below the boundary
+      if (currentWidth > closedBoundary + openThresholdOffset) {
+        setOpen(true)
+      } else if (currentWidth <= closedBoundary) {
+        setOpen(false)
+      }
+    },
     onSnap: (snappedWidth) => {
       setActiveWidth(snappedWidth)
 
-      // The first breakpoint (index 0) or minWidth represents the closed/collapsed boundary
-      const closedBoundary = breakpoints[0] ?? minWidthPx
-
-      if (snappedWidth > closedBoundary) {
-        setOpen(true)
-      } else {
-        setOpen(false)
-      }
+      const closedBoundary = minWidthPx
+      setOpen(snappedWidth > closedBoundary)
     },
     onDismiss: () => setOpen(false),
   })
@@ -74,25 +75,26 @@ export const SidebarContent = <T extends ElementType = 'aside'>({
     setIsDragging(isDragging)
   }, [isDragging, setIsDragging])
 
-  const resolvedFallbackClass = isPermanent ? expandedWidth : open ? expandedWidth : collapsedWidth
-
   const ResolvedContainer = (containersMap[role] ?? 'aside') as ElementType
   const activeHandlers = isResizable ? handlers : {}
 
-  // Priority: active drag style > inline width from snap state > external style prop
+  // Priority: active drag style > computed pixel width > external style prop
   const dynamicStyle = useMemo(() => {
     if (isDragging) return { ...style, ...resizerStyle }
-    return { ...style, width: `${activeWidth}px` }
-  }, [isDragging, style, resizerStyle, activeWidth])
+    if (isPermanent) return { ...style, width: `${maxWidthPx}px` }
+
+    const targetWidth = open ? activeWidth : minWidthPx
+    return { ...style, width: `${targetWidth}px` }
+  }, [isDragging, style, resizerStyle, activeWidth, open, isPermanent, minWidthPx, maxWidthPx])
 
   const isLeft = placement === 'left'
 
   return (
     <ResolvedContainer
       className={cn(
-        'relative flex flex-col h-full shrink-0 bg-(--lithos-surface) overflow-y-auto overflow-x-hidden',
+        'relative flex flex-col h-full shrink-0 bg-(--lithos-surface) overflow-y-auto overflow-x-hidden border-(--lithos-border) p-2',
         !isDragging && 'transition-[width] duration-150 ease-out',
-        !activeWidth && resolvedFallbackClass,
+        isLeft ? 'border-r-2' : 'border-l-2',
         className
       )}
       style={dynamicStyle}

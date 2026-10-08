@@ -57,18 +57,6 @@ export const sidebarPropsData: PropItem[] = [
 
 export const sidebarContentPropsData: PropItem[] = [
   {
-    name: 'collapsedWidth',
-    type: 'string',
-    defaultValue: "'w-16'",
-    description: "Tailwind width class for collapsed state (e.g. 'w-16').",
-  },
-  {
-    name: 'expandedWidth',
-    type: 'string',
-    defaultValue: "'w-56'",
-    description: "Tailwind width class for expanded state (e.g. 'w-56').",
-  },
-  {
     name: 'allowSwipeOnContent',
     type: 'boolean',
     defaultValue: 'true',
@@ -95,6 +83,13 @@ export const sidebarContentPropsData: PropItem[] = [
     name: 'resizer',
     type: 'ReactNode',
     description: 'Custom element or render function for the resizer handle.',
+  },
+  {
+    name: 'openThresholdOffset',
+    type: 'number',
+    defaultValue: '8',
+    description:
+      'Additional pixel threshold beyond the collapsed width required to toggle the `open` state to `true` during active dragging. Helps prevent flickering caused by accidental micro-gestures.',
   },
   {
     name: 'className',
@@ -248,7 +243,8 @@ export const useSidebarReturnPropsData: PropItem[] = [
   {
     name: 'breakpoints',
     type: 'number[]',
-    description: 'Width breakpoints in pixels for snap/resize steps. Array sorted in ascending order.',
+    description:
+      'Width breakpoints in pixels for snap/resize steps. The first item sets the collapsed width and the last item sets the expanded width.',
   },
   {
     name: 'activeWidth',
