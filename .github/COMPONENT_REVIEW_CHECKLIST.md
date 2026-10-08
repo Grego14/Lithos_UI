@@ -7,8 +7,8 @@ Use this checklist when reviewing new component PRs. Copy the template below, fi
 ## Template
 
 ```
-## Component: [COMPONENT_NAME]
-PR: #[PR_NUMBER]
+**Component:** Pagination
+**PR:** #350
 
 ### 1. COMPONENT FILE
 - [x] Component exported from `src/index.ts`
