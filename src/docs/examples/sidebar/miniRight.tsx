@@ -1,4 +1,11 @@
-import { Sidebar, SidebarContent, SidebarItem, SidebarHeader, SidebarTitle } from '../../../components/ui/Sidebar'
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarItem,
+  SidebarTrigger,
+  SidebarHeader,
+  SidebarTitle,
+} from '../../../components/ui/Sidebar'
 import { Typography } from '../../../components/ui/Typography'
 import { useState } from 'react'
 import { IconHome } from '../../../components/ui/icons/IconHome'
@@ -17,44 +24,33 @@ const cards = [
   { title: 'Server Latency', text: '12 ms' },
 ]
 
-export const ExamplePermanent = () => {
+export const ExampleRightMini = () => {
   const [active, setActive] = useState('item-0')
 
   return (
-    <div className="flex h-screen w-full bg-(--lithos-surface)">
-      <Sidebar role="navigation">
-        <SidebarContent className="border-r-2 border-(--lithos-border) p-2 space-y-2">
-          <SidebarHeader>
-            <SidebarTitle>Lithos UI</SidebarTitle>
-          </SidebarHeader>
-
-          {items.map((item) => (
-            <SidebarItem key={item.id} icon={item.icon} active={active === item.id} onClick={() => setActive(item.id)}>
-              {item.label}
-            </SidebarItem>
-          ))}
-        </SidebarContent>
-      </Sidebar>
-
-      <main className="flex-1 flex flex-col min-w-[320px] overflow-y-auto p-6 space-y-6">
+    <div className="flex h-screen w-full bg-(--lithos-surface) overflow-hidden">
+      <main className="flex-1 flex flex-col min-w-0 overflow-y-auto p-6 space-y-6">
         <header className="border-b-2 border-(--lithos-border) pb-4">
           <Typography variant="h2" className="font-black uppercase">
             Main Dashboard
           </Typography>
-          <Typography className="opacity-80">Overview of the layout integration with Permanent Sidebar.</Typography>
+          <Typography className="opacity-80">
+            Overview of the layout integration with Sidebar on the right side.
+          </Typography>
         </header>
 
-        <section className="flex flex-wrap -m-2">
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {cards.map((card) => (
-            <div className="w-full md:w-1/3 p-2" key={card.title}>
-              <div className="p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]">
-                <Typography variant="h6" className="font-bold mb-1 truncate">
-                  {card.title}
-                </Typography>
-                <Typography variant="h3" as="p" className="font-bold mb-1 truncate">
-                  {card.text}
-                </Typography>
-              </div>
+            <div
+              className="p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]"
+              key={card.title}
+            >
+              <Typography variant="h6" className="font-bold mb-1">
+                {card.title}
+              </Typography>
+              <Typography variant="h3" as="p" className="font-black">
+                {card.text}
+              </Typography>
             </div>
           ))}
         </section>
@@ -66,6 +62,21 @@ export const ExamplePermanent = () => {
           <Typography className="mb-2">Content related to the selected item goes here.</Typography>
         </section>
       </main>
+
+      <Sidebar mode="mini" placement="right" role="navigation">
+        <SidebarContent className="p-2 space-y-2">
+          <SidebarHeader>
+            <SidebarTrigger />
+            <SidebarTitle>Lithos</SidebarTitle>
+          </SidebarHeader>
+
+          {items.map((item) => (
+            <SidebarItem key={item.id} icon={item.icon} active={active === item.id} onClick={() => setActive(item.id)}>
+              {item.label}
+            </SidebarItem>
+          ))}
+        </SidebarContent>
+      </Sidebar>
     </div>
   )
 }

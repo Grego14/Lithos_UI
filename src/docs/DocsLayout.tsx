@@ -330,6 +330,7 @@ const tocRegistry: Record<string, TOCItem[]> = {
     { id: '#examples', label: 'Examples', level: 1 },
     { id: '#permanent', label: 'Permanent', level: 2 },
     { id: '#mini', label: 'Mini', level: 2 },
+    { id: '#right-placement', label: 'Right Placement', level: 2 },
     { id: '#anatomy', label: 'Anatomy', level: 1 },
     { id: '#accessibility', label: 'Accessibility', level: 1 },
     { id: '#api', label: 'API Reference', level: 1 },

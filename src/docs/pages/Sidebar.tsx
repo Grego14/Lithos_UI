@@ -2,24 +2,40 @@ import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 import { SetupGuide } from '../layout/SetupGuide'
 import { PropsAccordion } from '../../components/ui/PropsTable'
+import { Typography } from '../../components/ui/Typography'
 
 import { removeImports } from '../examples/removeImports'
 import { ExamplePermanent } from '../examples/sidebar/permanent'
 import { ExampleMini } from '../examples/sidebar/mini'
+import { ExampleRightMini } from '../examples/sidebar/miniRight'
 
 import examplePermanentSource from '../examples/sidebar/permanent.tsx?raw'
 import exampleMiniSource from '../examples/sidebar/mini.tsx?raw'
+import exampleRightMiniSource from '../examples/sidebar/miniRight?raw'
 
 import {
   useSidebarReturnPropsData,
   sidebarItemPropsData,
   sidebarTriggerPropsData,
   sidebarContentPropsData,
+  sidebarHeaderPropsData,
+  sidebarTitlePropsData,
   sidebarPropsData,
 } from '../propsData/sidebar'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/sidebar/Sidebar.tsx'
 const sidebarPath = '../../components/ui/Sidebar'
+const componentNames = [
+  'Sidebar',
+  'SidebarContent',
+  'SidebarItem',
+  'SidebarHeader',
+  'SidebarTitle',
+  'useState',
+  'IconFolder',
+  'IconHome',
+  'IconSettings',
+]
 
 const manualPath = {
   react: ['useState'],
@@ -31,22 +47,19 @@ const manualPath = {
 
 const usagePermanent = {
   body: removeImports(examplePermanentSource),
-  componentNames: ['Sidebar', 'SidebarContent', 'SidebarItem', 'useState', 'IconFolder', 'IconHome', 'IconSettings'],
+  componentNames,
   manualPath,
 }
 
 const usageMini = {
   body: removeImports(exampleMiniSource),
-  componentNames: [
-    'Sidebar',
-    'SidebarContent',
-    'SidebarTrigger',
-    'SidebarItem',
-    'useState',
-    'IconFolder',
-    'IconHome',
-    'IconSettings',
-  ],
+  componentNames: [...componentNames, 'SidebarTrigger'],
+  manualPath,
+}
+
+const usageRightMini = {
+  body: removeImports(exampleRightMiniSource),
+  componentNames: [...componentNames, 'SidebarTrigger'],
   manualPath,
 }
 
@@ -75,13 +88,18 @@ export const SidebarDoc = () => {
       </h2>
 
       <SetupGuide
-        componentNames={['Sidebar']}
+        slug="sidebar"
+        componentNames={['Sidebar', 'SidebarContent', 'SidebarTrigger', 'SidebarItem', 'useSidebar']}
         manualPath={manualPath}
         requires={[
           'utils/cn.ts',
           'components/ui/Button',
+          'components/ui/Typography',
+          'components/ui/Tooltip',
           'components/ui/icons/IconChevronLeft',
           'components/ui/icons/IconSidebar',
+          'core/types.ts',
+          'core/hooks/useResizer.ts',
         ]}
       />
 
@@ -117,6 +135,21 @@ export const SidebarDoc = () => {
         </PreviewBlock>
       </div>
 
+      <h3 id="right-placement" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
+        Right placement
+      </h3>
+      <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
+        Positions the sidebar on the right side of the layout using the <code>placement="right"</code> prop. It
+        automatically adjusts internal element alignment, reverses icon directions, and aligns tooltips to keep the UI
+        intuitive.
+      </p>
+
+      <div className="mt-8 mb-16">
+        <PreviewBlock code={usageRightMini} githubUrl={githubUrl}>
+          <ExampleRightMini />
+        </PreviewBlock>
+      </div>
+
       <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
         Anatomy
       </h2>
@@ -129,7 +162,11 @@ export const SidebarDoc = () => {
           language="tsx"
           code={`<Sidebar>
   <SidebarContent>
-    <SidebarTrigger />
+
+    <SidebarHeader>
+      <SidebarTitle></SidebarTitle>
+      <SidebarTrigger />
+    </SidebarHeader>
 
     <SidebarItem></SidebarItem>
   </SidebarContent>
@@ -147,11 +184,14 @@ export const SidebarDoc = () => {
             <code>role</code> prop.
           </li>
           <li>
-            <code>SidebarItem</code> leverages the native <code>Button</code> component to maintain keyboard focus
-            indicators and click handling.
+            <Typography variant="code">SidebarItem</Typography> leverages the native{' '}
+            <Typography variant="code">Button</Typography> component to maintain keyboard focus indicators and click
+            handling.
           </li>
           <li>
-            Labels are dynamically exposed via <code>title</code> attributes when the sidebar is collapsed in mini mode.
+            Labels are displayed as <Typography variant="code">Tooltip</Typography>s in the{' '}
+            <Typography variant="code">SidebarItem</Typography>s when the{' '}
+            <Typography variant="code">Sidebar</Typography> is closed.
           </li>
         </ul>
       </section>
@@ -170,6 +210,8 @@ export const SidebarDoc = () => {
         <PropsAccordion title="SidebarContent Props" data={sidebarContentPropsData} />
         <PropsAccordion title="SidebarTrigger Props" data={sidebarTriggerPropsData} />
         <PropsAccordion title="SidebarItem Props" data={sidebarItemPropsData} />
+        <PropsAccordion title="SidebarHeader Props" data={sidebarHeaderPropsData} />
+        <PropsAccordion title="SidebarTitle Props" data={sidebarTitlePropsData} />
         <PropsAccordion title="useSidebar return" data={useSidebarReturnPropsData} isHook />
       </section>
     </div>
