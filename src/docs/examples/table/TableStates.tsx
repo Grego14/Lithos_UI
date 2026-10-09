@@ -1,5 +1,5 @@
 import { useId, useState } from 'react'
-import { useToast } from '../../../core/hooks/useToast'
+import { useToast } from '../../../components/ui/toast/useToast'
 import { Badge } from '../../../components/ui/Badge'
 import { Button } from '../../../components/ui/Button'
 import { Spinner } from '../../../components/ui/Spinner'

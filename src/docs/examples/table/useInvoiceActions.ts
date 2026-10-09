@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useToast } from '../../../core/hooks/useToast'
+import { useToast } from '../../../components/ui/toast/useToast'
 import { colors } from '../../../utils/colors'
 
 export interface Invoice {
