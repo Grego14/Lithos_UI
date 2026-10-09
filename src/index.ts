@@ -42,7 +42,6 @@ export * from './core/ThemeProviderContext'
 
 // Hooks
 export * from './core/hooks/useFocusTrap'
-export * from './core/hooks/useToast'
 export * from './core/hooks/useVirtualizer'
 export * from './core/hooks/useTheme'
 export * from './core/useAccentColor'
