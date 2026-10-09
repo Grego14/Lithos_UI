@@ -207,7 +207,7 @@ export const CalendarDoc = () => {
       </div>
 
       <h3 id="multicolor" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Multicolor selection
+        Multicolor
       </h3>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
         Use this to visually categorize selected dates into distinct groups, such as different shift types or
