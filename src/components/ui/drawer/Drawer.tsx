@@ -11,7 +11,7 @@ import { FloatingPortal } from '@floating-ui/react'
 import { DrawerContext } from './useDrawer'
 import { getDrawerClasses, getDuration } from './drawer.utils'
 import type { DrawerProps } from './drawer.types'
-import { useDrawerSwipe } from './useDrawerSwipe'
+import { useSwipe } from '../../../core/hooks/useSwipe'
 import { DrawerIndicator } from './DrawerIndicator'
 import { useMediaQuery } from '../../../core/hooks/useMediaQuery'
 
@@ -59,10 +59,10 @@ export const Drawer = ({
     'aria-describedby': ariaDescribedBy ?? undefined,
   }
 
-  const { handlers: swipeHandlers, style: swipeStyle } = useDrawerSwipe({
+  const { handlers: swipeHandlers, style: swipeStyle } = useSwipe({
     placement,
     open,
-    onClose: () => onOpenChange(false),
+    onDismiss: () => onOpenChange(false),
     threshold,
     allowSwipeOnContent,
   })

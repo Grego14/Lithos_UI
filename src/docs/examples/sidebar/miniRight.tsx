@@ -25,18 +25,17 @@ const cards = [
   { title: 'Server Latency', text: '12 ms' },
 ]
 
-const SidebarNavContent = () => {
+const SidebarNavContentRight = () => {
   const [active, setActive] = useState('item-0')
   const { activeBreakpointIndex } = useSidebar()
 
-  // detect if we are on the second breakpoint (128px)
   const isCompact = activeBreakpointIndex === 1
 
   return (
     <SidebarContent className="space-y-2">
-      <SidebarHeader className={isCompact ? 'flex-col items-center space-y-2' : ''}>
-        {!isCompact && <SidebarTitle>Lithos</SidebarTitle>}
+      <SidebarHeader className={isCompact ? 'flex flex-col items-center space-y-2' : ''}>
         <SidebarTrigger />
+        {!isCompact && <SidebarTitle>Lithos</SidebarTitle>}
       </SidebarHeader>
 
       {items.map((item) => (
@@ -46,7 +45,9 @@ const SidebarNavContent = () => {
           active={active === item.id}
           onClick={() => setActive(item.id)}
           textVariant={isCompact ? 'span' : 'label'}
-          className={isCompact ? 'flex-col justify-center items-center text-center text-xs py-1.5 [&>span]:mr-0' : ''}
+          className={
+            isCompact ? 'flex-col justify-center items-center text-center text-xs py-2 px-1 [&>span]:ml-0' : ''
+          }
         >
           {item.label}
         </SidebarItem>
@@ -55,19 +56,17 @@ const SidebarNavContent = () => {
   )
 }
 
-export const ExampleMini = () => {
+export const ExampleRightMini = () => {
   return (
     <div className="flex h-screen w-full bg-(--lithos-surface) overflow-hidden">
-      <Sidebar mode="mini" role="navigation">
-        <SidebarNavContent />
-      </Sidebar>
-
       <main className="flex-1 flex flex-col min-w-0 overflow-y-auto p-6 space-y-6">
         <header className="border-b-2 border-(--lithos-border) pb-4">
           <Typography variant="h2" className="font-black uppercase">
             Main Dashboard
           </Typography>
-          <Typography className="opacity-80">Overview of the layout integration with Sidebar.</Typography>
+          <Typography className="opacity-80">
+            Overview of the layout integration with Sidebar on the right side.
+          </Typography>
         </header>
 
         <section className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
@@ -93,6 +92,10 @@ export const ExampleMini = () => {
           <Typography className="mb-2">Content related to the selected item goes here.</Typography>
         </section>
       </main>
+
+      <Sidebar mode="mini" placement="right" role="navigation">
+        <SidebarNavContentRight />
+      </Sidebar>
     </div>
   )
 }

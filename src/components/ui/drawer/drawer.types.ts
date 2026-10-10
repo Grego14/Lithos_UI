@@ -136,32 +136,3 @@ export type DrawerProps = AccessibleNameProps & {
    */
   trigger?: ReactNode
 }
-
-export interface UseDrawerSwipeOptions {
-  /**
-   * Placement orientation for gesture detection.
-   */
-  placement: DrawerPlacement
-
-  /**
-   * Current open state.
-   */
-  open: boolean
-
-  /**
-   * Handler called when a swipe threshold is met to request closing.
-   */
-  onClose: () => void
-
-  /**
-   * Distance threshold in pixels required to register a swipe gesture.
-   * @default 100
-   */
-  threshold?: number
-
-  /**
-   * Whether swipe gesture is enabled on the target element.
-   * @default true
-   */
-  allowSwipeOnContent?: boolean
-}

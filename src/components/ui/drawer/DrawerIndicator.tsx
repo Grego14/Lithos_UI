@@ -4,6 +4,7 @@
  */
 import type { DrawerPlacement } from './drawer.types'
 import { cn } from '../../../utils/cn'
+import type { SurfaceGestureHandlers } from '../../../core/types'
 
 const indicatorClasses: Record<DrawerPlacement, string> = {
   bottom: 'top-2',
@@ -18,7 +19,7 @@ export const DrawerIndicator = ({
   'aria-label': indicatorLabel = 'Drag handle',
 }: {
   placement: DrawerPlacement
-  swipeHandlers?: Record<string, unknown> | undefined
+  swipeHandlers?: SurfaceGestureHandlers | undefined
   'aria-label'?: string | undefined
 }) => {
   const isHorizontal = placement === 'left' || placement === 'right'
