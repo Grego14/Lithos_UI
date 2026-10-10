@@ -24,7 +24,7 @@ const variantClass: Record<ButtonVariant, string> = {
   primary: 'bg-(--lithos-accent) text-(--lithos-accent-text)',
   secondary: 'bg-(--lithos-surface) text-(--lithos-text)',
   accent: 'bg-(--lithos-surface) text-(--lithos-text) hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)',
-  text: 'bg-transparent text-(--lithos-text) border-transparent shadow-none hover:shadow-none',
+  text: 'bg-transparent text-(--lithos-text) border-transparent shadow-none hover:shadow-none hover:bg-(--lithos-surface-hover)',
   solid: '',
   inverse: 'bg-(--lithos-text) text-(--lithos-bg) border-(--lithos-bg)',
 }
