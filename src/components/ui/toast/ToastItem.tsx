@@ -13,8 +13,16 @@ import { cn } from '../../../utils/cn'
 import type { ToastItemProps } from './toast.types'
 import { DEFAULT_DURATION } from './toast.utils'
 
-export const ToastItem = ({ toast, onRemove, className, label }: ToastItemProps) => {
-  const { id, message, intent = 'default', color, title, duration } = toast
+/**
+ * Individual toast notification tile component.
+ * Renders an accessible alert panel with dynamic color contrast, pause-on-hover timers,
+ * and automatic focus management for error notifications.
+ *
+ * @param props - Customization, item data payload, and removal callback props.
+ * @returns Accessible toast notification element.
+ */
+export const ToastItem = ({ toast, onRemove, className }: ToastItemProps) => {
+  const { id, message, intent = 'default', color, title, duration, label } = toast
   const [isHovered, setIsHovered] = useState(false)
   const toastRef = useRef<HTMLDivElement | null>(null)
 

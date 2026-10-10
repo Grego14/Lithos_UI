@@ -12,6 +12,14 @@ import type { ToastProps, ToastProviderProps, IdentifiedToastProps } from './toa
 import { DEFAULT_DURATION, positionStyles } from './toast.utils'
 import { ToastItem } from './ToastItem'
 
+/**
+ * Context provider and floating portal container for managing toast notifications.
+ * Wraps the application tree to supply `addToast` and `removeToast` functions,
+ * rendering active toasts inside a fixed DOM portal.
+ *
+ * @param props - Configuration props for default duration, position, and children.
+ * @returns Provider wrapper with portal rendering for active toast items.
+ */
 export const ToastProvider = ({ children, duration, position = 'bottom-right', className }: ToastProviderProps) => {
   const [toasts, setToasts] = useState<IdentifiedToastProps[]>([])
 

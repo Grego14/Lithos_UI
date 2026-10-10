@@ -46,6 +46,12 @@ export interface ToastProps {
    * Display duration in milliseconds before auto-dismissing.
    */
   duration?: number | undefined
+
+  /**
+   * Accessible ARIA label for the close button.
+   * @default 'Close notification'
+   */
+  label?: string
 }
 
 /**
@@ -66,12 +72,6 @@ export interface ToastItemProps {
    * Callback function triggered when dismissing or removing the toast.
    */
   onRemove: () => void
-
-  /**
-   * Accessible ARIA label or screen reader description for the close button or toast element.
-   * @default 'Close notification'
-   */
-  label?: string
 
   /**
    * Custom CSS class names applied to the toast item element.
