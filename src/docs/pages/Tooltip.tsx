@@ -109,9 +109,9 @@ export const TooltipDoc = () => {
         variants are <code>default</code>, <code>primary</code>, and <code>inverse</code>.
       </p>
 
-      <h3 id="primary-variant" className="mt-8 mb-4 text-lg font-black tracking-tight text-(--lithos-text)">
+      <h4 id="primary-variant" className="mt-8 mb-4 text-lg font-black tracking-tight text-(--lithos-text)">
         Primary
-      </h3>
+      </h4>
       <div className="mt-4 mb-8">
         <PreviewBlock code={primaryCode}>
           <div className="flex items-center justify-center p-12">
@@ -120,9 +120,9 @@ export const TooltipDoc = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="inverse-variant" className="mt-8 mb-4 text-lg font-black tracking-tight text-(--lithos-text)">
+      <h4 id="inverse-variant" className="mt-8 mb-4 text-lg font-black tracking-tight text-(--lithos-text)">
         Inverse
-      </h3>
+      </h4>
       <div className="mt-4 mb-16">
         <PreviewBlock code={inverseCode}>
           <div className="flex items-center justify-center p-12">
