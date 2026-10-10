@@ -12,8 +12,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added a **ThemeProvider** to synchronize the calls to the new `useTheme` hook _(before useLithosTheme)_ ([#337](https://github.com/lithosui/Lithos_UI/pull/337))
 - **Table:** Added the `Table` primitive ([#341](https://github.com/lithosui/Lithos_UI/pull/341))
 - **Sidebar:** Added the `Sidebar` primitive ([#346](https://github.com/lithosui/Lithos_UI/pull/346))
+- **Pagination:** Added the `Pagination` primitive ([#350](https://github.com/lithosui/Lithos_UI/pull/350))
 
 ### Changed (0.1.3)
+
+- **Toast:** Added JSDoc comments to the `Toast` types and the `addToast` function now
+  accepts a `label` that is used on the `Toast` close button. ([#357](https://github.com/lithosui/Lithos_UI/pull/357))
 
 ### Fixed (0.1.3)
 

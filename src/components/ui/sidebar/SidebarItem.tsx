@@ -1,7 +1,8 @@
 /**
- * @fileoverview Lithos UI SidebarItem interactive primitive.
- * - Polymorphic architecture: seamlessly renders as a default Lithos `Button` or delegates to custom links (`<a />`, `Link`) via `asChild`.
- * - Merges nested event handlers (combines parent and child `onClick`), auto-injects `aria-current="page"`, and conditionally hides label text in collapsed mini mode.
+ * @fileoverview Lithos UI SidebarItem component.
+ * - Renders interactive navigation items supporting polymorphic child delegation via `asChild`.
+ * - Automatically displays a floating Tooltip with the item label when the sidebar is in collapsed mini mode.
+ * - Adapts layout alignment and text orientation dynamically according to sidebar `placement`.
  */
 import {
   cloneElement,
@@ -10,11 +11,14 @@ import {
   type ElementType,
   type MouseEvent,
   type ComponentPropsWithRef,
+  type ReactNode,
 } from 'react'
 import type { SidebarItemProps } from './sidebar.types'
 import { useSidebar } from './useSidebar'
 import { cn } from '../../../utils/cn'
 import { Button } from '../Button'
+import { Typography } from '../Typography'
+import { Tooltip, TooltipContent, TooltipTrigger } from '../Tooltip'
 
 export const SidebarItem = <T extends ElementType = 'button'>({
   icon,
@@ -23,25 +27,47 @@ export const SidebarItem = <T extends ElementType = 'button'>({
   onClick,
   className,
   asChild = false,
+  textVariant = 'label',
+  textClass,
   ...rest
 }: SidebarItemProps<T>) => {
-  const { mode, open } = useSidebar()
+  const { mode, open, placement, isDragging } = useSidebar()
   const isCollapsed = mode === 'mini' && !open
+  const isRight = placement === 'right'
+
+  const computedTooltipPlacement = isRight ? 'left' : 'right'
+
+  // Extract inner text/nodes if children is a valid React element (for asChild delegation)
+  const isChildValid = asChild && isValidElement(children)
+  const labelContent = isChildValid ? (children as ReactElement<{ children?: ReactNode }>).props.children : children
 
   const itemContent = (
     <>
-      {icon && <span className="text-xl shrink-0 flex items-center justify-center w-6">{icon}</span>}
-      {!isCollapsed && <span className="truncate text-left flex-1 leading-snug">{children}</span>}
+      {icon && <span className="flex h-6 w-6 shrink-0 items-center justify-center text-xl select-none">{icon}</span>}
+      {!isCollapsed && (
+        <Typography
+          variant={textVariant}
+          className={cn(
+            'flex-1 truncate leading-snug select-none cursor-pointer',
+            isRight ? 'text-right' : 'text-left',
+            textClass
+          )}
+        >
+          {labelContent}
+        </Typography>
+      )}
     </>
   )
 
   const computedClassName = cn(
-    'flex items-center w-full space-x-3 active:translate-none shadow-none justify-start transition-colors duration-150',
+    'flex items-center w-full space-x-3 active:translate-none shadow-none justify-start transition-colors duration-150 px-2.5 select-none',
+    isRight && 'flex-row-reverse space-x-reverse',
     active ? 'bg-(--lithos-accent) text-(--lithos-accent-text)' : 'hover:bg-(--lithos-surface-hover)',
+    isDragging && 'pointer-events-none',
     className
   )
 
-  const computedTitle = isCollapsed && typeof children === 'string' ? children : undefined
+  let itemElement: ReactElement
 
   if (asChild && isValidElement(children)) {
     const child = children as ReactElement<ComponentPropsWithRef<T>>
@@ -56,25 +82,32 @@ export const SidebarItem = <T extends ElementType = 'button'>({
 
     const combinedProps = {
       ...rest,
+      draggable: false,
       onClick: handleCombinedClick,
-      title: child.props.title ?? computedTitle,
       'aria-current': active ? 'page' : undefined,
       className: cn(computedClassName, child.props.className),
       children: itemContent,
     }
 
-    return cloneElement(child, combinedProps as unknown as ComponentPropsWithRef<T>)
+    itemElement = cloneElement(child, combinedProps as unknown as ComponentPropsWithRef<T>)
+  } else {
+    itemElement = (
+      <Button onClick={onClick} variant={active ? 'primary' : 'text'} className={computedClassName} {...rest}>
+        {itemContent}
+      </Button>
+    )
   }
 
+  // If it is not collapsed, we return the button/element directly
+  if (!isCollapsed) {
+    return itemElement
+  }
+
+  // If it's collapsed, we wrap it up with the Tooltip primitive
   return (
-    <Button
-      onClick={onClick}
-      variant={active ? 'primary' : 'text'}
-      title={computedTitle}
-      className={computedClassName}
-      {...rest}
-    >
-      {itemContent}
-    </Button>
+    <Tooltip placement={computedTooltipPlacement}>
+      <TooltipTrigger asChild>{itemElement}</TooltipTrigger>
+      <TooltipContent>{children}</TooltipContent>
+    </Tooltip>
   )
 }

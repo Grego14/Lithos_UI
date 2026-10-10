@@ -1,4 +1,4 @@
-import { Sidebar, SidebarContent, SidebarItem } from '../../../components/ui/Sidebar'
+import { Sidebar, SidebarContent, SidebarItem, SidebarHeader, SidebarTitle } from '../../../components/ui/Sidebar'
 import { Typography } from '../../../components/ui/Typography'
 import { useState } from 'react'
 import { IconHome } from '../../../components/ui/icons/IconHome'
@@ -6,9 +6,9 @@ import { IconFolder } from '../../../components/ui/icons/IconFolder'
 import { IconSettings } from '../../../components/ui/icons/IconSettings'
 
 const items = [
-  { icon: <IconHome strokeWidth={3} />, label: 'Dashboard', id: 'item-0' },
-  { icon: <IconFolder strokeWidth={3} />, label: 'Projects', id: 'item-1' },
-  { icon: <IconSettings strokeWidth={3} />, label: 'Settings', id: 'item-2' },
+  { icon: <IconHome size={22} strokeWidth={2} />, label: 'Dashboard', id: 'item-0' },
+  { icon: <IconFolder size={22} strokeWidth={2} />, label: 'Projects', id: 'item-1' },
+  { icon: <IconSettings size={22} strokeWidth={2} />, label: 'Settings', id: 'item-2' },
 ]
 
 const cards = [
@@ -23,14 +23,14 @@ export const ExamplePermanent = () => {
   return (
     <div className="flex h-screen w-full bg-(--lithos-surface)">
       <Sidebar role="navigation">
-        <SidebarContent className="border-r-2 border-(--lithos-border) p-2 space-y-2">
-          <Typography variant="h4" className="p-3 border-b-2 border-(--lithos-border) -mx-2 -mt-2 mb-2 uppercase mb-4">
-            Lithos UI
-          </Typography>
+        <SidebarContent className="space-y-2">
+          <SidebarHeader>
+            <SidebarTitle>Lithos UI</SidebarTitle>
+          </SidebarHeader>
 
           {items.map((item) => (
             <SidebarItem key={item.id} icon={item.icon} active={active === item.id} onClick={() => setActive(item.id)}>
-              <Typography variant="label">{item.label}</Typography>
+              {item.label}
             </SidebarItem>
           ))}
         </SidebarContent>
@@ -44,17 +44,18 @@ export const ExamplePermanent = () => {
           <Typography className="opacity-80">Overview of the layout integration with Permanent Sidebar.</Typography>
         </header>
 
-        <section className="flex flex-wrap -m-2">
+        <section className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
           {cards.map((card) => (
-            <div className="w-full md:w-1/3 p-2">
-              <div className="p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]">
-                <Typography variant="h6" className="font-bold mb-1 truncate">
-                  {card.title}
-                </Typography>
-                <Typography variant="h3" as="p" className="font-bold mb-1 truncate">
-                  {card.text}
-                </Typography>
-              </div>
+            <div
+              className="flex-1 p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]"
+              key={card.title}
+            >
+              <Typography variant="h6" className="font-bold mb-1">
+                {card.title}
+              </Typography>
+              <Typography variant="h3" as="p" className="font-black">
+                {card.text}
+              </Typography>
             </div>
           ))}
         </section>

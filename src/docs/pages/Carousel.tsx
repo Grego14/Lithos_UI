@@ -289,7 +289,7 @@ export const CustomLayoutCarousel = () => {
       </div>
 
       <h3 id="looping" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Infinite Looping
+        Looping
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
         Use this to allow continuous navigation, ensuring users can seamlessly cycle past the first or last slides
