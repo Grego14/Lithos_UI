@@ -276,7 +276,8 @@ describe('Bulk actions', () => {
     const user = userEvent.setup()
     const { container } = render(<BulkActionsTable />)
     const bulkTable = screen.getByRole('table', { name: /Bulk selection table/ })
-    await user.click(screen.getByRole('button', { name: 'Next' }))
+    expect(screen.getByRole('navigation', { name: 'Invoice pages' })).toHaveAttribute('data-slot', 'pagination')
+    await user.click(screen.getByRole('button', { name: 'Next page' }))
     await user.type(screen.getByLabelText('Filter invoices'), 'Alex')
     expect(screen.getByText('Page 1 of 1')).toBeInTheDocument()
     expect(within(bulkTable).getByRole('rowheader', { name: 'INV-001' })).toBeInTheDocument()
@@ -285,7 +286,7 @@ describe('Bulk actions', () => {
     await user.click(screen.getByLabelText('Show status'))
     expect(within(bulkTable).getByRole('cell')).toHaveAttribute('colspan', '4')
     expect(screen.getByLabelText('Select all on this page')).toBeDisabled()
-    expect(screen.getByRole('button', { name: 'Next' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Next page' })).toBeDisabled()
     expect(await axe(container)).toHaveNoViolations()
   })
 
@@ -298,7 +299,7 @@ describe('Bulk actions', () => {
     expect(screen.getByLabelText('Select all on this page')).toBePartiallyChecked()
     await user.click(screen.getByLabelText('Select all on this page'))
     expect(screen.getByText(/10 selected across pages/)).toBeInTheDocument()
-    await user.click(screen.getByRole('button', { name: 'Next' }))
+    await user.click(screen.getByRole('button', { name: 'Next page' }))
     expect(screen.getByLabelText('Select all on this page')).not.toBeChecked()
     expect(screen.getByLabelText('Select INV-011')).not.toBeChecked()
     await user.type(screen.getByLabelText('Filter invoices'), 'Robin')
@@ -316,7 +317,7 @@ describe('Bulk actions', () => {
       amount: index,
     }))
     const { rerender } = render(<BulkActionsTable data={data} />)
-    await user.click(screen.getByRole('button', { name: 'Next' }))
+    await user.click(screen.getByRole('button', { name: 'Next page' }))
     await user.click(screen.getByLabelText('Select row-11'))
     rerender(<BulkActionsTable data={data.slice(0, 2)} />)
     expect(screen.getByText('Page 1 of 1')).toBeInTheDocument()
@@ -333,7 +334,7 @@ describe('Bulk actions', () => {
         <BulkActionsTable />
       </form>
     )
-    await user.click(screen.getByRole('button', { name: 'Next' }))
+    await user.click(screen.getByRole('button', { name: 'Next page' }))
     await user.click(screen.getByLabelText('Items per page'))
     await user.click(screen.getByRole('option', { name: '20' }))
     expect(screen.getAllByRole('row')).toHaveLength(13)
@@ -359,7 +360,7 @@ describe('Bulk actions', () => {
     await user.click(screen.getByLabelText('Select INV-002'))
     await user.click(screen.getByRole('button', { name: 'Duplicate selected' }))
     expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
-    await user.click(screen.getByRole('button', { name: 'Next' }))
+    await user.click(screen.getByRole('button', { name: 'Next page' }))
     expect(screen.getByRole('rowheader', { name: 'INV-013' })).toBeInTheDocument()
     expect(screen.getByRole('rowheader', { name: 'INV-014' })).toBeInTheDocument()
     expect(await screen.findByRole('button', { name: 'Duplicated selected' })).toBeInTheDocument()
@@ -375,7 +376,7 @@ describe('Bulk actions', () => {
   it('clamps the last page after deletion and disables bulk edit for multiple selections', async () => {
     const user = userEvent.setup()
     render(<BulkActionsTable />)
-    await user.click(screen.getByRole('button', { name: 'Next' }))
+    await user.click(screen.getByRole('button', { name: 'Next page' }))
     await user.click(screen.getByLabelText('Select all on this page'))
     expect(screen.getByRole('button', { name: 'Edit selected' })).toBeDisabled()
     await user.click(screen.getByRole('button', { name: 'Delete selected' }))
