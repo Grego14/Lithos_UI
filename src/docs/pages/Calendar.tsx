@@ -129,7 +129,7 @@ export const CalendarDoc = () => (
 
     <DocExample
       id="multicolor"
-      title="Multicolor selection"
+      title="Multicolor"
       description={
         <>
           Use this to visually categorize selected dates into distinct groups, such as different shift types or
