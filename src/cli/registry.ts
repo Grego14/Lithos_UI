@@ -341,8 +341,6 @@ export const registry: Record<string, RegistryItem> = {
     requires: [
       'components/ui/icons/IconClose.tsx',
       'components/ui/Button.tsx',
-      'core/hooks/useToast.ts',
-      'core/types.ts',
       'utils/colors.ts',
       'utils/yiq.ts',
       'utils/cn.ts',

@@ -4,7 +4,7 @@
  * - Copies the current code block to the clipboard with toast feedback.
  * - Uses explicit spacing only; no gap utilities are allowed.
  */
-import { useToast } from '../../core/hooks/useToast'
+import { useToast } from './toast/useToast'
 import { useTheme } from '../../core/hooks/useTheme'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism'

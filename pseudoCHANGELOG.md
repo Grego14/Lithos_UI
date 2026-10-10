@@ -16,6 +16,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed (0.1.3)
 
+- **Toast:** Added JSDoc comments to the `Toast` types and the `addToast` function now
+  accepts a `label` that is used on the `Toast` close button. ([#357](https://github.com/lithosui/Lithos_UI/pull/357))
+
 ### Fixed (0.1.3)
 
 - The `Tooltip` arrow appeared detached from the floating element when using a non-sharp radius.

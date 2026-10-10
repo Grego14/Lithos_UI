@@ -16,18 +16,6 @@ export const isHexColor = (value: string): value is HexColor => HEX_COLOR_PATTER
 
 export type ButtonVariant = 'primary' | 'secondary' | 'accent' | 'text' | 'solid' | 'inverse'
 
-export type ToastType = 'success' | 'error' | 'warning' | 'info' | 'default' | 'accent'
-
-export type ToastPosition = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
-
-export interface ToastProps {
-  intent?: ToastType | undefined
-  title?: string | undefined
-  message: string
-  color?: HexColor | string | undefined
-  duration?: number | undefined
-}
-
 /**
  * Creates a discriminated union supporting standard rendering or child delegation via `asChild`.
  *

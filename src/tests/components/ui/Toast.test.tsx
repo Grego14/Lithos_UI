@@ -2,8 +2,7 @@ import { render, screen, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { axe } from 'jest-axe'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { ToastProvider, ToastItem } from '../../../components/ui/Toast'
-import { useToast } from '../../../core/hooks/useToast'
+import { useToast, ToastProvider, ToastItem } from '../../../components/ui/Toast'
 
 const TestComponent = ({
   toastProps = { title: 'Toast toast', message: 'Test notification' },
