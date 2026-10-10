@@ -21,6 +21,7 @@ import {
   type UseFloatingReturn,
   type UseHoverProps,
   type UseRoleProps,
+  type Middleware,
 } from '@floating-ui/react'
 
 export interface PopoverOptions {
@@ -34,6 +35,7 @@ export interface PopoverOptions {
   hover?: boolean | UseHoverProps
   role?: UseRoleProps['role']
   matchTriggerWidth?: boolean
+  middlewares?: Middleware[]
 }
 
 export type PopoverReturn = {
@@ -56,6 +58,7 @@ export const usePopover = ({
   hover: hoverOptions = false,
   role,
   matchTriggerWidth = true,
+  middlewares,
 }: PopoverOptions = {}): PopoverReturn => {
   const [uncontrolledOpen, setUncontrolledOpen] = useState(initialOpen)
   const labelId = useId()
@@ -64,12 +67,8 @@ export const usePopover = ({
   const open = controlledOpen ?? uncontrolledOpen
   const setOpen = setControlledOpen ?? setUncontrolledOpen
 
-  const data = useFloating({
-    placement,
-    open,
-    onOpenChange: setOpen,
-    whileElementsMounted: autoUpdate,
-    middleware: [
+  const mergedMiddlewares = useMemo(() => {
+    const defaultMiddlewares = [
       offset(consumerOffset ?? 0),
       flip({
         fallbackAxisSideDirection: 'end',
@@ -85,7 +84,24 @@ export const usePopover = ({
             }
           },
         }),
-    ].filter(Boolean),
+    ].filter(Boolean)
+
+    if (!middlewares?.length) return defaultMiddlewares
+
+    const customNames = new Set(middlewares.map((m) => m.name))
+
+    // keep the default whose 'name' wasn't overwritten on the 'middlewares' prop
+    const filteredDefaults = defaultMiddlewares.filter((m) => !customNames.has((m as Middleware).name))
+
+    return [...filteredDefaults, ...middlewares]
+  }, [middlewares, consumerOffset, matchTriggerWidth])
+
+  const data = useFloating({
+    placement,
+    open,
+    onOpenChange: setOpen,
+    whileElementsMounted: autoUpdate,
+    middleware: mergedMiddlewares,
   })
 
   const { context } = data

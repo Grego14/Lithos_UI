@@ -7,83 +7,83 @@ Use this checklist when reviewing new component PRs. Copy the template below, fi
 ## Template
 
 ```
-## Component: [COMPONENT_NAME]
-PR: #[PR_NUMBER]
+**Component:** Pagination
+**PR:** #350
 
 ### 1. COMPONENT FILE
-- [ ] Component exported from `src/index.ts`
-- [ ] TypeScript types properly defined (Props interface, variants)
-- [ ] Default props sensible
-- [ ] Accessibility attributes in place (aria-*, role, etc.)
-- [ ] Event handlers follow naming convention (`onEventName`)
+- [x] Component exported from `src/index.ts`
+- [x] TypeScript types properly defined (Props interface, variants)
+- [x] Default props sensible
+- [x] Accessibility attributes in place (aria-*, role, etc.)
+- [x] Event handlers follow naming convention (`onEventName`)
 
 ### 2. REGISTRY & NAVIGATION
-- [ ] Entry added to `src/cli/registry.ts` in alphabetical order
-- [ ] Dependencies correctly listed in `requires` array
-- [ ] Component added to `src/docs/layout/Navbar.tsx`
-- [ ] Component added to `src/docs/layout/Sidebar.tsx`
-- [ ] Route added to `src/App.tsx` in `renderDocRoutes()`
-- [ ] TOC entries added to `src/docs/DocsLayout.tsx`
+- [x] Entry added to `src/cli/registry.ts` in alphabetical order
+- [x] Dependencies correctly listed in `requires` array
+- [x] Component added to `src/docs/layout/Navbar.tsx`
+- [x] Component added to `src/docs/layout/Sidebar.tsx`
+- [x] Route added to `src/App.tsx` in `renderDocRoutes()`
+- [x] TOC entries added to `src/docs/DocsLayout.tsx`
 
 ### 3. DOCUMENTATION PAGE (`src/docs/pages/[Component].tsx`)
-- [ ] Title and description present
-- [ ] Installation/Setup section links to correct component path
-- [ ] Examples section properly structured
-- [ ] **NO Anatomy section** (remove if not needed)
-- [ ] Accessibility section covers keyboard, screen readers, ARIA
-- [ ] API Reference section with Props table
-- [ ] All section IDs match TOC entries
+- [x] Title and description present
+- [x] Installation/Setup section links to correct component path
+- [x] Examples section properly structured
+- [x] **NO Anatomy section** (remove if not needed)
+- [x] Accessibility section covers keyboard, screen readers, ARIA
+- [x] API Reference section with Props table
+- [x] All section IDs match TOC entries
 
 ### 4. EXAMPLE FILES (`src/docs/examples/[component]/`)
-- [ ] **Basic/Default** example shows simplest usage
-- [ ] **Variant/Style examples** show real consumer code, NOT loops/maps over const arrays
+- [x] **Basic/Default** example shows simplest usage
+- [x] **Variant/Style examples** show real consumer code, NOT loops/maps over const arrays
   - ❌ Bad: `{['sm', 'md'].map(size => <Component size={size} />)}`
   - ✅ Good: `<Component size="sm" />` and `<Component size="md" />` as separate JSX
-- [ ] **Position/Size/Shape examples** render standalone props, not in dynamic structures
-- [ ] All examples use correct component imports
-- [ ] `PreviewBlock` code snippets show plain JSX (no `export const`)
-- [ ] Examples don't wrap multiple variations in the same returned element without clear labels
+- [x] **Position/Size/Shape examples** render standalone props, not in dynamic structures
+- [x] All examples use correct component imports
+- [x] `PreviewBlock` code snippets show plain JSX (no `export const`)
+- [x] Examples don't wrap multiple variations in the same returned element without clear labels
 
 ### 5. PROPS DATA FILE (`src/docs/propsData/[component].ts`)
-- [ ] All props documented with `name`, `type`, `description`
-- [ ] `defaultValue` provided where applicable
-- [ ] Descriptions are clear and actionable
-- [ ] TypeScript types match component definition exactly
-- [ ] Union types formatted clearly: `'option1' | 'option2'`
-- [ ] Complex types (functions) clearly documented
-- [ ] `className / ref / native props` entries are clear (or split into separate rows)
+- [x] All props documented with `name`, `type`, `description`
+- [x] `defaultValue` provided where applicable
+- [x] Descriptions are clear and actionable
+- [x] TypeScript types match component definition exactly
+- [x] Union types formatted clearly: `'option1' | 'option2'`
+- [x] Complex types (functions) clearly documented
+- [x] `className / ref / native props` entries are clear (or split into separate rows)
 
 ### 6. TESTS (`src/tests/components/ui/[Component].test.tsx`)
-- [ ] Unit tests for core functionality
-- [ ] Accessibility tests (axe checks)
-- [ ] Keyboard interaction tests
-- [ ] Edge cases handled (empty state, disabled, etc.)
-- [ ] Controlled vs. uncontrolled behavior tested
-- [ ] All tests passing
+- [x] Unit tests for core functionality
+- [x] Accessibility tests (axe checks)
+- [x] Keyboard interaction tests
+- [x] Edge cases handled (empty state, disabled, etc.)
+- [x] Controlled vs. uncontrolled behavior tested
+- [x] All tests passing
 
 ### 7. COMPONENT SHOWCASE (`src/pages/ComponentsIndex.tsx`)
-- [ ] Component added to `componentsList` with preview
-- [ ] Preview uses small/compact variant for demo
-- [ ] `to` link points to `/docs/[component]`
+- [x] Component added to `componentsList` with preview
+- [x] Preview uses small/compact variant for demo
+- [x] `to` link points to `/docs/[component]`
 
 ### 8. EXPORTS & PACKAGE
-- [ ] Component exported from main `src/index.ts`
-- [ ] All supporting types/enums exported if needed
-- [ ] No unused imports in component or docs files
+- [x] Component exported from main `src/index.ts`
+- [x] All supporting types/enums exported if needed
+- [x] No unused imports in component or docs files
 
 ### 9. CONSISTENCY
-- [ ] Naming follows repo conventions (PascalCase components, camelCase props)
-- [ ] Styling uses Lithos design tokens (colors, spacing, typography)
-- [ ] Example code style matches existing component docs
-- [ ] Props table formatting consistent with other components
+- [x] Naming follows repo conventions (PascalCase components, camelCase props)
+- [x] Styling uses Lithos design tokens (colors, spacing, typography)
+- [x] Example code style matches existing component docs
+- [x] Props table formatting consistent with other components
 
 ### 10. CONTENT QUALITY
-- [ ] Section headings are descriptive and parallel
-- [ ] Descriptions explain "what" and "when to use"
-- [ ] Code examples are copy-paste ready
-- [ ] No typos or broken links
-- [ ] Accessibility guidance is actionable
-- [ ] Progress/loading indicators or complex UX clearly documented
+- [x] Section headings are descriptive and parallel
+- [x] Descriptions explain "what" and "when to use"
+- [x] Code examples are copy-paste ready
+- [x] No typos or broken links
+- [x] Accessibility guidance is actionable
+- [x] Progress/loading indicators or complex UX clearly documented
 
 ---
 

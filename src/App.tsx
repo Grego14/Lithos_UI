@@ -47,6 +47,7 @@ import { ToastDoc } from './docs/pages/Toast'
 import { ToggleDoc } from './docs/pages/Toggle'
 import { TabsDoc } from './docs/pages/Tabs'
 import { TableDoc } from './docs/pages/Table'
+import { PaginationDoc } from './docs/pages/Pagination'
 import { TypographyDoc } from './docs/pages/Typography'
 import { SidebarDoc } from './docs/pages/Sidebar'
 import { ThemeBuilder } from './pages/ThemeBuilder'
@@ -102,6 +103,7 @@ const renderDocRoutes = () => {
     { path: 'toggle', component: ToggleDoc },
     { path: 'tabs', component: TabsDoc },
     { path: 'table', component: TableDoc },
+    { path: 'pagination', component: PaginationDoc },
     { path: 'typography', component: TypographyDoc },
     { path: 'tooltip', component: TooltipDoc },
   ]

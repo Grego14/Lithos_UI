@@ -1,8 +1,55 @@
-import { useEffect, useState } from 'react'
+import { useState, useEffect, useSyncExternalStore } from 'react'
 import type { TOCItem } from '../types'
 
-export const TableOfContents = ({ links = [] }: { links: TOCItem[] }) => {
+let cachedLinks: TOCItem[] = []
+
+const getHeadingsFromDOM = (): TOCItem[] => {
+  const elements = Array.from(document.querySelectorAll<HTMLElement>('main h2[id], main h3[id], main h4[id]'))
+
+  const newLinks: TOCItem[] = elements.map((element) => {
+    const tagName = element.tagName
+
+    const level = tagName === 'H2' ? 1 : tagName === 'H3' ? 2 : 3
+
+    return {
+      id: `#${element.id}`,
+      label: element.textContent?.trim() || '',
+      level,
+    }
+  })
+
+  // check if the items are the same
+  const isUnchanged =
+    cachedLinks.length === newLinks.length &&
+    cachedLinks.every(
+      (item, index) =>
+        item.id === newLinks[index]?.id &&
+        item.label === newLinks[index]?.label &&
+        item.level === newLinks[index]?.level
+    )
+
+  if (isUnchanged) {
+    return cachedLinks
+  }
+
+  cachedLinks = newLinks
+  return cachedLinks
+}
+
+const subscribeToDOMMutations = (callback: () => void) => {
+  const main = document.querySelector('main')
+  if (!main) return () => {}
+
+  const observer = new MutationObserver(callback)
+  observer.observe(main, { childList: true, subtree: true })
+
+  return () => observer.disconnect()
+}
+
+export const TableOfContents = () => {
   const [activeId, setActiveId] = useState<string | null>(null)
+
+  const links = useSyncExternalStore(subscribeToDOMMutations, getHeadingsFromDOM, () => [])
 
   useEffect(() => {
     if (links.length === 0) return
@@ -64,17 +111,19 @@ export const TableOfContents = ({ links = [] }: { links: TOCItem[] }) => {
           Overview
         </a>
 
-        {links.map((link) => (
-          <a
-            key={link.id}
-            href={link.id}
-            className={`block py-1.5 px-4 text-xs font-bold transition-colors duration-150 ease-out hover:text-(--lithos-accent) ${
-              link.level === 2 ? 'ml-4' : ''
-            } ${activeId === link.id ? 'text-(--lithos-accent)' : 'opacity-70 hover:opacity-100'}`}
-          >
-            {link.label}
-          </a>
-        ))}
+        {links.map((link) => {
+          const levelStyle = link.level === 2 ? 'ml-4' : link.level === 3 ? 'ml-8' : ''
+
+          return (
+            <a
+              key={link.id}
+              href={link.id}
+              className={`block py-1.5 px-4 text-xs font-bold transition-colors duration-150 ease-out hover:text-(--lithos-accent) ${levelStyle} ${activeId === link.id ? 'text-(--lithos-accent)' : 'opacity-70 hover:opacity-100'}`}
+            >
+              {link.label}
+            </a>
+          )
+        })}
       </nav>
     </aside>
   )

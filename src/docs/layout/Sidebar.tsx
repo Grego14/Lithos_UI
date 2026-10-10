@@ -20,6 +20,7 @@ const components = [
   'dropdown',
   'input',
   'kbd',
+  'pagination',
   'popover',
   'select',
   'skeleton',
