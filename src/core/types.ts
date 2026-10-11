@@ -1,4 +1,5 @@
 import type { ElementType, ReactNode, ComponentPropsWithRef, CSSProperties, PointerEvent, DragEvent } from 'react'
+import type { LithosClass } from '../utils/cn'
 import 'react'
 
 declare module 'react' {
@@ -13,8 +14,6 @@ const HEX_COLOR_PATTERN = /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{4}|[0-9a-fA-F]{6}|[0-
 export type HexColor = string & { readonly __brand: 'HexColor' }
 
 export const isHexColor = (value: string): value is HexColor => HEX_COLOR_PATTERN.test(value)
-
-export type ButtonVariant = 'primary' | 'secondary' | 'accent' | 'text' | 'solid' | 'inverse'
 
 /**
  * Creates a discriminated union supporting standard rendering or child delegation via `asChild`.
@@ -38,6 +37,13 @@ export type AsChildProps<
         asChild: true
         children: ReactNode
       })
+
+/**
+ * Base props interface extending native element attributes with LithosClass support.
+ */
+export type LithosElementProps<T extends keyof HTMLElementTagNameMap> = Omit<ComponentPropsWithRef<T>, 'className'> & {
+  className?: LithosClass
+}
 
 export type SurfaceHorizontalPlacement = 'left' | 'right'
 export type SurfaceVerticalPlacement = 'top' | 'bottom'
