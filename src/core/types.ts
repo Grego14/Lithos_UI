@@ -1,4 +1,5 @@
 import type { ElementType, ReactNode, ComponentPropsWithRef, CSSProperties, PointerEvent, DragEvent } from 'react'
+import type { LithosClass } from '../utils/cn'
 import 'react'
 
 declare module 'react' {
@@ -38,6 +39,13 @@ export type AsChildProps<
         asChild: true
         children: ReactNode
       })
+
+/**
+ * Base props interface extending native element attributes with LithosClass support.
+ */
+export type LithosElementProps<T extends keyof HTMLElementTagNameMap> = Omit<ComponentPropsWithRef<T>, 'className'> & {
+  className?: LithosClass
+}
 
 export type SurfaceHorizontalPlacement = 'left' | 'right'
 export type SurfaceVerticalPlacement = 'top' | 'bottom'
