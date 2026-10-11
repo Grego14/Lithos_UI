@@ -76,6 +76,12 @@ export interface SidebarContextType {
 
 export const SidebarContext = createContext<SidebarContextType | null>(null)
 
+/**
+ * Custom hook to access sidebar context values and controls.
+ *
+ * @throws {Error} If called outside of a `<Sidebar>` component provider.
+ * @returns The current sidebar context configuration state.
+ */
 export const useSidebar = () => {
   const context = useContext(SidebarContext)
 

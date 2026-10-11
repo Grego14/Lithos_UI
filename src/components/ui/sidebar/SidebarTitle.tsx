@@ -9,6 +9,12 @@ import type { SidebarTitleProps } from './sidebar.types'
 
 import { Typography } from '../Typography'
 
+/**
+ * Title or brand heading component for the sidebar, automatically hidden when the sidebar is collapsed.
+ *
+ * @param props - Title props including typography variant, children, and class names.
+ * @returns Sidebar title element or null if collapsed.
+ */
 export const SidebarTitle = ({ children, className, variant = 'h4', ...rest }: SidebarTitleProps) => {
   const { open } = useSidebar()
 
