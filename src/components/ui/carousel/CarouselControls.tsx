@@ -3,16 +3,17 @@
  * - Header/footer toolbar providing title display and next/previous navigation triggers.
  * - Reactive button boundary guards: automatically disables navigation triggers at bounds when loop mode is inactive.
  */
-import type { ComponentPropsWithRef } from 'react'
 import { cn } from '../../../utils/cn'
 import { CarouselNext, CarouselPrev } from './CarouselButton'
 import { useCarousel } from './useCarousel'
-import type { LithosClass } from '../../../utils/cn'
+import type { CarouselControlsProps } from './carousel.types'
 
-export interface CarouselControlsProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
-  className?: LithosClass
-}
-
+/**
+ * Toolbar header or footer component containing the carousel title and previous/next navigation buttons.
+ *
+ * @param props - Container properties including custom class names.
+ * @returns Controls toolbar container element.
+ */
 export const CarouselControls = ({ className, ...rest }: CarouselControlsProps) => {
   const { currentIndex, totalSlides, title, loop, bottomControls } = useCarousel()
 

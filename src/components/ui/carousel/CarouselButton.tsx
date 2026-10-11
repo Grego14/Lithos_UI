@@ -6,20 +6,19 @@
  */
 import { type ComponentPropsWithRef, type MouseEvent } from 'react'
 import { Button } from '../Button'
-import { type CarouselDirection } from './carousel.types'
+import type { CarouselButtonProps } from './carousel.types'
 import { useCarousel } from './useCarousel'
-import type { LithosClass } from '../../../utils/cn'
 import { IconArrowLeft } from '../icons/IconArrowLeft'
 import { IconArrowRight } from '../icons/IconArrowRight'
 import { IconArrowDown } from '../icons/IconArrowDown'
 import { IconArrowUp } from '../icons/IconArrowUp'
 
-export interface CarouselButtonProps extends Omit<ComponentPropsWithRef<'button'>, 'className'> {
-  label?: string
-  direction?: CarouselDirection
-  className?: LithosClass
-}
-
+/**
+ * Direction-aware interactive button component for triggering carousel slide transitions.
+ *
+ * @param props - Configuration properties including direction, label, and click handler.
+ * @returns Button navigation element.
+ */
 export const CarouselButton = ({ direction = 'forwards', children, label, onClick, ...props }: CarouselButtonProps) => {
   const { scroll, mode } = useCarousel()
   const vertical = mode === 'vertical'
@@ -46,10 +45,22 @@ interface ButtonVariantProp extends ComponentPropsWithRef<typeof CarouselButton>
 const DEFAULT_PREV_LABEL = 'Previous slide'
 const DEFAULT_NEXT_LABEL = 'Next slide'
 
-export const CarouselPrev = (props: ButtonVariantProp) => {
-  return <CarouselButton {...props} label={props.label || DEFAULT_PREV_LABEL} direction="backwards" />
-}
+/**
+ * Previous slide navigation trigger button component.
+ *
+ * @param props - Button properties.
+ * @returns Previous navigation button element.
+ */
+export const CarouselPrev = (props: ButtonVariantProp) => (
+  <CarouselButton {...props} label={props.label || DEFAULT_PREV_LABEL} direction="backwards" />
+)
 
-export const CarouselNext = (props: ButtonVariantProp) => {
-  return <CarouselButton {...props} label={props.label || DEFAULT_NEXT_LABEL} />
-}
+/**
+ * Next slide navigation trigger button component.
+ *
+ * @param props - Button properties.
+ * @returns Next navigation button element.
+ */
+export const CarouselNext = (props: ButtonVariantProp) => (
+  <CarouselButton {...props} label={props.label || DEFAULT_NEXT_LABEL} />
+)

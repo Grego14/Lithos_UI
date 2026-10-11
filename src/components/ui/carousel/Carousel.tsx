@@ -4,48 +4,23 @@
  * - Compound component pattern with sub-component filtering to allow arbitrary non-slide children while indexing `CarouselSlide` elements.
  * - Accessible auto-rotation loop with focus/hover pausing and dynamic `aria-live` politeness management.
  */
-import {
-  useEffect,
-  useRef,
-  useCallback,
-  useState,
-  useMemo,
-  type ComponentPropsWithRef,
-  type KeyboardEvent,
-  type UIEvent,
-} from 'react'
-import { cn, type LithosClass } from '../../../utils/cn'
+import { useEffect, useRef, useCallback, useState, useMemo, type KeyboardEvent, type UIEvent } from 'react'
+import { cn } from '../../../utils/cn'
 import { scrollTo } from '../../../utils/scrollTo'
-import {
-  type SliderSelector,
-  type ScrollFuncProp,
-  type CarouselDirection,
-  type CarouselMode,
-  type CarouselControlsPosition,
-} from './carousel.types'
+import type { ScrollFuncProp, CarouselProps } from './carousel.types'
 import { CarouselControls } from './CarouselControls'
 import { CarouselPagination } from './CarouselPagination'
 import { useCarouselDrag } from './useCarouselDrag'
 import { CarouselContext } from './useCarousel'
 import { CarouselTrack } from './CarouselTrack'
 
-export interface CarouselProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
-  controlsPosition?: CarouselControlsPosition
-  title?: string
-  hidePagination?: boolean
-  hideControls?: boolean
-  slideSelector?: SliderSelector
-  showCounter?: boolean
-  playInfinite?: boolean
-  playInterval?: number
-  playDirection?: CarouselDirection
-  stopOnHover?: boolean
-  loop?: boolean
-  mode?: CarouselMode
-  className?: LithosClass
-  asChild?: boolean
-}
-
+/**
+ * Carousel slide presentation container component supporting multi-axis scrolling,
+ * touch gestures, auto-play rotation, and accessible keyboard navigation.
+ *
+ * @param props - Carousel configuration properties including mode, loop settings, and intervals.
+ * @returns Carousel region container element.
+ */
 export const Carousel = ({
   controlsPosition = 'top',
   title = '',
