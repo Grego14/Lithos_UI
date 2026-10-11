@@ -4,17 +4,38 @@
  * - `CardContent`/`CardFooter` own their own padding; stack spacing between them is margin-based, never `gap`.
  * - Hard geometry: fixed-offset shadow always shows; `hover:translate` lift is opt-in via `interactive`, not forced on every Card.
  */
-import type { ComponentPropsWithRef } from 'react'
-import { cn, type LithosClass } from '../../utils/cn'
+import { cn } from '../../utils/cn'
+import type { LithosElementProps } from '../../core/types'
 
-type CardVariants = 'default' | 'accent' | 'image' | 'solid'
+/**
+ * Visual styling variant for the card component.
+ */
+export type CardVariants = 'default' | 'accent' | 'image' | 'solid'
 
-export interface CardProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
+/**
+ * Props for the root `Card` container component.
+ */
+export interface CardProps extends LithosElementProps<'div'> {
+  /**
+   * Enables interactive hover effects (shadow enlargement or elevation translation).
+   * @default false
+   */
   interactive?: boolean | 'elevate'
+
+  /**
+   * Visual theme variant style.
+   * @default 'default'
+   */
   variant?: CardVariants
-  className?: LithosClass
 }
 
+/**
+ * Card container primitive featuring hard-edged neo-brutalist shadow geometry and variant themes.
+ * Root renders raw children with no padding, allowing edge-to-edge images.
+ *
+ * @param props - Card properties including interactive mode, variant style, and children.
+ * @returns Card container element.
+ */
 export const Card = ({ interactive = false, variant = 'default', className, children, ...rest }: CardProps) => {
   const isImage = variant === 'image'
 
@@ -43,13 +64,26 @@ export const Card = ({ interactive = false, variant = 'default', className, chil
   )
 }
 
-export interface CardImageProps extends Omit<ComponentPropsWithRef<'img'>, 'className'> {
+/**
+ * Props for the `CardImage` component.
+ */
+export interface CardImageProps extends LithosElementProps<'img'> {
+  /** Image source URL. */
   src: string
+
+  /** Alternative descriptive text for accessibility. */
   alt: string
+
+  /** Renders the image as an absolute background layer covering the card. */
   isBackground?: boolean
-  className?: LithosClass
 }
 
+/**
+ * Image component for cards, supporting standard block headers or absolute background placement.
+ *
+ * @param props - Image properties including source, alt text, and background mode.
+ * @returns Image element.
+ */
 export const CardImage = ({ isBackground = false, className, ...rest }: CardImageProps) => {
   const classes = cn(
     isBackground
@@ -61,11 +95,20 @@ export const CardImage = ({ isBackground = false, className, ...rest }: CardImag
   return <img className={classes} {...rest} />
 }
 
-export interface CardContentProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
+/**
+ * Props for the `CardContent` body container.
+ */
+export interface CardContentProps extends LithosElementProps<'div'> {
+  /** Internal padding spacing scale. */
   spacing?: 'sm' | 'md' | 'lg'
-  className?: LithosClass
 }
 
+/**
+ * Body content container component for the card, managing internal padding scale.
+ *
+ * @param props - Content properties including padding spacing and children.
+ * @returns Content container element.
+ */
 export const CardContent = ({ spacing = 'md', className, children, ...rest }: CardContentProps) => {
   const spacingClass = {
     sm: 'p-3',
@@ -82,10 +125,17 @@ export const CardContent = ({ spacing = 'md', className, children, ...rest }: Ca
   )
 }
 
-export interface CardTitleProps extends Omit<ComponentPropsWithRef<'h3'>, 'className'> {
-  className?: LithosClass
-}
+/**
+ * Props for the `CardTitle` heading component.
+ */
+export type CardTitleProps = LithosElementProps<'h3'>
 
+/**
+ * Heading component for card titles, featuring bold uppercase typography.
+ *
+ * @param props - Heading element attributes and custom classes.
+ * @returns Card title heading element.
+ */
 export const CardTitle = ({ className, children, ...rest }: CardTitleProps) => {
   const classes = cn('text-xl font-black uppercase tracking-tight leading-none mb-3', className)
 
@@ -96,10 +146,17 @@ export const CardTitle = ({ className, children, ...rest }: CardTitleProps) => {
   )
 }
 
-export interface CardDescriptionProps extends Omit<ComponentPropsWithRef<'p'>, 'className'> {
-  className?: LithosClass
-}
+/**
+ * Props for the `CardDescription` body text component.
+ */
+export type CardDescriptionProps = LithosElementProps<'p'>
 
+/**
+ * Paragraph text description component for cards.
+ *
+ * @param props - Paragraph element attributes and custom classes.
+ * @returns Card description paragraph element.
+ */
 export const CardDescription = ({ className, children, ...rest }: CardDescriptionProps) => {
   const classes = cn('font-body opacity-70 leading-snug', className)
 
@@ -110,11 +167,20 @@ export const CardDescription = ({ className, children, ...rest }: CardDescriptio
   )
 }
 
-export interface CardFooterProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
+/**
+ * Props for the `CardFooter` action bar container.
+ */
+export interface CardFooterProps extends LithosElementProps<'div'> {
+  /** Internal padding spacing scale. */
   spacing?: 'sm' | 'md' | 'lg'
-  className?: LithosClass
 }
 
+/**
+ * Footer action container component for the bottom of cards, separated by a top border.
+ *
+ * @param props - Footer properties including spacing scale and action buttons.
+ * @returns Footer container element.
+ */
 export const CardFooter = ({ spacing = 'md', className, children, ...rest }: CardFooterProps) => {
   const spacingClass = {
     sm: 'px-3 pt-2 pb-3',
