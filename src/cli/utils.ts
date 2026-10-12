@@ -3,6 +3,10 @@ import path from 'node:path'
 import process from 'node:process'
 import readline from 'node:readline'
 import { execSync } from 'node:child_process'
+import { fileURLToPath } from 'node:url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 export const getProjectRoot = (startDir = process.cwd()): string => {
   let currentDir = startDir
@@ -67,6 +71,20 @@ export const getConfig = (): LithosConfig => {
 }
 
 export const fetchFile = async (url: string): Promise<string> => {
+  // Prefer local development source file if it exists in the repo
+  try {
+    const urlPath = new URL(url).pathname
+    const match = urlPath.match(/\/src\/(.+)$/)
+    if (match && match[1]) {
+      const localFile = path.resolve(__dirname, '../../src', match[1])
+      if (fs.existsSync(localFile)) {
+        return fs.readFileSync(localFile, 'utf8')
+      }
+    }
+  } catch {
+    // fallback to remote fetch
+  }
+
   const response = await fetch(url)
   if (!response.ok) {
     throw new Error(`Failed to fetch ${url}: ${response.statusText}`)
