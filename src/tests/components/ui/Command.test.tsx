@@ -278,9 +278,12 @@ describe('Command Component', () => {
     expect(screen.queryByRole('button', { name: /clear search/i })).not.toBeInTheDocument()
   })
 
-  it('renders CommandBadge and CommandLoading correctly', () => {
+  it('renders CommandBadge and CommandLoading correctly', async () => {
+    const user = userEvent.setup()
+
     render(
       <Command>
+        <CommandInput placeholder="Search..." />
         <CommandLoading>Searching resources...</CommandLoading>
         <CommandList>
           <CommandItem value="1">
@@ -290,6 +293,8 @@ describe('Command Component', () => {
         </CommandList>
       </Command>
     )
+
+    await user.click(screen.getByRole('combobox'))
 
     expect(screen.getByRole('status')).toHaveTextContent('Searching resources...')
     expect(screen.getByText('New')).toBeInTheDocument()
