@@ -40,7 +40,7 @@ export const Sidebar = () => {
   const getLinkClass = (path: string) => {
     const isActive = location.pathname === path
     const baseClass =
-      'inline-block w-fit px-3 py-1.5 text-xs font-bold transition-all duration-150 ease-out border-2 rounded-(--lithos-radius)'
+      'inline-block w-fit px-3 py-1.5 text-xs font-bold font-docs transition-all duration-150 ease-out border-2 rounded-(--lithos-radius)'
 
     return isActive
       ? `${baseClass} border-(--lithos-border) bg-(--lithos-accent) text-(--lithos-accent-text) shadow-[4px_4px_0_0_var(--lithos-border)]`

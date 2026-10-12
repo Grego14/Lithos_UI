@@ -104,7 +104,7 @@ export const TableOfContents = () => {
             e.preventDefault()
             window.scrollTo({ top: 0, behavior: 'smooth' })
           }}
-          className={`block py-1.5 px-4 text-xs font-bold transition-colors duration-150 ease-out hover:text-(--lithos-accent) mb-2 ${
+          className={`block py-1.5 px-4 text-xs font-bold font-docs transition-colors duration-150 ease-out hover:text-(--lithos-accent) mb-2 ${
             !activeId ? 'text-(--lithos-accent)' : 'opacity-70 hover:opacity-100'
           }`}
         >
@@ -118,7 +118,7 @@ export const TableOfContents = () => {
             <a
               key={link.id}
               href={link.id}
-              className={`block py-1.5 px-4 text-xs font-bold transition-colors duration-150 ease-out hover:text-(--lithos-accent) ${levelStyle} ${activeId === link.id ? 'text-(--lithos-accent)' : 'opacity-70 hover:opacity-100'}`}
+              className={`block py-1.5 px-4 text-xs font-bold font-docs transition-colors duration-150 ease-out hover:text-(--lithos-accent) ${levelStyle} ${activeId === link.id ? 'text-(--lithos-accent)' : 'opacity-70 hover:opacity-100'}`}
             >
               {link.label}
             </a>
