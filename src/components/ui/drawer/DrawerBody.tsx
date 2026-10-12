@@ -3,15 +3,17 @@
  * - Serves as the main scrollable content container for the Drawer primitive.
  * - Dynamically renders a DialogBody on desktop when responsive mode is enabled.
  */
-import type { ComponentPropsWithRef } from 'react'
 import { DialogBody } from '../Dialog'
-import { cn, type LithosClass } from '../../../utils/cn'
+import { cn } from '../../../utils/cn'
 import { useDrawer } from './useDrawer'
+import type { DrawerBodyProps } from './drawer.types.ts'
 
-export interface DrawerBodyProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
-  className?: LithosClass
-}
-
+/**
+ * Scrollable body content container component for drawers.
+ *
+ * @param props - Drawer body properties including custom class names and children elements.
+ * @returns Scrollable container div element or DialogBody when in responsive desktop mode.
+ */
 export const DrawerBody = ({ className, children, ...props }: DrawerBodyProps) => {
   const { mode, isDesktop } = useDrawer()
 

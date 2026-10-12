@@ -3,15 +3,17 @@
  * - Encloses top title and navigation elements within the Drawer primitive.
  * - Switches to DialogHeader when responsive desktop view is activated.
  */
-import type { ComponentPropsWithRef } from 'react'
 import { DialogHeader } from '../Dialog'
-import { cn, type LithosClass } from '../../../utils/cn'
+import { cn } from '../../../utils/cn'
 import { useDrawer } from './useDrawer'
+import type { DrawerHeaderProps } from './drawer.types'
 
-export interface DrawerHeaderProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
-  className?: LithosClass
-}
-
+/**
+ * Header title bar component for drawers.
+ *
+ * @param props - Drawer header properties including custom class names and header children.
+ * @returns Header container element or DialogHeader when in responsive desktop mode.
+ */
 export const DrawerHeader = ({ className, children, ...props }: DrawerHeaderProps) => {
   const { mode, isDesktop } = useDrawer()
 

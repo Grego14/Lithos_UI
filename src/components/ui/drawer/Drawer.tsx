@@ -17,6 +17,12 @@ import { useMediaQuery } from '../../../core/hooks/useMediaQuery'
 
 const Dialog = lazy(() => import('../Dialog').then((mod) => ({ default: mod.Dialog })))
 
+/**
+ * Root overlay drawer component managing temporary slide-out panels, touch gestures, and responsive dialog fallback modes.
+ *
+ * @param props - Drawer configuration properties including placement, mode, transitions, and state callbacks.
+ * @returns Drawer portal container element.
+ */
 export const Drawer = ({
   open,
   onOpenChange,
