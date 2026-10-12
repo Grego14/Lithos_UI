@@ -25,6 +25,13 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '../Tooltip'
 import { isShortcutPressed, getShortcutKeys } from './sidebar.utils'
 import { Kbd } from '../Kbd'
 
+/**
+ * Control button component to toggle the sidebar open or collapsed state, supporting keyboard shortcuts and tooltips.
+ *
+ * @template T - Polymorphic element type override.
+ * @param props - Configuration props including shortcut keys, label, and disableTooltip.
+ * @returns Interactive toggle button component.
+ */
 export const SidebarTrigger = <T extends ElementType = 'button'>({
   children,
   className,

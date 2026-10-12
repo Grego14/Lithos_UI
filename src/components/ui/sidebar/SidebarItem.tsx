@@ -20,6 +20,14 @@ import { Button } from '../Button'
 import { Typography } from '../Typography'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../Tooltip'
 
+/**
+ * Interactive navigation link or button component designed for sidebar menus.
+ * Automatically wraps in a tooltip when the sidebar is collapsed in mini mode.
+ *
+ * @template T - Polymorphic element type override.
+ * @param props - Item props including icon, active state, polymorphic `asChild`, and typography options.
+ * @returns Interactive sidebar button or tooltip-wrapped element.
+ */
 export const SidebarItem = <T extends ElementType = 'button'>({
   icon,
   children,

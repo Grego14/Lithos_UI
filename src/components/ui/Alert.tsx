@@ -16,18 +16,66 @@ import { Button } from './Button'
 import { IconUndo } from './icons/IconUndo'
 import { IconClose } from './icons/IconClose'
 
+/**
+ * Semantic tone or intent variant for the alert component.
+ */
 export type AlertIntent = 'default' | 'success' | 'error' | 'warning' | 'info' | 'accent'
+
+/**
+ * Visual styling variant for the alert background and border presentation.
+ */
 export type AlertVariant = 'filled' | 'outlined'
+
+/**
+ * Size scale variant determining padding, title size, and message typography dimensions.
+ */
 export type AlertSize = 'sm' | 'md' | 'lg'
 
+/**
+ * Props for the `Alert` component.
+ */
 export interface AlertProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
+  /**
+   * Semantic style intent variant.
+   * @default 'default'
+   */
   intent?: AlertIntent
+
+  /**
+   * Visual presentation style variant.
+   * @default 'filled'
+   */
   variant?: AlertVariant
+
+  /**
+   * Size scale for spacing and typography.
+   * @default 'lg'
+   */
   size?: AlertSize
+
+  /**
+   * Optional header title text displayed above the alert message.
+   */
   title?: string
+
+  /**
+   * Custom background or border color override.
+   */
   color?: HexColor | string
+
+  /**
+   * Callback function triggered when clicking the close button. Renders the close button if provided.
+   */
   onClose?: () => void
+
+  /**
+   * Callback function triggered when clicking the undo button. Renders the undo button if provided.
+   */
   onUndo?: () => void
+
+  /**
+   * Custom CSS class names applied to the alert container.
+   */
   className?: LithosClass
 }
 
@@ -37,6 +85,13 @@ const sizeStyles: Record<AlertSize, { container: string; title: string; headerGa
   lg: { container: 'p-9', title: 'text-2xl', headerGap: 'mb-4', message: 'text-xl' },
 }
 
+/**
+ * Inline persistent notification plaque component featuring neo-brutalist styling,
+ * dynamic contrast calculation, and optional action buttons.
+ *
+ * @param props - Alert configuration props including intent, variant, size, title, and callbacks.
+ * @returns Persistent alert container element.
+ */
 export const Alert = ({
   intent = 'default',
   variant = 'filled',

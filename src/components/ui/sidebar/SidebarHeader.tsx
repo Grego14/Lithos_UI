@@ -7,6 +7,12 @@ import { useSidebar } from './useSidebar'
 import { cn } from '../../../utils/cn'
 import type { SidebarHeaderProps } from './sidebar.types'
 
+/**
+ * Top container header component for the sidebar, adjusting alignment based on open/collapsed state.
+ *
+ * @param props - Header props including children and class names.
+ * @returns Header layout container component.
+ */
 export const SidebarHeader = ({ children, className, ...rest }: SidebarHeaderProps) => {
   const { open } = useSidebar()
 
