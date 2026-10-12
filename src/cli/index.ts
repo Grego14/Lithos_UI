@@ -24,6 +24,9 @@ Usage:
   } else if (command === 'add') {
     const components = args.slice(1)
     await add(components)
+  } else if (command === 'build-registry') {
+    const { buildRegistry } = await import('./build-registry.js')
+    buildRegistry()
   } else {
     console.error(`✖ Unknown command: ${command}`)
     process.exit(1)
