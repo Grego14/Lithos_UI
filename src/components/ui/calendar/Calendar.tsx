@@ -57,6 +57,13 @@ const NavIcon = ({ direction }: { direction: 'prev' | 'next' }) => (
   </div>
 )
 
+/**
+ * Calendar date picker component supporting single, multiple, range, and rainbow modes,
+ * keyboard navigation, custom color mapping, and accessible month/year grid selection.
+ *
+ * @param props - Calendar configuration props including mode, value, range limits, and callbacks.
+ * @returns Calendar container element.
+ */
 export const Calendar = ({
   mode = 'single',
   value,
