@@ -3,15 +3,17 @@
  * - Renders the bottom action bar container for the Drawer primitive.
  * - Adaptively renders DialogFooter when operating in responsive desktop view.
  */
-import type { ComponentPropsWithRef } from 'react'
 import { DialogFooter } from '../Dialog'
-import { cn, type LithosClass } from '../../../utils/cn'
+import { cn } from '../../../utils/cn'
 import { useDrawer } from './useDrawer'
+import type { DrawerFooterProps } from './drawer.types'
 
-export interface DrawerFooterProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
-  className?: LithosClass
-}
-
+/**
+ * Footer action container component for drawer buttons.
+ *
+ * @param props - Drawer footer properties including custom class names and action children.
+ * @returns Footer action container element or DialogFooter when in responsive desktop mode.
+ */
 export const DrawerFooter = ({ className, children, ...props }: DrawerFooterProps) => {
   const { mode, isDesktop } = useDrawer()
 
