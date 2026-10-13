@@ -13,6 +13,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - **Table:** Added the `Table` primitive ([#341](https://github.com/lithosui/Lithos_UI/pull/341))
 - **Sidebar:** Added the `Sidebar` primitive ([#346](https://github.com/lithosui/Lithos_UI/pull/346))
 - **Pagination:** Added the `Pagination` primitive ([#350](https://github.com/lithosui/Lithos_UI/pull/350))
+- **Icons:** Introduced the `Icons` primitive suite and interactive documentation explorer.
+  - Standardized wrapper around `react-icons` with unified default geometry (`size: 16`, `strokeWidth: 2`) and design token compatibility.
+  - Added `icons.types.ts` defining `IconProps` and `iconDefaults` with backwards-compatible re-exports in `IconBase.tsx`.
+  - Exported 44 vector icon components and added `icons` to the CLI registry and component exports.
+  - Added interactive Gallery Explorer with real-time name and tag search, size and stroke thickness toggle controls, click-to-copy JSX tags, and expandable pagination with Lithos `Button`.
+  - Zero-Gap Rule compliance across the gallery grid using explicit margin and padding math.
+  - Comprehensive documentation page with standalone examples (`default`, `withButton`, `sizeAndStroke`, `colorAndToken`), Anatomy code preview, and custom props API reference.
+  - Integrated Icons card into the Components Index page.
 
 ### Changed (0.1.3)
 

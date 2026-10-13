@@ -1,10 +1,22 @@
 import { useState, useMemo } from 'react'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
+import { CodeViewer } from '../../components/ui/CodeViewer'
 import { Button } from '../../components/ui/Button'
 import { Badge } from '../../components/ui/Badge'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { iconPropsData } from '../propsData/icons'
 import { SetupGuide } from '../layout/SetupGuide'
+import { DocHeader, DocHeading, DocExample, DocSection } from '../layout/DocPage'
+import { removeImports } from '../examples/removeImports'
+
+import { DefaultExample } from '../examples/icons/default'
+import DefaultExampleSource from '../examples/icons/default?raw'
+import { WithButtonExample } from '../examples/icons/withButton'
+import WithButtonExampleSource from '../examples/icons/withButton?raw'
+import { SizeAndStrokeExample } from '../examples/icons/sizeAndStroke'
+import SizeAndStrokeExampleSource from '../examples/icons/sizeAndStroke?raw'
+import { ColorAndTokenExample } from '../examples/icons/colorAndToken'
+import ColorAndTokenExampleSource from '../examples/icons/colorAndToken?raw'
 
 // Import all 44 icon components
 import { IconAlertTriangle } from '../../components/ui/icons/IconAlertTriangle'
@@ -56,6 +68,7 @@ const githubUrl = 'https://github.com/lithosui/Lithos_UI/tree/main/src/component
 
 interface IconItem {
   name: string
+
   Component: React.ComponentType<{
     size?: number | string
     strokeWidth?: number | string
@@ -63,6 +76,7 @@ interface IconItem {
     className?: string
     fill?: string
   }>
+
   tags: string[]
 }
 
@@ -121,6 +135,9 @@ const ALL_ICONS: IconItem[] = [
   { name: 'IconUpload', Component: IconUpload, tags: ['upload', 'send', 'arrow', 'cloud'] },
 ]
 
+/**
+ * Documentation page for Lithos UI icons and interactive gallery explorer.
+ */
 export const IconsDoc = () => {
   const [search, setSearch] = useState('')
   const [previewSize, setPreviewSize] = useState(16)
@@ -153,97 +170,53 @@ export const IconsDoc = () => {
     }, 1800)
   }
 
-  const basicCode = {
-    body: `import { IconArrowRight, IconHeart, IconSettings } from 'lithos-ui'
+  const manualPath = '../../components/ui/icons/IconArrowRight'
 
-export const BasicIconsExample = () => {
-  return (
-    <div className="flex items-center space-x-6">
-      <IconArrowRight size={20} />
-      <IconHeart size={20} />
-      <IconSettings size={20} />
-    </div>
-  )
-}`,
+  const usageCode = {
+    body: removeImports(DefaultExampleSource),
     componentNames: ['IconArrowRight', 'IconHeart', 'IconSettings'],
-    manualPath: '../../components/ui/icons/IconArrowRight',
+    manualPath,
   }
 
-  const inButtonsCode = {
-    body: `import { Button, IconDownload, IconTrash, IconExternalLink } from 'lithos-ui'
-
-export const IconButtonExample = () => {
-  return (
-    <div className="flex flex-wrap items-center space-x-4">
-      <Button variant="primary" iconLeft={<IconDownload size={16} />}>
-        Download
-      </Button>
-      <Button variant="secondary" iconRight={<IconExternalLink size={16} />}>
-        Visit Docs
-      </Button>
-      <Button variant="accent" iconLeft={<IconTrash size={16} />}>
-        Delete
-      </Button>
-    </div>
-  )
-}`,
+  const withButtonCode = {
+    body: removeImports(WithButtonExampleSource),
     componentNames: ['Button', 'IconDownload', 'IconExternalLink', 'IconTrash'],
     manualPath: '../../components/ui/icons/IconDownload',
   }
 
   const strokeAndSizeCode = {
-    body: `import { IconSearch } from 'lithos-ui'
-
-export const StrokeSizeExample = () => {
-  return (
-    <div className="flex items-end space-x-6">
-      <IconSearch size={16} strokeWidth={2} />
-      <IconSearch size={24} strokeWidth={3} />
-      <IconSearch size={32} strokeWidth={4} />
-      <IconSearch size={40} strokeWidth={5} />
-    </div>
-  )
-}`,
+    body: removeImports(SizeAndStrokeExampleSource),
     componentNames: ['IconSearch'],
     manualPath: '../../components/ui/icons/IconSearch',
   }
 
   const colorCode = {
-    body: `import { IconHeart, IconCheck, IconAlertTriangle } from 'lithos-ui'
-
-export const ColorsExample = () => {
-  return (
-    <div className="flex items-center space-x-6">
-      <IconHeart size={24} color="#ff007f" fill="#ff007f" />
-      <IconCheck size={24} color="#059669" />
-      <IconAlertTriangle size={24} className="text-(--lithos-accent)" />
-    </div>
-  )
-}`,
+    body: removeImports(ColorAndTokenExampleSource),
     componentNames: ['IconHeart', 'IconCheck', 'IconAlertTriangle'],
     manualPath: '../../components/ui/icons/IconHeart',
   }
 
   return (
     <div className="max-w-5xl mx-auto px-6">
-      <header className="mt-0">
-        <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-none text-(--lithos-text) mb-4">Icons</h1>
-        <p className="text-lg font-bold text-(--lithos-text) opacity-70 mb-8">
-          Lithos UI icons are created as a wrapper around the <code>react-icons</code> library, providing standardized
-          default sizes, stroke geometry, and direct compatibility with Lithos UI components and design tokens.
-        </p>
-      </header>
+      <DocHeader
+        title="Icons"
+        description={
+          <>
+            A standardized wrapper around <code>react-icons</code> with preset geometry, stroke widths, and design token
+            support.
+          </>
+        }
+      />
 
       {/* Setup Guide */}
-      <h2 id="installation" className="mt-8 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Installation
-      </h2>
-
-      <SetupGuide
-        componentNames={['IconArrowRight', 'IconHeart', 'IconSettings']}
-        manualPath="../../components/ui/icons/IconArrowRight"
-        slug="icons"
-      />
+      <DocSection>
+        <DocHeading id="installation">Installation</DocHeading>
+        <SetupGuide
+          componentNames={['IconArrowRight', 'IconHeart', 'IconSettings']}
+          manualPath={manualPath}
+          slug="icons"
+        />
+      </DocSection>
 
       {/* Interactive Gallery Explorer Section */}
       <section className="mt-12 mb-16">
@@ -257,7 +230,7 @@ export const ColorsExample = () => {
                 </h2>
               </div>
               <p className="text-xs font-mono font-bold text-(--lithos-text) opacity-60 mt-1">
-                Click any icon card to copy its JSX component tag to clipboard.
+                Click any card to copy its JSX tag.
               </p>
             </div>
 
@@ -388,87 +361,76 @@ export const ColorsExample = () => {
       </section>
 
       {/* Code Examples */}
-      <section className="mb-12">
-        <h2 id="usage" className="text-2xl font-black tracking-tight text-(--lithos-text) mb-4">
-          Usage
-        </h2>
-        <p className="text-sm font-bold text-(--lithos-text) opacity-70 mb-4">
-          Import individual icon primitives directly and control dimensions using the <code>size</code> prop.
-        </p>
-        <PreviewBlock code={basicCode} githubUrl={githubUrl}>
-          <div className="flex items-center space-x-6 text-(--lithos-text)">
-            <IconArrowRight size={24} />
-            <IconHeart size={24} />
-            <IconSettings size={24} />
-          </div>
-        </PreviewBlock>
-      </section>
+      <DocHeading id="examples">Examples</DocHeading>
 
-      <section className="mb-12">
-        <h2 id="with-buttons" className="text-2xl font-black tracking-tight text-(--lithos-text) mb-4">
-          With Button
-        </h2>
-        <p className="text-sm font-bold text-(--lithos-text) opacity-70 mb-4">
-          Lithos icons pair directly with the <code>iconLeft</code> and <code>iconRight</code> props on{' '}
-          <code>Button</code>, automatically inheriting button hover states and spacing math.
-        </p>
-        <PreviewBlock code={inButtonsCode} githubUrl={githubUrl}>
-          <div className="flex flex-wrap items-center space-x-4">
-            <Button variant="primary" iconLeft={<IconDownload size={16} />}>
-              Download
-            </Button>
-            <Button variant="secondary" iconRight={<IconExternalLink size={16} />}>
-              Visit Docs
-            </Button>
-            <Button variant="accent" iconLeft={<IconTrash size={16} />}>
-              Delete
-            </Button>
-          </div>
+      <DocExample
+        id="usage"
+        title="Usage"
+        description={
+          <>
+            Import icon primitives directly and control dimensions with the <code>size</code> prop.
+          </>
+        }
+      >
+        <PreviewBlock code={usageCode} githubUrl={githubUrl}>
+          <DefaultExample />
         </PreviewBlock>
-      </section>
+      </DocExample>
 
-      <section className="mb-12">
-        <h2 id="strokes-and-sizes" className="text-2xl font-black tracking-tight text-(--lithos-text) mb-4">
-          Size & Stroke
-        </h2>
-        <p className="text-sm font-bold text-(--lithos-text) opacity-70 mb-4">
-          Control stroke geometry via <code>strokeWidth</code> to match heavy brutalist typography or clean hairline
-          technical blueprints.
-        </p>
+      <DocExample
+        id="with-buttons"
+        title="With Button"
+        description={
+          <>
+            Pairs with <code>Button</code> via <code>iconLeft</code> and <code>iconRight</code>, inheriting button
+            states and colors.
+          </>
+        }
+      >
+        <PreviewBlock code={withButtonCode} githubUrl={githubUrl}>
+          <WithButtonExample />
+        </PreviewBlock>
+      </DocExample>
+
+      <DocExample
+        id="strokes-and-sizes"
+        title="Size & Stroke"
+        description={
+          <>
+            Control stroke weight with <code>strokeWidth</code> and dimensions with <code>size</code>.
+          </>
+        }
+      >
         <PreviewBlock code={strokeAndSizeCode} githubUrl={githubUrl}>
-          <div className="flex items-end space-x-6 text-(--lithos-text)">
-            <IconSearch size={16} strokeWidth={2} />
-            <IconSearch size={24} strokeWidth={3} />
-            <IconSearch size={32} strokeWidth={4} />
-            <IconSearch size={40} strokeWidth={5} />
-          </div>
+          <SizeAndStrokeExample />
         </PreviewBlock>
-      </section>
+      </DocExample>
 
-      <section className="mb-12">
-        <h2 id="colors" className="text-2xl font-black tracking-tight text-(--lithos-text) mb-4">
-          Color & Token
-        </h2>
-        <p className="text-sm font-bold text-(--lithos-text) opacity-70 mb-4">
-          By default icons inherit <code>currentColor</code>, but you can pass explicit hex values, CSS classes, or
-          Lithos design tokens.
-        </p>
+      <DocExample
+        id="colors"
+        title="Color & Token"
+        description={
+          <>
+            Icons inherit <code>currentColor</code> by default, or accept custom colors and token classes.
+          </>
+        }
+      >
         <PreviewBlock code={colorCode} githubUrl={githubUrl}>
-          <div className="flex items-center space-x-6">
-            <IconHeart size={24} color="#ff007f" fill="#ff007f" />
-            <IconCheck size={24} color="#059669" />
-            <IconAlertTriangle size={24} className="text-(--lithos-accent)" />
-          </div>
+          <ColorAndTokenExample />
         </PreviewBlock>
-      </section>
+      </DocExample>
+
+      {/* Anatomy */}
+      <DocSection>
+        <DocHeading id="anatomy">Anatomy</DocHeading>
+        <CodeViewer language="tsx" code={`<IconArrowRight size={16} strokeWidth={2} />`} />
+      </DocSection>
 
       {/* Props Reference */}
-      <section className="mb-16">
-        <h2 id="props" className="text-2xl font-black tracking-tight text-(--lithos-text) mb-4">
-          API Reference
-        </h2>
+      <DocSection>
+        <DocHeading id="props">API Reference</DocHeading>
         <PropsAccordion title="Icon Props" data={iconPropsData} />
-      </section>
+      </DocSection>
     </div>
   )
 }
