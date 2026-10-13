@@ -1,49 +1,86 @@
-import { useState, type ComponentPropsWithRef } from 'react'
+import { useState } from 'react'
 import { Button } from './Button'
 import { IconChevronLeft } from './icons/IconChevronLeft'
-import { cn, type LithosClass } from '../../utils/cn'
+import { cn } from '../../utils/cn'
+import type { LithosElementProps } from '../../core/types'
 
+/**
+ * Visual structural variants supported by the pagination component.
+ */
 export type PaginationVariant = 'classic' | 'dots' | 'bordered' | 'track' | 'compact' | 'progress'
 
-export interface PaginationProps extends Omit<ComponentPropsWithRef<'nav'>, 'className' | 'children' | 'onChange'> {
+/**
+ * Props configuration interface for the `Pagination` component.
+ */
+export interface PaginationProps extends Omit<LithosElementProps<'nav'>, 'children' | 'onChange'> {
   /** Total number of pages, not records. */
   count: number
-  /** Controlled current page, starting at 1. */
+
+  /** Controlled current page number, starting at 1. */
   page?: number
+
+  /** Uncontrolled initial default page number when first mounted. */
   defaultPage?: number
+
+  /** Callback function triggered when the active page changes. */
   onPageChange?: (page: number) => void
+
+  /** Visual variant style mapping. */
   variant?: PaginationVariant
+
+  /** Border radius shape configuration for the pagination buttons. */
   shape?: 'square' | 'pill'
+
+  /** Flex alignment layout position of the pagination control bar. */
   position?: 'left' | 'center' | 'right'
+
+  /** Size scale variant for the pagination buttons. */
   size?: 'sm' | 'md' | 'lg'
-  /** Show fast backward/forward controls that jump to the first/last page. */
+
+  /** Displays fast backward/forward navigation controls that jump directly to the first or last page. */
   showEdges?: boolean
-  className?: LithosClass
 }
 
-const sizes = { sm: 'h-8 min-w-8 text-xs', md: 'h-10 min-w-10 text-sm', lg: 'h-12 min-w-12 text-base' }
+const sizes = {
+  sm: 'h-8 min-w-8 text-xs',
+  md: 'h-10 min-w-10 text-sm',
+  lg: 'h-12 min-w-12 text-base',
+}
+
 const positions = {
   left: 'justify-start rtl:justify-end',
   center: 'justify-center',
   right: 'justify-end rtl:justify-start',
 }
+
 const normalizeCount = (value: number) =>
   Number.isFinite(value) ? Math.max(0, Math.min(Number.MAX_SAFE_INTEGER, Math.floor(value))) : 0
+
 const clampPage = (value: number, count: number) =>
   Math.min(Math.max(1, Number.isFinite(value) ? Math.floor(value) : 1), Math.max(1, count))
 
 /** Two balanced page groups keep a single ellipsis centered while the current group slides. */
 const pageItems = (page: number, count: number): (number | string)[] => {
   if (count <= 5) return Array.from({ length: count }, (_, index) => index + 1)
+
   if (page <= Math.floor(count / 2)) {
     const start = Math.max(1, page - 1)
     return [start, start + 1, 'ellipsis', count - 1, count]
   }
+
   const start = Math.min(page, count - 1)
   return [1, 2, 'ellipsis', start, start + 1]
 }
 
-/** Flat dots and tracks suppress shadows so their visual guides stay aligned. */
+const focusClass =
+  'focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--lithos-text) motion-reduce:transition-none'
+
+/**
+ * Pagination component for navigating data sets across multiple page intervals.
+ *
+ * @param props - Pagination configuration properties including counts, active pages, variants, and event handlers.
+ * @returns Pagination navigation element.
+ */
 export const Pagination = ({
   count,
   page,
@@ -66,12 +103,11 @@ export const Pagination = ({
   const summaryOnly = variant === 'compact' || variant === 'progress'
   const flat = variant === 'dots' || variant === 'track'
   const radius = shape === 'pill' ? 'rounded-full' : 'rounded-none'
-  const focus =
-    'focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--lithos-text) motion-reduce:transition-none'
 
   const selectPage = (next: number) => {
     if (total === 0 || next < 1 || next > total || next === current) return
     if (page === undefined) setInternalPage(next)
+
     onPageChange?.(next)
   }
 
@@ -80,6 +116,7 @@ export const Pagination = ({
     const fast = direction === 'first' || direction === 'last'
     const target = fast ? (backward ? 1 : total) : current + (backward ? -1 : 1)
     const label = { first: 'First page', previous: 'Previous page', next: 'Next page', last: 'Last page' }[direction]
+
     return (
       <li className="m-1 flex shrink-0">
         <Button
@@ -151,7 +188,7 @@ export const Pagination = ({
                       'relative px-2 font-mono tabular-nums',
                       sizes[size],
                       radius,
-                      focus,
+                      focusClass,
                       flat && 'shadow-none hover:shadow-none active:translate-none',
                       selected &&
                         variant !== 'dots' &&
