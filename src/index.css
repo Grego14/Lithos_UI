@@ -11,7 +11,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:ital,wght@0,400;0,700;0,900;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;0,900;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:ital,wght@0,400;0,700;0,900;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,700;0,900;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;0,900;1,400&display=swap');
 @import 'tailwindcss';
 @import './tokens.css';
 
@@ -24,7 +24,7 @@
   --font-mono: 'Fragment Mono', ui-monospace, monospace;
   --font-code: 'Inconsolata', ui-monospace, monospace;
   --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Quantico', ui-sans-serif, system-ui, sans-serif;
 }
 
 html {

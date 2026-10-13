@@ -51,7 +51,7 @@ export const Sidebar = () => {
     <aside className="py-8 pr-6">
       {/* Getting Started Category */}
       <div className="mb-8">
-        <h3 className="text-xs font-black opacity-50 mb-3 px-4 uppercase">Getting Started</h3>
+        <h3 className="text-xs font-display opacity-50 mb-3 px-4 uppercase">Getting Started</h3>
         <nav className="flex flex-col items-start pl-4 space-y-1">
           <Link to="/docs" className={getLinkClass('/docs')}>
             Introduction
@@ -64,7 +64,7 @@ export const Sidebar = () => {
 
       {/* Atomic Components Category */}
       <div>
-        <h3 className="text-xs font-black opacity-50 mb-3 px-4 uppercase">Components ({components.length})</h3>
+        <h3 className="text-xs font-display opacity-50 mb-3 px-4 uppercase">Components ({components.length})</h3>
         <nav className="flex flex-col items-start pl-4 space-y-1">
           {components.map((component) => {
             const words = component.replaceAll('-', ' ').split(' ')
