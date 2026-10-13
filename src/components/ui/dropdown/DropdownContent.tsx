@@ -4,17 +4,19 @@
  * - Renders the floating panel containing menu items, separators, and nested groups.
  */
 import { useEffect, useRef, useState, useCallback, type KeyboardEvent } from 'react'
-import { PopoverContent, type PopoverContentProps } from '../popover/PopoverContent'
+import { PopoverContent } from '../popover/PopoverContent'
 import { FloatingList } from '@floating-ui/react'
 import { useListKeyNavigation } from '../../../core/hooks/useListKeyNavigation'
 import { DropdownNavigationContext } from './DropdownNavigationContext'
 import { useDropdown } from './useDropdown'
+import type { DropdownContentProps } from './dropdown.types'
 
-export interface DropdownContentProps extends PopoverContentProps {
-  loop?: boolean
-  onCloseSubmenu?: () => void
-}
-
+/**
+ * Floating panel content viewport component containing interactive dropdown menu items.
+ *
+ * @param props - Content properties including looping behaviors, close handlers, and custom classes.
+ * @returns Dropdown floating content container element.
+ */
 export const DropdownContent = ({
   children,
   className,
