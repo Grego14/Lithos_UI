@@ -18,6 +18,7 @@ const components = [
   'dialog',
   'drawer',
   'dropdown',
+  'icons',
   'input',
   'kbd',
   'pagination',

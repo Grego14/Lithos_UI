@@ -221,6 +221,13 @@ export const registry: Record<string, RegistryItem> = {
       'core/hooks/useListKeyNavigation.ts',
     ],
   },
+  icons: {
+    slug: 'icons',
+    name: 'Icons',
+    type: 'ui',
+    githubUrl: `${GITHUB_BASE}/components/ui/icons/IconBase.tsx`,
+    requires: ['react-icons'],
+  },
   input: {
     slug: 'input',
     name: 'Input',

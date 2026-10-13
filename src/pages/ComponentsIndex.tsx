@@ -46,6 +46,9 @@ import card1 from '../docs/assets/images/card1.webp'
 import { IconHome } from '../components/ui/icons/IconHome'
 import { IconFolder } from '../components/ui/icons/IconFolder'
 import { IconSettings } from '../components/ui/icons/IconSettings'
+import { IconArrowRight } from '../components/ui/icons/IconArrowRight'
+import { IconHeart } from '../components/ui/icons/IconHeart'
+import { IconSearch } from '../components/ui/icons/IconSearch'
 
 const SIDEBAR_ITEMS = [
   { id: 'home', label: 'Home', icon: IconHome },
@@ -373,6 +376,17 @@ const componentsList = [
     name: 'Dropdown',
     to: '/docs/dropdown',
     preview: <DropdownPreview />,
+  },
+  {
+    name: 'Icons',
+    to: '/docs/icons',
+    preview: (
+      <div className="flex items-center space-x-3 text-(--lithos-text)">
+        <IconHeart size={22} className="text-(--lithos-accent)" fill="var(--lithos-accent)" />
+        <IconSearch size={22} strokeWidth={3} />
+        <IconArrowRight size={22} strokeWidth={3} />
+      </div>
+    ),
   },
   {
     name: 'Input',
