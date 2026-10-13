@@ -3,17 +3,17 @@
  * - Renders the floating popover body with neo-brutalist styling, focus trapping, and optional portaling.
  * - Automatically links to reference element dimensions and attaches ARIA attributes.
  */
-import type { ComponentPropsWithRef } from 'react'
 import { useTransitionStatus, useMergeRefs, FloatingFocusManager, FloatingPortal } from '@floating-ui/react'
-import { cn, type LithosClass } from '../../../utils/cn'
+import { cn } from '../../../utils/cn'
 import { usePopoverContext } from './usePopover'
+import type { PopoverContentProps } from './popover.types'
 
-export interface PopoverContentProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
-  portaled?: boolean
-  className?: LithosClass
-  transitionDuration?: number
-}
-
+/**
+ * Floating surface panel component rendering popover content with transitions and portaling.
+ *
+ * @param props - Content properties including portaling toggles, transition durations, and custom classes.
+ * @returns Floating container element or null if unmounted.
+ */
 export const PopoverContent = ({
   style,
   className,

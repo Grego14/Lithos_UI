@@ -4,21 +4,19 @@
  * - Handles keyboard activation (Enter/Space) and mouse click events to trigger value changes.
  * - Registers item index dynamically with Floating UI for smooth keyboard list navigation.
  */
-import type { ReactNode, ComponentPropsWithRef } from 'react'
 import { useListItem } from '@floating-ui/react'
-import { cn, type LithosClass } from '../../../utils/cn'
+import { cn } from '../../../utils/cn'
 import { useSelect } from './useSelect'
 import { useAccentColor } from '../../../core/useAccentColor'
 import { usePopoverContext } from '../popover/usePopover'
+import type { SelectItemProps } from './select.types'
 
-export interface SelectItemProps extends Omit<ComponentPropsWithRef<'li'>, 'className'> {
-  value: string
-  disabled?: boolean
-  children: ReactNode
-  className?: LithosClass
-  index?: number
-}
-
+/**
+ * Individual option item component representing selectable choices inside the select dropdown.
+ *
+ * @param props - Item properties including unique values, disabled states, and custom classes.
+ * @returns Option list item element.
+ */
 export const SelectItem = ({ value, disabled, children, className, index, style, ...rest }: SelectItemProps) => {
   const { selectedValue, activeIndex, multiple, registerElement } = useSelect()
   const { contrastedAccentColor } = useAccentColor()

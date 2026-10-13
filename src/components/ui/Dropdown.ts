@@ -12,3 +12,5 @@ export * from './dropdown/DropdownItem'
 export * from './dropdown/DropdownSub'
 export * from './dropdown/DropdownNavigationContext'
 export * from './dropdown/useDropdown'
+
+export type * from './dropdown/dropdown.types'

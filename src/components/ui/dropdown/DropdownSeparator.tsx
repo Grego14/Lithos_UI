@@ -3,13 +3,15 @@
  * - Renders a horizontal divider line with `role="separator"` using global `--lithos-border`.
  * - Spans full container width with negative margins (`-mx-1`) to visually break up menu sections.
  */
-import type { ComponentPropsWithRef } from 'react'
-import { cn, type LithosClass } from '../../../utils/cn'
+import { cn } from '../../../utils/cn'
+import type { DropdownSeparatorProps } from './dropdown.types'
 
-export interface DropdownSeparatorProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
-  className?: LithosClass
-}
-
+/**
+ * Divider line component for partitioning sections within dropdown menus.
+ *
+ * @param props - Separator properties including custom class names.
+ * @returns Separator divider element.
+ */
 export const DropdownSeparator = ({ className, ...props }: DropdownSeparatorProps) => {
   return (
     <div

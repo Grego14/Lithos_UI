@@ -3,16 +3,18 @@
  * - Closes the active popover on click while safely executing any existing `onClick` handlers.
  * - Supports `asChild` composition to convert any custom element into a dismiss trigger.
  */
-import { cloneElement, isValidElement, type ComponentPropsWithRef, type HTMLProps, type MouseEvent } from 'react'
+import { cloneElement, isValidElement, type HTMLProps, type MouseEvent } from 'react'
 import { useMergeRefs } from '@floating-ui/react'
 import { usePopoverContext } from './usePopover'
-import { cn, type LithosClass } from '../../../utils/cn'
+import { cn } from '../../../utils/cn'
+import type { PopoverCloseProps } from './popover.types'
 
-export interface PopoverCloseProps extends Omit<ComponentPropsWithRef<'button'>, 'className'> {
-  asChild?: boolean
-  className?: LithosClass
-}
-
+/**
+ * Action close trigger component that dismisses the active popover on click or interaction.
+ *
+ * @param props - Close trigger properties including asChild composition flags and click handlers.
+ * @returns Close button element or cloned child element.
+ */
 export const PopoverClose = ({
   children,
   asChild = false,
