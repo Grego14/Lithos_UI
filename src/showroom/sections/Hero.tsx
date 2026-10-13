@@ -85,12 +85,6 @@ const Hero = () => {
           {/* Right Column: Bauhaus / Swiss Blueprint Live Theme Engine */}
           <div className="w-full lg:w-[42%] mt-12 lg:mt-24 flex justify-center lg:justify-end">
             <div className="relative border-4 border-(--lithos-border) bg-(--lithos-surface) p-5 sm:p-6 w-full max-w-md shadow-[8px_8px_0px_0px_var(--lithos-shadow)] rounded-(--lithos-radius) select-none">
-              {/* Technical caliper corner tick-marks */}
-              <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-(--lithos-border) pointer-events-none" />
-              <div className="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-(--lithos-border) pointer-events-none" />
-              <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-(--lithos-border) pointer-events-none" />
-              <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-(--lithos-border) pointer-events-none" />
-
               {/* Blueprint Header */}
               <div className="flex justify-between items-center mb-5 border-b-2 border-(--lithos-border) pb-3">
                 <div className="flex items-center space-x-2">
