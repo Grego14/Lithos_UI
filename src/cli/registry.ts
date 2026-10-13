@@ -591,11 +591,7 @@ export const registry: Record<string, RegistryItem> = {
     name: 'Toast',
     type: 'ui',
     githubUrl: `${GITHUB_BASE}/components/ui/Toast.tsx`,
-    requires: [
-      'components/ui/Button.tsx',
-      'utils/colors.ts',
-      'utils/yiq.ts',
-    ],
+    requires: ['components/ui/Button.tsx', 'utils/colors.ts', 'utils/yiq.ts'],
     dependencies: ['clsx', 'react-icons', 'tailwind-merge'],
   },
   toggle: {
