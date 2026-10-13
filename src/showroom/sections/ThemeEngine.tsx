@@ -27,9 +27,9 @@ const themes: ThemeColor[] = [
 
 const radii = [
   { label: 'None', value: 0, Icon: IconRadiusNone },
-  { label: 'Sm', value: 4, Icon: IconRadiusSm },
-  { label: 'Md', value: 8, Icon: IconRadiusMd },
-  { label: 'Lg', value: 16, Icon: IconRadiusLg },
+  { label: 'Sm', value: 8, Icon: IconRadiusSm },
+  { label: 'Md', value: 16, Icon: IconRadiusMd },
+  { label: 'Lg', value: 48, Icon: IconRadiusLg },
 ]
 
 const ThemeEngine = () => {

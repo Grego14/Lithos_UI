@@ -28,9 +28,9 @@ const ARTISTIC_PALETTES = [
 
 const RADII = [
   { label: 'None', value: 0, Icon: IconRadiusNone },
-  { label: 'Sm', value: 4, Icon: IconRadiusSm },
-  { label: 'Md', value: 8, Icon: IconRadiusMd },
-  { label: 'Lg', value: 16, Icon: IconRadiusLg },
+  { label: 'Sm', value: 8, Icon: IconRadiusSm },
+  { label: 'Md', value: 16, Icon: IconRadiusMd },
+  { label: 'Lg', value: 24, Icon: IconRadiusLg },
 ] as const
 
 const Hero = () => {
@@ -107,7 +107,7 @@ const Hero = () => {
                   <span className="font-mono text-[9px]">CLICK TO APPLY</span>
                 </div>
 
-                <div className="grid grid-cols-7 gap-1.5">
+                <div className="flex w-full space-x-1.5">
                   {ARTISTIC_PALETTES.map((palette) => {
                     return (
                       <button
@@ -116,7 +116,7 @@ const Hero = () => {
                         onClick={() => updateAccentColor(palette.hex as HexColor)}
                         title={palette.label}
                         aria-label={`Select ${palette.label}`}
-                        className="h-9 w-full rounded-(--lithos-radius) lithos-click relative"
+                        className="flex-1 h-9 rounded-(--lithos-radius) lithos-click relative"
                         style={{ backgroundColor: palette.hex }}
                       />
                     )
@@ -124,7 +124,7 @@ const Hero = () => {
 
                   {/* Custom color picker trigger button */}
                   <div
-                    className="h-9 w-full rounded-(--lithos-radius) bg-(--lithos-bg) lithos-click relative flex items-center justify-center cursor-pointer"
+                    className="flex-1 h-9 rounded-(--lithos-radius) bg-(--lithos-bg) lithos-click relative flex items-center justify-center cursor-pointer"
                     title="Custom Color Picker"
                   >
                     <span className="text-xs font-black text-(--lithos-text)">+</span>
@@ -146,8 +146,8 @@ const Hero = () => {
                   <span className="font-mono text-[9px]">{radius}PX</span>
                 </div>
 
-                <div className="grid grid-cols-4 gap-1.5">
-                  {RADII.map((r) => {
+                <div className="flex w-full border-2 border-(--lithos-border) rounded-(--lithos-radius) overflow-hidden shadow-[2px_2px_0px_0px_var(--lithos-shadow)]">
+                  {RADII.map((r, idx) => {
                     const isSelected = radius === r.value
                     const Icon = r.Icon
                     return (
@@ -157,14 +157,15 @@ const Hero = () => {
                         onClick={() => updateRadius(r.value)}
                         aria-label={`Set border radius to ${r.label}`}
                         title={`${r.label} (${r.value}px)`}
-                        className={`h-8 border-2 border-(--lithos-border) rounded-(--lithos-radius) lithos-click flex items-center justify-center space-x-1 text-xs font-bold font-mono transition-all ${
+                        className={`flex-1 h-8 flex items-center justify-center text-xs font-bold font-mono transition-colors cursor-pointer ${
+                          idx !== 0 ? 'border-l-2 border-(--lithos-border)' : ''
+                        } ${
                           isSelected
-                            ? 'bg-(--lithos-accent) text-(--lithos-accent-text) shadow-[2px_2px_0px_0px_var(--lithos-shadow)]'
+                            ? 'bg-(--lithos-accent) text-(--lithos-accent-text)'
                             : 'bg-(--lithos-bg) text-(--lithos-text) hover:bg-(--lithos-surface)'
                         }`}
                       >
                         <Icon size={14} />
-                        <span>{r.label}</span>
                       </button>
                     )
                   })}
@@ -190,7 +191,7 @@ const Hero = () => {
                 </div>
 
                 {/* Interactive live test buttons & tokens */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between space-y-2.5 sm:space-y-0 sm:space-x-2.5">
                   {/* Dynamic Primary CTA */}
                   <Button
                     variant="accent"
@@ -209,23 +210,6 @@ const Hero = () => {
                     <span>Active Token</span>
                   </div>
                 </div>
-
-                {/* Swiss calibration bar */}
-                <div className="mt-3 pt-2.5 border-t border-dashed border-(--lithos-border)/50 flex items-center justify-between text-[9px] font-mono text-(--lithos-text) opacity-70">
-                  <span>SCALE: 1:1</span>
-                  <span className="flex items-center space-x-1">
-                    <span>RADIUS: {radius}PX</span>
-                    <span>·</span>
-                    <span>CALIBRATED</span>
-                  </span>
-                </div>
-              </div>
-
-              {/* Technical Footnote */}
-              <div className="text-[10px] font-bold text-(--lithos-text) opacity-60 text-center uppercase tracking-widest flex items-center justify-center space-x-2">
-                <span>◄</span>
-                <span>Tokens cascade site-wide in 0ms</span>
-                <span>►</span>
               </div>
             </div>
           </div>
