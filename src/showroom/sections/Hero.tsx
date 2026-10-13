@@ -4,6 +4,7 @@
  * - Utilizes the KineticGrid to create an interactive tracking environment.
  * - Keeps the opening rhythm controlled by explicit spacing math and centered containment.
  */
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { KineticGrid } from '../../components/ui/KineticGrid'
 import { Button } from '../../components/ui/Button'
@@ -11,6 +12,10 @@ import { Typography } from '../../components/ui/Typography'
 import { getContrastText } from '../../utils/yiq'
 import type { HexColor } from '../../core/types'
 import { useTheme } from '../../core/hooks/useTheme'
+import { IconRadiusNone } from '../../components/ui/icons/IconRadiusNone'
+import { IconRadiusSm } from '../../components/ui/icons/IconRadiusSm'
+import { IconRadiusMd } from '../../components/ui/icons/IconRadiusMd'
+import { IconRadiusLg } from '../../components/ui/icons/IconRadiusLg'
 
 const ARTISTIC_PALETTES = [
   { label: 'Cyber Lime', hex: '#00ff00' },
@@ -21,9 +26,17 @@ const ARTISTIC_PALETTES = [
   { label: 'Hot Magenta', hex: '#ff007f' },
 ] as const
 
+const RADII = [
+  { label: 'None', value: 0, Icon: IconRadiusNone },
+  { label: 'Sm', value: 4, Icon: IconRadiusSm },
+  { label: 'Md', value: 8, Icon: IconRadiusMd },
+  { label: 'Lg', value: 16, Icon: IconRadiusLg },
+] as const
+
 const Hero = () => {
-  const { accentColor, updateAccentColor } = useTheme()
+  const { accentColor, updateAccentColor, radius, updateRadius } = useTheme()
   const fgColor = getContrastText(accentColor)
+  const [ctaClicks, setCtaClicks] = useState(0)
   const navigate = useNavigate()
 
   return (
@@ -81,12 +94,12 @@ const Hero = () => {
               {/* Blueprint Header */}
               <div className="flex justify-between items-center mb-5 border-b-2 border-(--lithos-border) pb-3">
                 <div className="flex items-center space-x-2">
-                  <span className="w-2.5 h-2.5 bg-(--lithos-accent) border border-(--lithos-border) inline-block animate-pulse" />
+                  <span className="w-2.5 h-2.5 bg-(--lithos-accent) border border-(--lithos-border) rounded-(--lithos-radius) inline-block animate-pulse" />
                   <h3 className="text-sm font-black uppercase tracking-wider text-(--lithos-text)">Theme Engine</h3>
                 </div>
-                <div className="flex items-center space-x-1.5 font-mono text-xs font-bold bg-(--lithos-bg) px-2 py-1 border-2 border-(--lithos-border) text-(--lithos-text) shadow-[2px_2px_0px_0px_var(--lithos-shadow)]">
+                <div className="flex items-center space-x-1.5 font-mono text-xs font-bold bg-(--lithos-bg) px-2 py-1 border-2 border-(--lithos-border) rounded-(--lithos-radius) text-(--lithos-text) shadow-[2px_2px_0px_0px_var(--lithos-shadow)]">
                   <span
-                    className="w-2.5 h-2.5 border border-(--lithos-border) shrink-0"
+                    className="w-2.5 h-2.5 border border-(--lithos-border) rounded-(--lithos-radius) shrink-0"
                     style={{ backgroundColor: accentColor }}
                   />
                   <span>{accentColor.toUpperCase()}</span>
@@ -94,15 +107,14 @@ const Hero = () => {
               </div>
 
               {/* Palette Chips + Custom Trigger */}
-              <div className="mb-5">
+              <div className="mb-4">
                 <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-wider text-(--lithos-text) opacity-70 mb-2">
+                  <span>Palette</span>
                   <span className="font-mono text-[9px]">CLICK TO APPLY</span>
                 </div>
 
                 <div className="grid grid-cols-7 gap-1.5">
                   {ARTISTIC_PALETTES.map((palette) => {
-                    const isSelected = accentColor.toLowerCase() === palette.hex.toLowerCase()
-                    const paletteFg = getContrastText(palette.hex)
                     return (
                       <button
                         key={palette.hex}
@@ -110,28 +122,18 @@ const Hero = () => {
                         onClick={() => updateAccentColor(palette.hex as HexColor)}
                         title={palette.label}
                         aria-label={`Select ${palette.label}`}
-                        className={`h-9 w-full border-2 border-(--lithos-border) lithos-click relative flex items-center justify-center transition-all ${
-                          isSelected
-                            ? 'ring-2 ring-(--lithos-border) ring-offset-1 scale-105 z-10 shadow-[2px_2px_0px_0px_var(--lithos-shadow)]'
-                            : 'hover:scale-105'
-                        }`}
+                        className="h-9 w-full rounded-(--lithos-radius) lithos-click relative"
                         style={{ backgroundColor: palette.hex }}
-                      >
-                        {isSelected && (
-                          <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: paletteFg }} />
-                        )}
-                      </button>
+                      />
                     )
                   })}
 
                   {/* Custom color picker trigger button */}
                   <div
-                    className="h-9 w-full border-2 border-(--lithos-border) bg-(--lithos-bg) lithos-click relative flex items-center justify-center cursor-pointer hover:bg-(--lithos-surface) group"
+                    className="h-9 w-full rounded-(--lithos-radius) bg-(--lithos-bg) lithos-click relative flex items-center justify-center cursor-pointer"
                     title="Custom Color Picker"
                   >
-                    <span className="text-xs font-black text-(--lithos-text) group-hover:scale-110 transition-transform">
-                      +
-                    </span>
+                    <span className="text-xs font-black text-(--lithos-text)">+</span>
                     <input
                       type="color"
                       value={accentColor}
@@ -143,20 +145,52 @@ const Hero = () => {
                 </div>
               </div>
 
+              {/* Radius Control Row */}
+              <div className="mb-5">
+                <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-wider text-(--lithos-text) opacity-70 mb-2">
+                  <span>Radius</span>
+                  <span className="font-mono text-[9px]">{radius}PX</span>
+                </div>
+
+                <div className="grid grid-cols-4 gap-1.5">
+                  {RADII.map((r) => {
+                    const isSelected = radius === r.value
+                    const Icon = r.Icon
+                    return (
+                      <button
+                        key={r.label}
+                        type="button"
+                        onClick={() => updateRadius(r.value)}
+                        aria-label={`Set border radius to ${r.label}`}
+                        title={`${r.label} (${r.value}px)`}
+                        className={`h-8 border-2 border-(--lithos-border) rounded-(--lithos-radius) lithos-click flex items-center justify-center space-x-1 text-xs font-bold font-mono transition-all ${
+                          isSelected
+                            ? 'bg-(--lithos-accent) text-(--lithos-accent-text) shadow-[2px_2px_0px_0px_var(--lithos-shadow)]'
+                            : 'bg-(--lithos-bg) text-(--lithos-text) hover:bg-(--lithos-surface)'
+                        }`}
+                      >
+                        <Icon size={14} />
+                        <span>{r.label}</span>
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+
               {/* Live Specimen & Contrast Gauge */}
-              <div className="border-2 border-(--lithos-border) bg-(--lithos-bg) p-3.5 mb-4 shadow-[3px_3px_0px_0px_var(--lithos-shadow)]">
+              <div className="border-2 border-(--lithos-border) bg-(--lithos-bg) rounded-(--lithos-radius) p-3.5 mb-4 shadow-[3px_3px_0px_0px_var(--lithos-shadow)]">
                 {/* Gauge technical header */}
                 <div className="flex items-center justify-between border-b border-dashed border-(--lithos-border) pb-2 mb-3">
                   <div className="flex items-center space-x-1.5">
-                    <span className="w-1.5 h-1.5 bg-(--lithos-border)" />
+                    <span className="w-1.5 h-1.5 bg-(--lithos-border) rounded-full" />
                     <span className="text-[10px] font-black uppercase tracking-wider text-(--lithos-text)">
                       Specimen Output
                     </span>
                   </div>
-                  <div className="flex items-center space-x-1 text-[9px] font-mono font-bold px-1.5 py-0.5 border border-(--lithos-border) bg-(--lithos-surface)">
+                  <div className="flex items-center space-x-1 text-[9px] font-mono font-bold px-1.5 py-0.5 border border-(--lithos-border) rounded-(--lithos-radius) bg-(--lithos-surface)">
                     <span>CONTRAST:</span>
                     <span style={{ color: fgColor === '#000000' ? '#059669' : '#2563eb' }}>
-                      {fgColor === '#000000' ? 'HIGH (DARK INK)' : 'HIGH (LIGHT INK)'}
+                      {fgColor === '#000000' ? 'DARK INK' : 'LIGHT INK'}
                     </span>
                   </div>
                 </div>
@@ -164,18 +198,18 @@ const Hero = () => {
                 {/* Interactive live test buttons & tokens */}
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
                   {/* Dynamic Primary CTA */}
-                  <button
-                    type="button"
-                    className="lithos-click px-3 py-1.5 border-2 border-(--lithos-border) font-black text-xs uppercase tracking-tight shadow-[2px_2px_0px_0px_var(--lithos-shadow)] text-center transition-transform"
-                    style={{ backgroundColor: accentColor, color: fgColor }}
+                  <Button
+                    variant="accent"
+                    onClick={() => setCtaClicks((prev) => prev + 1)}
+                    className="text-xs uppercase tracking-tight px-3 py-1.5"
                   >
-                    Interactive CTA
-                  </button>
+                    {ctaClicks === 0 ? 'Click Me' : `Clicked (${ctaClicks})`}
+                  </Button>
 
                   {/* Contrast Tag Badge */}
-                  <div className="flex items-center justify-center space-x-1.5 px-2.5 py-1.5 border-2 border-(--lithos-border) bg-(--lithos-surface) text-[10px] font-bold uppercase tracking-wider text-(--lithos-text)">
+                  <div className="flex items-center justify-center space-x-1.5 px-2.5 py-1.5 border-2 border-(--lithos-border) rounded-(--lithos-radius) bg-(--lithos-surface) text-[10px] font-bold uppercase tracking-wider text-(--lithos-text)">
                     <span
-                      className="w-2 h-2 border border-(--lithos-border)"
+                      className="w-2 h-2 border border-(--lithos-border) rounded-(--lithos-radius)"
                       style={{ backgroundColor: accentColor }}
                     />
                     <span>Active Token</span>
@@ -186,7 +220,7 @@ const Hero = () => {
                 <div className="mt-3 pt-2.5 border-t border-dashed border-(--lithos-border)/50 flex items-center justify-between text-[9px] font-mono text-(--lithos-text) opacity-70">
                   <span>SCALE: 1:1</span>
                   <span className="flex items-center space-x-1">
-                    <span>DELTA E: 0.0</span>
+                    <span>RADIUS: {radius}PX</span>
                     <span>·</span>
                     <span>CALIBRATED</span>
                   </span>
@@ -196,7 +230,7 @@ const Hero = () => {
               {/* Technical Footnote */}
               <div className="text-[10px] font-bold text-(--lithos-text) opacity-60 text-center uppercase tracking-widest flex items-center justify-center space-x-2">
                 <span>◄</span>
-                <span>One seed token cascades site-wide in 0ms</span>
+                <span>Tokens cascade site-wide in 0ms</span>
                 <span>►</span>
               </div>
             </div>
