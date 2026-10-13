@@ -5,4 +5,10 @@
  */
 import { PopoverTrigger, type PopoverTriggerProps } from '../popover/PopoverTrigger'
 
+/**
+ * Trigger element component wrapper for activating the dropdown menu.
+ *
+ * @param props - Popover trigger configuration properties.
+ * @returns Trigger element wrapper.
+ */
 export const DropdownTrigger = (props: PopoverTriggerProps) => <PopoverTrigger {...props} />
