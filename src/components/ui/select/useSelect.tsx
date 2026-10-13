@@ -8,6 +8,12 @@ import type { SelectContextType } from './select.types'
 
 export const SelectContext = createContext<SelectContextType | null>(null)
 
+/**
+ * Custom hook to consume select context values safely across subcomponents.
+ *
+ * @throws {Error} If called outside of a valid `<Select>` component hierarchy.
+ * @returns Current select context values and action methods.
+ */
 export const useSelect = () => {
   const context = useContext(SelectContext)
 

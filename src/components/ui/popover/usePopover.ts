@@ -16,37 +16,16 @@ import {
   useHover,
   useInteractions,
   size,
-  type ElementProps,
-  type Placement,
-  type UseFloatingReturn,
-  type UseHoverProps,
-  type UseRoleProps,
   type Middleware,
 } from '@floating-ui/react'
+import type { PopoverOptions, PopoverReturn, PopoverContextType } from './popover.types'
 
-export interface PopoverOptions {
-  initialOpen?: boolean
-  placement?: Placement
-  modal?: boolean
-  open?: boolean
-  onOpenChange?: (open: boolean) => void
-  interactions?: ElementProps[]
-  offset?: number
-  hover?: boolean | UseHoverProps
-  role?: UseRoleProps['role']
-  matchTriggerWidth?: boolean
-  middlewares?: Middleware[]
-}
-
-export type PopoverReturn = {
-  open: boolean
-  setOpen: (open: boolean) => void
-  modal?: boolean | undefined
-  labelId: string
-  descriptionId: string
-} & ReturnType<typeof useInteractions> &
-  UseFloatingReturn
-
+/**
+ * Custom state hook wrapping `@floating-ui/react` primitives to manage positioning, auto-updates, and interactions.
+ *
+ * @param options - Popover configuration options.
+ * @returns Popover return state and interaction handlers object.
+ */
 export const usePopover = ({
   initialOpen = false,
   placement = 'bottom-start',
@@ -130,10 +109,14 @@ export const usePopover = ({
   )
 }
 
-export type PopoverContextType = PopoverReturn | null
-
 export const PopoverContext = createContext<PopoverContextType>(null)
 
+/**
+ * Custom hook to consume popover context values safely.
+ *
+ * @throws {Error} If called outside of a valid `<Popover>` component hierarchy.
+ * @returns Current popover context return values.
+ */
 export const usePopoverContext = (): PopoverReturn => {
   const context = useContext(PopoverContext)
   if (!context) throw new Error('Popover components must be wrapped in <Popover />')

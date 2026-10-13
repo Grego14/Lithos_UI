@@ -26,6 +26,12 @@ const getOptionIndex = (options: SelectOption[] | undefined, val: string | numbe
   return index !== -1 ? index : null
 }
 
+/**
+ * Root select component managing single and multi-selection states, popover positioning, and automatic or composite option rendering.
+ *
+ * @param props - Select configuration properties including options, values, modes, and event handlers.
+ * @returns Select popover container provider element.
+ */
 export const Select = ({
   options,
   value: controlledValue,
