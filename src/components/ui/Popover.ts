@@ -7,3 +7,5 @@ export * from './popover/Popover'
 export * from './popover/PopoverTrigger'
 export * from './popover/PopoverContent'
 export * from './popover/PopoverClose'
+
+export type * from './popover/popover.types'

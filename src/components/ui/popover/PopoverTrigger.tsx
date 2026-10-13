@@ -3,16 +3,18 @@
  * - Attaches reference refs and accessibility attributes (`data-state`) to open or close the popover.
  * - Supports `asChild` composition via React `cloneElement` to forward props to custom children.
  */
-import { cloneElement, isValidElement, type ComponentPropsWithRef, type HTMLProps } from 'react'
+import { cloneElement, isValidElement, type HTMLProps } from 'react'
 import { useMergeRefs } from '@floating-ui/react'
 import { usePopoverContext } from './usePopover'
-import { cn, type LithosClass } from '../../../utils/cn'
+import { cn } from '../../../utils/cn'
+import type { PopoverTriggerProps } from './popover.types'
 
-export interface PopoverTriggerProps extends Omit<ComponentPropsWithRef<'button'>, 'className'> {
-  asChild?: boolean
-  className?: LithosClass
-}
-
+/**
+ * Reference trigger element component attaching accessibility attributes and toggle interactions.
+ *
+ * @param props - Trigger properties including asChild composition flags and event handlers.
+ * @returns Trigger button element or cloned child element.
+ */
 export const PopoverTrigger = ({
   children,
   asChild = false,
