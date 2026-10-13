@@ -11,7 +11,7 @@ export const iconPropsData: PropItem[] = [
   {
     name: 'strokeWidth',
     type: 'number | string',
-    defaultValue: '4',
+    defaultValue: '2',
     required: false,
     description: 'Vector stroke thickness used to control the geometric weight of the icon lines.',
   },

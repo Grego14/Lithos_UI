@@ -123,9 +123,10 @@ const ALL_ICONS: IconItem[] = [
 
 export const IconsDoc = () => {
   const [search, setSearch] = useState('')
-  const [previewSize, setPreviewSize] = useState(24)
-  const [previewStroke, setPreviewStroke] = useState(3)
+  const [previewSize, setPreviewSize] = useState(16)
+  const [previewStroke, setPreviewStroke] = useState(2)
   const [copiedIcon, setCopiedIcon] = useState<string | null>(null)
+  const [isExpanded, setIsExpanded] = useState(false)
 
   const filteredIcons = useMemo(() => {
     const q = search.toLowerCase().trim()
@@ -134,6 +135,15 @@ export const IconsDoc = () => {
       (icon) => icon.name.toLowerCase().includes(q) || icon.tags.some((tag) => tag.toLowerCase().includes(q))
     )
   }, [search])
+
+  const isSearching = search.trim().length > 0
+
+  const displayedIcons = useMemo(() => {
+    if (isSearching || isExpanded) {
+      return filteredIcons
+    }
+    return filteredIcons.slice(0, 6)
+  }, [filteredIcons, isSearching, isExpanded])
 
   const handleCopy = (iconName: string) => {
     navigator.clipboard.writeText(`<${iconName} />`)
@@ -243,7 +253,7 @@ export const ColorsExample = () => {
               <div className="flex items-center space-x-2">
                 <span className="w-2.5 h-2.5 bg-(--lithos-accent) border border-(--lithos-border) rounded-full inline-block animate-pulse" />
                 <h2 id="gallery" className="text-base font-black uppercase tracking-wider text-(--lithos-text)">
-                  Icon Gallery Explorer
+                  Gallery Explorer
                 </h2>
               </div>
               <p className="text-xs font-mono font-bold text-(--lithos-text) opacity-60 mt-1">
@@ -252,7 +262,7 @@ export const ColorsExample = () => {
             </div>
 
             <Badge intent="accent" className="self-start md:self-auto">
-              {filteredIcons.length} / {ALL_ICONS.length} ICONS
+              {displayedIcons.length} / {filteredIcons.length} ICONS
             </Badge>
           </div>
 
@@ -329,7 +339,7 @@ export const ColorsExample = () => {
 
           {/* Grid of Icon Cards (Zero-Gap compliant) */}
           <div className="mt-6 flex flex-wrap -m-1.5">
-            {filteredIcons.map(({ name, Component }) => {
+            {displayedIcons.map(({ name, Component }) => {
               const isCopied = copiedIcon === name
               return (
                 <div key={name} className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 p-1.5">
@@ -356,6 +366,19 @@ export const ColorsExample = () => {
             })}
           </div>
 
+          {/* View More / Show Less Button using Lithos Button primitive */}
+          {!isSearching && filteredIcons.length > 10 && (
+            <div className="mt-8 flex justify-center">
+              <Button
+                variant="secondary"
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="cursor-pointer text-xs font-mono font-bold uppercase tracking-wider px-5 py-2"
+              >
+                {isExpanded ? 'Show Less' : 'View More'}
+              </Button>
+            </div>
+          )}
+
           {filteredIcons.length === 0 && (
             <div className="py-12 text-center text-sm font-mono font-bold text-(--lithos-text) opacity-60">
               No icons found matching "{search}".
@@ -366,8 +389,8 @@ export const ColorsExample = () => {
 
       {/* Code Examples */}
       <section className="mb-12">
-        <h2 id="basic-usage" className="text-2xl font-black tracking-tight text-(--lithos-text) mb-4">
-          Basic Usage
+        <h2 id="usage" className="text-2xl font-black tracking-tight text-(--lithos-text) mb-4">
+          Usage
         </h2>
         <p className="text-sm font-bold text-(--lithos-text) opacity-70 mb-4">
           Import individual icon primitives directly and control dimensions using the <code>size</code> prop.
@@ -383,7 +406,7 @@ export const ColorsExample = () => {
 
       <section className="mb-12">
         <h2 id="with-buttons" className="text-2xl font-black tracking-tight text-(--lithos-text) mb-4">
-          Integration with Button
+          With Button
         </h2>
         <p className="text-sm font-bold text-(--lithos-text) opacity-70 mb-4">
           Lithos icons pair directly with the <code>iconLeft</code> and <code>iconRight</code> props on{' '}
@@ -406,7 +429,7 @@ export const ColorsExample = () => {
 
       <section className="mb-12">
         <h2 id="strokes-and-sizes" className="text-2xl font-black tracking-tight text-(--lithos-text) mb-4">
-          Sizes & Stroke Weights
+          Size & Stroke
         </h2>
         <p className="text-sm font-bold text-(--lithos-text) opacity-70 mb-4">
           Control stroke geometry via <code>strokeWidth</code> to match heavy brutalist typography or clean hairline
@@ -424,7 +447,7 @@ export const ColorsExample = () => {
 
       <section className="mb-12">
         <h2 id="colors" className="text-2xl font-black tracking-tight text-(--lithos-text) mb-4">
-          Colors & Tokens
+          Color & Token
         </h2>
         <p className="text-sm font-bold text-(--lithos-text) opacity-70 mb-4">
           By default icons inherit <code>currentColor</code>, but you can pass explicit hex values, CSS classes, or
@@ -442,7 +465,7 @@ export const ColorsExample = () => {
       {/* Props Reference */}
       <section className="mb-16">
         <h2 id="props" className="text-2xl font-black tracking-tight text-(--lithos-text) mb-4">
-          Props Reference
+          API Reference
         </h2>
         <PropsAccordion title="Icon Props" data={iconPropsData} />
       </section>
