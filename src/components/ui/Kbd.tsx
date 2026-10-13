@@ -5,20 +5,40 @@
  * - Zero-Gap Rule: KbdGroup uses explicit margin math (space-x-1.5 or attached -ml-0.5), never CSS gap.
  * - Contrast integrity: custom color or accent variants route through the YIQ engine (src/utils/yiq.ts).
  */
-import type { ComponentPropsWithRef, ReactNode } from 'react'
-import { cn, type LithosClass } from '../../utils/cn'
+import { cn } from '../../utils/cn'
 import { getContrastText } from '../../utils/yiq'
-import type { HexColor } from '../../core/types'
+import type { HexColor, LithosElementProps } from '../../core/types'
 
+/**
+ * Standard sizing scales supported by keycap components.
+ */
 export type KbdSize = 'xs' | 'sm' | 'md' | 'lg'
+
+/**
+ * Visual structural variants supported by keycap components.
+ */
 export type KbdVariant = 'default' | 'accent' | 'outline' | 'solid' | 'subtle' | 'inverse'
 
-export interface KbdProps extends Omit<ComponentPropsWithRef<'kbd'>, 'className'> {
+/**
+ * Props configuration interface for the root `Kbd` component.
+ */
+export interface KbdProps extends LithosElementProps<'kbd'> {
+  /** Size scale variant for the keycap. */
   size?: KbdSize
+
+  /** Visual variant style mapping. */
   variant?: KbdVariant
+
+  /** Custom hexadecimal or color string for solid background styling. */
   color?: HexColor | string
-  className?: LithosClass
-  children?: ReactNode
+}
+
+/**
+ * Props configuration interface for the `KbdGroup` compound component.
+ */
+export interface KbdGroupProps extends LithosElementProps<'div'> {
+  /** Merges neighboring keycaps closely together into an attached strip. */
+  attached?: boolean
 }
 
 const sizeStyles: Record<KbdSize, string> = {
@@ -41,6 +61,12 @@ const variantStyles: Record<KbdVariant, string> = {
     'bg-(--lithos-text) text-(--lithos-bg) border-2 border-(--lithos-border) shadow-[1px_2px_0px_0px_var(--lithos-shadow)]',
 }
 
+/**
+ * Keyboard key primitive component featuring neo-brutalist mechanical keycap styling and YIQ contrast integrity.
+ *
+ * @param props - Keycap properties including sizes, variants, custom colors, and children.
+ * @returns Kbd element.
+ */
 export const Kbd = ({ children, size = 'md', variant = 'default', color, className, style, ...rest }: KbdProps) => {
   const isSolid = variant === 'solid'
   const customBg = color || (isSolid ? '#00FF00' : undefined)
@@ -70,13 +96,10 @@ export const Kbd = ({ children, size = 'md', variant = 'default', color, classNa
 /**
  * KbdGroup lays out multiple `Kbd` primitives together in keyboard shortcut sequences.
  * Adheres strictly to the Zero-Gap Rule using explicit margins and support for attached strips.
+ *
+ * @param props - Group properties including attached layout toggles and custom classes.
+ * @returns Group container element.
  */
-export interface KbdGroupProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
-  attached?: boolean
-  className?: LithosClass
-  children?: ReactNode
-}
-
 export const KbdGroup = ({ attached = false, className, children, ...rest }: KbdGroupProps) => {
   const classes = cn(
     'inline-flex items-center',
