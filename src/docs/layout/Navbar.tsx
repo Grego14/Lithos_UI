@@ -33,6 +33,7 @@ const groupedLinks = [
       { label: 'Dialog', href: '/docs/dialog' },
       { label: 'Drawer', href: '/docs/drawer' },
       { label: 'Dropdown', href: '/docs/dropdown' },
+      { label: 'Icons', href: '/docs/icons' },
       { label: 'Input', href: '/docs/input' },
       { label: 'Kbd', href: '/docs/kbd' },
       { label: 'Pagination', href: '/docs/pagination' },
@@ -54,7 +55,7 @@ const groupedLinks = [
 export const DocsNavbar = () => {
   const { isDarkMode, toggleObsidian } = useTheme()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [expandedCategory, setExpandedCategory] = useState<string | null>('Getting Started')
+  const [expandedCategory, setExpandedCategory] = useState<string | null>('Components')
   const { addToast } = useToast()
   const navigate = useNavigate()
 
@@ -155,14 +156,14 @@ export const DocsNavbar = () => {
                 {expandedCategory === group.category && (
                   <div className="pl-2 flex flex-col mt-4">
                     {group.links.map((link) => (
-                      <a
+                      <Link
                         key={link.label}
-                        href={link.href}
+                        to={link.href}
                         onClick={() => setIsMenuOpen(false)}
                         className="block w-full text-left text-xl sm:text-2xl font-bold uppercase tracking-tight text-(--lithos-text) opacity-80 hover:opacity-100 hover:text-(--lithos-text) hover:translate-x-2 mb-4 cursor-pointer transition-all duration-150"
                       >
                         {link.label}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 )}
