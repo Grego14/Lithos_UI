@@ -6,14 +6,14 @@
  */
 import { useRef, useState, type PointerEvent } from 'react'
 import { scrollTo } from '../../../utils/scrollTo'
-import type { ScrollFunc } from './carousel.types'
+import type { UseCarouselDragOptions } from './carousel.types'
 
-export interface UseCarouselDragOptions {
-  containerRef: React.RefObject<HTMLDivElement | null>
-  scroll: ScrollFunc
-  vertical?: boolean
-}
-
+/**
+ * Custom hook managing pointer-based drag and touch gesture interactions for carousel tracks.
+ *
+ * @param options - Hook configuration options including container reference and orientation.
+ * @returns Dragging state flags and pointer event handler callbacks.
+ */
 export const useCarouselDrag = ({ containerRef, scroll, vertical = false }: UseCarouselDragOptions) => {
   const [isDragging, setIsDragging] = useState(false)
   const start = useRef(0)
@@ -71,4 +71,7 @@ export const useCarouselDrag = ({ containerRef, scroll, vertical = false }: UseC
   }
 }
 
+/**
+ * Return type definition for the `useCarouselDrag` hook.
+ */
 export type useCarouselDragReturn = ReturnType<typeof useCarouselDrag>

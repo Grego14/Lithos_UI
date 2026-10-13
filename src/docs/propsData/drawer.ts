@@ -130,6 +130,7 @@ export const drawerPropsData: PropItem[] = [
     name: 'backdropClass',
     type: 'LithosClass',
     required: false,
+    defaultValue: "'bg-black/50'",
     description: 'Additional CSS classes for the backdrop overlay.',
   },
   {

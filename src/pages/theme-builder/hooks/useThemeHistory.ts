@@ -4,7 +4,7 @@
  */
 import { useState, useCallback, useMemo, useEffect, useRef, type ChangeEvent } from 'react'
 import { THEME_PROPERTIES, LIGHT_DEFAULTS, DARK_DEFAULTS, PRESET_THEMES } from '../utils/constants'
-import { useToast } from '../../../core/hooks/useToast'
+import { useToast } from '../../../components/ui/toast/useToast'
 
 export type ViewportSize = 'desktop' | 'tablet' | 'mobile'
 

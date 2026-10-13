@@ -4,6 +4,7 @@
  */
 import type { DrawerPlacement } from './drawer.types'
 import { cn } from '../../../utils/cn'
+import type { DrawerIndicatorProps } from './drawer.types'
 
 const indicatorClasses: Record<DrawerPlacement, string> = {
   bottom: 'top-2',
@@ -12,15 +13,17 @@ const indicatorClasses: Record<DrawerPlacement, string> = {
   right: 'left-2',
 }
 
+/**
+ * Visual drag indicator handle component for swipeable drawers.
+ *
+ * @param props - Indicator properties including placement edge, gesture handlers, and accessible labels.
+ * @returns Indicator handle element.
+ */
 export const DrawerIndicator = ({
   placement,
   swipeHandlers,
   'aria-label': indicatorLabel = 'Drag handle',
-}: {
-  placement: DrawerPlacement
-  swipeHandlers?: Record<string, unknown> | undefined
-  'aria-label'?: string | undefined
-}) => {
+}: DrawerIndicatorProps) => {
   const isHorizontal = placement === 'left' || placement === 'right'
 
   return (

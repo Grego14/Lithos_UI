@@ -7,7 +7,7 @@
 
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useToast } from '../../core/hooks/useToast'
+import { useToast } from '../../components/ui/toast/useToast'
 import { Button } from '../../components/ui/Button'
 import { Toggle } from '../../components/ui/Toggle'
 import { IconMenu } from '../../components/ui/icons/IconMenu'

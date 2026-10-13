@@ -424,10 +424,10 @@ export const DrawerDoc = () => {
           'components/ui/Dialog.tsx',
           'components/ui/drawer/drawer.utils.ts',
           'components/ui/drawer/useDrawer.ts',
-          'components/ui/drawer/useDrawerSwipe.ts',
           'components/ui/Popover.ts',
           '@floating-ui/react',
           'core/hooks/useMediaQuery.ts',
+          'core/hooks/useSwipe.ts',
         ]}
       />
 

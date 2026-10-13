@@ -41,6 +41,14 @@ const originClasses: Record<DrawerTransformOrigin, string> = {
   'bottom-right': 'origin-bottom-right',
 }
 
+/**
+ * Generates combined Tailwind CSS classes for drawer sizing, placement, borders, radii, and transition animations.
+ *
+ * @param transition - Animation transition style ('slide', 'fade', or 'zoom').
+ * @param placement - Edge placement orientation ('left', 'right', 'top', or 'bottom').
+ * @param transformOrigin - Optional CSS transform origin alignment point.
+ * @returns Combined CSS class string.
+ */
 export const getDrawerClasses = (
   transition: DrawerTransition,
   placement: DrawerPlacement,
@@ -69,6 +77,13 @@ export const getDrawerClasses = (
   )
 }
 
+/**
+ * Resolves the active transition duration in milliseconds based on the open state and configuration format.
+ *
+ * @param transitionDuration - Duration value in milliseconds or an object containing separate enter/exit keys.
+ * @param open - Current open visibility state of the drawer.
+ * @returns Duration value in milliseconds.
+ */
 export const getDuration = (transitionDuration: DrawerTransitionDuration, open: boolean) => {
   if (typeof transitionDuration === 'number') return transitionDuration
 

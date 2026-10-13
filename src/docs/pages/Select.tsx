@@ -332,7 +332,7 @@ export const SelectDoc = () => {
       </div>
 
       <h3 id="custom-layout" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Custom Layout (Compound Components)
+        Custom Layout
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
         Use subcomponents like <code>SelectTrigger</code>, <code>SelectContent</code>, and <code>SelectItem</code> when

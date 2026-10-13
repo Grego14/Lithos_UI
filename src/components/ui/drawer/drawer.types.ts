@@ -4,32 +4,86 @@
  */
 import type { ReactNode } from 'react'
 import type { LithosClass } from '../../../utils/cn'
+import type { LithosElementProps, SurfaceGestureHandlers } from '../../../core/types'
 
+/**
+ * Horizontal placement edge configurations for the drawer container.
+ */
 export type DrawerHorizontalPlacement = 'left' | 'right'
+
+/**
+ * Vertical placement edge configurations for the drawer container.
+ */
 export type DrawerVerticalPlacement = 'top' | 'bottom'
+
+/**
+ * All supported edge placement directions for the drawer container.
+ */
 export type DrawerPlacement = DrawerHorizontalPlacement | DrawerVerticalPlacement
+
+/**
+ * Animation transition effect styles applied during open/close cycles.
+ */
 export type DrawerTransition = 'slide' | 'fade' | 'zoom'
+
+/**
+ * Origin coordinate points for CSS transform scaling and positioning.
+ */
 export type DrawerTransformOrigin =
   'center' | 'top' | 'bottom' | 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+
+/**
+ * Operational rendering modes supported by the drawer.
+ */
 export type DrawerMode = 'default' | 'responsive'
+
+/**
+ * Transition duration configuration scale in milliseconds.
+ */
 export type DrawerTransitionDuration = number | { enter: number; exit: number }
 
+/**
+ * Enforces accessible naming conventions requiring either an aria-label or an aria-labelledby reference.
+ */
 type AccessibleNameProps =
   | {
-      /**
-       * Accessible label for the drawer. Required if `aria-labelledby` is not provided.
-       */
+      /** Accessible string label for the drawer. Required if `aria-labelledby` is omitted. */
       'aria-label': string
+
+      /** Identifier of the element labeling the drawer. */
       'aria-labelledby'?: string
     }
   | {
+      /** Accessible string label for the drawer. */
       'aria-label'?: string
-      /**
-       * ID of the element that labels the drawer. Required if `aria-label` is not provided.
-       */
+
+      /** Identifier of the element labeling the drawer. Required if `aria-label` is omitted. */
       'aria-labelledby': string
     }
 
+/**
+ * Context value contract shared across drawer sub-components.
+ */
+export interface DrawerContextValue {
+  /** Current open visibility state of the parent drawer. */
+  open: boolean
+
+  /** Callback function triggered to request opening or closing the parent drawer. */
+  onOpenChange: (open: boolean) => void
+
+  /** Operational rendering mode of the drawer container. */
+  mode?: DrawerMode
+
+  /** Indicates whether the current viewport matches the desktop breakpoint media query. */
+  isDesktop?: boolean
+
+  /** Unique HTML identifier assigned to the drawer title element for accessibility associations. */
+  titleId?: string
+}
+
+/**
+ * Props configuration interface for the root `Drawer` component.
+ */
 export type DrawerProps = AccessibleNameProps & {
   /**
    * Controls the open state of the drawer.
@@ -53,34 +107,25 @@ export type DrawerProps = AccessibleNameProps & {
    */
   transformOrigin?: DrawerTransformOrigin
 
-  /**
-   * Content to render inside the drawer.
-   */
+  /** Content to render inside the drawer. */
   children: ReactNode
 
-  /**
-   * Callback fired when the enter transition starts.
-   */
+  /** Callback fired when the enter transition starts. */
   onEnter?: () => void
 
-  /**
-   * Callback fired when the exit transition ends.
-   */
+  /** Callback fired when the exit transition ends. */
   onExit?: () => void
 
-  /**
-   * Additional CSS classes for the drawer main panel container.
-   */
+  /** Additional CSS classes for the drawer main panel container. */
   className?: LithosClass
 
   /**
    * Additional CSS classes for the backdrop overlay.
+   * @default 'bg-black/50'
    */
   backdropClass?: LithosClass
 
-  /**
-   * ID of the element that describes the drawer content for screen readers.
-   */
+  /** ID of the element that describes the drawer content for screen readers. */
   'aria-describedby'?: string
 
   /**
@@ -95,9 +140,7 @@ export type DrawerProps = AccessibleNameProps & {
    */
   indicator?: boolean
 
-  /**
-   * Accessible label for the swipe handle indicator.
-   */
+  /** Accessible label for the swipe handle indicator. */
   indicatorLabel?: string
 
   /**
@@ -131,37 +174,43 @@ export type DrawerProps = AccessibleNameProps & {
    */
   placement?: DrawerPlacement
 
-  /**
-   * Trigger element used to open the drawer.
-   */
+  /** Trigger element used to open the drawer. */
   trigger?: ReactNode
 }
 
-export interface UseDrawerSwipeOptions {
-  /**
-   * Placement orientation for gesture detection.
-   */
+/**
+ * Props configuration interface for the `DrawerHeader` component.
+ */
+export type DrawerHeaderProps = LithosElementProps<'div'>
+
+/**
+ * Props configuration interface for the `DrawerBody` component.
+ */
+export type DrawerBodyProps = LithosElementProps<'div'>
+
+/**
+ * Props configuration interface for the `DrawerFooter` component.
+ */
+export type DrawerFooterProps = LithosElementProps<'div'>
+
+/**
+ * Props configuration interface for the `DrawerTitle` component.
+ */
+export type DrawerTitleProps = LithosElementProps<'h2'>
+
+/**
+ * Props configuration interface for the `DrawerIndicator` component.
+ */
+export interface DrawerIndicatorProps {
+  /** Edge placement orientation of the drawer. */
   placement: DrawerPlacement
 
-  /**
-   * Current open state.
-   */
-  open: boolean
+  /** Gesture event handlers for drag interactions. */
+  swipeHandlers?: SurfaceGestureHandlers | undefined
 
   /**
-   * Handler called when a swipe threshold is met to request closing.
+   * Accessible label for the drag handle.
+   * @default 'Drag handle'
    */
-  onClose: () => void
-
-  /**
-   * Distance threshold in pixels required to register a swipe gesture.
-   * @default 100
-   */
-  threshold?: number
-
-  /**
-   * Whether swipe gesture is enabled on the target element.
-   * @default true
-   */
-  allowSwipeOnContent?: boolean
+  'aria-label'?: string | undefined
 }

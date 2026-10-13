@@ -358,10 +358,6 @@ export const InputDoc = () => {
         </div>
 
         <PropsAccordion title="Input Props" data={inputPropsData} />
-
-        <h3 id="input-group-api" className="mt-8 mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-          InputGroup
-        </h3>
         <PropsAccordion title="InputGroup Props" data={inputGroupPropsData} />
         <PropsAccordion title="InputGroupInput Props" data={inputGroupInputPropsData} />
         <PropsAccordion title="InputGroupAddon Props" data={inputGroupAddonPropsData} />

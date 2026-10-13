@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { axe } from 'jest-axe'
 import { describe, it, expect, vi } from 'vitest'
-import { Checkbox, PlainCheckbox, IconCheckbox, CheckboxGroup } from '../../../components/ui/Checkbox'
+import { Checkbox, PlainCheckbox, IconCheckbox, CheckboxGroup, useCheckboxGroup } from '../../../components/ui/Checkbox'
 
 describe('Checkbox', () => {
   it('renders unchecked by default', () => {
@@ -135,6 +135,20 @@ describe('CheckboxGroup', () => {
     )
     expect(screen.getByRole('checkbox', { name: 'A' })).toBeDisabled()
     expect(screen.getByRole('checkbox', { name: 'B' })).toBeDisabled()
+  })
+
+  it('throws an error when useCheckboxGroup is called outside of CheckboxGroup', () => {
+    // Suppress console.error temporarily to keep test output clean from React error boundary logs
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+
+    const TestComponent = () => {
+      useCheckboxGroup()
+      return null
+    }
+
+    expect(() => render(<TestComponent />)).toThrow('useCheckboxGroup must be used within a <CheckboxGroup>')
+
+    consoleErrorSpy.mockRestore()
   })
 
   it('has no accessibility violations', async () => {

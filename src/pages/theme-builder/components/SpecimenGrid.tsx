@@ -25,14 +25,13 @@ import { Dialog, DialogHeader, DialogTitle, DialogBody, DialogFooter } from '../
 import { KineticGrid } from '../../../components/ui/KineticGrid'
 import { Popover, PopoverTrigger, PopoverContent } from '../../../components/ui/Popover'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../../components/ui/Tabs'
-import { ToastProvider } from '../../../components/ui/Toast'
 import { Tooltip, TooltipTrigger, TooltipContent } from '../../../components/ui/Tooltip'
 import { CodeViewer } from '../../../components/ui/CodeViewer'
 import { PropsTable } from '../../../components/ui/PropsTable'
 import { PANEL } from '../utils/constants'
 import { AccentColorProvider } from '../../../core/AccentColorProvider'
 import { getContrastText } from '../../../utils/yiq'
-import { useToast } from '../../../core/hooks/useToast'
+import { useToast, ToastProvider } from '../../../components/ui/Toast'
 import { IconHome } from '../../../components/ui/icons/IconHome'
 import { IconMaximize } from '../../../components/ui/icons/IconMaximize'
 import { IconMinimize } from '../../../components/ui/icons/IconMinimize'
@@ -339,17 +338,17 @@ const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
         <h2 className="text-4xl font-black leading-none tracking-tighter shrink-0">FREE</h2>
       </div>
     </div>
-    
+
     <CardDescription className="text-sm font-bold leading-relaxed">
       Unleash the full power of neo-brutalism. Build bold, beautiful interfaces faster than ever.
     </CardDescription>
-    
+
     <div className="space-y-4 pt-6 border-t-[3px] border-border border-dashed mt-6">
       <Checkbox checked={true} label={<span className="font-bold">Unlimited Components</span>} />
       <Checkbox checked={true} label={<span className="font-bold">Premium Themes</span>} />
       <Checkbox checked={false} label={<span className="font-bold text-muted">Dedicated Support</span>} />
     </div>
-    
+
     <div className="pt-8">
       <Button variant="primary" fullWidth className="text-lg font-black py-6 border-[3px]">
         START BUILDING
@@ -560,7 +559,7 @@ export const SpecimenGrid = ({ style, accentColor }: { style: React.CSSPropertie
       style={style}
     >
       <style>{`
-        #specimen-grid-container, 
+        #specimen-grid-container,
         #specimen-grid-container *,
         .theme-builder-floating,
         .theme-builder-floating * {

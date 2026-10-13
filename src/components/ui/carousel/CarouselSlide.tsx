@@ -4,15 +4,17 @@
  * - Accessible slide container utilizing `role="group"`, `aria-roledescription="slide"`, and automatic indexing labels.
  * - Focus and accessibility boundary management: applies `inert` and `aria-hidden` attributes to non-active slides to prevent off-screen tab focus.
  */
-import { useEffect, useId, type ComponentPropsWithRef } from 'react'
-import { cn, type LithosClass } from '../../../utils/cn'
+import { useEffect, useId } from 'react'
+import { cn } from '../../../utils/cn'
 import { useCarousel } from './useCarousel'
+import type { CarouselSlideProps } from './carousel.types'
 
-export interface CarouselSlideProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
-  label?: string
-  className?: LithosClass
-}
-
+/**
+ * Individual slide container component for carousel content items, managing snap points and accessibility focus boundaries.
+ *
+ * @param props - Slide configuration properties including custom labels and styling classes.
+ * @returns Slide group container element.
+ */
 export const CarouselSlide = ({ label, className, children, ...rest }: CarouselSlideProps) => {
   const id = useId()
   const { currentIndex, totalSlides, registerSlide, slideIds } = useCarousel()

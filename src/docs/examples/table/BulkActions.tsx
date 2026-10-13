@@ -10,6 +10,7 @@ import { Badge } from '../../../components/ui/Badge'
 import { Button } from '../../../components/ui/Button'
 import { Checkbox } from '../../../components/ui/Checkbox'
 import { Input } from '../../../components/ui/Input'
+import { Pagination } from '../../../components/ui/Pagination'
 import { Select, SelectTrigger, SelectContent, SelectItem } from '../../../components/ui/Select'
 import { IconChevronDown } from '../../../components/ui/icons/IconChevronDown'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../../../components/ui/Tooltip'
@@ -309,17 +310,17 @@ export const BulkActionsTable = ({ data = demoInvoices }: { data?: Invoice[] }) 
             </SelectContent>
           </Select>
         </div>
-        <nav aria-label="Invoice pages" className="mb-3 flex items-center">
-          <Button variant="secondary" disabled={currentPage === 0} onClick={() => setPage(currentPage - 1)}>
-            Previous
-          </Button>
-          <span className="mx-4 text-sm whitespace-nowrap" role="status">
-            Page {currentPage + 1} of {pageCount}
-          </span>
-          <Button variant="secondary" disabled={currentPage >= pageCount - 1} onClick={() => setPage(currentPage + 1)}>
-            Next
-          </Button>
-        </nav>
+        <Pagination
+          aria-label="Invoice pages"
+          className="mb-3 w-auto"
+          count={pageCount}
+          page={currentPage + 1}
+          onPageChange={(nextPage) => setPage(nextPage - 1)}
+          variant="compact"
+          position="right"
+          size="sm"
+          showEdges={false}
+        />
       </div>
     </div>
   )

@@ -11,12 +11,18 @@ import { FloatingPortal } from '@floating-ui/react'
 import { DrawerContext } from './useDrawer'
 import { getDrawerClasses, getDuration } from './drawer.utils'
 import type { DrawerProps } from './drawer.types'
-import { useDrawerSwipe } from './useDrawerSwipe'
+import { useSwipe } from '../../../core/hooks/useSwipe'
 import { DrawerIndicator } from './DrawerIndicator'
 import { useMediaQuery } from '../../../core/hooks/useMediaQuery'
 
 const Dialog = lazy(() => import('../Dialog').then((mod) => ({ default: mod.Dialog })))
 
+/**
+ * Root overlay drawer component managing temporary slide-out panels, touch gestures, and responsive dialog fallback modes.
+ *
+ * @param props - Drawer configuration properties including placement, mode, transitions, and state callbacks.
+ * @returns Drawer portal container element.
+ */
 export const Drawer = ({
   open,
   onOpenChange,
@@ -59,10 +65,10 @@ export const Drawer = ({
     'aria-describedby': ariaDescribedBy ?? undefined,
   }
 
-  const { handlers: swipeHandlers, style: swipeStyle } = useDrawerSwipe({
+  const { handlers: swipeHandlers, style: swipeStyle } = useSwipe({
     placement,
     open,
-    onClose: () => onOpenChange(false),
+    onDismiss: () => onOpenChange(false),
     threshold,
     allowSwipeOnContent,
   })

@@ -4,11 +4,11 @@
  * - Dynamic viewport windowing: scales active dot sizes and hides off-screen indicators (outside ±2 index range) with `tabIndex={-1}` for cleaner DOM flow.
  * - Optional slide counter and horizontal rendering safeguard for vertical layout mode.
  */
-import type { ComponentPropsWithRef } from 'react'
 import { Button } from '../Button'
-import { cn, type LithosClass } from '../../../utils/cn'
+import { cn } from '../../../utils/cn'
 import { IconCircle } from '../icons/IconCircle'
 import { useCarousel } from './useCarousel'
+import type { CarouselPaginationProps } from './carousel.types'
 
 const iconClass = {
   default: 'w-2 h-2',
@@ -16,11 +16,12 @@ const iconClass = {
   selected: 'w-4 h-4',
 }
 
-export interface CarouselPaginationProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
-  label?: string
-  className?: LithosClass
-}
-
+/**
+ * Pagination dot or number indicator component for jumping directly to specific carousel slides.
+ *
+ * @param props - Pagination properties including accessibility label templates.
+ * @returns Pagination container element.
+ */
 export const CarouselPagination = ({ className, label = 'Move to the slide $', ...rest }: CarouselPaginationProps) => {
   const { currentIndex, totalSlides, scroll, slideSelector, showCounter, bottomControls, mode } = useCarousel()
   const selectors = []

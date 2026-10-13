@@ -1,4 +1,12 @@
-import { Sidebar, SidebarContent, SidebarItem, SidebarTrigger } from '../../../components/ui/Sidebar'
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarItem,
+  SidebarTrigger,
+  SidebarHeader,
+  SidebarTitle,
+  useSidebar,
+} from '../../../components/ui/Sidebar'
 import { Typography } from '../../../components/ui/Typography'
 import { useState } from 'react'
 import { IconHome } from '../../../components/ui/icons/IconHome'
@@ -6,9 +14,9 @@ import { IconFolder } from '../../../components/ui/icons/IconFolder'
 import { IconSettings } from '../../../components/ui/icons/IconSettings'
 
 const items = [
-  { icon: <IconHome strokeWidth={3} />, label: 'Dashboard', id: 'item-0' },
-  { icon: <IconFolder strokeWidth={3} />, label: 'Projects', id: 'item-1' },
-  { icon: <IconSettings strokeWidth={3} />, label: 'Settings', id: 'item-2' },
+  { Icon: IconHome, label: 'Dashboard', id: 'item-0' },
+  { Icon: IconFolder, label: 'Projects', id: 'item-1' },
+  { Icon: IconSettings, label: 'Settings', id: 'item-2' },
 ]
 
 const cards = [
@@ -17,27 +25,41 @@ const cards = [
   { title: 'Server Latency', text: '12 ms' },
 ]
 
-export const ExampleMini = () => {
-  const [open, setOpen] = useState(true)
+const SidebarNavContent = () => {
   const [active, setActive] = useState('item-0')
+  const { activeBreakpointIndex } = useSidebar()
+
+  // detect if we are on the second breakpoint (128px)
+  const isCompact = activeBreakpointIndex === 1
 
   return (
-    <div className="flex h-screen w-full bg-(--lithos-surface) overflow-hidden">
-      <Sidebar open={open} setOpen={setOpen} mode="mini" role="navigation">
-        <SidebarContent className="p-2 space-y-2">
-          <div
-            className={`flex items-center mb-4 py-1.5 ${open ? 'px-2 justify-between' : 'justify-center'} border-b-2 border-(--lithos-border)`}
-          >
-            {open && <span className="font-bold tracking-wider uppercase text-lg">Lithos</span>}
-            <SidebarTrigger />
-          </div>
+    <SidebarContent className="space-y-2">
+      <SidebarHeader className={isCompact ? 'flex-col items-center space-y-2' : ''}>
+        {!isCompact && <SidebarTitle>Lithos</SidebarTitle>}
+        <SidebarTrigger />
+      </SidebarHeader>
 
-          {items.map((item) => (
-            <SidebarItem key={item.id} icon={item.icon} active={active === item.id} onClick={() => setActive(item.id)}>
-              <Typography variant="label">{item.label}</Typography>
-            </SidebarItem>
-          ))}
-        </SidebarContent>
+      {items.map((item) => (
+        <SidebarItem
+          key={item.id}
+          icon={<item.Icon size={isCompact ? 18 : 22} strokeWidth={2} />}
+          active={active === item.id}
+          onClick={() => setActive(item.id)}
+          textVariant={isCompact ? 'span' : 'label'}
+          className={isCompact ? 'flex-col justify-center items-center text-center text-xs py-1.5 [&>span]:mr-0' : ''}
+        >
+          {item.label}
+        </SidebarItem>
+      ))}
+    </SidebarContent>
+  )
+}
+
+export const ExampleMini = () => {
+  return (
+    <div className="flex h-screen w-full bg-(--lithos-surface) overflow-hidden">
+      <Sidebar mode="mini" role="navigation">
+        <SidebarNavContent />
       </Sidebar>
 
       <main className="flex-1 flex flex-col min-w-0 overflow-y-auto p-6 space-y-6">
@@ -48,9 +70,12 @@ export const ExampleMini = () => {
           <Typography className="opacity-80">Overview of the layout integration with Sidebar.</Typography>
         </header>
 
-        <section className="grid grid-cols-1 md:grid-cols-3 spacex-4">
+        <section className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
           {cards.map((card) => (
-            <div className="p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]">
+            <div
+              className="flex-1 p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-shadow)]"
+              key={card.title}
+            >
               <Typography variant="h6" className="font-bold mb-1">
                 {card.title}
               </Typography>
@@ -63,7 +88,7 @@ export const ExampleMini = () => {
 
         <section className="p-4 border-2 border-(--lithos-border) bg-(--lithos-surface) shadow-[4px_4px_0px_0px_var(--lithos-border)] flex-1 min-h-[200px]">
           <Typography variant="h5" as="h2" className="mb-2">
-            Active View: <Typography variant="mark">{active}</Typography>
+            Active View
           </Typography>
           <Typography className="mb-2">Content related to the selected item goes here.</Typography>
         </section>
