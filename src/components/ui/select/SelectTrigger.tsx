@@ -4,18 +4,18 @@
  * - Syncs visual active/pressed states with select context and popover open state.
  * - Wraps Lithos UI Button component to maintain design system consistency.
  */
-import type { ComponentPropsWithRef } from 'react'
 import { PopoverTrigger } from '../popover/PopoverTrigger'
 import { usePopoverContext } from '../popover/usePopover'
 import { Button } from '../Button'
 import { useSelect } from './useSelect'
+import type { SelectTriggerProps } from './select.types'
 
-export interface SelectTriggerProps extends ComponentPropsWithRef<'button'> {
-  open?: boolean
-  label?: string | undefined
-  placeholder?: string | undefined
-}
-
+/**
+ * Anchor trigger button component opening and closing the select dropdown popover.
+ *
+ * @param props - Trigger properties including placeholder texts, labels, and custom classes.
+ * @returns Trigger button element wrapper.
+ */
 export const SelectTrigger = ({
   children,
   open: openProp,
