@@ -4,17 +4,20 @@
  * - Automatically dismisses the parent dropdown menu (`setOpen(false)`) upon click or key activation (`Enter`/`Space`).
  * - Skips interaction handlers and prevents pointer events when `disabled`.
  */
-import type { ComponentPropsWithRef, MouseEvent, KeyboardEvent } from 'react'
+import type { MouseEvent, KeyboardEvent } from 'react'
 import { Button } from '../Button'
 import { usePopoverContext } from '../popover/usePopover'
-import { cn, type LithosClass } from '../../../utils/cn'
+import { cn } from '../../../utils/cn'
 import { useListItem } from '@floating-ui/react'
 import { menuItemClass } from './Dropdown'
+import type { DropdownItemProps } from './dropdown.types'
 
-export interface DropdownItemProps extends Omit<ComponentPropsWithRef<'button'>, 'className'> {
-  disabled?: boolean
-  className?: LithosClass
-}
+/**
+ * Individual action item button component for dropdown menus.
+ *
+ * @param props - Item configuration properties including click handlers, disabled states, and children content.
+ * @returns Menu item button element.
+ */
 export const DropdownItem = ({ children, disabled, onClick, onKeyDown, className, ...props }: DropdownItemProps) => {
   const { ref, index } = useListItem()
   const { setOpen } = usePopoverContext()

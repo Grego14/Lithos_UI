@@ -4,8 +4,8 @@
  * - Leverages `useHover` with `safePolygon` to keep submenus open during diagonal cursor movements.
  * - Uses a custom trigger item that opens the nested surface on hover or focus without closing the root menu.
  */
-import { useRef, useState, useMemo, type ReactNode } from 'react'
-import { Popover, PopoverTrigger, type PopoverProps } from '../Popover'
+import { useRef, useState, useMemo } from 'react'
+import { Popover, PopoverTrigger } from '../Popover'
 import { Button } from '../Button'
 import {
   useFloatingNodeId,
@@ -17,14 +17,16 @@ import {
   safePolygon,
 } from '@floating-ui/react'
 import { DropdownContent } from './DropdownContent'
+import type { DropdownSubProps } from './dropdown.types'
 
 import { menuItemClass } from './Dropdown'
 
-export interface DropdownSubProps extends PopoverProps {
-  trigger: ReactNode
-  disabled?: boolean
-}
-
+/**
+ * Nested submenu container component managing floating sub-panels and hover/focus triggers.
+ *
+ * @param props - Submenu configuration properties including triggers, placements, and disabled states.
+ * @returns Nested floating node submenu element.
+ */
 export const DropdownSub = ({ children, trigger, placement = 'right-start', disabled, ...props }: DropdownSubProps) => {
   const [open, setOpen] = useState(false)
   const { ref: listItemRef, index } = useListItem()

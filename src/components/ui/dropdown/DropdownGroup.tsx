@@ -3,14 +3,15 @@
  * - Wraps a set of related menu items under a shared container with `role="group"`.
  * - Renders an optional non-interactive section header text via `label` for semantic categorization.
  */
-import type { ComponentPropsWithRef } from 'react'
-import { cn, type LithosClass } from '../../../utils/cn'
+import { cn } from '../../../utils/cn'
+import type { DropdownGroupProps } from './dropdown.types'
 
-export interface DropdownGroupProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
-  label?: string
-  className?: LithosClass
-}
-
+/**
+ * Section container component organizing related dropdown items under optional group headings.
+ *
+ * @param props - Group configuration properties including section labels and child items.
+ * @returns Group container div element.
+ */
 export const DropdownGroup = ({ children, label, className, ...props }: DropdownGroupProps) => {
   return (
     <div role="group" aria-label={label} className={cn('px-1 py-1', className)} {...props}>

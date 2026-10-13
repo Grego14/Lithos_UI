@@ -4,9 +4,8 @@
  * - Implements fluid pointer move tracking to sync active item state on mouse/touch hover.
  * - Manages accessibility roles (`listbox`) and custom layout container styling.
  */
-import type { ReactNode, ComponentPropsWithRef, MouseEvent, KeyboardEvent } from 'react'
+import type { MouseEvent, KeyboardEvent } from 'react'
 import { useEffect, useCallback } from 'react'
-import type { LithosClass } from '../../../utils/cn'
 import { PopoverContent } from '../popover/PopoverContent'
 import { usePopoverContext } from '../popover/usePopover'
 import { useSelect } from './useSelect'
@@ -15,16 +14,14 @@ import { SelectItem } from './SelectItem'
 import { useVirtualizer } from '../../../core/hooks/useVirtualizer'
 import type { SelectOption } from './select.types'
 import { useListKeyNavigation } from '../../../core/hooks/useListKeyNavigation'
+import type { SelectContentProps } from './select.types'
 
-export interface SelectContentProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
-  children?: ReactNode
-  className?: LithosClass
-  loop?: boolean
-  virtualizeThreshold?: number | boolean
-  estimateSize?: number
-  overscan?: number
-}
-
+/**
+ * Floating panel content viewport component for select dropdowns featuring keyboard navigation, typeahead, and optional list virtualization.
+ *
+ * @param props - Content properties including virtualization thresholds, item heights, and looping flags.
+ * @returns Floating options container element.
+ */
 export const SelectContent = ({
   children,
   className,

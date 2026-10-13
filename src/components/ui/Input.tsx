@@ -9,16 +9,57 @@
  * - startAdornment / endAdornment on InputGroup render icon slots positioned inside the group border; InputGroupInput receives auto-padding.
  * - Zero-Gap Rule: edge alignment relies on flex order utilities and padding, never CSS gap.
  */
-import type { ComponentPropsWithRef, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { colors } from '../../utils/colors'
 import { cn, type LithosClass } from '../../utils/cn'
+import type { LithosElementProps } from '../../core/types'
 
-type InputSizes = 'default' | 'sm' | 'md' | 'lg'
+/**
+ * Standard sizing scales supported by input components.
+ */
+export type InputSizes = 'default' | 'sm' | 'md' | 'lg'
 
-export interface InputProps extends Omit<ComponentPropsWithRef<'input'>, 'className' | 'size'> {
-  className?: LithosClass
+/**
+ * Props configuration interface for the root `Input` component.
+ */
+export interface InputProps extends Omit<LithosElementProps<'input'>, 'size'> {
+  /** Triggers invalid error state formatting and applies the shared error intent border color. */
   invalid?: boolean
+
+  /** Height and padding size scale variant. */
   size?: InputSizes
+}
+
+/**
+ * Props configuration interface for the `InputGroup` compound wrapper.
+ */
+export interface InputGroupProps extends LithosElementProps<'div'> {
+  /** Optional leading adornment element or icon pinned to the start edge. */
+  startAdornment?: ReactNode
+
+  /** Optional trailing adornment element or icon pinned to the end edge. */
+  endAdornment?: ReactNode
+}
+
+/**
+ * Props configuration interface for the `InputGroupInput` bare field component.
+ */
+export type InputGroupInputProps = InputProps
+
+/**
+ * Alignment directions supported by input group add-on elements.
+ */
+export type InputAddonAlign = 'inline-start' | 'inline-end'
+
+/**
+ * Props configuration interface for the `InputGroupAddon` component.
+ */
+export interface InputGroupAddonProps extends LithosElementProps<'div'> {
+  /** Flex placement alignment orientation edge for the add-on. */
+  align?: InputAddonAlign
+
+  /** Custom CSS classes applied to the add-on element. */
+  className?: LithosClass
 }
 
 const inputSizeStyles = {
@@ -28,7 +69,13 @@ const inputSizeStyles = {
   lg: 'text-lg h-12 px-4 py-3',
 }
 
-export const Input = ({ className = '', invalid, size = 'default', style, ...props }: InputProps) => {
+/**
+ * Root input primitive component featuring brutalist hard-shadow geometry and size scaling.
+ *
+ * @param props - Input field properties including sizes, invalid states, and native HTML attributes.
+ * @returns Native input element.
+ */
+export const Input = ({ className, invalid, size = 'default', style, ...props }: InputProps) => {
   const classes = cn(
     'rounded-(--lithos-radius)',
     'font-mono font-bold w-full outline-none border-2 border-(--lithos-border) shadow-[2px_2px_0_0_var(--lithos-shadow)] focus:shadow-[4px_4px_0_0_var(--lithos-shadow)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
@@ -45,15 +92,11 @@ export const Input = ({ className = '', invalid, size = 'default', style, ...pro
 
 /**
  * InputGroup — compound wrapper that owns the brutalist frame.
+ *
+ * @param props - Input group container properties including start/end adornments and custom classes.
+ * @returns Group container element.
  */
-
-export interface InputGroupProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
-  className?: LithosClass
-  startAdornment?: ReactNode
-  endAdornment?: ReactNode
-}
-
-export const InputGroup = ({ className = '', children, startAdornment, endAdornment, ...props }: InputGroupProps) => {
+export const InputGroup = ({ className, children, startAdornment, endAdornment, ...props }: InputGroupProps) => {
   return (
     <div
       role="group"
@@ -80,11 +123,11 @@ export const InputGroup = ({ className = '', children, startAdornment, endAdornm
 
 /**
  * InputGroupInput — bare field stripped of standalone frame; sized to fill the group.
+ *
+ * @param props - Input group field properties.
+ * @returns Bare input element filling the container group.
  */
-
-export type InputGroupInputProps = InputProps
-
-export const InputGroupInput = ({ className = '', ...props }: InputGroupInputProps) => {
+export const InputGroupInput = ({ className, ...props }: InputGroupInputProps) => {
   return (
     <Input
       className={cn(
@@ -96,28 +139,18 @@ export const InputGroupInput = ({ className = '', ...props }: InputGroupInputPro
   )
 }
 
-/**
- * InputGroupAddon — pins content to either inline edge regardless of DOM order via flex ordering.
- */
-
-type AddonAlign = 'inline-start' | 'inline-end'
-
-export interface InputGroupAddonProps extends Omit<ComponentPropsWithRef<'div'>, 'className'> {
-  align?: AddonAlign
-  className?: LithosClass
-}
-
 const addonAlignClasses = {
   'inline-start': 'order-first border-r-2',
   'inline-end': 'order-last border-l-2',
 } as const
 
-export const InputGroupAddon = ({
-  align = 'inline-start',
-  className = '',
-  children,
-  ...props
-}: InputGroupAddonProps) => {
+/**
+ * InputGroupAddon — pins content to either inline edge regardless of DOM order via flex ordering.
+ *
+ * @param props - Add-on properties including alignment options and custom classes.
+ * @returns Add-on container element.
+ */
+export const InputGroupAddon = ({ align = 'inline-start', className, children, ...props }: InputGroupAddonProps) => {
   return (
     <div
       className={cn(

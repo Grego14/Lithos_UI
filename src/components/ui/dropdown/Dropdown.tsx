@@ -5,15 +5,10 @@
  * - Exports `menuItemClass` to enforce consistent interactive styles across items and sub menu triggers.
  */
 import { useMemo, type ReactNode } from 'react'
-import { Popover, type PopoverProps } from '../Popover'
+import { Popover } from '../Popover'
 import { DropdownContext } from './useDropdown'
 import { usePopoverContext } from '../popover/usePopover'
-
-export type DropdownPlacement = 'bottom-start' | 'bottom-end'
-
-interface DropdownProps extends PopoverProps {
-  placement?: DropdownPlacement
-}
+import type { DropdownProps } from './dropdown.types'
 
 const DropdownRoot = ({ placement = 'bottom-end', ...props }: DropdownProps) => (
   <Popover {...props} placement={placement} role="menu" />
@@ -35,11 +30,18 @@ const DropdownProvider = ({ children }: { children: ReactNode }) => {
   return <DropdownContext.Provider value={value}>{children}</DropdownContext.Provider>
 }
 
+/**
+ * Root container component for dropdown menus, establishing popover positioning and menu contexts.
+ *
+ * @param props - Dropdown configuration properties and child menu components.
+ * @returns Dropdown root wrapper element.
+ */
 export const Dropdown = ({ children, ...props }: DropdownProps) => (
   <DropdownRoot {...props}>
     <DropdownProvider>{children}</DropdownProvider>
   </DropdownRoot>
 )
 
+/** Standardized CSS class string enforcing consistent interactive hover, focus, and disabled states across menu items. */
 export const menuItemClass =
   'w-full justify-start text-start select-none rounded-(--lithos-radius) relative text-sm hover:bg-(--lithos-accent)/10 focus:bg-(--lithos-accent)/10 outline-none active:translate-none disabled:pointer-events-none disabled:opacity-50'
