@@ -34,6 +34,7 @@ import { DrawerDoc } from './docs/pages/Drawer'
 import { DocsLayout } from './docs/DocsLayout'
 import { Faq } from './pages/Faq'
 import { InputDoc } from './docs/pages/Input'
+import { IconsDoc } from './docs/pages/Icons'
 import { Installation } from './docs/pages/Installation'
 import { Introduction } from './docs/pages/Introduction'
 import { KbdDoc } from './docs/pages/Kbd'
@@ -86,6 +87,7 @@ const renderDocRoutes = () => {
     { path: 'calendar', component: CalendarDoc },
     { path: 'card', component: CardDoc },
     { path: 'carousel', component: CarouselDoc },
+    { path: 'icons', component: IconsDoc },
     { path: 'input', component: InputDoc },
     { path: 'checkbox', component: CheckboxDoc },
     { path: 'command', component: CommandDoc },
