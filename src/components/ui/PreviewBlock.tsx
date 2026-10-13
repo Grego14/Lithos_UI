@@ -4,10 +4,11 @@
  * - Resolves example code imports and usage blocks dynamically.
  * - Excluded from the public package as it's meant for docs tooling.
  */
-import { useState, type ReactNode } from 'react'
+import { useState, useEffect, type ReactNode } from 'react'
 import { cn, type LithosClass } from '../../utils/cn'
 import { CodeViewer } from './CodeViewer'
 import { Button } from './Button'
+import { Skeleton } from './Skeleton'
 import { IconMonitor } from './icons/IconMonitor'
 import { IconTablet } from './icons/IconTablet'
 import { IconSmartphone } from './icons/IconSmartphone'
@@ -60,7 +61,12 @@ export const PreviewBlock = ({
   const [activeTab, setActiveTab] = useState<AvailableTabs>('preview')
   const [breakpoint, setBreakpoint] = useState<Breakpoint>('desktop')
   const [showInstall, setShowInstall] = useState(false)
+  const [isIframeLoading, setIsIframeLoading] = useState(true)
   const { installTab, packageManager } = useInstallPreference()
+
+  useEffect(() => {
+    setIsIframeLoading(true)
+  }, [slug, previewBaseUrl])
 
   const resolvedCode = typeof code === 'string' ? code : deriveUsageCode(code, installTab)
   const cliCommand = slug ? getCliCommand(packageManager, slug) : undefined
@@ -163,8 +169,24 @@ export const PreviewBlock = ({
         {activeTab === 'preview' ? (
           slug ? (
             <div className={cn('flex items-center justify-center w-full h-full', !noPadding && 'p-4 md:p-6')}>
-              <div style={{ width: getIframeWidth() }} className="h-full transition-all duration-300">
-                <iframe src={`${previewBaseUrl}/${slug}`} className="w-full h-full border-0" title="Block preview" />
+              <div style={{ width: getIframeWidth() }} className="h-full relative transition-all duration-300">
+                {isIframeLoading && (
+                  <Skeleton
+                    variant="rectangular"
+                    animation="shimmer"
+                    tone="accent"
+                    className="absolute inset-0 w-full h-full z-10 rounded-none border-0 shadow-none"
+                  />
+                )}
+                <iframe
+                  src={`${previewBaseUrl}/${slug}`}
+                  className={cn(
+                    'w-full h-full border-0 transition-opacity duration-200',
+                    isIframeLoading ? 'opacity-0' : 'opacity-100'
+                  )}
+                  title="Block preview"
+                  onLoad={() => setIsIframeLoading(false)}
+                />
               </div>
             </div>
           ) : (

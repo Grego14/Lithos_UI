@@ -27,11 +27,11 @@ const Hero = () => {
               MIT LICENSED · ZERO DEPENDENCIES ON GAP
             </p>
 
-            <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tighter leading-none md:text-7xl lg:text-8xl text-(--lithos-text)">
+            <h1 className="text-4xl sm:text-5xl font-hero uppercase tracking-tighter leading-none md:text-7xl lg:text-8xl">
               BUILD FRONTENDS THAT REFUSE TO BREAK
             </h1>
 
-            <h2 className="mt-4 text-3xl sm:text-4xl font-display md:text-5xl italic font-medium text-(--lithos-accent)">
+            <h2 className="mt-4 text-3xl sm:text-4xl font-docs md:text-5xl italic font-medium text-(--lithos-accent)">
               Free Forever
             </h2>
 

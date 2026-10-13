@@ -7,23 +7,25 @@
  */
 
 @import url('https://fonts.googleapis.com/css2?family=Fragment+Mono:ital,wght@0,400;0,700;0,900;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Faster+One:ital,wght@0,400;0,700;0,900;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:ital,wght@0,400;0,700;0,900;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;0,900;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:ital,wght@0,400;0,700;0,900;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,700;0,900;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;0,900;1,400&display=swap');
 @import 'tailwindcss';
+@import './tokens.css';
 
 /* - Tailwind v4 API: Overrides default sans/mono stacks with the brutalist Fragment Mono. */
 @theme {
   /* Set Inter as the global default sans-serif font */
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-
+  --font-hero: 'Faster One', ui-sans-serif, system-ui, sans-serif;
+  --font-docs: 'Playwrite DE Grund', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'Fragment Mono', ui-monospace, monospace;
   --font-code: 'Inconsolata', ui-monospace, monospace;
   --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Quantico', ui-sans-serif, system-ui, sans-serif;
 }
-
-@import './tokens.css';
 
 html {
   /* - Spacing Math: 96px offset accounts for the fixed Navbar height during anchor link scrolling. */
