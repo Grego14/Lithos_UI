@@ -4,16 +4,39 @@
  * - Utilizes the KineticGrid to create an interactive tracking environment.
  * - Keeps the opening rhythm controlled by explicit spacing math and centered containment.
  */
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { KineticGrid } from '../../components/ui/KineticGrid'
 import { Button } from '../../components/ui/Button'
+import { Typography } from '../../components/ui/Typography'
 import { getContrastText } from '../../utils/yiq'
 import type { HexColor } from '../../core/types'
 import { useTheme } from '../../core/hooks/useTheme'
+import { IconRadiusNone } from '../../components/ui/icons/IconRadiusNone'
+import { IconRadiusSm } from '../../components/ui/icons/IconRadiusSm'
+import { IconRadiusMd } from '../../components/ui/icons/IconRadiusMd'
+import { IconRadiusLg } from '../../components/ui/icons/IconRadiusLg'
+
+const ARTISTIC_PALETTES = [
+  { label: 'Cyber Lime', hex: '#00ff00' },
+  { label: 'Acid Orange', hex: '#ff5500' },
+  { label: 'Electric Violet', hex: '#7928ca' },
+  { label: 'Toxic Yellow', hex: '#ffe600' },
+  { label: 'Hyper Cyan', hex: '#00f0ff' },
+  { label: 'Hot Magenta', hex: '#ff007f' },
+] as const
+
+const RADII = [
+  { label: 'None', value: 0, Icon: IconRadiusNone },
+  { label: 'Sm', value: 8, Icon: IconRadiusSm },
+  { label: 'Md', value: 16, Icon: IconRadiusMd },
+  { label: 'Lg', value: 24, Icon: IconRadiusLg },
+] as const
 
 const Hero = () => {
-  const { accentColor, updateAccentColor } = useTheme()
+  const { accentColor, updateAccentColor, radius, updateRadius } = useTheme()
   const fgColor = getContrastText(accentColor)
+  const [ctaClicks, setCtaClicks] = useState(0)
   const navigate = useNavigate()
 
   return (
@@ -36,9 +59,9 @@ const Hero = () => {
             </h2>
 
             <p className="mt-6 text-xl sm:text-2xl font-normal leading-tight text-(--lithos-text) md:text-3xl font-body max-w-2xl mx-auto lg:mx-0">
-              No layout shift. No unreadable text on a bad accent color. No CSS specificity fights. Four systems
-              <ht>built into every component</ht>, working automatically — so the UI you shipped is still standing next
-              quarter.
+              No layout shift. No unreadable text on a bad accent color. No CSS specificity fights. Four systems{' '}
+              <Typography variant="mark">built into every component</Typography>, working automatically — so the UI you
+              shipped is still standing next quarter.
             </p>
 
             <p className="mt-4 text-sm sm:text-base font-bold text-(--lithos-text) opacity-50">
@@ -59,74 +82,135 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right Column: Live Theme Panel */}
-          <div className="w-full lg:w-[40%] mt-16 lg:mt-48 flex justify-center lg:justify-end">
-            <div className="relative border-4 border-(--lithos-border) bg-(--lithos-surface) p-6 w-full max-w-sm shadow-[6px_6px_0px_0px_var(--lithos-shadow)] rounded-(--lithos-radius)">
-              {/* Architectural tick-marks */}
-              <div className="absolute -top-1 -left-1 w-2 h-2 border-t-2 border-l-2 border-(--lithos-accent)" />
-              <div className="absolute -top-1 -right-1 w-2 h-2 border-t-2 border-r-2 border-(--lithos-accent)" />
-              <div className="absolute -bottom-1 -left-1 w-2 h-2 border-b-2 border-l-2 border-(--lithos-accent)" />
-              <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b-2 border-r-2 border-(--lithos-accent)" />
-
-              <div className="flex justify-between items-center mb-6 border-b-2 border-(--lithos-border) pb-4">
-                <h3 className="text-sm font-black uppercase tracking-widest text-(--lithos-text)">Live Theme Engine</h3>
-                <span className="font-mono text-xs font-bold bg-(--lithos-bg) px-2 py-1 border-2 border-(--lithos-border) text-(--lithos-text)">
-                  {accentColor}
-                </span>
-              </div>
-
-              {/* Swatch → dimension line → mini browser mock, as one connected diagram */}
-              <div className="flex items-center space-x-3">
-                {/* Custom color trigger */}
-                <div
-                  className="relative h-20 w-20 shrink-0 lithos-click rounded-(--lithos-radius) overflow-hidden"
-                  style={{ backgroundColor: accentColor }}
-                >
-                  <input
-                    type="color"
-                    value={accentColor}
-                    onChange={(e) => updateAccentColor(e.target.value as HexColor)}
-                    className="absolute inset-0 h-full w-full opacity-0 cursor-pointer z-10"
-                    aria-label="Choose custom theme color"
+          {/* Right Column: Bauhaus / Swiss Blueprint Live Theme Engine */}
+          <div className="w-full lg:w-[42%] mt-12 lg:mt-24 flex justify-center lg:justify-end">
+            <div className="relative border-4 border-(--lithos-border) bg-(--lithos-surface) p-5 sm:p-6 w-full max-w-md shadow-[8px_8px_0px_0px_var(--lithos-shadow)] rounded-(--lithos-radius) select-none">
+              {/* Blueprint Header */}
+              <div className="flex justify-between items-center mb-5 border-b-2 border-(--lithos-border) pb-3">
+                <div className="flex items-center space-x-2">
+                  <span className="w-2.5 h-2.5 bg-(--lithos-accent) border border-(--lithos-border) rounded-(--lithos-radius) inline-block animate-pulse" />
+                  <h3 className="text-sm font-black uppercase tracking-wider text-(--lithos-text)">Theme Engine</h3>
+                </div>
+                <div className="flex items-center space-x-1.5 font-mono text-xs font-bold bg-(--lithos-bg) px-2 py-1 border-2 border-(--lithos-border) rounded-(--lithos-radius) text-(--lithos-text) shadow-[2px_2px_0px_0px_var(--lithos-shadow)]">
+                  <span
+                    className="w-2.5 h-2.5 border border-(--lithos-border) rounded-(--lithos-radius) shrink-0"
+                    style={{ backgroundColor: accentColor }}
                   />
+                  <span>{accentColor.toUpperCase()}</span>
+                </div>
+              </div>
+
+              {/* Palette Chips + Custom Trigger */}
+              <div className="mb-4">
+                <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-wider text-(--lithos-text) opacity-70 mb-2">
+                  <span>Palette</span>
+                  <span className="font-mono text-[9px]">CLICK TO APPLY</span>
                 </div>
 
-                {/* Dimension-line annotation */}
-                <div className="flex-1 flex flex-col items-center justify-center min-w-6">
-                  <span className="text-[9px] font-black uppercase tracking-widest text-(--lithos-text) opacity-50 mb-1 whitespace-nowrap">
-                    Site-Wide
-                  </span>
-                  <div className="w-full border-t-2 border-dashed border-(--lithos-border) relative h-0">
-                    <span className="absolute right-0 -top-1.75 text-(--lithos-border) text-xs leading-none">▶</span>
-                  </div>
-                </div>
+                <div className="flex w-full space-x-1.5">
+                  {ARTISTIC_PALETTES.map((palette) => {
+                    return (
+                      <button
+                        key={palette.hex}
+                        type="button"
+                        onClick={() => updateAccentColor(palette.hex as HexColor)}
+                        title={palette.label}
+                        aria-label={`Select ${palette.label}`}
+                        className="flex-1 h-9 rounded-(--lithos-radius) lithos-click relative"
+                        style={{ backgroundColor: palette.hex }}
+                      />
+                    )
+                  })}
 
-                {/* Mini live browser mock */}
-                <div className="w-28 shrink-0 border-2 border-(--lithos-border) bg-(--lithos-bg) rounded-(--lithos-radius) overflow-hidden">
-                  <div className="flex items-center space-x-1 px-2 py-1.5 border-b-2 border-(--lithos-border) bg-(--lithos-surface)">
-                    <span className="w-1.5 h-1.5 bg-(--lithos-border)" />
-                    <span className="w-1.5 h-1.5 bg-(--lithos-border)" />
-                    <span className="w-1.5 h-1.5 bg-(--lithos-border)" />
-                  </div>
-                  <div className="h-5 flex items-center px-2" style={{ backgroundColor: accentColor }}>
-                    <div className="w-8 h-1.5" style={{ backgroundColor: fgColor, opacity: 0.85 }} />
-                  </div>
-                  <div className="p-2.5 flex flex-col items-start">
-                    <div className="w-3/4 h-1.5 bg-(--lithos-text) opacity-20 mb-1" />
-                    <div className="w-1/2 h-1.5 bg-(--lithos-text) opacity-20 mb-3" />
-                    <div
-                      className="px-2 py-1 text-[9px] font-black uppercase tracking-tight border-2 border-(--lithos-border) rounded-(--lithos-radius)"
-                      style={{ backgroundColor: accentColor, color: fgColor }}
-                    >
-                      Action
-                    </div>
+                  {/* Custom color picker trigger button */}
+                  <div
+                    className="flex-1 h-9 rounded-(--lithos-radius) bg-(--lithos-bg) lithos-click relative flex items-center justify-center cursor-pointer"
+                    title="Custom Color Picker"
+                  >
+                    <span className="text-xs font-black text-(--lithos-text)">+</span>
+                    <input
+                      type="color"
+                      value={accentColor}
+                      onChange={(e) => updateAccentColor(e.target.value as HexColor)}
+                      className="absolute inset-0 h-full w-full opacity-0 cursor-pointer z-10"
+                      aria-label="Choose custom theme color"
+                    />
                   </div>
                 </div>
               </div>
 
-              <p className="mt-6 text-xs font-bold text-(--lithos-text) opacity-50 text-center uppercase tracking-widest">
-                One color. Every token updates instantly — site-wide.
-              </p>
+              {/* Radius Control Row */}
+              <div className="mb-5">
+                <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-wider text-(--lithos-text) opacity-70 mb-2">
+                  <span>Radius</span>
+                  <span className="font-mono text-[9px]">{radius}PX</span>
+                </div>
+
+                <div className="flex w-full border-2 border-(--lithos-border) rounded-(--lithos-radius) overflow-hidden shadow-[2px_2px_0px_0px_var(--lithos-shadow)]">
+                  {RADII.map((r, idx) => {
+                    const isSelected = radius === r.value
+                    const Icon = r.Icon
+                    return (
+                      <button
+                        key={r.label}
+                        type="button"
+                        onClick={() => updateRadius(r.value)}
+                        aria-label={`Set border radius to ${r.label}`}
+                        title={`${r.label} (${r.value}px)`}
+                        className={`flex-1 h-8 flex items-center justify-center text-xs font-bold font-mono transition-colors cursor-pointer ${
+                          idx !== 0 ? 'border-l-2 border-(--lithos-border)' : ''
+                        } ${
+                          isSelected
+                            ? 'bg-(--lithos-accent) text-(--lithos-accent-text)'
+                            : 'bg-(--lithos-bg) text-(--lithos-text) hover:bg-(--lithos-surface)'
+                        }`}
+                      >
+                        <Icon size={14} />
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+
+              {/* Live Specimen & Contrast Gauge */}
+              <div className="border-2 border-(--lithos-border) bg-(--lithos-bg) rounded-(--lithos-radius) p-3.5 mb-4 shadow-[3px_3px_0px_0px_var(--lithos-shadow)]">
+                {/* Gauge technical header */}
+                <div className="flex items-center justify-between border-b border-dashed border-(--lithos-border) pb-2 mb-3">
+                  <div className="flex items-center space-x-1.5">
+                    <span className="w-1.5 h-1.5 bg-(--lithos-border) rounded-full" />
+                    <span className="text-[10px] font-black uppercase tracking-wider text-(--lithos-text)">
+                      Specimen Output
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-1 text-[9px] font-mono font-bold px-1.5 py-0.5 border border-(--lithos-border) rounded-(--lithos-radius) bg-(--lithos-surface)">
+                    <span>CONTRAST:</span>
+                    <span style={{ color: fgColor === '#000000' ? '#059669' : '#2563eb' }}>
+                      {fgColor === '#000000' ? 'DARK INK' : 'LIGHT INK'}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Interactive live test buttons & tokens */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between space-y-2.5 sm:space-y-0 sm:space-x-2.5">
+                  {/* Dynamic Primary CTA */}
+                  <Button
+                    variant="accent"
+                    onClick={() => setCtaClicks((prev) => prev + 1)}
+                    className="text-xs uppercase tracking-tight px-3 py-1.5"
+                  >
+                    {ctaClicks === 0 ? 'Click Me' : `Clicked (${ctaClicks})`}
+                  </Button>
+
+                  {/* Contrast Tag Badge */}
+                  <div className="flex items-center justify-center space-x-1.5 px-2.5 py-1.5 border-2 border-(--lithos-border) rounded-(--lithos-radius) bg-(--lithos-surface) text-[10px] font-bold uppercase tracking-wider text-(--lithos-text)">
+                    <span
+                      className="w-2 h-2 border border-(--lithos-border) rounded-(--lithos-radius)"
+                      style={{ backgroundColor: accentColor }}
+                    />
+                    <span>Active Token</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
