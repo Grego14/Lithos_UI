@@ -15,6 +15,7 @@ import {
   TableRow,
 } from '../../../components/ui/Table'
 import { ToastProvider } from '../../../components/ui/Toast'
+import { ThemeProvider } from '../../../core/ThemeProvider'
 import { BasicTable } from '../../../docs/examples/table/BasicTable'
 import { TableStates } from '../../../docs/examples/table/TableStates'
 import { BulkActionsTable } from '../../../docs/examples/table/BulkActions'
@@ -23,7 +24,15 @@ import { DropdownActionsTable } from '../../../docs/examples/table/DropdownActio
 import { ResponsiveTable } from '../../../docs/examples/table/ResponsiveTable'
 import { SortableTable } from '../../../docs/examples/table/SortableTable'
 import { GroupedHeadersTable } from '../../../docs/examples/table/GroupedHeaders'
-const render = (ui: ReactElement) => renderWithProvider(ui, { wrapper: ToastProvider })
+
+const render = (ui: ReactElement) =>
+  renderWithProvider(ui, {
+    wrapper: ({ children }) => (
+      <ThemeProvider>
+        <ToastProvider>{children}</ToastProvider>
+      </ThemeProvider>
+    ),
+  })
 
 afterEach(() => vi.unstubAllGlobals())
 afterEach(() => vi.restoreAllMocks())
