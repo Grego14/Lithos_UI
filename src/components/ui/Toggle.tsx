@@ -4,17 +4,34 @@
  * - Neo-brutalist physics: shadow steps move; the parent never translates.
  * - Binary contrast: thumb and track invert as one hard state change.
  */
-import type { ComponentPropsWithRef } from 'react'
 import { Button } from './Button'
 import { cn, type LithosClass } from '../../utils/cn'
+import type { LithosElementProps } from '../../core/types'
 
-export interface ToggleProps extends Omit<ComponentPropsWithRef<'button'>, 'className'> {
+/** Props configuration interface for the `Toggle` component. */
+export interface ToggleProps extends LithosElementProps<'button'> {
+  /** Checked boolean state controlling the toggle activation status. */
   checked: boolean
+
+  /** Callback function triggered when toggling the active state. */
   onToggle: () => void
+
+  /**
+   * Accessible label string for screen reader announcements.
+   * @default 'Theme Changed'
+   */
   label?: string
+
+  /** Custom CSS classes applied to the root button element. */
   className?: LithosClass
 }
 
+/**
+ * Kinetic toggle switch primitive component featuring neo-brutalist track and thumb physics.
+ *
+ * @param props - Toggle properties including checked states, onToggle handlers, labels, and custom classes.
+ * @returns Toggle switch button element.
+ */
 export const Toggle = ({ checked, onToggle, label = 'Theme Changed', className, ...rest }: ToggleProps) => {
   // - Stationary shell: only the shadow changes, so surrounding layout never shifts.
   return (
