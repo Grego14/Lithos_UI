@@ -1,9 +1,98 @@
-import type { ComponentPropsWithRef, CSSProperties } from 'react'
+/**
+ * @fileoverview Lithos UI skeleton loader primitives (`Skeleton` and `SkeletonText`).
+ * - Renders placeholder placeholder shapes with neo-brutalist border styling and animation effects (`shimmer` or `pulse`).
+ * - Supports accessibility hiding (`aria-hidden="true"` and `inert`) and responsive motion preference adjustments.
+ */
+import type { CSSProperties } from 'react'
 import { cn, type LithosClass } from '../../utils/cn'
+import type { LithosElementProps } from '../../core/types'
 
+/** Animation behavior configurations for skeleton loaders. */
 export type SkeletonAnimation = boolean | 'shimmer' | 'pulse'
+
+/** Structural shape variant styles supported by skeleton components. */
 export type SkeletonVariant = 'text' | 'rectangular' | 'rounded' | 'circular'
+
+/** Color tone themes supported by skeleton components. */
 export type SkeletonTone = 'neutral' | 'accent'
+
+/** Props configuration interface for the root `Skeleton` component. */
+export interface SkeletonProps extends Omit<LithosElementProps<'span'>, 'children' | 'dangerouslySetInnerHTML'> {
+  /** Custom CSS classes applied to the skeleton element. */
+  className?: LithosClass
+
+  /** Children are explicitly disallowed for skeleton placeholders. */
+  children?: never
+
+  /**
+   * Structural shape variant style.
+   * @default 'text'
+   */
+  variant?: SkeletonVariant
+
+  /**
+   * Animation behavior type or boolean toggle.
+   * @default true
+   */
+  animation?: SkeletonAnimation
+
+  /**
+   * Disables animations when user system preferences request reduced motion.
+   * @default false
+   */
+  respectReducedMotion?: boolean
+
+  /**
+   * Semantic color tone theme category.
+   * @default 'neutral'
+   */
+  tone?: SkeletonTone
+
+  /** Custom width dimension style property. */
+  width?: CSSProperties['width']
+
+  /** Custom height dimension style property. */
+  height?: CSSProperties['height']
+}
+
+/** Props configuration interface for the `SkeletonText` component. */
+export interface SkeletonTextProps extends Omit<LithosElementProps<'div'>, 'children' | 'dangerouslySetInnerHTML'> {
+  /** Custom CSS classes applied to the text block container. */
+  className?: LithosClass
+
+  /** Children are explicitly disallowed for skeleton text blocks. */
+  children?: never
+
+  /**
+   * Total number of placeholder text lines to render.
+   * @default 3
+   */
+  lines?: number
+
+  /**
+   * Width dimension style applied specifically to the final text line.
+   * @default '65%'
+   */
+  lastLineWidth?: CSSProperties['width']
+
+  /**
+   * Animation behavior type or boolean toggle.
+   * @default true
+   */
+  animation?: SkeletonAnimation
+
+  /**
+   * Disables animations when user system preferences request reduced motion.
+   * @default false
+   */
+  respectReducedMotion?: boolean
+
+  /**
+   * Semantic color tone theme category.
+   * @default 'neutral'
+   */
+  tone?: SkeletonTone
+}
 
 const variants: Record<SkeletonVariant, string> = {
   text: 'w-full h-[1em] rounded-(--lithos-radius)',
@@ -23,20 +112,12 @@ const animations: Record<Exclude<SkeletonAnimation, boolean>, string> = {
     'animate-[lithos-shimmer_1.5s_linear_infinite] [mask-image:linear-gradient(to_right,#0006_35%,#000_50%,#0006_65%)] [mask-size:300%_100%] [mask-clip:no-clip] [mask-repeat:repeat] forced-colors:[mask-image:none]',
 }
 
-export interface SkeletonProps extends Omit<
-  ComponentPropsWithRef<'span'>,
-  'className' | 'children' | 'dangerouslySetInnerHTML'
-> {
-  className?: LithosClass
-  children?: never
-  variant?: SkeletonVariant
-  animation?: SkeletonAnimation
-  respectReducedMotion?: boolean
-  tone?: SkeletonTone
-  width?: CSSProperties['width']
-  height?: CSSProperties['height']
-}
-
+/**
+ * Skeleton placeholder primitive component rendering animated loading shapes with neo-brutalist styling.
+ *
+ * @param props - Skeleton properties including variants, animations, tones, widths, and heights.
+ * @returns Skeleton span element.
+ */
 export const Skeleton = ({
   variant = 'text',
   animation = true,
@@ -69,19 +150,12 @@ export const Skeleton = ({
   />
 )
 
-export interface SkeletonTextProps extends Omit<
-  ComponentPropsWithRef<'div'>,
-  'className' | 'children' | 'dangerouslySetInnerHTML'
-> {
-  className?: LithosClass
-  children?: never
-  lines?: number
-  lastLineWidth?: CSSProperties['width']
-  animation?: SkeletonAnimation
-  respectReducedMotion?: boolean
-  tone?: SkeletonTone
-}
-
+/**
+ * SkeletonText layout component rendering multi-line paragraph loading placeholders with custom line counts and trailing widths.
+ *
+ * @param props - Skeleton text properties including line quantities, last line widths, tones, and animations.
+ * @returns Skeleton text container div element.
+ */
 export const SkeletonText = ({
   lines = 3,
   lastLineWidth = '65%',
