@@ -1,20 +1,87 @@
 /**
  * @fileoverview Lithos UI native table primitives.
- * - React 19 refs are ordinary props, typed by ComponentPropsWithRef and passed through to native elements.
  * - Theme tokens provide colors, YIQ-derived accent text, radius, and hard shadows; cn() preserves class overrides.
  * - Cell padding controls density without CSS gap; interactive behavior is composed with shared controls.
  */
-import type { ComponentPropsWithRef } from 'react'
-import { cn, type LithosClass } from '../../utils/cn'
+import { cn } from '../../utils/cn'
+import type { LithosElementProps } from '../../core/types'
 
-type TableElementProps<T extends 'div' | 'table' | 'thead' | 'tbody' | 'tfoot' | 'tr' | 'th' | 'td' | 'caption'> = Omit<
-  ComponentPropsWithRef<T>,
-  'className'
-> & { className?: LithosClass }
+/**
+ * Utility type mapping native table element attributes and injecting `LithosClass` support.
+ */
+export type TableElementProps<
+  T extends 'div' | 'table' | 'thead' | 'tbody' | 'tfoot' | 'tr' | 'th' | 'td' | 'caption',
+> = LithosElementProps<T>
 
+/** Props configuration interface for the `TableContainer` component. */
 export type TableContainerProps = TableElementProps<'div'>
 
-/** Name the scroll region with aria-label or aria-labelledby. */
+/** Props configuration interface for the root `Table` component. */
+export interface TableProps extends TableElementProps<'table'> {
+  /**
+   * Size density scale variant controlling cell padding metrics.
+   * @default 'md'
+   */
+  size?: 'sm' | 'md' | 'lg'
+
+  /**
+   * Applies alternating background striping styles to table body rows.
+   * @default false
+   */
+  striped?: boolean
+
+  /**
+   * Enables interactive hover background styling on table body rows.
+   * @default false
+   */
+  hoverable?: boolean
+
+  /**
+   * Fixes the table header row at the top of the scroll container viewport.
+   * @default false
+   */
+  stickyHeader?: boolean
+}
+
+/** Props configuration interface for the `TableHeader` component. */
+export interface TableHeaderProps extends TableElementProps<'thead'> {
+  /**
+   * Visual header color theme variant mapping.
+   * @default 'default'
+   */
+  variant?: 'default' | 'accent'
+}
+
+/** Props configuration interface for the `TableBody` component. */
+export type TableBodyProps = TableElementProps<'tbody'>
+
+/** Props configuration interface for the `TableFooter` component. */
+export type TableFooterProps = TableElementProps<'tfoot'>
+
+/** Props configuration interface for the `TableRow` component. */
+export interface TableRowProps extends TableElementProps<'tr'> {
+  /**
+   * Visual selection state flag. Supply a labeled checkbox for interactive selection.
+   * @default false
+   */
+  selected?: boolean
+}
+
+/** Props configuration interface for the `TableHead` header cell component. */
+export type TableHeadProps = TableElementProps<'th'>
+
+/** Props configuration interface for the `TableCell` standard data cell component. */
+export type TableCellProps = TableElementProps<'td'>
+
+/** Props configuration interface for the `TableCaption` description component. */
+export type TableCaptionProps = TableElementProps<'caption'>
+
+/**
+ * Scrollable container wrapper component for data tables.
+ *
+ * @param props - Container properties including custom classes and ARIA attributes.
+ * @returns Region container div element.
+ */
 export const TableContainer = ({ className, ...props }: TableContainerProps) => (
   <div
     data-slot="table-container"
@@ -28,14 +95,12 @@ export const TableContainer = ({ className, ...props }: TableContainerProps) => 
   />
 )
 
-export interface TableProps extends TableElementProps<'table'> {
-  size?: 'sm' | 'md' | 'lg'
-  striped?: boolean
-  hoverable?: boolean
-  stickyHeader?: boolean
-}
-
-/** Native table semantics; state and data transformations belong to the consumer. */
+/**
+ * Root table element component providing native semantics, spacing rules, and density scales.
+ *
+ * @param props - Table properties including sizes, striping, hover effects, and sticky header toggles.
+ * @returns Native table element.
+ */
 export const Table = ({
   size = 'md',
   striped = false,
@@ -62,9 +127,12 @@ export const Table = ({
   />
 )
 
-export interface TableHeaderProps extends TableElementProps<'thead'> {
-  variant?: 'default' | 'accent'
-}
+/**
+ * Table header group section component (`<thead>`).
+ *
+ * @param props - Header properties including color theme variants and custom classes.
+ * @returns Native thead element.
+ */
 export const TableHeader = ({ variant = 'default', className, ...props }: TableHeaderProps) => (
   <thead
     data-slot="table-header"
@@ -78,12 +146,22 @@ export const TableHeader = ({ variant = 'default', className, ...props }: TableH
   />
 )
 
-export type TableBodyProps = TableElementProps<'tbody'>
+/**
+ * Table body group section component (`<tbody>`).
+ *
+ * @param props - Body properties including custom classes.
+ * @returns Native tbody element.
+ */
 export const TableBody = ({ className, ...props }: TableBodyProps) => (
   <tbody data-slot="table-body" className={cn('[&>tr:last-child>*]:border-b-0', className)} {...props} />
 )
 
-export type TableFooterProps = TableElementProps<'tfoot'>
+/**
+ * Table footer group section component (`<tfoot>`).
+ *
+ * @param props - Footer properties including custom classes.
+ * @returns Native tfoot element.
+ */
 export const TableFooter = ({ className, ...props }: TableFooterProps) => (
   <tfoot
     data-slot="table-footer"
@@ -95,10 +173,12 @@ export const TableFooter = ({ className, ...props }: TableFooterProps) => (
   />
 )
 
-export interface TableRowProps extends TableElementProps<'tr'> {
-  /** Visual selection only. Supply a labeled checkbox for interactive selection. */
-  selected?: boolean
-}
+/**
+ * Table row component (`<tr>`) supporting visual selection states.
+ *
+ * @param props - Row properties including selection flags and custom classes.
+ * @returns Native tr element.
+ */
 export const TableRow = ({ selected = false, className, ...props }: TableRowProps) => (
   <tr
     data-slot="table-row"
@@ -111,7 +191,12 @@ export const TableRow = ({ selected = false, className, ...props }: TableRowProp
   />
 )
 
-export type TableHeadProps = TableElementProps<'th'>
+/**
+ * Table header cell component (`<th>`).
+ *
+ * @param props - Header cell properties including custom classes.
+ * @returns Native th element.
+ */
 export const TableHead = ({ className, ...props }: TableHeadProps) => (
   <th
     data-slot="table-head"
@@ -123,7 +208,12 @@ export const TableHead = ({ className, ...props }: TableHeadProps) => (
   />
 )
 
-export type TableCellProps = TableElementProps<'td'>
+/**
+ * Table standard data cell component (`<td>`).
+ *
+ * @param props - Cell properties including custom classes.
+ * @returns Native td element.
+ */
 export const TableCell = ({ className, ...props }: TableCellProps) => (
   <td
     data-slot="table-cell"
@@ -135,7 +225,12 @@ export const TableCell = ({ className, ...props }: TableCellProps) => (
   />
 )
 
-export type TableCaptionProps = TableElementProps<'caption'>
+/**
+ * Table caption description component (`<caption>`).
+ *
+ * @param props - Caption properties including custom classes.
+ * @returns Native caption element.
+ */
 export const TableCaption = ({ className, ...props }: TableCaptionProps) => (
   <caption
     data-slot="table-caption"
