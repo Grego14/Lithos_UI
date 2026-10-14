@@ -1,4 +1,6 @@
 /**
  * @fileoverview Re-export icon types and defaults for backward compatibility.
  */
-export * from './icons.types'
+
+// eslint-disable-next-line
+export { iconDefaults, type IconProps } from './icons.types'
