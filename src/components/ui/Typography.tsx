@@ -54,7 +54,10 @@ export interface TypographyOwnProps<T extends TypographyComponent = 'p'> {
   /** Polymorphic HTML element tag override to render. */
   as?: T
 
-  /** Typographic style variant token mapping. */
+  /**
+   * Typographic style variant token mapping.
+   * @default 'p'
+   */
   variant?: TypographyVariants
 
   /** Custom CSS classes applied to the typography element. */
