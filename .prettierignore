@@ -19,6 +19,3 @@ Thumbs.db
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
-
-# Minified/obfuscated file - do not commit
-api.js
