@@ -223,6 +223,22 @@ const discoverTargets = (): ComponentTarget[] => {
         seedFiles,
       })
     }
+
+    // Special case: icons directory -> 'icons' slug pointing to IconBase.tsx
+    const iconsDir = path.join(UI_DIR, 'icons')
+    if (fs.existsSync(iconsDir) && fs.statSync(iconsDir).isDirectory()) {
+      const iconBasePath = path.join(iconsDir, 'IconBase.tsx')
+      if (fs.existsSync(iconBasePath)) {
+        const iconFiles = getCompanionFiles(iconsDir)
+        targets.push({
+          slug: 'icons',
+          name: 'Icons',
+          type: 'ui',
+          primaryFile: 'components/ui/icons/IconBase.tsx',
+          seedFiles: iconFiles,
+        })
+      }
+    }
   }
 
   // 2. Blocks
