@@ -28,7 +28,7 @@ const SHOWCASE_BLOCKS = [
     badge: 'ZERO-GAP',
     description: 'Rigid card fields with explicit margins, hard shadows, and physical hover lifts.',
     cli: 'npx lithos-ui add feature-grids-1',
-    link: '/blocks/feature-grid',
+    link: '/blocks/feature-grids',
   },
   {
     title: 'Landing Templates',
@@ -60,11 +60,11 @@ export const BlocksShowcase = () => {
         </div>
 
         {/* Blocks Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="flex flex-wrap -m-3">
           {SHOWCASE_BLOCKS.map((block) => (
             <Card
               key={block.title}
-              className="border-4 border-(--lithos-border) bg-(--lithos-surface) p-6 sm:p-8 flex flex-col justify-between shadow-[6px_6px_0px_0px_var(--lithos-shadow)] hover:shadow-[10px_10px_0px_0px_var(--lithos-shadow)] transition-all duration-150"
+              className="m-3 w-full md:w-[calc(50%-1.5rem)] border-4 border-(--lithos-border) bg-(--lithos-surface) p-6 sm:p-8 flex flex-col justify-between shadow-[6px_6px_0px_0px_var(--lithos-shadow)] hover:shadow-[10px_10px_0px_0px_var(--lithos-shadow)] transition-all duration-150"
             >
               <div>
                 <div className="flex items-center justify-between border-b-2 border-(--lithos-border) pb-3 mb-4">

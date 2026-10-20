@@ -28,9 +28,9 @@ export const StatsStrip = () => {
   return (
     <section className="border-b-2 border-(--lithos-border) bg-(--lithos-surface) py-16">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="flex flex-wrap -m-3">
           {/* Stat 1: Components */}
-          <div className="border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 rounded-(--lithos-radius) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] text-center">
+          <div className="m-3 w-[calc(50%-1.5rem)] lg:w-[calc(25%-1.5rem)] border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 rounded-(--lithos-radius) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] text-center">
             <span className="text-4xl sm:text-6xl font-black font-mono text-(--lithos-text) block mb-2">27+</span>
             <span className="text-xs font-mono font-bold uppercase tracking-widest text-(--lithos-text) opacity-70">
               UI Primitives
@@ -38,7 +38,7 @@ export const StatsStrip = () => {
           </div>
 
           {/* Stat 2: Blocks */}
-          <div className="border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 rounded-(--lithos-radius) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] text-center">
+          <div className="m-3 w-[calc(50%-1.5rem)] lg:w-[calc(25%-1.5rem)] border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 rounded-(--lithos-radius) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] text-center">
             <span className="text-4xl sm:text-6xl font-black font-mono text-(--lithos-text) block mb-2">8+</span>
             <span className="text-xs font-mono font-bold uppercase tracking-widest text-(--lithos-text) opacity-70">
               Sections & Blocks
@@ -46,7 +46,7 @@ export const StatsStrip = () => {
           </div>
 
           {/* Stat 3: Free Forever */}
-          <div className="border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 rounded-(--lithos-radius) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] text-center">
+          <div className="m-3 w-[calc(50%-1.5rem)] lg:w-[calc(25%-1.5rem)] border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 rounded-(--lithos-radius) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] text-center">
             <span className="text-4xl sm:text-6xl font-black font-mono text-(--lithos-accent) block mb-2">$0</span>
             <span className="text-xs font-mono font-bold uppercase tracking-widest text-(--lithos-text) opacity-70">
               Free & Open Source
@@ -54,7 +54,7 @@ export const StatsStrip = () => {
           </div>
 
           {/* Stat 4: Layout Shifts / GitHub Stars */}
-          <div className="border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 rounded-(--lithos-radius) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] text-center">
+          <div className="m-3 w-[calc(50%-1.5rem)] lg:w-[calc(25%-1.5rem)] border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 rounded-(--lithos-radius) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] text-center">
             <span className="text-4xl sm:text-6xl font-black font-mono text-(--lithos-text) block mb-2">
               {stars !== null ? `${stars}★` : '0'}
             </span>
@@ -65,14 +65,14 @@ export const StatsStrip = () => {
         </div>
 
         {/* Ticker / Guarantee bar */}
-        <div className="mt-8 border-2 border-(--lithos-border) bg-(--lithos-bg) py-3 px-6 rounded-(--lithos-radius) flex flex-wrap items-center justify-around font-mono text-xs font-bold text-(--lithos-text) opacity-80 gap-4 text-center">
-          <span>MIT LICENSED</span>
-          <span>·</span>
-          <span>NO PRO TIERS</span>
-          <span>·</span>
-          <span>NO SUBSCRIPTIONS</span>
-          <span>·</span>
-          <span>YOU OWN THE SOURCE</span>
+        <div className="mt-8 border-2 border-(--lithos-border) bg-(--lithos-bg) py-3 px-4 rounded-(--lithos-radius) flex flex-wrap items-center justify-around font-mono text-xs font-bold text-(--lithos-text) opacity-80 text-center">
+          <span className="my-1 mx-2">MIT LICENSED</span>
+          <span className="my-1 mx-2">·</span>
+          <span className="my-1 mx-2">NO PRO TIERS</span>
+          <span className="my-1 mx-2">·</span>
+          <span className="my-1 mx-2">NO SUBSCRIPTIONS</span>
+          <span className="my-1 mx-2">·</span>
+          <span className="my-1 mx-2">YOU OWN THE SOURCE</span>
         </div>
       </div>
     </section>

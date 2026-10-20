@@ -42,9 +42,9 @@ export const ComponentPlayground = () => {
         </div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex flex-wrap -m-3">
           {/* Card 1: Interactive Button Physics */}
-          <Card className="border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 flex flex-col justify-between shadow-[6px_6px_0px_0px_var(--lithos-shadow)]">
+          <Card className="m-3 w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 flex flex-col justify-between shadow-[6px_6px_0px_0px_var(--lithos-shadow)]">
             <div>
               <div className="flex items-center justify-between border-b-2 border-(--lithos-border) pb-3 mb-5">
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-(--lithos-text)">
@@ -59,18 +59,18 @@ export const ComponentPlayground = () => {
               </p>
 
               <div className="space-y-3">
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap -m-1">
                   <Button
                     variant="primary"
                     onClick={() => setClickCount((c) => c + 1)}
-                    className="text-xs font-black uppercase py-2 px-3"
+                    className="m-1 text-xs font-black uppercase py-2 px-3"
                   >
                     Click Me ({clickCount})
                   </Button>
                   <Button
                     variant="secondary"
                     onClick={() => setClickCount(0)}
-                    className="text-xs font-bold uppercase py-2 px-3"
+                    className="m-1 text-xs font-bold uppercase py-2 px-3"
                     iconLeft={<IconRotateCcw size={12} />}
                   >
                     Reset
@@ -78,7 +78,7 @@ export const ComponentPlayground = () => {
                   <Button
                     variant="accent"
                     onClick={() => setLiked(!liked)}
-                    className="text-xs font-bold uppercase py-2 px-3"
+                    className="m-1 text-xs font-bold uppercase py-2 px-3"
                     iconLeft={<IconHeart size={12} />}
                   >
                     {liked ? 'Liked!' : 'Like'}
@@ -93,7 +93,7 @@ export const ComponentPlayground = () => {
           </Card>
 
           {/* Card 2: Interactive Tabs Component */}
-          <Card className="border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 flex flex-col justify-between shadow-[6px_6px_0px_0px_var(--lithos-shadow)]">
+          <Card className="m-3 w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 flex flex-col justify-between shadow-[6px_6px_0px_0px_var(--lithos-shadow)]">
             <div>
               <div className="flex items-center justify-between border-b-2 border-(--lithos-border) pb-3 mb-5">
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-(--lithos-text)">
@@ -139,7 +139,7 @@ export const ComponentPlayground = () => {
           </Card>
 
           {/* Card 3: Interactive Alerts & Feedback */}
-          <Card className="border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 flex flex-col justify-between shadow-[6px_6px_0px_0px_var(--lithos-shadow)]">
+          <Card className="m-3 w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 flex flex-col justify-between shadow-[6px_6px_0px_0px_var(--lithos-shadow)]">
             <div>
               <div className="flex items-center justify-between border-b-2 border-(--lithos-border) pb-3 mb-5">
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-(--lithos-text)">
@@ -178,7 +178,7 @@ export const ComponentPlayground = () => {
           </Card>
 
           {/* Card 4: Toggles & Form Controls */}
-          <Card className="border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 flex flex-col justify-between shadow-[6px_6px_0px_0px_var(--lithos-shadow)]">
+          <Card className="m-3 w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 flex flex-col justify-between shadow-[6px_6px_0px_0px_var(--lithos-shadow)]">
             <div>
               <div className="flex items-center justify-between border-b-2 border-(--lithos-border) pb-3 mb-5">
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-(--lithos-text)">
@@ -216,7 +216,7 @@ export const ComponentPlayground = () => {
           </Card>
 
           {/* Card 5: Badge & Status Stack */}
-          <Card className="border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 flex flex-col justify-between shadow-[6px_6px_0px_0px_var(--lithos-shadow)]">
+          <Card className="m-3 w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 flex flex-col justify-between shadow-[6px_6px_0px_0px_var(--lithos-shadow)]">
             <div>
               <div className="flex items-center justify-between border-b-2 border-(--lithos-border) pb-3 mb-5">
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-(--lithos-text)">
@@ -230,20 +230,20 @@ export const ComponentPlayground = () => {
                 Semantic status badges dynamically resolving their foreground ink tone.
               </p>
 
-              <div className="flex flex-wrap gap-2">
-                <Badge intent="accent" className="font-mono text-xs uppercase font-black">
+              <div className="flex flex-wrap -m-1">
+                <Badge intent="accent" className="m-1 font-mono text-xs uppercase font-black">
                   ACCENT
                 </Badge>
-                <Badge intent="success" className="font-mono text-xs uppercase font-black">
+                <Badge intent="success" className="m-1 font-mono text-xs uppercase font-black">
                   SUCCESS
                 </Badge>
-                <Badge intent="warning" className="font-mono text-xs uppercase font-black">
+                <Badge intent="warning" className="m-1 font-mono text-xs uppercase font-black">
                   WARNING
                 </Badge>
-                <Badge intent="error" className="font-mono text-xs uppercase font-black">
+                <Badge intent="error" className="m-1 font-mono text-xs uppercase font-black">
                   CRITICAL
                 </Badge>
-                <Badge intent="info" className="font-mono text-xs uppercase font-black">
+                <Badge intent="info" className="m-1 font-mono text-xs uppercase font-black">
                   SYSTEM
                 </Badge>
               </div>
@@ -255,7 +255,7 @@ export const ComponentPlayground = () => {
           </Card>
 
           {/* Card 6: Kbd Shortcuts & Hotkeys */}
-          <Card className="border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 flex flex-col justify-between shadow-[6px_6px_0px_0px_var(--lithos-shadow)]">
+          <Card className="m-3 w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] border-4 border-(--lithos-border) bg-(--lithos-bg) p-6 flex flex-col justify-between shadow-[6px_6px_0px_0px_var(--lithos-shadow)]">
             <div>
               <div className="flex items-center justify-between border-b-2 border-(--lithos-border) pb-3 mb-5">
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-(--lithos-text)">
