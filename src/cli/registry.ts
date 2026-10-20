@@ -434,6 +434,13 @@ export const registry: Record<string, RegistryItem> = {
     requires: ['utils/cn.ts', 'utils/colors.ts'],
     dependencies: ['clsx', 'tailwind-merge'],
   },
+  icons: {
+    slug: 'icons',
+    name: 'Icons',
+    type: 'ui',
+    githubUrl: `${GITHUB_BASE}/components/ui/icons/IconBase.tsx`,
+    requires: ['react-icons'],
+  },
   kbd: {
     slug: 'kbd',
     name: 'Kbd',
