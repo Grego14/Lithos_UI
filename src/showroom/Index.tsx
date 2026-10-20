@@ -1,51 +1,50 @@
 import { Navbar } from './sections/Navbar'
 import { Hero } from './sections/Hero'
+import { QuickstartCLI } from './sections/QuickstartCLI'
 import { FeatureGrid } from './sections/FeatureGrid'
-import { ThemeEngine } from './sections/ThemeEngine'
+import { ComponentPlayground } from './sections/ComponentPlayground'
+import { BlocksShowcase } from './sections/BlocksShowcase'
+import { StatsStrip } from './sections/StatsStrip'
+import { CallToAction } from './sections/CallToAction'
 import { Footer } from './sections/Footer'
 
 /**
  * Showroom Component - Landing Page UI Composition
  *
- * Isolates the landing page structure (Navbar, sections, Footer) from root App logic.
- * Accepts theme state and toggle function as props for downstream consumption.
+ * Neo-brutalist zero-gap architectural layout:
+ * - pt-24 (main): offsets fixed 96px Navbar.
+ * - Slabs stack seamlessly with alternating surface contrast and 2px hard dividers.
  */
-
 export const Showroom = () => {
-  /**
-   * ZERO-GAP SPACING MATH:
-   * - pt-24 (main): padding-top: 6rem = 96px
-   *   Accounts for fixed Navbar height (~96px) to prevent content overlap.
-   *   Navbar height MUST equal pt-24 value for perfect zero-gap alignment.
-   *
-   * - Wrapper div mt-24: margin-top: 6rem = 96px
-   *   Creates uniform inter-section spacing (96px between major blocks).
-   *   This is the Lithos spacing unit. Do NOT mix with gap utilities.
-   */
   return (
     <>
       <Navbar />
 
       <main className="pt-24">
+        {/* Viewport Hero Anchor */}
         <Hero />
-        {/* All sections: mt-24 = 96px margin for zero-gap layout */}
-        <div className="mt-24">
-          <ThemeEngine />
-        </div>
-        <div className="mt-24">
-          <FeatureGrid />
-        </div>
-        {/* TODO: Future stats strip section goes here.
-            - Real GitHub star count (fetched, not hardcoded)
-            - Component count
-            - Block count
-            - "Free. No tiers. No Pro plan."
-        */}
+
+        {/* Quickstart Terminal & Zero Lock-in CLI */}
+        <QuickstartCLI />
+
+        {/* Four Architectural Pillars */}
+        <FeatureGrid />
+
+        {/* Live Interactive Bento Component Playground */}
+        <ComponentPlayground />
+
+        {/* Pre-composed Blocks & Templates Gallery */}
+        <BlocksShowcase />
+
+        {/* Stats Strip & Free Forever Open Source Manifesto */}
+        <StatsStrip />
+
+        {/* Production Readiness Call to Action */}
+        <CallToAction />
       </main>
 
-      <div className="mt-24">
-        <Footer />
-      </div>
+      {/* Heavy Closing Slab */}
+      <Footer />
     </>
   )
 }

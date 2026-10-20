@@ -4,18 +4,17 @@
  * - Utilizes the KineticGrid to create an interactive tracking environment.
  * - Keeps the opening rhythm controlled by explicit spacing math and centered containment.
  */
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { KineticGrid } from '../../components/ui/KineticGrid'
 import { Button } from '../../components/ui/Button'
 import { Typography } from '../../components/ui/Typography'
-import { getContrastText } from '../../utils/yiq'
 import type { HexColor } from '../../core/types'
 import { useTheme } from '../../core/hooks/useTheme'
 import { IconRadiusNone } from '../../components/ui/icons/IconRadiusNone'
 import { IconRadiusSm } from '../../components/ui/icons/IconRadiusSm'
 import { IconRadiusMd } from '../../components/ui/icons/IconRadiusMd'
 import { IconRadiusLg } from '../../components/ui/icons/IconRadiusLg'
+import { IconArrowRight } from '../../components/ui/icons/IconArrowRight'
 
 const ARTISTIC_PALETTES = [
   { label: 'Cyber Lime', hex: '#00ff00' },
@@ -35,8 +34,6 @@ const RADII = [
 
 const Hero = () => {
   const { accentColor, updateAccentColor, radius, updateRadius } = useTheme()
-  const fgColor = getContrastText(accentColor)
-  const [ctaClicks, setCtaClicks] = useState(0)
   const navigate = useNavigate()
 
   return (
@@ -172,45 +169,16 @@ const Hero = () => {
                 </div>
               </div>
 
-              {/* Live Specimen & Contrast Gauge */}
-              <div className="border-2 border-(--lithos-border) bg-(--lithos-bg) rounded-(--lithos-radius) p-3.5 mb-4 shadow-[3px_3px_0px_0px_var(--lithos-shadow)]">
-                {/* Gauge technical header */}
-                <div className="flex items-center justify-between border-b border-dashed border-(--lithos-border) pb-2 mb-3">
-                  <div className="flex items-center space-x-1.5">
-                    <span className="w-1.5 h-1.5 bg-(--lithos-border) rounded-full" />
-                    <span className="text-[10px] font-black uppercase tracking-wider text-(--lithos-text)">
-                      Specimen Output
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-1 text-[9px] font-mono font-bold px-1.5 py-0.5 border border-(--lithos-border) rounded-(--lithos-radius) bg-(--lithos-surface)">
-                    <span>CONTRAST:</span>
-                    <span style={{ color: fgColor === '#000000' ? '#059669' : '#2563eb' }}>
-                      {fgColor === '#000000' ? 'DARK INK' : 'LIGHT INK'}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Interactive live test buttons & tokens */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between space-y-2.5 sm:space-y-0 sm:space-x-2.5">
-                  {/* Dynamic Primary CTA */}
-                  <Button
-                    variant="accent"
-                    onClick={() => setCtaClicks((prev) => prev + 1)}
-                    className="text-xs uppercase tracking-tight px-3 py-1.5"
-                  >
-                    {ctaClicks === 0 ? 'Click Me' : `Clicked (${ctaClicks})`}
-                  </Button>
-
-                  {/* Contrast Tag Badge */}
-                  <div className="flex items-center justify-center space-x-1.5 px-2.5 py-1.5 border-2 border-(--lithos-border) rounded-(--lithos-radius) bg-(--lithos-surface) text-[10px] font-bold uppercase tracking-wider text-(--lithos-text)">
-                    <span
-                      className="w-2 h-2 border border-(--lithos-border) rounded-(--lithos-radius)"
-                      style={{ backgroundColor: accentColor }}
-                    />
-                    <span>Active Token</span>
-                  </div>
-                </div>
-              </div>
+              {/* Navigate to Full Theme Builder */}
+              <Button
+                variant="primary"
+                fullWidth
+                onClick={() => navigate('/theme')}
+                iconRight={<IconArrowRight size={14} />}
+                className="py-2.5 text-xs font-black uppercase tracking-wider flex items-center justify-center"
+              >
+                Open Full Theme Builder
+              </Button>
             </div>
           </div>
         </div>

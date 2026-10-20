@@ -2,10 +2,11 @@ import { Navbar } from '../showroom/sections/Navbar'
 import { Footer } from '../showroom/sections/Footer'
 import { KineticGrid } from '../components/ui/KineticGrid'
 import { templateCategories } from '../components/templates/registry'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Card, CardContent } from '../components/ui/Card'
 
 export const TemplatesIndex = () => {
+  const navigate = useNavigate()
   return (
     <>
       <Navbar />
@@ -40,25 +41,33 @@ export const TemplatesIndex = () => {
 
                 return (
                   <div key={category.slug} className="w-full sm:w-[50%] lg:w-[33.333%] p-3">
-                    <Link to={`/templates/${category.slug}`} className="block h-full outline-none">
-                      <Card interactive className="h-full flex flex-col p-0">
-                        <div className="w-full h-48 overflow-hidden bg-(--lithos-surface) relative border-b-2 border-(--lithos-border) font-normal tracking-normal leading-normal">
-                          <div className="absolute inset-0 pointer-events-none">
-                            <div className="w-[300%] scale-[0.333] origin-top-left">
-                              <FirstComponent />
-                            </div>
+                    <Card
+                      interactive
+                      onClick={() => navigate(`/templates/${category.slug}`)}
+                      className="h-full flex flex-col p-0 cursor-pointer"
+                    >
+                      <div className="w-full h-48 overflow-hidden bg-(--lithos-surface) relative border-b-2 border-(--lithos-border) font-normal tracking-normal leading-normal">
+                        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+                          <div className="w-[300%] scale-[0.333] origin-top-left">
+                            <FirstComponent />
                           </div>
                         </div>
-                        <CardContent spacing="sm" className="grow flex flex-col justify-between">
-                          <h3 className="text-xl font-black tracking-tighter leading-none text-(--lithos-text)">
+                      </div>
+                      <CardContent spacing="sm" className="grow flex flex-col justify-between">
+                        <h3 className="text-xl font-black tracking-tighter leading-none text-(--lithos-text)">
+                          <Link
+                            to={`/templates/${category.slug}`}
+                            onClick={(e) => e.stopPropagation()}
+                            className="hover:text-(--lithos-accent) transition-colors"
+                          >
                             {category.title}
-                          </h3>
-                          <div className="mt-4 text-xs font-bold tracking-widest text-(--lithos-accent)">
-                            {category.variants.length} Variant{category.variants.length !== 1 ? 's' : ''}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </Link>
+                          </Link>
+                        </h3>
+                        <div className="mt-4 text-xs font-bold tracking-widest text-(--lithos-accent)">
+                          {category.variants.length} Variant{category.variants.length !== 1 ? 's' : ''}
+                        </div>
+                      </CardContent>
+                    </Card>
                   </div>
                 )
               })}

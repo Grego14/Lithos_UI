@@ -85,7 +85,7 @@ export const TabsList = ({ className, children, ...rest }: TabsListProps) => {
         'flex',
         variant === 'vertical' && 'flex-col items-stretch [&>*:not(:first-child)]:mt-4 min-w-[150px]',
         variant === 'underline' && 'flex-row items-center w-full',
-        variant === 'default' && 'flex-row flex-wrap items-center [&>*:not(:first-child)]:ml-4',
+        variant === 'default' && 'flex-row flex-wrap items-center -m-1 [&>*]:m-1',
         className
       )}
       {...rest}
