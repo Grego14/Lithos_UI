@@ -108,14 +108,17 @@ export const ComponentPlayground = () => {
               </p>
 
               <Tabs defaultValue="architecture" className="w-full">
-                <TabsList className="mb-4">
-                  <TabsTrigger value="architecture" className="text-xs font-bold uppercase">
+                <TabsList className="mb-4 w-full flex">
+                  <TabsTrigger
+                    value="architecture"
+                    className="flex-1 px-2 py-2 text-xs font-bold uppercase text-center"
+                  >
                     Pillars
                   </TabsTrigger>
-                  <TabsTrigger value="contrast" className="text-xs font-bold uppercase">
+                  <TabsTrigger value="contrast" className="flex-1 px-2 py-2 text-xs font-bold uppercase text-center">
                     YIQ Ink
                   </TabsTrigger>
-                  <TabsTrigger value="code" className="text-xs font-bold uppercase">
+                  <TabsTrigger value="code" className="flex-1 px-2 py-2 text-xs font-bold uppercase text-center">
                     Tokens
                   </TabsTrigger>
                 </TabsList>

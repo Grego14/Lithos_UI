@@ -68,10 +68,10 @@ export const BlocksShowcase = () => {
             >
               <div>
                 <div className="flex items-center justify-between border-b-2 border-(--lithos-border) pb-3 mb-4">
-                  <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-(--lithos-text)">
+                  <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-(--lithos-text) min-w-0 truncate mr-3">
                     {block.title}
                   </h3>
-                  <span className="font-mono text-[10px] font-black uppercase px-2 py-0.5 border border-(--lithos-border) rounded-(--lithos-radius) bg-(--lithos-accent) text-(--lithos-accent-text)">
+                  <span className="shrink-0 whitespace-nowrap font-mono text-[10px] font-black uppercase px-2 py-0.5 border border-(--lithos-border) rounded-(--lithos-radius) bg-(--lithos-accent) text-(--lithos-accent-text)">
                     {block.badge}
                   </span>
                 </div>

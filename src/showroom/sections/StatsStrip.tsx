@@ -65,14 +65,19 @@ export const StatsStrip = () => {
         </div>
 
         {/* Ticker / Guarantee bar */}
-        <div className="mt-8 border-2 border-(--lithos-border) bg-(--lithos-bg) py-3 px-4 rounded-(--lithos-radius) flex flex-wrap items-center justify-around font-mono text-xs font-bold text-(--lithos-text) opacity-80 text-center">
-          <span className="my-1 mx-2">MIT LICENSED</span>
-          <span className="my-1 mx-2">·</span>
-          <span className="my-1 mx-2">NO PRO TIERS</span>
-          <span className="my-1 mx-2">·</span>
-          <span className="my-1 mx-2">NO SUBSCRIPTIONS</span>
-          <span className="my-1 mx-2">·</span>
-          <span className="my-1 mx-2">YOU OWN THE SOURCE</span>
+        <div className="mt-8 border-2 border-(--lithos-border) bg-(--lithos-bg) p-3 rounded-(--lithos-radius) flex flex-wrap items-center justify-center font-mono text-xs font-bold text-(--lithos-text) text-center">
+          <span className="m-1.5 px-3 py-1 rounded-(--lithos-radius) border border-(--lithos-border) bg-(--lithos-surface) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] whitespace-nowrap">
+            MIT LICENSED
+          </span>
+          <span className="m-1.5 px-3 py-1 rounded-(--lithos-radius) border border-(--lithos-border) bg-(--lithos-surface) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] whitespace-nowrap">
+            NO PRO TIERS
+          </span>
+          <span className="m-1.5 px-3 py-1 rounded-(--lithos-radius) border border-(--lithos-border) bg-(--lithos-surface) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] whitespace-nowrap">
+            NO SUBSCRIPTIONS
+          </span>
+          <span className="m-1.5 px-3 py-1 rounded-(--lithos-radius) border border-(--lithos-border) bg-(--lithos-surface) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] whitespace-nowrap">
+            YOU OWN THE SOURCE
+          </span>
         </div>
       </div>
     </section>
