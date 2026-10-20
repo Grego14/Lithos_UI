@@ -205,14 +205,23 @@ const discoverTargets = (): ComponentTarget[] => {
 
       const slug = toKebabCase(baseName)
       const name = toDisplayName(slug, baseName)
-      const primaryFile = `components/ui/${fileEntry.name}`
-      const seedFiles = [primaryFile]
 
       // Check for companion directory (e.g. drawer/, select/, popover/)
       const companionDir = path.join(UI_DIR, slug)
+      let primaryFile = `components/ui/${fileEntry.name}`
+      const seedFiles: string[] = []
+
       if (fs.existsSync(companionDir) && fs.statSync(companionDir).isDirectory()) {
+        // Use the main component file from companion directory as primaryFile if it exists
+        const mainFromDir = `${slug}/${baseName}.tsx`
+        const mainFromDirPath = path.join(UI_DIR, mainFromDir)
+        if (fs.existsSync(mainFromDirPath)) {
+          primaryFile = `components/ui/${mainFromDir}`
+        }
         const compFiles = getCompanionFiles(companionDir)
         seedFiles.push(...compFiles)
+      } else {
+        seedFiles.push(primaryFile)
       }
 
       targets.push({
