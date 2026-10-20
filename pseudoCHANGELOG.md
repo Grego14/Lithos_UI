@@ -30,6 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Fixed (0.1.3)
 
 - The `Tooltip` arrow appeared detached from the floating element when using a non-sharp radius.
+- **Tabs:** Fixed `TabsList` default variant wrapping behavior by replacing one-dimensional `[&>*:not(:first-child)]:ml-4` with zero-gap compliant `-m-1 [&>*]:m-1` margin distribution. Tab triggers now wrap cleanly across multiple lines on smaller viewports with consistent vertical and horizontal clearance, preventing overlap.
 
 ### Removed (0.1.3)
 
