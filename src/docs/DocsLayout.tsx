@@ -18,7 +18,7 @@ export const DocsLayout = ({ children }: { children: ReactNode }) => {
 
       <div className="flex-1 w-full max-w-screen-2xl mx-auto grid grid-cols-12 pt-24 items-start">
         <div className="hidden lg:block lg:col-span-2 sticky top-32">
-          <div className="max-h-[calc(100vh-10rem)] pb-6 overflow-y-auto sidebar-scroll">
+          <div className="max-h-[calc(100vh-10rem)] pb-6 overflow-y-auto no-scrollbar sidebar-scroll [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <Sidebar />
           </div>
         </div>
@@ -28,7 +28,7 @@ export const DocsLayout = ({ children }: { children: ReactNode }) => {
         </main>
 
         <div className="hidden xl:block xl:col-span-2 sticky top-32">
-          <div className="max-h-[calc(100vh-10rem)] pb-6 overflow-y-auto sidebar-scroll">
+          <div className="max-h-[calc(100vh-10rem)] pb-6 overflow-y-auto no-scrollbar sidebar-scroll [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <TableOfContents />
           </div>
         </div>
