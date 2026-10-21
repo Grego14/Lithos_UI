@@ -4,6 +4,12 @@
 
 Lithos UI is a free, neo-brutalist React component library engineered with absolute structural integrity. It ditches fragile CSS gaps and soft shadows in favor of rigid grids, and high-contrast accessibility.
 
+<p align="left">
+  <a href="https://www.npmjs.com/package/lithos-ui"><img src="https://img.shields.io/npm/v/lithos-ui?style=flat-square&color=000000" alt="NPM Version" /></a>
+  <a href="./LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-000000?style=flat-square" alt="License" /></a>
+  <a href="https://opencollective.com/lithos-ui"><img src="https://img.shields.io/opencollective/all/lithos-ui?label=financial%20contributors&color=00ff00&style=flat-square&logo=open-collective&logoColor=000000" alt="Open Collective Contributors" /></a>
+</p>
+
 ## Core Architecture
 
 ### 1. YIQ Biological Contrast Engine
@@ -101,6 +107,24 @@ _(Note: Interactive physics and structural weight are handled via the `@layer co
 
 Lithos UI includes a native Dark Mode trigger. Simply apply the `.obsidian` class to the document body or top-level wrapper, and the global tokens will instantly invert, while respecting your primary `--lithos-accent` color.
 
-### License
+## Sponsors & Financial Contributors
+
+Lithos UI is an independent open-source project supported by our community and fiscal host [Open Source Collective](https://opencollective.com/lithos-ui).
+
+If you or your team use Lithos UI to ship products, consider [becoming a financial contributor](https://opencollective.com/lithos-ui). Contributions directly fund our custom domain, hosting infrastructure, and ongoing development of brutalist primitives.
+
+<p align="left">
+  <a href="https://opencollective.com/lithos-ui">
+    <img src="https://opencollective.com/lithos-ui/donate/button@2x.png?color=blue" width="220" alt="Donate to Lithos UI on Open Collective" />
+  </a>
+</p>
+
+### Financial Contributors
+
+<a href="https://opencollective.com/lithos-ui">
+  <img src="https://opencollective.com/lithos-ui/backers.svg?width=890" alt="Lithos UI Financial Contributors" />
+</a>
+
+## License
 
 Lithos UI is free for unlimited commercial and personal projects. See [LICENSE.md](./LICENSE.md) for full details.

@@ -49,7 +49,7 @@ export const Footer = () => {
         <div className="mt-12 flex w-full flex-col lg:mt-0 lg:w-1/4 lg:items-end">
           <Button
             variant="secondary"
-            onClick={() => window.open('https://incrediblestand.gumroad.com/l/lithos-ui', '_blank')}
+            onClick={() => window.open('https://opencollective.com/lithos-ui', '_blank')}
             className="group text-2xl hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text) md:text-3xl py-4 px-6"
           >
             <span>Show Love</span>
