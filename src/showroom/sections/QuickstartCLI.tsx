@@ -57,7 +57,7 @@ export const QuickstartCLI = () => {
               <span className="w-3 h-3 border-2 border-(--lithos-border) bg-[#ffbd2e] rounded-full inline-block" />
               <span className="w-3 h-3 border-2 border-(--lithos-border) bg-[#27c93f] rounded-full inline-block" />
               <span className="ml-3 font-mono text-xs font-bold uppercase tracking-wider text-(--lithos-text)">
-                lithos-cli ~ v0.1.2
+                lithos-cli ~ v0.1.4
               </span>
             </div>
 
