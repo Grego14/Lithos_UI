@@ -4,9 +4,9 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [0.1.3]
+## [0.1.4]
 
-### Added (0.1.3)
+### Added (0.1.4)
 
 - **Typography:** Added the `Typography` primitive ([#335](https://github.com/lithosui/Lithos_UI/pull/335))
 - Added a **ThemeProvider** to synchronize the calls to the new `useTheme` hook _(before useLithosTheme)_ ([#337](https://github.com/lithosui/Lithos_UI/pull/337))
@@ -22,15 +22,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - Comprehensive documentation page with standalone examples (`default`, `withButton`, `sizeAndStroke`, `colorAndToken`), Anatomy code preview, and custom props API reference.
   - Integrated Icons card into the Components Index page.
 
-### Changed (0.1.3)
+### Changed (0.1.4)
 
 - **Toast:** Added JSDoc comments to the `Toast` types and the `addToast` function now
   accepts a `label` that is used on the `Toast` close button. ([#357](https://github.com/lithosui/Lithos_UI/pull/357))
 
-### Fixed (0.1.3)
+### Fixed (0.1.4)
 
 - The `Tooltip` arrow appeared detached from the floating element when using a non-sharp radius.
 - **Tabs:** Fixed `TabsList` default variant wrapping behavior by replacing one-dimensional `[&>*:not(:first-child)]:ml-4` with zero-gap compliant `-m-1 [&>*]:m-1` margin distribution. Tab triggers now wrap cleanly across multiple lines on smaller viewports with consistent vertical and horizontal clearance, preventing overlap.
+
+### Removed (0.1.4)
+
+## [0.1.3]
+
+### Added (0.1.3)
+
+### Changed (0.1.3)
+
+### Fixed (0.1.3)
 
 ### Removed (0.1.3)
 
