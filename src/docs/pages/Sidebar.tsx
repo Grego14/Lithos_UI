@@ -130,7 +130,11 @@ export const SidebarDoc = () => (
       description={
         <>
           Allows toggling between an expanded state and a compact icon-only view using the <code>SidebarTrigger</code>{' '}
-          component.
+          component.{' '}
+          <strong>
+            To disable the tooltip on the trigger, pass the <code>disableTooltip</code> prop (e.g.,{' '}
+            <code>&lt;SidebarTrigger disableTooltip /&gt;</code>).
+          </strong>
         </>
       }
     >
