@@ -297,7 +297,7 @@ export const SpinnerDoc = () => {
       </div>
 
       <h3 id="icons" className="mt-12 mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Choosing the Spinner
+        Custom Spinner
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
         You can pass a predefined string to the <code>icon</code> prop. The Spinner will render the corresponding icon

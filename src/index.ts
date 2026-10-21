@@ -36,6 +36,7 @@ export * from './components/ui/Toast'
 export * from './components/ui/Toggle'
 export * from './components/ui/Tooltip'
 export * from './components/ui/Sidebar'
+export * from './components/ui/Typography'
 
 export * from './core/ThemeProvider'
 export * from './core/ThemeProviderContext'

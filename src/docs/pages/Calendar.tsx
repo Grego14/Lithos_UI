@@ -166,7 +166,7 @@ export const CalendarDoc = () => (
 
     <DocExample
       id="range"
-      title="range"
+      title="Range"
       description={
         <>
           Use this when the user needs to select a contiguous block of dates, such as a booking period or filter range.

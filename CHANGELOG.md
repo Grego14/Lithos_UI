@@ -8,9 +8,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added (0.1.3)
 
+- **Typography:** Added the `Typography` primitive ([#335](https://github.com/lithosui/Lithos_UI/pull/335))
+- Added a **ThemeProvider** to synchronize the calls to the new `useTheme` hook _(before useLithosTheme)_ ([#337](https://github.com/lithosui/Lithos_UI/pull/337))
+- **Table:** Added the `Table` primitive ([#341](https://github.com/lithosui/Lithos_UI/pull/341))
+- **Sidebar:** Added the `Sidebar` primitive ([#346](https://github.com/lithosui/Lithos_UI/pull/346))
+- **Pagination:** Added the `Pagination` primitive ([#350](https://github.com/lithosui/Lithos_UI/pull/350))
+- **Icons:** Introduced the `Icons` primitive suite and interactive documentation explorer.
+  - Standardized wrapper around `react-icons` with unified default geometry (`size: 16`, `strokeWidth: 2`) and design token compatibility.
+  - Added `icons.types.ts` defining `IconProps` and `iconDefaults` with backwards-compatible re-exports in `IconBase.tsx`.
+  - Exported 44 vector icon components and added `icons` to the CLI registry and component exports.
+  - Added interactive Gallery Explorer with real-time name and tag search, size and stroke thickness toggle controls, click-to-copy JSX tags, and expandable pagination with Lithos `Button`.
+  - Zero-Gap Rule compliance across the gallery grid using explicit margin and padding math.
+  - Comprehensive documentation page with standalone examples (`default`, `withButton`, `sizeAndStroke`, `colorAndToken`), Anatomy code preview, and custom props API reference.
+  - Integrated Icons card into the Components Index page.
+
 ### Changed (0.1.3)
 
+- **Toast:** Added JSDoc comments to the `Toast` types and the `addToast` function now
+  accepts a `label` that is used on the `Toast` close button. ([#357](https://github.com/lithosui/Lithos_UI/pull/357))
+
 ### Fixed (0.1.3)
+
+- The `Tooltip` arrow appeared detached from the floating element when using a non-sharp radius.
+- **Tabs:** Fixed `TabsList` default variant wrapping behavior by replacing one-dimensional `[&>*:not(:first-child)]:ml-4` with zero-gap compliant `-m-1 [&>*]:m-1` margin distribution. Tab triggers now wrap cleanly across multiple lines on smaller viewports with consistent vertical and horizontal clearance, preventing overlap.
 
 ### Removed (0.1.3)
 

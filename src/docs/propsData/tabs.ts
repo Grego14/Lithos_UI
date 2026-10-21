@@ -41,6 +41,21 @@ export const tabsPropsData: PropItem[] = [
   },
 ]
 
+export const tabsListPropsData: PropItem[] = [
+  {
+    name: 'children',
+    type: 'ReactNode',
+    required: true,
+    description: 'The tab triggers that constitute the navigation list.',
+  },
+  {
+    name: 'className',
+    type: 'LithosClass',
+    required: false,
+    description: 'Additional CSS classes applied to the tab list container.',
+  },
+]
+
 export const tabsTriggerPropsData: PropItem[] = [
   {
     name: 'value',

@@ -192,7 +192,7 @@ export const DropdownDoc = () => {
       </h2>
 
       <h3 id="default" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Action Menu
+        Default
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
         Use a Dropdown when you need to group related actions (like account settings, navigation options, or
