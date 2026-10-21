@@ -102,7 +102,9 @@ export const PopoverPage = () => {
       </h2>
 
       <div className="mb-12">
-        <h3 className="text-xl font-bold mb-4 font-display">Default</h3>
+        <h3 id="default" className="text-xl font-bold mb-4 font-display">
+          Default
+        </h3>
         <p className="mb-4 text-sm font-body opacity-80 max-w-2xl">
           By default, the popover opens below its trigger. It will automatically flip to the top if it collides with the
           bottom of the viewport. Focus is trapped inside while open.

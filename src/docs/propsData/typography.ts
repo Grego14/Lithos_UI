@@ -24,9 +24,9 @@ export const typographyPropsData: PropItem[] = [
   },
   {
     name: 'color',
-    type: 'HexColor | string',
+    type: 'HexColor',
     required: false,
-    description: 'Hex color value for background with automatic contrast text resolution.',
+    description: 'Hex color string (e.g. "#00FF00") for background with automatic YIQ contrast text resolution.',
   },
   {
     name: 'className',

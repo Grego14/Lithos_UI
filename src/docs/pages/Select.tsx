@@ -299,8 +299,8 @@ export const SelectDoc = () => {
         Examples
       </h2>
 
-      <h3 id="simple-usage" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Simple Usage
+      <h3 id="basic" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
+        Basic
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
         Pass an array of options through the <code>options</code> prop for quick, declarative rendering without extra
@@ -315,8 +315,8 @@ export const SelectDoc = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="multiple-selection" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Multiple Selection
+      <h3 id="multiple" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
+        Multiple
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
         Enable the <code>multiple</code> prop to allow selecting several options. Selected items are displayed

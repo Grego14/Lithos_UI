@@ -101,17 +101,14 @@ export const TooltipDoc = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="variants" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Variants
-      </h3>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
         You can pass the <code>variant</code> prop to <code>TooltipContent</code> to change its style. Supported
         variants are <code>default</code>, <code>primary</code>, and <code>inverse</code>.
       </p>
 
-      <h4 id="primary-variant" className="mt-8 mb-4 text-lg font-black tracking-tight text-(--lithos-text)">
+      <h3 id="primary-variant" className="mt-8 mb-4 text-lg font-black tracking-tight text-(--lithos-text)">
         Primary
-      </h4>
+      </h3>
       <div className="mt-4 mb-8">
         <PreviewBlock code={primaryCode}>
           <div className="flex items-center justify-center p-12">
@@ -120,9 +117,9 @@ export const TooltipDoc = () => {
         </PreviewBlock>
       </div>
 
-      <h4 id="inverse-variant" className="mt-8 mb-4 text-lg font-black tracking-tight text-(--lithos-text)">
+      <h3 id="inverse-variant" className="mt-8 mb-4 text-lg font-black tracking-tight text-(--lithos-text)">
         Inverse
-      </h4>
+      </h3>
       <div className="mt-4 mb-16">
         <PreviewBlock code={inverseCode}>
           <div className="flex items-center justify-center p-12">

@@ -347,7 +347,7 @@ export const IconsDoc = () => {
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="cursor-pointer text-xs font-mono font-bold uppercase tracking-wider px-5 py-2"
               >
-                {isExpanded ? 'Show Less' : 'Show More'}
+                {isExpanded ? 'Show Less' : 'View More'}
               </Button>
             </div>
           )}

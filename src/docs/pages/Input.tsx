@@ -191,8 +191,8 @@ export const InputDoc = () => {
         Examples
       </h2>
 
-      <h3 id="basic-usage" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Basic usage
+      <h3 id="basic" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
+        Basic
       </h3>
 
       <div className="mt-8 mb-16">
@@ -230,7 +230,7 @@ export const InputDoc = () => {
       </div>
 
       <h3 id="invalid" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Invalid state
+        Invalid
       </h3>
 
       <div className="mt-8 mb-16">

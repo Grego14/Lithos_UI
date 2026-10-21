@@ -427,8 +427,8 @@ export const CustomLayoutCarousel = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="vertical-orientation" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Vertical Orientation
+      <h3 id="vertical" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
+        Vertical
       </h3>
       <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
         Use this to navigate between slides along the Y-axis instead of the standard horizontal direction. It renders

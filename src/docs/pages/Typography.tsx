@@ -13,7 +13,7 @@ const articleSnippetCode = {
     <article className="p-6 bg-(--lithos-bg) border-2 border-(--lithos-border) shadow-[4px_4px_0px_0px_var(--lithos-shadow)] flex flex-col space-y-4">
       <Typography variant="caption">Featured Note</Typography>
       <Typography variant="h2">Raw Layout Clarity</Typography>
-      <Typography variant="body">Lithos UI relies on <Typography variant="mark">structural weight</Typography> and high contrast rather than smooth gradients.</Typography>
+      <Typography variant="p">Lithos UI relies on <Typography variant="mark">structural weight</Typography> and high contrast rather than smooth gradients.</Typography>
       <Typography variant="blockquote">"Neobrutalism is not about ugly UI, it is about raw layout clarity."</Typography>
       <Typography variant="small" className="text-(--lithos-text)/80">Run <Typography variant="code">npm i lithos-ui</Typography> to get started.</Typography>
     </article>
@@ -146,6 +146,10 @@ export const TypographyDoc = () => {
         Examples
       </h2>
 
+      <h3 id="some" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
+        Some
+      </h3>
+
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
         Combine typographic variants to build structured content layouts with high contrast and explicit visual
         hierarchy.
@@ -157,8 +161,8 @@ export const TypographyDoc = () => {
         </PreviewBlock>
       </div>
 
-      <h3 id="usage" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Usage
+      <h3 id="all" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
+        All
       </h3>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
         Overview of all available typography scale variants from display headings down to micro captions, code blocks,

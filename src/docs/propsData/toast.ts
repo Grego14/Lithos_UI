@@ -45,8 +45,14 @@ export const toastPropsData: PropItem[] = [
     description: 'Defines the structural intent and default styling variant.',
   },
   {
-    name: 'color',
+    name: 'label',
     type: 'string',
+    defaultValue: "'Close notification'",
+    description: 'Accessible ARIA label applied to the toast close button.',
+  },
+  {
+    name: 'color',
+    type: 'HexColor | string',
     description: 'Custom inline CSS background or accent color variable.',
   },
   {

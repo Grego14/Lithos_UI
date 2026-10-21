@@ -2,7 +2,7 @@ import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../components/ui/Tabs'
 import { PropsAccordion } from '../../components/ui/PropsTable'
-import { tabsPropsData, tabsTriggerPropsData, tabsContentPropsData } from '../propsData/tabs'
+import { tabsPropsData, tabsListPropsData, tabsTriggerPropsData, tabsContentPropsData } from '../propsData/tabs'
 import { SetupGuide } from '../layout/SetupGuide'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Tabs.tsx'
@@ -230,6 +230,7 @@ export const TabsDoc = () => {
           API Reference
         </h2>
         <PropsAccordion title="Tabs Props" data={tabsPropsData} />
+        <PropsAccordion title="TabsList Props" data={tabsListPropsData} />
         <PropsAccordion title="TabsTrigger Props" data={tabsTriggerPropsData} />
         <PropsAccordion title="TabsContent Props" data={tabsContentPropsData} />
       </section>
