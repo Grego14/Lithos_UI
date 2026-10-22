@@ -1,398 +1,242 @@
-import { Button, ButtonGroup } from '../../components/ui/Button'
-import { IconDownload } from '../../components/ui/icons/IconDownload'
-import { IconHome } from '../../components/ui/icons/IconHome'
-import { IconSettings } from '../../components/ui/icons/IconSettings'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 import { PropsAccordion } from '../../components/ui/PropsTable'
+import { Typography } from '../../components/ui/Typography'
 import { SetupGuide } from '../layout/SetupGuide'
+import { DocCallout, DocExample, DocHeader, DocHeading, DocLeadText, DocList, DocSection } from '../layout/DocPage'
 import { buttonPropsData, buttonGroupPropsData } from '../propsData/button'
+import { removeImports } from '../examples/removeImports'
+import { DefaultButtonExample } from '../examples/button/default'
+import defaultSource from '../examples/button/default.tsx?raw'
+import { SecondaryButtonExample } from '../examples/button/secondary'
+import secondarySource from '../examples/button/secondary.tsx?raw'
+import { AccentButtonExample } from '../examples/button/accent'
+import accentSource from '../examples/button/accent.tsx?raw'
+import { SolidButtonExample } from '../examples/button/solid'
+import solidSource from '../examples/button/solid.tsx?raw'
+import { TextButtonExample } from '../examples/button/text'
+import textSource from '../examples/button/text.tsx?raw'
+import { InverseButtonExample } from '../examples/button/inverse'
+import inverseSource from '../examples/button/inverse.tsx?raw'
+import { WithIconButtonsExample } from '../examples/button/withIcon'
+import withIconSource from '../examples/button/withIcon.tsx?raw'
+import { IconButtonExample } from '../examples/button/icon'
+import iconSource from '../examples/button/icon.tsx?raw'
+import { HorizontalButtonGroupExample } from '../examples/button/groupHorizontal'
+import groupHorizontalSource from '../examples/button/groupHorizontal.tsx?raw'
+import { VerticalButtonGroupExample } from '../examples/button/groupVertical'
+import groupVerticalSource from '../examples/button/groupVertical.tsx?raw'
+import { AttachedButtonGroupExample } from '../examples/button/groupAttached'
+import groupAttachedSource from '../examples/button/groupAttached.tsx?raw'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Button.tsx'
 const manualPath = '../../components/ui/Button'
-
-const defaultCode = {
-  body: `export const DefaultButton = () => {
-    return <Button>Default</Button>
-  }`,
-  componentNames: ['Button'],
+const buttonCode = (source: string, componentNames = ['Button']) => ({
+  body: removeImports(source),
+  componentNames,
   manualPath,
-}
-
-const secondaryCode = {
-  body: `export const SecondaryButton = () => {
-    return <Button variant="secondary">Secondary</Button>
-  }`,
-  componentNames: ['Button'],
-  manualPath,
-}
-
-const accentCode = {
-  body: `export const AccentButton = () => {
-    return <Button variant="accent">Accent</Button>
-  }`,
-  componentNames: ['Button'],
-  manualPath,
-}
-
-const solidCode = {
-  body: `export const SolidButton = () => {
-    return <Button variant="solid" color="#0000FF">Solid</Button>
-  }`,
-  componentNames: ['Button'],
-  manualPath,
-}
-
-const textCode = {
-  body: `export const TextButton = () => {
-    return <Button variant="text">Text</Button>
-  }`,
-  componentNames: ['Button'],
-  manualPath,
-}
-
-const inverseCode = {
-  body: `export const InverseButton = () => {
-    return <Button variant="inverse">Inverse</Button>
-  }`,
-  componentNames: ['Button'],
-  manualPath,
-}
-
+})
 const withIconCode = {
-  body: `export const WithIconButtons = () => {
-    return (
-      <div className="flex items-center">
-        <Button iconLeft={<IconHome />}>Home</Button>
-        <Button variant="secondary" iconRight={<IconSettings />} className="ml-3">
-          Settings
-        </Button>
-      </div>
-    )
-  }`,
-  componentNames: ['Button', 'IconHome', 'IconSettings'],
+  ...buttonCode(withIconSource, ['Button', 'IconHome', 'IconSettings']),
   manualPath: {
     Button: manualPath,
     IconHome: '../../components/ui/icons/IconHome',
     IconSettings: '../../components/ui/icons/IconSettings',
   },
 }
-
 const iconCode = {
-  body: `export const IconButton = () => {
-    return (
-      <Button aria-label="Download">
-        <IconDownload />
-      </Button>
-    )
-  }`,
-  componentNames: ['Button', 'IconDownload'],
+  ...buttonCode(iconSource, ['Button', 'IconDownload']),
   manualPath: {
     Button: manualPath,
     IconDownload: '../../components/ui/icons/IconDownload',
   },
 }
 
-const groupHorizontalCode = {
-  body: `export const HorizontalButtonGroup = () => {
-    return (
-      <ButtonGroup>
-        <Button variant="secondary">Cancel</Button>
-        <Button variant="primary">Save Changes</Button>
-      </ButtonGroup>
-    )
-  }`,
-  componentNames: ['Button', 'ButtonGroup'],
-  manualPath: manualPath,
-}
+export const ButtonDoc = () => (
+  <div className="max-w-5xl mx-auto px-6">
+    <DocHeader
+      title="Button"
+      description="A hard-bordered, high-contrast clickable primitive with four levels of visual emphasis."
+    />
 
-const groupVerticalCode = {
-  body: `export const VerticalButtonGroup = () => {
-    return (
-      <ButtonGroup mode="vertical">
-        <Button variant="primary">Save Changes</Button>
-        <Button variant="secondary">Cancel</Button>
-      </ButtonGroup>
-    )
-  }`,
-  componentNames: ['Button', 'ButtonGroup'],
-  manualPath: manualPath,
-}
+    <DocSection className="mb-6">
+      <DocLeadText>
+        Button is a strict native <code>&lt;button&gt;</code> primitive. It ships four <code>intent</code> variants —
+        Default, Secondary, Accent, Text — built on the shared hard-shadow, hard-border interaction physics of{' '}
+        <code>.lithos-click</code>.
+      </DocLeadText>
+      <DocCallout>
+        <strong>Default</strong> is the primary call to action and requires no <code>intent</code> prop.{' '}
+        <strong>Secondary</strong> is a secondary call-to-action with an outlined style. <strong>Accent</strong> is a
+        secondary button that fills solid with the accent color on hover. <strong>Solid</strong> allows a custom
+        background color with an automatically adapting contrast text. <strong>Inverse</strong> inverts the button
+        colors to adapt to dark backgrounds. <strong>Text</strong> is a text-only button variant with no border or
+        background, typically used for secondary or low-emphasis actions.
+      </DocCallout>
+    </DocSection>
 
-const groupAttachedCode = {
-  body: `export const AttachedButtonGroup = () => {
-    return (
-      <ButtonGroup attached>
-        <Button variant="secondary">Cancel</Button>
-        <Button variant="primary">Save Changes</Button>
-      </ButtonGroup>
-    )
-  }`,
-  componentNames: ['Button', 'ButtonGroup'],
-  manualPath: manualPath,
-}
-
-export const ButtonDoc = () => {
-  return (
-    <div className="max-w-5xl mx-auto px-6">
-      <header className="mt-0">
-        <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-none text-(--lithos-text) mb-8">
-          Button
-        </h1>
-        <p className="mt-2 text-lg md:text-xl font-display opacity-70 text-(--lithos-text)">
-          A hard-bordered, high-contrast clickable primitive with four levels of visual emphasis.
-        </p>
-        <hr className="border-t-2 border-(--lithos-border) mt-6 mb-6" />
-      </header>
-
-      <section className="mb-6">
-        <p className="text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          Button is a strict native <code>&lt;button&gt;</code> primitive. It ships four <code>intent</code> variants —
-          Default, Secondary, Accent, Text — built on the shared hard-shadow, hard-border interaction physics of{' '}
-          <code>.lithos-click</code>.
-        </p>
-      </section>
-
-      <div className="border-l-4 border-(--lithos-accent) pl-6 py-2 mb-8 bg-(--lithos-surface) p-4">
-        <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
-          <strong>Default</strong> is the primary call to action and requires no <code>intent</code> prop.{' '}
-          <strong>Secondary</strong> is a secondary call-to-action with an outlined style. <strong>Accent</strong> is a
-          secondary button that fills solid with the accent color on hover. <strong>Solid</strong> allows a custom
-          background color with an automatically adapting contrast text. <strong>Inverse</strong> inverts the button
-          colors to adapt to dark backgrounds. <strong>Text</strong> is a text-only button variant with no border or
-          background, typically used for secondary or low-emphasis actions.
-        </p>
-      </div>
-
-      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Installation
-      </h2>
-
+    <DocSection>
+      <DocHeading id="installation">Installation</DocHeading>
       <SetupGuide
         componentNames={['Button']}
-        manualPath="../../components/ui/Button"
+        manualPath={manualPath}
         requires={['utils/cn.ts', 'core/types.ts', 'utils/yiq.ts']}
       />
+    </DocSection>
 
-      <h2 id="examples" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Examples
-      </h2>
+    <DocHeading id="examples">Examples</DocHeading>
+    <DocHeading id="button">Button</DocHeading>
 
-      <h2 id="button" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Button
-      </h2>
-
-      <h4 id="default" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
-        Default
-      </h4>
-      <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        Use this as the primary call to action on a screen. It renders with a solid accent background and contrasting
-        text. Hovering or focusing scales the button slightly. Do not use more than once per view to maintain visual
-        hierarchy. Accessible via standard keyboard interactions.
-      </p>
-
-      <PreviewBlock code={defaultCode} githubUrl={githubUrl}>
-        <Button>Default</Button>
+    <DocExample
+      id="default"
+      title="Default"
+      description="Use this as the primary call to action on a screen. It renders with a solid accent background and contrasting text. Hovering or focusing scales the button slightly. Do not use more than once per view to maintain visual hierarchy. Accessible via standard keyboard interactions."
+    >
+      <PreviewBlock code={buttonCode(defaultSource)} githubUrl={githubUrl}>
+        <DefaultButtonExample />
       </PreviewBlock>
+    </DocExample>
 
-      <h4 id="secondary" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
-        Secondary
-      </h4>
-      <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        Use this for lower-emphasis actions alongside a primary button, such as 'Cancel' or 'Back'. It renders with a
-        transparent background and a solid border to reduce visual weight compared to the default variant. On hover or
-        focus, the background fills with the accent color. Do not use for the main call to action. Fully accessible via
-        standard keyboard navigation.
-      </p>
-
-      <PreviewBlock code={secondaryCode} githubUrl={githubUrl}>
-        <Button variant="secondary">Secondary</Button>
+    <DocExample
+      id="secondary"
+      title="Secondary"
+      description="Use this for lower-emphasis actions alongside a primary button, such as 'Cancel' or 'Back'. It renders with a transparent background and a solid border to reduce visual weight compared to the default variant. On hover or focus, the background fills with the accent color. Do not use for the main call to action. Fully accessible via standard keyboard navigation."
+    >
+      <PreviewBlock code={buttonCode(secondarySource)} githubUrl={githubUrl}>
+        <SecondaryButtonExample />
       </PreviewBlock>
+    </DocExample>
 
-      <h4 id="accent" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
-        Accent
-      </h4>
-      <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        Use this for a secondary call to action that needs to stand out without the full visual weight of the primary
-        button. It renders exactly like the secondary variant but fills solid with the accent color on hover instead of
-        remaining transparent. Content guidelines match the secondary variant. Fully keyboard accessible.
-      </p>
-
-      <PreviewBlock code={accentCode} githubUrl={githubUrl}>
-        <Button variant="accent">Accent</Button>
+    <DocExample
+      id="accent"
+      title="Accent"
+      description="Use this for a secondary call to action that needs to stand out without the full visual weight of the primary button. It renders exactly like the secondary variant but fills solid with the accent color on hover instead of remaining transparent. Content guidelines match the secondary variant. Fully keyboard accessible."
+    >
+      <PreviewBlock code={buttonCode(accentSource)} githubUrl={githubUrl}>
+        <AccentButtonExample />
       </PreviewBlock>
+    </DocExample>
 
-      <h4 id="solid" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
-        Solid
-      </h4>
-      <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        Use this when a specific action requires a unique background color unrelated to the global theme, such as a
-        destructive 'Delete' button. Provide a custom hex <code>color</code> to set the background; the text color
-        automatically adapts using a YIQ contrast check. Standard hover scaling applies. Ensure custom colors still meet
-        accessibility contrast guidelines for colorblindness.
-      </p>
-
-      <PreviewBlock code={solidCode} githubUrl={githubUrl}>
-        <Button variant="solid" color="#0000FF">
-          Solid
-        </Button>
+    <DocExample
+      id="solid"
+      title="Solid"
+      description="Use this when a specific action requires a unique background color unrelated to the global theme, such as a destructive 'Delete' button. Provide a custom hex color to set the background; the text color automatically adapts using a YIQ contrast check. Standard hover scaling applies. Ensure custom colors still meet accessibility contrast guidelines for colorblindness."
+    >
+      <PreviewBlock code={buttonCode(solidSource)} githubUrl={githubUrl}>
+        <SolidButtonExample />
       </PreviewBlock>
+    </DocExample>
 
-      <h4 id="text" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
-        Text
-      </h4>
-      <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        Use this for inline actions or tight spaces like toolbar items and table row actions. It renders as a flat,
-        borderless variant with no background or shadow to minimize visual clutter. Hovering slightly scales the text.
-        Do not use for standalone primary actions. Retains full focus management for keyboard users.
-      </p>
-
-      <PreviewBlock code={textCode} githubUrl={githubUrl}>
-        <Button variant="text">Text</Button>
+    <DocExample
+      id="text"
+      title="Text"
+      description="Use this for inline actions or tight spaces like toolbar items and table row actions. It renders as a flat, borderless variant with no background or shadow to minimize visual clutter. Hovering slightly scales the text. Do not use for standalone primary actions. Retains full focus management for keyboard users."
+    >
+      <PreviewBlock code={buttonCode(textSource)} githubUrl={githubUrl}>
+        <TextButtonExample />
       </PreviewBlock>
+    </DocExample>
 
-      <h4 id="inverse" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
-        Inverse
-      </h4>
-      <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        Use this variant when placing a button on a dark or inverted background. It explicitly sets the button
-        background to match the global text color, ensuring high visibility regardless of the current theme mode.
-      </p>
-
-      <PreviewBlock code={inverseCode} githubUrl={githubUrl}>
+    <DocExample
+      id="inverse"
+      title="Inverse"
+      description="Use this variant when placing a button on a dark or inverted background. It explicitly sets the button background to match the global text color, ensuring high visibility regardless of the current theme mode."
+    >
+      <PreviewBlock code={buttonCode(inverseSource)} githubUrl={githubUrl}>
         <div className="p-4 bg-(--lithos-text) rounded-(--lithos-radius) inline-block">
-          <Button variant="inverse">Inverse</Button>
+          <InverseButtonExample />
         </div>
       </PreviewBlock>
+    </DocExample>
 
-      <h4 id="with-icon" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
-        With Icon
-      </h4>
-      <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        Use this to provide a visual cue alongside the text label for faster recognition. It renders an icon inline with
-        the text via the <code>iconLeft</code> or <code>iconRight</code> props. Keep labels short. The icon is treated
-        as decorative, ensuring the text label dictates screen reader accessibility. Hover and focus states match the
-        underlying variant.
-      </p>
-
+    <DocExample
+      id="with-icon"
+      title="With Icon"
+      description="Use this to provide a visual cue alongside the text label for faster recognition. It renders an icon inline with the text via the iconLeft or iconRight props. Keep labels short. The icon is treated as decorative, ensuring the text label dictates screen reader accessibility. Hover and focus states match the underlying variant."
+    >
       <PreviewBlock code={withIconCode} githubUrl={githubUrl}>
-        <div className="flex items-center">
-          <Button iconLeft={<IconHome />}>Home</Button>
-          <Button variant="secondary" iconRight={<IconSettings />} className="ml-3">
-            Settings
-          </Button>
-        </div>
+        <WithIconButtonsExample />
       </PreviewBlock>
+    </DocExample>
 
-      <h4 id="icon" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
-        Icon
-      </h4>
-      <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        An icon-only button with no label — pass a single icon as <code>children</code> and set <code>aria-label</code>{' '}
-        so the action stays announced to assistive tech. The square <code>.lithos-click</code> padding keeps it visually
-        balanced.
-      </p>
-
+    <DocExample
+      id="icon"
+      title="Icon"
+      description="An icon-only button with no label — pass a single icon as children and set aria-label so the action stays announced to assistive tech. The square .lithos-click padding keeps it visually balanced."
+    >
       <PreviewBlock code={iconCode} githubUrl={githubUrl}>
-        <Button aria-label="Download">
-          <IconDownload />
-        </Button>
+        <IconButtonExample />
       </PreviewBlock>
+    </DocExample>
 
-      <h2 id="button-group" className="mb-4 mt-8 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Button Group
-      </h2>
-      <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-6 opacity-80">
-        <code>ButtonGroup</code> lays out <code>Button</code> primitives side by side or stacked. Pass{' '}
-        <code>attached</code> to fuse adjacent buttons into a single hard-bordered strip.
-      </p>
+    <DocHeading id="button-group">Button Group</DocHeading>
+    <Typography variant="p" className="mb-6 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
+      <code>ButtonGroup</code> lays out <code>Button</code> primitives side by side or stacked. Pass{' '}
+      <code>attached</code> to fuse adjacent buttons into a single hard-bordered strip.
+    </Typography>
 
-      <h4 id="group-horizontal" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
-        Default
-      </h4>
-      <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        Default mode, buttons laid out side by side with margin-based spacing between them. The classic dialog footer
-        pattern: a secondary <em>Cancel</em> next to the primary confirming action.
-      </p>
-
-      <PreviewBlock code={groupHorizontalCode} githubUrl={githubUrl}>
-        <ButtonGroup>
-          <Button variant="secondary">Cancel</Button>
-          <Button variant="primary">Save Changes</Button>
-        </ButtonGroup>
+    <DocExample
+      id="group-horizontal"
+      title="Default"
+      description="Default mode, buttons laid out side by side with margin-based spacing between them. The classic dialog footer pattern: a secondary Cancel next to the primary confirming action."
+    >
+      <PreviewBlock code={buttonCode(groupHorizontalSource, ['Button', 'ButtonGroup'])} githubUrl={githubUrl}>
+        <HorizontalButtonGroupExample />
       </PreviewBlock>
+    </DocExample>
 
-      <h4 id="group-vertical" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
-        Vertical
-      </h4>
-      <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        Set <code>mode="vertical"</code> to stack buttons instead — useful in narrow sidebars, mobile sheets, or
-        anywhere horizontal space is tight.
-      </p>
-
-      <PreviewBlock code={groupVerticalCode} githubUrl={githubUrl}>
-        <ButtonGroup mode="vertical">
-          <Button variant="primary">Save Changes</Button>
-          <Button variant="secondary">Cancel</Button>
-        </ButtonGroup>
+    <DocExample
+      id="group-vertical"
+      title="Vertical"
+      description={
+        <>
+          Set <code>mode="vertical"</code> to stack buttons instead — useful in narrow sidebars, mobile sheets, or
+          anywhere horizontal space is tight.
+        </>
+      }
+    >
+      <PreviewBlock code={buttonCode(groupVerticalSource, ['Button', 'ButtonGroup'])} githubUrl={githubUrl}>
+        <VerticalButtonGroupExample />
       </PreviewBlock>
+    </DocExample>
 
-      <h4 id="group-attached" className="mb-3 text-lg font-black tracking-tight text-(--lithos-text)">
-        Attached
-      </h4>
-      <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">
-        The <code>attached</code> flag collapses the shared border between buttons into a single fused strip and pops
-        the hovered/focused button's shadow above its neighbors via <code>z-10</code> — a segmented-control look without
-        giving up individual <code>Button</code> semantics.
-      </p>
-
-      <PreviewBlock code={groupAttachedCode} githubUrl={githubUrl}>
-        <ButtonGroup attached>
-          <Button variant="secondary">Cancel</Button>
-          <Button variant="primary">Save Changes</Button>
-        </ButtonGroup>
+    <DocExample
+      id="group-attached"
+      title="Attached"
+      description="The attached flag collapses the shared border between buttons into a single fused strip and pops the hovered/focused button's shadow above its neighbors via z-10 — a segmented-control look without giving up individual Button semantics."
+    >
+      <PreviewBlock code={buttonCode(groupAttachedSource, ['Button', 'ButtonGroup'])} githubUrl={githubUrl}>
+        <AttachedButtonGroupExample />
       </PreviewBlock>
+    </DocExample>
 
-      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Anatomy
-      </h2>
-      <div className="mb-12">
-        <CodeViewer
-          language="tsx"
-          code={`<ButtonGroup>
-  <Button />
-  <Button />
-</ButtonGroup>`}
-        />
-      </div>
+    <DocSection>
+      <DocHeading id="anatomy">Anatomy</DocHeading>
+      <CodeViewer language="tsx" code={`<ButtonGroup>\n  <Button />\n  <Button />\n</ButtonGroup>`} />
+    </DocSection>
 
-      <section className="mb-12">
-        <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-          Accessibility
-        </h2>
-        <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
-          <li>
-            Uses native <code>&lt;button&gt;</code> element for built-in keyboard navigation and screen reader support.
-          </li>
-          <li>Supports standard focus outlines provided by the browser.</li>
-          <li>Maintains high contrast ratios for all intent variants.</li>
-          <li>
-            Disabled state accurately maps to the native <code>disabled</code> attribute.
-          </li>
-        </ul>
-      </section>
+    <DocSection>
+      <DocHeading id="accessibility">Accessibility</DocHeading>
+      <DocList>
+        <li>
+          Uses native <code>&lt;button&gt;</code> element for built-in keyboard navigation and screen reader support.
+        </li>
+        <li>Supports standard focus outlines provided by the browser.</li>
+        <li>Maintains high contrast ratios for all intent variants.</li>
+        <li>
+          Disabled state accurately maps to the native <code>disabled</code> attribute.
+        </li>
+      </DocList>
+    </DocSection>
 
-      <section className="mb-12">
-        <h2 id="api" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-          API Reference
-        </h2>
-        <div className="mb-6 p-4 border-l-4 border-(--lithos-accent) bg-(--lithos-surface) text-sm font-body text-(--lithos-text)">
-          <strong>Note:</strong> Border radius is configurable globally via the <code>--lithos-radius</code> CSS token,
-          or per-instance via <code>className</code> (e.g. <code>rounded-full</code>). No custom prop is required.
-        </div>
-        <PropsAccordion title="Button Props" data={buttonPropsData} />
-        <PropsAccordion title="ButtonGroup Props" data={buttonGroupPropsData} />
-      </section>
-    </div>
-  )
-}
+    <DocSection>
+      <DocHeading id="api">API Reference</DocHeading>
+      <DocCallout className="mb-6">
+        <strong>Note:</strong> Border radius is configurable globally via the <code>--lithos-radius</code> CSS token, or
+        per-instance via <code>className</code> (e.g. <code>rounded-full</code>). No custom prop is required.
+      </DocCallout>
+      <PropsAccordion title="Button Props" data={buttonPropsData} />
+      <PropsAccordion title="ButtonGroup Props" data={buttonGroupPropsData} />
+    </DocSection>
+  </div>
+)

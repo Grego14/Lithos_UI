@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import { type LithosClass, cn } from '../../utils/cn'
 
 import { Typography } from '../../components/ui/Typography'
@@ -7,6 +7,7 @@ type ClassName = { className?: LithosClass }
 
 interface DocCalloutProps extends ClassName {
   children: ReactNode
+  borderColor?: CSSProperties['borderColor']
 }
 
 interface DocExampleProps extends ClassName {
@@ -14,6 +15,7 @@ interface DocExampleProps extends ClassName {
   title: string
   description: ReactNode
   children: ReactNode
+  headingLevel?: 'h2' | 'h3' | 'h4'
 }
 
 interface DocHeaderProps extends ClassName {
@@ -40,18 +42,21 @@ interface DocSectionProps extends ClassName {
   children: ReactNode
 }
 
-export const DocCallout = ({ children, className }: DocCalloutProps) => {
+export const DocCallout = ({ children, className, borderColor }: DocCalloutProps) => {
   return (
-    <div className={cn('border-l-4 border-(--lithos-accent) pl-6 py-2 mb-8 bg-(--lithos-surface) p-4', className)}>
+    <div
+      className={cn('border-l-4 border-(--lithos-accent) pl-6 py-2 mb-8 bg-(--lithos-surface) p-4', className)}
+      style={borderColor ? { borderColor } : undefined}
+    >
       <div className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">{children}</div>
     </div>
   )
 }
 
-export const DocExample = ({ id, title, description, children, className }: DocExampleProps) => {
+export const DocExample = ({ id, title, description, children, className, headingLevel = 'h3' }: DocExampleProps) => {
   return (
     <section className={cn('mb-16', className)}>
-      <DocHeading id={id} level="h3">
+      <DocHeading id={id} level={headingLevel}>
         {title}
       </DocHeading>
       <p className="text-base text-(--lithos-text) max-w-3xl font-body mb-4 opacity-80">{description}</p>

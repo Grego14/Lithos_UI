@@ -1,11 +1,17 @@
-import { useState, useCallback } from 'react'
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { CodeViewer } from '../../components/ui/CodeViewer'
-import { Select, SelectTrigger, SelectItem, SelectContent, useSelect } from '../../components/ui/Select'
-import type { SelectOption } from '../../components/ui/select/select.types'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
-import { Button } from '../../components/ui/Button'
+import { DocCallout, DocExample, DocHeader, DocHeading, DocLeadText, DocSection } from '../layout/DocPage'
+import { BasicSelectExample } from '../examples/select/basic'
+import basicSource from '../examples/select/basic.tsx?raw'
+import { MultipleSelectExample } from '../examples/select/multiple'
+import multipleSource from '../examples/select/multiple.tsx?raw'
+import { CustomSelectExample } from '../examples/select/customLayout'
+import customLayoutSource from '../examples/select/customLayout.tsx?raw'
+import { AsyncSelectExample } from '../examples/select/async'
+import asyncSource from '../examples/select/async.tsx?raw'
+import { removeImports } from '../examples/removeImports'
 import {
   selectProps,
   selectTriggerProps,
@@ -15,261 +21,61 @@ import {
 } from '../propsData/select'
 
 import { colors } from '../../utils/colors'
-import { cn } from '../../utils/cn'
-import { IconChevronDown } from '../../components/ui/icons/IconChevronDown'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Select.tsx'
-
-const FRAMEWORK_OPTIONS = [
-  { value: 'react', label: 'React', color: 'bg-cyan-400', downloads: '20M/week' },
-  { value: 'preact', label: 'Preact', color: 'bg-purple-500', downloads: '1.2M/week' },
-  { value: 'vue', label: 'Vue.js', color: 'bg-emerald-500', downloads: '4M/week' },
-  { value: 'svelte', label: 'Svelte', color: 'bg-orange-500', downloads: '800K/week' },
-]
-
-const CustomSelectLayout = () => {
-  const { selectedValue } = useSelect()
-  const currentOption = FRAMEWORK_OPTIONS.find((opt) => opt.value === selectedValue)
-
-  return (
-    <>
-      <SelectTrigger className="w-full justify-between">
-        <span className="flex items-center space-x-2 truncate min-w-0">
-          {currentOption && <span className={cn('size-2 rounded-full shrink-0', currentOption.color)} />}
-          <span className="truncate min-w-0 font-medium leading-[1.15]">
-            {currentOption ? currentOption.label : 'Select a framework...'}
-          </span>
-        </span>
-        <IconChevronDown className="ml-2 size-4 shrink-0 opacity-60" />
-      </SelectTrigger>
-      <SelectContent>
-        {FRAMEWORK_OPTIONS.map((opt, i) => (
-          <SelectItem key={opt.value} value={opt.value} index={i}>
-            <div className="flex items-center justify-between w-full space-x-4">
-              <span className="flex items-center space-x-2 min-w-0">
-                <span className={cn('size-2 rounded-full shrink-0', opt.color)} />
-                <span className="truncate">{opt.label}</span>
-              </span>
-              <span className="text-xs opacity-60 font-mono shrink-0">{opt.downloads}</span>
-            </div>
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </>
-  )
-}
-
-const AsyncVirtualizedSelectExample = () => {
-  const [options, setOptions] = useState<SelectOption[]>([])
-  const [loading, setLoading] = useState(false)
-
-  const fetchOptions = useCallback(() => {
-    setLoading(true)
-    setOptions([])
-
-    new Promise<SelectOption[]>((res) => {
-      setTimeout(() => {
-        res(
-          Array.from({ length: 300 }, (_, i) => ({
-            label: `Option ${i + 1}`,
-            value: `opt-${i + 1}`,
-          }))
-        )
-      }, 600)
-    }).then((data) => {
-      setOptions(data)
-      setLoading(false)
-    })
-  }, [])
-
-  return (
-    <div>
-      <Button onClick={fetchOptions} disabled={loading} className="w-full justify-center mb-4">
-        {loading ? 'Fetching 300 items...' : 'Load Async Options'}
-      </Button>
-
-      <Select
-        options={options || []}
-        placeholder={
-          loading ? 'Loading...' : (options?.length || 0) > 0 ? 'Select option' : 'Click button to load options'
-        }
-      />
-    </div>
-  )
-}
-
 const simpleLayoutCode = {
-  body: `const FRAMEWORK_OPTIONS = [
-  { label: 'React', value: 'react' },
-  { label: 'Preact', value: 'preact' },
-  { label: 'Vue.js', value: 'vue' },
-  { label: 'Svelte', value: 'svelte' }
-]
-
-export const SelectSimple = () => {
-  return (
-    <Select
-      options={FRAMEWORK_OPTIONS}
-      placeholder='Select a framework...'
-    />
-  )
-}`,
+  body: removeImports(basicSource),
   componentNames: ['Select'],
   manualPath: '../../components/ui/Select',
 }
-
 const multipleUsageCode = {
-  body: `const FRAMEWORK_OPTIONS = [
-  { label: 'React', value: 'react' },
-  { label: 'Preact', value: 'preact' },
-  { label: 'Vue', value: 'vue' },
-  { label: 'Svelte', value: 'svelte' }
-]
-
-export const SelectMultiple = () => {
-  return (
-    <Select
-      multiple
-      options={FRAMEWORK_OPTIONS}
-      placeholder='Select frameworks...'
-    />
-  )
-}`,
+  body: removeImports(multipleSource),
   componentNames: ['Select'],
   manualPath: '../../components/ui/Select',
 }
-
 const customLayoutCode = {
-  body: `const FRAMEWORK_OPTIONS = [
-  { value: 'react', label: 'React', color: 'bg-cyan-400', downloads: '20M/week' },
-  { value: 'preact', label: 'Preact', color: 'bg-purple-500', downloads: '1.2M/week' },
-  { value: 'vue', label: 'Vue.js', color: 'bg-emerald-500', downloads: '4M/week' },
-  { value: 'svelte', label: 'Svelte', color: 'bg-orange-500', downloads: '800K/week' }
-]
-
-const CustomSelectLayout = () => {
-  const { selectedValue } = useSelect()
-  const currentOption = FRAMEWORK_OPTIONS.find(opt => opt.value === selectedValue)
-
-  return (
-    <>
-      <SelectTrigger className='w-full justify-between'>
-        <span className='flex items-center space-x-2 truncate min-w-0'>
-          {currentOption && (
-            <span className={\`size-2 rounded-full shrink-0 \${currentOption.color}\`} />
-          )}
-          <span className='truncate min-w-0 font-medium leading-[1.15]'>
-            {currentOption ? currentOption.label : 'Select a framework...'}
-          </span>
-        </span>
-        <IconChevronDown className='ml-2 size-4 shrink-0 opacity-60' />
-      </SelectTrigger>
-
-      <SelectContent>
-        {FRAMEWORK_OPTIONS.map((opt, i) => (
-          <SelectItem key={opt.value} value={opt.value} index={i}>
-            <div className='flex items-center justify-between w-full space-x-4'>
-              <span className='flex items-center space-x-2 min-w-0'>
-                <span className={\`size-2 rounded-full shrink-0 \${opt.color}\`} />
-                <span className='truncate'>{opt.label}</span>
-              </span>
-              <span className='text-xs opacity-60 font-mono shrink-0'>
-                {opt.downloads}
-              </span>
-            </div>
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </>
-  )
-}
-
-export const SelectCustom = () => {
-  return (
-    <Select>
-      <CustomSelectLayout />
-    </Select>
-  )
-}`,
-  componentNames: ['Select', 'SelectTrigger', 'SelectContent', 'SelectItem', 'useSelect', 'IconChevronDown'],
+  body: removeImports(customLayoutSource),
+  componentNames: ['Select', 'SelectTrigger', 'SelectContent', 'SelectItem', 'useSelect', 'cn', 'IconChevronDown'],
   manualPath: {
     others: '../../components/ui/Select',
-    IconChevronDown: '../../components/icons/IconChevronDown',
+    cn: '../../utils/cn',
+    IconChevronDown: '../../components/ui/icons/IconChevronDown',
   },
 }
-
 const asyncUsageCode = {
-  body: `export const SelectAsync = () => {
-  const [options, setOptions] = useState<SelectOption[]>([])
-  const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    const loadOptions = async () => {
-      setLoading(true)
-      try {
-        const response = await fetch('/api/options')
-        const data = await response.json()
-
-        // Transform your API data to match { label, value } structure if needed
-        const formattedOptions = data.map((item: { id: string; name: string }) => ({
-          label: item.name,
-          value: item.id
-        }))
-
-        setOptions(formattedOptions)
-      } catch (error) {
-        console.error('Failed to load options:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    loadOptions()
-  }, [])
-
-  return (
-    <Select
-      options={options}
-      placeholder={loading ? 'Loading options...' : 'Select a framework'}
-    />
-  )
-}`,
-  componentNames: ['useState', 'useEffect', 'SelectOption', 'Select'],
-  manualPath: { react: ['useState', 'useEffect'], others: '../../components/ui/Select' },
+  body: removeImports(asyncSource),
+  componentNames: ['useCallback', 'useState', 'Button', 'Select', 'SelectOption'],
+  manualPath: {
+    react: ['useCallback', 'useState'],
+    others: '../../components/ui/Select',
+    Button: '../../components/ui/Button',
+    SelectOption: '../../components/ui/select/select.types',
+  },
   types: ['SelectOption'],
 }
 
 export const SelectDoc = () => {
   return (
     <div className="max-w-5xl mx-auto px-6">
-      <header className="mt-0">
-        <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-none text-(--lithos-text) mb-8">
-          Select
-        </h1>
-        <p className="mt-2 text-lg md:text-xl font-display opacity-70 text-(--lithos-text)">
-          A custom dropdown component for selecting single or multiple values from a list of options.
-        </p>
-        <hr className="border-t-2 border-(--lithos-border) mt-8 mb-8" />
-      </header>
+      <DocHeader
+        title="Select"
+        description="A custom dropdown component for selecting single or multiple values from a list of options."
+      />
 
-      <section className="mb-12">
-        <p className="mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
+      <DocSection>
+        <DocLeadText>
           The Select component presents a list of options when triggered, allowing users to pick single or multiple
           values. It supports both a quick declarative <code>options</code> array layout and a fully customizable
           compound component layout.
-        </p>
-      </section>
+        </DocLeadText>
 
-      <div className="border-l-4 border-(--lithos-accent) pl-6 py-2 mb-8 bg-(--lithos-surface) p-4">
-        <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
+        <DocCallout>
           The Select popover automatically positions itself relative to the trigger button using Floating UI, keeping
           access fluid and responsive across screen boundaries.
-        </p>
-      </div>
+        </DocCallout>
+      </DocSection>
 
-      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Installation
-      </h2>
+      <DocHeading id="installation">Installation</DocHeading>
 
       <SetupGuide
         componentNames={['Select']}
@@ -295,61 +101,60 @@ export const SelectDoc = () => {
         ]}
       />
 
-      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Examples
-      </h2>
+      <DocHeading id="examples">Examples</DocHeading>
 
-      <h3 id="basic" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Basic
-      </h3>
-      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-        Pass an array of options through the <code>options</code> prop for quick, declarative rendering without extra
-        JSX boilerplate.
-      </p>
-
-      <div className="mt-8 mb-16">
+      <DocExample
+        id="basic"
+        title="Basic"
+        description={
+          <>
+            Pass an array of options through the <code>options</code> prop for quick, declarative rendering without
+            extra JSX boilerplate.
+          </>
+        }
+      >
         <PreviewBlock code={simpleLayoutCode} githubUrl={githubUrl}>
           <div className="max-w-xs w-full">
-            <Select options={FRAMEWORK_OPTIONS} placeholder="Select a framework..." />
+            <BasicSelectExample />
           </div>
         </PreviewBlock>
-      </div>
+      </DocExample>
 
-      <h3 id="multiple" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Multiple
-      </h3>
-      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-        Enable the <code>multiple</code> prop to allow selecting several options. Selected items are displayed
-        comma-separated in the trigger while keeping the popover open during selection.
-      </p>
-
-      <div className="mt-8 mb-16">
+      <DocExample
+        id="multiple"
+        title="Multiple"
+        description={
+          <>
+            Enable the <code>multiple</code> prop to allow selecting several options. Selected items are displayed
+            comma-separated in the trigger while keeping the popover open during selection.
+          </>
+        }
+      >
         <PreviewBlock code={multipleUsageCode} githubUrl={githubUrl}>
           <div className="max-w-xs w-full">
-            <Select multiple options={FRAMEWORK_OPTIONS} placeholder="Select frameworks..." />
+            <MultipleSelectExample />
           </div>
         </PreviewBlock>
-      </div>
+      </DocExample>
 
-      <h3 id="custom-layout" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Custom Layout
-      </h3>
-      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-        Use subcomponents like <code>SelectTrigger</code>, <code>SelectContent</code>, and <code>SelectItem</code> when
-        you need full control over structure, custom icons, or item rendering.
-      </p>
-
-      <div className="mt-8 mb-16">
+      <DocExample
+        id="custom-layout"
+        title="Custom Layout"
+        description={
+          <>
+            Use subcomponents like <code>SelectTrigger</code>, <code>SelectContent</code>, and <code>SelectItem</code>{' '}
+            when you need full control over structure, custom icons, or item rendering.
+          </>
+        }
+      >
         <PreviewBlock code={customLayoutCode} githubUrl={githubUrl}>
           <div className="max-w-xs w-full">
-            <Select>
-              <CustomSelectLayout />
-            </Select>
+            <CustomSelectExample />
           </div>
         </PreviewBlock>
-      </div>
+      </DocExample>
 
-      <div className="border-l-4 pl-6 py-2 mb-8 bg-(--lithos-surface) p-4" style={{ borderColor: colors.warning }}>
+      <DocCallout borderColor={colors.warning}>
         <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
           When using a custom composition layout with the <code>multiple</code> prop, retrieve{' '}
           <code>selectedValue</code> and <code>multiple</code> via the <code>useSelect()</code> hook to manage custom
@@ -360,25 +165,21 @@ export const SelectDoc = () => {
           Don't forget to add the <code>index</code>prop to the SelectItem, otherwise you will need to add an onClick
           event to the SelectContent component.
         </p>
-      </div>
+      </DocCallout>
 
-      <h3 id="async-virtualized" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Async Data & Virtualization
-      </h3>
-      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-        Seamlessly handle options loaded asynchronously. The virtualizer updates scroll alignment automatically when
-        datasets update dynamically.
-      </p>
-
-      <div className="mt-8 mb-16">
+      <DocExample
+        id="async-virtualized"
+        title="Async Data & Virtualization"
+        description="Seamlessly handle options loaded asynchronously. The virtualizer updates scroll alignment automatically when datasets update dynamically."
+      >
         <PreviewBlock code={asyncUsageCode} githubUrl={githubUrl}>
           <div className="max-w-xs w-full">
-            <AsyncVirtualizedSelectExample />
+            <AsyncSelectExample />
           </div>
         </PreviewBlock>
-      </div>
+      </DocExample>
 
-      <div className="border-l-4 pl-6 py-4 mb-12 bg-(--lithos-surface) p-4" style={{ borderColor: colors.warning }}>
+      <DocCallout borderColor={colors.warning} className="py-4 mb-12">
         <h4 className="text-base font-bold text-(--lithos-text) mb-4">Virtualization Performance & Constraints</h4>
         <p className="text-sm font-body opacity-80 text-(--lithos-text) leading-relaxed">
           By default, <code>SelectContent</code> automatically enables windowing/virtualization when the options array
@@ -398,12 +199,10 @@ export const SelectDoc = () => {
             auto-virtualization.
           </li>
         </ul>
-      </div>
+      </DocCallout>
 
-      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Anatomy
-      </h2>
-      <div className="mb-12">
+      <DocSection>
+        <DocHeading id="anatomy">Anatomy</DocHeading>
         <CodeViewer
           language="tsx"
           code={`<Select>
@@ -416,12 +215,10 @@ export const SelectDoc = () => {
   </SelectContent>
 </Select>`}
         />
-      </div>
+      </DocSection>
 
-      <section className="mb-12">
-        <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-          Accessibility
-        </h2>
+      <DocSection>
+        <DocHeading id="accessibility">Accessibility</DocHeading>
 
         <p className="mb-4 text-base font-body text-(--lithos-text)">
           The <code>Select</code> component follows the WAI-ARIA <strong>Select (Combobox) Pattern</strong>, built on
@@ -464,25 +261,23 @@ export const SelectDoc = () => {
             navigation.
           </li>
         </ul>
-      </section>
+      </DocSection>
 
-      <section className="mb-12">
-        <h2 id="api" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-          API Reference
-        </h2>
+      <DocSection>
+        <DocHeading id="api">API Reference</DocHeading>
 
-        <div className="mb-6 p-4 border-l-4 border-(--lithos-accent) bg-(--lithos-surface) text-sm font-body text-(--lithos-text)">
+        <DocCallout className="mb-6">
           <strong>Note:</strong> Border radius is configurable globally via the <code>--lithos-radius</code> CSS token,
           or per-instance via <code>className</code> prop of the Select subcomponent (e.g. <code>rounded-full</code> on
           the SelectTrigger). No custom prop is required.
-        </div>
+        </DocCallout>
 
         <PropsAccordion title="Select Props" data={selectProps} className="mb-6" />
         <PropsAccordion title="SelectTrigger Props" data={selectTriggerProps} className="mb-6" />
         <PropsAccordion title="SelectContent Props" data={selectContentProps} className="mb-6" />
         <PropsAccordion title="SelectItem Props" data={selectItemProps} className="mb-6" />
         <PropsAccordion title="useSelect Return Values" isHook data={useSelectProps} />
-      </section>
+      </DocSection>
     </div>
   )
 }
