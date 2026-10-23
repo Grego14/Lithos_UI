@@ -6,7 +6,7 @@
  */
 
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useToast } from '../../components/ui/toast/useToast'
 import { Button } from '../../components/ui/Button'
 import { Toggle } from '../../components/ui/Toggle'
@@ -14,12 +14,12 @@ import { IconMenu } from '../../components/ui/icons/IconMenu'
 import { IconClose } from '../../components/ui/icons/IconClose'
 import { useTheme } from '../../core/hooks/useTheme'
 import { LITHOS_UI_LINKS } from '../../core/lithos.utils'
+import { LithosLogo } from '../../components/ui/LithosLogo'
 
 export const Navbar = () => {
   const { isDarkMode, toggleObsidian } = useTheme()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { addToast } = useToast()
-  const navigate = useNavigate()
 
   const handleToggleObsidian = () => {
     const nextMode = !isDarkMode
@@ -44,12 +44,12 @@ export const Navbar = () => {
       >
         {/* - Fixed rail: the 4px bottom border marks the top boundary of the app. */}
         {/* - 24px vertical padding gives the bar enough mass to read as a slab, not a strip. */}
-        <div className="mx-auto flex max-w-screen-2xl items-center justify-between px-6 py-5">
+        <div className="mx-auto flex max-w-screen-2xl items-center justify-between px-6 py-1.5 md:py-2">
           {/* - Brand block flex-1 balances the center lane. */}
           <div className="flex items-center justify-start lg:flex-1">
-            <Button variant="primary" onClick={() => navigate('/')}>
-              Lithos UI
-            </Button>
+            <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center">
+              <LithosLogo className="h-8 md:h-9 w-auto" />
+            </Link>
           </div>
 
           {/* - Center lane is reserved for wayfinding and sized exactly to its content. */}
