@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useToast } from '../../components/ui/toast/useToast'
 import { Button } from '../../components/ui/Button'
 import { Toggle } from '../../components/ui/Toggle'
@@ -57,7 +57,6 @@ export const DocsNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [expandedCategory, setExpandedCategory] = useState<string | null>('Components')
   const { addToast } = useToast()
-  const navigate = useNavigate()
 
   const handleToggleObsidian = () => {
     const nextMode = !isDarkMode
@@ -79,11 +78,11 @@ export const DocsNavbar = () => {
       className="fixed top-0 z-50 w-full border-b-2 border-(--lithos-border) bg-(--lithos-surface)"
       style={{ paddingRight: 'var(--removed-scrollbar-width, 0px)' }}
     >
-      <div className="mx-auto flex max-w-screen-2xl items-center justify-between px-6 py-5">
+      <div className="mx-auto flex max-w-screen-2xl items-center justify-between px-6 py-1.5 md:py-2">
         <div className="flex items-center justify-start lg:w-1/3">
-          <Button variant="primary" onClick={() => navigate('/')}>
-            Lithos UI
-          </Button>
+          <Link to="/" className="flex items-center">
+            <img src="/full_logo.webp" alt="Lithos UI" className="h-12 md:h-14 w-auto object-contain" />
+          </Link>
         </div>
 
         {/* - Center lane for main wayfinding */}
