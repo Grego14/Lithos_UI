@@ -7,6 +7,7 @@ import { IconMenu } from '../../components/ui/icons/IconMenu'
 import { IconClose } from '../../components/ui/icons/IconClose'
 import { LITHOS_UI_LINKS } from '../../core/lithos.utils'
 import { useTheme } from '../../core/hooks/useTheme'
+import { LithosLogo } from '../../components/ui/LithosLogo'
 
 const groupedLinks = [
   {
@@ -81,7 +82,7 @@ export const DocsNavbar = () => {
       <div className="mx-auto flex max-w-screen-2xl items-center justify-between px-6 py-1.5 md:py-2">
         <div className="flex items-center justify-start lg:w-1/3">
           <Link to="/" className="flex items-center">
-            <img src="/full_logo.webp" alt="Lithos UI" className="h-12 md:h-14 w-auto object-contain" />
+            <LithosLogo className="h-8 md:h-9 w-auto" />
           </Link>
         </div>
 

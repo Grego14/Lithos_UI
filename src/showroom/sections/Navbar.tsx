@@ -14,6 +14,7 @@ import { IconMenu } from '../../components/ui/icons/IconMenu'
 import { IconClose } from '../../components/ui/icons/IconClose'
 import { useTheme } from '../../core/hooks/useTheme'
 import { LITHOS_UI_LINKS } from '../../core/lithos.utils'
+import { LithosLogo } from '../../components/ui/LithosLogo'
 
 export const Navbar = () => {
   const { isDarkMode, toggleObsidian } = useTheme()
@@ -47,7 +48,7 @@ export const Navbar = () => {
           {/* - Brand block flex-1 balances the center lane. */}
           <div className="flex items-center justify-start lg:flex-1">
             <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center">
-              <img src="/full_logo.webp" alt="Lithos UI" className="h-12 md:h-14 w-auto object-contain" />
+              <LithosLogo className="h-8 md:h-9 w-auto" />
             </Link>
           </div>
 
