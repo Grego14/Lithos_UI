@@ -1,14 +1,5 @@
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { CodeViewer } from '../../components/ui/CodeViewer'
-import {
-  Carousel,
-  CarouselSlide,
-  CarouselPrev,
-  CarouselNext,
-  CarouselTrack,
-  CarouselPagination,
-  useCarousel,
-} from '../../components/ui/Carousel'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
 import {
@@ -22,223 +13,55 @@ import {
   useCarouselPropsData,
 } from '../propsData/carousel'
 import { colors } from '../../utils/colors'
+import { removeImports } from '../examples/removeImports'
+import { DocCallout, DocExample, DocHeader, DocHeading, DocLeadText, DocList, DocSection } from '../layout/DocPage'
+import { DefaultCarouselExample } from '../examples/carousel/default'
+import defaultSource from '../examples/carousel/default.tsx?raw'
+import { LoopingCarouselExample } from '../examples/carousel/looping'
+import loopingSource from '../examples/carousel/looping.tsx?raw'
+import { BottomControlsCarouselExample } from '../examples/carousel/bottomControls'
+import bottomControlsSource from '../examples/carousel/bottomControls.tsx?raw'
+import { NumbersSelectorCarouselExample } from '../examples/carousel/numbersSelector'
+import numbersSelectorSource from '../examples/carousel/numbersSelector.tsx?raw'
+import { NoCounterCarouselExample } from '../examples/carousel/noCounter'
+import noCounterSource from '../examples/carousel/noCounter.tsx?raw'
+import { NoControlsCarouselExample } from '../examples/carousel/noControls'
+import noControlsSource from '../examples/carousel/noControls.tsx?raw'
+import { PlayInfiniteCarouselExample } from '../examples/carousel/playInfinite'
+import playInfiniteSource from '../examples/carousel/playInfinite.tsx?raw'
+import { VerticalCarouselExample } from '../examples/carousel/vertical'
+import verticalSource from '../examples/carousel/vertical.tsx?raw'
+import { CustomLayoutCarouselExample } from '../examples/carousel/customLayout'
+import customLayoutSource from '../examples/carousel/customLayout.tsx?raw'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Carousel.tsx'
-const CAROUSEL_PATH = '../../components/ui/Carousel'
+const manualPath = '../../components/ui/Carousel'
+const carouselCode = (source: string, componentNames = ['Carousel', 'CarouselSlide']) => ({
+  body: removeImports(source),
+  componentNames,
+  manualPath,
+})
 
-const SLIDES = `<CarouselSlide>Slide 1</CarouselSlide>
-      <CarouselSlide>Slide 2</CarouselSlide>
-      <CarouselSlide>Slide 3</CarouselSlide>
-      <CarouselSlide>Slide 4</CarouselSlide>
-      <CarouselSlide>Slide 5</CarouselSlide>
-      <CarouselSlide>Slide 6</CarouselSlide>
-      <CarouselSlide>Slide 7</CarouselSlide>`
+export const CarouselDoc = () => (
+  <div className="max-w-5xl mx-auto px-6">
+    <DocHeader
+      title="Carousel"
+      description="An accessible horizontal/vertical slide viewer supporting auto-play, custom controls, and live region announcements."
+    />
 
-const CarouselCustomLayout = () => {
-  const { title } = useCarousel()
+    <DocSection>
+      <DocLeadText>
+        The Carousel primitive organizes content into paginated horizontal/vertical steps. Includes built-in support for
+        keyboard navigation (ArrowLeft / ArrowRight) and automated screen reader live region notifications.
+      </DocLeadText>
+    </DocSection>
 
-  return (
-    <>
-      <h4 className="text-(--lithos-text) text-md">{title}</h4>
-
-      <div className="flex items-center space-x-4 justify-center">
-        <CarouselPrev>Prev</CarouselPrev>
-
-        <CarouselTrack className="w-40 h-25">
-          <CarouselSlide>Slide 1</CarouselSlide>
-          <CarouselSlide>Slide 2</CarouselSlide>
-          <CarouselSlide>Slide 3</CarouselSlide>
-          <CarouselSlide>Slide 4</CarouselSlide>
-          <CarouselSlide>Slide 5</CarouselSlide>
-          <CarouselSlide>Slide 6</CarouselSlide>
-          <CarouselSlide>Slide 7</CarouselSlide>
-        </CarouselTrack>
-
-        <CarouselNext>Next</CarouselNext>
-      </div>
-
-      <CarouselPagination className="mt-0" />
-    </>
-  )
-}
-
-export const CarouselDoc = () => {
-  const usageCode = {
-    body: `export const AppCarousel = () => {
-  return (
-    <Carousel title='Default carousel, everything included!'>
-      ${SLIDES}
-    </Carousel>
-  )
-}`,
-    componentNames: ['Carousel', 'CarouselSlide'],
-    manualPath: CAROUSEL_PATH,
-  }
-
-  const loopCode = {
-    body: `export const AppCarousel = () => {
-  return (
-    <Carousel title='Carousel with looping!' loop>
-      ${SLIDES}
-    </Carousel>
-  )
-}`,
-    componentNames: ['Carousel', 'CarouselSlide'],
-    manualPath: CAROUSEL_PATH,
-  }
-
-  const bottomControlsCode = {
-    body: `export const AppCarousel = () => {
-  return (
-    <Carousel title='Carousel with controls at the bottom!' controlsPosition='bottom'>
-      ${SLIDES}
-    </Carousel>
-  )
-}`,
-    componentNames: ['Carousel', 'CarouselSlide'],
-    manualPath: CAROUSEL_PATH,
-  }
-
-  const numbersSelectorCode = {
-    body: `export const AppCarousel = () => {
-  return (
-    <Carousel title='Carousel using the numbers sliders selector!' slideSelector='numbers'>
-      ${SLIDES}
-    </Carousel>
-  )
-}`,
-    componentNames: ['Carousel', 'CarouselSlide'],
-    manualPath: CAROUSEL_PATH,
-  }
-
-  const noCurrentSliderCode = {
-    body: `export const AppCarousel = () => {
-  return (
-    <Carousel title='Carousel without the current slider identifier!' showCounter={false}>
-      ${SLIDES}
-    </Carousel>
-  )
-}`,
-    componentNames: ['Carousel', 'CarouselSlide'],
-    manualPath: CAROUSEL_PATH,
-  }
-
-  const noControlsCode = {
-    body: `export const AppCarousel = () => {
-  return (
-    <Carousel title='Headless Carousel!' hideControls>
-      ${SLIDES}
-    </Carousel>
-  )
-}`,
-    componentNames: ['Carousel', 'CarouselSlide'],
-    manualPath: CAROUSEL_PATH,
-  }
-
-  const infinitePlayCode = {
-    body: `export const AppCarousel = () => {
-  return (
-    <Carousel title='Carousel that plays infinitely!' playInfinite>
-      ${SLIDES}
-    </Carousel>
-  )
-}`,
-    componentNames: ['Carousel', 'CarouselSlide'],
-    manualPath: CAROUSEL_PATH,
-  }
-
-  const verticalCode = {
-    body: `export const AppCarousel = () => {
-  return (
-    <Carousel title='Carousel with vertical sliding!' mode="vertical">
-      ${SLIDES}
-    </Carousel>
-  )
-}`,
-    componentNames: ['Carousel', 'CarouselSlide'],
-    manualPath: CAROUSEL_PATH,
-  }
-
-  const customLayoutCode = {
-    body: `const CarouselCustomContent = () => {
-  const { title } = useCarousel()
-
-  return (
-    <>
-      <h4 className='text-(--lithos-text) text-md'>{title}</h4>
-
-      <div className='flex items-center space-x-4 justify-center'>
-        <CarouselPrev>Prev</CarouselPrev>
-
-        <CarouselTrack className='w-40 h-25'>
-          <CarouselSlide>Slide 1</CarouselSlide>
-          <CarouselSlide>Slide 2</CarouselSlide>
-          <CarouselSlide>Slide 3</CarouselSlide>
-          <CarouselSlide>Slide 4</CarouselSlide>
-          <CarouselSlide>Slide 5</CarouselSlide>
-          <CarouselSlide>Slide 6</CarouselSlide>
-          <CarouselSlide>Slide 7</CarouselSlide>
-        </CarouselTrack>
-
-        <CarouselNext>Next</CarouselNext>
-      </div>
-
-      <CarouselPagination className='mt-0' />
-    </>
-  )
-}
-
-export const CustomLayoutCarousel = () => {
-  return (
-    <Carousel
-      title='Carousel with a custom layout!'
-      asChild
-      className='flex flex-col space-y-4 items-center py-4'
-    >
-      <CarouselCustomContent />
-    </Carousel>
-  )
-}`,
-    componentNames: [
-      'Carousel',
-      'CarouselPrev',
-      'CarouselNext',
-      'CarouselTrack',
-      'CarouselSlide',
-      'CarouselPagination',
-      'useCarousel',
-    ],
-    manualPath: CAROUSEL_PATH,
-  }
-
-  return (
-    <div className="max-w-5xl mx-auto px-6">
-      <header className="mt-0">
-        <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-none text-(--lithos-text) mb-8">
-          Carousel
-        </h1>
-        <p className="mt-2 text-lg md:text-xl font-display opacity-70 text-(--lithos-text)">
-          An accessible horizontal/vertical slide viewer supporting auto-play, custom controls, and live region
-          announcements.
-        </p>
-        <hr className="border-t-2 border-(--lithos-border) mt-8 mb-8" />
-      </header>
-
-      <section className="mb-12">
-        <p className="mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          The Carousel primitive organizes content into paginated horizontal/vertical steps. Includes built-in support
-          for keyboard navigation (ArrowLeft / ArrowRight) and automated screen reader live region notifications.
-        </p>
-      </section>
-
-      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Installation
-      </h2>
-
+    <DocSection>
+      <DocHeading id="installation">Installation</DocHeading>
       <SetupGuide
         slug="carousel"
         componentNames={['Carousel']}
-        manualPath={CAROUSEL_PATH}
+        manualPath={manualPath}
         requires={[
           'utils/cn.ts',
           'utils/scrollTo.ts',
@@ -259,232 +82,152 @@ export const CustomLayoutCarousel = () => {
           'components/ui/icons/IconCircle.tsx',
         ]}
       />
+    </DocSection>
 
-      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Examples
-      </h2>
-
-      <h3 id="default" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Default
-      </h3>
-      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-        Use this as the standard presentation for a series of slides. It renders horizontal pagination dots at the top
-        alongside navigation arrows. Focus shifts correctly between slides, and keyboard arrows allow panning. Content
-        within slides can be arbitrary. Fully accessible via live regions that announce the active slide to screen
-        readers.
-      </p>
-
-      <div className="mt-8 mb-16">
-        <PreviewBlock code={usageCode} githubUrl={githubUrl}>
-          <Carousel title="Default carousel, everything included!">
-            <CarouselSlide>Slide 1</CarouselSlide>
-            <CarouselSlide>Slide 2</CarouselSlide>
-            <CarouselSlide>Slide 3</CarouselSlide>
-            <CarouselSlide>Slide 4</CarouselSlide>
-            <CarouselSlide>Slide 5</CarouselSlide>
-            <CarouselSlide>Slide 6</CarouselSlide>
-            <CarouselSlide>Slide 7</CarouselSlide>
-          </Carousel>
+    <DocSection>
+      <DocHeading id="examples">Examples</DocHeading>
+      <DocExample
+        id="default"
+        title="Default"
+        description={
+          <>
+            Use this as the standard presentation for a series of slides. It renders horizontal pagination dots at the
+            top alongside navigation arrows. Focus shifts correctly between slides, and keyboard arrows allow panning.
+            Content within slides can be arbitrary. Fully accessible via live regions that announce the active slide to
+            screen readers.
+          </>
+        }
+      >
+        <PreviewBlock code={carouselCode(defaultSource)} githubUrl={githubUrl}>
+          <DefaultCarouselExample />
         </PreviewBlock>
-      </div>
+      </DocExample>
 
-      <h3 id="looping" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Looping
-      </h3>
-      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-        Use this to allow continuous navigation, ensuring users can seamlessly cycle past the first or last slides
-        without hitting a hard stop. It renders identically to the default but visually wraps the slides in an infinite
-        scrolling track. Does not affect child content limits. Arrow key navigation loops automatically.
-      </p>
-
-      <div className="mt-8 mb-16">
-        <PreviewBlock code={loopCode} githubUrl={githubUrl}>
-          <Carousel title="Carousel with looping!" loop>
-            <CarouselSlide>Slide 1</CarouselSlide>
-            <CarouselSlide>Slide 2</CarouselSlide>
-            <CarouselSlide>Slide 3</CarouselSlide>
-            <CarouselSlide>Slide 4</CarouselSlide>
-            <CarouselSlide>Slide 5</CarouselSlide>
-            <CarouselSlide>Slide 6</CarouselSlide>
-            <CarouselSlide>Slide 7</CarouselSlide>
-          </Carousel>
+      <DocExample
+        id="looping"
+        title="Looping"
+        description="Use this to allow continuous navigation, ensuring users can seamlessly cycle past the first or last slides without hitting a hard stop. It renders identically to the default but visually wraps the slides in an infinite scrolling track. Does not affect child content limits. Arrow key navigation loops automatically."
+      >
+        <PreviewBlock code={carouselCode(loopingSource)} githubUrl={githubUrl}>
+          <LoopingCarouselExample />
         </PreviewBlock>
-      </div>
+      </DocExample>
 
-      <h3 id="bottom-controls" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Bottom controls
-      </h3>
-      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-        Use this when the carousel sits high on a page or when imagery needs to take precedence over navigation UI. It
-        moves the navigation arrows and pagination dots to the bottom edge. Layout physics remain identical otherwise.
-        Navigation shortcuts and semantic roles are preserved.
-      </p>
-
-      <div className="mt-8 mb-16">
-        <PreviewBlock code={bottomControlsCode} githubUrl={githubUrl}>
-          <Carousel title="Carousel with the controls at the bottom!" controlsPosition="bottom">
-            <CarouselSlide>Slide 1</CarouselSlide>
-            <CarouselSlide>Slide 2</CarouselSlide>
-            <CarouselSlide>Slide 3</CarouselSlide>
-            <CarouselSlide>Slide 4</CarouselSlide>
-            <CarouselSlide>Slide 5</CarouselSlide>
-            <CarouselSlide>Slide 6</CarouselSlide>
-            <CarouselSlide>Slide 7</CarouselSlide>
-          </Carousel>
+      <DocExample
+        id="bottom-controls"
+        title="Bottom controls"
+        description="Use this when the carousel sits high on a page or when imagery needs to take precedence over navigation UI. It moves the navigation arrows and pagination dots to the bottom edge. Layout physics remain identical otherwise. Navigation shortcuts and semantic roles are preserved."
+      >
+        <PreviewBlock code={carouselCode(bottomControlsSource)} githubUrl={githubUrl}>
+          <BottomControlsCarouselExample />
         </PreviewBlock>
-      </div>
+      </DocExample>
 
-      <h3 id="numbers-selector" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Numbers Selector
-      </h3>
-      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-        Use this when the absolute position within the slide deck is more important than visual dots, such as multi-step
-        forms or tutorials. It replaces the pagination dots with explicit numeric buttons. Visual height is slightly
-        expanded to accommodate the numbers. Keyboard interactions on the numeric selectors allow direct jumps.
-      </p>
-
-      <div className="mt-8 mb-16">
-        <PreviewBlock code={numbersSelectorCode} githubUrl={githubUrl}>
-          <Carousel title="Carousel using the numbers sliders selector!" slideSelector="numbers">
-            <CarouselSlide>Slide 1</CarouselSlide>
-            <CarouselSlide>Slide 2</CarouselSlide>
-            <CarouselSlide>Slide 3</CarouselSlide>
-            <CarouselSlide>Slide 4</CarouselSlide>
-            <CarouselSlide>Slide 5</CarouselSlide>
-            <CarouselSlide>Slide 6</CarouselSlide>
-            <CarouselSlide>Slide 7</CarouselSlide>
-          </Carousel>
+      <DocExample
+        id="numbers-selector"
+        title="Numbers Selector"
+        description="Use this when the absolute position within the slide deck is more important than visual dots, such as multi-step forms or tutorials. It replaces the pagination dots with explicit numeric buttons. Visual height is slightly expanded to accommodate the numbers. Keyboard interactions on the numeric selectors allow direct jumps."
+      >
+        <PreviewBlock code={carouselCode(numbersSelectorSource)} githubUrl={githubUrl}>
+          <NumbersSelectorCarouselExample />
         </PreviewBlock>
-      </div>
+      </DocExample>
 
-      <h3 id="no-current-slider" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        No current slider
-      </h3>
-      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-        Use this to declutter the carousel interface when the exact slide count isn't strictly necessary for the user.
-        It removes the textual slide counter while keeping other navigation elements intact. Visuals are otherwise
-        identical. Screen readers still announce the slide index via the live region.
-      </p>
-
-      <div className="mt-8 mb-16">
-        <PreviewBlock code={noCurrentSliderCode} githubUrl={githubUrl}>
-          <Carousel title="Carousel without the current slider identifier!" showCounter={false}>
-            <CarouselSlide>Slide 1</CarouselSlide>
-            <CarouselSlide>Slide 2</CarouselSlide>
-            <CarouselSlide>Slide 3</CarouselSlide>
-            <CarouselSlide>Slide 4</CarouselSlide>
-            <CarouselSlide>Slide 5</CarouselSlide>
-            <CarouselSlide>Slide 6</CarouselSlide>
-            <CarouselSlide>Slide 7</CarouselSlide>
-          </Carousel>
+      <DocExample
+        id="no-current-slider"
+        title="No current slider"
+        description="Use this to declutter the carousel interface when the exact slide count isn't strictly necessary for the user. It removes the textual slide counter while keeping other navigation elements intact. Visuals are otherwise identical. Screen readers still announce the slide index via the live region."
+      >
+        <PreviewBlock code={carouselCode(noCounterSource)} githubUrl={githubUrl}>
+          <NoCounterCarouselExample />
         </PreviewBlock>
-      </div>
+      </DocExample>
 
-      <h3 id="no-controls" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        No controls
-      </h3>
-      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-        Use this to create a "headless" carousel driven entirely by your own external state or custom buttons. It hides
-        the primary directional arrows and pagination UI. You must pass custom buttons that hook into the{' '}
-        <code>CarouselContext</code>. Keyboard arrow navigation still works implicitly on focus.
-      </p>
-
-      <div className="mt-8 mb-16">
-        <PreviewBlock code={noControlsCode} githubUrl={githubUrl}>
-          <Carousel title="Headless Carousel!" hideControls>
-            <CarouselSlide>Slide 1</CarouselSlide>
-            <CarouselSlide>Slide 2</CarouselSlide>
-            <CarouselSlide>Slide 3</CarouselSlide>
-            <CarouselSlide>Slide 4</CarouselSlide>
-            <CarouselSlide>Slide 5</CarouselSlide>
-            <CarouselSlide>Slide 6</CarouselSlide>
-            <CarouselSlide>Slide 7</CarouselSlide>
-          </Carousel>
+      <DocExample
+        id="no-controls"
+        title="No controls"
+        description={
+          <>
+            Use this to create a "headless" carousel driven entirely by your own external state or custom buttons. It
+            hides the primary directional arrows and pagination UI. You must pass custom buttons that hook into the{' '}
+            <code>CarouselContext</code>. Keyboard arrow navigation still works implicitly on focus.
+          </>
+        }
+      >
+        <PreviewBlock code={carouselCode(noControlsSource)} githubUrl={githubUrl}>
+          <NoControlsCarouselExample />
         </PreviewBlock>
-      </div>
+      </DocExample>
 
-      <h3 id="play-infinite" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Play infinitely
-      </h3>
-      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-        Use this for hero banners or continuous galleries that should cycle automatically. It rotates slides on a fixed
-        interval without user interaction. To protect accessibility, auto-play forcibly pauses on hover or keyboard
-        focus, ensuring users have time to read. The live region is temporarily silenced during auto-play to prevent
-        spamming screen readers.
-      </p>
-
-      <div className="mt-8 mb-16">
-        <PreviewBlock code={infinitePlayCode} githubUrl={githubUrl}>
-          <Carousel title="Carousel that plays infinitely!" playInfinite>
-            <CarouselSlide>Slide 1</CarouselSlide>
-            <CarouselSlide>Slide 2</CarouselSlide>
-            <CarouselSlide>Slide 3</CarouselSlide>
-            <CarouselSlide>Slide 4</CarouselSlide>
-            <CarouselSlide>Slide 5</CarouselSlide>
-            <CarouselSlide>Slide 6</CarouselSlide>
-            <CarouselSlide>Slide 7</CarouselSlide>
-          </Carousel>
+      <DocExample
+        id="play-infinite"
+        title="Play infinitely"
+        description="Use this for hero banners or continuous galleries that should cycle automatically. It rotates slides on a fixed interval without user interaction. To protect accessibility, auto-play forcibly pauses on hover or keyboard focus, ensuring users have time to read. The live region is temporarily silenced during auto-play to prevent spamming screen readers."
+      >
+        <PreviewBlock code={carouselCode(playInfiniteSource)} githubUrl={githubUrl}>
+          <PlayInfiniteCarouselExample />
         </PreviewBlock>
-      </div>
+      </DocExample>
 
-      <h3 id="vertical" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Vertical
-      </h3>
-      <p className="mb-4 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-        Use this to navigate between slides along the Y-axis instead of the standard horizontal direction. It renders
-        the track vertically and shifts the navigation arrows to point up and down. Text within slides remains
-        horizontal. Arrow navigation bindings automatically remap to <code>ArrowUp</code> and <code>ArrowDown</code>.
-        Accessible live regions remain fully functional.
-      </p>
-
-      <div className="mt-8 mb-16">
-        <PreviewBlock code={verticalCode} githubUrl={githubUrl}>
-          <Carousel title="Carousel with vertical sliding!" mode="vertical">
-            <CarouselSlide>Slide 1</CarouselSlide>
-            <CarouselSlide>Slide 2</CarouselSlide>
-            <CarouselSlide>Slide 3</CarouselSlide>
-            <CarouselSlide>Slide 4</CarouselSlide>
-            <CarouselSlide>Slide 5</CarouselSlide>
-            <CarouselSlide>Slide 6</CarouselSlide>
-            <CarouselSlide>Slide 7</CarouselSlide>
-          </Carousel>
+      <DocExample
+        id="vertical"
+        title="Vertical"
+        description={
+          <>
+            Use this to navigate between slides along the Y-axis instead of the standard horizontal direction. It
+            renders the track vertically and shifts the navigation arrows to point up and down. Text within slides
+            remains horizontal. Arrow navigation bindings automatically remap to <code>ArrowUp</code> and{' '}
+            <code>ArrowDown</code>. Accessible live regions remain fully functional.
+          </>
+        }
+      >
+        <PreviewBlock code={carouselCode(verticalSource)} githubUrl={githubUrl}>
+          <VerticalCarouselExample />
         </PreviewBlock>
-      </div>
+      </DocExample>
 
-      <h3 id="custom-layout" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Custom Layout
-      </h3>
-
-      <div className="mt-8 mb-16">
-        <PreviewBlock code={customLayoutCode} githubUrl={githubUrl}>
-          <Carousel
-            title="Carousel with a custom layout!"
-            className="flex flex-col space-y-4 items-center py-4"
-            asChild
-          >
-            <CarouselCustomLayout />
-          </Carousel>
+      <DocExample
+        id="custom-layout"
+        title="Custom Layout"
+        description={
+          <>
+            Compose the carousel from its track, slide, controls, and pagination primitives to tailor its structure. Use{' '}
+            <code>useCarousel</code> to access carousel state inside custom content.
+          </>
+        }
+      >
+        <PreviewBlock
+          code={carouselCode(customLayoutSource, [
+            'Carousel',
+            'CarouselSlide',
+            'CarouselPrev',
+            'CarouselNext',
+            'CarouselTrack',
+            'CarouselPagination',
+            'useCarousel',
+          ])}
+          githubUrl={githubUrl}
+        >
+          <CustomLayoutCarouselExample />
         </PreviewBlock>
-      </div>
+      </DocExample>
 
-      <div className="border-l-4 pl-6 py-2 mb-8 bg-(--lithos-surface) p-4" style={{ borderColor: colors.warning }}>
+      <DocCallout borderColor={colors.warning}>
         <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
           When customizing the dimensions in a custom layout, apply sizing utilities (e.g., <code>w-40</code>,{' '}
           <code>h-40</code>) directly to the <code>CarouselTrack</code>.
         </p>
-
         <p className="text-sm font-medium font-body opacity-80 mt-4">
-          The <code>CarouselSlide</code> primitive automatically expands to to fit the active track boundary cleanly.
+          The <code>CarouselSlide</code> primitive automatically expands to fit the active track boundary cleanly.
         </p>
-      </div>
+      </DocCallout>
+    </DocSection>
 
-      <h2 id="anatomy" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Anatomy
-      </h2>
-      <div className="mb-12">
-        <CodeViewer
-          language="tsx"
-          code={`<Carousel>
+    <DocSection>
+      <DocHeading id="anatomy">Anatomy</DocHeading>
+      <CodeViewer
+        language="tsx"
+        code={`<Carousel>
   <CarouselControls>
     <CarouselPrev />
     <CarouselNext />
@@ -497,51 +240,45 @@ export const CustomLayoutCarousel = () => {
 
   <CarouselPagination />
 </Carousel>`}
-        />
-      </div>
+      />
+    </DocSection>
 
-      <section className="mb-12">
-        <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-          Accessibility
-        </h2>
-        <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
-          <li>
-            Uses <code>role="region"</code> and <code>aria-roledescription="carousel"</code> to identify the component
-            structure to screen readers.
-          </li>
-          <li>
-            Provides an <code>aria-label</code> (falling back to "Carousel") to convey the component context.
-          </li>
-          <li>
-            Features a visually hidden live region (<code>aria-live</code>) that announces active slide changes
-            dynamically, automatically setting politeness to <code>off</code> during auto-play to avoid screen reader
-            spam.
-          </li>
-          <li>
-            Supports full keyboard navigation using directional arrow keys (<code>ArrowLeft</code>/
-            <code>ArrowRight</code> or <code>ArrowUp</code>/<code>ArrowDown</code> based on orientation).
-          </li>
-          <li>
-            Automatically pauses auto-rotation on hover and focus to ensure users have enough time to interact with the
-            content.
-          </li>
-        </ul>
-      </section>
+    <DocSection>
+      <DocHeading id="accessibility">Accessibility</DocHeading>
+      <DocList>
+        <li>
+          Uses <code>role="region"</code> and <code>aria-roledescription="carousel"</code> to identify the component
+          structure to screen readers.
+        </li>
+        <li>
+          Provides an <code>aria-label</code> (falling back to "Carousel") to convey the component context.
+        </li>
+        <li>
+          Features a visually hidden live region (<code>aria-live</code>) that announces active slide changes
+          dynamically, automatically setting politeness to <code>off</code> during auto-play to avoid screen reader
+          spam.
+        </li>
+        <li>
+          Supports full keyboard navigation using directional arrow keys (<code>ArrowLeft</code>/<code>ArrowRight</code>{' '}
+          or <code>ArrowUp</code>/<code>ArrowDown</code> based on orientation).
+        </li>
+        <li>
+          Automatically pauses auto-rotation on hover and focus to ensure users have enough time to interact with the
+          content.
+        </li>
+      </DocList>
+    </DocSection>
 
-      <section className="mb-12">
-        <h2 id="api" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-          API Reference
-        </h2>
-
-        <PropsAccordion title="Carousel Props" data={carouselPropsData} className="mb-6" />
-        <PropsAccordion title="CarouselSlide Props" data={carouselSlidePropsData} className="mb-6" />
-        <PropsAccordion title="CarouselPrev Button Props" data={carouselPrevPropsData} className="mb-6" />
-        <PropsAccordion title="CarouselNext Button Props" data={carouselNextPropsData} />
-        <PropsAccordion title="CarouselTrack Props" data={carouselTrackPropsData} />
-        <PropsAccordion title="CarouselControls Props" data={carouselControlsPropsData} />
-        <PropsAccordion title="CarouselPagination Props" data={carouselPaginationPropsData} />
-        <PropsAccordion title="useCarousel Return" data={useCarouselPropsData} isHook />
-      </section>
-    </div>
-  )
-}
+    <DocSection>
+      <DocHeading id="api">API Reference</DocHeading>
+      <PropsAccordion title="Carousel Props" data={carouselPropsData} className="mb-6" />
+      <PropsAccordion title="CarouselSlide Props" data={carouselSlidePropsData} className="mb-6" />
+      <PropsAccordion title="CarouselPrev Button Props" data={carouselPrevPropsData} className="mb-6" />
+      <PropsAccordion title="CarouselNext Button Props" data={carouselNextPropsData} />
+      <PropsAccordion title="CarouselTrack Props" data={carouselTrackPropsData} />
+      <PropsAccordion title="CarouselControls Props" data={carouselControlsPropsData} />
+      <PropsAccordion title="CarouselPagination Props" data={carouselPaginationPropsData} />
+      <PropsAccordion title="useCarousel Return" data={useCarouselPropsData} isHook />
+    </DocSection>
+  </div>
+)
