@@ -8,6 +8,25 @@ export interface LithosLogoProps extends HTMLAttributes<HTMLSpanElement> {
   interactive?: boolean
 }
 
+let shortLogoRawCache = ''
+
+const recolorShortLogoSvg = (svgText: string, accentHex: string, filterId: string) => {
+  const safeHex = accentHex && accentHex.startsWith('#') && accentHex.length >= 7 ? accentHex : '#00FF00'
+  const cleanHex = safeHex.slice(1, 7)
+  const r = (parseInt(cleanHex.slice(0, 2), 16) / 255).toFixed(3)
+  const g = (parseInt(cleanHex.slice(2, 4), 16) / 255).toFixed(3)
+  const b = (parseInt(cleanHex.slice(4, 6), 16) / 255).toFixed(3)
+
+  const filterDefs = `<defs><filter id="${filterId}" color-interpolation-filters="sRGB" x="-5%" y="-5%" width="110%" height="110%"><feColorMatrix type="matrix" values="0.390 1.312 0.132 0 -0.220 0.390 1.312 0.132 0 -0.220 0.390 1.312 0.132 0 -0.220 0 0 0 1 0" result="mono"/><feComponentTransfer in="mono" result="clamped"><feFuncR type="linear" slope="1" intercept="0"/><feFuncG type="linear" slope="1" intercept="0"/><feFuncB type="linear" slope="1" intercept="0"/></feComponentTransfer><feColorMatrix type="matrix" in="clamped" values="${r} 0 0 0 0  0 ${g} 0 0 0  0 0 ${b} 0 0  0 0 0 1 0"/></filter></defs>`
+
+  return svgText
+    .replace(
+      /<svg\b([^>]*)>/,
+      `<svg$1 style="width:100%;height:100%;display:block;" preserveAspectRatio="xMidYMid meet">${filterDefs}<g filter="url(#${filterId})">`
+    )
+    .replace(/<\/svg>/, '</g></svg>')
+}
+
 // Boulder base path
 const BOULDER_BASE_D =
   'M0,0 L19,0 L19,1 L26,1 L26,2 L32,2 L32,3 L36,3 L36,4 L38,4 L38,5 L40,5 L40,6 L41,6 L41,7 L42,7 L42,8 L43,8 L43,10 L44,10 L44,11 L45,11 L45,13 L46,13 L46,14 L47,14 L47,15 L48,15 L48,16 L49,16 L49,17 L50,17 L50,18 L51,18 L51,19 L52,19 L52,21 L53,21 L53,23 L54,23 L54,27 L55,27 L55,30 L56,30 L56,34 L57,34 L57,33 L58,33 L58,34 L59,34 L59,36 L60,36 L60,43 L61,43 L61,50 L62,50 L62,59 L63,59 L63,63 L64,63 L64,71 L63,71 L63,76 L62,76 L62,79 L61,79 L61,81 L60,81 L60,83 L61,83 L61,82 L62,82 L62,84 L59,84 L59,85 L58,85 L58,86 L56,86 L56,82 L55,82 L55,90 L54,90 L54,91 L53,91 L53,93 L54,93 L54,92 L55,92 L55,91 L56,91 L56,93 L55,93 L55,96 L53,96 L53,94 L52,94 L52,95 L51,95 L51,96 L50,96 L50,97 L49,97 L49,98 L45,98 L45,99 L42,99 L42,100 L40,100 L40,101 L38,101 L38,102 L36,102 L36,103 L35,103 L35,104 L34,104 L34,105 L33,105 L33,106 L32,106 L32,107 L30,107 L30,108 L28,108 L28,109 L20,109 L20,110 L17,110 L17,111 L9,111 L9,108 L10,108 L10,106 L9,106 L9,103 L8,103 L8,100 L7,100 L7,109 L1,109 L1,108 L-5,108 L-5,107 L-11,107 L-11,106 L-14,106 L-14,105 L-18,105 L-18,104 L-21,104 L-21,103 L-23,103 L-23,102 L-24,102 L-24,101 L-25,101 L-25,100 L-26,100 L-26,99 L-27,99 L-27,98 L-29,98 L-29,97 L-31,97 L-31,96 L-32,96 L-32,94 L-33,94 L-33,93 L-34,93 L-34,91 L-35,91 L-35,89 L-36,89 L-36,87 L-37,87 L-37,85 L-38,85 L-38,84 L-39,84 L-39,78 L-41,78 L-41,75 L-42,75 L-42,73 L-43,73 L-43,70 L-44,70 L-44,68 L-45,68 L-45,57 L-44,57 L-44,54 L-43,54 L-43,48 L-42,48 L-42,45 L-41,45 L-41,43 L-40,43 L-40,41 L-39,41 L-39,38 L-38,38 L-38,36 L-36,36 L-36,37 L-35,37 L-35,39 L-34,39 L-34,42 L-32,42 L-32,41 L-33,41 L-33,38 L-34,38 L-34,36 L-35,36 L-35,35 L-36,35 L-36,34 L-37,34 L-37,33 L-36,33 L-36,30 L-35,30 L-35,27 L-34,27 L-34,26 L-31,26 L-31,27 L-29,27 L-29,28 L-27,28 L-27,29 L-25,29 L-25,28 L-26,28 L-26,27 L-28,27 L-28,26 L-30,26 L-30,25 L-32,25 L-32,24 L-33,24 L-33,23 L-32,23 L-32,22 L-31,22 L-31,21 L-29,21 L-29,20 L-27,20 L-27,19 L-25,19 L-25,18 L-23,18 L-23,17 L-22,17 L-22,16 L-20,16 L-20,18 L-21,18 L-21,20 L-20,20 L-20,19 L-19,19 L-19,16 L-18,16 L-18,15 L-17,15 L-17,13 L-16,13 L-16,12 L-15,12 L-15,11 L-13,11 L-13,10 L-11,10 L-11,9 L-10,9 L-10,8 L-9,8 L-9,7 L-7,7 L-7,6 L-6,6 L-6,5 L-5,5 L-5,4 L-4,4 L-4,3 L-3,3 L-3,2 L-2,2 L-2,1 L0,1 Z'
@@ -113,11 +132,43 @@ export const LithosLogo = ({
 }: LithosLogoProps) => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
-  const [resolvedAccent, setResolvedAccent] = useState<string>('#00FF00')
   const clipId = useId().replace(/:/g, '')
+  const filterId = `lithos-${clipId}-rock-tint`
   const clipLeftId = `lithos-${clipId}-left`
   const clipRockId = `lithos-${clipId}-rock`
   const clipRightId = `lithos-${clipId}-right`
+
+  const [resolvedAccent, setResolvedAccent] = useState<string>(() => {
+    if (accentColor && accentColor !== 'var(--lithos-accent)' && accentColor.startsWith('#')) {
+      return accentColor
+    }
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('lithos-theme-color')
+      if (stored && stored.startsWith('#')) return stored
+    }
+    return '#00FF00'
+  })
+
+  const [shortLogoSvg, setShortLogoSvg] = useState<string>(() =>
+    shortLogoRawCache ? recolorShortLogoSvg(shortLogoRawCache, resolvedAccent, filterId) : ''
+  )
+
+  useEffect(() => {
+    if (shortLogoRawCache) {
+      setShortLogoSvg(recolorShortLogoSvg(shortLogoRawCache, resolvedAccent, filterId))
+      return
+    }
+
+    if (typeof window !== 'undefined') {
+      fetch('/short_logo.svg')
+        .then((res) => res.text())
+        .then((text) => {
+          shortLogoRawCache = text
+          setShortLogoSvg(recolorShortLogoSvg(text, resolvedAccent, filterId))
+        })
+        .catch(() => {})
+    }
+  }, [resolvedAccent, filterId])
 
   useEffect(() => {
     if (accentColor && accentColor !== 'var(--lithos-accent)' && accentColor.startsWith('#')) {
@@ -311,14 +362,14 @@ export const LithosLogo = ({
         }`}
         aria-hidden={!isEffectivelyCollapsed}
       >
-        <img
-          src="/short_logo.svg"
-          alt=""
-          className="w-full h-full object-contain"
-          style={{
-            filter: getHueRotation(resolvedAccent),
-          }}
-        />
+        {shortLogoSvg ? (
+          <div
+            className="w-full h-full flex items-center justify-center [&>svg]:w-full [&>svg]:h-full [&>svg]:object-contain"
+            dangerouslySetInnerHTML={{ __html: shortLogoSvg }}
+          />
+        ) : (
+          <img src="/short_logo.svg" alt="" className="w-full h-full object-contain" />
+        )}
       </div>
     </span>
   )
