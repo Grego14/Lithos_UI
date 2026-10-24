@@ -1,4 +1,4 @@
-import { useState, useEffect, useId, type HTMLAttributes } from 'react'
+import { useState, useEffect, type HTMLAttributes } from 'react'
 
 export interface LithosLogoProps extends HTMLAttributes<HTMLSpanElement> {
   accentColor?: string
@@ -6,25 +6,6 @@ export interface LithosLogoProps extends HTMLAttributes<HTMLSpanElement> {
   collapseOnScroll?: boolean
   scrollThreshold?: number
   interactive?: boolean
-}
-
-let shortLogoRawCache = ''
-
-const recolorShortLogoSvg = (svgText: string, accentHex: string, filterId: string) => {
-  const safeHex = accentHex && accentHex.startsWith('#') && accentHex.length >= 7 ? accentHex : '#00FF00'
-  const cleanHex = safeHex.slice(1, 7)
-  const r = (parseInt(cleanHex.slice(0, 2), 16) / 255).toFixed(3)
-  const g = (parseInt(cleanHex.slice(2, 4), 16) / 255).toFixed(3)
-  const b = (parseInt(cleanHex.slice(4, 6), 16) / 255).toFixed(3)
-
-  const filterDefs = `<defs><filter id="${filterId}" color-interpolation-filters="sRGB" x="-5%" y="-5%" width="110%" height="110%"><feColorMatrix type="matrix" values="0.390 1.312 0.132 0 -0.220 0.390 1.312 0.132 0 -0.220 0.390 1.312 0.132 0 -0.220 0 0 0 1 0" result="mono"/><feComponentTransfer in="mono" result="clamped"><feFuncR type="linear" slope="1" intercept="0"/><feFuncG type="linear" slope="1" intercept="0"/><feFuncB type="linear" slope="1" intercept="0"/></feComponentTransfer><feColorMatrix type="matrix" in="clamped" values="${r} 0 0 0 0  0 ${g} 0 0 0  0 0 ${b} 0 0  0 0 0 1 0"/></filter></defs>`
-
-  return svgText
-    .replace(
-      /<svg\b([^>]*)>/,
-      `<svg$1 style="width:100%;height:100%;display:block;" preserveAspectRatio="xMidYMid meet">${filterDefs}<g filter="url(#${filterId})">`
-    )
-    .replace(/<\/svg>/, '</g></svg>')
 }
 
 // Boulder base path
@@ -118,6 +99,159 @@ const BoulderFacets = () => (
 const MAIN_SHADOW_D =
   'M0,0 L12,0 L12,1 L15,1 L15,2 L17,2 L17,3 L19,3 L19,4 L21,4 L21,5 L23,5 L23,6 L25,6 L25,7 L27,7 L27,8 L29,8 L29,9 L31,9 L31,10 L32,10 L32,11 L34,11 L34,12 L35,12 L35,13 L36,13 L36,14 L37,14 L37,15 L38,15 L38,17 L39,17 L39,19 L40,19 L40,23 L41,23 L41,31 L40,31 L40,34 L39,34 L39,36 L38,36 L38,38 L37,38 L37,39 L36,39 L36,40 L35,40 L35,41 L34,41 L34,42 L33,42 L33,43 L32,43 L32,44 L30,44 L30,45 L27,45 L27,46 L24,46 L24,47 L27,47 L27,48 L29,48 L29,49 L31,49 L31,48 L32,48 L32,47 L39,47 L39,46 L46,46 L46,35 L47,35 L47,24 L48,24 L48,20 L49,20 L49,18 L51,18 L51,17 L82,17 L82,18 L85,18 L85,19 L87,19 L87,20 L88,20 L88,21 L90,21 L90,22 L92,22 L92,23 L93,23 L93,24 L94,24 L94,25 L95,25 L95,46 L106,46 L106,47 L108,47 L108,48 L110,48 L110,49 L112,49 L112,14 L111,14 L111,8 L112,8 L112,3 L113,3 L113,2 L115,2 L115,1 L149,1 L149,2 L151,2 L151,3 L153,3 L153,4 L154,4 L154,5 L155,5 L155,6 L156,6 L156,7 L157,7 L157,8 L158,8 L158,10 L159,10 L159,11 L160,11 L160,46 L162,46 L162,45 L164,45 L164,44 L169,44 L169,43 L186,43 L186,44 L190,44 L190,45 L192,45 L192,46 L195,46 L195,47 L197,47 L197,48 L198,48 L198,49 L200,49 L200,50 L201,50 L201,51 L202,51 L202,52 L203,52 L203,53 L204,53 L204,54 L205,54 L205,55 L206,55 L206,56 L207,56 L207,58 L208,58 L208,59 L209,59 L209,60 L210,60 L210,62 L211,62 L211,63 L212,63 L212,65 L213,65 L213,67 L214,67 L214,70 L215,70 L215,73 L216,73 L216,76 L217,76 L217,82 L218,82 L218,93 L219,93 L219,97 L220,97 L220,93 L221,93 L221,89 L222,89 L222,86 L223,86 L223,84 L224,84 L224,82 L225,82 L225,80 L226,80 L226,77 L227,77 L227,74 L228,74 L228,72 L229,72 L229,70 L230,70 L230,68 L231,68 L231,67 L233,67 L233,66 L234,66 L234,65 L235,65 L235,64 L237,64 L237,63 L239,63 L239,62 L241,62 L241,61 L244,61 L244,60 L245,60 L245,59 L246,59 L246,58 L247,58 L247,57 L249,57 L249,56 L250,56 L250,55 L251,55 L251,54 L252,54 L252,53 L254,53 L254,52 L255,52 L255,51 L256,51 L256,50 L257,50 L257,49 L259,49 L259,48 L260,48 L260,47 L261,47 L261,46 L264,46 L264,45 L267,45 L267,44 L276,44 L276,43 L277,43 L277,44 L287,44 L287,45 L293,45 L293,46 L297,46 L297,47 L301,47 L301,48 L304,48 L304,49 L305,49 L305,50 L306,50 L306,51 L307,51 L307,52 L308,52 L308,53 L309,53 L309,54 L310,54 L310,55 L312,55 L312,56 L313,56 L313,57 L314,57 L314,58 L315,58 L315,59 L316,59 L316,61 L317,61 L317,62 L318,62 L318,64 L319,64 L319,66 L320,66 L320,67 L321,67 L321,69 L322,69 L322,71 L323,71 L323,73 L324,73 L324,74 L325,74 L325,71 L326,71 L326,68 L327,68 L327,66 L328,66 L328,65 L329,65 L329,63 L330,63 L330,61 L331,61 L331,60 L332,60 L332,59 L333,59 L333,58 L334,58 L334,57 L335,57 L335,56 L336,56 L336,55 L337,55 L337,54 L338,54 L338,53 L339,53 L339,52 L341,52 L341,51 L342,51 L342,50 L344,50 L344,49 L346,49 L346,48 L348,48 L348,47 L350,47 L350,46 L353,46 L353,45 L357,45 L357,44 L364,44 L364,43 L379,43 L379,44 L385,44 L385,45 L389,45 L389,46 L392,46 L392,47 L395,47 L395,48 L398,48 L398,49 L400,49 L400,50 L402,50 L402,51 L403,51 L403,52 L405,52 L405,53 L407,53 L407,54 L409,54 L409,55 L410,55 L410,56 L411,56 L411,57 L412,57 L412,58 L413,58 L413,59 L414,59 L414,62 L413,62 L413,64 L412,64 L412,66 L411,66 L411,68 L410,68 L410,69 L409,69 L409,71 L408,71 L408,72 L407,72 L407,74 L406,74 L406,75 L405,75 L405,76 L404,76 L404,78 L403,78 L403,79 L402,79 L402,80 L401,80 L401,82 L400,82 L400,83 L399,83 L399,84 L398,84 L398,85 L396,85 L396,86 L393,86 L393,87 L386,87 L386,86 L385,86 L385,85 L383,85 L383,84 L382,84 L382,83 L380,83 L380,82 L378,82 L378,81 L376,81 L376,80 L374,80 L374,79 L370,79 L370,78 L365,78 L365,79 L364,79 L364,80 L366,80 L366,81 L367,81 L367,82 L369,82 L369,83 L371,83 L371,84 L375,84 L375,85 L377,85 L377,86 L381,86 L381,87 L384,87 L384,88 L387,88 L387,89 L389,89 L389,90 L392,90 L392,91 L393,91 L393,92 L396,92 L396,93 L398,93 L398,94 L400,94 L400,95 L401,95 L401,96 L403,96 L403,97 L404,97 L404,98 L405,98 L405,99 L406,99 L406,100 L407,100 L407,101 L408,101 L408,102 L409,102 L409,103 L410,103 L410,104 L411,104 L411,106 L412,106 L412,108 L413,108 L413,110 L414,110 L414,112 L415,112 L415,116 L416,116 L416,133 L415,133 L415,137 L414,137 L414,139 L413,139 L413,142 L412,142 L412,143 L411,143 L411,145 L410,145 L410,146 L409,146 L409,148 L408,148 L408,149 L407,149 L407,150 L406,150 L406,151 L405,151 L405,152 L403,152 L403,153 L402,153 L402,154 L401,154 L401,155 L400,155 L400,156 L398,156 L398,157 L396,157 L396,158 L394,158 L394,159 L391,159 L391,160 L387,160 L387,161 L383,161 L383,162 L374,162 L374,163 L366,163 L366,162 L357,162 L357,161 L353,161 L353,160 L349,160 L349,159 L346,159 L346,158 L343,158 L343,157 L341,157 L341,156 L339,156 L339,155 L337,155 L337,154 L334,154 L334,153 L332,153 L332,152 L330,152 L330,151 L329,151 L329,150 L327,150 L327,149 L326,149 L326,148 L325,148 L325,147 L323,147 L323,146 L322,146 L322,145 L321,145 L321,144 L320,144 L320,143 L318,143 L318,144 L317,144 L317,145 L316,145 L316,146 L315,146 L315,147 L313,147 L313,148 L312,148 L312,149 L310,149 L310,150 L308,150 L308,151 L307,151 L307,152 L305,152 L305,153 L303,153 L303,154 L300,154 L300,155 L298,155 L298,156 L296,156 L296,157 L293,157 L293,158 L289,158 L289,159 L283,159 L283,160 L274,160 L274,159 L268,159 L268,158 L261,158 L261,157 L257,157 L257,156 L253,156 L253,155 L251,155 L251,154 L247,154 L247,153 L245,153 L245,152 L242,152 L242,151 L240,151 L240,150 L238,150 L238,149 L236,149 L236,148 L235,148 L235,147 L234,147 L234,146 L233,146 L233,145 L232,145 L232,143 L231,143 L231,141 L230,141 L230,140 L229,140 L229,138 L228,138 L228,137 L227,137 L227,135 L226,135 L226,133 L225,133 L225,131 L224,131 L224,129 L223,129 L223,127 L222,127 L222,125 L221,125 L221,123 L220,123 L220,121 L219,121 L219,118 L218,118 L218,156 L217,156 L217,157 L216,157 L216,158 L215,158 L215,159 L212,159 L212,160 L177,160 L177,159 L175,159 L175,157 L174,157 L174,87 L173,87 L173,83 L172,83 L172,82 L166,82 L166,83 L164,83 L164,84 L163,84 L163,85 L162,85 L162,86 L161,86 L161,89 L160,89 L160,156 L159,156 L159,157 L158,157 L158,158 L155,158 L155,159 L151,159 L151,160 L115,160 L115,159 L113,159 L113,158 L107,158 L107,159 L104,159 L104,160 L99,160 L99,161 L94,161 L94,162 L74,162 L74,161 L69,161 L69,160 L67,160 L67,159 L64,159 L64,158 L62,158 L62,157 L61,157 L61,156 L59,156 L59,155 L58,155 L58,154 L56,154 L56,152 L55,152 L55,151 L54,151 L54,150 L53,150 L53,148 L52,148 L52,147 L51,147 L51,145 L50,145 L50,143 L49,143 L49,141 L48,141 L48,138 L47,138 L47,134 L46,134 L46,129 L45,129 L45,81 L44,81 L44,80 L39,80 L39,81 L40,81 L40,105 L39,105 L39,146 L40,146 L40,150 L39,150 L39,156 L38,156 L38,157 L37,157 L37,158 L31,158 L31,159 L25,159 L25,160 L-11,160 L-11,159 L-13,159 L-13,158 L-15,158 L-15,159 L-22,159 L-22,160 L-117,160 L-117,159 L-119,159 L-119,157 L-120,157 L-120,46 L-119,46 L-119,27 L-120,27 L-120,26 L-119,26 L-119,10 L-118,10 L-118,9 L-117,9 L-117,8 L-77,8 L-77,9 L-74,9 L-74,10 L-72,10 L-72,11 L-69,11 L-69,12 L-66,12 L-66,13 L-63,13 L-63,14 L-61,14 L-61,15 L-60,15 L-60,16 L-59,16 L-59,17 L-58,17 L-58,108 L-59,108 L-59,121 L-20,121 L-20,122 L-19,122 L-19,121 L-17,121 L-17,122 L-16,122 L-16,121 L-15,121 L-15,122 L-14,122 L-14,48 L-13,48 L-13,47 L-12,47 L-12,46 L13,46 L13,45 L9,45 L9,44 L7,44 L7,43 L4,43 L4,42 L0,42 L0,41 L-2,41 L-2,40 L-5,40 L-5,39 L-6,39 L-6,38 L-8,38 L-8,37 L-9,37 L-9,36 L-11,36 L-11,34 L-12,34 L-12,33 L-13,33 L-13,32 L-14,32 L-14,30 L-15,30 L-15,27 L-16,27 L-16,23 L-17,23 L-17,19 L-16,19 L-16,14 L-15,14 L-15,12 L-14,12 L-14,10 L-13,10 L-13,9 L-12,9 L-12,7 L-11,7 L-11,6 L-10,6 L-10,5 L-9,5 L-9,4 L-7,4 L-7,3 L-5,3 L-5,2 L-3,2 L-3,1 L0,1 Z M95,81 L95,123 L96,123 L96,125 L97,125 L97,126 L101,126 L101,125 L111,125 L111,126 L112,126 L112,81 Z M331,105 L331,120 L334,120 L334,119 L335,119 L335,118 L342,118 L342,119 L344,119 L344,120 L345,120 L345,121 L347,121 L347,122 L348,122 L348,123 L350,123 L350,124 L352,124 L352,125 L354,125 L354,126 L356,126 L356,127 L358,127 L358,128 L361,128 L361,129 L365,129 L365,130 L368,130 L368,129 L371,129 L371,124 L370,124 L370,123 L369,123 L369,122 L366,122 L366,121 L364,121 L364,120 L361,120 L361,119 L359,119 L359,118 L356,118 L356,117 L353,117 L353,116 L350,116 L350,115 L347,115 L347,114 L345,114 L345,113 L343,113 L343,112 L341,112 L341,111 L339,111 L339,110 L337,110 L337,109 L336,109 L336,108 L334,108 L334,107 L333,107 L333,106 L332,106 L332,105 Z '
 
+let shortLogoRawCache: string | null = null
+
+interface HslColor {
+  h: number
+  s: number
+  l: number
+}
+
+const parseColorToHsl = (color: string): HslColor => {
+  let r = 0
+  let g = 255
+  let b = 0
+
+  const trimmed = color.trim().toLowerCase()
+
+  if (trimmed.startsWith('#')) {
+    const hex = trimmed.slice(1)
+    if (hex.length === 3) {
+      const h0 = hex.charAt(0)
+      const h1 = hex.charAt(1)
+      const h2 = hex.charAt(2)
+      r = parseInt(h0 + h0, 16)
+      g = parseInt(h1 + h1, 16)
+      b = parseInt(h2 + h2, 16)
+    } else if (hex.length >= 6) {
+      r = parseInt(hex.slice(0, 2), 16)
+      g = parseInt(hex.slice(2, 4), 16)
+      b = parseInt(hex.slice(4, 6), 16)
+    }
+  } else if (trimmed.startsWith('rgb')) {
+    const parts = trimmed.match(/[\d.]+/g)
+    const p0 = parts?.[0]
+    const p1 = parts?.[1]
+    const p2 = parts?.[2]
+    if (p0 !== undefined && p1 !== undefined && p2 !== undefined) {
+      r = parseFloat(p0)
+      g = parseFloat(p1)
+      b = parseFloat(p2)
+    }
+  } else if (trimmed.startsWith('hsl')) {
+    const parts = trimmed.match(/[\d.]+/g)
+    const p0 = parts?.[0]
+    const p1 = parts?.[1]
+    const p2 = parts?.[2]
+    if (p0 !== undefined && p1 !== undefined && p2 !== undefined) {
+      return {
+        h: parseFloat(p0),
+        s: Math.min(100, Math.max(0, parseFloat(p1))),
+        l: Math.min(100, Math.max(0, parseFloat(p2))),
+      }
+    }
+  }
+
+  r = Math.min(255, Math.max(0, r)) / 255
+  g = Math.min(255, Math.max(0, g)) / 255
+  b = Math.min(255, Math.max(0, b)) / 255
+
+  const max = Math.max(r, g, b)
+  const min = Math.min(r, g, b)
+  let h = 0
+  let s = 0
+  const l = (max + min) / 2
+
+  if (max !== min) {
+    const d = max - min
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
+    switch (max) {
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0)
+        break
+      case g:
+        h = (b - r) / d + 2
+        break
+      case b:
+        h = (r - g) / d + 4
+        break
+    }
+    h *= 60
+  }
+
+  return {
+    h: Math.round(h),
+    s: Math.round(s * 100),
+    l: Math.round(l * 100),
+  }
+}
+
+const resolveAccentColor = (accentColorProp: string): string => {
+  if (typeof window === 'undefined') return '#00ff00'
+
+  if (accentColorProp.startsWith('var(')) {
+    const varMatch = accentColorProp.match(/var\(\s*([^,\s)]+)/)
+    const varName = varMatch?.[1] ?? '--lithos-accent'
+
+    const computed =
+      document.documentElement.style.getPropertyValue(varName).trim() ||
+      getComputedStyle(document.documentElement).getPropertyValue(varName).trim()
+
+    if (computed) return computed
+
+    const stored = localStorage.getItem('lithos-theme-color')
+    if (stored) return stored
+
+    return '#00ff00'
+  }
+
+  return accentColorProp
+}
+
+const recoloredSvgCache = new Map<string, string>()
+
+const prepareShortLogoSvg = (svgText: string, accentColorStr: string): string => {
+  const resolved = resolveAccentColor(accentColorStr)
+  const cacheKey = `${resolved.trim().toLowerCase()}_${svgText.length}`
+  if (recoloredSvgCache.has(cacheKey)) {
+    return recoloredSvgCache.get(cacheKey)!
+  }
+
+  const { h, s, l } = parseColorToHsl(resolved)
+
+  const recolored = svgText.replace(/fill=(["'])(#[0-9a-fA-F]{3,8})\1/gi, (_match, quote, hex) => {
+    const orig = parseColorToHsl(hex)
+
+    // Deep dark outlines, cracks and borders: preserve solid black
+    if (orig.l < 18) {
+      return `fill=${quote}#000000${quote}`
+    }
+
+    const deltaL = orig.l - 48
+    let targetL: number
+    let targetS: number
+
+    if (orig.l > 55) {
+      // Highlight facet: light sheen preserving relative facet brightness
+      targetL = Math.min(92, Math.max(55, Math.round(l + deltaL * 0.85)))
+      targetS = Math.min(100, Math.round(s * 0.9))
+    } else if (orig.l < 38) {
+      // Shaded bottom facet: rich chromatic shading without muddy black
+      targetL = Math.max(18, Math.min(45, Math.round(l + deltaL * 0.85)))
+      targetS = Math.min(100, Math.round(s * 0.95))
+    } else {
+      // Base body midtone
+      targetL = Math.min(85, Math.max(25, l))
+      targetS = s
+    }
+
+    return `fill=${quote}hsl(${h}, ${targetS}%, ${targetL}%)${quote}`
+  })
+
+  recoloredSvgCache.set(cacheKey, recolored)
+  return recolored
+}
+
 export const LithosLogo = ({
   accentColor = 'var(--lithos-accent)',
   collapsed,
@@ -132,30 +266,45 @@ export const LithosLogo = ({
 }: LithosLogoProps) => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
-  const clipId = useId().replace(/:/g, '')
-  const filterId = `lithos-${clipId}-rock-tint`
-  const clipLeftId = `lithos-${clipId}-left`
-  const clipRockId = `lithos-${clipId}-rock`
-  const clipRightId = `lithos-${clipId}-right`
-
-  const [resolvedAccent, setResolvedAccent] = useState<string>(() => {
-    if (accentColor && accentColor !== 'var(--lithos-accent)' && accentColor.startsWith('#')) {
-      return accentColor
-    }
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('lithos-theme-color')
-      if (stored && stored.startsWith('#')) return stored
-    }
-    return '#00FF00'
-  })
-
+  const [resolvedAccent, setResolvedAccent] = useState(() => resolveAccentColor(accentColor))
   const [shortLogoSvg, setShortLogoSvg] = useState<string>(() =>
-    shortLogoRawCache ? recolorShortLogoSvg(shortLogoRawCache, resolvedAccent, filterId) : ''
+    shortLogoRawCache ? prepareShortLogoSvg(shortLogoRawCache, resolvedAccent) : ''
   )
 
+  // Keep resolved accent in sync with prop and global theme changes
+  useEffect(() => {
+    const updateAccent = () => {
+      const nextColor = resolveAccentColor(accentColor)
+      setResolvedAccent((prev) => (prev !== nextColor ? nextColor : prev))
+    }
+
+    updateAccent()
+
+    if (typeof window === 'undefined') {
+      return undefined
+    }
+
+    window.addEventListener('lithos-theme-color-changed', updateAccent)
+
+    const observer = new MutationObserver(() => {
+      updateAccent()
+    })
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['style', 'class'],
+    })
+
+    return () => {
+      window.removeEventListener('lithos-theme-color-changed', updateAccent)
+      observer.disconnect()
+    }
+  }, [accentColor])
+
+  // Update shortLogoSvg whenever raw cache or resolvedAccent changes
   useEffect(() => {
     if (shortLogoRawCache) {
-      setShortLogoSvg(recolorShortLogoSvg(shortLogoRawCache, resolvedAccent, filterId))
+      setShortLogoSvg(prepareShortLogoSvg(shortLogoRawCache, resolvedAccent))
       return
     }
 
@@ -164,37 +313,11 @@ export const LithosLogo = ({
         .then((res) => res.text())
         .then((text) => {
           shortLogoRawCache = text
-          setShortLogoSvg(recolorShortLogoSvg(text, resolvedAccent, filterId))
+          setShortLogoSvg(prepareShortLogoSvg(text, resolvedAccent))
         })
         .catch(() => {})
     }
-  }, [resolvedAccent, filterId])
-
-  useEffect(() => {
-    if (accentColor && accentColor !== 'var(--lithos-accent)' && accentColor.startsWith('#')) {
-      setResolvedAccent(accentColor)
-      return
-    }
-
-    const checkAccent = () => {
-      if (typeof window === 'undefined') return
-      const computed = getComputedStyle(document.documentElement).getPropertyValue('--lithos-accent').trim()
-      if (computed && computed.startsWith('#')) {
-        setResolvedAccent(computed)
-        return
-      }
-      const stored = localStorage.getItem('lithos-theme-color')
-      if (stored && stored.startsWith('#')) {
-        setResolvedAccent(stored)
-        return
-      }
-      setResolvedAccent('#00FF00')
-    }
-
-    checkAccent()
-    window.addEventListener('lithos-theme-color-changed', checkAccent)
-    return () => window.removeEventListener('lithos-theme-color-changed', checkAccent)
-  }, [accentColor])
+  }, [resolvedAccent])
 
   useEffect(() => {
     if (!collapseOnScroll && collapsed === undefined) return
@@ -222,18 +345,20 @@ export const LithosLogo = ({
       role="img"
       onMouseEnter={(e) => {
         setIsHovered(true)
-        onMouseEnter?.(e as any)
+        onMouseEnter?.(e)
       }}
       onMouseLeave={(e) => {
         setIsHovered(false)
-        onMouseLeave?.(e as any)
+        onMouseLeave?.(e)
       }}
       {...props}
     >
-      {/* 1. Full Animated Vector Logo ("Lith [Rock] s UI") */}
+      {/* 1. Full Vector Logo ("Lith [Rock] s UI") */}
       <div
-        className={`absolute inset-y-0 left-1/2 -translate-x-1/2 w-[150px] md:w-[168px] h-full transition-opacity duration-300 ease-out ${
-          isEffectivelyCollapsed ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        className={`absolute inset-y-0 left-0 w-[150px] md:w-[168px] h-full flex items-center origin-left transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          isEffectivelyCollapsed
+            ? 'opacity-0 scale-95 pointer-events-none'
+            : 'opacity-100 scale-100 pointer-events-auto'
         }`}
         aria-hidden={isEffectivelyCollapsed}
       >
@@ -244,132 +369,104 @@ export const LithosLogo = ({
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-full"
         >
-          <defs>
-            {/* Clip paths for MAIN_SHADOW_D (in translate(226, 104) coordinate space) */}
-            {/* 1. Left letters (Lith): covers x = -150 to 219 (screen x = 76 to 445, including full 'L' and 'i') */}
-            <clipPath id={clipLeftId}>
-              <rect x="-150" y="-50" width="369" height="300" />
-            </clipPath>
-            {/* 2. Rock region: covers x = 219 to 328 when full, cuts at 319 (width 100) when collapsed to eliminate 's' shadow */}
-            <clipPath id={clipRockId}>
-              <rect x="219" y="-50" width={isEffectivelyCollapsed ? 100 : 109} height="300" />
-            </clipPath>
-            {/* 3. Right letters (s): covers x = 328 to 500 (screen x = 554 to 726) */}
-            <clipPath id={clipRightId}>
-              <rect x="328" y="-50" width="200" height="300" />
-            </clipPath>
-          </defs>
+          {/* Main 3D Drop Shadow */}
+          <path d={MAIN_SHADOW_D} fill="#000000" transform="translate(226,104)" />
 
-          {/* 1. Left Letters Group ("Lith") */}
-          <g
-            style={{
-              transform: isEffectivelyCollapsed ? 'translateX(55px)' : 'translateX(0)',
-              opacity: isEffectivelyCollapsed ? 0 : 1,
-              transition: 'transform 450ms cubic-bezier(0.16, 1, 0.3, 1), opacity 300ms ease-out',
-            }}
-          >
-            {/* Left Drop Shadow */}
-            <path d={MAIN_SHADOW_D} fill="#000000" transform="translate(226,104)" clipPath={`url(#${clipLeftId})`} />
-            {/* Letter 'i' shadow */}
-            <path
-              d="M0,0 L12,0 L12,1 L15,1 L15,2 L17,2 L17,3 L19,3 L19,4 L21,4 L21,5 L23,5 L23,6 L25,6 L25,7 L27,7 L27,8 L29,8 L29,9 L31,9 L31,10 L32,10 L32,11 L34,11 L34,12 L35,12 L35,13 L36,13 L36,14 L37,14 L37,15 L38,15 L38,17 L39,17 L39,19 L40,19 L40,23 L41,23 L41,31 L40,31 L40,34 L39,34 L39,36 L38,36 L38,38 L37,38 L37,39 L36,39 L36,40 L35,40 L35,41 L34,41 L34,42 L33,42 L33,43 L32,43 L32,44 L30,44 L30,45 L27,45 L27,46 L24,46 L24,47 L-11,47 L-11,48 L-12,48 L-12,49 L-13,49 L-13,122 L-14,122 L-14,48 L-13,48 L-13,47 L-12,47 L-12,46 L13,46 L13,45 L9,45 L9,44 L7,44 L7,43 L4,43 L4,42 L0,42 L0,41 L-2,41 L-2,40 L-5,40 L-5,39 L-6,39 L-6,38 L-8,38 L-8,37 L-9,37 L-9,36 L-11,36 L-11,34 L-12,34 L-12,33 L-13,33 L-13,32 L-14,32 L-14,30 L-15,30 L-15,27 L-16,27 L-16,23 L-17,23 L-17,19 L-16,19 L-16,14 L-15,14 L-15,12 L-14,12 L-14,10 L-13,10 L-13,9 L-12,9 L-12,7 L-11,7 L-11,6 L-10,6 L-10,5 L-9,5 L-9,4 L-7,4 L-7,3 L-5,3 L-5,2 L-3,2 L-3,1 L0,1 Z "
-              fill="#000000"
-              transform="translate(226,104)"
-            />
-            {/* Letter 'L' */}
-            <path
-              d="M0,0 L36,0 L36,37 L35,37 L35,114 L91,114 L91,145 L0,145 Z "
-              fill={accentColor}
-              transform="translate(110,115)"
-            />
-            {/* Letter 'i' Dot */}
-            <path
-              d="M0,0 L11,0 L11,1 L15,1 L15,2 L17,2 L17,3 L18,3 L18,4 L19,4 L19,5 L20,5 L20,6 L21,6 L21,7 L22,7 L22,9 L23,9 L23,11 L24,11 L24,23 L23,23 L23,25 L22,25 L22,27 L21,27 L21,28 L20,28 L20,29 L19,29 L19,30 L18,30 L18,31 L17,31 L17,32 L15,32 L15,33 L13,33 L13,34 L-1,34 L-1,33 L-3,33 L-3,32 L-5,32 L-5,31 L-6,31 L-6,30 L-7,30 L-7,29 L-8,29 L-8,28 L-9,28 L-9,27 L-10,27 L-10,25 L-11,25 L-11,23 L-12,23 L-12,11 L-11,11 L-11,8 L-10,8 L-10,7 L-9,7 L-9,6 L-8,6 L-8,5 L-7,5 L-7,4 L-6,4 L-6,3 L-5,3 L-5,2 L-3,2 L-3,1 L0,1 Z "
-              fill={accentColor}
-              transform="translate(226,108)"
-            />
-            {/* Letter 'i' Stem */}
-            <path d="M0,0 L33,0 L33,1 L34,1 L34,107 L0,107 Z " fill={accentColor} transform="translate(215,153)" />
-            {/* Letter 't' */}
-            <path
-              d="M0,0 L30,0 L30,28 L51,28 L51,54 L29,54 L29,102 L30,102 L30,104 L31,104 L31,105 L32,105 L32,106 L33,106 L33,107 L34,107 L34,108 L36,108 L36,109 L45,109 L45,108 L49,108 L49,114 L50,114 L50,118 L51,118 L51,124 L52,124 L52,129 L53,129 L53,134 L51,134 L51,135 L49,135 L49,136 L45,136 L45,137 L42,137 L42,138 L22,138 L22,137 L19,137 L19,136 L16,136 L16,135 L14,135 L14,134 L12,134 L12,133 L10,133 L10,132 L9,132 L9,131 L8,131 L8,130 L7,130 L7,129 L6,129 L6,128 L5,128 L5,127 L4,127 L4,126 L3,126 L3,124 L2,124 L2,122 L1,122 L1,120 L0,120 L0,118 L-1,118 L-1,115 L-2,115 L-2,110 L-3,110 L-3,105 L-4,105 L-4,54 L-18,54 L-18,29 L-8,29 L-8,28 L-4,28 L-4,26 L-3,26 L-3,21 L-2,21 L-2,11 L-1,11 L-1,6 L0,6 Z "
-              fill={accentColor}
-              transform="translate(278,125)"
-            />
-            {/* Letter 'h' */}
-            <path
-              d="M0,0 L34,0 L34,52 L36,52 L36,51 L37,51 L37,50 L38,50 L38,49 L40,49 L40,48 L42,48 L42,47 L43,47 L43,46 L45,46 L45,45 L47,45 L47,44 L49,44 L49,43 L52,43 L52,42 L73,42 L73,43 L76,43 L76,44 L78,44 L78,45 L80,45 L80,46 L82,46 L82,47 L83,47 L83,48 L84,48 L84,49 L85,49 L85,50 L86,50 L86,51 L87,51 L87,52 L88,52 L88,53 L89,53 L89,55 L90,55 L90,57 L91,57 L91,59 L92,59 L92,61 L93,61 L93,64 L94,64 L94,68 L95,68 L95,74 L96,74 L96,151 L63,151 L63,83 L62,83 L62,79 L61,79 L61,76 L60,76 L60,74 L59,74 L59,73 L58,73 L58,72 L56,72 L56,71 L53,71 L53,70 L48,70 L48,71 L44,71 L44,72 L42,72 L42,73 L41,73 L41,74 L39,74 L39,75 L38,75 L38,77 L37,77 L37,78 L36,78 L36,80 L35,80 L35,82 L34,82 L34,151 L0,151 Z "
-              fill={accentColor}
-              transform="translate(341,109)"
-            />
-          </g>
+          {/* Letter 'i' shadow */}
+          <path
+            d="M0,0 L12,0 L12,1 L15,1 L15,2 L17,2 L17,3 L19,3 L19,4 L21,4 L21,5 L23,5 L23,6 L25,6 L25,7 L27,7 L27,8 L29,8 L29,9 L31,9 L31,10 L32,10 L32,11 L34,11 L34,12 L35,12 L35,13 L36,13 L36,14 L37,14 L37,15 L38,15 L38,17 L39,17 L39,19 L40,19 L40,23 L41,23 L41,31 L40,31 L40,34 L39,34 L39,36 L38,36 L38,38 L37,38 L37,39 L36,39 L36,40 L35,40 L35,41 L34,41 L34,42 L33,42 L33,43 L32,43 L32,44 L30,44 L30,45 L27,45 L27,46 L24,46 L24,47 L-11,47 L-11,48 L-12,48 L-12,49 L-13,49 L-13,122 L-14,122 L-14,48 L-13,48 L-13,47 L-12,47 L-12,46 L13,46 L13,45 L9,45 L9,44 L7,44 L7,43 L4,43 L4,42 L0,42 L0,41 L-2,41 L-2,40 L-5,40 L-5,39 L-6,39 L-6,38 L-8,38 L-8,37 L-9,37 L-9,36 L-11,36 L-11,34 L-12,34 L-12,33 L-13,33 L-13,32 L-14,32 L-14,30 L-15,30 L-15,27 L-16,27 L-16,23 L-17,23 L-17,19 L-16,19 L-16,14 L-15,14 L-15,12 L-14,12 L-14,10 L-13,10 L-13,9 L-12,9 L-12,7 L-11,7 L-11,6 L-10,6 L-10,5 L-9,5 L-9,4 L-7,4 L-7,3 L-5,3 L-5,2 L-3,2 L-3,1 L0,1 Z "
+            fill="#000000"
+            transform="translate(226,104)"
+          />
 
-          {/* 2. Center Boulder ("Rock") */}
-          <g
-            style={{
-              transformOrigin: '500px 206px',
-              transform: isHovered && isEffectivelyCollapsed ? 'scale(1.05)' : 'scale(1)',
-              transition: 'transform 350ms cubic-bezier(0.16, 1, 0.3, 1)',
-            }}
-          >
-            {/* Boulder Drop Shadow */}
-            <path d={MAIN_SHADOW_D} fill="#000000" transform="translate(226,104)" clipPath={`url(#${clipRockId})`} />
+          {/* U & I 3D Drop Shadow */}
+          <path
+            d="M0,0 L33,0 L33,1 L36,1 L36,2 L37,2 L37,3 L38,3 L38,97 L39,97 L39,104 L40,104 L40,107 L41,107 L41,109 L42,109 L42,111 L43,111 L43,112 L44,112 L44,113 L45,113 L45,114 L46,114 L46,115 L49,115 L49,116 L53,116 L53,115 L55,115 L55,114 L56,114 L56,113 L57,113 L57,112 L58,112 L58,110 L59,110 L59,108 L60,108 L60,105 L61,105 L61,101 L62,101 L62,100 L61,100 L61,99 L62,99 L62,9 L63,9 L63,8 L64,8 L64,7 L66,7 L66,6 L68,6 L68,5 L70,5 L70,4 L72,4 L72,3 L74,3 L74,2 L76,2 L76,1 L82,1 L82,0 L112,0 L112,1 L116,1 L116,2 L117,2 L117,5 L118,5 L118,8 L119,8 L119,7 L122,7 L122,6 L125,6 L125,5 L127,5 L127,4 L130,4 L130,3 L132,3 L132,2 L134,2 L134,1 L139,1 L139,0 L156,0 L156,1 L157,1 L157,0 L158,0 L158,1 L159,1 L159,0 L167,0 L167,1 L170,1 L170,2 L171,2 L171,5 L172,5 L172,136 L173,136 L173,149 L172,149 L172,151 L171,151 L171,152 L170,152 L170,153 L134,153 L134,152 L126,152 L126,151 L119,151 L119,150 L118,150 L118,149 L117,149 L117,99 L116,99 L116,108 L115,108 L115,113 L114,113 L114,117 L113,117 L113,120 L112,120 L112,123 L111,123 L111,125 L110,125 L110,127 L109,127 L109,129 L108,129 L108,131 L107,131 L107,132 L106,132 L106,134 L105,134 L105,136 L103,136 L103,138 L102,138 L102,139 L101,139 L101,140 L100,140 L100,141 L99,141 L99,142 L98,142 L98,143 L97,143 L97,144 L96,144 L96,145 L94,145 L94,146 L93,146 L93,147 L91,147 L91,148 L89,148 L89,149 L88,149 L88,150 L85,150 L85,151 L83,151 L83,152 L80,152 L80,153 L77,153 L77,154 L73,154 L73,155 L65,155 L65,156 L50,156 L50,155 L42,155 L42,154 L36,154 L36,153 L30,153 L30,152 L25,152 L25,151 L22,151 L22,150 L19,150 L19,149 L16,149 L16,148 L14,148 L14,147 L12,147 L12,146 L11,146 L11,145 L9,145 L9,144 L7,144 L7,143 L6,143 L6,142 L5,142 L5,141 L4,141 L4,140 L3,140 L3,139 L2,139 L2,138 L1,138 L1,137 L0,137 L0,136 L-1,136 L-1,135 L-2,135 L-2,133 L-3,133 L-3,132 L-4,132 L-4,131 L-5,131 L-5,129 L-6,129 L-6,127 L-7,127 L-7,125 L-8,125 L-8,123 L-9,123 L-9,120 L-10,120 L-10,117 L-11,117 L-11,113 L-12,113 L-12,107 L-13,107 L-13,100 L-14,100 L-14,62 L-15,62 L-15,12 L-14,12 L-14,9 L-13,9 L-13,8 L-12,8 L-12,7 L-11,7 L-11,6 L-9,6 L-9,5 L-8,5 L-8,4 L-7,4 L-7,3 L-5,3 L-5,2 L-3,2 L-3,1 L0,1 Z "
+            fill="#000000"
+            transform="translate(706,111)"
+          />
 
-            {/* Center Boulder Base */}
-            <path d={BOULDER_BASE_D} fill={accentColor} transform="translate(491,151)" />
+          {/* Letter 'L' */}
+          <path
+            d="M0,0 L36,0 L36,37 L35,37 L35,114 L91,114 L91,145 L0,145 Z "
+            fill={accentColor}
+            transform="translate(110,115)"
+          />
 
-            <BoulderFacets />
-          </g>
+          {/* Letter 'i' Dot */}
+          <path
+            d="M0,0 L11,0 L11,1 L15,1 L15,2 L17,2 L17,3 L18,3 L18,4 L19,4 L19,5 L20,5 L20,6 L21,6 L21,7 L22,7 L22,9 L23,9 L23,11 L24,11 L24,23 L23,23 L23,25 L22,25 L22,27 L21,27 L21,28 L20,28 L20,29 L19,29 L19,30 L18,30 L18,31 L17,31 L17,32 L15,32 L15,33 L13,33 L13,34 L-1,34 L-1,33 L-3,33 L-3,32 L-5,32 L-5,31 L-6,31 L-6,30 L-7,30 L-7,29 L-8,29 L-8,28 L-9,28 L-9,27 L-10,27 L-10,25 L-11,25 L-11,23 L-12,23 L-12,11 L-11,11 L-11,8 L-10,8 L-10,7 L-9,7 L-9,6 L-8,6 L-8,5 L-7,5 L-7,4 L-6,4 L-6,3 L-5,3 L-5,2 L-3,2 L-3,1 L0,1 Z "
+            fill={accentColor}
+            transform="translate(226,108)"
+          />
 
-          {/* 3. Right Letters Group ("s UI") */}
-          <g
-            style={{
-              transform: isEffectivelyCollapsed ? 'translateX(-55px)' : 'translateX(0)',
-              opacity: isEffectivelyCollapsed ? 0 : 1,
-              transition: 'transform 450ms cubic-bezier(0.16, 1, 0.3, 1), opacity 300ms ease-out',
-            }}
-          >
-            {/* Right Drop Shadow */}
-            <path d={MAIN_SHADOW_D} fill="#000000" transform="translate(226,104)" clipPath={`url(#${clipRightId})`} />
-            {/* U & I 3D Drop Shadow */}
-            <path
-              d="M0,0 L33,0 L33,1 L36,1 L36,2 L37,2 L37,3 L38,3 L38,97 L39,97 L39,104 L40,104 L40,107 L41,107 L41,109 L42,109 L42,111 L43,111 L43,112 L44,112 L44,113 L45,113 L45,114 L46,114 L46,115 L49,115 L49,116 L53,116 L53,115 L55,115 L55,114 L56,114 L56,113 L57,113 L57,112 L58,112 L58,110 L59,110 L59,108 L60,108 L60,105 L61,105 L61,101 L62,101 L62,100 L61,100 L61,99 L62,99 L62,9 L63,9 L63,8 L64,8 L64,7 L66,7 L66,6 L68,6 L68,5 L70,5 L70,4 L72,4 L72,3 L74,3 L74,2 L76,2 L76,1 L82,1 L82,0 L112,0 L112,1 L116,1 L116,2 L117,2 L117,5 L118,5 L118,8 L119,8 L119,7 L122,7 L122,6 L125,6 L125,5 L127,5 L127,4 L130,4 L130,3 L132,3 L132,2 L134,2 L134,1 L139,1 L139,0 L156,0 L156,1 L157,1 L157,0 L158,0 L158,1 L159,1 L159,0 L167,0 L167,1 L170,1 L170,2 L171,2 L171,5 L172,5 L172,136 L173,136 L173,149 L172,149 L172,151 L171,151 L171,152 L170,152 L170,153 L134,153 L134,152 L126,152 L126,151 L119,151 L119,150 L118,150 L118,149 L117,149 L117,99 L116,99 L116,108 L115,108 L115,113 L114,113 L114,117 L113,117 L113,120 L112,120 L112,123 L111,123 L111,125 L110,125 L110,127 L109,127 L109,129 L108,129 L108,131 L107,131 L107,132 L106,132 L106,134 L105,134 L105,136 L103,136 L103,138 L102,138 L102,139 L101,139 L101,140 L100,140 L100,141 L99,141 L99,142 L98,142 L98,143 L97,143 L97,144 L96,144 L96,145 L94,145 L94,146 L93,146 L93,147 L91,147 L91,148 L89,148 L89,149 L88,149 L88,150 L85,150 L85,151 L83,151 L83,152 L80,152 L80,153 L77,153 L77,154 L73,154 L73,155 L65,155 L65,156 L50,156 L50,155 L42,155 L42,154 L36,154 L36,153 L30,153 L30,152 L25,152 L25,151 L22,151 L22,150 L19,150 L19,149 L16,149 L16,148 L14,148 L14,147 L12,147 L12,146 L11,146 L11,145 L9,145 L9,144 L7,144 L7,143 L6,143 L6,142 L5,142 L5,141 L4,141 L4,140 L3,140 L3,139 L2,139 L2,138 L1,138 L1,137 L0,137 L0,136 L-1,136 L-1,135 L-2,135 L-2,133 L-3,133 L-3,132 L-4,132 L-4,131 L-5,131 L-5,129 L-6,129 L-6,127 L-7,127 L-7,125 L-8,125 L-8,123 L-9,123 L-9,120 L-10,120 L-10,117 L-11,117 L-11,113 L-12,113 L-12,107 L-13,107 L-13,100 L-14,100 L-14,62 L-15,62 L-15,12 L-14,12 L-14,9 L-13,9 L-13,8 L-12,8 L-12,7 L-11,7 L-11,6 L-9,6 L-9,5 L-8,5 L-8,4 L-7,4 L-7,3 L-5,3 L-5,2 L-3,2 L-3,1 L0,1 Z "
-              fill="#000000"
-              transform="translate(706,111)"
-            />
-            {/* Letter 's' */}
-            <path
-              d="M0,0 L23,0 L23,1 L27,1 L27,2 L31,2 L31,3 L34,3 L34,4 L36,4 L36,5 L38,5 L38,6 L41,6 L41,7 L43,7 L43,8 L44,8 L44,9 L46,9 L46,10 L48,10 L48,11 L49,11 L49,12 L50,12 L50,13 L51,13 L51,15 L50,15 L50,17 L49,17 L49,18 L48,18 L48,20 L47,20 L47,21 L46,21 L46,22 L45,22 L45,24 L44,24 L44,26 L43,26 L43,27 L42,27 L42,28 L41,28 L41,30 L40,30 L40,31 L39,31 L39,33 L38,33 L38,34 L35,34 L35,33 L34,33 L34,32 L32,32 L32,31 L31,31 L31,30 L29,30 L29,29 L27,29 L27,28 L25,28 L25,27 L22,27 L22,26 L19,26 L19,25 L7,25 L7,26 L4,26 L4,27 L3,27 L3,28 L2,28 L2,29 L1,29 L1,34 L2,34 L2,35 L3,35 L3,36 L5,36 L5,37 L7,37 L7,38 L9,38 L9,39 L11,39 L11,40 L14,40 L14,41 L16,41 L16,42 L19,42 L19,43 L23,43 L23,44 L25,44 L25,45 L28,45 L28,46 L31,46 L31,47 L33,47 L33,48 L35,48 L35,49 L37,49 L37,50 L39,50 L39,51 L40,51 L40,52 L42,52 L42,53 L43,53 L43,54 L44,54 L44,55 L45,55 L45,56 L46,56 L46,57 L47,57 L47,58 L48,58 L48,59 L49,59 L49,61 L50,61 L50,63 L51,63 L51,65 L52,65 L52,68 L53,68 L53,72 L54,72 L54,84 L53,84 L53,87 L52,87 L52,90 L51,90 L51,92 L50,92 L50,94 L49,94 L49,96 L48,96 L48,97 L47,97 L47,98 L46,98 L46,100 L45,100 L45,101 L44,101 L44,102 L43,102 L43,103 L41,103 L41,104 L40,104 L40,105 L38,105 L38,106 L37,106 L37,107 L35,107 L35,108 L32,108 L32,109 L30,109 L30,110 L26,110 L26,111 L23,111 L23,112 L-1,112 L-1,111 L-5,111 L-5,110 L-8,110 L-8,109 L-11,109 L-11,108 L-14,108 L-14,107 L-16,107 L-16,106 L-18,106 L-18,105 L-21,105 L-21,104 L-23,104 L-23,103 L-25,103 L-25,102 L-27,102 L-27,101 L-28,101 L-28,100 L-30,100 L-30,99 L-31,99 L-31,98 L-32,98 L-32,97 L-34,97 L-34,95 L-33,95 L-33,94 L-32,94 L-32,93 L-31,93 L-31,91 L-30,91 L-30,90 L-29,90 L-29,88 L-28,88 L-28,87 L-27,87 L-27,85 L-26,85 L-26,84 L-25,84 L-25,82 L-24,82 L-24,80 L-23,80 L-23,79 L-22,79 L-22,77 L-21,77 L-21,76 L-20,76 L-20,75 L-17,75 L-17,76 L-16,76 L-16,77 L-14,77 L-14,78 L-12,78 L-12,79 L-11,79 L-11,80 L-9,80 L-9,81 L-7,81 L-7,82 L-5,82 L-5,83 L-3,83 L-3,84 L0,84 L0,85 L2,85 L2,86 L7,86 L7,87 L15,87 L15,86 L18,86 L18,85 L20,85 L20,84 L21,84 L21,82 L22,82 L22,77 L21,77 L21,75 L20,75 L20,74 L19,74 L19,73 L17,73 L17,72 L15,72 L15,71 L13,71 L13,70 L10,70 L10,69 L8,69 L8,68 L5,68 L5,67 L2,67 L2,66 L-1,66 L-1,65 L-3,65 L-3,64 L-6,64 L-6,63 L-9,63 L-9,62 L-11,62 L-11,61 L-13,61 L-13,60 L-14,60 L-14,59 L-16,59 L-16,58 L-17,58 L-17,57 L-19,57 L-19,56 L-20,56 L-20,55 L-21,55 L-21,54 L-22,54 L-22,53 L-23,53 L-23,52 L-24,52 L-24,51 L-25,51 L-25,50 L-26,50 L-26,48 L-27,48 L-27,46 L-28,46 L-28,44 L-29,44 L-29,39 L-30,39 L-30,29 L-29,29 L-29,24 L-28,24 L-28,22 L-27,22 L-27,19 L-26,19 L-26,18 L-25,18 L-25,16 L-24,16 L-24,14 L-23,14 L-23,13 L-22,13 L-22,12 L-21,12 L-21,11 L-20,11 L-20,10 L-19,10 L-19,9 L-18,9 L-18,8 L-16,8 L-16,7 L-15,7 L-15,6 L-13,6 L-13,5 L-11,5 L-11,4 L-9,4 L-9,3 L-7,3 L-7,2 L-3,2 L-3,1 L0,1 Z "
-              fill={accentColor}
-              transform="translate(585,151)"
-            />
-            {/* Letter 'U' */}
-            <path
-              d="M0,0 L35,0 L35,90 L36,90 L36,98 L37,98 L37,102 L38,102 L38,105 L39,105 L39,107 L40,107 L40,109 L41,109 L41,110 L42,110 L42,111 L43,111 L43,112 L44,112 L44,113 L45,113 L45,114 L47,114 L47,115 L49,115 L49,116 L53,116 L53,117 L64,117 L64,116 L67,116 L67,115 L69,115 L69,114 L71,114 L71,113 L72,113 L72,112 L73,112 L73,111 L74,111 L74,110 L75,110 L75,108 L76,108 L76,106 L77,106 L77,104 L78,104 L78,100 L79,100 L79,95 L80,95 L80,0 L115,0 L115,91 L114,91 L114,100 L113,100 L113,105 L112,105 L112,110 L111,110 L111,113 L110,113 L110,116 L109,116 L109,119 L108,119 L108,121 L107,121 L107,123 L106,123 L106,125 L105,125 L105,126 L104,126 L104,128 L103,128 L103,129 L102,129 L102,131 L101,131 L101,132 L100,132 L100,133 L99,133 L99,134 L98,134 L98,135 L97,135 L97,136 L96,136 L96,137 L95,137 L95,138 L93,138 L93,139 L92,139 L92,140 L90,140 L90,141 L88,141 L88,142 L86,142 L86,143 L84,143 L84,144 L82,144 L82,145 L79,145 L79,146 L75,146 L75,147 L72,147 L72,148 L47,148 L47,147 L41,147 L41,146 L37,146 L37,145 L34,145 L34,144 L32,144 L32,143 L29,143 L29,142 L28,142 L28,141 L26,141 L26,140 L24,140 L24,139 L22,139 L22,138 L21,138 L21,137 L20,137 L20,136 L19,136 L19,135 L18,135 L18,134 L17,134 L17,133 L16,133 L16,132 L15,132 L15,131 L14,131 L14,130 L13,130 L13,129 L12,129 L12,127 L11,127 L11,126 L10,126 L10,124 L9,124 L9,122 L8,122 L8,120 L7,120 L7,118 L6,118 L6,116 L5,116 L5,113 L4,113 L4,109 L3,109 L3,106 L2,106 L2,98 L1,98 L1,28 L0,28 Z "
-              fill={accentColor}
-              transform="translate(705,115)"
-            />
-            {/* Letter 'I' */}
-            <path d="M0,0 L31,0 L31,104 L32,104 L32,145 L0,145 Z " fill={accentColor} transform="translate(843,115)" />
-          </g>
+          {/* Letter 'i' Stem */}
+          <path d="M0,0 L33,0 L33,1 L34,1 L34,107 L0,107 Z " fill={accentColor} transform="translate(215,153)" />
+
+          {/* Letter 't' */}
+          <path
+            d="M0,0 L30,0 L30,28 L51,28 L51,54 L29,54 L29,102 L30,102 L30,104 L31,104 L31,105 L32,105 L32,106 L33,106 L33,107 L34,107 L34,108 L36,108 L36,109 L45,109 L45,108 L49,108 L49,114 L50,114 L50,118 L51,118 L51,124 L52,124 L52,129 L53,129 L53,134 L51,134 L51,135 L49,135 L49,136 L45,136 L45,137 L42,137 L42,138 L22,138 L22,137 L19,137 L19,136 L16,136 L16,135 L14,135 L14,134 L12,134 L12,133 L10,133 L10,132 L9,132 L9,131 L8,131 L8,130 L7,130 L7,129 L6,129 L6,128 L5,128 L5,127 L4,127 L4,126 L3,126 L3,124 L2,124 L2,122 L1,122 L1,120 L0,120 L0,118 L-1,118 L-1,115 L-2,115 L-2,110 L-3,110 L-3,105 L-4,105 L-4,54 L-18,54 L-18,29 L-8,29 L-8,28 L-4,28 L-4,26 L-3,26 L-3,21 L-2,21 L-2,11 L-1,11 L-1,6 L0,6 Z "
+            fill={accentColor}
+            transform="translate(278,125)"
+          />
+
+          {/* Letter 'h' */}
+          <path
+            d="M0,0 L34,0 L34,52 L36,52 L36,51 L37,51 L37,50 L38,50 L38,49 L40,49 L40,48 L42,48 L42,47 L43,47 L43,46 L45,46 L45,45 L47,45 L47,44 L49,44 L49,43 L52,43 L52,42 L73,42 L73,43 L76,43 L76,44 L78,44 L78,45 L80,45 L80,46 L82,46 L82,47 L83,47 L83,48 L84,48 L84,49 L85,49 L85,50 L86,50 L86,51 L87,51 L87,52 L88,52 L88,53 L89,53 L89,55 L90,55 L90,57 L91,57 L91,59 L92,59 L92,61 L93,61 L93,64 L94,64 L94,68 L95,68 L95,74 L96,74 L96,151 L63,151 L63,83 L62,83 L62,79 L61,79 L61,76 L60,76 L60,74 L59,74 L59,73 L58,73 L58,72 L56,72 L56,71 L53,71 L53,70 L48,70 L48,71 L44,71 L44,72 L42,72 L42,73 L41,73 L41,74 L39,74 L39,75 L38,75 L38,77 L37,77 L37,78 L36,78 L36,80 L35,80 L35,82 L34,82 L34,151 L0,151 Z "
+            fill={accentColor}
+            transform="translate(341,109)"
+          />
+
+          {/* Letter 's' */}
+          <path
+            d="M0,0 L23,0 L23,1 L27,1 L27,2 L31,2 L31,3 L34,3 L34,4 L36,4 L36,5 L38,5 L38,6 L41,6 L41,7 L43,7 L43,8 L44,8 L44,9 L46,9 L46,10 L48,10 L48,11 L49,11 L49,12 L50,12 L50,13 L51,13 L51,15 L50,15 L50,17 L49,17 L49,18 L48,18 L48,20 L47,20 L47,21 L46,21 L46,22 L45,22 L45,24 L44,24 L44,26 L43,26 L43,27 L42,27 L42,28 L41,28 L41,30 L40,30 L40,31 L39,31 L39,33 L38,33 L38,34 L35,34 L35,33 L34,33 L34,32 L32,32 L32,31 L31,31 L31,30 L29,30 L29,29 L27,29 L27,28 L25,28 L25,27 L22,27 L22,26 L19,26 L19,25 L7,25 L7,26 L4,26 L4,27 L3,27 L3,28 L2,28 L2,29 L1,29 L1,34 L2,34 L2,35 L3,35 L3,36 L5,36 L5,37 L7,37 L7,38 L9,38 L9,39 L11,39 L11,40 L14,40 L14,41 L16,41 L16,42 L19,42 L19,43 L23,43 L23,44 L25,44 L25,45 L28,45 L28,46 L31,46 L31,47 L33,47 L33,48 L35,48 L35,49 L37,49 L37,50 L39,50 L39,51 L40,51 L40,52 L42,52 L42,53 L43,53 L43,54 L44,54 L44,55 L45,55 L45,56 L46,56 L46,57 L47,57 L47,58 L48,58 L48,59 L49,59 L49,61 L50,61 L50,63 L51,63 L51,65 L52,65 L52,68 L53,68 L53,72 L54,72 L54,84 L53,84 L53,87 L52,87 L52,90 L51,90 L51,92 L50,92 L50,94 L49,94 L49,96 L48,96 L48,97 L47,97 L47,98 L46,98 L46,100 L45,100 L45,101 L44,101 L44,102 L43,102 L43,103 L41,103 L41,104 L40,104 L40,105 L38,105 L38,106 L37,106 L37,107 L35,107 L35,108 L32,108 L32,109 L30,109 L30,110 L26,110 L26,111 L23,111 L23,112 L-1,112 L-1,111 L-5,111 L-5,110 L-8,110 L-8,109 L-11,109 L-11,108 L-14,108 L-14,107 L-16,107 L-16,106 L-18,106 L-18,105 L-21,105 L-21,104 L-23,104 L-23,103 L-25,103 L-25,102 L-27,102 L-27,101 L-28,101 L-28,100 L-30,100 L-30,99 L-31,99 L-31,98 L-32,98 L-32,97 L-34,97 L-34,95 L-33,95 L-33,94 L-32,94 L-32,93 L-31,93 L-31,91 L-30,91 L-30,90 L-29,90 L-29,88 L-28,88 L-28,87 L-27,87 L-27,85 L-26,85 L-26,84 L-25,84 L-25,82 L-24,82 L-24,80 L-23,80 L-23,79 L-22,79 L-22,77 L-21,77 L-21,76 L-20,76 L-20,75 L-17,75 L-17,76 L-16,76 L-16,77 L-14,77 L-14,78 L-12,78 L-12,79 L-11,79 L-11,80 L-9,80 L-9,81 L-7,81 L-7,82 L-5,82 L-5,83 L-3,83 L-3,84 L0,84 L0,85 L2,85 L2,86 L7,86 L7,87 L15,87 L15,86 L18,86 L18,85 L20,85 L20,84 L21,84 L21,82 L22,82 L22,77 L21,77 L21,75 L20,75 L20,74 L19,74 L19,73 L17,73 L17,72 L15,72 L15,71 L13,71 L13,70 L10,70 L10,69 L8,69 L8,68 L5,68 L5,67 L2,67 L2,66 L-1,66 L-1,65 L-3,65 L-3,64 L-6,64 L-6,63 L-9,63 L-9,62 L-11,62 L-11,61 L-13,61 L-13,60 L-14,60 L-14,59 L-16,59 L-16,58 L-17,58 L-17,57 L-19,57 L-19,56 L-20,56 L-20,55 L-21,55 L-21,54 L-22,54 L-22,53 L-23,53 L-23,52 L-24,52 L-24,51 L-25,51 L-25,50 L-26,50 L-26,48 L-27,48 L-27,46 L-28,46 L-28,44 L-29,44 L-29,39 L-30,39 L-30,29 L-29,29 L-29,24 L-28,24 L-28,22 L-27,22 L-27,19 L-26,19 L-26,18 L-25,18 L-25,16 L-24,16 L-24,14 L-23,14 L-23,13 L-22,13 L-22,12 L-21,12 L-21,11 L-20,11 L-20,10 L-19,10 L-19,9 L-18,9 L-18,8 L-16,8 L-16,7 L-15,7 L-15,6 L-13,6 L-13,5 L-11,5 L-11,4 L-9,4 L-9,3 L-7,3 L-7,2 L-3,2 L-3,1 L0,1 Z "
+            fill={accentColor}
+            transform="translate(585,151)"
+          />
+
+          {/* Letter 'U' */}
+          <path
+            d="M0,0 L35,0 L35,90 L36,90 L36,98 L37,98 L37,102 L38,102 L38,105 L39,105 L39,107 L40,107 L40,109 L41,109 L41,110 L42,110 L42,111 L43,111 L43,112 L44,112 L44,113 L45,113 L45,114 L47,114 L47,115 L49,115 L49,116 L53,116 L53,117 L64,117 L64,116 L67,116 L67,115 L69,115 L69,114 L71,114 L71,113 L72,113 L72,112 L73,112 L73,111 L74,111 L74,110 L75,110 L75,108 L76,108 L76,106 L77,106 L77,104 L78,104 L78,100 L79,100 L79,95 L80,95 L80,0 L115,0 L115,91 L114,91 L114,100 L113,100 L113,105 L112,105 L112,110 L111,110 L111,113 L110,113 L110,116 L109,116 L109,119 L108,119 L108,121 L107,121 L107,123 L106,123 L106,125 L105,125 L105,126 L104,126 L104,128 L103,128 L103,129 L102,129 L102,131 L101,131 L101,132 L100,132 L100,133 L99,133 L99,134 L98,134 L98,135 L97,135 L97,136 L96,136 L96,137 L95,137 L95,138 L93,138 L93,139 L92,139 L92,140 L90,140 L90,141 L88,141 L88,142 L86,142 L86,143 L84,143 L84,144 L82,144 L82,145 L79,145 L79,146 L75,146 L75,147 L72,147 L72,148 L47,148 L47,147 L41,147 L41,146 L37,146 L37,145 L34,145 L34,144 L32,144 L32,143 L29,143 L29,142 L28,142 L28,141 L26,141 L26,140 L24,140 L24,139 L22,139 L22,138 L21,138 L21,137 L20,137 L20,136 L19,136 L19,135 L18,135 L18,134 L17,134 L17,133 L16,133 L16,132 L15,132 L15,131 L14,131 L14,130 L13,130 L13,129 L12,129 L12,127 L11,127 L11,126 L10,126 L10,124 L9,124 L9,122 L8,122 L8,120 L7,120 L7,118 L6,118 L6,116 L5,116 L5,113 L4,113 L4,109 L3,109 L3,106 L2,106 L2,98 L1,98 L1,28 L0,28 Z "
+            fill={accentColor}
+            transform="translate(705,115)"
+          />
+
+          {/* Letter 'I' */}
+          <path d="M0,0 L31,0 L31,104 L32,104 L32,145 L0,145 Z " fill={accentColor} transform="translate(843,115)" />
+
+          {/* Center Boulder Base */}
+          <path
+            d={BOULDER_BASE_D}
+            fill={accentColor}
+            stroke="#000000"
+            strokeWidth="2.5"
+            strokeLinejoin="round"
+            transform="translate(491,151)"
+          />
+
+          <BoulderFacets />
         </svg>
       </div>
 
       {/* 2. Standalone Rock Short Logo (public/short_logo.svg) */}
       <div
-        className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ease-out ${
-          isEffectivelyCollapsed ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+        className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          isEffectivelyCollapsed
+            ? 'opacity-100 scale-100 pointer-events-auto'
+            : 'opacity-0 scale-75 pointer-events-none'
         }`}
         aria-hidden={!isEffectivelyCollapsed}
       >
-        {shortLogoSvg ? (
-          <div
-            className="w-full h-full flex items-center justify-center [&>svg]:w-full [&>svg]:h-full [&>svg]:object-contain"
-            dangerouslySetInnerHTML={{ __html: shortLogoSvg }}
-          />
-        ) : (
-          <img src="/short_logo.svg" alt="" className="w-full h-full object-contain" />
-        )}
+        <div className="w-full h-full flex items-center justify-center scale-[1.5]">
+          {shortLogoSvg ? (
+            <div
+              className="w-full h-full flex items-center justify-center [&>svg]:w-full [&>svg]:h-full [&>svg]:object-contain"
+              dangerouslySetInnerHTML={{ __html: shortLogoSvg }}
+            />
+          ) : (
+            <img src="/short_logo.svg" alt="Lithos UI" className="w-full h-full object-contain" />
+          )}
+        </div>
       </div>
     </span>
   )
