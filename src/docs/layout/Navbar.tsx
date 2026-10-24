@@ -82,7 +82,7 @@ export const DocsNavbar = () => {
       <div className="mx-auto flex max-w-screen-2xl items-center justify-between px-6 py-1.5 md:py-2">
         <div className="flex items-center justify-start lg:w-1/3">
           <Link to="/" className="flex items-center">
-            <LithosLogo className="h-8 md:h-9 w-auto" />
+            <LithosLogo className="h-8 md:h-9" />
           </Link>
         </div>
 

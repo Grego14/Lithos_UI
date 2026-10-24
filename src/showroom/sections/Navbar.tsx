@@ -48,7 +48,7 @@ export const Navbar = () => {
           {/* - Brand block flex-1 balances the center lane. */}
           <div className="flex items-center justify-start lg:flex-1">
             <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center">
-              <LithosLogo className="h-8 md:h-9 w-auto" />
+              <LithosLogo className="h-8 md:h-9" />
             </Link>
           </div>
 
