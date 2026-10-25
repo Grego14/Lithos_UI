@@ -53,6 +53,7 @@ import { TypographyDoc } from './docs/pages/Typography'
 import { SidebarDoc } from './docs/pages/Sidebar'
 import { ThemeBuilder } from './pages/ThemeBuilder'
 import { TooltipDoc } from './docs/pages/Tooltip'
+import { MiniThemeEngine } from './components/ui/MiniThemeEngine'
 import { useEffect } from 'react'
 
 const ScrollToTop = () => {
@@ -169,6 +170,7 @@ const App = () => {
             {/* Structural Failure Catch-all */}
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <MiniThemeEngine />
         </BrowserRouter>
       </div>
     </ThemeProvider>
