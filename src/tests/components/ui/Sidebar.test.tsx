@@ -347,4 +347,29 @@ describe('Sidebar Accessibility', () => {
     const results = await axe(container)
     expect(results).toHaveNoViolations()
   })
+
+  it('unmounts tooltip after clicking trigger and moving mouse away', async () => {
+    render(
+      <Sidebar mode="mini">
+        <SidebarContent>
+          <SidebarTrigger data-testid="trigger" />
+        </SidebarContent>
+      </Sidebar>
+    )
+
+    const trigger = screen.getByTestId('trigger')
+    fireEvent.mouseEnter(trigger)
+
+    await waitFor(() => {
+      expect(screen.getByText('Collapse sidebar')).toBeInTheDocument()
+    })
+
+    fireEvent.click(trigger)
+    fireEvent.mouseLeave(trigger)
+
+    await waitFor(() => {
+      expect(screen.queryByText('Collapse sidebar')).not.toBeInTheDocument()
+      expect(screen.queryByText('Expand sidebar')).not.toBeInTheDocument()
+    })
+  })
 })
