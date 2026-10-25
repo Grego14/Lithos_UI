@@ -7,9 +7,10 @@
 import { FloatingArrow } from '@floating-ui/react'
 import { cn } from '../../../utils/cn'
 import { useTooltip } from './useTooltip'
+import { useContext } from 'react'
 import { PopoverContent, usePopoverContext } from '../Popover'
 import type { TooltipVariant, TooltipContentProps } from './tooltip.types'
-import { useTheme } from '../../../core/hooks/useTheme'
+import { ThemeContext } from '../../../core/ThemeProviderContext'
 
 const variantStyles: Record<TooltipVariant, { container: string; fill: string; stroke: string }> = {
   default: {
@@ -32,7 +33,8 @@ const variantStyles: Record<TooltipVariant, { container: string; fill: string; s
 export const TooltipContent = ({ className, variant = 'default', children, ...rest }: TooltipContentProps) => {
   const { context, placement } = usePopoverContext()
   const { arrowRef } = useTooltip()
-  const { radius } = useTheme()
+  const theme = useContext(ThemeContext)
+  const radius = theme?.radius ?? 0
 
   const currentVariant = variantStyles[variant]
 
