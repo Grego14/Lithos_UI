@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useToast } from '../../components/ui/toast/useToast'
 import { Button } from '../../components/ui/Button'
-import { Toggle } from '../../components/ui/Toggle'
 import { IconMenu } from '../../components/ui/icons/IconMenu'
 import { IconClose } from '../../components/ui/icons/IconClose'
+import { IconMoon } from '../../components/ui/icons/IconMoon'
+import { IconSun } from '../../components/ui/icons/IconSun'
 import { LITHOS_UI_LINKS } from '../../core/lithos.utils'
 import { useTheme } from '../../core/hooks/useTheme'
 import { LithosLogo } from '../../components/ui/LithosLogo'
@@ -57,20 +57,6 @@ export const DocsNavbar = () => {
   const { isDarkMode, toggleObsidian } = useTheme()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [expandedCategory, setExpandedCategory] = useState<string | null>('Components')
-  const { addToast } = useToast()
-
-  const handleToggleObsidian = () => {
-    const nextMode = !isDarkMode
-
-    toggleObsidian()
-
-    addToast({
-      title: 'THEME CHANGED',
-      message: nextMode ? 'Obsidian Mode Activated.' : 'Light Mode Activated.',
-      intent: 'default',
-      color: nextMode ? '#000000' : '#FFFFFF',
-    })
-  }
 
   const ActionToggle = isMenuOpen ? IconClose : IconMenu
 
@@ -102,7 +88,15 @@ export const DocsNavbar = () => {
         {/* - Desktop GitHub CTA (Hidden on mobile) */}
         <div className="hidden lg:flex items-center justify-end lg:w-1/3">
           <div className="mr-4 flex items-center">
-            <Toggle checked={isDarkMode} onToggle={handleToggleObsidian} label="Toggle Obsidian Mode" />
+            <Button
+              variant="secondary"
+              onClick={toggleObsidian}
+              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+              title={isDarkMode ? 'Light Mode' : 'Dark Mode (Obsidian)'}
+              className="p-2 flex items-center justify-center"
+            >
+              {isDarkMode ? <IconSun size={18} /> : <IconMoon size={18} />}
+            </Button>
           </div>
           <Button variant="primary" onClick={() => window.open('https://github.com/lithosui/Lithos_UI', '_blank')}>
             GitHub
@@ -183,7 +177,15 @@ export const DocsNavbar = () => {
               GitHub
             </Button>
             <div className="flex items-center">
-              <Toggle checked={isDarkMode} onToggle={handleToggleObsidian} label="Toggle Obsidian Mode" />
+              <Button
+                variant="secondary"
+                onClick={toggleObsidian}
+                aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                title={isDarkMode ? 'Light Mode' : 'Dark Mode (Obsidian)'}
+                className="p-2 flex items-center justify-center"
+              >
+                {isDarkMode ? <IconSun size={18} /> : <IconMoon size={18} />}
+              </Button>
             </div>
           </div>
         </nav>

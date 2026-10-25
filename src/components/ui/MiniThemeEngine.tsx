@@ -14,12 +14,19 @@ import { IconArrowRight } from './icons/IconArrowRight'
 import type { HexColor } from '../../core/types'
 
 const ARTISTIC_PALETTES = [
-  { label: 'Cyber Lime', hex: '#00ff00' },
-  { label: 'Acid Orange', hex: '#ff5500' },
-  { label: 'Electric Violet', hex: '#7928ca' },
-  { label: 'Toxic Yellow', hex: '#ffe600' },
-  { label: 'Hyper Cyan', hex: '#00f0ff' },
-  { label: 'Hot Magenta', hex: '#ff007f' },
+  { label: 'Lime', hex: '#00ff00' },
+  { label: 'Orange', hex: '#ff5500' },
+  { label: 'Violet', hex: '#7928ca' },
+  { label: 'Yellow', hex: '#ffe600' },
+  { label: 'Cyan', hex: '#00f0ff' },
+  { label: 'Magenta', hex: '#ff007f' },
+  { label: 'Red', hex: '#ef4444' },
+  { label: 'Blue', hex: '#2563eb' },
+  { label: 'Amber', hex: '#f59e0b' },
+  { label: 'Beige', hex: '#e8d5b5' },
+  { label: 'Brown', hex: '#78350f' },
+  { label: 'Lavender', hex: '#a78bfa' },
+  { label: 'Teal', hex: '#0d9488' },
 ] as const
 
 const RADII = [
@@ -126,38 +133,60 @@ export const MiniThemeEngine = () => {
           </div>
 
           {/* Color Palettes List */}
-          <div className="p-2 flex flex-col space-y-1">
-            <div className="flex items-center justify-between px-2 pt-1 pb-1 text-[10px] font-black uppercase tracking-wider text-(--lithos-text) opacity-70">
+          <div className="p-2 flex flex-col">
+            <div className="flex items-center justify-between px-2 pt-1 pb-1.5 text-[10px] font-black uppercase tracking-wider text-(--lithos-text) opacity-70">
               <span>Palette</span>
               <span className="font-mono text-[9px]">{accentColor.toUpperCase()}</span>
             </div>
 
-            {ARTISTIC_PALETTES.map((palette) => {
-              const selected = isPaletteSelected(palette.hex)
-              return (
-                <button
-                  key={palette.hex}
-                  type="button"
-                  onClick={() => updateAccentColor(palette.hex as HexColor)}
-                  className={`w-full flex items-center justify-between px-2.5 py-1.5 cursor-pointer transition-all duration-75 text-left rounded-(--lithos-radius) border-2 ${
-                    selected
-                      ? 'border-(--lithos-border) bg-(--lithos-surface-hover) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] font-bold'
-                      : 'border-transparent hover:bg-(--lithos-surface-hover)'
-                  }`}
-                >
-                  <div className="flex items-center space-x-3">
-                    {/* Single color box swatch */}
-                    <span
-                      className="w-5 h-5 rounded-(--lithos-radius) border-2 border-(--lithos-border) shrink-0 shadow-[1px_1px_0px_0px_var(--lithos-shadow)]"
-                      style={{ backgroundColor: palette.hex }}
-                    />
-                    <span className="text-sm text-(--lithos-text)">{palette.label}</span>
-                  </div>
+            <div className="flex flex-col space-y-1 max-h-56 overflow-y-auto pr-1">
+              {ARTISTIC_PALETTES.map((palette) => {
+                const selected = isPaletteSelected(palette.hex)
+                return (
+                  <button
+                    key={palette.hex}
+                    type="button"
+                    onClick={() => updateAccentColor(palette.hex as HexColor)}
+                    className={`w-full flex items-center justify-between px-2.5 py-1.5 cursor-pointer transition-all duration-75 text-left rounded-(--lithos-radius) border-2 shrink-0 ${
+                      selected
+                        ? 'border-(--lithos-border) bg-(--lithos-surface-hover) shadow-[2px_2px_0px_0px_var(--lithos-shadow)] font-bold'
+                        : 'border-transparent hover:bg-(--lithos-surface-hover)'
+                    }`}
+                  >
+                    <div className="flex items-center space-x-3">
+                      {/* Single color box swatch */}
+                      <span
+                        className="w-5 h-5 rounded-(--lithos-radius) border-2 border-(--lithos-border) shrink-0 shadow-[1px_1px_0px_0px_var(--lithos-shadow)]"
+                        style={{ backgroundColor: palette.hex }}
+                      />
+                      <span className="text-sm text-(--lithos-text)">{palette.label}</span>
+                    </div>
 
-                  <span className="font-mono text-[11px] opacity-50 uppercase text-(--lithos-text)">{palette.hex}</span>
-                </button>
-              )
-            })}
+                    <span className="font-mono text-[11px] opacity-50 uppercase text-(--lithos-text)">
+                      {palette.hex}
+                    </span>
+                  </button>
+                )
+              })}
+
+              {/* Custom Color Trigger */}
+              <label className="w-full flex items-center justify-between px-2.5 py-1.5 cursor-pointer transition-all duration-75 text-left rounded-(--lithos-radius) border-2 border-transparent hover:bg-(--lithos-surface-hover) relative shrink-0">
+                <div className="flex items-center space-x-3">
+                  <span className="w-5 h-5 rounded-(--lithos-radius) border-2 border-(--lithos-border) shrink-0 shadow-[1px_1px_0px_0px_var(--lithos-shadow)] bg-(--lithos-bg) flex items-center justify-center text-xs font-black text-(--lithos-text)">
+                    +
+                  </span>
+                  <span className="text-sm text-(--lithos-text)">Custom</span>
+                </div>
+                <span className="font-mono text-[11px] opacity-50 uppercase text-(--lithos-text)">Picker</span>
+                <input
+                  type="color"
+                  value={accentColor}
+                  onChange={(e) => updateAccentColor(e.target.value as HexColor)}
+                  className="absolute inset-0 h-full w-full opacity-0 cursor-pointer"
+                  aria-label="Choose custom theme color"
+                />
+              </label>
+            </div>
           </div>
 
           {/* Radius Segmented Bar */}

@@ -17,12 +17,12 @@ import { IconRadiusLg } from '../../components/ui/icons/IconRadiusLg'
 import { IconArrowRight } from '../../components/ui/icons/IconArrowRight'
 
 const ARTISTIC_PALETTES = [
-  { label: 'Cyber Lime', hex: '#00ff00' },
-  { label: 'Acid Orange', hex: '#ff5500' },
-  { label: 'Electric Violet', hex: '#7928ca' },
-  { label: 'Toxic Yellow', hex: '#ffe600' },
-  { label: 'Hyper Cyan', hex: '#00f0ff' },
-  { label: 'Hot Magenta', hex: '#ff007f' },
+  { label: 'Lime', hex: '#00ff00' },
+  { label: 'Orange', hex: '#ff5500' },
+  { label: 'Violet', hex: '#7928ca' },
+  { label: 'Yellow', hex: '#ffe600' },
+  { label: 'Cyan', hex: '#00f0ff' },
+  { label: 'Magenta', hex: '#ff007f' },
 ] as const
 
 const RADII = [
