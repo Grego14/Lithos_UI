@@ -42,6 +42,7 @@ import { PopoverPage } from './docs/pages/Popover'
 import { NotFound } from './showroom/sections/NotFound'
 import { SelectDoc } from './docs/pages/Select'
 import { SkeletonDoc } from './docs/pages/Skeleton'
+import { SliderDoc } from './docs/pages/Slider'
 import { SpinnerDoc } from './docs/pages/Spinner'
 import { Showroom } from './showroom/Index'
 import { ToastDoc } from './docs/pages/Toast'
@@ -100,6 +101,7 @@ const renderDocRoutes = () => {
     { path: 'select', component: SelectDoc },
     { path: 'sidebar', component: SidebarDoc },
     { path: 'skeleton', component: SkeletonDoc },
+    { path: 'slider', component: SliderDoc },
     { path: 'spinner', component: SpinnerDoc },
     { path: 'toast', component: ToastDoc },
     { path: 'toggle', component: ToggleDoc },
