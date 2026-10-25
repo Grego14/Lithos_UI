@@ -12,6 +12,8 @@ import {
   type UseHoverProps,
   type UseRoleProps,
   type Middleware,
+  type UseClickProps,
+  type UseDismissProps,
 } from '@floating-ui/react'
 
 /**
@@ -50,6 +52,9 @@ export interface PopoverOptions {
 
   /** Custom floating-ui middleware configurations. */
   middlewares?: Middleware[]
+
+  click?: boolean | UseClickProps
+  dismiss?: boolean | UseDismissProps
 }
 
 /**

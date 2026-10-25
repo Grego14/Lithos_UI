@@ -156,7 +156,7 @@ export const SidebarTrigger = <T extends ElementType = 'button'>({
   if (disableTooltip) return triggerElement
 
   return (
-    <Tooltip placement={computedTooltipPlacement}>
+    <Tooltip key={String(open)} placement={computedTooltipPlacement}>
       <TooltipTrigger asChild>{triggerElement}</TooltipTrigger>
       <TooltipContent>{content}</TooltipContent>
     </Tooltip>

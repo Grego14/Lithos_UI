@@ -35,6 +35,8 @@ export const usePopover = ({
   interactions: extraInteractions = [],
   offset: consumerOffset,
   hover: hoverOptions = false,
+  click: clickOptions = true,
+  dismiss: dismissOptions = true,
   role,
   matchTriggerWidth = true,
   middlewares,
@@ -90,8 +92,14 @@ export const usePopover = ({
     ...(typeof hoverOptions === 'object' ? hoverOptions : {}),
   })
 
-  const click = useClick(context)
-  const dismiss = useDismiss(context)
+  const click = useClick(context, {
+    enabled: !!clickOptions,
+    ...(typeof clickOptions === 'object' ? clickOptions : {}),
+  })
+  const dismiss = useDismiss(context, {
+    enabled: !!dismissOptions,
+    ...(typeof dismissOptions === 'object' ? dismissOptions : {}),
+  })
   const usedRole = useRole(context, { enabled: !!role, role })
   const interactions = useInteractions([click, hover, dismiss, usedRole, ...extraInteractions])
 
