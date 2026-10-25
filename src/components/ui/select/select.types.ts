@@ -23,6 +23,8 @@ export interface SelectContentProps extends LithosElementProps<'div'> {
 
   /** Extra buffer item count rendered outside the visible virtualized viewport. */
   overscan?: number
+
+  emptyMessage?: ReactNode
 }
 
 /** Props configuration interface for the `SelectTrigger` component. */
@@ -116,6 +118,8 @@ export interface SelectContextType {
 
   /** Optional array of data-driven select options. */
   options?: SelectOption[] | undefined
+
+  emptyMessage?: ReactNode
 }
 
 /** Event handler callback type for selection changes. */
@@ -148,6 +152,8 @@ export type SelectProps = {
 
   /** Accessible label string. */
   label?: string
+
+  emptyMessage?: ReactNode
 } & (
   | {
       /** Enforces single-selection mode. */

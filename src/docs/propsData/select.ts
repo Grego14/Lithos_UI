@@ -64,6 +64,13 @@ export const selectProps: PropItem[] = [
     required: false,
     description: 'Custom composition layout instead of using the default option list.',
   },
+  {
+    name: 'emptyMessage',
+    type: 'ReactNode',
+    defaultValue: '"No options available"',
+    required: false,
+    description: 'Fallback message displayed when there are no options available.',
+  },
 ]
 
 export const selectTriggerProps: PropItem[] = [
@@ -127,6 +134,13 @@ export const selectContentProps: PropItem[] = [
     type: 'LithosClass',
     required: false,
     description: 'Custom CSS classes applied to the popover content container.',
+  },
+  {
+    name: 'emptyMessage',
+    type: 'ReactNode',
+    defaultValue: '"No options available"',
+    required: false,
+    description: 'Fallback message displayed when there are no options available.',
   },
 ]
 
