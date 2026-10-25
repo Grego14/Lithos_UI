@@ -1,184 +1,89 @@
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
-import { Input, InputGroup, InputGroupAddon, InputGroupInput } from '../../components/ui/Input'
-import { IconSearch } from '../../components/ui/icons/IconSearch'
-import { IconSettings } from '../../components/ui/icons/IconSettings'
+import { CodeViewer } from '../../components/ui/CodeViewer'
 import { PropsAccordion } from '../../components/ui/PropsTable'
+import {
+  DocCallout,
+  DocExample,
+  DocHeader,
+  DocHeading,
+  DocLeadText,
+  DocList,
+  DocSection,
+  Code,
+} from '../layout/DocPage'
+import { SetupGuide } from '../layout/SetupGuide'
+import { removeImports } from '../examples/removeImports'
 import {
   inputPropsData,
   inputGroupPropsData,
   inputGroupInputPropsData,
   inputGroupAddonPropsData,
 } from '../propsData/input'
-import { SetupGuide } from '../layout/SetupGuide'
+import { BasicInputExample } from '../examples/input/basic'
+import basicSource from '../examples/input/basic.tsx?raw'
+import { NativeAttributesInputExample } from '../examples/input/nativeAttributes'
+import nativeAttributesSource from '../examples/input/nativeAttributes.tsx?raw'
+import { DisabledInputExample } from '../examples/input/disabled'
+import disabledSource from '../examples/input/disabled.tsx?raw'
+import { InvalidInputExample } from '../examples/input/invalid'
+import invalidSource from '../examples/input/invalid.tsx?raw'
+import { CustomizedInputExample } from '../examples/input/custom'
+import customSource from '../examples/input/custom.tsx?raw'
+import { InputSizesExample } from '../examples/input/sizes'
+import sizesSource from '../examples/input/sizes.tsx?raw'
+import { InputIconsExample } from '../examples/input/icons'
+import iconsSource from '../examples/input/icons.tsx?raw'
+import { InputGroupExample } from '../examples/input/group'
+import groupSource from '../examples/input/group.tsx?raw'
+import { PasswordInputGroupExample } from '../examples/input/groupPassword'
+import groupPasswordSource from '../examples/input/groupPassword.tsx?raw'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Input.tsx'
-const INPUT_PATH = '../../components/ui/Input'
+const inputPath = '../../components/ui/Input'
+const inputCode = (
+  source: string,
+  componentNames = ['Input'],
+  manualPath: Record<string, string> | string = inputPath
+) => ({
+  body: removeImports(source),
+  componentNames,
+  manualPath,
+})
 
-export const InputDoc = () => {
-  const basicCode = {
-    body: `export const InputBasic = () => {
-  return (
-    <div className='flex flex-col items-center'>
-      <Input placeholder='Enter your name' />
-    </div>
-  )
-}`,
-    componentNames: ['Input'],
-    manualPath: INPUT_PATH,
-  }
+const iconsCode = inputCode(iconsSource, ['InputGroup', 'InputGroupInput', 'IconSearch', 'IconSettings'], {
+  others: inputPath,
+  IconSearch: '../../components/ui/icons/IconSearch',
+  IconSettings: '../../components/ui/icons/IconSettings',
+})
+const groupCode = inputCode(groupSource, ['InputGroup', 'InputGroupInput', 'InputGroupAddon', 'IconSearch'], {
+  others: inputPath,
+  IconSearch: '../../components/ui/icons/IconSearch',
+})
 
-  const nativeAttributesCode = {
-    body: `export const InputNativeAttributes = () => {
-  return (
-    <div className='flex flex-col items-center'>
-      <Input type='email' placeholder='you@example.com' />
-      <Input className='mt-4' type='password' placeholder='Password' />
-      <Input className='mt-4' type='number' placeholder='Age' min={0} max={120} />
-    </div>
-  )
-}`,
-    componentNames: ['Input'],
-    manualPath: INPUT_PATH,
-  }
-
-  const disabledCode = {
-    body: `export const InputDisabled = () => {
-  return (
-    <div className='flex flex-col items-center'>
-      <Input placeholder='Disabled field' disabled />
-    </div>
-  )
-}`,
-    componentNames: ['Input'],
-    manualPath: INPUT_PATH,
-  }
-
-  const invalidCode = {
-    body: `export const InputInvalid = () => {
-  return (
-    <div className='flex flex-col items-center'>
-      <Input invalid placeholder='Required field' />
-    </div>
-  )
-}`,
-    componentNames: ['Input'],
-    manualPath: INPUT_PATH,
-  }
-
-  const customCode = {
-    body: `export const CustomizedInput = () => {
-  return (
-    <Input
-      placeholder='Styled via className'
-      className='border-2 border-(--lithos-border) shadow-[2px_2px_0_0_var(--lithos-border)] p-2 font-(--font-mono)'
+export const InputDoc = () => (
+  <div className="max-w-5xl mx-auto px-6">
+    <DocHeader
+      title="Input"
+      description="A foundational form primitive that wraps the native input element with theme awareness."
     />
-  )
-}`,
-    componentNames: ['Input'],
-    manualPath: INPUT_PATH,
-  }
+    <DocSection className="mb-6">
+      <DocLeadText>
+        The Input is an atomic primitive built around the native HTML input element. It resolves the active accent color
+        through the theme engine and forwards every native attribute, so it drops into any form without fighting your
+        types or your styles.
+      </DocLeadText>
+      <DocCallout>
+        The component intentionally ships unopinionated base styling. Use <code>className</code> to align it with the
+        brutalist geometry of your layout.
+      </DocCallout>
+    </DocSection>
 
-  const sizesCode = {
-    body: `export const InputSizes = () => {
-  return (
-    <div className='flex flex-col items-center'>
-      <Input size='sm' placeholder='Small (h-8)' />
-      <Input size='default' className='mt-4' placeholder='Default (h-10)' />
-      <Input size='md' className='mt-4' placeholder='Medium (h-11)' />
-      <Input size='lg' className='mt-4' placeholder='Large (h-12)' />
-    </div>
-  )
-}`,
-    componentNames: ['Input'],
-    manualPath: INPUT_PATH,
-  }
-
-  const iconsCode = {
-    body: `export const InputIcons = () => {
-  return (
-    <div className='flex flex-col items-center'>
-      <InputGroup className='max-w-xs' startAdornment={<IconSearch />}>
-        <InputGroupInput placeholder='Search...' />
-      </InputGroup>
-      <InputGroup className='mt-4 max-w-xs' endAdornment={<IconSettings />}>
-        <InputGroupInput placeholder='Settings' />
-      </InputGroup>
-    </div>
-  )
-}`,
-    componentNames: ['InputGroup', 'InputGroupInput', 'IconSearch', 'IconSettings'],
-    manualPath: {
-      others: INPUT_PATH,
-      IconSearch: '../../components/ui/icons/IconSearch',
-      IconSettings: '../../components/ui/icons/IconSettings',
-    },
-  }
-
-  const groupCode = {
-    body: `export const InputGroupSearch = () => {
-  return (
-    <InputGroup className='max-w-xs'>
-      <InputGroupInput placeholder='Search...' />
-      <InputGroupAddon>
-        <IconSearch />
-      </InputGroupAddon>
-      <InputGroupAddon align='inline-end'>12 results</InputGroupAddon>
-    </InputGroup>
-  )
-}`,
-    componentNames: ['InputGroup', 'InputGroupInput', 'InputGroupAddon', 'IconSearch'],
-    manualPath: {
-      others: INPUT_PATH,
-      IconSearch: '../../components/ui/icons/IconSearch',
-    },
-  }
-
-  const groupPasswordCode = {
-    body: `export const InputGroupPassword = () => {
-  return (
-    <InputGroup className='max-w-xs'>
-      <InputGroupInput type='password' placeholder='Password' />
-      <InputGroupAddon align='inline-end'>Required</InputGroupAddon>
-    </InputGroup>
-  )
-}`,
-    componentNames: ['InputGroup', 'InputGroupInput', 'InputGroupAddon'],
-    manualPath: INPUT_PATH,
-  }
-
-  return (
-    <div className="max-w-5xl mx-auto px-6">
-      <header className="mt-0">
-        <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-none text-(--lithos-text) mb-8">Input</h1>
-        <p className="mt-2 text-lg md:text-xl font-display opacity-70 text-(--lithos-text)">
-          A foundational form primitive that wraps the native input element with theme awareness.
-        </p>
-        <hr className="border-t-2 border-(--lithos-border) mt-8 mb-8" />
-      </header>
-
-      <section className="mb-12">
-        <p className="mb-8 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-          The Input is an atomic primitive built around the native HTML input element. It resolves the active accent
-          color through the theme engine and forwards every native attribute, so it drops into any form without fighting
-          your types or your styles.
-        </p>
-      </section>
-
-      <div className="border-l-4 border-(--lithos-accent) pl-6 py-2 mb-8 bg-(--lithos-surface) p-4">
-        <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
-          The component intentionally ships unopinionated base styling. Use <code>className</code> to align it with the
-          brutalist geometry of your layout.
-        </p>
-      </div>
-
-      <h2 id="installation" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Installation
-      </h2>
-
+    <DocSection>
+      <DocHeading id="installation">Installation</DocHeading>
       <SetupGuide
         slug="input"
         componentNames={['Input', 'InputGroup', 'InputGroupInput', 'InputGroupAddon']}
-        manualPath={INPUT_PATH}
+        manualPath={inputPath}
         requires={[
           'utils/cn.ts',
           'utils/colors.ts',
@@ -186,182 +91,144 @@ export const InputDoc = () => {
           'components/ui/icons/IconSettings.tsx',
         ]}
       />
+    </DocSection>
 
-      <h2 id="examples" className="mt-12 mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-        Examples
-      </h2>
-
-      <h3 id="basic" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Basic
-      </h3>
-
-      <div className="mt-8 mb-16">
-        <PreviewBlock code={basicCode} githubUrl={githubUrl}>
-          <div className="flex flex-col items-center text-center flex-wrap">
-            <Input placeholder="Enter your name" />
-          </div>
-        </PreviewBlock>
-      </div>
-
-      <h3 id="native-attributes" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Native attributes
-      </h3>
-
-      <div className="mt-8 mb-16">
-        <PreviewBlock code={nativeAttributesCode} githubUrl={githubUrl}>
-          <div className="flex flex-col items-center text-center flex-wrap">
-            <Input type="email" placeholder="you@example.com" />
-            <Input className="mt-8" type="password" placeholder="Password" />
-            <Input className="mt-8" type="number" placeholder="Age" min={0} max={120} />
-          </div>
-        </PreviewBlock>
-      </div>
-
-      <h3 id="disabled" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Disabled
-      </h3>
-
-      <div className="mt-8 mb-16">
-        <PreviewBlock code={disabledCode} githubUrl={githubUrl}>
-          <div className="flex flex-col items-center text-center flex-wrap">
-            <Input placeholder="Disabled field" disabled />
-          </div>
-        </PreviewBlock>
-      </div>
-
-      <h3 id="invalid" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Invalid
-      </h3>
-
-      <div className="mt-8 mb-16">
-        <PreviewBlock code={invalidCode} githubUrl={githubUrl}>
-          <div className="flex flex-col items-center text-center flex-wrap">
-            <Input invalid placeholder="Required field" />
-          </div>
-        </PreviewBlock>
-      </div>
-
-      <h3 id="sizes" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Sizes
-      </h3>
-
-      <div className="mt-8 mb-16">
-        <p className="mb-6 text-lg text-(--lithos-text) max-w-3xl font-body">
-          Use the <code>size</code> prop to control the input height and padding. All sizes use explicit{' '}
-          <code>h-*</code> utilities so every input type (text, number, email) renders at the same height.
-        </p>
-        <PreviewBlock code={sizesCode} githubUrl={githubUrl}>
-          <div className="flex flex-col items-center text-center flex-wrap">
-            <Input size="sm" placeholder="Small (h-8)" />
-            <Input size="default" className="mt-8" placeholder="Default (h-10)" />
-            <Input size="md" className="mt-8" placeholder="Medium (h-11)" />
-            <Input size="lg" className="mt-8" placeholder="Large (h-12)" />
-          </div>
-        </PreviewBlock>
-      </div>
-
-      <h3 id="custom-styling" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Custom styling
-      </h3>
-
-      <div className="mt-8 mb-16">
-        <PreviewBlock code={customCode} githubUrl={githubUrl}>
-          <div className="flex flex-col items-center text-center flex-wrap">
-            <Input
-              placeholder="Styled via className"
-              className="border-2 border-(--lithos-border) shadow-[2px_2px_0_0_var(--lithos-border)] p-2 font-(--font-mono)"
-            />
-          </div>
-        </PreviewBlock>
-      </div>
-
-      <h3 id="icons" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Icons
-      </h3>
-
-      <div className="mt-8 mb-16">
-        <p className="mb-6 text-lg text-(--lithos-text) max-w-3xl font-body">
-          Pass <code>startAdornment</code> or <code>endAdornment</code> to <code>InputGroup</code> to render icons
-          inside the group border. The adornments are positioned via flex ordering and separated by a 2px divider.
-        </p>
-        <PreviewBlock code={iconsCode} githubUrl={githubUrl}>
-          <div className="flex flex-col items-center text-center flex-wrap">
-            <InputGroup className="max-w-xs" startAdornment={<IconSearch />}>
-              <InputGroupInput placeholder="Search..." />
-            </InputGroup>
-            <InputGroup className="mt-8 max-w-xs" endAdornment={<IconSettings />}>
-              <InputGroupInput placeholder="Settings" />
-            </InputGroup>
-          </div>
-        </PreviewBlock>
-      </div>
-
-      <h3 id="input-group" className="mb-4 text-xl font-black tracking-tight text-(--lithos-text)">
-        Input group
-      </h3>
-
-      <div className="mt-8 mb-16">
-        <p className="mb-6 text-lg text-(--lithos-text) max-w-3xl font-body">
-          The <code>InputGroup</code> compound wraps a bare field with addon segments pinned to either edge. Addons keep
-          their position through the <code>align</code> prop regardless of DOM order.
-        </p>
-
-        <PreviewBlock code={groupCode} githubUrl={githubUrl}>
-          <div className="flex flex-col items-center text-center flex-wrap">
-            <InputGroup className="max-w-xs">
-              <InputGroupInput placeholder="Search..." />
-              <InputGroupAddon>
-                <IconSearch />
-              </InputGroupAddon>
-              <InputGroupAddon align="inline-end">12 results</InputGroupAddon>
-            </InputGroup>
-          </div>
-        </PreviewBlock>
-
-        <div className="mt-10">
-          <PreviewBlock code={groupPasswordCode} githubUrl={githubUrl}>
-            <div className="flex flex-col items-center text-center flex-wrap">
-              <InputGroup className="max-w-xs">
-                <InputGroupInput type="password" placeholder="Password" />
-                <InputGroupAddon align="inline-end">Required</InputGroupAddon>
-              </InputGroup>
-            </div>
-          </PreviewBlock>
+    <DocHeading id="examples">Examples</DocHeading>
+    <DocExample id="basic" title="Basic" description="A minimal text field.">
+      <PreviewBlock code={inputCode(basicSource)} githubUrl={githubUrl}>
+        <div className="flex flex-col items-center text-center flex-wrap">
+          <BasicInputExample />
         </div>
-      </div>
-
-      <section className="mb-12">
-        <h2 id="accessibility" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-          Accessibility
-        </h2>
-        <ul className="list-disc pl-6 text-lg font-body text-(--lithos-text)">
-          <li>Renders a real native input element, preserving keyboard navigation and focus behavior.</li>
-          <li>
-            Pair it with a label element and pass <code>id</code> to keep forms screen-reader friendly.
-          </li>
-          <li>Disabled inputs are excluded from the focus order automatically by the browser.</li>
-          <li>
-            InputGroup renders with <code>role=&quot;group&quot;</code>; pass an <code>aria-label</code> when the
-            surrounding form context is not self-describing.
-          </li>
-        </ul>
-      </section>
-
-      <section className="mb-12">
-        <h2 id="api" className="mb-4 text-2xl font-black tracking-tight text-(--lithos-text)">
-          API Reference
-        </h2>
-        <div className="mb-6 p-4 border-l-4 border-(--lithos-accent) bg-(--lithos-surface) text-sm font-body text-(--lithos-text)">
-          <strong>Note:</strong> Because the component extends the native input props, any valid attribute such as{' '}
-          <code>type</code>, <code>value</code>, <code>onChange</code>, or <code>autoComplete</code> works without extra
-          configuration.
+      </PreviewBlock>
+    </DocExample>
+    <DocExample
+      id="native-attributes"
+      title="Native attributes"
+      description="Input forwards native HTML input attributes, including type, min, and max."
+    >
+      <PreviewBlock code={inputCode(nativeAttributesSource)} githubUrl={githubUrl}>
+        <div className="flex flex-col items-center text-center flex-wrap">
+          <NativeAttributesInputExample />
         </div>
+      </PreviewBlock>
+    </DocExample>
+    <DocExample
+      id="disabled"
+      title="Disabled"
+      description="The native disabled attribute removes the field from keyboard focus."
+    >
+      <PreviewBlock code={inputCode(disabledSource)} githubUrl={githubUrl}>
+        <div className="flex flex-col items-center text-center flex-wrap">
+          <DisabledInputExample />
+        </div>
+      </PreviewBlock>
+    </DocExample>
+    <DocExample id="invalid" title="Invalid" description="Set invalid to communicate a validation error visually.">
+      <PreviewBlock code={inputCode(invalidSource)} githubUrl={githubUrl}>
+        <div className="flex flex-col items-center text-center flex-wrap">
+          <InvalidInputExample />
+        </div>
+      </PreviewBlock>
+    </DocExample>
+    <DocExample
+      id="sizes"
+      title="Sizes"
+      description={
+        <>
+          Use <code>size</code> to control input height and padding. Explicit <code>h-*</code> utilities keep input
+          types aligned.
+        </>
+      }
+    >
+      <PreviewBlock code={inputCode(sizesSource)} githubUrl={githubUrl}>
+        <div className="flex flex-col items-center text-center flex-wrap">
+          <InputSizesExample />
+        </div>
+      </PreviewBlock>
+    </DocExample>
+    <DocExample
+      id="custom-styling"
+      title="Custom styling"
+      description="Use className to override the primitive's base presentation."
+    >
+      <PreviewBlock code={inputCode(customSource)} githubUrl={githubUrl}>
+        <div className="flex flex-col items-center text-center flex-wrap">
+          <CustomizedInputExample />
+        </div>
+      </PreviewBlock>
+    </DocExample>
+    <DocExample
+      id="icons"
+      title="Icons"
+      description="Pass startAdornment or endAdornment to InputGroup to render icons inside the group border."
+    >
+      <PreviewBlock code={iconsCode} githubUrl={githubUrl}>
+        <div className="flex flex-col items-center text-center flex-wrap">
+          <InputIconsExample />
+        </div>
+      </PreviewBlock>
+    </DocExample>
+    <DocExample
+      id="input-group"
+      title="Input group"
+      description="InputGroup wraps a field with addon segments pinned to either edge."
+    >
+      <PreviewBlock code={groupCode} githubUrl={githubUrl}>
+        <div className="flex flex-col items-center text-center flex-wrap">
+          <InputGroupExample />
+        </div>
+      </PreviewBlock>
+      <div className="mt-10">
+        <PreviewBlock
+          code={inputCode(groupPasswordSource, ['InputGroup', 'InputGroupInput', 'InputGroupAddon'])}
+          githubUrl={githubUrl}
+        >
+          <div className="flex flex-col items-center text-center flex-wrap">
+            <PasswordInputGroupExample />
+          </div>
+        </PreviewBlock>
+      </div>
+    </DocExample>
 
-        <PropsAccordion title="Input Props" data={inputPropsData} />
-        <PropsAccordion title="InputGroup Props" data={inputGroupPropsData} />
-        <PropsAccordion title="InputGroupInput Props" data={inputGroupInputPropsData} />
-        <PropsAccordion title="InputGroupAddon Props" data={inputGroupAddonPropsData} />
-      </section>
-    </div>
-  )
-}
+    <DocSection>
+      <DocHeading id="anatomy">Anatomy</DocHeading>
+      <p className="mb-4 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
+        InputGroup composes an input with optional start and end addons.
+      </p>
+      <CodeViewer
+        language="tsx"
+        code={`<InputGroup>
+  <InputGroupInput />
+  <InputGroupAddon />
+</InputGroup>`}
+      />
+    </DocSection>
+
+    <DocSection>
+      <DocHeading id="accessibility">Accessibility</DocHeading>
+      <DocList>
+        <li>Renders a real native input element, preserving keyboard navigation and focus behavior.</li>
+        <li>
+          Pair it with a label element and pass <Code text="id" /> to keep forms screen-reader friendly.
+        </li>
+        <li>Disabled inputs are excluded from the focus order automatically by the browser.</li>
+        <li>
+          InputGroup renders with <Code text='role="group"' />; pass an <Code text="aria-label" /> when surrounding
+          context is not self-describing.
+        </li>
+      </DocList>
+    </DocSection>
+
+    <DocSection>
+      <DocHeading id="api">API Reference</DocHeading>
+      <DocCallout className="mb-6">
+        Because Input extends native input props, attributes such as <Code text="type" />, <Code text="value" />,{' '}
+        <Code text="onChange" />, and <Code text="autoComplete" /> work without extra configuration.
+      </DocCallout>
+      <PropsAccordion title="Input Props" data={inputPropsData} />
+      <PropsAccordion title="InputGroup Props" data={inputGroupPropsData} />
+      <PropsAccordion title="InputGroupInput Props" data={inputGroupInputPropsData} />
+      <PropsAccordion title="InputGroupAddon Props" data={inputGroupAddonPropsData} />
+    </DocSection>
+  </div>
+)
