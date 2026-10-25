@@ -295,5 +295,68 @@ describe('Select Component', () => {
 
       expect(results).toHaveNoViolations()
     })
+
+    it('should have no accessibility violations when empty dropdown is opened', async () => {
+      const user = userEvent.setup()
+      const { container } = render(<Select options={[]} aria-label="Empty select" />)
+
+      await user.click(screen.getByRole('combobox'))
+
+      const results = await axe(container, {
+        rules: {
+          'aria-command-name': { enabled: false },
+        },
+      })
+
+      expect(results).toHaveNoViolations()
+    })
+  })
+
+  describe('Empty State', () => {
+    it('should render default empty message when options array is empty', async () => {
+      const user = userEvent.setup()
+      render(<Select options={[]} placeholder="Click button to load options" />)
+
+      await user.click(screen.getByRole('combobox'))
+
+      expect(screen.getByRole('listbox')).toBeInTheDocument()
+      expect(screen.getByText('No options available')).toBeInTheDocument()
+    })
+
+    it('should render custom empty message when provided via prop', async () => {
+      const user = userEvent.setup()
+      render(<Select options={[]} emptyMessage="Nothing found" />)
+
+      await user.click(screen.getByRole('combobox'))
+
+      expect(screen.getByText('Nothing found')).toBeInTheDocument()
+    })
+
+    it('should render empty message in compound layout when no items are passed', async () => {
+      const user = userEvent.setup()
+      render(
+        <Select>
+          <SelectTrigger>Select</SelectTrigger>
+          <SelectContent />
+        </Select>
+      )
+
+      await user.click(screen.getByRole('combobox'))
+
+      expect(screen.getByText('No options available')).toBeInTheDocument()
+    })
+
+    it('should not throw error or trigger onChange when clicking empty state message', async () => {
+      const user = userEvent.setup()
+      const onChange = vi.fn()
+      render(<Select options={[]} onChange={onChange} />)
+
+      await user.click(screen.getByRole('combobox'))
+      const emptyItem = screen.getByText('No options available')
+      await user.click(emptyItem)
+
+      expect(onChange).not.toHaveBeenCalled()
+      expect(screen.getByRole('listbox')).toBeInTheDocument()
+    })
   })
 })

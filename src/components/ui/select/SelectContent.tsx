@@ -5,7 +5,7 @@
  * - Manages accessibility roles (`listbox`) and custom layout container styling.
  */
 import type { MouseEvent, KeyboardEvent } from 'react'
-import { useEffect, useCallback } from 'react'
+import { useEffect, useCallback, Children } from 'react'
 import { PopoverContent } from '../popover/PopoverContent'
 import { usePopoverContext } from '../popover/usePopover'
 import { useSelect } from './useSelect'
@@ -29,11 +29,26 @@ export const SelectContent = ({
   virtualizeThreshold = 30,
   estimateSize = 32,
   overscan = 15,
+  emptyMessage: propEmptyMessage,
   ...rest
 }: SelectContentProps) => {
-  const { selectedValue, activeIndex, setActiveIndex, elementsRef, labelsRef, handleSelect, open, options, setOpen } =
-    useSelect()
+  const {
+    selectedValue,
+    activeIndex,
+    setActiveIndex,
+    elementsRef,
+    labelsRef,
+    handleSelect,
+    open,
+    options,
+    setOpen,
+    emptyMessage: contextEmptyMessage,
+  } = useSelect()
   const { refs } = usePopoverContext()
+
+  const emptyMessage = propEmptyMessage ?? contextEmptyMessage ?? 'No options available'
+  const hasChildren = Children.toArray(children).length > 0
+  const isEmpty = options !== undefined ? options.length === 0 && !hasChildren : !hasChildren
 
   const shouldVirtualize =
     Array.isArray(options) &&
@@ -183,7 +198,17 @@ export const SelectContent = ({
         onKeyDown={handleKeyDown}
         onClick={handleListClick}
       >
-        {shouldVirtualize && options ? (
+        {isEmpty ? (
+          <div
+            role="option"
+            aria-selected="false"
+            aria-disabled="true"
+            data-slot="select-empty"
+            className="py-3 px-3 text-center text-sm font-medium text-(--lithos-text)/70 select-none cursor-default"
+          >
+            {emptyMessage}
+          </div>
+        ) : shouldVirtualize && options ? (
           <ul className="relative w-full pr-2" style={{ height: `${totalHeight}px` }}>
             {virtualItems.map((virtualItem) => {
               const option = options[virtualItem.index]
