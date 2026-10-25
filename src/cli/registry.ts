@@ -693,6 +693,14 @@ export const registry: Record<string, RegistryItem> = {
     requires: ['core/types.ts', 'utils/cn.ts'],
     dependencies: ['clsx', 'tailwind-merge'],
   },
+  slider: {
+    slug: 'slider',
+    name: 'Slider',
+    type: 'ui',
+    githubUrl: `${GITHUB_BASE}/components/ui/Slider.tsx`,
+    requires: ['core/types.ts', 'utils/cn.ts', 'utils/yiq.ts'],
+    dependencies: ['clsx', 'tailwind-merge'],
+  },
   spinner: {
     slug: 'spinner',
     name: 'Spinner',
