@@ -64,6 +64,32 @@ body.obsidian {
   color-scheme: dark;
 }
 
+/* - View Transitions API: Liquid wave theme transition from top-left */
+::view-transition-old(root) {
+  animation: none;
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  animation: none;
+  z-index: 2;
+}
+
+@keyframes liquid-wave {
+  from {
+    clip-path: circle(0px at 0% 0%);
+  }
+  to {
+    clip-path: circle(150vmax at 0% 0%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
 /* - Z-axis lift: Objects scale up to simulate physical mass moving closer to the user. */
 @keyframes brutalist-pop {
   0% {
