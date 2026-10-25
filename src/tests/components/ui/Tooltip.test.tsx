@@ -56,6 +56,39 @@ describe('Tooltip Component', () => {
     })
   })
 
+  it('hides tooltip content when trigger is clicked', async () => {
+    renderTooltip()
+
+    fireEvent.mouseEnter(screen.getByText('Hover me'))
+
+    await waitFor(() => {
+      expect(screen.getByText('Tooltip content')).toBeInTheDocument()
+    })
+
+    fireEvent.click(screen.getByText('Hover me'))
+
+    await waitFor(() => {
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+    })
+  })
+
+  it('does not keep tooltip open after clicking trigger and moving mouse away', async () => {
+    renderTooltip()
+
+    fireEvent.mouseEnter(screen.getByText('Hover me'))
+
+    await waitFor(() => {
+      expect(screen.getByText('Tooltip content')).toBeInTheDocument()
+    })
+
+    fireEvent.click(screen.getByText('Hover me'))
+    fireEvent.mouseLeave(screen.getByText('Hover me'))
+
+    await waitFor(() => {
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+    })
+  })
+
   it('shows tooltip content on focus', async () => {
     renderTooltip({ initialOpen: true })
 
