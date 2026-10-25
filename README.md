@@ -32,8 +32,6 @@ To prevent Tailwind class bloat ("DRY" architecture), Lithos UI packages its mec
 
 ## Components
 
-Slider is available as a labelled native range input with controlled or uncontrolled values, custom bounds and steps, and three thumb sizes. See [Slider docs](https://lithos-ui.vercel.app/docs/slider).
-
 [See the component tracker issue for all existing and planned components.](https://github.com/lithosui/Lithos_UI/issues/311)
 
 ---
