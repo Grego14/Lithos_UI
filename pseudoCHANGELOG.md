@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added (0.1.4)
 
+- **Slider:** Added a native horizontal range primitive with controlled/uncontrolled values, numeric change callbacks, bounds and steps, disabled state, three thumb sizes, native form support, and theme-token track/thumb styling.
+- Added Slider documentation, standalone examples, props reference, component showcase, navigation, package exports, CLI registry entry, and behavior/accessibility tests.
+- Added square and round shapes, filled sliders controlling whole-app brightness with both icons inside or outside, a three-color Easy/Medium/Hard distribution slider with adjustable shares totaling 100%, and optional custom thumb colors with YIQ border contrast.
+- Added a two-handle range slider example with circular grip handles, a highlighted selected interval, 1% increments, and keyboard-accessible minimum/maximum values.
+- Simplified Slider event/style handling and brightness state updates; app filter cleanup now runs when the brightness demo unmounts instead of resetting on each adjustment.
 - **Typography:** Added the `Typography` primitive ([#335](https://github.com/lithosui/Lithos_UI/pull/335))
 - Added a **ThemeProvider** to synchronize the calls to the new `useTheme` hook _(before useLithosTheme)_ ([#337](https://github.com/lithosui/Lithos_UI/pull/337))
 - **Table:** Added the `Table` primitive ([#341](https://github.com/lithosui/Lithos_UI/pull/341))
