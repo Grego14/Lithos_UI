@@ -7,8 +7,103 @@ import { Slider } from '../../../components/ui/Slider'
 import { AppBrightnessExample } from '../../../docs/examples/slider/brightness'
 import { DifficultySliderExample } from '../../../docs/examples/slider/difficulty'
 import { RangeSliderExample } from '../../../docs/examples/slider/range'
+import { SliderOrientationExample } from '../../../docs/examples/slider/orientation'
+import { DefaultSliderExample } from '../../../docs/examples/slider/default'
+import { SteppedSliderExample } from '../../../docs/examples/slider/steps'
+import { IrregularSteppedSliderExample } from '../../../docs/examples/slider/steps-irregular'
 
 describe('Slider', () => {
+  it('selects and announces irregular values when stepping between presets', async () => {
+    const { container } = render(<IrregularSteppedSliderExample />)
+    const input = screen.getByRole('slider', { name: 'Irregular value: 15' })
+    fireEvent.input(input, { target: { value: '3' } })
+    expect(input).toHaveAccessibleName('Irregular value: 35')
+    expect(input).toHaveAttribute('aria-valuetext', '35')
+    fireEvent.input(input, { target: { value: '5' } })
+    expect(input).toHaveAccessibleName('Irregular value: 100')
+    fireEvent.input(input, { target: { value: '4' } })
+    expect(input).toHaveAttribute('aria-valuetext', '65')
+    expect(await axe(container)).toHaveNoViolations()
+  })
+
+  it('updates the default example percentage as its native value changes', () => {
+    render(<DefaultSliderExample />)
+    const input = screen.getByRole('slider', { name: 'Volume: 40%' })
+    fireEvent.change(input, { target: { value: '55' } })
+    expect(input).toHaveAccessibleName('Volume: 55%')
+    expect(input).toHaveAttribute('aria-valuetext', '55%')
+  })
+
+  it('demonstrates increments of 20 and displays the selected stepped value', () => {
+    render(<SteppedSliderExample />)
+    const input = screen.getByRole('slider', { name: 'Value: 20' })
+    expect(input).toHaveAttribute('min', '0')
+    expect(input).toHaveAttribute('max', '100')
+    expect(input).toHaveAttribute('step', '20')
+    fireEvent.change(input, { target: { value: '60' } })
+    expect(input).toHaveValue('60')
+    expect(input).toHaveAccessibleName('Value: 60')
+  })
+
+  it('supports horizontal and vertical modes without leaking mode to the native input', () => {
+    const { rerender } = render(<Slider aria-label="Axis" mode="vertical" />)
+    expect(screen.getByRole('slider')).toHaveAttribute('aria-orientation', 'vertical')
+    expect(screen.getByRole('slider')).not.toHaveAttribute('mode')
+    rerender(<Slider aria-label="Axis" mode="horizontal" />)
+    expect(screen.getByRole('slider')).toHaveAttribute('aria-orientation', 'horizontal')
+    expect(screen.getByRole('slider').className).not.toContain('[writing-mode:vertical-lr]')
+  })
+
+  it('shows both orientations and updates each value independently', async () => {
+    const { container } = render(<SliderOrientationExample />)
+    const horizontal = screen.getByRole('slider', { name: 'Horizontal: 60%' })
+    const vertical = screen.getByRole('slider', { name: 'Vertical: 60%' })
+    expect(horizontal).toHaveAttribute('aria-orientation', 'horizontal')
+    expect(vertical).toHaveAttribute('aria-orientation', 'vertical')
+    fireEvent.input(horizontal, { target: { value: '61' } })
+    expect(horizontal).toHaveAccessibleName('Horizontal: 61%')
+    expect(vertical).toHaveValue('60')
+    fireEvent.input(vertical, { target: { value: '61' } })
+    expect(vertical).toHaveAccessibleName('Vertical: 61%')
+    expect(await axe(container)).toHaveNoViolations()
+  })
+  // JSDOM does not implement native range keyboard actions. Browser regression
+  // checks cover actual key-driven stepping; these tests verify React events.
+  it.each(['horizontal', 'vertical'] as const)(
+    'delegates native arrow actions and handles input events in %s mode',
+    (mode) => {
+      const onValueChange = vi.fn()
+      render(<Slider aria-label="Keyboard" mode={mode} defaultValue={20} step={20} onValueChange={onValueChange} />)
+      const input = screen.getByRole('slider')
+      for (const key of ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End']) {
+        expect(fireEvent.keyDown(input, { key })).toBe(true)
+      }
+      expect(onValueChange).not.toHaveBeenCalled()
+      fireEvent.input(input, { target: { value: '40' } })
+      expect(input).toHaveValue('40')
+      expect(onValueChange).toHaveBeenCalledExactlyOnceWith(40)
+    }
+  )
+
+  it('lets keyboard users focus both orientations in order', async () => {
+    const user = userEvent.setup()
+    render(<SliderOrientationExample />)
+    await user.tab()
+    expect(screen.getByRole('slider', { name: 'Horizontal: 60%' })).toHaveFocus()
+    await user.tab()
+    expect(screen.getByRole('slider', { name: 'Vertical: 60%' })).toHaveFocus()
+  })
+
+  it('does not change disabled inputs or override a consumer cancelling keyboard input', () => {
+    const { rerender } = render(<Slider aria-label="Value" defaultValue={40} disabled />)
+    const input = screen.getByRole('slider')
+    fireEvent.keyDown(input, { key: 'ArrowUp' })
+    expect(input).toHaveValue('40')
+    rerender(<Slider aria-label="Value" defaultValue={40} onKeyDown={(event) => event.preventDefault()} />)
+    fireEvent.keyDown(input, { key: 'ArrowUp' })
+    expect(input).toHaveValue('40')
+  })
+
   it('captures the numeric value before the native callback can mutate the input', () => {
     const onValueChange = vi.fn()
     render(

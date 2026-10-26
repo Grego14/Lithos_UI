@@ -2,6 +2,8 @@
  * @fileoverview Native single-value slider with Lithos track and thumb geometry.
  * - The browser owns pointer, touch, keyboard, bounds, and uncontrolled form state.
  * - Track/thumb styles use theme tokens and zero-blur shadows without layout gaps.
+ * - Prop taxonomy: mode selects the axis; size/shape/color customize appearance.
+ *   Native type is fixed to range. This primitive has no semantic status intent.
  * - Exception to lithos-click: translating a range input would move its hit target
  *   during a drag. Only the thumb shadow changes on interaction instead.
  */
@@ -9,7 +11,7 @@ import type { LithosElementProps } from '../../core/types'
 import { cn } from '../../utils/cn'
 import { getContrastText } from '../../utils/yiq'
 
-/** Props for a horizontal, single-value native range input. */
+/** Props for a single-value native range input. */
 export interface SliderProps extends Omit<
   LithosElementProps<'input'>,
   'type' | 'size' | 'value' | 'defaultValue' | 'min' | 'max' | 'step' | 'children'
@@ -24,8 +26,10 @@ export interface SliderProps extends Omit<
   max?: number
   /** Allowed increment, or 'any' for continuous values. @default 1 */
   step?: number | 'any'
-  /** Thumb size; the focusable input stays at least 44px tall. @default 'md' */
+  /** Thumb size; the input keeps a 44px hit area across its axis. @default 'md' */
   size?: 'sm' | 'md' | 'lg'
+  /** Slider axis. Vertical values increase from bottom to top. @default 'horizontal' */
+  mode?: 'horizontal' | 'vertical'
   /** Track and thumb shape. Omit to follow the global radius token. */
   shape?: 'square' | 'round'
   /** Custom thumb color. Its border contrast is resolved by the YIQ engine. */
@@ -57,6 +61,7 @@ export const Slider = ({
   onChange,
   onValueChange,
   shape,
+  mode = 'horizontal',
   color,
   style,
   ...props
@@ -67,6 +72,7 @@ export const Slider = ({
     min={min}
     max={max}
     step={step}
+    aria-orientation={mode}
     className={cn(
       'block h-11 w-full min-w-0 cursor-pointer appearance-none bg-transparent rounded-(--lithos-radius) focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--lithos-border) disabled:cursor-not-allowed disabled:opacity-50',
       '[&::-webkit-slider-runnable-track]:h-2 [&::-webkit-slider-runnable-track]:rounded-(--lithos-radius) [&::-webkit-slider-runnable-track]:border-2 [&::-webkit-slider-runnable-track]:border-(--lithos-border) [&::-webkit-slider-runnable-track]:bg-(--lithos-surface) [&::-webkit-slider-runnable-track]:shadow-[2px_2px_0_0_var(--lithos-shadow)]',
@@ -75,6 +81,14 @@ export const Slider = ({
       '[&::-moz-range-thumb]:box-border [&::-moz-range-thumb]:rounded-(--lithos-radius) [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-[var(--slider-border,var(--lithos-border))] [&::-moz-range-thumb]:bg-[var(--slider-color,var(--lithos-accent))] [&::-moz-range-thumb]:shadow-[2px_2px_0_0_var(--lithos-shadow)]',
       'enabled:active:[&::-webkit-slider-thumb]:shadow-none enabled:active:[&::-moz-range-thumb]:shadow-none',
       sizes[size],
+      mode === 'vertical' && [
+        'h-48 w-11 [writing-mode:vertical-lr] [direction:rtl] [&::-webkit-slider-runnable-track]:h-full [&::-webkit-slider-runnable-track]:w-2 [&::-moz-range-track]:h-full [&::-moz-range-track]:w-2 [&::-webkit-slider-thumb]:mt-0',
+        size === 'sm'
+          ? '[&::-webkit-slider-thumb]:-ml-1.5'
+          : size === 'lg'
+            ? '[&::-webkit-slider-thumb]:-ml-2.5'
+            : '[&::-webkit-slider-thumb]:-ml-2',
+      ],
       shape && shapes[shape],
       className
     )}

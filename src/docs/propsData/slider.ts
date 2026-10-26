@@ -2,6 +2,13 @@ import type { PropItem } from '../../components/ui/PropsTable'
 
 export const sliderPropsData: PropItem[] = [
   {
+    name: 'mode',
+    type: '"horizontal" | "vertical"',
+    defaultValue: '"horizontal"',
+    description:
+      'Layout behavior: horizontal or vertical axis. Vertical values increase from bottom to top; customize height with className or style.',
+  },
+  {
     name: 'shape',
     type: '"square" | "round"',
     defaultValue: 'Global --lithos-radius token',
@@ -41,13 +48,14 @@ export const sliderPropsData: PropItem[] = [
     name: 'step',
     type: 'number | "any"',
     defaultValue: '1',
-    description: 'Positive increment relative to min, or "any" for continuous values.',
+    description:
+      'Positive increment relative to min, or "any" for continuous values. With "any", keyboard increments follow native browser behavior.',
   },
   {
     name: 'size',
     type: '"sm" | "md" | "lg"',
     defaultValue: '"md"',
-    description: 'Thumb size. All sizes keep a 44px-tall input hit area.',
+    description: 'Thumb size. All sizes keep a 44px input hit area across the slider axis.',
   },
   {
     name: 'onValueChange',

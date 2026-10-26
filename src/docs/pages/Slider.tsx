@@ -7,26 +7,29 @@ import { DefaultSliderExample } from '../examples/slider/default'
 import { ControlledSliderExample } from '../examples/slider/controlled'
 import { SteppedSliderExample } from '../examples/slider/steps'
 import { SliderSizesExample } from '../examples/slider/sizes'
+import defaultSource from '../examples/slider/default.tsx?raw'
+import { IrregularSteppedSliderExample } from '../examples/slider/steps-irregular'
+import irregularStepsSource from '../examples/slider/steps-irregular.tsx?raw'
+import stepsSource from '../examples/slider/steps.tsx?raw'
 import controlledSource from '../examples/slider/controlled.tsx?raw'
 import { removeImports } from '../examples/removeImports'
 import { DifficultySliderExample } from '../examples/slider/difficulty'
 import { SliderShapesExample } from '../examples/slider/shapes'
 import { AppBrightnessExample } from '../examples/slider/brightness'
 import brightnessSource from '../examples/slider/brightness.tsx?raw'
+import sizesSource from '../examples/slider/sizes.tsx?raw'
 import shapesSource from '../examples/slider/shapes.tsx?raw'
 import difficultySource from '../examples/slider/difficulty.tsx?raw'
 import { RangeSliderExample } from '../examples/slider/range'
+import { SliderOrientationExample } from '../examples/slider/orientation'
+import orientationSource from '../examples/slider/orientation.tsx?raw'
 import rangeSource from '../examples/slider/range.tsx?raw'
 
 const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Slider.tsx'
-const sliderCode = (body: string) => ({ body, componentNames: ['Slider'], manualPath: '../../components/ui/Slider' })
 
 export const SliderDoc = () => (
   <div className="max-w-5xl mx-auto px-6">
-    <DocHeader
-      title="Slider"
-      description="Choose a numeric value within a range using a native, keyboard-accessible control."
-    />
+    <DocHeader title="Slider" description="A draggable input for picking a value or range." />
     <DocSection>
       <DocHeading id="installation">Installation</DocHeading>
       <SetupGuide
@@ -44,13 +47,15 @@ export const SliderDoc = () => (
     <DocExample
       id="default"
       title="Default"
-      description="Use defaultValue for an uncontrolled slider. Associate a visible label with its id; name includes its value in native form submission."
+      description="An uncontrolled slider with a live percentage label. Set its starting value with defaultValue and update the label with onValueChange."
     >
       <PreviewBlock
         githubUrl={githubUrl}
-        code={sliderCode(
-          '<label htmlFor="slider-volume">Volume</label>\n<Slider id="slider-volume" name="volume" defaultValue={40} />'
-        )}
+        code={{
+          body: removeImports(defaultSource),
+          componentNames: ['Slider', 'useId', 'useState'],
+          manualPath: { Slider: '../../components/ui/Slider', react: ['useId', 'useState'] },
+        }}
       >
         <DefaultSliderExample />
       </PreviewBlock>
@@ -58,7 +63,7 @@ export const SliderDoc = () => (
     <DocExample
       id="controlled"
       title="Controlled"
-      description="Keep the value in React state to display it elsewhere. aria-valuetext supplies meaningful units for assistive technology."
+      description="Manage the slider value with React state and display the current percentage beside it."
     >
       <PreviewBlock
         githubUrl={githubUrl}
@@ -71,16 +76,57 @@ export const SliderDoc = () => (
         <ControlledSliderExample />
       </PreviewBlock>
     </DocExample>
+    <DocSection>
+      <DocHeading id="steps" level="h3">
+        Stepped
+      </DocHeading>
+      <DocExample
+        id="steps-twenty"
+        title="Evenly Distributed"
+        headingLevel="h4"
+        description="Select 0, 20, 40, 60, 80, or 100 in equal increments. The thumb snaps to each labeled stop, and the selected stop is highlighted."
+      >
+        <PreviewBlock
+          githubUrl={githubUrl}
+          code={{
+            body: removeImports(stepsSource),
+            componentNames: ['Slider', 'useId', 'useState'],
+            manualPath: { Slider: '../../components/ui/Slider', react: ['useId', 'useState'] },
+          }}
+        >
+          <SteppedSliderExample />
+        </PreviewBlock>
+      </DocExample>
+      <DocExample
+        id="steps-irregular"
+        title="Unevenly Distributed"
+        headingLevel="h4"
+        description="Drag the thumb to pick 0, 5, 15, 35, 65, or 100. The values have unequal increments, while their positions on the track are evenly spaced. Each stop selects one preset value."
+      >
+        <PreviewBlock
+          githubUrl={githubUrl}
+          code={{
+            body: removeImports(irregularStepsSource),
+            componentNames: ['Slider', 'useId', 'useState'],
+            manualPath: { Slider: '../../components/ui/Slider', react: ['useId', 'useState'] },
+          }}
+        >
+          <IrregularSteppedSliderExample />
+        </PreviewBlock>
+      </DocExample>
+    </DocSection>
     <DocExample
       id="sizes"
       title="Sizes"
-      description="Choose a thumb size for the surrounding interface. Every size retains a 44px-tall input area without changing the track position."
+      description="Choose a small, medium, or large thumb. All sizes retain a 44px-tall input area."
     >
       <PreviewBlock
         githubUrl={githubUrl}
-        code={sliderCode(
-          '<label htmlFor="slider-small">Small</label>\n<Slider id="slider-small" size="sm" defaultValue={25} />\n<label htmlFor="slider-medium">Medium</label>\n<Slider id="slider-medium" size="md" defaultValue={50} />\n<label htmlFor="slider-large">Large</label>\n<Slider id="slider-large" size="lg" defaultValue={75} />'
-        )}
+        code={{
+          body: removeImports(sizesSource),
+          componentNames: ['Slider'],
+          manualPath: '../../components/ui/Slider',
+        }}
       >
         <SliderSizesExample />
       </PreviewBlock>
@@ -102,9 +148,25 @@ export const SliderDoc = () => (
       </PreviewBlock>
     </DocExample>
     <DocExample
+      id="mode"
+      title="Mode"
+      description='Choose mode="horizontal" or mode="vertical". Focus the slider, then use Left/Right for horizontal controls or Up/Down for vertical controls. Vertical values increase from bottom to top.'
+    >
+      <PreviewBlock
+        githubUrl={githubUrl}
+        code={{
+          body: removeImports(orientationSource),
+          componentNames: ['Slider', 'useId', 'useState'],
+          manualPath: { Slider: '../../components/ui/Slider', react: ['useId', 'useState'] },
+        }}
+      >
+        <SliderOrientationExample />
+      </PreviewBlock>
+    </DocExample>
+    <DocExample
       id="brightness"
-      title="Filled slider"
-      description="Use a filled track for settings such as app brightness, with icons inside or outside the bar. Each sample keeps its own value; focusing or moving either control applies its brightness to the whole app. Original brightness is restored when you leave this demo."
+      title="Filled"
+      description="Control app brightness with icons inside or outside a filled track. Each example keeps its own value; the focused control sets the app brightness. The original brightness is restored when you leave the demo."
     >
       <PreviewBlock
         githubUrl={githubUrl}
@@ -122,23 +184,25 @@ export const SliderDoc = () => (
       </PreviewBlock>
     </DocExample>
     <DocExample
-      id="steps"
-      title="Stepped slider"
-      description="Set finite min and max bounds and a positive step for precise increments. Use step='any' for continuous values. Native range inputs clamp values and snap them to valid steps."
+      id="range-slider"
+      title="Range"
+      description="Select a minimum and maximum percentage with two handles on one track. Drag a handle or focus it with Tab and use Left/Right. Values change by one percentage point, and the handles cannot cross."
     >
       <PreviewBlock
         githubUrl={githubUrl}
-        code={sliderCode(
-          '<label htmlFor="slider-temperature">Temperature (°C)</label>\n<Slider id="slider-temperature" name="temperature" min={-10} max={40} step={0.5} defaultValue={20} aria-describedby="slider-temperature-help" />\n<p id="slider-temperature-help">−10 to 40 °C in half-degree steps.</p>'
-        )}
+        code={{
+          body: removeImports(rangeSource),
+          componentNames: ['Slider', 'useRef', 'useState'],
+          manualPath: { Slider: '../../components/ui/Slider', react: ['useRef', 'useState'] },
+        }}
       >
-        <SteppedSliderExample />
+        <RangeSliderExample />
       </PreviewBlock>
     </DocExample>
     <DocExample
       id="difficulty"
-      title="Distribution slider"
-      description="Drag the two dividers to distribute 100% between Easy, Medium, and Hard in 1% increments. The colored segments and three percentages update together. Any share can be zero; for example, Easy 50%, Medium 50%, Hard 0%."
+      title="Distribution"
+      description="Drag the dividers to distribute 100% between Easy, Medium, and Hard. Shares change by one percentage point and always total 100%. Any share can be zero."
     >
       <PreviewBlock
         githubUrl={githubUrl}
@@ -151,22 +215,6 @@ export const SliderDoc = () => (
         <DifficultySliderExample />
       </PreviewBlock>
     </DocExample>
-    <DocExample
-      id="range-slider"
-      title="Range slider"
-      description="Select a lower and upper value with two circular handles on one track. Drag either handle, or Tab between them and use the arrow keys. Values move in 1% steps and cannot cross. This example composes two native Slider inputs."
-    >
-      <PreviewBlock
-        githubUrl={githubUrl}
-        code={{
-          body: removeImports(rangeSource),
-          componentNames: ['Slider', 'useState'],
-          manualPath: { Slider: '../../components/ui/Slider', react: ['useState'] },
-        }}
-      >
-        <RangeSliderExample />
-      </PreviewBlock>
-    </DocExample>
     <DocSection>
       <DocHeading id="accessibility">Accessibility</DocHeading>
       <DocList>
@@ -176,11 +224,12 @@ export const SliderDoc = () => (
         </li>
         <li>
           Tab focuses the control and shows a visible outline. Arrow keys adjust the value by step; Home and End select
-          the minimum and maximum. Keyboard details follow the user's browser and text direction.
+          the minimum and maximum. Use Left/Right for horizontal sliders and Up/Down for vertical sliders. Direction
+          follows native browser behavior and text direction.
         </li>
         <li>
           Native range semantics expose the current value and bounds to screen readers. Use aria-valuetext for units or
-          human-readable descriptions.
+          human-readable descriptions. With step="any", the browser determines keyboard increments.
         </li>
         <li>
           Mouse and touch dragging use the browser's native range interaction. Disabled controls cannot be adjusted.
@@ -191,12 +240,19 @@ export const SliderDoc = () => (
         </li>
       </DocList>
       <DocCallout>
-        This primitive is a horizontal, single-value slider. For exact text entry, pair it with a labelled numeric
-        input. The range input stays stationary during dragging; thumb shadows provide the hard-press feedback.
+        This primitive is a single-value slider with horizontal and vertical orientations. For exact text entry, pair it
+        with a labelled numeric input. The range input stays stationary during dragging; thumb shadows provide the
+        hard-press feedback.
       </DocCallout>
     </DocSection>
     <DocSection>
       <DocHeading id="api">API Reference</DocHeading>
+      <DocCallout>
+        <code>mode</code> selects horizontal or vertical layout. Use <code>size</code>, <code>shape</code>, and{' '}
+        <code>color</code> for their specific appearance settings. The native input <code>type</code> is fixed to{' '}
+        <code>range</code>. Slider has no semantic status states, so it does not expose <code>intent</code>. Filled,
+        distribution, and range examples compose the primitive; they are not <code>variant</code> values.
+      </DocCallout>
       <PropsAccordion title="Slider Props" data={sliderPropsData} />
     </DocSection>
   </div>
