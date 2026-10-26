@@ -56,15 +56,15 @@ describe('Slider', () => {
 
   it('shows both orientations and updates each value independently', async () => {
     const { container } = render(<SliderOrientationExample />)
-    const horizontal = screen.getByRole('slider', { name: 'Horizontal 60%' })
-    const vertical = screen.getByRole('slider', { name: 'Vertical 60%' })
+    const horizontal = screen.getByRole('slider', { name: 'Horizontal Volume' })
+    const vertical = screen.getByRole('slider', { name: 'Vertical Volume' })
     expect(horizontal).toHaveAttribute('aria-orientation', 'horizontal')
     expect(vertical).toHaveAttribute('aria-orientation', 'vertical')
     fireEvent.input(horizontal, { target: { value: '61' } })
-    expect(horizontal).toHaveAccessibleName('Horizontal 61%')
+    expect(horizontal).toHaveAttribute('aria-valuetext', '61%')
     expect(vertical).toHaveValue('60')
     fireEvent.input(vertical, { target: { value: '61' } })
-    expect(vertical).toHaveAccessibleName('Vertical 61%')
+    expect(vertical).toHaveAttribute('aria-valuetext', '61%')
     expect(await axe(container)).toHaveNoViolations()
   })
   // JSDOM does not implement native range keyboard actions. Browser regression
@@ -89,9 +89,9 @@ describe('Slider', () => {
     const user = userEvent.setup()
     render(<SliderOrientationExample />)
     await user.tab()
-    expect(screen.getByRole('slider', { name: 'Horizontal 60%' })).toHaveFocus()
+    expect(screen.getByRole('slider', { name: 'Horizontal Volume' })).toHaveFocus()
     await user.tab()
-    expect(screen.getByRole('slider', { name: 'Vertical 60%' })).toHaveFocus()
+    expect(screen.getByRole('slider', { name: 'Vertical Volume' })).toHaveFocus()
   })
 
   it('does not change disabled inputs or override a consumer cancelling keyboard input', () => {
