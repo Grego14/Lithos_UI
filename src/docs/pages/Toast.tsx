@@ -14,8 +14,9 @@ import PositionedToastSource from '../examples/toast/customPosition?raw'
 
 import { AllIntentsToast } from '../examples/toast/allIntents'
 import AllIntentsToastSource from '../examples/toast/allIntents?raw'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Toast.tsx'
+const githubUrl = getComponentGithubUrl('toast')
 const componentNames = ['useToast', 'Button']
 const manualPath = {
   ToastProvider: '../../components/ui/Toast',
