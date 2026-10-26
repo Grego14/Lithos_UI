@@ -4,6 +4,9 @@ import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { toggleProps } from '../propsData/toggle'
 import { SetupGuide } from '../layout/SetupGuide'
+import { getComponentGithubUrl } from '../utils/githubUrl'
+
+const githubUrl = getComponentGithubUrl('toggle')
 
 export const ToggleDoc = () => {
   const [checked, setChecked] = useState(false)
@@ -75,10 +78,7 @@ export const ToggleDoc = () => {
         <code>aria-pressed</code> attribute.
       </p>
 
-      <PreviewBlock
-        code={usageCode}
-        githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Toggle.tsx"
-      >
+      <PreviewBlock code={usageCode} githubUrl={githubUrl}>
         <Toggle checked={checked} onToggle={() => setChecked(!checked)} label="Documentation Toggle" />
       </PreviewBlock>
 

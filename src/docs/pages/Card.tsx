@@ -23,8 +23,9 @@ import elevateSource from '../examples/card/elevate.tsx?raw'
 import { SpacingCardExample } from '../examples/card/spacing'
 import { ImageCardExample } from '../examples/card/image'
 import imageSource from '../examples/card/image.tsx?raw'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Card.tsx'
+const githubUrl = getComponentGithubUrl('card')
 const cardCode = (source: string, componentNames: string[]) => ({
   body: removeImports(source).replace(/\bsrc=\{card[12]\}/g, 'src="/example-card.webp"'),
   componentNames,

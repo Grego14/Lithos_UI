@@ -63,8 +63,9 @@ import { IconTablet } from '../../components/ui/icons/IconTablet'
 import { IconTrash } from '../../components/ui/icons/IconTrash'
 import { IconUndo } from '../../components/ui/icons/IconUndo'
 import { IconUpload } from '../../components/ui/icons/IconUpload'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/tree/main/src/components/ui/icons'
+const githubUrl = getComponentGithubUrl('icons')
 
 interface IconItem {
   name: string
