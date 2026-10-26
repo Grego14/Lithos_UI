@@ -11,11 +11,12 @@ export const SliderOrientationExample = () => {
       <h4 id="horizontal" className="mb-4 font-bold">
         Horizontal
       </h4>
-      <label htmlFor={`${id}-horizontal`} className="mb-4 block font-bold">
-        Horizontal: {horizontal}%
+      <label id={`${id}-horizontal-value`} htmlFor={`${id}-horizontal`} className="mb-4 block font-bold">
+        {horizontal}%
       </label>
       <Slider
         id={`${id}-horizontal`}
+        aria-labelledby={`horizontal ${id}-horizontal-value`}
         mode="horizontal"
         value={horizontal}
         onValueChange={setHorizontal}
@@ -24,11 +25,12 @@ export const SliderOrientationExample = () => {
       <h4 id="vertical" className="mt-8 mb-4 font-bold">
         Vertical
       </h4>
-      <label htmlFor={`${id}-vertical`} className="mb-4 block font-bold">
-        Vertical: {vertical}%
+      <label id={`${id}-vertical-value`} htmlFor={`${id}-vertical`} className="mb-4 block font-bold">
+        {vertical}%
       </label>
       <Slider
         id={`${id}-vertical`}
+        aria-labelledby={`vertical ${id}-vertical-value`}
         mode="vertical"
         value={vertical}
         onValueChange={setVertical}
