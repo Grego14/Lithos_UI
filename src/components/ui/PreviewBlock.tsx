@@ -13,7 +13,7 @@ import { IconMonitor } from './icons/IconMonitor'
 import { IconTablet } from './icons/IconTablet'
 import { IconSmartphone } from './icons/IconSmartphone'
 import { IconExternalLink } from './icons/IconExternalLink'
-import { IconCode } from './icons/IconCode'
+import { IconGithub } from './icons/IconGithub'
 import { IconDownload } from './icons/IconDownload'
 import { useInstallPreference } from '../../core/useInstallPreference'
 import { deriveUsageCode, type ManualPath } from '../../docs/utils/deriveUsageCode'
@@ -31,6 +31,8 @@ export interface PreviewBlockProps {
         manualPath: ManualPath
       }
   githubUrl?: string
+  githubIcon?: ReactNode
+  githubLabel?: ReactNode
   language?: string
   height?: string
   noPadding?: boolean
@@ -50,6 +52,8 @@ export const PreviewBlock = ({
   children,
   code,
   githubUrl,
+  githubIcon,
+  githubLabel,
   language = 'tsx',
   height,
   noPadding,
@@ -126,7 +130,7 @@ export const PreviewBlock = ({
           )}
         </div>
 
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 shrink-0">
           {installGuide && (
             <Button
               aria-label="Install"
@@ -150,10 +154,11 @@ export const PreviewBlock = ({
             <Button
               variant="secondary"
               onClick={() => window.open(githubUrl, '_blank')}
-              aria-label="Source"
+              aria-label={typeof githubLabel === 'string' ? githubLabel : 'Source'}
               className="inline-flex items-center justify-center hover:bg-(--lithos-accent) hover:text-(--lithos-accent-text)"
             >
-              <IconCode />
+              {githubIcon ?? <IconGithub />}
+              {githubLabel ? <span className="hidden sm:inline ml-2">{githubLabel}</span> : null}
             </Button>
           ) : null}
         </div>

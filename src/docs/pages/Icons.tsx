@@ -39,6 +39,7 @@ import { IconExternalLink } from '../../components/ui/icons/IconExternalLink'
 import { IconEye } from '../../components/ui/icons/IconEye'
 import { IconFileText } from '../../components/ui/icons/IconFileText'
 import { IconFolder } from '../../components/ui/icons/IconFolder'
+import { IconGithub } from '../../components/ui/icons/IconGithub'
 import { IconHeart } from '../../components/ui/icons/IconHeart'
 import { IconHeartOutline } from '../../components/ui/icons/IconHeartOutline'
 import { IconHome } from '../../components/ui/icons/IconHome'
@@ -106,6 +107,7 @@ const ALL_ICONS: IconItem[] = [
   { name: 'IconEye', Component: IconEye, tags: ['eye', 'view', 'visibility', 'preview'] },
   { name: 'IconFileText', Component: IconFileText, tags: ['file', 'text', 'document', 'page'] },
   { name: 'IconFolder', Component: IconFolder, tags: ['folder', 'directory', 'storage'] },
+  { name: 'IconGithub', Component: IconGithub, tags: ['github', 'git', 'repo', 'social', 'brand'] },
   { name: 'IconHeart', Component: IconHeart, tags: ['heart', 'like', 'love', 'favorite'] },
   { name: 'IconHeartOutline', Component: IconHeartOutline, tags: ['heart', 'outline', 'love', 'favorite'] },
   { name: 'IconHome', Component: IconHome, tags: ['home', 'house', 'dashboard', 'index'] },

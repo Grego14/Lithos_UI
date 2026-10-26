@@ -104,6 +104,39 @@ describe('PreviewBlock', () => {
     openSpy.mockRestore()
   })
 
+  it('renders icon-only source button by default', () => {
+    render(
+      <PreviewBlock {...defaultProps} githubUrl="https://github.com/test">
+        Hello
+      </PreviewBlock>
+    )
+    const button = screen.getByRole('button', { name: /^source$/i })
+    expect(button).toBeInTheDocument()
+    expect(button.textContent).toBe('')
+  })
+
+  it('renders custom githubLabel when passed', () => {
+    render(
+      <PreviewBlock {...defaultProps} githubUrl="https://github.com/test" githubLabel="View Code">
+        Hello
+      </PreviewBlock>
+    )
+    expect(screen.getByRole('button', { name: /view code/i })).toBeInTheDocument()
+  })
+
+  it('renders custom githubIcon when passed', () => {
+    render(
+      <PreviewBlock
+        {...defaultProps}
+        githubUrl="https://github.com/test"
+        githubIcon={<span data-testid="custom-icon">git-icon</span>}
+      >
+        Hello
+      </PreviewBlock>
+    )
+    expect(screen.getByTestId('custom-icon')).toBeInTheDocument()
+  })
+
   it('has zero accessibility violations', async () => {
     const { container } = render(<PreviewBlock {...defaultProps}>Test</PreviewBlock>)
     const results = await axe(container)
