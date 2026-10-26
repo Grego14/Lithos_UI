@@ -20,8 +20,9 @@ import PrimaryExampleSource from '../examples/tooltip/primary?raw'
 
 import { InverseExample } from '../examples/tooltip/inverse'
 import InverseExampleSource from '../examples/tooltip/inverse?raw'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/tooltip/Tooltip.tsx'
+const githubUrl = getComponentGithubUrl('tooltip')
 const manualPath = '../../components/ui/Tooltip'
 const componentNames = ['Tooltip', 'TooltipTrigger', 'TooltipContent', 'Button']
 
