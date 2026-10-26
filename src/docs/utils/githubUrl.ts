@@ -10,8 +10,19 @@ const RAW_BASE = 'https://raw.githubusercontent.com/lithosui/Lithos_UI/main/src'
  */
 export const getComponentGithubUrl = (slug: string): string => {
   const normalizedSlug = slug.toLowerCase()
+
+  if (normalizedSlug === 'icons') {
+    return 'https://github.com/lithosui/Lithos_UI/tree/main/src/components/ui/icons'
+  }
+
   const item = registry[normalizedSlug]
-  if (!item) return ''
+  if (!item) {
+    const pascal = slug
+      .split(/[-_]/)
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join('')
+    return `${GITHUB_REPO_BASE}/components/ui/${pascal}.tsx`
+  }
 
   const normalizedName = item.name.replace(/\s+/g, '')
 

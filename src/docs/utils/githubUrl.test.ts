@@ -42,21 +42,29 @@ describe('getComponentGithubUrl', () => {
     expect(getComponentGithubUrl('tooltip')).toBe(
       'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/tooltip/Tooltip.tsx'
     )
+    expect(getComponentGithubUrl('icons')).toBe(
+      'https://github.com/lithosui/Lithos_UI/tree/main/src/components/ui/icons'
+    )
   })
 
-  it('resolves correct GitHub URLs for single-file components', () => {
+  it('resolves correct GitHub URLs for single-file and docs-only components', () => {
     expect(getComponentGithubUrl('button')).toBe(
       'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Button.tsx'
     )
     expect(getComponentGithubUrl('accordion')).toBe(
       'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Accordion.tsx'
     )
+    expect(getComponentGithubUrl('code-viewer')).toBe(
+      'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/CodeViewer.tsx'
+    )
+    expect(getComponentGithubUrl('preview-block')).toBe(
+      'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/PreviewBlock.tsx'
+    )
   })
 
-  it('handles case-insensitivity and invalid slugs gracefully', () => {
+  it('handles case-insensitivity gracefully', () => {
     expect(getComponentGithubUrl('CheckBox')).toBe(
       'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/checkbox/Checkbox.tsx'
     )
-    expect(getComponentGithubUrl('unknown-component')).toBe('')
   })
 })
