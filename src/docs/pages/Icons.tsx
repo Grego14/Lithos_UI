@@ -6,7 +6,7 @@ import { Badge } from '../../components/ui/Badge'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { iconPropsData } from '../propsData/icons'
 import { SetupGuide } from '../layout/SetupGuide'
-import { DocHeader, DocHeading, DocExample, DocSection } from '../layout/DocPage'
+import { DocHeader, DocHeading, DocExample, DocSection, Code } from '../layout/DocPage'
 import { removeImports } from '../examples/removeImports'
 
 import { DefaultExample } from '../examples/icons/default'
@@ -205,8 +205,8 @@ export const IconsDoc = () => {
         title="Icons"
         description={
           <>
-            A standardized wrapper around <code>react-icons</code> with preset geometry, stroke widths, and design token
-            support.
+            A standardized wrapper around <Code text="react-icons" /> with preset geometry, stroke widths, and design
+            token support.
           </>
         }
       />
@@ -371,7 +371,7 @@ export const IconsDoc = () => {
         title="Usage"
         description={
           <>
-            Import icon primitives directly and control dimensions with the <code>size</code> prop.
+            Import icon primitives directly and control dimensions with the <Code text="size" /> prop.
           </>
         }
       >
@@ -385,8 +385,8 @@ export const IconsDoc = () => {
         title="With Button"
         description={
           <>
-            Pairs with <code>Button</code> via <code>iconLeft</code> and <code>iconRight</code>, inheriting button
-            states and colors.
+            Pairs with <Code text="Button" /> via <Code text="iconLeft" /> and <Code text="iconRight" />, inheriting
+            button states and colors.
           </>
         }
       >
@@ -400,7 +400,7 @@ export const IconsDoc = () => {
         title="Size & Stroke"
         description={
           <>
-            Control stroke weight with <code>strokeWidth</code> and dimensions with <code>size</code>.
+            Control stroke weight with <Code text="strokeWidth" /> and dimensions with <Code text="size" />.
           </>
         }
       >
@@ -414,7 +414,7 @@ export const IconsDoc = () => {
         title="Color & Token"
         description={
           <>
-            Icons inherit <code>currentColor</code> by default, or accept custom colors and token classes.
+            Icons inherit <Code text="currentColor" /> by default, or accept custom colors and token classes.
           </>
         }
       >

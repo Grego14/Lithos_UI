@@ -3,7 +3,7 @@ import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
 import { paginationPropsData } from '../propsData/pagination'
 import { getComponentGithubUrl } from '../utils/githubUrl'
-import { DocExample, DocHeader, DocHeading, DocList, DocSection } from '../layout/DocPage'
+import { DocExample, DocHeader, DocHeading, DocList, DocSection, Code } from '../layout/DocPage'
 import { removeImports } from '../examples/removeImports'
 import { BasicPagination } from '../examples/pagination/BasicPagination'
 import basicSource from '../examples/pagination/BasicPagination.tsx?raw'
@@ -54,10 +54,11 @@ export const PaginationDoc = () => (
         title="Basic"
         description={
           <>
-            Pass the total number of pages directly to <code>count</code> (for example, <code>count={12}</code>).
-            Control the displayed records with a one-based <code>page</code> and <code>onPageChange</code>. Page groups
-            keep a single ellipsis in the middle, such as <code>1 2 ··· 5 6</code>. The current page group moves as you
-            navigate. Double chevrons jump to the first or last page; single chevrons move one page at a time.
+            Pass the total number of pages directly to <Code text="count" /> (for example, <Code text="count={12}" />
+            ). Control the displayed records with a one-based <Code text="page" /> and <Code text="onPageChange" />.
+            Page groups keep a single ellipsis in the middle, such as <Code text="1 2 ··· 5 6" />. The current page
+            group moves as you navigate. Double chevrons jump to the first or last page; single chevrons move one page
+            at a time.
           </>
         }
       >
@@ -135,8 +136,8 @@ export const PaginationDoc = () => (
         title="Shapes"
         description={
           <>
-            Use <code>shape="square"</code> for straight corners or <code>shape="pill"</code> for round controls and
-            indicators. Shape is independent of the pagination style.
+            Use <Code text='shape="square"' /> for straight corners or <Code text='shape="pill"' /> for round controls
+            and indicators. Shape is independent of the pagination style.
           </>
         }
       >
@@ -149,8 +150,8 @@ export const PaginationDoc = () => (
         title="Position"
         description={
           <>
-            Set <code>position</code> to <code>left</code>, <code>center</code>, or <code>right</code> to align the
-            controls within their container.
+            Set <Code text="position" /> to <Code text="left" />, <Code text="center" />, or <Code text="right" /> to
+            align the controls within their container.
           </>
         }
       >
@@ -176,7 +177,7 @@ export const PaginationDoc = () => (
           Tab focuses available controls. Enter and Space select a page. Native buttons never submit the enclosing form.
         </li>
         <li>
-          The current page exposes <code>aria-current="page"</code>. Dots have page labels, and a polite status
+          The current page exposes <Code text='aria-current="page"' />. Dots have page labels, and a polite status
           announces the current page in every style.
         </li>
         <li>
@@ -184,8 +185,8 @@ export const PaginationDoc = () => (
           decorative and cannot be focused.
         </li>
         <li>
-          Give multiple pagers distinct names using <code>aria-label</code>. Controlled page state and displayed records
-          should update together when the page count changes.
+          Give multiple pagers distinct names using <Code text="aria-label" />. Controlled page state and displayed
+          records should update together when the page count changes.
         </li>
       </DocList>
     </DocSection>

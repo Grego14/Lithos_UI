@@ -1,6 +1,7 @@
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 import { getComponentGithubUrl } from '../utils/githubUrl'
+import { Code } from '../layout/DocPage'
 
 // should this file be removed?
 
@@ -57,8 +58,8 @@ export const CodeViewerDoc = () => {
 
       <div className="border-l-4 border-(--lithos-accent) pl-6 py-2 mb-8 bg-(--lithos-surface) p-4">
         <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
-          Test the live clipboard interaction below. You can toggle the <code className="font-black">showLanguage</code>{' '}
-          prop to switch between a language label and structural window squares.
+          Test the live clipboard interaction below. You can toggle the <Code text="showLanguage" /> prop to switch
+          between a language label and structural window squares.
         </p>
       </div>
 

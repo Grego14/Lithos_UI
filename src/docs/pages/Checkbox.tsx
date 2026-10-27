@@ -5,7 +5,16 @@ import { Button } from '../../components/ui/Button'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { colors } from '../../utils/colors'
 import { isHexColor } from '../../core/types'
-import { DocCallout, DocExample, DocHeader, DocHeading, DocLeadText, DocList, DocSection } from '../layout/DocPage'
+import {
+  DocCallout,
+  DocExample,
+  DocHeader,
+  DocHeading,
+  DocLeadText,
+  DocList,
+  DocSection,
+  Code,
+} from '../layout/DocPage'
 import { SetupGuide } from '../layout/SetupGuide'
 import { removeImports } from '../examples/removeImports'
 import { checkboxPropsData, iconCheckboxPropsData, checkboxGroupPropsData } from '../propsData/checkbox'
@@ -61,14 +70,14 @@ export const CheckboxDoc = () => {
       <DocHeader title="Checkbox" description="A native, form-friendly checkbox with a multi-select group." />
       <DocSection className="mb-6">
         <DocLeadText>
-          Checkbox keeps a real <code>&lt;input type="checkbox"&gt;</code> mounted off-screen for native keyboard,
-          focus, and form-submission behavior, and paints a hard-edged box next to it from that input&apos;s own state.
-          Use a single <code>Checkbox</code> for one on/off choice, or wrap several in a <code>CheckboxGroup</code> to
+          Checkbox keeps a real <Code text={'<input type="checkbox">'} /> mounted off-screen for native keyboard, focus,
+          and form-submission behavior, and paints a hard-edged box next to it from that input&apos;s own state. Use a
+          single <Code text="Checkbox" /> for one on/off choice, or wrap several in a <Code text="CheckboxGroup" /> to
           collect multiple selections into one array.
         </DocLeadText>
         <DocCallout>
-          A standalone Checkbox works uncontrolled with <code>defaultChecked</code>. CheckboxGroup is controlled and
-          receives its selected values through <code>value</code> and <code>onChange</code>.
+          A standalone Checkbox works uncontrolled with <Code text="defaultChecked" />. CheckboxGroup is controlled and
+          receives its selected values through <Code text="value" /> and <Code text="onChange" />.
         </DocCallout>
       </DocSection>
 
@@ -88,7 +97,7 @@ export const CheckboxDoc = () => {
         title="Single"
         description={
           <>
-            A single on/off choice, equivalent to a native input. Use <code>defaultChecked</code> for an uncontrolled
+            A single on/off choice, equivalent to a native input. Use <Code text="defaultChecked" /> for an uncontrolled
             default.
           </>
         }
@@ -111,8 +120,8 @@ export const CheckboxDoc = () => {
         title="Icon"
         description={
           <>
-            <code>IconCheckbox</code> drops the box for an outlined/filled icon toggle. It defaults to a heart; pass{' '}
-            <code>icon</code> and <code>checkedIcon</code> to use another pair.
+            <Code text="IconCheckbox" /> drops the box for an outlined/filled icon toggle. It defaults to a heart; pass{' '}
+            <Code text="icon" /> and <Code text="checkedIcon" /> to use another pair.
           </>
         }
       >
@@ -159,8 +168,8 @@ export const CheckboxDoc = () => {
         title="Indeterminate"
         description={
           <>
-            Use <code>indeterminate</code> for a select-all checkbox with partially checked children. It sets the native
-            DOM property directly and renders a dash.
+            Use <Code text="indeterminate" /> for a select-all checkbox with partially checked children. It sets the
+            native DOM property directly and renders a dash.
           </>
         }
       >
@@ -186,7 +195,7 @@ export const CheckboxDoc = () => {
         title="Group"
         description={
           <>
-            CheckboxGroup controls one <code>string[]</code>. Children declare values and inherit checked state and
+            CheckboxGroup controls one <Code text="string[]" />. Children declare values and inherit checked state and
             toggling from the group.
           </>
         }
@@ -200,7 +209,7 @@ export const CheckboxDoc = () => {
         title="Horizontal group"
         description={
           <>
-            Pass <code>mode="horizontal"</code> to flow the group items in a row.
+            Pass <Code text='mode="horizontal"' /> to flow the group items in a row.
           </>
         }
       >
@@ -231,12 +240,12 @@ export const CheckboxDoc = () => {
         <DocHeading id="accessibility">Accessibility</DocHeading>
         <DocList>
           <li>
-            Renders a real <code>&lt;input type="checkbox"&gt;</code> wrapped in a label, providing native click
-            targets, keyboard toggling, and screen reader semantics.
+            Renders a real <Code text={'<input type="checkbox">'} /> wrapped in a label, providing native click targets,
+            keyboard toggling, and screen reader semantics.
           </li>
           <li>The custom box is purely visual and tracks the input's state.</li>
           <li>
-            <code>CheckboxGroup</code> exposes <code>role="group"</code> and labels the group.
+            <Code text="CheckboxGroup" /> exposes <Code text='role="group"' /> and labels the group.
           </li>
           <li>Keyboard focus is visible through a ring on the checkbox.</li>
         </DocList>

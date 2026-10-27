@@ -1,7 +1,7 @@
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
-import { DocCallout, DocExample, DocHeader, DocHeading, DocList, DocSection } from '../layout/DocPage'
+import { DocCallout, DocExample, DocHeader, DocHeading, DocList, DocSection, Code } from '../layout/DocPage'
 import { sliderPropsData } from '../propsData/slider'
 import { DefaultSliderExample } from '../examples/slider/default'
 import { ControlledSliderExample } from '../examples/slider/controlled'
@@ -39,7 +39,7 @@ export const SliderDoc = () => (
         requires={['core/types.ts', 'utils/cn.ts', 'utils/yiq.ts']}
       />
       <DocCallout>
-        Use React 19 and Tailwind CSS v4. Import your Tailwind stylesheet before <code>lithos-ui/tokens.css</code>.
+        Use React 19 and Tailwind CSS v4. Import your Tailwind stylesheet before <Code text="lithos-ui/tokens.css" />.
         Slider uses the global accent, border, surface, shadow, and radius tokens.
       </DocCallout>
     </DocSection>
@@ -248,10 +248,10 @@ export const SliderDoc = () => (
     <DocSection>
       <DocHeading id="api">API Reference</DocHeading>
       <DocCallout>
-        <code>mode</code> selects horizontal or vertical layout. Use <code>size</code>, <code>shape</code>, and{' '}
-        <code>color</code> for their specific appearance settings. The native input <code>type</code> is fixed to{' '}
-        <code>range</code>. Slider has no semantic status states, so it does not expose <code>intent</code>. Filled,
-        distribution, and range examples compose the primitive; they are not <code>variant</code> values.
+        <Code text="mode" /> selects horizontal or vertical layout. Use <Code text="size" />, <Code text="shape" />, and{' '}
+        <Code text="color" /> for their specific appearance settings. The native input <Code text="type" /> is fixed to{' '}
+        <Code text="range" />. Slider has no semantic status states, so it does not expose <Code text="intent" />.
+        Filled, distribution, and range examples compose the primitive; they are not <Code text="variant" /> values.
       </DocCallout>
       <PropsAccordion title="Slider Props" data={sliderPropsData} />
     </DocSection>

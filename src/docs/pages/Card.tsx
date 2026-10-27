@@ -11,7 +11,16 @@ import {
   cardFooterPropsData,
 } from '../propsData/card'
 import { removeImports } from '../examples/removeImports'
-import { DocCallout, DocExample, DocHeader, DocHeading, DocLeadText, DocList, DocSection } from '../layout/DocPage'
+import {
+  DocCallout,
+  DocExample,
+  DocHeader,
+  DocHeading,
+  DocLeadText,
+  DocList,
+  DocSection,
+  Code,
+} from '../layout/DocPage'
 import { DefaultCardExample } from '../examples/card/default'
 import defaultSource from '../examples/card/default.tsx?raw'
 import { AccentCardExample } from '../examples/card/accent'
@@ -44,13 +53,13 @@ export const CardDoc = () => (
 
     <DocSection>
       <DocLeadText>
-        Card is a foundational container composed of <code>CardImage</code>, <code>CardContent</code> (with{' '}
-        <code>CardTitle</code> and <code>CardDescription</code>) and <code>CardFooter</code>. Every part is optional —
-        compose only what the content needs.
+        Card is a foundational container composed of <Code text="CardImage" />, <Code text="CardContent" /> (with{' '}
+        <Code text="CardTitle" /> and <Code text="CardDescription" />) and <Code text="CardFooter" />. Every part is
+        optional — compose only what the content needs.
       </DocLeadText>
       <DocCallout>
         <strong>Default</strong>, <strong>accent</strong>, <strong>solid</strong>, and <strong>image</strong> are the
-        available variants, all shown below. Hover lift is opt-in via the <code>interactive</code> prop and off by
+        available variants, all shown below. Hover lift is opt-in via the <Code text="interactive" /> prop and off by
         default.
       </DocCallout>
     </DocSection>
@@ -71,9 +80,9 @@ export const CardDoc = () => (
       description={
         <>
           Use this to encapsulate distinct, standalone pieces of information or interactive content. It renders with a
-          solid background, a robust 2px border, and a sharp shadow. Set <code>interactive</code> to true to enable
-          hover expansion of the shadow. It supports nested semantic elements like <code>CardTitle</code> and{' '}
-          <code>CardFooter</code>. Accessible by default, but if marked interactive, it should contain focusable
+          solid background, a robust 2px border, and a sharp shadow. Set <Code text="interactive" /> to true to enable
+          hover expansion of the shadow. It supports nested semantic elements like <Code text="CardTitle" /> and{' '}
+          <Code text="CardFooter" />. Accessible by default, but if marked interactive, it should contain focusable
           navigation elements.
         </>
       }
@@ -126,7 +135,7 @@ export const CardDoc = () => (
       description={
         <>
           Use this alternative physics mode when shadow expansion feels too heavy for the surrounding layout. Setting{' '}
-          <code>interactive="elevate"</code> causes the card itself to translate upwards along the Y-axis on hover,
+          <Code text='interactive="elevate"' /> causes the card itself to translate upwards along the Y-axis on hover,
           leaving the shadow footprint behind. Avoid nesting elevate cards within other translating layouts. Interactive
           bounds remain consistent for assistive technology.
         </>
@@ -145,10 +154,10 @@ export const CardDoc = () => (
       title="Spacing"
       description={
         <>
-          Use the <code>spacing</code> prop on child components to adjust internal padding rhythm. It scales layout
-          density (<code>sm</code> for tight data grids, <code>md</code> for standard text, <code>lg</code> for spacious
-          hero cards). Does not alter the outer card dimensions directly but shifts the inner baseline grid. Consistent
-          spacing aids cognitive accessibility.
+          Use the <Code text="spacing" /> prop on child components to adjust internal padding rhythm. It scales layout
+          density (<Code text="sm" /> for tight data grids, <Code text="md" /> for standard text, <Code text="lg" /> for
+          spacious hero cards). Does not alter the outer card dimensions directly but shifts the inner baseline grid.
+          Consistent spacing aids cognitive accessibility.
         </>
       }
     >
@@ -183,8 +192,8 @@ export const CardDoc = () => (
       description={
         <>
           Use this to render full-bleed, visually immersive cards where the background is an image. It relies on the{' '}
-          <code>variant="image"</code> prop on the root card. Requires a minimum height to be set via utility classes to
-          prevent collapse. Title and description text require dark scrims or explicit contrast handling to guarantee
+          <Code text='variant="image"' /> prop on the root card. Requires a minimum height to be set via utility classes
+          to prevent collapse. Title and description text require dark scrims or explicit contrast handling to guarantee
           WCAG compliance against arbitrary image backgrounds.
         </>
       }
@@ -216,24 +225,24 @@ export const CardDoc = () => (
       <DocHeading id="accessibility">Accessibility</DocHeading>
       <DocList>
         <li>
-          Card renders a plain <code>div</code> — it carries no implicit role or focus behavior of its own.
+          Card renders a plain <Code text="div" /> — it carries no implicit role or focus behavior of its own.
         </li>
         <li>
-          <code>CardTitle</code> renders an <code>h3</code>, so cards compose into the surrounding document heading
-          order rather than skipping levels.
+          <Code text="CardTitle" /> renders an <Code text="h3" />, so cards compose into the surrounding document
+          heading order rather than skipping levels.
         </li>
         <li>
-          Always pass descriptive <code>alt</code> text to <code>CardImage</code>; it is required, not optional, on the
-          component's props.
+          Always pass descriptive <Code text="alt" /> text to <Code text="CardImage" />; it is required, not optional,
+          on the component's props.
         </li>
         <li>
           When a Card wraps interactive controls (links, buttons), keyboard focus and activation come from those native
           elements, not from the Card itself.
         </li>
         <li>
-          If an entire Card is meant to be a single click target, wrap it in a native <code>a</code> or{' '}
-          <code>button</code> rather than relying on an <code>onClick</code> on the <code>div</code>, so it stays
-          keyboard operable.
+          If an entire Card is meant to be a single click target, wrap it in a native <Code text="a" /> or{' '}
+          <Code text="button" /> rather than relying on an <Code text="onClick" /> on the <Code text="div" />, so it
+          stays keyboard operable.
         </li>
       </DocList>
     </DocSection>
@@ -241,8 +250,9 @@ export const CardDoc = () => (
     <DocSection>
       <DocHeading id="api">API Reference</DocHeading>
       <DocCallout className="mb-6">
-        <strong>Note:</strong> Border radius is configurable globally via the <code>--lithos-radius</code> CSS token, or
-        per-instance via <code>className</code> (e.g. <code>rounded-full</code>). No custom prop is required.
+        <strong>Note:</strong> Border radius is configurable globally via the <Code text="--lithos-radius" /> CSS token,
+        or per-instance via <Code text="className" /> (e.g. <Code text="rounded-full" />
+        ). No custom prop is required.
       </DocCallout>
       <PropsAccordion title="Card Props" data={cardPropsData} />
       <PropsAccordion title="CardImage Props" data={cardImagePropsData} />

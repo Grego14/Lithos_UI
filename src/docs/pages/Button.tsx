@@ -3,7 +3,16 @@ import { CodeViewer } from '../../components/ui/CodeViewer'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { Typography } from '../../components/ui/Typography'
 import { SetupGuide } from '../layout/SetupGuide'
-import { DocCallout, DocExample, DocHeader, DocHeading, DocLeadText, DocList, DocSection } from '../layout/DocPage'
+import {
+  DocCallout,
+  DocExample,
+  DocHeader,
+  DocHeading,
+  DocLeadText,
+  DocList,
+  DocSection,
+  Code,
+} from '../layout/DocPage'
 import { buttonPropsData, buttonGroupPropsData } from '../propsData/button'
 import { removeImports } from '../examples/removeImports'
 import { DefaultButtonExample } from '../examples/button/default'
@@ -62,12 +71,12 @@ export const ButtonDoc = () => (
 
     <DocSection className="mb-6">
       <DocLeadText>
-        Button is a strict native <code>&lt;button&gt;</code> primitive. It ships four <code>intent</code> variants —
+        Button is a strict native <Code text="<button>" /> primitive. It ships four <Code text="intent" /> variants —
         Default, Secondary, Accent, Text — built on the shared hard-shadow, hard-border interaction physics of{' '}
-        <code>.lithos-click</code>.
+        <Code text=".lithos-click" />.
       </DocLeadText>
       <DocCallout>
-        <strong>Default</strong> is the primary call to action and requires no <code>intent</code> prop.{' '}
+        <strong>Default</strong> is the primary call to action and requires no <Code text="intent" /> prop.{' '}
         <strong>Secondary</strong> is a secondary call-to-action with an outlined style. <strong>Accent</strong> is a
         secondary button that fills solid with the accent color on hover. <strong>Solid</strong> allows a custom
         background color with an automatically adapting contrast text. <strong>Inverse</strong> inverts the button
@@ -172,8 +181,8 @@ export const ButtonDoc = () => (
 
     <DocHeading id="button-group">Button Group</DocHeading>
     <Typography variant="p" className="mb-6 text-base text-(--lithos-text) max-w-3xl font-body opacity-80">
-      <code>ButtonGroup</code> lays out <code>Button</code> primitives side by side or stacked. Pass{' '}
-      <code>attached</code> to fuse adjacent buttons into a single hard-bordered strip.
+      <Code text="ButtonGroup" /> lays out <Code text="Button" /> primitives side by side or stacked. Pass{' '}
+      <Code text="attached" /> to fuse adjacent buttons into a single hard-bordered strip.
     </Typography>
 
     <DocExample
@@ -191,7 +200,7 @@ export const ButtonDoc = () => (
       title="Vertical"
       description={
         <>
-          Set <code>mode="vertical"</code> to stack buttons instead — useful in narrow sidebars, mobile sheets, or
+          Set <Code text='mode="vertical"' /> to stack buttons instead — useful in narrow sidebars, mobile sheets, or
           anywhere horizontal space is tight.
         </>
       }
@@ -220,12 +229,12 @@ export const ButtonDoc = () => (
       <DocHeading id="accessibility">Accessibility</DocHeading>
       <DocList>
         <li>
-          Uses native <code>&lt;button&gt;</code> element for built-in keyboard navigation and screen reader support.
+          Uses native <Code text="<button>" /> element for built-in keyboard navigation and screen reader support.
         </li>
         <li>Supports standard focus outlines provided by the browser.</li>
         <li>Maintains high contrast ratios for all intent variants.</li>
         <li>
-          Disabled state accurately maps to the native <code>disabled</code> attribute.
+          Disabled state accurately maps to the native <Code text="disabled" /> attribute.
         </li>
       </DocList>
     </DocSection>
@@ -233,8 +242,9 @@ export const ButtonDoc = () => (
     <DocSection>
       <DocHeading id="api">API Reference</DocHeading>
       <DocCallout className="mb-6">
-        <strong>Note:</strong> Border radius is configurable globally via the <code>--lithos-radius</code> CSS token, or
-        per-instance via <code>className</code> (e.g. <code>rounded-full</code>). No custom prop is required.
+        <strong>Note:</strong> Border radius is configurable globally via the <Code text="--lithos-radius" /> CSS token,
+        or per-instance via <Code text="className" /> (e.g. <Code text="rounded-full" />
+        ). No custom prop is required.
       </DocCallout>
       <PropsAccordion title="Button Props" data={buttonPropsData} />
       <PropsAccordion title="ButtonGroup Props" data={buttonGroupPropsData} />
