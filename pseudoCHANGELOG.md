@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.1.5]
+
+### Added (0.1.5)
+
+- **Slider:** Added a native horizontal/vertical range primitive with controlled/uncontrolled values, numeric change callbacks, bounds and steps, disabled state, three thumb sizes, native form support, and theme-token track/thumb styling.
+- Added Slider documentation, standalone examples, props reference, component showcase, navigation, package exports, CLI registry entry, and behavior/accessibility tests.
+- Added square and round shapes, filled sliders controlling whole-app brightness with both icons inside or outside, a three-color Easy/Medium/Hard distribution slider with adjustable shares totaling 100%, and optional custom thumb colors with YIQ border contrast.
+- Added a two-handle range slider example with theme-styled handles, a highlighted selected interval, 1% increments, and keyboard-accessible minimum/maximum values.
+- Added separate horizontal and vertical orientation examples and consistent arrow-key stepping for both axes.
+- Kept Slider as a native input wrapper: the browser handles keyboard stepping, and React change callbacks update consumer state.
+- Added evenly and unevenly distributed stepped examples with labeled stops and snapping.
+- Simplified Slider event/style handling and brightness state updates; app filter cleanup now runs when the brightness demo unmounts instead of resetting on each adjustment.
+
 ## [0.1.4]
 
 ### Added (0.1.4)
