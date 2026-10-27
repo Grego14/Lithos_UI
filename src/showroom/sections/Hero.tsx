@@ -37,9 +37,9 @@ const Hero = () => {
   const navigate = useNavigate()
 
   return (
-    <section id="top" className="border-b-2 border-(--lithos-border) bg-(--lithos-bg)">
+    <section id="top" className="border-b-2 border-(--lithos-border) bg-(--lithos-strata)">
       {/* Deploying the tracking engine to the main landing viewport */}
-      <KineticGrid baseOpacity="opacity-10" className="py-12 md:py-24 w-full">
+      <KineticGrid baseOpacity="opacity-10" className="pt-20 pb-12 md:pt-28 md:pb-24 w-full">
         <div className="mx-auto max-w-7xl px-6 w-full flex flex-col lg:flex-row items-center lg:items-start lg:justify-between">
           {/* Left Column: Copy & CTAs */}
           <div className="w-full lg:w-[55%] text-center lg:text-left flex flex-col items-center lg:items-start">

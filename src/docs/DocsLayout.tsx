@@ -13,7 +13,7 @@ import { Footer } from '../showroom/sections/Footer'
 
 export const DocsLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="min-h-screen flex flex-col bg-(--lithos-bg) text-(--lithos-text)">
+    <div className="min-h-screen flex flex-col bg-(--lithos-strata) text-(--lithos-text)">
       <Navbar />
 
       <div className="flex-1 w-full max-w-screen-2xl mx-auto grid grid-cols-12 pt-24 items-start">

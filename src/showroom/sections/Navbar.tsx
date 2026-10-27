@@ -26,7 +26,7 @@ export const Navbar = () => {
   return (
     <>
       <header
-        className="fixed top-0 z-50 w-full border-b-2 border-(--lithos-border) bg-(--lithos-surface)"
+        className="fixed top-0 z-50 w-full bg-(--lithos-strata)"
         style={{ paddingRight: 'var(--removed-scrollbar-width, 0px)' }}
       >
         {/* - Fixed rail: the 4px bottom border marks the top boundary of the app. */}
@@ -92,7 +92,7 @@ export const Navbar = () => {
 
       {/* - Full-Screen Mobile Overlay */}
       {isMenuOpen && (
-        <nav className="fixed inset-0 z-40 pt-32 pb-6 px-6 bg-(--lithos-surface) overflow-y-auto flex flex-col justify-start lg:hidden">
+        <nav className="fixed inset-0 z-40 pt-32 pb-6 px-6 bg-(--lithos-strata) overflow-y-auto flex flex-col justify-start lg:hidden">
           {LITHOS_UI_LINKS.map((link) => (
             <Link
               key={link.label}

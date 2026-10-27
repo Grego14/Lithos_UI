@@ -89,7 +89,7 @@ export const PreviewBlock = ({
       )}
     >
       {/* 2. Control Bar inside container */}
-      <div className="flex flex-wrap items-center justify-between p-4 border-b-2 border-(--lithos-border) bg-(--lithos-surface)">
+      <div className="flex flex-wrap items-center justify-between p-4 border-b-2 border-(--lithos-border) bg-(--lithos-strata)">
         <div className="flex flex-wrap items-center">
           <div className="flex items-center mr-4">
             <Button

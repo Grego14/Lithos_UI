@@ -32,8 +32,8 @@ const faqs = [
 export const Faq = () => (
   <>
     <Navbar />
-    <main className="pt-24 min-h-screen bg-(--lithos-bg) text-(--lithos-text)">
-      <section className="py-24">
+    <main className="min-h-screen bg-(--lithos-strata) text-(--lithos-text)">
+      <section className="pt-32 pb-24 bg-(--lithos-strata)">
         <div className="mx-auto max-w-4xl px-6">
           <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-16 text-(--lithos-text)">
             Frequently Asked
@@ -61,8 +61,6 @@ export const Faq = () => (
         </div>
       </section>
     </main>
-    <div className="mt-24">
-      <Footer />
-    </div>
+    <Footer />
   </>
 )

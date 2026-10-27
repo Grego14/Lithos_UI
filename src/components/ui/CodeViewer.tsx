@@ -92,7 +92,7 @@ export const CodeViewer = ({
 
   return (
     <div className={classes}>
-      <div className="border-b-2 border-(--lithos-border) bg-(--lithos-surface) px-4 py-2 flex justify-between items-center relative">
+      <div className="border-b-2 border-(--lithos-border) bg-(--lithos-strata) px-4 py-2 flex justify-between items-center relative">
         <div className="flex items-center z-10">
           {showLanguage ? (
             <p className="text-xs font-black uppercase tracking-widest text-(--lithos-text) font-code">{language}</p>
