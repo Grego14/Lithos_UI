@@ -1,5 +1,4 @@
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
-import { CodeViewer } from '../../components/ui/CodeViewer'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { toggleProps } from '../propsData/toggle'
 import { SetupGuide } from '../layout/SetupGuide'
