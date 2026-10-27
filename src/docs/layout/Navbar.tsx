@@ -64,7 +64,7 @@ export const DocsNavbar = () => {
 
   return (
     <header
-      className="fixed top-0 z-50 w-full border-b-2 border-(--lithos-border) bg-(--lithos-surface)"
+      className="fixed top-0 z-50 w-full bg-(--lithos-strata)"
       style={{ paddingRight: 'var(--removed-scrollbar-width, 0px)' }}
     >
       <div className="mx-auto flex max-w-screen-2xl items-center justify-between px-6 py-1.5 md:py-2">
@@ -125,7 +125,7 @@ export const DocsNavbar = () => {
 
       {/* - Full-Screen Scrollable Mobile Accordion Overlay */}
       {isMenuOpen && (
-        <nav className="fixed inset-0 z-[-1] pt-32 pb-12 px-6 bg-(--lithos-surface) overflow-y-auto flex flex-col justify-start lg:hidden">
+        <nav className="fixed inset-0 z-[-1] pt-32 pb-12 px-6 bg-(--lithos-strata) overflow-y-auto flex flex-col justify-start lg:hidden">
           {/* Main Top-level Links */}
           <div className="mb-8 border-b-2 border-(--lithos-border) pb-4">
             {LITHOS_UI_LINKS.map((link) => (

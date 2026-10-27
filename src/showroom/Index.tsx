@@ -12,15 +12,15 @@ import { Footer } from './sections/Footer'
  * Showroom Component - Landing Page UI Composition
  *
  * Neo-brutalist zero-gap architectural layout:
- * - pt-24 (main): offsets fixed 96px Navbar.
- * - Slabs stack seamlessly with alternating surface contrast and 2px hard dividers.
+ * - Full-bleed Hero extends under fixed Navbar with seamless strata background.
+ * - Slabs stack seamlessly with unified strata atmosphere and 2px hard dividers.
  */
 export const Showroom = () => {
   return (
     <>
       <Navbar />
 
-      <main className="pt-24">
+      <main className="bg-(--lithos-strata)">
         {/* Viewport Hero Anchor */}
         <Hero />
 
