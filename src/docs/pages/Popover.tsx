@@ -24,7 +24,7 @@ const defaultCode = {
   manualPath: {
     others: popoverPath,
     Button: '../../components/ui/Button',
-  }
+  },
 }
 
 const componentNames = ['Popover', 'PopoverTrigger', 'PopoverContent', 'PopoverClose']
