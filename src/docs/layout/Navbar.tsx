@@ -5,6 +5,7 @@ import { IconMenu } from '../../components/ui/icons/IconMenu'
 import { IconClose } from '../../components/ui/icons/IconClose'
 import { IconMoon } from '../../components/ui/icons/IconMoon'
 import { IconSun } from '../../components/ui/icons/IconSun'
+import { IconGithub } from '../../components/ui/icons/IconGithub'
 import { LITHOS_UI_LINKS } from '../../core/lithos.utils'
 import { useTheme } from '../../core/hooks/useTheme'
 import { LithosLogo } from '../../components/ui/LithosLogo'
@@ -99,8 +100,14 @@ export const DocsNavbar = () => {
               {isDarkMode ? <IconSun size={18} /> : <IconMoon size={18} />}
             </Button>
           </div>
-          <Button variant="primary" onClick={() => window.open('https://github.com/lithosui/Lithos_UI', '_blank')}>
-            GitHub
+          <Button
+            variant="primary"
+            onClick={() => window.open('https://github.com/lithosui/Lithos_UI', '_blank')}
+            aria-label="GitHub Repository"
+            title="GitHub Repository"
+            className="p-2 flex items-center justify-center"
+          >
+            <IconGithub size={18} />
           </Button>
         </div>
 
@@ -174,8 +181,11 @@ export const DocsNavbar = () => {
                 setIsMenuOpen(false)
                 window.open('https://github.com/lithosui/Lithos_UI', '_blank')
               }}
+              aria-label="GitHub Repository"
+              title="GitHub Repository"
+              className="p-2 flex items-center justify-center"
             >
-              GitHub
+              <IconGithub size={18} />
             </Button>
             <div className="flex items-center">
               <Button
