@@ -3,8 +3,9 @@ import { Typography } from '../../components/ui/Typography'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
 import { typographyPropsData } from '../propsData/typography'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Typography.tsx'
+const githubUrl = getComponentGithubUrl('typography')
 const manualPath = '../../components/ui/Typography'
 
 const articleSnippetCode = {

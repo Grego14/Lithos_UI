@@ -4,8 +4,9 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../components/ui/Ta
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { tabsPropsData, tabsListPropsData, tabsTriggerPropsData, tabsContentPropsData } from '../propsData/tabs'
 import { SetupGuide } from '../layout/SetupGuide'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Tabs.tsx'
+const githubUrl = getComponentGithubUrl('tabs')
 
 export const TabsDoc = () => {
   const defaultCode = {

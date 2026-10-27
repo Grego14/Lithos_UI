@@ -3,6 +3,9 @@ import { PropsAccordion } from '../../components/ui/PropsTable'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 import { SetupGuide } from '../layout/SetupGuide'
 import { skeletonPropsData, skeletonTextPropsData } from '../propsData/skeleton'
+import { getComponentGithubUrl } from '../utils/githubUrl'
+
+const githubUrl = getComponentGithubUrl('skeleton')
 import { SkeletonAnimations } from '../examples/skeleton/Animations'
 import { SkeletonCardExample } from '../examples/skeleton/Card'
 import { SkeletonListExample } from '../examples/skeleton/List'
@@ -73,28 +76,31 @@ export const SkeletonDoc = () => (
         <code>{'animation={false}'}</code> to disable it. Set <code>{'respectReducedMotion={true}'}</code> to follow the
         OS/browser reduced-motion preference. Forced colors disable both animations.
       </p>
-      <PreviewBlock code={sourceExample(animationSource, ['Skeleton'])}>
+      <PreviewBlock code={sourceExample(animationSource, ['Skeleton'])} githubUrl={githubUrl}>
         <SkeletonAnimations />
       </PreviewBlock>
       <h3 id="component-card" className={subheading}>
         Card
       </h3>
       <p className={paragraph}>Use rectangular and text skeletons for a card's image, title, and description.</p>
-      <PreviewBlock code={sourceExample(cardSource, ['Skeleton', 'SkeletonText', 'Card', 'CardContent'])}>
+      <PreviewBlock
+        code={sourceExample(cardSource, ['Skeleton', 'SkeletonText', 'Card', 'CardContent'])}
+        githubUrl={githubUrl}
+      >
         <SkeletonCardExample />
       </PreviewBlock>
       <h3 id="component-list" className={subheading}>
         List
       </h3>
       <p className={paragraph}>Combine image and text skeletons into repeating list rows.</p>
-      <PreviewBlock code={sourceExample(listSource, ['Skeleton', 'SkeletonText'])}>
+      <PreviewBlock code={sourceExample(listSource, ['Skeleton', 'SkeletonText'])} githubUrl={githubUrl}>
         <SkeletonListExample />
       </PreviewBlock>
       <h3 id="component-avatar" className={subheading}>
         Avatar
       </h3>
       <p className={paragraph}>Use circular skeletons to reserve space for avatars in different sizes.</p>
-      <PreviewBlock code={sourceExample(avatarSource, ['Skeleton'])}>
+      <PreviewBlock code={sourceExample(avatarSource, ['Skeleton'])} githubUrl={githubUrl}>
         <SkeletonAvatarExample />
       </PreviewBlock>
     </section>

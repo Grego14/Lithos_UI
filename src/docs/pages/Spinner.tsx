@@ -27,8 +27,9 @@ import { SpinnerRotation } from '../examples/spinner/rotation'
 import rotationSource from '../examples/spinner/rotation.tsx?raw'
 import { SpinnerIntegration } from '../examples/spinner/integration'
 import integrationSource from '../examples/spinner/integration.tsx?raw'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Spinner.tsx'
+const githubUrl = getComponentGithubUrl('spinner')
 const spinnerPath = '../../components/ui/Spinner'
 
 const sourceCode = (

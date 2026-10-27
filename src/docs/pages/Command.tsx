@@ -18,8 +18,9 @@ import { ShortcutsCommandExample } from '../examples/command/shortcuts'
 import shortcutsSource from '../examples/command/shortcuts.tsx?raw'
 import { CommandDialogExample } from '../examples/command/dialog'
 import dialogSource from '../examples/command/dialog.tsx?raw'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Command.tsx'
+const githubUrl = getComponentGithubUrl('command')
 const commandPath = '../../components/ui/Command'
 const commandCode = (source: string, componentNames: string[], manualPath: ManualPath = commandPath) => ({
   body: removeImports(source),

@@ -1,6 +1,7 @@
 import { PreviewBlock as PreviewBlockUI } from '../../components/ui/PreviewBlock'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/PreviewBlock.tsx'
+const githubUrl = getComponentGithubUrl('preview-block')
 
 export const PreviewBlockDoc = () => {
   const innerCode = `export const InnerExample = () => {

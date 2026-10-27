@@ -25,8 +25,9 @@ import { CheckboxGroupExample } from '../examples/checkbox/group'
 import groupSource from '../examples/checkbox/group.tsx?raw'
 import { HorizontalCheckboxGroupExample } from '../examples/checkbox/horizontalGroup'
 import horizontalGroupSource from '../examples/checkbox/horizontalGroup.tsx?raw'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Checkbox.tsx'
+const githubUrl = getComponentGithubUrl('checkbox')
 const manualPath = {
   Checkbox: '../../components/ui/Checkbox',
   PlainCheckbox: '../../components/ui/Checkbox',

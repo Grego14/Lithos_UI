@@ -31,6 +31,7 @@ import { Pagination } from '../components/ui/Pagination'
 import { Popover, PopoverTrigger, PopoverContent } from '../components/ui/Popover'
 import { Select } from '../components/ui/Select'
 import { Skeleton, SkeletonText } from '../components/ui/Skeleton'
+import { Slider } from '../components/ui/Slider'
 import { Spinner } from '../components/ui/Spinner'
 import { IconClose } from '../components/ui/icons/IconClose'
 import { Input } from '../components/ui/Input'
@@ -436,6 +437,11 @@ const componentsList = [
         <SkeletonText lines={2} className="text-xs" />
       </div>
     ),
+  },
+  {
+    name: 'Slider',
+    to: '/docs/slider',
+    preview: <Slider size="sm" defaultValue={40} aria-label="Example volume" className="max-w-48" />,
   },
   {
     name: 'Spinner',

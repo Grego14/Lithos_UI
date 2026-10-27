@@ -32,8 +32,9 @@ import responsiveSource from '../examples/drawer/responsive.tsx?raw'
 import { PlacementsDrawerExample } from '../examples/drawer/placements'
 import placementsSource from '../examples/drawer/placements.tsx?raw'
 import { colors } from '../../utils/colors'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Drawer.tsx'
+const githubUrl = getComponentGithubUrl('drawer')
 const drawerPath = '../../components/ui/Drawer'
 const drawerCode = (
   source: string,
@@ -58,7 +59,7 @@ const PlacementsPreview = () => {
 
   return (
     <>
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap -m-1.5">
         {positions.map((position) => (
           <Button
             key={position}
@@ -66,7 +67,7 @@ const PlacementsPreview = () => {
               setPlacement(position)
               setOpen(true)
             }}
-            className="capitalize"
+            className="capitalize m-1.5"
           >
             {position}
           </Button>

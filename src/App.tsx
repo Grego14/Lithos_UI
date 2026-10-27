@@ -42,6 +42,7 @@ import { PopoverPage } from './docs/pages/Popover'
 import { NotFound } from './showroom/sections/NotFound'
 import { SelectDoc } from './docs/pages/Select'
 import { SkeletonDoc } from './docs/pages/Skeleton'
+import { SliderDoc } from './docs/pages/Slider'
 import { SpinnerDoc } from './docs/pages/Spinner'
 import { Showroom } from './showroom/Index'
 import { ToastDoc } from './docs/pages/Toast'
@@ -53,6 +54,7 @@ import { TypographyDoc } from './docs/pages/Typography'
 import { SidebarDoc } from './docs/pages/Sidebar'
 import { ThemeBuilder } from './pages/ThemeBuilder'
 import { TooltipDoc } from './docs/pages/Tooltip'
+import { MiniThemeEngine } from './components/ui/MiniThemeEngine'
 import { useEffect } from 'react'
 
 const ScrollToTop = () => {
@@ -100,6 +102,7 @@ const renderDocRoutes = () => {
     { path: 'select', component: SelectDoc },
     { path: 'sidebar', component: SidebarDoc },
     { path: 'skeleton', component: SkeletonDoc },
+    { path: 'slider', component: SliderDoc },
     { path: 'spinner', component: SpinnerDoc },
     { path: 'toast', component: ToastDoc },
     { path: 'toggle', component: ToggleDoc },
@@ -169,6 +172,7 @@ const App = () => {
             {/* Structural Failure Catch-all */}
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <MiniThemeEngine />
         </BrowserRouter>
       </div>
     </ThemeProvider>

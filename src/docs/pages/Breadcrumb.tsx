@@ -11,8 +11,9 @@ import { IconBreadcrumbExample } from '../examples/breadcrumb/icons'
 import iconsSource from '../examples/breadcrumb/icons.tsx?raw'
 import { CustomSeparatorBreadcrumbExample } from '../examples/breadcrumb/customSeparator'
 import customSeparatorSource from '../examples/breadcrumb/customSeparator.tsx?raw'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Breadcrumb.tsx'
+const githubUrl = getComponentGithubUrl('breadcrumb')
 const manualPath = '../../components/ui/Breadcrumb'
 const breadcrumbCode = (source: string, componentNames: string[]) => ({
   body: removeImports(source),

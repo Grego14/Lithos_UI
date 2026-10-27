@@ -43,6 +43,7 @@ export const Select = ({
   children,
   multiple = false,
   label = undefined,
+  emptyMessage = 'No options available',
 }: SelectProps) => {
   const [uncontrolledValue, setUncontrolledValue] = useState<string | string[]>(() => {
     if (Array.isArray(defaultValue)) return defaultValue
@@ -185,6 +186,7 @@ export const Select = ({
           setSelectedIndex,
           registerElement,
           options,
+          emptyMessage,
         }}
       >
         {children ? (
@@ -201,7 +203,7 @@ export const Select = ({
               <IconChevronDown className="ml-2 shrink-0 opacity-60" />
             </SelectTrigger>
 
-            <SelectContent>
+            <SelectContent emptyMessage={emptyMessage}>
               {options?.map((opt, i) => (
                 <SelectItem key={opt.value} value={opt.value} index={i} disabled={!!opt.disabled}>
                   {opt.icon && <span className="mr-2 shrink-0">{opt.icon}</span>}

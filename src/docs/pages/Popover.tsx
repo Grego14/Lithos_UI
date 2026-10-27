@@ -13,16 +13,21 @@ import { DocExample, DocHeader, DocHeading, DocLeadText, DocList, DocSection, Co
 import { DefaultPopover } from '../examples/popover/default'
 import defaultSource from '../examples/popover/default.tsx?raw'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Popover.tsx'
+import { getComponentGithubUrl } from '../utils/githubUrl'
+
+const githubUrl = getComponentGithubUrl('popover')
 const popoverPath = '../../components/ui/Popover'
+
 const defaultCode = {
   body: removeImports(defaultSource),
   componentNames: ['Popover', 'PopoverTrigger', 'PopoverContent', 'PopoverClose', 'Button'],
   manualPath: {
     others: popoverPath,
     Button: '../../components/ui/Button',
-  },
+  }
 }
+
+const componentNames = ['Popover', 'PopoverTrigger', 'PopoverContent', 'PopoverClose']
 
 export const PopoverPage = () => (
   <div className="max-w-5xl mx-auto px-6">
@@ -42,7 +47,7 @@ export const PopoverPage = () => (
       <DocHeading id="installation">Installation</DocHeading>
       <SetupGuide
         slug="popover"
-        componentNames={['Popover', 'PopoverTrigger', 'PopoverContent', 'PopoverClose']}
+        componentNames={componentNames}
         manualPath={popoverPath}
         requires={['@floating-ui/react', 'utils/cn.ts', 'components/ui/Button.tsx']}
       />

@@ -28,8 +28,9 @@ import { VerticalButtonGroupExample } from '../examples/button/groupVertical'
 import groupVerticalSource from '../examples/button/groupVertical.tsx?raw'
 import { AttachedButtonGroupExample } from '../examples/button/groupAttached'
 import groupAttachedSource from '../examples/button/groupAttached.tsx?raw'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Button.tsx'
+const githubUrl = getComponentGithubUrl('button')
 const manualPath = '../../components/ui/Button'
 const buttonCode = (source: string, componentNames = ['Button']) => ({
   body: removeImports(source),

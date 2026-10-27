@@ -31,8 +31,11 @@ import { InContextKbd } from '../examples/kbd/inContext'
 import inContextSource from '../examples/kbd/inContext.tsx?raw'
 import customColorSource from '../examples/kbd/customColor.tsx?raw'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Kbd.tsx'
+import { getComponentGithubUrl } from '../utils/githubUrl'
+
+const githubUrl = getComponentGithubUrl('kbd')
 const kbdPath = '../../components/ui/Kbd'
+
 const kbdCode = (source: string, componentNames: string[], manualPath: ManualPath = kbdPath) => ({
   body: removeImports(source),
   componentNames,

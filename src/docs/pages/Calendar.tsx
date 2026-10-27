@@ -29,8 +29,9 @@ import { ControlledCalendar } from '../examples/calendar/controlled'
 import ControlledCalendarSource from '../examples/calendar/controlled?raw'
 
 import { DocHeader, DocCallout, DocHeading, DocExample, DocLeadText, DocList, DocSection } from '../layout/DocPage'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Calendar.tsx'
+const githubUrl = getComponentGithubUrl('calendar')
 const componentNames = ['Calendar']
 const manualPath = '../../components/ui/Calendar'
 

@@ -2,6 +2,7 @@ import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
 import { paginationPropsData } from '../propsData/pagination'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 import { DocExample, DocHeader, DocHeading, DocList, DocSection } from '../layout/DocPage'
 import { removeImports } from '../examples/removeImports'
 import { BasicPagination } from '../examples/pagination/BasicPagination'
@@ -32,7 +33,7 @@ const paginationCode = (source: string, usesState = false) => ({
   manualPath,
 })
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Pagination.tsx'
+const githubUrl = getComponentGithubUrl('pagination')
 
 export const PaginationDoc = () => (
   <div className="max-w-5xl mx-auto px-6 min-w-0">

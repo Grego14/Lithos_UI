@@ -30,7 +30,14 @@ const TooltipProvider = ({ arrowRef, children }: TooltipProviderProps) => {
   return <TooltipContext.Provider value={value}>{children}</TooltipContext.Provider>
 }
 
-const TooltipRoot = ({ children, offset: consumerOffset = 4, placement = 'top', ...rest }: TooltipProps) => {
+const TooltipRoot = ({
+  children,
+  offset: consumerOffset = 4,
+  placement = 'top',
+  click = false,
+  dismiss = { referencePress: true },
+  ...rest
+}: TooltipProps) => {
   const arrowRef = useRef<SVGSVGElement | null>(null)
 
   const tooltipMiddlewares = useMemo(
@@ -44,6 +51,8 @@ const TooltipRoot = ({ children, offset: consumerOffset = 4, placement = 'top', 
       offset={consumerOffset + 8}
       matchTriggerWidth={false}
       middlewares={tooltipMiddlewares}
+      click={click}
+      dismiss={dismiss}
       {...rest}
       hover={{ move: false }}
       role="tooltip"
