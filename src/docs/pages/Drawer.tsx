@@ -59,7 +59,7 @@ const PlacementsPreview = () => {
 
   return (
     <>
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap -m-1.5">
         {positions.map((position) => (
           <Button
             key={position}
@@ -67,7 +67,7 @@ const PlacementsPreview = () => {
               setPlacement(position)
               setOpen(true)
             }}
-            className="capitalize"
+            className="capitalize m-1.5"
           >
             {position}
           </Button>
