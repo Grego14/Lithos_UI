@@ -65,12 +65,12 @@ export const ThemeBuilder = () => {
     <>
       <Navbar />
 
-      <main className="min-h-screen lg:h-screen pt-[82px] flex flex-col overflow-y-auto lg:overflow-hidden bg-(--lithos-bg) text-(--lithos-text) antialiased">
+      <main className="min-h-screen lg:h-screen pt-14 flex flex-col overflow-y-auto lg:overflow-hidden bg-(--lithos-strata) text-(--lithos-text) antialiased">
         {/* Strict monolithic flex container for exact height sharing and sharp border intersections */}
         <div className="flex-1 min-h-0 flex flex-col lg:flex-row w-full items-stretch">
           {/* PANEL 1: CONFIGURATION */}
           <div className="flex flex-col w-full lg:w-[280px] h-auto lg:h-full overflow-hidden bg-(--lithos-surface) lg:border-r-2 border-(--lithos-border) text-(--lithos-text) shrink-0">
-            <div className="h-16 border-b-2 border-(--lithos-border) bg-(--lithos-surface) flex items-center justify-between shrink-0 px-5">
+            <div className="h-16 border-b-2 border-(--lithos-border) bg-(--lithos-strata) flex items-center justify-between shrink-0 px-5">
               <h2 className="text-sm tracking-widest uppercase mt-0.5 font-bold font-mono">Configuration</h2>
             </div>
 
@@ -206,7 +206,7 @@ export const ThemeBuilder = () => {
 
           {/* PANEL 2: DESIGN TOKENS */}
           <div className="flex flex-col w-full lg:w-[340px] h-auto lg:h-full overflow-hidden bg-(--lithos-surface) border-b lg:border-b-0 lg:border-r-2 border-(--lithos-border) text-(--lithos-text) shrink-0">
-            <div className="h-16 border-b-2 border-(--lithos-border) bg-(--lithos-surface) flex items-center justify-between shrink-0 px-5">
+            <div className="h-16 border-b-2 border-(--lithos-border) bg-(--lithos-strata) flex items-center justify-between shrink-0 px-5">
               <h2 className="text-sm tracking-widest uppercase mt-0.5 font-bold font-mono">Design Tokens</h2>
             </div>
 
@@ -248,7 +248,7 @@ export const ThemeBuilder = () => {
           <div className="flex flex-col min-w-0 flex-1 h-auto min-h-[600px] lg:min-h-0 lg:h-full overflow-hidden bg-(--lithos-surface) font-sans text-(--lithos-text)">
             {/* Stage Header */}
             {/* Reset */}
-            <div className="min-h-[64px] px-4 md:px-6 pt-4 md:pt-0 border-b-2 border-(--lithos-border) bg-(--lithos-surface) flex flex-col md:flex-row items-center md:items-end justify-between space-y-4 md:space-y-0">
+            <div className="min-h-[64px] px-4 md:px-6 pt-4 md:pt-0 border-b-2 border-(--lithos-border) bg-(--lithos-strata) flex flex-col md:flex-row items-center md:items-end justify-between space-y-4 md:space-y-0">
               <Tabs
                 variant="underline"
                 value={stageTab}
@@ -315,7 +315,7 @@ export const ThemeBuilder = () => {
             </div>
 
             {/* Stage Body */}
-            <div className="flex-1 p-4 lg:p-10 relative overflow-auto flex justify-center bg-(--lithos-bg) bg-[radial-gradient(var(--lithos-muted)_1.5px,transparent_1.5px)] bg-size-[16px_16px]">
+            <div className="flex-1 p-4 lg:p-10 relative overflow-auto flex justify-center bg-(--lithos-strata) bg-[radial-gradient(var(--lithos-muted)_1.5px,transparent_1.5px)] bg-size-[16px_16px]">
               {stageTab === 'preview' && (
                 <div
                   className={`h-full transition-all duration-300 rounded-none overflow-hidden border-4 border-(--lithos-border) bg-(--lithos-surface) ${previewMode === 'dark' ? 'obsidian' : ''}`}
