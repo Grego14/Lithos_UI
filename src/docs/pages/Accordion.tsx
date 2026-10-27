@@ -15,8 +15,9 @@ import DefaultGrouppedSource from '../examples/accordion/groupedDefault?raw'
 
 import { GroupedMultiple } from '../examples/accordion/groupedMultiple'
 import GroupedMultipleSource from '../examples/accordion/groupedMultiple?raw'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Accordion.tsx'
+const githubUrl = getComponentGithubUrl('accordion')
 const manualPath = '../../components/ui/Accordion'
 
 const usageCode = {

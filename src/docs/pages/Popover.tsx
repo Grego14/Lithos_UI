@@ -11,8 +11,9 @@ import {
   popoverContentPropsData,
   popoverClosePropsData,
 } from '../propsData/popover'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Popover.tsx'
+const githubUrl = getComponentGithubUrl('popover')
 const componentNames = ['Popover', 'PopoverTrigger', 'PopoverContent', 'PopoverClose']
 const manualPath = '../../components/ui/Popover'
 

@@ -9,8 +9,9 @@ import variantsSource from '../examples/badge/variants.tsx?raw'
 import { BadgeSizesExample } from '../examples/badge/sizes'
 import sizesSource from '../examples/badge/sizes.tsx?raw'
 import { CustomColorBadgeExample } from '../examples/badge/customColor'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Badge.tsx'
+const githubUrl = getComponentGithubUrl('badge')
 const badgeCode = (source: string) => ({
   body: removeImports(source),
   componentNames: ['Badge'],

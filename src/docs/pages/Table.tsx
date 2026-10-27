@@ -3,6 +3,9 @@ import { PropsAccordion } from '../../components/ui/PropsTable'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 import { SetupGuide } from '../layout/SetupGuide'
 import { tableContainerPropsData, tablePartsPropsData, tablePropsData } from '../propsData/table'
+import { getComponentGithubUrl } from '../utils/githubUrl'
+
+const githubUrl = getComponentGithubUrl('table')
 
 import { BasicTable } from '../examples/table/BasicTable'
 import BasicTableSource from '../examples/table/BasicTable?raw'
@@ -129,7 +132,7 @@ export const TableDoc = () => (
         </>
       }
     >
-      <PreviewBlock code={tableExampleCode(BasicTableSource)}>
+      <PreviewBlock code={tableExampleCode(BasicTableSource)} githubUrl={githubUrl}>
         <BasicTable />
       </PreviewBlock>
     </DocExample>
@@ -145,7 +148,7 @@ export const TableDoc = () => (
         </>
       }
     >
-      <PreviewBlock code={tableExampleCode(AccentTableSource)}>
+      <PreviewBlock code={tableExampleCode(AccentTableSource)} githubUrl={githubUrl}>
         <AccentTable />
       </PreviewBlock>
     </DocExample>
@@ -160,7 +163,7 @@ export const TableDoc = () => (
         </>
       }
     >
-      <PreviewBlock code={tableExampleCode(TableStatesSource)}>
+      <PreviewBlock code={tableExampleCode(TableStatesSource)} githubUrl={githubUrl}>
         <TableStates />
       </PreviewBlock>
     </DocExample>
@@ -175,7 +178,7 @@ export const TableDoc = () => (
         </>
       }
     >
-      <PreviewBlock code={tableExampleCode(sortableSource)}>
+      <PreviewBlock code={tableExampleCode(sortableSource)} githubUrl={githubUrl}>
         <SortableTable />
       </PreviewBlock>
     </DocExample>
@@ -190,7 +193,7 @@ export const TableDoc = () => (
         </>
       }
     >
-      <PreviewBlock code={tableExampleCode(GroupedHeadersTableSource)}>
+      <PreviewBlock code={tableExampleCode(GroupedHeadersTableSource)} githubUrl={githubUrl}>
         <GroupedHeadersTable />
       </PreviewBlock>
     </DocExample>
@@ -205,7 +208,7 @@ export const TableDoc = () => (
         </>
       }
     >
-      <PreviewBlock code={tableExampleCode(ResponsiveTableSource)}>
+      <PreviewBlock code={tableExampleCode(ResponsiveTableSource)} githubUrl={githubUrl}>
         <ResponsiveTable />
       </PreviewBlock>
     </DocExample>
@@ -223,7 +226,7 @@ export const TableDoc = () => (
         </>
       }
     >
-      <PreviewBlock code={tableExampleCode(hookSource, actionsSource, BulkActionsTableSource)}>
+      <PreviewBlock code={tableExampleCode(hookSource, actionsSource, BulkActionsTableSource)} githubUrl={githubUrl}>
         <BulkActionsTable />
       </PreviewBlock>
     </DocExample>
@@ -239,7 +242,7 @@ export const TableDoc = () => (
         </>
       }
     >
-      <PreviewBlock code={tableExampleCode(hookSource, actionsSource, RowActionsTableSource)}>
+      <PreviewBlock code={tableExampleCode(hookSource, actionsSource, RowActionsTableSource)} githubUrl={githubUrl}>
         <RowActionsTable />
       </PreviewBlock>
     </DocExample>
@@ -254,7 +257,10 @@ export const TableDoc = () => (
         </>
       }
     >
-      <PreviewBlock code={tableExampleCode(hookSource, actionsSource, DropdownActionsTableSource)}>
+      <PreviewBlock
+        code={tableExampleCode(hookSource, actionsSource, DropdownActionsTableSource)}
+        githubUrl={githubUrl}
+      >
         <DropdownActionsTable />
       </PreviewBlock>
     </DocExample>

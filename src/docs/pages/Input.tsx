@@ -37,8 +37,9 @@ import { InputGroupExample } from '../examples/input/group'
 import groupSource from '../examples/input/group.tsx?raw'
 import { PasswordInputGroupExample } from '../examples/input/groupPassword'
 import groupPasswordSource from '../examples/input/groupPassword.tsx?raw'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Input.tsx'
+const githubUrl = getComponentGithubUrl('input')
 const inputPath = '../../components/ui/Input'
 const inputCode = (
   source: string,

@@ -22,8 +22,9 @@ import { NoCloseDialogExample } from '../examples/dialog/noClose'
 import noCloseSource from '../examples/dialog/noClose.tsx?raw'
 import { CustomDialogExample } from '../examples/dialog/custom'
 import customSource from '../examples/dialog/custom.tsx?raw'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Dialog.tsx'
+const githubUrl = getComponentGithubUrl('dialog')
 const dialogPath = '../../components/ui/Dialog'
 const dialogCode = (source: string, componentNames: string[], manualPath: Record<string, string | string[]> = {}) => ({
   body: removeImports(source),

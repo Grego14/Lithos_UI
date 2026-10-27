@@ -21,8 +21,9 @@ import {
 } from '../propsData/select'
 
 import { colors } from '../../utils/colors'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Select.tsx'
+const githubUrl = getComponentGithubUrl('select')
 const simpleLayoutCode = {
   body: removeImports(basicSource),
   componentNames: ['Select'],

@@ -1,5 +1,6 @@
 import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { CodeViewer } from '../../components/ui/CodeViewer'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
 // should this file be removed?
 
@@ -71,10 +72,7 @@ export const CodeViewerDoc = () => {
 
       {/* Enforcing structural zero-gap compliance using standard margins */}
       <div className="mt-8 mb-16">
-        <PreviewBlock
-          code={usageCode}
-          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/CodeViewer.tsx"
-        >
+        <PreviewBlock code={usageCode} githubUrl={getComponentGithubUrl('code-viewer')}>
           <CodeViewer code={sampleCode} language="tsx" showLanguage={false} className="mb-0" />
         </PreviewBlock>
       </div>

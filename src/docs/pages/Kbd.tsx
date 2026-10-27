@@ -8,8 +8,9 @@ import { InputGroup, InputGroupInput } from '../../components/ui/Input'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { kbdPropsData, kbdGroupPropsData } from '../propsData/kbd'
 import { SetupGuide } from '../layout/SetupGuide'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Kbd.tsx'
+const githubUrl = getComponentGithubUrl('kbd')
 const KBD_PATH = '../../components/ui/Kbd'
 
 export const KbdDoc = () => {

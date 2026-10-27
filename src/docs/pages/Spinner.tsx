@@ -10,6 +10,9 @@ import { Alert } from '../../components/ui/Alert'
 import { useRef, useState } from 'react'
 import { colors } from '../../utils/colors'
 import { isHexColor } from '../../core/types'
+import { getComponentGithubUrl } from '../utils/githubUrl'
+
+const githubUrl = getComponentGithubUrl('spinner')
 
 export const SpinnerDoc = () => {
   const [customColor, setCustomColor] = useState('#f59e0b')
@@ -198,10 +201,7 @@ export const SpinnerDoc = () => {
         or alerts.
       </p>
 
-      <PreviewBlock
-        code={usageCode}
-        githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Spinner.tsx"
-      >
+      <PreviewBlock code={usageCode} githubUrl={githubUrl}>
         <div className="flex flex-col items-center p-8">
           <div className="flex items-center justify-center space-x-8">
             <Spinner size={32} variant="default" />
@@ -241,10 +241,7 @@ export const SpinnerDoc = () => {
       </p>
 
       <div className="mb-12">
-        <PreviewBlock
-          code={sizesCode}
-          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Spinner.tsx"
-        >
+        <PreviewBlock code={sizesCode} githubUrl={githubUrl}>
           <div className="flex flex-col items-center p-8">
             <div className="flex items-end justify-center space-x-8">
               <div className="flex flex-col items-center space-y-2">
@@ -277,10 +274,7 @@ export const SpinnerDoc = () => {
       </p>
 
       <div className="mb-12">
-        <PreviewBlock
-          code={rotationCode}
-          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Spinner.tsx"
-        >
+        <PreviewBlock code={rotationCode} githubUrl={githubUrl}>
           <div className="flex flex-col items-center p-8">
             <div className="flex items-end justify-center space-x-12">
               <div className="flex flex-col items-center space-y-2">
@@ -305,10 +299,7 @@ export const SpinnerDoc = () => {
       </p>
 
       <div className="mb-12">
-        <PreviewBlock
-          code={iconsCode}
-          githubUrl="https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Spinner.tsx"
-        >
+        <PreviewBlock code={iconsCode} githubUrl={githubUrl}>
           <div className="flex flex-col items-center p-8">
             <div className="flex flex-wrap items-end justify-center -m-2 sm:-m-4">
               {[

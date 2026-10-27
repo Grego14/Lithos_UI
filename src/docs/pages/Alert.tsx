@@ -15,8 +15,9 @@ import noTitleSource from '../examples/alert/noTitle.tsx?raw'
 import { AlertActionsExample } from '../examples/alert/actions'
 import actionsSource from '../examples/alert/actions.tsx?raw'
 import { CustomColorAlertExample } from '../examples/alert/customColor'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Alert.tsx'
+const githubUrl = getComponentGithubUrl('alert')
 const alertCode = (source: string) => ({
   body: removeImports(source),
   componentNames: ['Alert'],

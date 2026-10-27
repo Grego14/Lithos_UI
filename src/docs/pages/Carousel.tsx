@@ -12,7 +12,6 @@ import {
   carouselControlsPropsData,
   useCarouselPropsData,
 } from '../propsData/carousel'
-import { colors } from '../../utils/colors'
 import { removeImports } from '../examples/removeImports'
 import { DocCallout, DocExample, DocHeader, DocHeading, DocLeadText, DocList, DocSection } from '../layout/DocPage'
 import { DefaultCarouselExample } from '../examples/carousel/default'
@@ -33,8 +32,10 @@ import { VerticalCarouselExample } from '../examples/carousel/vertical'
 import verticalSource from '../examples/carousel/vertical.tsx?raw'
 import { CustomLayoutCarouselExample } from '../examples/carousel/customLayout'
 import customLayoutSource from '../examples/carousel/customLayout.tsx?raw'
+import { getComponentGithubUrl } from '../utils/githubUrl'
+import { colors } from '../../utils/colors'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Carousel.tsx'
+const githubUrl = getComponentGithubUrl('carousel')
 const manualPath = '../../components/ui/Carousel'
 const carouselCode = (source: string, componentNames = ['Carousel', 'CarouselSlide']) => ({
   body: removeImports(source),

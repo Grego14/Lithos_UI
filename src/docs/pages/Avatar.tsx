@@ -13,8 +13,9 @@ import { TenUserAvatarGroupExample } from '../examples/avatar/groupTen'
 import groupTenSource from '../examples/avatar/groupTen.tsx?raw'
 import { FourteenUserAvatarGroupExample } from '../examples/avatar/groupFourteen'
 import groupFourteenSource from '../examples/avatar/groupFourteen.tsx?raw'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Avatar.tsx'
+const githubUrl = getComponentGithubUrl('avatar')
 const avatarCode = (source: string, componentNames: string[]) => ({
   body: removeImports(source),
   componentNames,

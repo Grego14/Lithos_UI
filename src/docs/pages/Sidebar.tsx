@@ -32,8 +32,9 @@ import {
   sidebarTitlePropsData,
   sidebarPropsData,
 } from '../propsData/sidebar'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/sidebar/Sidebar.tsx'
+const githubUrl = getComponentGithubUrl('sidebar')
 const sidebarPath = '../../components/ui/Sidebar'
 
 const componentNames = [

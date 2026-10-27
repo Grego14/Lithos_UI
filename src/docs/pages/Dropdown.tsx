@@ -25,8 +25,9 @@ import {
 } from '../propsData/dropdown'
 import { ProfileDropdownExample } from '../examples/dropdown/profile'
 import profileSource from '../examples/dropdown/profile.tsx?raw'
+import { getComponentGithubUrl } from '../utils/githubUrl'
 
-const githubUrl = 'https://github.com/lithosui/Lithos_UI/blob/main/src/components/ui/Dropdown.tsx'
+const githubUrl = getComponentGithubUrl('dropdown')
 const dropdownPath = '../../components/ui/Dropdown'
 const profileCode = {
   body: removeImports(profileSource),
