@@ -1,4 +1,5 @@
 import { CodeViewer } from '../../components/ui/CodeViewer'
+import { Code } from '../layout/DocPage'
 
 export const Installation = () => {
   return (
@@ -66,20 +67,21 @@ export const Installation = () => {
       <p className="mb-6 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
         If you are integrating into an existing project, you must define the Lithos UI physics engine and root tokens.
         The most robust way to do this is by importing our tokens directly inside your main CSS file (e.g.,{' '}
-        <code>index.css</code>), immediately after Tailwind.
+        <Code text="index.css" />
+        ), immediately after Tailwind.
       </p>
 
       <div className="border-l-4 border-red-500 pl-6 py-2 mb-8 bg-(--lithos-surface) p-4">
         <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
           <strong>CRITICAL: Tailwind v4 Layer Ordering & Cascade Rules</strong>
           <br />
-          You must import Tailwind <strong>before</strong> importing <code>lithos-ui/tokens.css</code> so that our{' '}
-          <code>@layer components</code> are prioritized correctly.
+          You must import Tailwind <strong>before</strong> importing <Code text="lithos-ui/tokens.css" /> so that our{' '}
+          <Code text="@layer components" /> are prioritized correctly.
           <br />
           <br />
           Additionally, importing the tokens directly inside your CSS file (rather than in your JS entrypoint) ensures
-          your custom <code>:root</code> overrides evaluate last. This allows them to successfully win the CSS cascade
-          without requiring specificity hacks like <code>html:root</code>.
+          your custom <Code text=":root" /> overrides evaluate last. This allows them to successfully win the CSS
+          cascade without requiring specificity hacks like <Code text="html:root" />.
         </p>
       </div>
 
@@ -100,8 +102,8 @@ export const Installation = () => {
       </h2>
       <p className="mb-4 text-base md:text-lg text-(--lithos-text) max-w-3xl font-body">
         Lithos UI relies entirely on native CSS custom properties for theming. To configure your aesthetic and enable
-        dark mode, use the <code>ThemeProvider</code> component. This provider automatically calculates YIQ contrast for
-        legibility and injects live overrides into the DOM.
+        dark mode, use the <Code text="ThemeProvider" /> component. This provider automatically calculates YIQ contrast
+        for legibility and injects live overrides into the DOM.
       </p>
 
       <CodeViewer
@@ -120,9 +122,9 @@ export function App() {
 
       <h3 className="text-xl font-bold tracking-tighter text-(--lithos-text) mt-8 mb-2">Obsidian Mode (Dark Mode)</h3>
       <p className="mb-6 text-sm md:text-base text-(--lithos-text) max-w-3xl font-body">
-        Dark mode is handled natively by the <code>toggleObsidian</code> function returned from the hook. It
+        Dark mode is handled natively by the <Code text="toggleObsidian" /> function returned from the hook. It
         automatically computes transparent contrast values (YIQ) for maximum legibility on dark backgrounds and persists
-        the user's preference to <code>localStorage</code>.
+        the user's preference to <Code text="localStorage" />.
       </p>
     </div>
   )

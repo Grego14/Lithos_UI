@@ -4,7 +4,16 @@ import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
 import { avatarPropsData, avatarGroupPropsData, avatarGroupCountPropsData } from '../propsData/avatar'
 import { removeImports } from '../examples/removeImports'
-import { DocCallout, DocExample, DocHeader, DocHeading, DocLeadText, DocList, DocSection } from '../layout/DocPage'
+import {
+  DocCallout,
+  DocExample,
+  DocHeader,
+  DocHeading,
+  DocLeadText,
+  DocList,
+  DocSection,
+  Code,
+} from '../layout/DocPage'
 import { AvatarVariantsExample } from '../examples/avatar/variants'
 import variantsSource from '../examples/avatar/variants.tsx?raw'
 import { AvatarSizesExample } from '../examples/avatar/sizes'
@@ -35,9 +44,9 @@ export const AvatarDoc = () => (
         when the image fails to load.
       </DocLeadText>
       <DocCallout>
-        Fallback initials are rendered whenever <code>src</code> is missing or the image fails to load — derived from{' '}
-        <code>alt</code>. A single-word <code>alt</code> renders one letter; two or more words render the first letter
-        of each of the first two words.
+        Fallback initials are rendered whenever <Code text="src" /> is missing or the image fails to load — derived from{' '}
+        <Code text="alt" />. A single-word <Code text="alt" /> renders one letter; two or more words render the first
+        letter of each of the first two words.
       </DocCallout>
     </DocSection>
 
@@ -58,10 +67,10 @@ export const AvatarDoc = () => (
       description={
         <>
           Use this to represent a user visually via an image or fallback initials. It renders a circular container with
-          a 2px border and shadow. If the <code>src</code> image fails to load or is missing, it automatically falls
-          back to rendering initials derived from the <code>alt</code> text (up to two letters). No explicit interaction
-          states exist unless wrapped in a button or link. Ensures accessibility by relying on the <code>alt</code>{' '}
-          attribute for screen readers, which must contain the user's real name.
+          a 2px border and shadow. If the <Code text="src" /> image fails to load or is missing, it automatically falls
+          back to rendering initials derived from the <Code text="alt" /> text (up to two letters). No explicit
+          interaction states exist unless wrapped in a button or link. Ensures accessibility by relying on the{' '}
+          <Code text="alt" /> attribute for screen readers, which must contain the user's real name.
         </>
       }
     >
@@ -75,11 +84,11 @@ export const AvatarDoc = () => (
       title="Sizes"
       description={
         <>
-          Use the <code>size</code> prop to scale the avatar appropriately for the surrounding layout. It
-          proportionately adjusts the circle diameter and the fallback initials font size (<code>sm</code> for dense
-          lists or table rows, <code>md</code> for standard UI, <code>lg</code> for profile headers). Visual layout and
-          border widths remain constant. Text limits are identical across sizes. Scaling does not affect structural
-          accessibility.
+          Use the <Code text="size" /> prop to scale the avatar appropriately for the surrounding layout. It
+          proportionately adjusts the circle diameter and the fallback initials font size (<Code text="sm" /> for dense
+          lists or table rows, <Code text="md" /> for standard UI, <Code text="lg" /> for profile headers). Visual
+          layout and border widths remain constant. Text limits are identical across sizes. Scaling does not affect
+          structural accessibility.
         </>
       }
     >
@@ -93,10 +102,11 @@ export const AvatarDoc = () => (
       title="Group"
       description={
         <>
-          Use <code>AvatarGroup</code> to display a collection of related avatars in a condensed, overlapping stack. It
-          renders up to a specified <code>max</code> number of avatars (default 4), automatically appending an{' '}
-          <code>AvatarGroupCount</code> indicator for any remaining items. The overflow count indicator renders as plain
-          text (e.g., <code>+2</code>), readable directly by assistive technologies without manual slicing.
+          Use <Code text="AvatarGroup" /> to display a collection of related avatars in a condensed, overlapping stack.
+          It renders up to a specified <Code text="max" /> number of avatars (default 4), automatically appending an{' '}
+          <Code text="AvatarGroupCount" /> indicator for any remaining items. The overflow count indicator renders as
+          plain text (e.g., <Code text="+2" />
+          ), readable directly by assistive technologies without manual slicing.
         </>
       }
     >
@@ -125,19 +135,19 @@ export const AvatarDoc = () => (
       <DocHeading id="accessibility">Accessibility</DocHeading>
       <DocList>
         <li>
-          The underlying <code>&lt;img&gt;</code> always carries the <code>alt</code> text passed to Avatar.
+          The underlying <Code text="<img>" /> always carries the <Code text="alt" /> text passed to Avatar.
         </li>
         <li>
-          When falling back to initials, the same <code>alt</code> text is the only accessible label — pass a real name,
-          not decorative text.
+          When falling back to initials, the same <Code text="alt" /> text is the only accessible label — pass a real
+          name, not decorative text.
         </li>
         <li>
-          <code>solid</code> variant's text color is computed via the YIQ engine to keep contrast against the accent
+          <Code text="solid" /> variant's text color is computed via the YIQ engine to keep contrast against the accent
           color.
         </li>
         <li>
-          <code>AvatarGroupCount</code> renders as plain text (<code>+N</code>), readable by screen readers with no
-          extra markup.
+          <Code text="AvatarGroupCount" /> renders as plain text (<Code text="+N" />
+          ), readable by screen readers with no extra markup.
         </li>
       </DocList>
     </DocSection>
@@ -145,8 +155,8 @@ export const AvatarDoc = () => (
     <DocSection>
       <DocHeading id="api">API Reference</DocHeading>
       <DocCallout className="mb-6">
-        Avatars intentionally ignore the global <code>--lithos-radius</code> token to remain perfectly circular by
-        design. You can still override this behavior manually via <code>className</code> if necessary.
+        Avatars intentionally ignore the global <Code text="--lithos-radius" /> token to remain perfectly circular by
+        design. You can still override this behavior manually via <Code text="className" /> if necessary.
       </DocCallout>
       <PropsAccordion title="Avatar Props" data={avatarPropsData} />
       <PropsAccordion title="AvatarGroupCount Props" data={avatarGroupCountPropsData} />

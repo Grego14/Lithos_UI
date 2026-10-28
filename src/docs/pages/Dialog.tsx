@@ -2,7 +2,16 @@ import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
-import { DocCallout, DocExample, DocHeader, DocHeading, DocLeadText, DocList, DocSection } from '../layout/DocPage'
+import {
+  DocCallout,
+  DocExample,
+  DocHeader,
+  DocHeading,
+  DocLeadText,
+  DocList,
+  DocSection,
+  Code,
+} from '../layout/DocPage'
 import { removeImports } from '../examples/removeImports'
 import {
   dialogPropsData,
@@ -40,7 +49,7 @@ export const DialogDoc = () => (
     />
     <DocSection className="mb-6">
       <DocLeadText>
-        Dialog renders as a hard-edged plaque above a scrim, portaled to <code>document.body</code>. It closes on
+        Dialog renders as a hard-edged plaque above a scrim, portaled to <Code text="document.body" />. It closes on
         Escape, a backdrop click, or the header close button. While open, it traps Tab focus inside the panel and
         restores focus to the trigger on close.
       </DocLeadText>
@@ -89,8 +98,8 @@ export const DialogDoc = () => (
       title="Sizes"
       description={
         <>
-          Use <code>size</code> to constrain the maximum panel width. This example uses <code>lg</code> for a data-heavy
-          view.
+          Use <Code text="size" /> to constrain the maximum panel width. This example uses <Code text="lg" /> for a
+          data-heavy view.
         </>
       }
     >
@@ -134,8 +143,8 @@ export const DialogDoc = () => (
       title="No close icon"
       description={
         <>
-          Pass <code>hideClose</code> to DialogHeader to remove its close button. Escape and backdrop dismissal remain
-          available.
+          Pass <Code text="hideClose" /> to DialogHeader to remove its close button. Escape and backdrop dismissal
+          remain available.
         </>
       }
     >
@@ -171,7 +180,7 @@ export const DialogDoc = () => (
     <DocSection>
       <DocHeading id="anatomy">Anatomy</DocHeading>
       <p className="mb-4 text-lg md:text-xl text-(--lithos-text) max-w-3xl font-body">
-        Dialog is controlled: pair it with consumer-owned <code>open</code> and <code>onClose</code> state.
+        Dialog is controlled: pair it with consumer-owned <Code text="open" /> and <Code text="onClose" /> state.
       </p>
       <CodeViewer
         language="tsx"
@@ -190,8 +199,8 @@ export const DialogDoc = () => (
       <DocHeading id="accessibility">Accessibility</DocHeading>
       <DocList>
         <li>
-          The panel carries <code>role="dialog"</code> (or <code>alertdialog</code> for error intent),{' '}
-          <code>aria-modal="true"</code>, and an <code>aria-labelledby</code> reference to DialogTitle.
+          The panel carries <Code text='role="dialog"' /> (or <Code text="alertdialog" /> for error intent),{' '}
+          <Code text='aria-modal="true"' />, and an <Code text="aria-labelledby" /> reference to DialogTitle.
         </li>
         <li>Focus moves into the panel and is trapped there; focus returns to the trigger when the dialog closes.</li>
         <li>Escape, backdrop click, and the header close button dismiss the panel.</li>

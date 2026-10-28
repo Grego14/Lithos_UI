@@ -3,7 +3,16 @@ import { PropsAccordion } from '../../components/ui/PropsTable'
 import { badgePropsData } from '../propsData/badge'
 import { SetupGuide } from '../layout/SetupGuide'
 import { removeImports } from '../examples/removeImports'
-import { DocCallout, DocExample, DocHeader, DocHeading, DocLeadText, DocList, DocSection } from '../layout/DocPage'
+import {
+  DocCallout,
+  DocExample,
+  DocHeader,
+  DocHeading,
+  DocLeadText,
+  DocList,
+  DocSection,
+  Code,
+} from '../layout/DocPage'
 import { BadgeVariantsExample } from '../examples/badge/variants'
 import variantsSource from '../examples/badge/variants.tsx?raw'
 import { BadgeSizesExample } from '../examples/badge/sizes'
@@ -72,9 +81,9 @@ export const BadgeDoc = () => (
       title="Sizes"
       description={
         <>
-          Use the <code>size</code> prop to scale the badge appropriately for its context. It proportionally scales the
-          font size and padding (<code>sm</code> for tight data tables, <code>md</code> for standard tags,{' '}
-          <code>lg</code> for prominent status headers). Does not affect structural layout or color contrast. Limits
+          Use the <Code text="size" /> prop to scale the badge appropriately for its context. It proportionally scales
+          the font size and padding (<Code text="sm" /> for tight data tables, <Code text="md" /> for standard tags,{' '}
+          <Code text="lg" /> for prominent status headers). Does not affect structural layout or color contrast. Limits
           remain identical across all sizes. Continues to be ignored by standard focus indexing.
         </>
       }
@@ -90,7 +99,7 @@ export const BadgeDoc = () => (
       description={
         <>
           Use this when the predefined intents do not match your branding or exact categorization needs. Pass a valid
-          hex code to the <code>color</code> prop to completely override the background. The YIQ contrast engine will
+          hex code to the <Code text="color" /> prop to completely override the background. The YIQ contrast engine will
           automatically calculate the most legible text and border colors against your custom background. Interaction
           and accessibility roles remain unchanged.
         </>
@@ -112,8 +121,9 @@ export const BadgeDoc = () => (
     <DocSection>
       <DocHeading id="api">API Reference</DocHeading>
       <DocCallout className="mb-6">
-        <strong>Note:</strong> Border radius is configurable globally via the <code>--lithos-radius</code> CSS token, or
-        per-instance via <code>className</code> (e.g. <code>rounded-full</code>). No custom prop is required.
+        <strong>Note:</strong> Border radius is configurable globally via the <Code text="--lithos-radius" /> CSS token,
+        or per-instance via <Code text="className" /> (e.g. <Code text="rounded-full" />
+        ). No custom prop is required.
       </DocCallout>
       <PropsAccordion title="Badge Props" data={badgePropsData} />
     </DocSection>

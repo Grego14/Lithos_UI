@@ -28,7 +28,16 @@ import BoundedYearsCalendarSource from '../examples/calendar/boundedYears?raw'
 import { ControlledCalendar } from '../examples/calendar/controlled'
 import ControlledCalendarSource from '../examples/calendar/controlled?raw'
 
-import { DocHeader, DocCallout, DocHeading, DocExample, DocLeadText, DocList, DocSection } from '../layout/DocPage'
+import {
+  DocHeader,
+  DocCallout,
+  DocHeading,
+  DocExample,
+  DocLeadText,
+  DocList,
+  DocSection,
+  Code,
+} from '../layout/DocPage'
 import { getComponentGithubUrl } from '../utils/githubUrl'
 
 const githubUrl = getComponentGithubUrl('calendar')
@@ -61,13 +70,13 @@ export const CalendarDoc = () => (
 
     <DocSection>
       <DocLeadText>
-        Calendar supports three selection modes via the <code>mode</code> prop: <code>single</code> for one date,{' '}
-        <code>multiple</code> for any set of individual dates, and <code>range</code> for a contiguous start-to-end
-        span. The displayed month and the selection are independently controlled or uncontrolled, so jumping years via
-        the header selects never disturbs the current selection.
+        Calendar supports three selection modes via the <Code text="mode" /> prop: <Code text="single" /> for one date,{' '}
+        <Code text="multiple" /> for any set of individual dates, and <Code text="range" /> for a contiguous
+        start-to-end span. The displayed month and the selection are independently controlled or uncontrolled, so
+        jumping years via the header selects never disturbs the current selection.
       </DocLeadText>
       <DocCallout>
-        Pass <code>disabledDates</code>, <code>minDate</code>, or <code>maxDate</code> to block off booked or
+        Pass <Code text="disabledDates" />, <Code text="minDate" />, or <Code text="maxDate" /> to block off booked or
         out-of-range days. Disabled days are unclickable and skipped by keyboard navigation.
       </DocCallout>
     </DocSection>
@@ -99,7 +108,7 @@ export const CalendarDoc = () => (
         <>
           Use this to select a single specific date from the calendar grid. It renders the standard monthly calendar
           interface. Selecting a new date unselects the previous one. Does not limit bounds unless min/max props are
-          provided. Keyboard navigable via standard arrow keys; selected dates use <code>aria-pressed</code>.
+          provided. Keyboard navigable via standard arrow keys; selected dates use <Code text="aria-pressed" />.
         </>
       }
     >
@@ -190,7 +199,7 @@ export const CalendarDoc = () => (
         <>
           Use this to prevent selection of specific days, such as past dates, fully booked days, or holidays. Pass an
           array of dates or bounds to make them unclickable. They render with reduced opacity and a crossed-out visual
-          style. Disabled dates are explicitly marked with <code>aria-disabled="true"</code> for screen readers.
+          style. Disabled dates are explicitly marked with <Code text='aria-disabled="true"' /> for screen readers.
         </>
       }
     >
@@ -225,8 +234,8 @@ export const CalendarDoc = () => (
       description={
         <>
           Use this to explicitly manage the calendar's internal state (selected dates and visible month) from a parent
-          component. Pass <code>value</code> and <code>month</code> alongside their respective change handlers. Visually
-          identical to uncontrolled variants, but guarantees sync with external state logic.
+          component. Pass <Code text="value" /> and <Code text="month" /> alongside their respective change handlers.
+          Visually identical to uncontrolled variants, but guarantees sync with external state logic.
         </>
       }
     >
@@ -241,18 +250,18 @@ export const CalendarDoc = () => (
       <DocHeading id="accessibility">Accessibility</DocHeading>
       <DocList>
         <li>
-          Uses <code>role="grid"</code>, <code>role="row"</code>, and <code>role="gridcell"</code> to create a
+          Uses <Code text='role="grid"' />, <Code text='role="row"' />, and <Code text='role="gridcell"' /> to create a
           semantically correct grid structure.
         </li>
         <li>
-          Uses <code>display: contents</code> on rows to preserve the zero-gap grid layout while maintaining standard
+          Uses <Code text="display: contents" /> on rows to preserve the zero-gap grid layout while maintaining standard
           ARIA parent-child relationships.
         </li>
         <li>
-          Uses <code>aria-selected</code> on the gridcells to indicate active selections.
+          Uses <Code text="aria-selected" /> on the gridcells to indicate active selections.
         </li>
         <li>
-          Applies <code>aria-disabled</code> to dates out of bounds or marked as disabled.
+          Applies <Code text="aria-disabled" /> to dates out of bounds or marked as disabled.
         </li>
         <li>
           Fully keyboard navigable (arrow keys to move between days, PageUp/PageDown for months, Home/End for week
@@ -264,8 +273,8 @@ export const CalendarDoc = () => (
     <DocSection>
       <DocHeading id="api">API Reference</DocHeading>
       <DocCallout>
-        <strong>Note:</strong> Border radius is configurable globally via the <code>--lithos-radius</code> CSS token, or
-        per-instance via <code>className</code>.
+        <strong>Note:</strong> Border radius is configurable globally via the <Code text="--lithos-radius" /> CSS token,
+        or per-instance via <Code text="className" />.
       </DocCallout>
       <PropsAccordion title="Calendar Props" data={calendarPropsData} />
     </DocSection>

@@ -117,4 +117,11 @@ export const DocSection = ({ children, className }: DocSectionProps) => {
   return <section className={cn('mb-12', className)}>{children}</section>
 }
 
-export const Code = ({ text }: { text: string }) => <Typography variant="code">{text}</Typography>
+export const Code = ({ text }: { text: string }) => (
+  <Typography
+    variant="code"
+    className="px-1.5 py-0.5 text-xs font-mono rounded bg-(--lithos-accent)/15 border border-(--lithos-accent)/30"
+  >
+    {text}
+  </Typography>
+)

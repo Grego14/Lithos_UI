@@ -2,7 +2,16 @@ import { PreviewBlock } from '../../components/ui/PreviewBlock'
 import { CodeViewer } from '../../components/ui/CodeViewer'
 import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
-import { DocCallout, DocExample, DocHeader, DocHeading, DocLeadText, DocList, DocSection } from '../layout/DocPage'
+import {
+  DocCallout,
+  DocExample,
+  DocHeader,
+  DocHeading,
+  DocLeadText,
+  DocList,
+  DocSection,
+  Code,
+} from '../layout/DocPage'
 import { removeImports } from '../examples/removeImports'
 import type { ManualPath } from '../utils/deriveUsageCode'
 import {
@@ -213,11 +222,11 @@ export const CommandDoc = () => (
       <DocHeading id="accessibility">Accessibility</DocHeading>
       <DocList>
         <li>
-          Follows WAI-ARIA combobox patterns with <code>application</code>, <code>combobox</code>, <code>listbox</code>,
-          and <code>option</code> roles.
+          Follows WAI-ARIA combobox patterns with <Code text="application" />, <Code text="combobox" />,{' '}
+          <Code text="listbox" />, and <Code text="option" /> roles.
         </li>
         <li>
-          Active items are indicated via <code>aria-selected</code> and <code>data-selected</code>.
+          Active items are indicated via <Code text="aria-selected" /> and <Code text="data-selected" />.
         </li>
         <li>Supports arrow-key navigation, Home/End, and Enter to select.</li>
         <li>Disabled items receive aria-disabled and are skipped during keyboard traversal.</li>

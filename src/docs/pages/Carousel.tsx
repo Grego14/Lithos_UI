@@ -13,7 +13,16 @@ import {
   useCarouselPropsData,
 } from '../propsData/carousel'
 import { removeImports } from '../examples/removeImports'
-import { DocCallout, DocExample, DocHeader, DocHeading, DocLeadText, DocList, DocSection } from '../layout/DocPage'
+import {
+  DocCallout,
+  DocExample,
+  DocHeader,
+  DocHeading,
+  DocLeadText,
+  DocList,
+  DocSection,
+  Code,
+} from '../layout/DocPage'
 import { DefaultCarouselExample } from '../examples/carousel/default'
 import defaultSource from '../examples/carousel/default.tsx?raw'
 import { LoopingCarouselExample } from '../examples/carousel/looping'
@@ -151,7 +160,7 @@ export const CarouselDoc = () => (
           <>
             Use this to create a "headless" carousel driven entirely by your own external state or custom buttons. It
             hides the primary directional arrows and pagination UI. You must pass custom buttons that hook into the{' '}
-            <code>CarouselContext</code>. Keyboard arrow navigation still works implicitly on focus.
+            <Code text="CarouselContext" />. Keyboard arrow navigation still works implicitly on focus.
           </>
         }
       >
@@ -177,8 +186,8 @@ export const CarouselDoc = () => (
           <>
             Use this to navigate between slides along the Y-axis instead of the standard horizontal direction. It
             renders the track vertically and shifts the navigation arrows to point up and down. Text within slides
-            remains horizontal. Arrow navigation bindings automatically remap to <code>ArrowUp</code> and{' '}
-            <code>ArrowDown</code>. Accessible live regions remain fully functional.
+            remains horizontal. Arrow navigation bindings automatically remap to <Code text="ArrowUp" /> and{' '}
+            <Code text="ArrowDown" />. Accessible live regions remain fully functional.
           </>
         }
       >
@@ -193,7 +202,7 @@ export const CarouselDoc = () => (
         description={
           <>
             Compose the carousel from its track, slide, controls, and pagination primitives to tailor its structure. Use{' '}
-            <code>useCarousel</code> to access carousel state inside custom content.
+            <Code text="useCarousel" /> to access carousel state inside custom content.
           </>
         }
       >
@@ -215,11 +224,11 @@ export const CarouselDoc = () => (
 
       <DocCallout borderColor={colors.warning}>
         <p className="text-sm font-bold font-body opacity-80 text-(--lithos-text)">
-          When customizing the dimensions in a custom layout, apply sizing utilities (e.g., <code>w-40</code>,{' '}
-          <code>h-40</code>) directly to the <code>CarouselTrack</code>.
+          When customizing the dimensions in a custom layout, apply sizing utilities (e.g., <Code text="w-40" />,{' '}
+          <Code text="h-40" />) directly to the <Code text="CarouselTrack" />.
         </p>
         <p className="text-sm font-medium font-body opacity-80 mt-4">
-          The <code>CarouselSlide</code> primitive automatically expands to fit the active track boundary cleanly.
+          The <Code text="CarouselSlide" /> primitive automatically expands to fit the active track boundary cleanly.
         </p>
       </DocCallout>
     </DocSection>
@@ -248,20 +257,20 @@ export const CarouselDoc = () => (
       <DocHeading id="accessibility">Accessibility</DocHeading>
       <DocList>
         <li>
-          Uses <code>role="region"</code> and <code>aria-roledescription="carousel"</code> to identify the component
-          structure to screen readers.
+          Uses <Code text='role="region"' /> and <Code text='aria-roledescription="carousel"' /> to identify the
+          component structure to screen readers.
         </li>
         <li>
-          Provides an <code>aria-label</code> (falling back to "Carousel") to convey the component context.
+          Provides an <Code text="aria-label" /> (falling back to "Carousel") to convey the component context.
         </li>
         <li>
-          Features a visually hidden live region (<code>aria-live</code>) that announces active slide changes
-          dynamically, automatically setting politeness to <code>off</code> during auto-play to avoid screen reader
+          Features a visually hidden live region (<Code text="aria-live" />) that announces active slide changes
+          dynamically, automatically setting politeness to <Code text="off" /> during auto-play to avoid screen reader
           spam.
         </li>
         <li>
-          Supports full keyboard navigation using directional arrow keys (<code>ArrowLeft</code>/<code>ArrowRight</code>{' '}
-          or <code>ArrowUp</code>/<code>ArrowDown</code> based on orientation).
+          Supports full keyboard navigation using directional arrow keys (<Code text="ArrowLeft" />/
+          <Code text="ArrowRight" /> or <Code text="ArrowUp" />/<Code text="ArrowDown" /> based on orientation).
         </li>
         <li>
           Automatically pauses auto-rotation on hover and focus to ensure users have enough time to interact with the

@@ -4,7 +4,16 @@ import { PropsAccordion } from '../../components/ui/PropsTable'
 import { SetupGuide } from '../layout/SetupGuide'
 import { breadcrumbPropsData, breadcrumbItemDataPropsData } from '../propsData/breadcrumb'
 import { removeImports } from '../examples/removeImports'
-import { DocCallout, DocExample, DocHeader, DocHeading, DocLeadText, DocList, DocSection } from '../layout/DocPage'
+import {
+  DocCallout,
+  DocExample,
+  DocHeader,
+  DocHeading,
+  DocLeadText,
+  DocList,
+  DocSection,
+  Code,
+} from '../layout/DocPage'
 import { CollapsibleBreadcrumbExample } from '../examples/breadcrumb/collapsible'
 import collapsibleSource from '../examples/breadcrumb/collapsible.tsx?raw'
 import { IconBreadcrumbExample } from '../examples/breadcrumb/icons'
@@ -35,8 +44,9 @@ export const BreadcrumbDoc = () => (
         a visual touch.
       </DocLeadText>
       <DocCallout>
-        Screen readers automatically recognize the breadcrumb landmark (<code>&lt;nav aria-label="Breadcrumb"&gt;</code>
-        ) and identify the active page (<code>aria-current="page"</code>) for easy keyboard navigation.
+        Screen readers automatically recognize the breadcrumb landmark (
+        <Code text={'<nav aria-label="Breadcrumb">'} />) and identify the active page (
+        <Code text='aria-current="page"' />) for easy keyboard navigation.
       </DocCallout>
     </DocSection>
 
@@ -65,9 +75,9 @@ export const BreadcrumbDoc = () => (
         <>
           Use this when navigation paths become too long to fit cleanly on screen. It renders a standard breadcrumb but
           replaces intermediate items with an ellipsis button to save space. Clicking the ellipsis expands the hidden
-          items inline. Restrict the maximum visible items using the <code>maxItems</code> prop. The ellipsis button is
-          fully accessible, featuring a descriptive <code>aria-label</code> that alerts screen readers to its expanding
-          function.
+          items inline. Restrict the maximum visible items using the <Code text="maxItems" /> prop. The ellipsis button
+          is fully accessible, featuring a descriptive <Code text="aria-label" /> that alerts screen readers to its
+          expanding function.
         </>
       }
     >
@@ -105,9 +115,9 @@ export const BreadcrumbDoc = () => (
       title="Custom Separator"
       description={
         <>
-          Use the <code>separator</code> prop to replace the default SVG chevron with any custom <code>ReactNode</code>.
-          Whether it's a simple text slash or a different SVG icon, the breadcrumb will automatically manage spacing and
-          accessibility for your custom separator.
+          Use the <Code text="separator" /> prop to replace the default SVG chevron with any custom{' '}
+          <Code text="ReactNode" />. Whether it's a simple text slash or a different SVG icon, the breadcrumb will
+          automatically manage spacing and accessibility for your custom separator.
         </>
       }
     >
@@ -144,18 +154,18 @@ export const BreadcrumbDoc = () => (
       <DocHeading id="accessibility">Accessibility</DocHeading>
       <DocList>
         <li>
-          Breadcrumbs are wrapped in a <code>&lt;nav aria-label="Breadcrumb"&gt;</code> element to define a navigation
+          Breadcrumbs are wrapped in a <Code text={'<nav aria-label="Breadcrumb">'} /> element to define a navigation
           landmark.
         </li>
         <li>
-          The currently active page is indicated to assistive technologies using <code>aria-current="page"</code>.
+          The currently active page is indicated to assistive technologies using <Code text='aria-current="page"' />.
         </li>
         <li>
-          Separators between items are hidden from screen readers using <code>aria-hidden="true"</code>.
+          Separators between items are hidden from screen readers using <Code text='aria-hidden="true"' />.
         </li>
         <li>
-          The collapsible ellipsis button provides a descriptive <code>aria-label</code> that updates dynamically when
-          expanded.
+          The collapsible ellipsis button provides a descriptive <Code text="aria-label" /> that updates dynamically
+          when expanded.
         </li>
       </DocList>
     </DocSection>
