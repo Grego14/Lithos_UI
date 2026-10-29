@@ -32,10 +32,7 @@ import { PANEL } from '../utils/constants'
 import { AccentColorProvider } from '../../../core/AccentColorProvider'
 import { getContrastText } from '../../../utils/yiq'
 import { useToast, ToastProvider } from '../../../components/ui/Toast'
-import { IconHome } from '../../../components/ui/icons/IconHome'
-import { IconMaximize } from '../../../components/ui/icons/IconMaximize'
-import { IconMinimize } from '../../../components/ui/icons/IconMinimize'
-import { IconChevronDown } from '../../../components/ui/icons/IconChevronDown'
+import { IconHome, IconMaximize, IconMinimize, IconChevronDown } from '../../../components/ui/icons'
 
 const LandingPageContent = ({ style }: { style?: React.CSSProperties }) => {
   const [isFullscreen, setIsFullscreen] = useState(false)
