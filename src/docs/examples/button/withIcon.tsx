@@ -1,6 +1,5 @@
 import { Button } from '../../../components/ui/Button'
-import { IconHome } from '../../../components/ui/icons/IconHome'
-import { IconSettings } from '../../../components/ui/icons/IconSettings'
+import { IconHome, IconSettings } from '../../../components/ui/icons'
 
 export const WithIconButtonsExample = () => (
   <div className="flex items-center">
