@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Dialog, DialogHeader, DialogTitle, DialogBody, DialogFooter } from '../../../components/ui/Dialog'
 import { Button } from '../../../components/ui/Button'
-import { IconSettings } from '../../../components/ui/icons/IconSettings'
+import { IconSettings } from '../../../components/ui/icons'
 
 export const DefaultDialogExample = () => {
   const [open, setOpen] = useState(false)

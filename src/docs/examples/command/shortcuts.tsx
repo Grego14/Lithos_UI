@@ -9,10 +9,7 @@ import {
   CommandBadge,
   CommandSeparator,
 } from '../../../components/ui/Command'
-import { IconFileText } from '../../../components/ui/icons/IconFileText'
-import { IconFolder } from '../../../components/ui/icons/IconFolder'
-import { IconSearch } from '../../../components/ui/icons/IconSearch'
-import { IconSettings } from '../../../components/ui/icons/IconSettings'
+import { IconFileText, IconFolder, IconSearch, IconSettings } from '../../../components/ui/icons'
 
 export const ShortcutsCommandExample = () => (
   <Command className="w-full">

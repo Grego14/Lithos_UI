@@ -1,6 +1,6 @@
 import { Drawer, type DrawerPlacement } from '../../../components/ui/Drawer'
 import { Button } from '../../../components/ui/Button'
-import { IconClose } from '../../../components/ui/icons/IconClose'
+import { IconClose } from '../../../components/ui/icons'
 
 export const PlacementsDrawerExample = ({
   open,

@@ -1,6 +1,5 @@
 import { InputGroup, InputGroupInput } from '../../../components/ui/Input'
-import { IconSearch } from '../../../components/ui/icons/IconSearch'
-import { IconSettings } from '../../../components/ui/icons/IconSettings'
+import { IconSearch, IconSettings } from '../../../components/ui/icons'
 
 export const InputIconsExample = () => (
   <>

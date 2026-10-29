@@ -9,9 +9,7 @@ import {
 } from '../../../components/ui/Sidebar'
 import { Typography } from '../../../components/ui/Typography'
 import { useState } from 'react'
-import { IconHome } from '../../../components/ui/icons/IconHome'
-import { IconFolder } from '../../../components/ui/icons/IconFolder'
-import { IconSettings } from '../../../components/ui/icons/IconSettings'
+import { IconHome, IconFolder, IconSettings } from '../../../components/ui/icons'
 
 const items = [
   { Icon: IconHome, label: 'Dashboard', id: 'item-0' },
