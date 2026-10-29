@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '../../components/ui/Button'
+import { Badge } from '../../components/ui/Badge'
+import { getUnreleasedComponentInfo } from '../../core/unreleasedRegistry'
 import { IconMenu } from '../../components/ui/icons/IconMenu'
 import { IconClose } from '../../components/ui/icons/IconClose'
 import { IconMoon } from '../../components/ui/icons/IconMoon'
@@ -38,6 +40,7 @@ const groupedLinks = [
       { label: 'Icons', href: '/docs/icons' },
       { label: 'Input', href: '/docs/input' },
       { label: 'Kbd', href: '/docs/kbd' },
+      { label: 'Marquee', href: '/docs/marquee' },
       { label: 'Pagination', href: '/docs/pagination' },
       { label: 'Popover', href: '/docs/popover' },
       { label: 'Select', href: '/docs/select' },
@@ -157,16 +160,28 @@ export const DocsNavbar = () => {
                 {/* Accordion Content */}
                 {expandedCategory === group.category && (
                   <div className="pl-2 flex flex-col mt-4">
-                    {group.links.map((link) => (
-                      <Link
-                        key={link.label}
-                        to={link.href}
-                        onClick={() => setIsMenuOpen(false)}
-                        className="block w-full text-left text-xl sm:text-2xl font-bold uppercase tracking-tight text-(--lithos-text) opacity-80 hover:opacity-100 hover:text-(--lithos-text) hover:translate-x-2 mb-4 cursor-pointer transition-all duration-150"
-                      >
-                        {link.label}
-                      </Link>
-                    ))}
+                    {group.links.map((link) => {
+                      const unreleased = getUnreleasedComponentInfo(link.label)
+                      return (
+                        <Link
+                          key={link.label}
+                          to={link.href}
+                          onClick={() => setIsMenuOpen(false)}
+                          className="flex items-center justify-between w-full text-left text-xl sm:text-2xl font-bold uppercase tracking-tight text-(--lithos-text) opacity-80 hover:opacity-100 hover:text-(--lithos-text) hover:translate-x-2 mb-4 cursor-pointer transition-all duration-150"
+                        >
+                          <span>{link.label}</span>
+                          {unreleased && (
+                            <Badge
+                              intent="accent"
+                              size="sm"
+                              className="font-mono font-black text-[10px] tracking-wider py-0.5 px-1.5"
+                            >
+                              {unreleased.badgeLabel}
+                            </Badge>
+                          )}
+                        </Link>
+                      )
+                    })}
                   </div>
                 )}
               </div>
