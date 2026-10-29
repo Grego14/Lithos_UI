@@ -4,7 +4,7 @@ import { Badge } from '../../../components/ui/Badge'
 import { Button } from '../../../components/ui/Button'
 import { Spinner } from '../../../components/ui/Spinner'
 import { Select, SelectTrigger, SelectContent, SelectItem } from '../../../components/ui/Select'
-import { IconChevronDown } from '../../../components/ui/icons/IconChevronDown'
+import { IconChevronDown } from '../../../components/ui/icons'
 import {
   Table,
   TableBody,

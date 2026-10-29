@@ -10,7 +10,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { cn, type LithosClass } from '../../utils/cn'
 import { Button } from './Button'
-import { IconCopy } from './icons/IconCopy'
+import { IconCopy } from './icons'
 
 export interface CodeViewerProps {
   code: string

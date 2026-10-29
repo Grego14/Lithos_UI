@@ -1,6 +1,4 @@
-import { IconHeart } from '../../../components/ui/icons/IconHeart'
-import { IconCheck } from '../../../components/ui/icons/IconCheck'
-import { IconAlertTriangle } from '../../../components/ui/icons/IconAlertTriangle'
+import { IconHeart, IconCheck, IconAlertTriangle } from '../../../components/ui/icons'
 
 export const ColorAndTokenExample = () => {
   return (

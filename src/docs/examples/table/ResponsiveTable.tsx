@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useId, useRef, useState } from 'react'
 import { Button } from '../../../components/ui/Button'
-import { IconChevronDown } from '../../../components/ui/icons/IconChevronDown'
+import { IconChevronDown } from '../../../components/ui/icons'
 import {
   Table,
   TableBody,

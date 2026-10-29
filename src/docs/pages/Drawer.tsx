@@ -123,7 +123,7 @@ export const DrawerDoc = () => (
     >
       <PreviewBlock
         code={drawerCode(defaultSource, ['Drawer', 'Button', 'IconClose', 'useState'], [], {
-          IconClose: '../../components/ui/icons/IconClose',
+          IconClose: '../../components/ui/icons',
           react: ['useState'],
         })}
         githubUrl={githubUrl}

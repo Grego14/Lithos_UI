@@ -1,6 +1,6 @@
 import { Select, SelectTrigger, SelectItem, SelectContent, useSelect } from '../../../components/ui/Select'
 import { cn } from '../../../utils/cn'
-import { IconChevronDown } from '../../../components/ui/icons/IconChevronDown'
+import { IconChevronDown } from '../../../components/ui/icons'
 
 const FRAMEWORK_OPTIONS = [
   { value: 'react', label: 'React', color: 'bg-cyan-400', downloads: '20M/week' },

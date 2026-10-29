@@ -35,7 +35,15 @@ import { Skeleton, SkeletonText } from '../components/ui/Skeleton'
 import { isUnreleasedComponent } from '../core/unreleasedRegistry'
 import { Slider } from '../components/ui/Slider'
 import { Spinner } from '../components/ui/Spinner'
-import { IconClose } from '../components/ui/icons/IconClose'
+import {
+  IconClose,
+  IconHome,
+  IconFolder,
+  IconSettings,
+  IconArrowRight,
+  IconHeart,
+  IconSearch,
+} from '../components/ui/icons'
 import { Input } from '../components/ui/Input'
 import { Kbd, KbdGroup } from '../components/ui/Kbd'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/Tabs'
@@ -45,13 +53,6 @@ import { Tooltip } from '../components/ui/tooltip/Tooltip'
 import { TooltipTrigger } from '../components/ui/tooltip/TooltipTrigger'
 import { TooltipContent } from '../components/ui/tooltip/TooltipContent'
 import card1 from '../docs/assets/images/card1.webp'
-
-import { IconHome } from '../components/ui/icons/IconHome'
-import { IconFolder } from '../components/ui/icons/IconFolder'
-import { IconSettings } from '../components/ui/icons/IconSettings'
-import { IconArrowRight } from '../components/ui/icons/IconArrowRight'
-import { IconHeart } from '../components/ui/icons/IconHeart'
-import { IconSearch } from '../components/ui/icons/IconSearch'
 
 const SIDEBAR_ITEMS = [
   { id: 'home', label: 'Home', icon: IconHome },

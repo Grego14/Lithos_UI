@@ -1,10 +1,5 @@
 import { useRef } from 'react'
-import { IconCheck } from '../../../components/ui/icons/IconCheck'
-import { IconCopy } from '../../../components/ui/icons/IconCopy'
-import { IconEdit } from '../../../components/ui/icons/IconEdit'
-import { IconEye } from '../../../components/ui/icons/IconEye'
-import { IconMoreHorizontal } from '../../../components/ui/icons/IconMoreHorizontal'
-import { IconTrash } from '../../../components/ui/icons/IconTrash'
+import { IconCheck, IconCopy, IconEdit, IconEye, IconMoreHorizontal, IconTrash } from '../../../components/ui/icons'
 import { Button } from '../../../components/ui/Button'
 import {
   Dropdown,

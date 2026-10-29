@@ -51,9 +51,9 @@ const componentNames = [
 
 const manualPath = {
   react: ['useState'],
-  IconHome: '../../components/ui/icons/IconHome',
-  IconFolder: '../../components/ui/icons/IconFolder',
-  IconSettings: '../../components/ui/icons/IconSettings',
+  IconHome: '../../components/ui/icons',
+  IconFolder: '../../components/ui/icons',
+  IconSettings: '../../components/ui/icons',
   others: sidebarPath,
 }
 

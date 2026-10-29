@@ -1,18 +1,20 @@
 import { useEffect, useId, useState } from 'react'
-import { IconCheck } from '../../../components/ui/icons/IconCheck'
-import { IconCopy } from '../../../components/ui/icons/IconCopy'
-import { IconEdit } from '../../../components/ui/icons/IconEdit'
-import { IconTrash } from '../../../components/ui/icons/IconTrash'
-import { IconClose } from '../../../components/ui/icons/IconClose'
-import { IconArrowUp } from '../../../components/ui/icons/IconArrowUp'
-import { IconArrowDown } from '../../../components/ui/icons/IconArrowDown'
+import {
+  IconCheck,
+  IconCopy,
+  IconEdit,
+  IconTrash,
+  IconClose,
+  IconArrowUp,
+  IconArrowDown,
+  IconChevronDown,
+} from '../../../components/ui/icons'
 import { Badge } from '../../../components/ui/Badge'
 import { Button } from '../../../components/ui/Button'
 import { Checkbox } from '../../../components/ui/Checkbox'
 import { Input } from '../../../components/ui/Input'
 import { Pagination } from '../../../components/ui/Pagination'
 import { Select, SelectTrigger, SelectContent, SelectItem } from '../../../components/ui/Select'
-import { IconChevronDown } from '../../../components/ui/icons/IconChevronDown'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../../../components/ui/Tooltip'
 import {
   Table,

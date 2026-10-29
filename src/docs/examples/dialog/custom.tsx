@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { CustomDialog } from '../../../components/ui/Dialog'
 import { Button } from '../../../components/ui/Button'
-import { IconAlertTriangle } from '../../../components/ui/icons/IconAlertTriangle'
+import { IconAlertTriangle } from '../../../components/ui/icons'
 
 export const CustomDialogExample = () => {
   const [open, setOpen] = useState(false)

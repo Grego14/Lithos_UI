@@ -10,11 +10,7 @@ import { Button } from '../../components/ui/Button'
 import { Typography } from '../../components/ui/Typography'
 import type { HexColor } from '../../core/types'
 import { useTheme } from '../../core/hooks/useTheme'
-import { IconRadiusNone } from '../../components/ui/icons/IconRadiusNone'
-import { IconRadiusSm } from '../../components/ui/icons/IconRadiusSm'
-import { IconRadiusMd } from '../../components/ui/icons/IconRadiusMd'
-import { IconRadiusLg } from '../../components/ui/icons/IconRadiusLg'
-import { IconArrowRight } from '../../components/ui/icons/IconArrowRight'
+import { IconRadius, IconArrowRight } from '../../components/ui/icons'
 
 const ARTISTIC_PALETTES = [
   { label: 'Lime', hex: '#00ff00' },
@@ -26,10 +22,10 @@ const ARTISTIC_PALETTES = [
 ] as const
 
 const RADII = [
-  { label: 'None', value: 0, Icon: IconRadiusNone },
-  { label: 'Sm', value: 8, Icon: IconRadiusSm },
-  { label: 'Md', value: 16, Icon: IconRadiusMd },
-  { label: 'Lg', value: 24, Icon: IconRadiusLg },
+  { label: 'None', value: 0, variant: 'none' },
+  { label: 'Sm', value: 8, variant: 'sm' },
+  { label: 'Md', value: 16, variant: 'md' },
+  { label: 'Lg', value: 24, variant: 'lg' },
 ] as const
 
 const Hero = () => {
@@ -146,7 +142,6 @@ const Hero = () => {
                 <div className="flex w-full border-2 border-(--lithos-border) rounded-(--lithos-radius) overflow-hidden shadow-[2px_2px_0px_0px_var(--lithos-shadow)]">
                   {RADII.map((r, idx) => {
                     const isSelected = radius === r.value
-                    const Icon = r.Icon
                     return (
                       <button
                         key={r.label}
@@ -162,7 +157,7 @@ const Hero = () => {
                             : 'bg-(--lithos-bg) text-(--lithos-text) hover:bg-(--lithos-surface)'
                         }`}
                       >
-                        <Icon size={14} />
+                        <IconRadius variant={r.variant} size={14} />
                       </button>
                     )
                   })}
