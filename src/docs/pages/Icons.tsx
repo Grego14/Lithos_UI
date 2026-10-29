@@ -17,8 +17,10 @@ import { SizeAndStrokeExample } from '../examples/icons/sizeAndStroke'
 import SizeAndStrokeExampleSource from '../examples/icons/sizeAndStroke?raw'
 import { ColorAndTokenExample } from '../examples/icons/colorAndToken'
 import ColorAndTokenExampleSource from '../examples/icons/colorAndToken?raw'
+import { RadiusExample } from '../examples/icons/radius'
+import RadiusExampleSource from '../examples/icons/radius?raw'
 
-// Import all 44 icon components
+// Import the icon collection
 import {
   IconAlertTriangle,
   IconArrowDown,
@@ -50,10 +52,7 @@ import {
   IconMinus,
   IconMonitor,
   IconMoreHorizontal,
-  IconRadiusLg,
-  IconRadiusMd,
-  IconRadiusNone,
-  IconRadiusSm,
+  IconRadius,
   IconRedo,
   IconRefreshCcw,
   IconRotateCcw,
@@ -123,10 +122,7 @@ const ALL_ICONS: IconItem[] = [
     Component: IconMoreHorizontal,
     tags: ['more', 'horizontal', 'dots', 'menu', 'options'],
   },
-  { name: 'IconRadiusLg', Component: IconRadiusLg, tags: ['radius', 'large', 'pill', 'circle', 'round'] },
-  { name: 'IconRadiusMd', Component: IconRadiusMd, tags: ['radius', 'medium', 'round'] },
-  { name: 'IconRadiusNone', Component: IconRadiusNone, tags: ['radius', 'none', 'sharp', 'square'] },
-  { name: 'IconRadiusSm', Component: IconRadiusSm, tags: ['radius', 'small', 'round'] },
+  { name: 'IconRadius', Component: IconRadius, tags: ['radius', 'none', 'small', 'medium', 'large', 'round'] },
   { name: 'IconRedo', Component: IconRedo, tags: ['redo', 'forward', 'repeat', 'arrow'] },
   { name: 'IconRefreshCcw', Component: IconRefreshCcw, tags: ['refresh', 'reload', 'sync', 'ccw'] },
   { name: 'IconRotateCcw', Component: IconRotateCcw, tags: ['rotate', 'ccw', 'counterclockwise', 'history'] },
@@ -186,7 +182,10 @@ export const IconsDoc = () => {
   const withButtonCode = {
     body: removeImports(WithButtonExampleSource),
     componentNames: ['Button', 'IconDownload', 'IconExternalLink', 'IconTrash'],
-    manualPath: { Button: '../../components/ui/Button', others: manualPath },
+    manualPath: {
+      Button: '../../components/ui/Button',
+      others: manualPath,
+    },
   }
 
   const strokeAndSizeCode = {
@@ -422,6 +421,23 @@ export const IconsDoc = () => {
       >
         <PreviewBlock code={colorCode} githubUrl={githubUrl}>
           <ColorAndTokenExample />
+        </PreviewBlock>
+      </DocExample>
+
+      <DocExample
+        id="radius-variants"
+        title="Radius Variants"
+        description={
+          <>
+            Use <Code text="IconRadius" /> with variant="none", "sm", "md", or "lg". The default is "md".
+          </>
+        }
+      >
+        <PreviewBlock
+          code={{ body: removeImports(RadiusExampleSource), componentNames: ['IconRadius'], manualPath }}
+          githubUrl={githubUrl}
+        >
+          <RadiusExample />
         </PreviewBlock>
       </DocExample>
 
