@@ -5,7 +5,7 @@
 import type { CSSProperties } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '../../components/ui/Button'
-import { IconArrowRight } from '../../components/ui/icons/IconArrowRight'
+import { IconArrowRight } from '../../components/ui/icons'
 import { useTheme } from '../../core/hooks/useTheme'
 
 export const CallToAction = () => {

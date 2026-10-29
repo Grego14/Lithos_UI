@@ -10,11 +10,7 @@ import { Button } from '../../components/ui/Button'
 import { Typography } from '../../components/ui/Typography'
 import type { HexColor } from '../../core/types'
 import { useTheme } from '../../core/hooks/useTheme'
-import { IconRadiusNone } from '../../components/ui/icons/IconRadiusNone'
-import { IconRadiusSm } from '../../components/ui/icons/IconRadiusSm'
-import { IconRadiusMd } from '../../components/ui/icons/IconRadiusMd'
-import { IconRadiusLg } from '../../components/ui/icons/IconRadiusLg'
-import { IconArrowRight } from '../../components/ui/icons/IconArrowRight'
+import { IconRadiusNone, IconRadiusSm, IconRadiusMd, IconRadiusLg, IconArrowRight } from '../../components/ui/icons'
 
 const ARTISTIC_PALETTES = [
   { label: 'Lime', hex: '#00ff00' },

@@ -6,7 +6,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { Card } from '../../components/ui/Card'
 import { Button } from '../../components/ui/Button'
-import { IconArrowRight } from '../../components/ui/icons/IconArrowRight'
+import { IconArrowRight } from '../../components/ui/icons'
 
 const SHOWCASE_BLOCKS = [
   {

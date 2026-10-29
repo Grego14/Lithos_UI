@@ -13,9 +13,7 @@ import { PlainCheckbox } from '../../components/ui/Checkbox'
 import { Kbd, KbdGroup } from '../../components/ui/Kbd'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../components/ui/Tabs'
 import { Card } from '../../components/ui/Card'
-import { IconArrowRight } from '../../components/ui/icons/IconArrowRight'
-import { IconRotateCcw } from '../../components/ui/icons/IconRotateCcw'
-import { IconHeart } from '../../components/ui/icons/IconHeart'
+import { IconArrowRight, IconRotateCcw, IconHeart } from '../../components/ui/icons'
 
 export const ComponentPlayground = () => {
   const [clickCount, setClickCount] = useState(0)

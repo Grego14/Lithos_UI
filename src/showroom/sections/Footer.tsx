@@ -6,7 +6,7 @@
  */
 
 import { Link } from 'react-router-dom'
-import { IconHeart } from '../../components/ui/icons/IconHeart'
+import { IconHeart } from '../../components/ui/icons'
 import { Button } from '../../components/ui/Button'
 import { LITHOS_UI_LINKS } from '../../core/lithos.utils'
 
