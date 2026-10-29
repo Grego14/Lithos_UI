@@ -19,51 +19,53 @@ import { ColorAndTokenExample } from '../examples/icons/colorAndToken'
 import ColorAndTokenExampleSource from '../examples/icons/colorAndToken?raw'
 
 // Import all 44 icon components
-import { IconAlertTriangle } from '../../components/ui/icons/IconAlertTriangle'
-import { IconArrowDown } from '../../components/ui/icons/IconArrowDown'
-import { IconArrowLeft } from '../../components/ui/icons/IconArrowLeft'
-import { IconArrowRight } from '../../components/ui/icons/IconArrowRight'
-import { IconArrowUp } from '../../components/ui/icons/IconArrowUp'
-import { IconBreadcrumbSeparator } from '../../components/ui/icons/IconBreadcrumbSeparator'
-import { IconCheck } from '../../components/ui/icons/IconCheck'
-import { IconChevronDown } from '../../components/ui/icons/IconChevronDown'
-import { IconChevronLeft } from '../../components/ui/icons/IconChevronLeft'
-import { IconChevronUp } from '../../components/ui/icons/IconChevronUp'
-import { IconCircle } from '../../components/ui/icons/IconCircle'
-import { IconClose } from '../../components/ui/icons/IconClose'
-import { IconCode } from '../../components/ui/icons/IconCode'
-import { IconCopy } from '../../components/ui/icons/IconCopy'
-import { IconDownload } from '../../components/ui/icons/IconDownload'
-import { IconEdit } from '../../components/ui/icons/IconEdit'
-import { IconExternalLink } from '../../components/ui/icons/IconExternalLink'
-import { IconEye } from '../../components/ui/icons/IconEye'
-import { IconFileText } from '../../components/ui/icons/IconFileText'
-import { IconFolder } from '../../components/ui/icons/IconFolder'
-import { IconGithub } from '../../components/ui/icons/IconGithub'
-import { IconHeart } from '../../components/ui/icons/IconHeart'
-import { IconHeartOutline } from '../../components/ui/icons/IconHeartOutline'
-import { IconHome } from '../../components/ui/icons/IconHome'
-import { IconMaximize } from '../../components/ui/icons/IconMaximize'
-import { IconMenu } from '../../components/ui/icons/IconMenu'
-import { IconMinimize } from '../../components/ui/icons/IconMinimize'
-import { IconMinus } from '../../components/ui/icons/IconMinus'
-import { IconMonitor } from '../../components/ui/icons/IconMonitor'
-import { IconMoreHorizontal } from '../../components/ui/icons/IconMoreHorizontal'
-import { IconRadiusLg } from '../../components/ui/icons/IconRadiusLg'
-import { IconRadiusMd } from '../../components/ui/icons/IconRadiusMd'
-import { IconRadiusNone } from '../../components/ui/icons/IconRadiusNone'
-import { IconRadiusSm } from '../../components/ui/icons/IconRadiusSm'
-import { IconRedo } from '../../components/ui/icons/IconRedo'
-import { IconRefreshCcw } from '../../components/ui/icons/IconRefreshCcw'
-import { IconRotateCcw } from '../../components/ui/icons/IconRotateCcw'
-import { IconSearch } from '../../components/ui/icons/IconSearch'
-import { IconSettings } from '../../components/ui/icons/IconSettings'
-import { IconSidebar } from '../../components/ui/icons/IconSidebar'
-import { IconSmartphone } from '../../components/ui/icons/IconSmartphone'
-import { IconTablet } from '../../components/ui/icons/IconTablet'
-import { IconTrash } from '../../components/ui/icons/IconTrash'
-import { IconUndo } from '../../components/ui/icons/IconUndo'
-import { IconUpload } from '../../components/ui/icons/IconUpload'
+import {
+  IconAlertTriangle,
+  IconArrowDown,
+  IconArrowLeft,
+  IconArrowRight,
+  IconArrowUp,
+  IconBreadcrumbSeparator,
+  IconCheck,
+  IconChevronDown,
+  IconChevronLeft,
+  IconChevronUp,
+  IconCircle,
+  IconClose,
+  IconCode,
+  IconCopy,
+  IconDownload,
+  IconEdit,
+  IconExternalLink,
+  IconEye,
+  IconFileText,
+  IconFolder,
+  IconGithub,
+  IconHeart,
+  IconHeartOutline,
+  IconHome,
+  IconMaximize,
+  IconMenu,
+  IconMinimize,
+  IconMinus,
+  IconMonitor,
+  IconMoreHorizontal,
+  IconRadiusLg,
+  IconRadiusMd,
+  IconRadiusNone,
+  IconRadiusSm,
+  IconRedo,
+  IconRefreshCcw,
+  IconRotateCcw,
+  IconSearch,
+  IconSettings,
+  IconSidebar,
+  IconSmartphone,
+  IconTablet,
+  IconTrash,
+  IconUndo,
+  IconUpload,
+} from '../../components/ui/icons'
 import { getComponentGithubUrl } from '../utils/githubUrl'
 
 const githubUrl = getComponentGithubUrl('icons')
@@ -173,7 +175,7 @@ export const IconsDoc = () => {
     }, 1800)
   }
 
-  const manualPath = '../../components/ui/icons/IconArrowRight'
+  const manualPath = '../../components/ui/icons'
 
   const usageCode = {
     body: removeImports(DefaultExampleSource),
@@ -184,19 +186,19 @@ export const IconsDoc = () => {
   const withButtonCode = {
     body: removeImports(WithButtonExampleSource),
     componentNames: ['Button', 'IconDownload', 'IconExternalLink', 'IconTrash'],
-    manualPath: '../../components/ui/icons/IconDownload',
+    manualPath: { Button: '../../components/ui/Button', others: manualPath },
   }
 
   const strokeAndSizeCode = {
     body: removeImports(SizeAndStrokeExampleSource),
     componentNames: ['IconSearch'],
-    manualPath: '../../components/ui/icons/IconSearch',
+    manualPath: '../../components/ui/icons',
   }
 
   const colorCode = {
     body: removeImports(ColorAndTokenExampleSource),
     componentNames: ['IconHeart', 'IconCheck', 'IconAlertTriangle'],
-    manualPath: '../../components/ui/icons/IconHeart',
+    manualPath: '../../components/ui/icons',
   }
 
   return (

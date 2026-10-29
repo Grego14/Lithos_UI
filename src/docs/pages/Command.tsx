@@ -133,10 +133,10 @@ export const CommandDoc = () => (
           ],
           {
             others: commandPath,
-            IconFileText: '../../components/ui/icons/IconFileText',
-            IconFolder: '../../components/ui/icons/IconFolder',
-            IconSearch: '../../components/ui/icons/IconSearch',
-            IconSettings: '../../components/ui/icons/IconSettings',
+            IconFileText: '../../components/ui/icons',
+            IconFolder: '../../components/ui/icons',
+            IconSearch: '../../components/ui/icons',
+            IconSettings: '../../components/ui/icons',
           }
         )}
         githubUrl={githubUrl}
@@ -171,10 +171,10 @@ export const CommandDoc = () => (
           ],
           {
             others: commandPath,
-            IconFileText: '../../components/ui/icons/IconFileText',
-            IconFolder: '../../components/ui/icons/IconFolder',
-            IconSearch: '../../components/ui/icons/IconSearch',
-            IconSettings: '../../components/ui/icons/IconSettings',
+            IconFileText: '../../components/ui/icons',
+            IconFolder: '../../components/ui/icons',
+            IconSearch: '../../components/ui/icons',
+            IconSettings: '../../components/ui/icons',
           }
         )}
         githubUrl={githubUrl}

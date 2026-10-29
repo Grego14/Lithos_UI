@@ -53,12 +53,12 @@ const inputCode = (
 
 const iconsCode = inputCode(iconsSource, ['InputGroup', 'InputGroupInput', 'IconSearch', 'IconSettings'], {
   others: inputPath,
-  IconSearch: '../../components/ui/icons/IconSearch',
-  IconSettings: '../../components/ui/icons/IconSettings',
+  IconSearch: '../../components/ui/icons',
+  IconSettings: '../../components/ui/icons',
 })
 const groupCode = inputCode(groupSource, ['InputGroup', 'InputGroupInput', 'InputGroupAddon', 'IconSearch'], {
   others: inputPath,
-  IconSearch: '../../components/ui/icons/IconSearch',
+  IconSearch: '../../components/ui/icons',
 })
 
 export const InputDoc = () => (

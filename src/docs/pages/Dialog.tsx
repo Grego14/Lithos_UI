@@ -85,7 +85,7 @@ export const DialogDoc = () => (
           defaultSource,
           ['Dialog', 'DialogHeader', 'DialogTitle', 'DialogBody', 'DialogFooter', 'Button', 'IconSettings', 'useState'],
           {
-            IconSettings: '../../components/ui/icons/IconSettings',
+            IconSettings: '../../components/ui/icons',
           }
         )}
         githubUrl={githubUrl}
@@ -170,7 +170,7 @@ export const DialogDoc = () => (
     >
       <PreviewBlock
         code={dialogCode(customSource, ['CustomDialog', 'Button', 'IconAlertTriangle', 'useState'], {
-          IconAlertTriangle: '../../components/ui/icons/IconAlertTriangle',
+          IconAlertTriangle: '../../components/ui/icons',
         })}
         githubUrl={githubUrl}
       >
