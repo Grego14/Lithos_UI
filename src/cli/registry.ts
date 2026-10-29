@@ -478,6 +478,7 @@ export const registry: Record<string, RegistryItem> = {
       'components/ui/icons/IconMonitor.tsx',
       'components/ui/icons/IconMoon.tsx',
       'components/ui/icons/IconMoreHorizontal.tsx',
+      'components/ui/icons/IconRadius.tsx',
       'components/ui/icons/IconRadiusLg.tsx',
       'components/ui/icons/IconRadiusMd.tsx',
       'components/ui/icons/IconRadiusNone.tsx',
