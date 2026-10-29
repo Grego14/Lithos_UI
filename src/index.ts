@@ -25,6 +25,7 @@ export * from './components/ui/Dropdown'
 export * from './components/ui/Input'
 export * from './components/ui/Kbd'
 export * from './components/ui/KineticGrid'
+export * from './components/ui/Marquee'
 export * from './components/ui/Popover'
 export * from './components/ui/Pagination'
 export * from './components/ui/Select'
@@ -42,6 +43,7 @@ export * from './components/ui/Typography'
 
 export * from './core/ThemeProvider'
 export * from './core/ThemeProviderContext'
+export * from './core/unreleasedRegistry'
 
 // Hooks
 export * from './core/hooks/useFocusTrap'

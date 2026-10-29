@@ -38,6 +38,7 @@ import { IconsDoc } from './docs/pages/Icons'
 import { Installation } from './docs/pages/Installation'
 import { Introduction } from './docs/pages/Introduction'
 import { KbdDoc } from './docs/pages/Kbd'
+import { MarqueeDoc } from './docs/pages/Marquee'
 import { PopoverPage } from './docs/pages/Popover'
 import { NotFound } from './showroom/sections/NotFound'
 import { SelectDoc } from './docs/pages/Select'
@@ -98,6 +99,7 @@ const renderDocRoutes = () => {
     { path: 'drawer', component: DrawerDoc },
     { path: 'installation', component: Installation },
     { path: 'kbd', component: KbdDoc },
+    { path: 'marquee', component: MarqueeDoc },
     { path: 'popover', component: PopoverPage },
     { path: 'select', component: SelectDoc },
     { path: 'sidebar', component: SidebarDoc },

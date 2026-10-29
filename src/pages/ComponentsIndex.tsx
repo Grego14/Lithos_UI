@@ -27,10 +27,12 @@ import {
 } from '../components/ui/Dropdown'
 
 import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from '../components/ui/Command'
+import { Marquee } from '../components/ui/Marquee'
 import { Pagination } from '../components/ui/Pagination'
 import { Popover, PopoverTrigger, PopoverContent } from '../components/ui/Popover'
 import { Select } from '../components/ui/Select'
 import { Skeleton, SkeletonText } from '../components/ui/Skeleton'
+import { isUnreleasedComponent } from '../core/unreleasedRegistry'
 import { Slider } from '../components/ui/Slider'
 import { Spinner } from '../components/ui/Spinner'
 import { IconClose } from '../components/ui/icons/IconClose'
@@ -405,6 +407,24 @@ const componentsList = [
     ),
   },
   {
+    name: 'Marquee',
+    to: '/docs/marquee',
+    preview: (
+      <div className="w-full py-1 overflow-hidden pointer-events-none">
+        <Marquee speed="normal" noPause className="shadow-none border-y-2 border-x-0 py-1.5 bg-(--lithos-bg)">
+          <span className="font-mono font-black text-[11px] tracking-widest text-(--lithos-accent)">NEO-BRUTAL</span>
+          <span className="font-mono text-xs text-(--lithos-text)">✦</span>
+          <span className="font-mono font-bold text-[11px] uppercase tracking-wider text-(--lithos-text)">
+            LITHOS UI
+          </span>
+          <span className="font-mono text-xs text-(--lithos-text)">✦</span>
+          <span className="font-mono font-black text-[11px] tracking-widest text-(--lithos-accent)">CONTINUOUS</span>
+          <span className="font-mono text-xs text-(--lithos-text)">✦</span>
+        </Marquee>
+      </div>
+    ),
+  },
+  {
     name: 'Pagination',
     to: '/docs/pagination',
     preview: (
@@ -546,10 +566,18 @@ export const ComponentsIndex = () => (
                     </div>
 
                     {/* Bottom Zone: Thin Label Strip */}
-                    <CardContent spacing="sm" className="grow flex flex-col justify-center bg-(--lithos-strata)">
+                    <CardContent
+                      spacing="sm"
+                      className="grow flex flex-row items-center justify-between bg-(--lithos-strata)"
+                    >
                       <h2 className="text-xl font-black tracking-tighter leading-none text-(--lithos-text)">
                         {comp.name}
                       </h2>
+                      {isUnreleasedComponent(comp.name) && (
+                        <Badge intent="accent" size="sm" className="font-mono font-black text-[10px] tracking-wider">
+                          NEW
+                        </Badge>
+                      )}
                     </CardContent>
                   </Card>
                 </Link>
