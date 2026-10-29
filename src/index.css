@@ -44,6 +44,19 @@ body {
   font-family: var(--font-mono);
 }
 
+@keyframes lithos-route-loading {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
 * {
   scrollbar-color: var(--lithos-accent) transparent;
 }
