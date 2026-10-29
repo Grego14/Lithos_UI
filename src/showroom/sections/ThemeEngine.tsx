@@ -6,7 +6,7 @@
  */
 import type { HexColor } from '../../core/types'
 import { Button } from '../../components/ui/Button'
-import { IconRadiusNone, IconRadiusSm, IconRadiusMd, IconRadiusLg } from '../../components/ui/icons'
+import { IconRadius } from '../../components/ui/icons'
 import { useTheme } from '../../core/hooks/useTheme'
 
 interface ThemeColor {
@@ -23,11 +23,11 @@ const themes: ThemeColor[] = [
 ]
 
 const radii = [
-  { label: 'None', value: 0, Icon: IconRadiusNone },
-  { label: 'Sm', value: 8, Icon: IconRadiusSm },
-  { label: 'Md', value: 16, Icon: IconRadiusMd },
-  { label: 'Lg', value: 48, Icon: IconRadiusLg },
-]
+  { label: 'None', value: 0, variant: 'none' },
+  { label: 'Sm', value: 8, variant: 'sm' },
+  { label: 'Md', value: 16, variant: 'md' },
+  { label: 'Lg', value: 48, variant: 'lg' },
+] as const
 
 const ThemeEngine = () => {
   const { accentColor, updateAccentColor, radius, updateRadius } = useTheme()
@@ -111,7 +111,6 @@ const ThemeEngine = () => {
             <div className="flex items-center space-x-4 sm:space-x-6">
               {radii.map((r) => {
                 const isActive = radius === r.value
-                const Icon = r.Icon
                 return (
                   <button
                     key={r.label}
@@ -121,7 +120,8 @@ const ThemeEngine = () => {
                     title={r.label}
                     className="focus:outline-none transition-transform active:scale-95 cursor-pointer"
                   >
-                    <Icon
+                    <IconRadius
+                      variant={r.variant}
                       size={28}
                       strokeWidth={isActive ? 3 : 2}
                       className={`transition-colors ${isActive ? 'text-(--lithos-text)' : 'text-(--lithos-text) opacity-30 hover:opacity-60'}`}
