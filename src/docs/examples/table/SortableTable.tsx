@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Button } from '../../../components/ui/Button'
-import { IconArrowUp } from '../../../components/ui/icons/IconArrowUp'
-import { IconArrowDown } from '../../../components/ui/icons/IconArrowDown'
+import { IconArrowUp, IconArrowDown } from '../../../components/ui/icons'
 import {
   Table,
   TableBody,
