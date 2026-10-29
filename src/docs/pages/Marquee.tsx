@@ -49,9 +49,8 @@ export const MarqueeDoc = () => (
 
     <DocSection>
       <DocLeadText>
-        The Marquee component creates continuous scrolling ribbons, announcement tickers, and animated showcases. Built
-        with strict adherence to Lithos UI's <strong>Zero-Gap layout system</strong>, it uses hardware-accelerated
-        dual-track translation for mathematical continuity without stutter or gap degradation.
+        The Marquee component creates continuous scrolling ribbons, announcement tickers, and animated showcases.It uses
+        hardware-accelerated dual-track translation for mathematical continuity without stutter or gap degradation.
       </DocLeadText>
       <DocCallout>
         Hovering over the Marquee automatically freezes the animation, enabling users to read announcements or interact

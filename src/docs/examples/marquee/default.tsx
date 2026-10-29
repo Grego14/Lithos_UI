@@ -3,7 +3,7 @@ import { Badge } from '../../../components/ui/Badge'
 
 export const DefaultMarqueeExample = () => (
   <Marquee>
-    <span className="font-mono font-bold text-sm">LITHOS UI V0.1.5</span>
+    <span className="font-mono font-bold text-sm">LITHOS UI V0.1.4</span>
     <Badge size="sm" intent="accent">
       NEW
     </Badge>
