@@ -4,9 +4,9 @@
  * - Utilizes the KineticGrid to create an interactive tracking environment.
  * - Keeps the opening rhythm controlled by explicit spacing math and centered containment.
  */
-import { useNavigate } from 'react-router-dom'
 import { KineticGrid } from '../../components/ui/KineticGrid'
 import { Button } from '../../components/ui/Button'
+import { RouteButton } from '../../components/site/RouteButton'
 import { Typography } from '../../components/ui/Typography'
 import type { HexColor } from '../../core/types'
 import { useTheme } from '../../core/hooks/useTheme'
@@ -32,9 +32,8 @@ const RADII = [
   { label: 'Lg', value: 24, Icon: IconRadiusLg },
 ] as const
 
-const Hero = () => {
+export const Hero = () => {
   const { accentColor, updateAccentColor, radius, updateRadius } = useTheme()
-  const navigate = useNavigate()
 
   return (
     <section id="top" className="border-b-2 border-(--lithos-border) bg-(--lithos-strata)">
@@ -66,9 +65,14 @@ const Hero = () => {
             </p>
 
             <div className="mt-10 flex flex-col items-center lg:items-start sm:flex-row flex-wrap">
-              <Button variant="primary" onClick={() => navigate('/docs')} className="mb-4 sm:mb-0 sm:mr-6 px-4 py-2">
+              <RouteButton
+                to="/docs"
+                className="mb-4 sm:mb-0 sm:mr-6 px-4 py-2"
+                variant="primary"
+                importRoute={() => import('../../docs/pages/Introduction')}
+              >
                 Documentation
-              </Button>
+              </RouteButton>
               <Button
                 variant="secondary"
                 onClick={() => window.open('https://github.com/lithosui/Lithos_UI', '_blank')}
@@ -170,15 +174,17 @@ const Hero = () => {
               </div>
 
               {/* Navigate to Full Theme Builder */}
-              <Button
-                variant="primary"
+              <RouteButton
+                to="/theme"
                 fullWidth
-                onClick={() => navigate('/theme')}
-                iconRight={<IconArrowRight size={14} />}
                 className="py-2.5 text-xs font-black uppercase tracking-wider flex items-center justify-center"
+                iconRight={<IconArrowRight size={14} />}
+                variant="primary"
+                importRoute={() => import('../../pages/ThemeBuilder')}
+                rootMargin="50px"
               >
                 Open Full Theme Builder
-              </Button>
+              </RouteButton>
             </div>
           </div>
         </div>
@@ -186,5 +192,3 @@ const Hero = () => {
     </section>
   )
 }
-
-export { Hero }
