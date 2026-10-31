@@ -2,14 +2,11 @@ import { useState, useRef, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useTheme } from '../../core/hooks/useTheme'
 import { Button } from './Button'
+import { IconRadius } from './icons/IconRadius'
 import { IconSettings } from './icons/IconSettings'
 import { IconClose } from './icons/IconClose'
 import { IconMoon } from './icons/IconMoon'
 import { IconSun } from './icons/IconSun'
-import { IconRadiusNone } from './icons/IconRadiusNone'
-import { IconRadiusSm } from './icons/IconRadiusSm'
-import { IconRadiusMd } from './icons/IconRadiusMd'
-import { IconRadiusLg } from './icons/IconRadiusLg'
 import { IconArrowRight } from './icons/IconArrowRight'
 import type { HexColor } from '../../core/types'
 
@@ -30,10 +27,10 @@ const ARTISTIC_PALETTES = [
 ] as const
 
 const RADII = [
-  { label: 'None', value: 0, Icon: IconRadiusNone },
-  { label: 'Sm', value: 8, Icon: IconRadiusSm },
-  { label: 'Md', value: 16, Icon: IconRadiusMd },
-  { label: 'Lg', value: 24, Icon: IconRadiusLg },
+  { label: 'None', value: 0, variant: 'none' },
+  { label: 'Sm', value: 8, variant: 'sm' },
+  { label: 'Md', value: 16, variant: 'md' },
+  { label: 'Lg', value: 24, variant: 'lg' },
 ] as const
 
 export const MiniThemeEngine = () => {
@@ -199,7 +196,6 @@ export const MiniThemeEngine = () => {
             <div className="flex w-full border-2 border-(--lithos-border) rounded-(--lithos-radius) overflow-hidden shadow-[2px_2px_0px_0px_var(--lithos-shadow)]">
               {RADII.map((r, idx) => {
                 const isSelected = radius === r.value
-                const Icon = r.Icon
                 return (
                   <button
                     key={r.label}
@@ -215,7 +211,7 @@ export const MiniThemeEngine = () => {
                         : 'bg-(--lithos-bg) text-(--lithos-text) hover:bg-(--lithos-surface)'
                     }`}
                   >
-                    <Icon size={14} />
+                    <IconRadius variant={r.variant} size={14} />
                   </button>
                 )
               })}

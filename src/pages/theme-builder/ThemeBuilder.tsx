@@ -20,15 +20,17 @@ import { Toggle } from '../../components/ui/Toggle'
 import { Select } from '../../components/ui/Select'
 import { Button, ButtonGroup } from '../../components/ui/Button'
 import { Card, CardContent } from '../../components/ui/Card'
-import { IconUndo } from '../../components/ui/icons/IconUndo'
-import { IconRedo } from '../../components/ui/icons/IconRedo'
-import { IconUpload } from '../../components/ui/icons/IconUpload'
-import { IconDownload } from '../../components/ui/icons/IconDownload'
-import { IconRotateCcw } from '../../components/ui/icons/IconRotateCcw'
-import { IconMonitor } from '../../components/ui/icons/IconMonitor'
-import { IconTablet } from '../../components/ui/icons/IconTablet'
-import { IconSmartphone } from '../../components/ui/icons/IconSmartphone'
-import { IconCopy } from '../../components/ui/icons/IconCopy'
+import {
+  IconUndo,
+  IconRedo,
+  IconUpload,
+  IconDownload,
+  IconRotateCcw,
+  IconMonitor,
+  IconTablet,
+  IconSmartphone,
+  IconCopy,
+} from '../../components/ui/icons'
 
 type StageTab = 'preview' | 'code' | 'swatches'
 

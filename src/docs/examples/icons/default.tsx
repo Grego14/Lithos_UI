@@ -1,6 +1,4 @@
-import { IconArrowRight } from '../../../components/ui/icons/IconArrowRight'
-import { IconHeart } from '../../../components/ui/icons/IconHeart'
-import { IconSettings } from '../../../components/ui/icons/IconSettings'
+import { IconArrowRight, IconHeart, IconSettings } from '../../../components/ui/icons'
 
 export const DefaultExample = () => {
   return (

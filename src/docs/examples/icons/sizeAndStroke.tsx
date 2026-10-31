@@ -1,4 +1,4 @@
-import { IconSearch } from '../../../components/ui/icons/IconSearch'
+import { IconSearch } from '../../../components/ui/icons'
 
 export const SizeAndStrokeExample = () => {
   return (

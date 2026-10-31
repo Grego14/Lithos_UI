@@ -16,7 +16,7 @@ import json from 'react-syntax-highlighter/dist/esm/languages/prism/json'
 import okaidia from 'react-syntax-highlighter/dist/esm/styles/prism/okaidia'
 import { cn, type LithosClass } from '../../utils/cn'
 import { Button } from './Button'
-import { IconCopy } from './icons/IconCopy'
+import { IconCopy } from './icons'
 
 // Register only the required languages to keep bundle size minimal
 SyntaxHighlighter.registerLanguage('tsx', tsx)

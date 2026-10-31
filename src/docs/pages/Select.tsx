@@ -40,7 +40,7 @@ const customLayoutCode = {
   manualPath: {
     others: '../../components/ui/Select',
     cn: '../../utils/cn',
-    IconChevronDown: '../../components/ui/icons/IconChevronDown',
+    IconChevronDown: '../../components/ui/icons',
   },
 }
 const asyncUsageCode = {

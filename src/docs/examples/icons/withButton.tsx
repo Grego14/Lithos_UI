@@ -1,7 +1,5 @@
 import { Button } from '../../../components/ui/Button'
-import { IconDownload } from '../../../components/ui/icons/IconDownload'
-import { IconExternalLink } from '../../../components/ui/icons/IconExternalLink'
-import { IconTrash } from '../../../components/ui/icons/IconTrash'
+import { IconDownload, IconExternalLink, IconTrash } from '../../../components/ui/icons'
 
 export const WithButtonExample = () => {
   return (

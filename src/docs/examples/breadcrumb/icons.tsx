@@ -1,7 +1,5 @@
 import { Breadcrumb } from '../../../components/ui/Breadcrumb'
-import { IconFolder } from '../../../components/ui/icons/IconFolder'
-import { IconSettings } from '../../../components/ui/icons/IconSettings'
-import { IconFileText } from '../../../components/ui/icons/IconFileText'
+import { IconFolder, IconSettings, IconFileText } from '../../../components/ui/icons'
 
 export const IconBreadcrumbExample = () => (
   <Breadcrumb

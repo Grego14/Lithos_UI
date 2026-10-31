@@ -5,8 +5,7 @@
  * - Supports pnpm, npm, yarn, bun with one-click copy.
  */
 import { useState } from 'react'
-import { IconCopy } from '../../components/ui/icons/IconCopy'
-import { IconCheck } from '../../components/ui/icons/IconCheck'
+import { IconCopy, IconCheck } from '../../components/ui/icons'
 
 type PackageManager = 'pnpm' | 'npm' | 'yarn' | 'bun'
 

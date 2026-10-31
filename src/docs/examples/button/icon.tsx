@@ -1,5 +1,5 @@
 import { Button } from '../../../components/ui/Button'
-import { IconDownload } from '../../../components/ui/icons/IconDownload'
+import { IconDownload } from '../../../components/ui/icons'
 
 export const IconButtonExample = () => (
   <Button aria-label="Download">

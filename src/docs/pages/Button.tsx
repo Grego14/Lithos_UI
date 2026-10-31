@@ -50,15 +50,15 @@ const withIconCode = {
   ...buttonCode(withIconSource, ['Button', 'IconHome', 'IconSettings']),
   manualPath: {
     Button: manualPath,
-    IconHome: '../../components/ui/icons/IconHome',
-    IconSettings: '../../components/ui/icons/IconSettings',
+    IconHome: '../../components/ui/icons',
+    IconSettings: '../../components/ui/icons',
   },
 }
 const iconCode = {
   ...buttonCode(iconSource, ['Button', 'IconDownload']),
   manualPath: {
     Button: manualPath,
-    IconDownload: '../../components/ui/icons/IconDownload',
+    IconDownload: '../../components/ui/icons',
   },
 }
 

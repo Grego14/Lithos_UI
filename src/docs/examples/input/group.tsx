@@ -1,5 +1,5 @@
 import { InputGroup, InputGroupInput, InputGroupAddon } from '../../../components/ui/Input'
-import { IconSearch } from '../../../components/ui/icons/IconSearch'
+import { IconSearch } from '../../../components/ui/icons'
 
 export const InputGroupExample = () => (
   <InputGroup className="max-w-xs">

@@ -5,7 +5,7 @@
  * - Couples the theme toggle with toast feedback so state changes are visible and immediate.
  */
 
-import { IconHeart } from '../../components/ui/icons/IconHeart'
+import { IconHeart } from '../../components/ui/icons'
 import { Button } from '../../components/ui/Button'
 import { RouteLink } from '../../components/site/RouteLink'
 import { LITHOS_UI_LINKS } from '../../core/lithos.utils'
