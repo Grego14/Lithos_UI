@@ -9,10 +9,10 @@
 import { lazy, Suspense, useEffect } from 'react'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { MiniThemeEngine } from './components/ui/MiniThemeEngine'
+import { NotFound } from './showroom/sections/NotFound'
+import { LithosLogo } from './components/ui/LithosLogo'
 
 const Showroom = lazy(() => import('./showroom/Index').then(({ Showroom }) => ({ default: Showroom })))
-const NotFound = lazy(() => import('./showroom/sections/NotFound').then(({ NotFound }) => ({ default: NotFound })))
-
 const ComingSoon = lazy(() =>
   import('./showroom/sections/ComingSoon').then(({ ComingSoon }) => ({ default: ComingSoon }))
 )
@@ -22,7 +22,6 @@ const ComponentsIndex = lazy(() =>
 const Faq = lazy(() => import('./pages/Faq').then(({ Faq }) => ({ default: Faq })))
 const ThemeBuilder = lazy(() => import('./pages/ThemeBuilder').then(({ ThemeBuilder }) => ({ default: ThemeBuilder })))
 
-// Section-level lazy chunks
 const DocsSection = lazy(() => import('./docs/DocsRoutes').then(({ DocsRoutes }) => ({ default: DocsRoutes })))
 const BlocksSection = lazy(() => import('./pages/BlocksRoutes').then(({ BlocksRoutes }) => ({ default: BlocksRoutes })))
 const TemplatesSection = lazy(() =>
@@ -36,10 +35,9 @@ const RouteLoading = () => (
     aria-live="polite"
     aria-busy="true"
   >
-    <img
-      src="/short_logo.svg"
-      alt=""
-      className="h-25 w-25 animate-[lithos-route-loading_1.75s_ease-in-out_infinite] motion-reduce:animate-none"
+    <LithosLogo
+      collapsed
+      className="text-(--lithos-bg) h-25 w-25 animate-[lithos-route-loading_1.75s_ease-in-out_infinite] motion-reduce:animate-none"
     />
     <span className="sr-only text-(--lithos-bg)">Loading</span>
   </div>
